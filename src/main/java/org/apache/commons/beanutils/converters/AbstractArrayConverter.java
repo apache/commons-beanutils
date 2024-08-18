@@ -54,6 +54,34 @@ public abstract class AbstractArrayConverter implements Converter {
 
 
     /**
+     * This is a special reference that can be passed as the "default object"
+     * to the constructor to indicate that no default is desired. Note that
+     * the value 'null' cannot be used for this purpose, as the caller may
+     * want a null to be returned as the default.
+     * @since 1.8.0
+     */
+    public static final Object NO_DEFAULT = new Object();
+
+    /**
+     * <p>Model object for string arrays.</p>
+     */
+    protected static String[] strings = {};
+
+
+    /**
+     * The default value specified to our Constructor, if any.
+     */
+    protected Object defaultValue = null;
+
+
+
+    /**
+     * Should we return the default value on conversion errors?
+     */
+    protected boolean useDefault = true;
+
+
+    /**
      * Create a {@link Converter} that will throw a {@link ConversionException}
      * if a conversion error occurs.
      */
@@ -63,6 +91,7 @@ public abstract class AbstractArrayConverter implements Converter {
         this.useDefault = false;
 
     }
+
 
     /**
      * Create a {@link Converter} that will return the specified default value
@@ -81,35 +110,6 @@ public abstract class AbstractArrayConverter implements Converter {
         }
 
     }
-
-
-    /**
-     * This is a special reference that can be passed as the "default object"
-     * to the constructor to indicate that no default is desired. Note that
-     * the value 'null' cannot be used for this purpose, as the caller may
-     * want a null to be returned as the default.
-     * @since 1.8.0
-     */
-    public static final Object NO_DEFAULT = new Object();
-
-
-
-    /**
-     * <p>Model object for string arrays.</p>
-     */
-    protected static String[] strings = {};
-
-
-    /**
-     * The default value specified to our Constructor, if any.
-     */
-    protected Object defaultValue = null;
-
-
-    /**
-     * Should we return the default value on conversion errors?
-     */
-    protected boolean useDefault = true;
 
 
 

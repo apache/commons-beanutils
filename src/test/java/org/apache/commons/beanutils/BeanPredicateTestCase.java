@@ -39,17 +39,17 @@ public class BeanPredicateTestCase extends TestCase {
         assertTrue(!predicate.evaluate(new TestBean("bar")));
     }
 
-    public void testNotEqual() {
-        final BeanPredicate predicate =
-            new BeanPredicate("stringProperty",new NotPredicate( new EqualPredicate("foo")));
-        assertTrue(!predicate.evaluate(new TestBean("foo")));
-        assertTrue(predicate.evaluate(new TestBean("bar")));
-    }
-
     public void testInstanceOf() {
         final BeanPredicate predicate =
             new BeanPredicate("stringProperty",new InstanceofPredicate( String.class ));
         assertTrue(predicate.evaluate(new TestBean("foo")));
+        assertTrue(predicate.evaluate(new TestBean("bar")));
+    }
+
+    public void testNotEqual() {
+        final BeanPredicate predicate =
+            new BeanPredicate("stringProperty",new NotPredicate( new EqualPredicate("foo")));
+        assertTrue(!predicate.evaluate(new TestBean("foo")));
         assertTrue(predicate.evaluate(new TestBean("bar")));
     }
 

@@ -30,32 +30,35 @@ import org.apache.commons.beanutils.Converter;
 
 public class BigDecimalConverterTestCase extends NumberConverterTestBase {
 
-    private Converter converter = null;
+    /**
+     * A class derived from {@code BigDecimal} used for testing whether
+     * derived number classes are handled correctly.
+     */
+    private static class ExtendingBigDecimal extends BigDecimal {
+        private static final long serialVersionUID = 1L;
 
-    // ------------------------------------------------------------------------
-
-    public BigDecimalConverterTestCase(final String name) {
-        super(name);
+        private ExtendingBigDecimal(final String val) {
+            super(val);
+        }
     }
 
     // ------------------------------------------------------------------------
-
-    @Override
-    public void setUp() throws Exception {
-        converter = makeConverter();
-        numbers[0] = new BigDecimal("-12");
-        numbers[1] = new BigDecimal("13");
-        numbers[2] = new BigDecimal("-22");
-        numbers[3] = new BigDecimal("23");
-    }
 
     public static TestSuite suite() {
         return new TestSuite(BigDecimalConverterTestCase.class);
     }
 
+    // ------------------------------------------------------------------------
+
+    private Converter converter = null;
+
+    public BigDecimalConverterTestCase(final String name) {
+        super(name);
+    }
+
     @Override
-    public void tearDown() throws Exception {
-        converter = null;
+    protected Class<?> getExpectedType() {
+        return BigDecimal.class;
     }
 
     // ------------------------------------------------------------------------
@@ -71,11 +74,20 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase {
     }
 
     @Override
-    protected Class<?> getExpectedType() {
-        return BigDecimal.class;
+    public void setUp() throws Exception {
+        converter = makeConverter();
+        numbers[0] = new BigDecimal("-12");
+        numbers[1] = new BigDecimal("13");
+        numbers[2] = new BigDecimal("-22");
+        numbers[3] = new BigDecimal("23");
     }
 
     // ------------------------------------------------------------------------
+
+    @Override
+    public void tearDown() throws Exception {
+        converter = null;
+    }
 
     public void testSimpleConversion() throws Exception {
         final String[] message= {
@@ -135,18 +147,6 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase {
                 message[i] + " to null type",
                 expected[i],
                 converter.convert(null,input[i]));
-        }
-    }
-
-    /**
-     * A class derived from {@code BigDecimal} used for testing whether
-     * derived number classes are handled correctly.
-     */
-    private static class ExtendingBigDecimal extends BigDecimal {
-        private static final long serialVersionUID = 1L;
-
-        private ExtendingBigDecimal(final String val) {
-            super(val);
         }
     }
 }

@@ -39,73 +39,10 @@ public class IndexedTestBean {
     }
 
     /**
-     * Getter for the String[] property.
-     */
-    public String[] getStringArray() {
-        return stringArray;
-    }
-
-    /**
-     * Setter for the String[] property.
-     */
-    public void setStringArray(final String[] stringArray) {
-        this.stringArray = stringArray;
-    }
-
-    /**
-     * Indexed Getter for the String[] property.
-     */
-    public String getStringArray(final int index) {
-        return stringArray[index];
-    }
-
-    /**
-     * Indexed Setter for the String[] property.
-     */
-    public void setStringArray(final int index, final String value) {
-        stringArray[index] = value;
-    }
-
-    /**
-     * Getter for the java.util.List property.
-     */
-    public List<String> getStringList() {
-        return stringList;
-    }
-
-    /**
-     * Setter for the java.util.List property.
-     */
-    public void setStringList(final List<String> stringList) {
-        this.stringList = stringList;
-    }
-
-    /**
-     * Indexed Getter for the java.util.List property.
-     */
-    public String getStringList(final int index) {
-        return stringList.get(index);
-    }
-
-    /**
-     * Indexed Setter for the java.util.List property.
-     */
-    public void setStringList(final int index, final String value) {
-        stringList.add(index, value);
-    }
-
-    /**
      * Getter for the java.util.ArrayList property.
      */
     public ArrayList<Object> getArrayList() {
         return arrayList;
-    }
-
-    /**
-     * Setter for the java.util.ArrayList property.
-     */
-    public void setArrayList(final ArrayList<Object> arrayList) {
-        this.arrayList = arrayList;
     }
 
     /**
@@ -116,10 +53,73 @@ public class IndexedTestBean {
     }
 
     /**
+     * Getter for the String[] property.
+     */
+    public String[] getStringArray() {
+        return stringArray;
+    }
+
+    /**
+     * Indexed Getter for the String[] property.
+     */
+    public String getStringArray(final int index) {
+        return stringArray[index];
+    }
+
+    /**
+     * Getter for the java.util.List property.
+     */
+    public List<String> getStringList() {
+        return stringList;
+    }
+
+    /**
+     * Indexed Getter for the java.util.List property.
+     */
+    public String getStringList(final int index) {
+        return stringList.get(index);
+    }
+
+    /**
+     * Setter for the java.util.ArrayList property.
+     */
+    public void setArrayList(final ArrayList<Object> arrayList) {
+        this.arrayList = arrayList;
+    }
+
+    /**
      * Indexed Setter for the java.util.ArrayList property.
      */
     public void setArrayList(final int index, final Object value) {
         arrayList.add(index, value);
+    }
+
+    /**
+     * Indexed Setter for the String[] property.
+     */
+    public void setStringArray(final int index, final String value) {
+        stringArray[index] = value;
+    }
+
+    /**
+     * Setter for the String[] property.
+     */
+    public void setStringArray(final String[] stringArray) {
+        this.stringArray = stringArray;
+    }
+
+    /**
+     * Indexed Setter for the java.util.List property.
+     */
+    public void setStringList(final int index, final String value) {
+        stringList.add(index, value);
+    }
+
+    /**
+     * Setter for the java.util.List property.
+     */
+    public void setStringList(final List<String> stringList) {
+        this.stringList = stringList;
     }
 
 }

@@ -46,17 +46,46 @@ import org.apache.commons.collections.keyvalue.AbstractMapEntry;
  */
 public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
 
-    private transient Object bean;
+    /**
+     * Map entry used by {@link BeanMap}.
+     */
+    protected static class Entry extends AbstractMapEntry {
+        private final BeanMap owner;
 
-    private transient HashMap<String, Method> readMethods = new HashMap<>();
-    private transient HashMap<String, Method> writeMethods = new HashMap<>();
-    private transient HashMap<String, Class<? extends Object>> types = new HashMap<>();
+        /**
+         * Constructs a new <code>Entry</code>.
+         *
+         * @param owner  the BeanMap this entry belongs to
+         * @param key  the key for this entry
+         * @param value  the value for this entry
+         */
+        protected Entry( final BeanMap owner, final Object key, final Object value ) {
+            super( key, value );
+            this.owner = owner;
+        }
+
+        /**
+         * Sets the value.
+         *
+         * @param value  the new value for the entry
+         * @return the old value for the entry
+         */
+        @Override
+        public Object setValue(final Object value) {
+            final Object key = getKey();
+            final Object oldValue = owner.get( key );
+
+            owner.put( key, value );
+            final Object newValue = owner.get( key );
+            super.setValue( newValue );
+            return oldValue;
+        }
+    }
 
     /**
      * An empty array.  Used to invoke accessors via reflection.
      */
     public static final Object[] NULL_ARGUMENTS = {};
-
     /**
      * Maps primitive Class types to transformers.  The transformer
      * transform strings into the appropriate primitive wrapper.
@@ -65,7 +94,6 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
      */
     private static final Map<Class<? extends Object>, Transformer> typeTransformers =
             Collections.unmodifiableMap(createTypeTransformers());
-
     /**
      * This HashMap has been made unmodifiable to prevent issues when
      * loaded in a shared ClassLoader enviroment.
@@ -204,15 +232,26 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
         return defaultTransformers;
     }
 
+    private transient Object bean;
+
+    private transient HashMap<String, Method> readMethods = new HashMap<>();
+
+    private transient HashMap<String, Method> writeMethods = new HashMap<>();
+
 
     // Constructors
     //-------------------------------------------------------------------------
+
+    private transient HashMap<String, Class<? extends Object>> types = new HashMap<>();
 
     /**
      * Constructs a new empty <code>BeanMap</code>.
      */
     public BeanMap() {
     }
+
+    // Map interface
+    //-------------------------------------------------------------------------
 
     /**
      * Constructs a new <code>BeanMap</code> that operates on the
@@ -226,16 +265,31 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
         initialise();
     }
 
-    // Map interface
-    //-------------------------------------------------------------------------
-
     /**
-     * Renders a string representation of this object.
-     * @return a <code>String</code> representation of this object
+     * This method reinitializes the bean map to have default values for the
+     * bean's properties.  This is accomplished by constructing a new instance
+     * of the bean which the map uses as its underlying data source.  This
+     * behavior for <code>clear()</code> differs from the Map contract in that
+     * the mappings are not actually removed from the map (the mappings for a
+     * BeanMap are fixed).
      */
     @Override
-    public String toString() {
-        return "BeanMap<" + String.valueOf(bean) + ">";
+    public void clear() {
+        if(bean == null) {
+            return;
+        }
+
+        Class<? extends Object> beanClass = null;
+        try {
+            beanClass = bean.getClass();
+            bean = beanClass.getConstructor().newInstance();
+        }
+        catch (final Exception e) {
+            final UnsupportedOperationException uoe =
+                new UnsupportedOperationException("Could not create new instance of class: " + beanClass);
+            BeanUtils.initCause(uoe, e);
+            throw uoe;
+        }
     }
 
     /**
@@ -315,47 +369,6 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
         return newMap;
     }
 
-    /**
-     * Puts all of the writable properties from the given BeanMap into this
-     * BeanMap. Read-only and Write-only properties will be ignored.
-     *
-     * @param map  the BeanMap whose properties to put
-     */
-    public void putAllWriteable(final BeanMap map) {
-        for (final Object key : map.readMethods.keySet()) {
-            if (getWriteMethod(key) != null) {
-                this.put(key, map.get(key));
-            }
-        }
-    }
-
-
-    /**
-     * This method reinitializes the bean map to have default values for the
-     * bean's properties.  This is accomplished by constructing a new instance
-     * of the bean which the map uses as its underlying data source.  This
-     * behavior for <code>clear()</code> differs from the Map contract in that
-     * the mappings are not actually removed from the map (the mappings for a
-     * BeanMap are fixed).
-     */
-    @Override
-    public void clear() {
-        if(bean == null) {
-            return;
-        }
-
-        Class<? extends Object> beanClass = null;
-        try {
-            beanClass = bean.getClass();
-            bean = beanClass.getConstructor().newInstance();
-        }
-        catch (final Exception e) {
-            final UnsupportedOperationException uoe =
-                new UnsupportedOperationException("Could not create new instance of class: " + beanClass);
-            BeanUtils.initCause(uoe, e);
-            throw uoe;
-        }
-    }
 
     /**
      * Returns true if the bean defines a property with the given name.
@@ -390,437 +403,6 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     public boolean containsValue(final Object value) {
         // use default implementation
         return super.containsValue(value);
-    }
-
-    /**
-     * Returns the value of the bean's property with the given name.
-     * <p>
-     * The given name must be a {@link String} and must not be
-     * null; otherwise, this method returns <code>null</code>.
-     * If the bean defines a property with the given name, the value of
-     * that property is returned.  Otherwise, <code>null</code> is
-     * returned.
-     * <p>
-     * Write-only properties will not be matched as the test operates against
-     * property read methods.
-     *
-     * @param name  the name of the property whose value to return
-     * @return  the value of the property with that name
-     */
-    @Override
-    public Object get(final Object name) {
-        if ( bean != null ) {
-            final Method method = getReadMethod( name );
-            if ( method != null ) {
-                try {
-                    return method.invoke( bean, NULL_ARGUMENTS );
-                }
-                catch ( final IllegalAccessException | IllegalArgumentException | InvocationTargetException | NullPointerException e ) {
-                    logWarn(  e );
-                }
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Sets the bean property with the given name to the given value.
-     *
-     * @param name  the name of the property to set
-     * @param value  the value to set that property to
-     * @return  the previous value of that property
-     * @throws IllegalArgumentException  if the given name is null;
-     *   if the given name is not a {@link String}; if the bean doesn't
-     *   define a property with that name; or if the bean property with
-     *   that name is read-only
-     * @throws ClassCastException if an error occurs creating the method args
-     */
-    @Override
-    public Object put(final Object name, final Object value) throws IllegalArgumentException, ClassCastException {
-        if ( bean != null ) {
-            final Object oldValue = get( name );
-            final Method method = getWriteMethod( name );
-            if ( method == null ) {
-                throw new IllegalArgumentException( "The bean of type: "+
-                        bean.getClass().getName() + " has no property called: " + name );
-            }
-            try {
-                final Object[] arguments = createWriteMethodArguments( method, value );
-                method.invoke( bean, arguments );
-
-                final Object newValue = get( name );
-                firePropertyChange( name, oldValue, newValue );
-            }
-            catch ( final InvocationTargetException | IllegalAccessException e ) {
-                final IllegalArgumentException iae = new IllegalArgumentException(e.getMessage());
-                if (!BeanUtils.initCause(iae, e)) {
-                    logInfo(e);
-                }
-                throw iae;
-            }
-            return oldValue;
-        }
-        return null;
-    }
-
-    /**
-     * Returns the number of properties defined by the bean.
-     *
-     * @return  the number of properties defined by the bean
-     */
-    @Override
-    public int size() {
-        return readMethods.size();
-    }
-
-
-    /**
-     * Get the keys for this BeanMap.
-     * <p>
-     * Write-only properties are <b>not</b> included in the returned set of
-     * property names, although it is possible to set their value and to get
-     * their type.
-     *
-     * @return BeanMap keys.  The Set returned by this method is not
-     *        modifiable.
-     */
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    // The set actually contains strings; however, because it cannot be
-    // modified there is no danger in selling it as Set<Object>
-    @Override
-    public Set<Object> keySet() {
-        return Collections.unmodifiableSet((Set) readMethods.keySet());
-    }
-
-    /**
-     * Gets a Set of MapEntry objects that are the mappings for this BeanMap.
-     * <p>
-     * Each MapEntry can be set but not removed.
-     *
-     * @return the unmodifiable set of mappings
-     */
-    @Override
-    public Set<Map.Entry<Object, Object>> entrySet() {
-        return Collections.unmodifiableSet(new AbstractSet<Map.Entry<Object, Object>>() {
-            @Override
-            public Iterator<Map.Entry<Object, Object>> iterator() {
-                return entryIterator();
-            }
-            @Override
-            public int size() {
-              return BeanMap.this.readMethods.size();
-            }
-        });
-    }
-
-    /**
-     * Returns the values for the BeanMap.
-     *
-     * @return values for the BeanMap.  The returned collection is not
-     *        modifiable.
-     */
-    @Override
-    public Collection<Object> values() {
-        final ArrayList<Object> answer = new ArrayList<>( readMethods.size() );
-        for ( final Iterator<Object> iter = valueIterator(); iter.hasNext(); ) {
-            answer.add( iter.next() );
-        }
-        return Collections.unmodifiableList(answer);
-    }
-
-
-    // Helper methods
-    //-------------------------------------------------------------------------
-
-    /**
-     * Returns the type of the property with the given name.
-     *
-     * @param name  the name of the property
-     * @return  the type of the property, or <code>null</code> if no such
-     *  property exists
-     */
-    public Class<?> getType(final String name) {
-        return types.get( name );
-    }
-
-    /**
-     * Convenience method for getting an iterator over the keys.
-     * <p>
-     * Write-only properties will not be returned in the iterator.
-     *
-     * @return an iterator over the keys
-     */
-    public Iterator<String> keyIterator() {
-        return readMethods.keySet().iterator();
-    }
-
-    /**
-     * Convenience method for getting an iterator over the values.
-     *
-     * @return an iterator over the values
-     */
-    public Iterator<Object> valueIterator() {
-        final Iterator<?> iter = keyIterator();
-        return new Iterator<Object>() {
-            @Override
-            public boolean hasNext() {
-                return iter.hasNext();
-            }
-            @Override
-            public Object next() {
-                final Object key = iter.next();
-                return get(key);
-            }
-            @Override
-            public void remove() {
-                throw new UnsupportedOperationException( "remove() not supported for BeanMap" );
-            }
-        };
-    }
-
-    /**
-     * Convenience method for getting an iterator over the entries.
-     *
-     * @return an iterator over the entries
-     */
-    public Iterator<Map.Entry<Object, Object>> entryIterator() {
-        final Iterator<String> iter = keyIterator();
-        return new Iterator<Map.Entry<Object, Object>>() {
-            @Override
-            public boolean hasNext() {
-                return iter.hasNext();
-            }
-            @Override
-            public Map.Entry<Object, Object> next() {
-                final Object key = iter.next();
-                final Object value = get(key);
-                @SuppressWarnings("unchecked")
-                final
-                // This should not cause any problems; the key is actually a
-                // string, but it does no harm to expose it as Object
-                Map.Entry<Object, Object> tmpEntry = new Entry( BeanMap.this, key, value );
-                return tmpEntry;
-            }
-            @Override
-            public void remove() {
-                throw new UnsupportedOperationException( "remove() not supported for BeanMap" );
-            }
-        };
-    }
-
-
-    // Properties
-    //-------------------------------------------------------------------------
-
-    /**
-     * Returns the bean currently being operated on.  The return value may
-     * be null if this map is empty.
-     *
-     * @return the bean being operated on by this map
-     */
-    public Object getBean() {
-        return bean;
-    }
-
-    /**
-     * Sets the bean to be operated on by this map.  The given value may
-     * be null, in which case this map will be empty.
-     *
-     * @param newBean  the new bean to operate on
-     */
-    public void setBean( final Object newBean ) {
-        bean = newBean;
-        reinitialise();
-    }
-
-    /**
-     * Returns the accessor for the property with the given name.
-     *
-     * @param name  the name of the property
-     * @return the accessor method for the property, or null
-     */
-    public Method getReadMethod(final String name) {
-        return readMethods.get(name);
-    }
-
-    /**
-     * Returns the mutator for the property with the given name.
-     *
-     * @param name  the name of the property
-     * @return the mutator method for the property, or null
-     */
-    public Method getWriteMethod(final String name) {
-        return writeMethods.get(name);
-    }
-
-
-    // Implementation methods
-    //-------------------------------------------------------------------------
-
-    /**
-     * Returns the accessor for the property with the given name.
-     *
-     * @param name  the name of the property
-     * @return null if the name is null; null if the name is not a
-     * {@link String}; null if no such property exists; or the accessor
-     *  method for that property
-     */
-    protected Method getReadMethod( final Object name ) {
-        return readMethods.get( name );
-    }
-
-    /**
-     * Returns the mutator for the property with the given name.
-     *
-     * @param name  the name of the
-     * @return null if the name is null; null if the name is not a
-     * {@link String}; null if no such property exists; null if the
-     * property is read-only; or the mutator method for that property
-     */
-    protected Method getWriteMethod( final Object name ) {
-        return writeMethods.get( name );
-    }
-
-    /**
-     * Reinitializes this bean.  Called during {@link #setBean(Object)}.
-     * Does introspection to find properties.
-     */
-    protected void reinitialise() {
-        readMethods.clear();
-        writeMethods.clear();
-        types.clear();
-        initialise();
-    }
-
-    private void initialise() {
-        if(getBean() == null) {
-            return;
-        }
-
-        final Class<? extends Object>  beanClass = getBean().getClass();
-        try {
-            //BeanInfo beanInfo = Introspector.getBeanInfo( bean, null );
-            final BeanInfo beanInfo = Introspector.getBeanInfo( beanClass );
-            final PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
-            if ( propertyDescriptors != null ) {
-                for (final PropertyDescriptor propertyDescriptor : propertyDescriptors) {
-                    if ( propertyDescriptor != null ) {
-                        final String name = propertyDescriptor.getName();
-                        final Method readMethod = propertyDescriptor.getReadMethod();
-                        final Method writeMethod = propertyDescriptor.getWriteMethod();
-                        final Class<? extends Object> aType = propertyDescriptor.getPropertyType();
-
-                        if ( readMethod != null ) {
-                            readMethods.put( name, readMethod );
-                        }
-                        if ( writeMethod != null ) {
-                            writeMethods.put( name, writeMethod );
-                        }
-                        types.put( name, aType );
-                    }
-                }
-            }
-        }
-        catch ( final IntrospectionException e ) {
-            logWarn(  e );
-        }
-    }
-
-    /**
-     * Called during a successful {@link #put(Object,Object)} operation.
-     * Default implementation does nothing.  Override to be notified of
-     * property changes in the bean caused by this map.
-     *
-     * @param key  the name of the property that changed
-     * @param oldValue  the old value for that property
-     * @param newValue  the new value for that property
-     */
-    protected void firePropertyChange( final Object key, final Object oldValue, final Object newValue ) {
-    }
-
-    // Implementation classes
-    //-------------------------------------------------------------------------
-
-    /**
-     * Map entry used by {@link BeanMap}.
-     */
-    protected static class Entry extends AbstractMapEntry {
-        private final BeanMap owner;
-
-        /**
-         * Constructs a new <code>Entry</code>.
-         *
-         * @param owner  the BeanMap this entry belongs to
-         * @param key  the key for this entry
-         * @param value  the value for this entry
-         */
-        protected Entry( final BeanMap owner, final Object key, final Object value ) {
-            super( key, value );
-            this.owner = owner;
-        }
-
-        /**
-         * Sets the value.
-         *
-         * @param value  the new value for the entry
-         * @return the old value for the entry
-         */
-        @Override
-        public Object setValue(final Object value) {
-            final Object key = getKey();
-            final Object oldValue = owner.get( key );
-
-            owner.put( key, value );
-            final Object newValue = owner.get( key );
-            super.setValue( newValue );
-            return oldValue;
-        }
-    }
-
-    /**
-     * Creates an array of parameters to pass to the given mutator method.
-     * If the given object is not the right type to pass to the method
-     * directly, it will be converted using {@link #convertType(Class,Object)}.
-     *
-     * @param method  the mutator method
-     * @param value  the value to pass to the mutator method
-     * @return an array containing one object that is either the given value
-     *   or a transformed value
-     * @throws IllegalAccessException if {@link #convertType(Class,Object)}
-     *   raises it
-     * @throws IllegalArgumentException if any other exception is raised
-     *   by {@link #convertType(Class,Object)}
-     * @throws ClassCastException if an error occurs creating the method args
-     */
-    protected Object[] createWriteMethodArguments( final Method method, Object value )
-        throws IllegalAccessException, ClassCastException {
-        try {
-            if ( value != null ) {
-                final Class<? extends Object>[] types = method.getParameterTypes();
-                if ( types != null && types.length > 0 ) {
-                    final Class<? extends Object> paramType = types[0];
-                    if ( ! paramType.isAssignableFrom( value.getClass() ) ) {
-                        value = convertType( paramType, value );
-                    }
-                }
-            }
-            return new Object[] { value };
-        }
-        catch ( final InvocationTargetException e ) {
-            final IllegalArgumentException iae = new IllegalArgumentException(e.getMessage());
-            if (!BeanUtils.initCause(iae, e)) {
-                logInfo(e);
-            }
-            throw iae;
-        }
-        catch ( final InstantiationException e ) {
-            final IllegalArgumentException iae = new IllegalArgumentException(e.getMessage());
-            if (!BeanUtils.initCause(iae, e)) {
-                logInfo(e);
-            }
-            BeanUtils.initCause(iae, e);
-            throw iae;
-        }
     }
 
     /**
@@ -875,6 +457,194 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     }
 
     /**
+     * Creates an array of parameters to pass to the given mutator method.
+     * If the given object is not the right type to pass to the method
+     * directly, it will be converted using {@link #convertType(Class,Object)}.
+     *
+     * @param method  the mutator method
+     * @param value  the value to pass to the mutator method
+     * @return an array containing one object that is either the given value
+     *   or a transformed value
+     * @throws IllegalAccessException if {@link #convertType(Class,Object)}
+     *   raises it
+     * @throws IllegalArgumentException if any other exception is raised
+     *   by {@link #convertType(Class,Object)}
+     * @throws ClassCastException if an error occurs creating the method args
+     */
+    protected Object[] createWriteMethodArguments( final Method method, Object value )
+        throws IllegalAccessException, ClassCastException {
+        try {
+            if ( value != null ) {
+                final Class<? extends Object>[] types = method.getParameterTypes();
+                if ( types != null && types.length > 0 ) {
+                    final Class<? extends Object> paramType = types[0];
+                    if ( ! paramType.isAssignableFrom( value.getClass() ) ) {
+                        value = convertType( paramType, value );
+                    }
+                }
+            }
+            return new Object[] { value };
+        }
+        catch ( final InvocationTargetException e ) {
+            final IllegalArgumentException iae = new IllegalArgumentException(e.getMessage());
+            if (!BeanUtils.initCause(iae, e)) {
+                logInfo(e);
+            }
+            throw iae;
+        }
+        catch ( final InstantiationException e ) {
+            final IllegalArgumentException iae = new IllegalArgumentException(e.getMessage());
+            if (!BeanUtils.initCause(iae, e)) {
+                logInfo(e);
+            }
+            BeanUtils.initCause(iae, e);
+            throw iae;
+        }
+    }
+
+    /**
+     * Convenience method for getting an iterator over the entries.
+     *
+     * @return an iterator over the entries
+     */
+    public Iterator<Map.Entry<Object, Object>> entryIterator() {
+        final Iterator<String> iter = keyIterator();
+        return new Iterator<Map.Entry<Object, Object>>() {
+            @Override
+            public boolean hasNext() {
+                return iter.hasNext();
+            }
+            @Override
+            public Map.Entry<Object, Object> next() {
+                final Object key = iter.next();
+                final Object value = get(key);
+                @SuppressWarnings("unchecked")
+                final
+                // This should not cause any problems; the key is actually a
+                // string, but it does no harm to expose it as Object
+                Map.Entry<Object, Object> tmpEntry = new Entry( BeanMap.this, key, value );
+                return tmpEntry;
+            }
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException( "remove() not supported for BeanMap" );
+            }
+        };
+    }
+
+    /**
+     * Gets a Set of MapEntry objects that are the mappings for this BeanMap.
+     * <p>
+     * Each MapEntry can be set but not removed.
+     *
+     * @return the unmodifiable set of mappings
+     */
+    @Override
+    public Set<Map.Entry<Object, Object>> entrySet() {
+        return Collections.unmodifiableSet(new AbstractSet<Map.Entry<Object, Object>>() {
+            @Override
+            public Iterator<Map.Entry<Object, Object>> iterator() {
+                return entryIterator();
+            }
+            @Override
+            public int size() {
+              return BeanMap.this.readMethods.size();
+            }
+        });
+    }
+
+
+    /**
+     * Called during a successful {@link #put(Object,Object)} operation.
+     * Default implementation does nothing.  Override to be notified of
+     * property changes in the bean caused by this map.
+     *
+     * @param key  the name of the property that changed
+     * @param oldValue  the old value for that property
+     * @param newValue  the new value for that property
+     */
+    protected void firePropertyChange( final Object key, final Object oldValue, final Object newValue ) {
+    }
+
+    /**
+     * Returns the value of the bean's property with the given name.
+     * <p>
+     * The given name must be a {@link String} and must not be
+     * null; otherwise, this method returns <code>null</code>.
+     * If the bean defines a property with the given name, the value of
+     * that property is returned.  Otherwise, <code>null</code> is
+     * returned.
+     * <p>
+     * Write-only properties will not be matched as the test operates against
+     * property read methods.
+     *
+     * @param name  the name of the property whose value to return
+     * @return  the value of the property with that name
+     */
+    @Override
+    public Object get(final Object name) {
+        if ( bean != null ) {
+            final Method method = getReadMethod( name );
+            if ( method != null ) {
+                try {
+                    return method.invoke( bean, NULL_ARGUMENTS );
+                }
+                catch ( final IllegalAccessException | IllegalArgumentException | InvocationTargetException | NullPointerException e ) {
+                    logWarn(  e );
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns the bean currently being operated on.  The return value may
+     * be null if this map is empty.
+     *
+     * @return the bean being operated on by this map
+     */
+    public Object getBean() {
+        return bean;
+    }
+
+
+    // Helper methods
+    //-------------------------------------------------------------------------
+
+    /**
+     * Returns the accessor for the property with the given name.
+     *
+     * @param name  the name of the property
+     * @return null if the name is null; null if the name is not a
+     * {@link String}; null if no such property exists; or the accessor
+     *  method for that property
+     */
+    protected Method getReadMethod( final Object name ) {
+        return readMethods.get( name );
+    }
+
+    /**
+     * Returns the accessor for the property with the given name.
+     *
+     * @param name  the name of the property
+     * @return the accessor method for the property, or null
+     */
+    public Method getReadMethod(final String name) {
+        return readMethods.get(name);
+    }
+
+    /**
+     * Returns the type of the property with the given name.
+     *
+     * @param name  the name of the property
+     * @return  the type of the property, or <code>null</code> if no such
+     *  property exists
+     */
+    public Class<?> getType(final String name) {
+        return types.get( name );
+    }
+
+    /**
      * Returns a transformer for the given primitive type.
      *
      * @param aType  the primitive type whose transformer to return
@@ -883,6 +653,99 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
      */
     protected Transformer getTypeTransformer( final Class<?> aType ) {
         return typeTransformers.get( aType );
+    }
+
+
+    // Properties
+    //-------------------------------------------------------------------------
+
+    /**
+     * Returns the mutator for the property with the given name.
+     *
+     * @param name  the name of the
+     * @return null if the name is null; null if the name is not a
+     * {@link String}; null if no such property exists; null if the
+     * property is read-only; or the mutator method for that property
+     */
+    protected Method getWriteMethod( final Object name ) {
+        return writeMethods.get( name );
+    }
+
+    /**
+     * Returns the mutator for the property with the given name.
+     *
+     * @param name  the name of the property
+     * @return the mutator method for the property, or null
+     */
+    public Method getWriteMethod(final String name) {
+        return writeMethods.get(name);
+    }
+
+    private void initialise() {
+        if(getBean() == null) {
+            return;
+        }
+
+        final Class<? extends Object>  beanClass = getBean().getClass();
+        try {
+            //BeanInfo beanInfo = Introspector.getBeanInfo( bean, null );
+            final BeanInfo beanInfo = Introspector.getBeanInfo( beanClass );
+            final PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
+            if ( propertyDescriptors != null ) {
+                for (final PropertyDescriptor propertyDescriptor : propertyDescriptors) {
+                    if ( propertyDescriptor != null ) {
+                        final String name = propertyDescriptor.getName();
+                        final Method readMethod = propertyDescriptor.getReadMethod();
+                        final Method writeMethod = propertyDescriptor.getWriteMethod();
+                        final Class<? extends Object> aType = propertyDescriptor.getPropertyType();
+
+                        if ( readMethod != null ) {
+                            readMethods.put( name, readMethod );
+                        }
+                        if ( writeMethod != null ) {
+                            writeMethods.put( name, writeMethod );
+                        }
+                        types.put( name, aType );
+                    }
+                }
+            }
+        }
+        catch ( final IntrospectionException e ) {
+            logWarn(  e );
+        }
+    }
+
+    /**
+     * Convenience method for getting an iterator over the keys.
+     * <p>
+     * Write-only properties will not be returned in the iterator.
+     *
+     * @return an iterator over the keys
+     */
+    public Iterator<String> keyIterator() {
+        return readMethods.keySet().iterator();
+    }
+
+
+    // Implementation methods
+    //-------------------------------------------------------------------------
+
+    /**
+     * Get the keys for this BeanMap.
+     * <p>
+     * Write-only properties are <b>not</b> included in the returned set of
+     * property names, although it is possible to set their value and to get
+     * their type.
+     *
+     * @return BeanMap keys.  The Set returned by this method is not
+     *        modifiable.
+     */
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    // The set actually contains strings; however, because it cannot be
+    // modified there is no danger in selling it as Set<Object>
+    @Override
+    public Set<Object> keySet() {
+        return Collections.unmodifiableSet((Set) readMethods.keySet());
     }
 
     /**
@@ -906,5 +769,142 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
         // Deliberately do not use LOG4J or Commons Logging to avoid dependencies
         System.out.println( "WARN: Exception: " + ex );
         ex.printStackTrace();
+    }
+
+    /**
+     * Sets the bean property with the given name to the given value.
+     *
+     * @param name  the name of the property to set
+     * @param value  the value to set that property to
+     * @return  the previous value of that property
+     * @throws IllegalArgumentException  if the given name is null;
+     *   if the given name is not a {@link String}; if the bean doesn't
+     *   define a property with that name; or if the bean property with
+     *   that name is read-only
+     * @throws ClassCastException if an error occurs creating the method args
+     */
+    @Override
+    public Object put(final Object name, final Object value) throws IllegalArgumentException, ClassCastException {
+        if ( bean != null ) {
+            final Object oldValue = get( name );
+            final Method method = getWriteMethod( name );
+            if ( method == null ) {
+                throw new IllegalArgumentException( "The bean of type: "+
+                        bean.getClass().getName() + " has no property called: " + name );
+            }
+            try {
+                final Object[] arguments = createWriteMethodArguments( method, value );
+                method.invoke( bean, arguments );
+
+                final Object newValue = get( name );
+                firePropertyChange( name, oldValue, newValue );
+            }
+            catch ( final InvocationTargetException | IllegalAccessException e ) {
+                final IllegalArgumentException iae = new IllegalArgumentException(e.getMessage());
+                if (!BeanUtils.initCause(iae, e)) {
+                    logInfo(e);
+                }
+                throw iae;
+            }
+            return oldValue;
+        }
+        return null;
+    }
+
+    /**
+     * Puts all of the writable properties from the given BeanMap into this
+     * BeanMap. Read-only and Write-only properties will be ignored.
+     *
+     * @param map  the BeanMap whose properties to put
+     */
+    public void putAllWriteable(final BeanMap map) {
+        for (final Object key : map.readMethods.keySet()) {
+            if (getWriteMethod(key) != null) {
+                this.put(key, map.get(key));
+            }
+        }
+    }
+
+    // Implementation classes
+    //-------------------------------------------------------------------------
+
+    /**
+     * Reinitializes this bean.  Called during {@link #setBean(Object)}.
+     * Does introspection to find properties.
+     */
+    protected void reinitialise() {
+        readMethods.clear();
+        writeMethods.clear();
+        types.clear();
+        initialise();
+    }
+
+    /**
+     * Sets the bean to be operated on by this map.  The given value may
+     * be null, in which case this map will be empty.
+     *
+     * @param newBean  the new bean to operate on
+     */
+    public void setBean( final Object newBean ) {
+        bean = newBean;
+        reinitialise();
+    }
+
+    /**
+     * Returns the number of properties defined by the bean.
+     *
+     * @return  the number of properties defined by the bean
+     */
+    @Override
+    public int size() {
+        return readMethods.size();
+    }
+
+    /**
+     * Renders a string representation of this object.
+     * @return a <code>String</code> representation of this object
+     */
+    @Override
+    public String toString() {
+        return "BeanMap<" + String.valueOf(bean) + ">";
+    }
+
+    /**
+     * Convenience method for getting an iterator over the values.
+     *
+     * @return an iterator over the values
+     */
+    public Iterator<Object> valueIterator() {
+        final Iterator<?> iter = keyIterator();
+        return new Iterator<Object>() {
+            @Override
+            public boolean hasNext() {
+                return iter.hasNext();
+            }
+            @Override
+            public Object next() {
+                final Object key = iter.next();
+                return get(key);
+            }
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException( "remove() not supported for BeanMap" );
+            }
+        };
+    }
+
+    /**
+     * Returns the values for the BeanMap.
+     *
+     * @return values for the BeanMap.  The returned collection is not
+     *        modifiable.
+     */
+    @Override
+    public Collection<Object> values() {
+        final ArrayList<Object> answer = new ArrayList<>( readMethods.size() );
+        for ( final Iterator<Object> iter = valueIterator(); iter.hasNext(); ) {
+            answer.add( iter.next() );
+        }
+        return Collections.unmodifiableList(answer);
     }
 }

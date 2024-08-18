@@ -107,29 +107,6 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
     /**
      * <p>Construct a new {@link RowSetDynaClass} for the specified
      * <code>ResultSet</code>.  The property names corresponding
-     * to column names in the result set will be lower cased.</p>
-     *
-     * If <code>limit</code> is not less than 0, max <code>limit</code>
-     * number of rows will be copied into the list.
-     *
-     * @param resultSet The result set to be wrapped
-     * @param limit The maximum for the size of the result.
-     *
-     * @throws NullPointerException if <code>resultSet</code>
-     *  is <code>null</code>
-     * @throws SQLException if the metadata for this result set
-     *  cannot be introspected
-     */
-    public RowSetDynaClass(final ResultSet resultSet, final int limit) throws SQLException {
-
-        this(resultSet, true, limit);
-
-    }
-
-
-    /**
-     * <p>Construct a new {@link RowSetDynaClass} for the specified
-     * <code>ResultSet</code>.  The property names corresponding
      * to the column names in the result set will be lower cased or not,
      * depending on the specified <code>lowerCase</code> value.</p>
      *
@@ -148,6 +125,36 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
     public RowSetDynaClass(final ResultSet resultSet, final boolean lowerCase)
                                                     throws SQLException {
         this(resultSet, lowerCase, -1);
+
+    }
+
+
+    /**
+     * <p>Construct a new {@link RowSetDynaClass} for the specified
+     * <code>ResultSet</code>.  The property names corresponding
+     * to the column names in the result set will be lower cased or not,
+     * depending on the specified <code>lowerCase</code> value.</p>
+     *
+     * <p><strong>WARNING</strong> - If you specify <code>false</code>
+     * for <code>lowerCase</code>, the returned property names will
+     * exactly match the column names returned by your JDBC driver.
+     * Because different drivers might return column names in different
+     * cases, the property names seen by your application will vary
+     * depending on which JDBC driver you are using.</p>
+     *
+     * @param resultSet The result set to be wrapped
+     * @param lowerCase Should property names be lower cased?
+     * @param useColumnLabel true if the column label should be used, otherwise false
+     *
+     * @throws NullPointerException if <code>resultSet</code>
+     *  is <code>null</code>
+     * @throws SQLException if the metadata for this result set
+     *  cannot be introspected
+     * @since 1.8.3
+     */
+    public RowSetDynaClass(final ResultSet resultSet, final boolean lowerCase, final boolean useColumnLabel)
+        throws SQLException {
+        this(resultSet, lowerCase, -1, useColumnLabel);
 
     }
 
@@ -195,35 +202,6 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
      *
      * @param resultSet The result set to be wrapped
      * @param lowerCase Should property names be lower cased?
-     * @param useColumnLabel true if the column label should be used, otherwise false
-     *
-     * @throws NullPointerException if <code>resultSet</code>
-     *  is <code>null</code>
-     * @throws SQLException if the metadata for this result set
-     *  cannot be introspected
-     * @since 1.8.3
-     */
-    public RowSetDynaClass(final ResultSet resultSet, final boolean lowerCase, final boolean useColumnLabel)
-        throws SQLException {
-        this(resultSet, lowerCase, -1, useColumnLabel);
-
-    }
-
-    /**
-     * <p>Construct a new {@link RowSetDynaClass} for the specified
-     * <code>ResultSet</code>.  The property names corresponding
-     * to the column names in the result set will be lower cased or not,
-     * depending on the specified <code>lowerCase</code> value.</p>
-     *
-     * <p><strong>WARNING</strong> - If you specify <code>false</code>
-     * for <code>lowerCase</code>, the returned property names will
-     * exactly match the column names returned by your JDBC driver.
-     * Because different drivers might return column names in different
-     * cases, the property names seen by your application will vary
-     * depending on which JDBC driver you are using.</p>
-     *
-     * @param resultSet The result set to be wrapped
-     * @param lowerCase Should property names be lower cased?
      * @param limit Maximum limit for the <code>List</code> of {@link DynaBean}
      * @param useColumnLabel true if the column label should be used, otherwise false
      *
@@ -248,26 +226,26 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
     }
 
     /**
-     * <p>Return a <code>List</code> containing the {@link DynaBean}s that
-     * represent the contents of each <code>Row</code> from the
-     * <code>ResultSet</code> that was the basis of this
-     * {@link RowSetDynaClass} instance.  These {@link DynaBean}s are
-     * disconnected from the database itself, so there is no problem with
-     * modifying the contents of the list, or the values of the properties
-     * of these {@link DynaBean}s.  However, it is the application's
-     * responsibility to persist any such changes back to the database,
-     * if it so desires.</p>
+     * <p>Construct a new {@link RowSetDynaClass} for the specified
+     * <code>ResultSet</code>.  The property names corresponding
+     * to column names in the result set will be lower cased.</p>
      *
-     * @return A <code>List</code> of {@link DynaBean} instances
+     * If <code>limit</code> is not less than 0, max <code>limit</code>
+     * number of rows will be copied into the list.
+     *
+     * @param resultSet The result set to be wrapped
+     * @param limit The maximum for the size of the result.
+     *
+     * @throws NullPointerException if <code>resultSet</code>
+     *  is <code>null</code>
+     * @throws SQLException if the metadata for this result set
+     *  cannot be introspected
      */
-    public List<DynaBean> getRows() {
+    public RowSetDynaClass(final ResultSet resultSet, final int limit) throws SQLException {
 
-        return this.rows;
+        this(resultSet, true, limit);
 
     }
-
-
-
 
     /**
      * <p>Copy the column values for each row in the specified
@@ -296,6 +274,8 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
     }
 
 
+
+
     /**
      * <p>Create and return a new {@link DynaBean} instance to be used for
      * representing a row in the underlying result set.</p>
@@ -305,6 +285,26 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
     protected DynaBean createDynaBean() {
 
         return new BasicDynaBean(this);
+
+    }
+
+
+    /**
+     * <p>Return a <code>List</code> containing the {@link DynaBean}s that
+     * represent the contents of each <code>Row</code> from the
+     * <code>ResultSet</code> that was the basis of this
+     * {@link RowSetDynaClass} instance.  These {@link DynaBean}s are
+     * disconnected from the database itself, so there is no problem with
+     * modifying the contents of the list, or the values of the properties
+     * of these {@link DynaBean}s.  However, it is the application's
+     * responsibility to persist any such changes back to the database,
+     * if it so desires.</p>
+     *
+     * @return A <code>List</code> of {@link DynaBean} instances
+     */
+    public List<DynaBean> getRows() {
+
+        return this.rows;
 
     }
 

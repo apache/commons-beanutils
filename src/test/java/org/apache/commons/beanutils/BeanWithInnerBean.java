@@ -24,13 +24,6 @@ import java.util.Properties;
  *
  */
 public class BeanWithInnerBean {
-  private final InnerBean innerBean = new InnerBean();
-
-  public BeanWithInnerBean() {}
-    public InnerBean getInnerBean(){
-      return innerBean;
-    }
-
   public class InnerBean {
     private final Properties fish = new Properties();
 
@@ -41,4 +34,11 @@ public class BeanWithInnerBean {
       fish.setProperty(key, value);
     }
   }
+
+  private final InnerBean innerBean = new InnerBean();
+    public BeanWithInnerBean() {}
+
+  public InnerBean getInnerBean(){
+  return innerBean;
+}
 }

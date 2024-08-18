@@ -26,9 +26,24 @@ import junit.framework.TestSuite;
  */
 public class LazyDynaClassTestCase extends TestCase {
 
-    protected LazyDynaClass dynaClass = null;
-    protected String testProperty     = "myProperty";
+    /**
+     * Run this Test
+     */
+    public static void main(final String[] args) {
+      junit.textui.TestRunner.run(suite());
+    }
+    /**
+     * Return the tests included in this test suite.
+     */
+    public static Test suite() {
+        return new TestSuite(LazyDynaClassTestCase.class);
+    }
 
+
+    protected LazyDynaClass dynaClass = null;
+
+
+    protected String testProperty     = "myProperty";
 
     /**
      * Construct a new instance of this test case.
@@ -39,27 +54,12 @@ public class LazyDynaClassTestCase extends TestCase {
         super(name);
     }
 
-
-    /**
-     * Run this Test
-     */
-    public static void main(final String[] args) {
-      junit.textui.TestRunner.run(suite());
-    }
-
     /**
      * Set up instance variables required by this test case.
      */
     @Override
     public void setUp() throws Exception {
         dynaClass = new LazyDynaClass();
-    }
-
-    /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(LazyDynaClassTestCase.class);
     }
 
     /**
@@ -217,6 +217,15 @@ public class LazyDynaClassTestCase extends TestCase {
     }
 
     /**
+     * Test removing a property which doesn't exist
+     */
+    public void testRemovePropertyDoesntExist() {
+        assertFalse("property doesn't exist", dynaClass.isDynaProperty(testProperty));
+        dynaClass.remove(testProperty);
+        assertFalse("property still doesn't exist", dynaClass.isDynaProperty(testProperty));
+    }
+
+    /**
      * Test removing a property, name is null
      */
     public void testRemovePropertyNullName() {
@@ -242,14 +251,5 @@ public class LazyDynaClassTestCase extends TestCase {
         } catch (final IllegalStateException expected) {
             // expected result
         }
-    }
-
-    /**
-     * Test removing a property which doesn't exist
-     */
-    public void testRemovePropertyDoesntExist() {
-        assertFalse("property doesn't exist", dynaClass.isDynaProperty(testProperty));
-        dynaClass.remove(testProperty);
-        assertFalse("property still doesn't exist", dynaClass.isDynaProperty(testProperty));
     }
 }

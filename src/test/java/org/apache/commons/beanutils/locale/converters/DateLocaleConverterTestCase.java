@@ -112,6 +112,239 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
     // ------------------------------------------------------------------------
 
+    /**
+     * Test Calendar
+     */
+    public void testCalendarObject() {
+        converter = new DateLocaleConverter(defaultLocale);
+        final java.util.Calendar calendar = java.util.Calendar.getInstance();
+        calendar.setTime((java.util.Date)expectedValue);
+        assertEquals("java.util.Calendar", expectedValue, converter.convert(calendar));
+    }
+
+    /**
+     * Test Converter() constructor
+     *
+     * Uses the default locale, no default value
+     *
+     */
+    public void testConstructor_2() {
+
+        converter = new DateLocaleConverter();
+
+        // Perform Tests
+        convertValueNoPattern(converter, defaultShortDateValue, expectedValue);
+        convertValueWithPattern(converter, defaultDateValue, defaultDatePattern, expectedValue);
+        convertInvalid(converter, null);
+        convertNull(converter, null);
+
+    }
+
+    /**
+     * Test Converter(locPattern) constructor
+     *
+     * Uses the default locale, no default value
+     *
+     */
+    public void testConstructor_3() {
+
+        converter = new DateLocaleConverter(true);
+
+        // Perform Tests
+        convertValueNoPattern(converter, defaultShortDateValue, expectedValue);
+        convertValueWithPattern(converter, defaultDateValue, defaultDatePattern, expectedValue);
+        convertInvalid(converter, null);
+        convertNull(converter, null);
+
+
+    }
+
+    /**
+     * Test Converter(Locale) constructor
+     */
+    public void testConstructor_4() {
+
+        converter = new DateLocaleConverter(localizedLocale);
+
+        // Perform Tests
+        convertValueNoPattern(converter, localizedShortDateValue, expectedValue);
+        convertValueWithPattern(converter, localizedDateValue, defaultDatePattern, expectedValue);
+        convertInvalid(converter, null);
+        convertNull(converter, null);
+
+
+    }
+
+    /**
+     * Test Converter(Locale, locPattern) constructor
+     */
+    public void testConstructor_5() {
+
+        // Skip this test if no valid symbols for the locale
+        if (!validLocalDateSymbols) {
+            log.error("Invalid locale symbols *** skipping testConstructor_5() **");
+            return;
+        }
+
+        converter = new DateLocaleConverter(localizedLocale, true);
+
+        // Perform Tests
+        convertValueNoPattern(converter, localizedShortDateValue, expectedValue);
+        convertValueWithPattern(converter, localizedDateValue, localizedDatePattern, expectedValue);
+        convertInvalid(converter, null);
+        convertNull(converter, null);
+
+
+    }
+
+
+    /**
+     * Test Converter(Locale, pattern) constructor
+     */
+    public void testConstructor_6() {
+
+        converter = new DateLocaleConverter(localizedLocale, defaultDatePattern);
+
+        // Perform Tests
+        convertValueNoPattern(converter, localizedDateValue, expectedValue);
+        convertValueWithPattern(converter, localizedDateValue, defaultDatePattern, expectedValue);
+        convertInvalid(converter, null);
+        convertNull(converter, null);
+
+    }
+
+    /**
+     * Test Converter(Locale, pattern, locPattern) constructor
+     */
+    public void testConstructor_7() {
+
+        // Skip this test if no valid symbols for the locale
+        if (!validLocalDateSymbols) {
+            log.error("Invalid locale symbols *** skipping testConstructor_7() **");
+            return;
+        }
+
+        converter = new DateLocaleConverter(localizedLocale, localizedDatePattern, true);
+
+        // Perform Tests
+        convertValueNoPattern(converter, localizedDateValue, expectedValue);
+        convertValueWithPattern(converter, localizedDateValue, localizedDatePattern, expectedValue);
+        convertInvalid(converter, null);
+        convertNull(converter, null);
+
+    }
+
+    /**
+     * Test Converter(defaultValue) constructor
+     */
+    public void testConstructor_8() {
+
+        converter = new DateLocaleConverter(defaultValue);
+
+        // Perform Tests
+        convertValueNoPattern(converter, defaultShortDateValue, expectedValue);
+        convertValueWithPattern(converter, defaultDateValue, defaultDatePattern, expectedValue);
+        convertInvalid(converter, defaultValue);
+        convertNull(converter, defaultValue);
+
+    }
+
+    /**
+     * Test Converter(defaultValue, locPattern) constructor
+     */
+    public void testConstructor_9() {
+
+        converter = new DateLocaleConverter(defaultValue, true);
+
+        // Perform Tests
+        convertValueNoPattern(converter, defaultShortDateValue, expectedValue);
+        convertValueWithPattern(converter, defaultDateValue, defaultDatePattern, expectedValue);
+        convertInvalid(converter, defaultValue);
+        convertNull(converter, defaultValue);
+
+    }
+
+    /**
+     * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
+     */
+    public void testConstructorMain() {
+
+        // Skip this test if no valid symbols for the locale
+        if (!validLocalDateSymbols) {
+            log.error("Invalid locale symbols *** skipping testConstructorMain() **");
+            return;
+        }
+
+        converter = new DateLocaleConverter(defaultValue,
+                                            localizedLocale,
+                                            localizedDatePattern,
+                                            true);
+
+
+        convertValueNoPattern(converter, "(A)", localizedDateValue, expectedValue);
+        convertValueWithPattern(converter, "(A)", localizedDateValue, localizedDatePattern, expectedValue);
+        convertInvalid(converter, "(A)", defaultValue);
+        convertNull(converter, "(A)", defaultValue);
+
+
+        // Convert value in the wrong format - should return default value
+        convertValueNoPattern(converter, "(B)", defaultDateValue, defaultValue);
+
+        // Convert with non-localized pattern - should return default value
+        convertValueWithPattern(converter, "(B)", localizedDateValue, defaultDatePattern, defaultValue);
+
+        // **************************************************************************
+        // Convert with specified type
+        //
+        // BaseLocaleConverter completely ignores the type - so even if we specify
+        // Double.class here it still returns a Date.
+        //  **** This has been changed due to BEANUTILS-449 ****
+        // **************************************************************************
+        //convertValueToType(converter, "(B)", String.class, localizedDateValue, localizedDatePattern, expectedValue);
+
+
+        converter = new DateLocaleConverter(defaultValue,
+                                            localizedLocale,
+                                            defaultDatePattern,
+                                            false);
+
+
+        convertValueNoPattern(converter, "(C)", localizedDateValue, expectedValue);
+        convertValueWithPattern(converter, "(C)", localizedDateValue, defaultDatePattern, expectedValue);
+        convertInvalid(converter, "(C)", defaultValue);
+        convertNull(converter, "(C)", defaultValue);
+
+    }
+
+    /**
+     * Test java.util.Date
+     */
+    public void testDateObject() {
+        converter = new DateLocaleConverter(defaultLocale);
+        assertEquals("java.util.Date", expectedValue, converter.convert(expectedValue));
+    }
+
+    /**
+     * Test invalid date
+     */
+    public void testInvalidDate() {
+
+        converter = new DateLocaleConverter(defaultLocale);
+
+        try {
+            converter.convert("01/10/2004", "dd-MM-yyyy");
+        } catch (final ConversionException e) {
+            assertEquals("Parse Error", "Error parsing date '01/10/2004' at position=2", e.getMessage());
+        }
+
+        try {
+            converter.convert("01-10-2004X", "dd-MM-yyyy");
+        } catch (final ConversionException e) {
+            assertEquals("Parse Length", "Date '01-10-2004X' contains unparsed characters from position=10", e.getMessage());
+        }
+
+    }
+
     public void testSetLenient() {
         // make sure that date format works as expected
         final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.UK);
@@ -199,239 +432,6 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         } catch (final ConversionException e) {
             fail("Could not parse date (6) - " + e.getMessage());
         }
-    }
-
-    /**
-     * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
-     */
-    public void testConstructorMain() {
-
-        // Skip this test if no valid symbols for the locale
-        if (!validLocalDateSymbols) {
-            log.error("Invalid locale symbols *** skipping testConstructorMain() **");
-            return;
-        }
-
-        converter = new DateLocaleConverter(defaultValue,
-                                            localizedLocale,
-                                            localizedDatePattern,
-                                            true);
-
-
-        convertValueNoPattern(converter, "(A)", localizedDateValue, expectedValue);
-        convertValueWithPattern(converter, "(A)", localizedDateValue, localizedDatePattern, expectedValue);
-        convertInvalid(converter, "(A)", defaultValue);
-        convertNull(converter, "(A)", defaultValue);
-
-
-        // Convert value in the wrong format - should return default value
-        convertValueNoPattern(converter, "(B)", defaultDateValue, defaultValue);
-
-        // Convert with non-localized pattern - should return default value
-        convertValueWithPattern(converter, "(B)", localizedDateValue, defaultDatePattern, defaultValue);
-
-        // **************************************************************************
-        // Convert with specified type
-        //
-        // BaseLocaleConverter completely ignores the type - so even if we specify
-        // Double.class here it still returns a Date.
-        //  **** This has been changed due to BEANUTILS-449 ****
-        // **************************************************************************
-        //convertValueToType(converter, "(B)", String.class, localizedDateValue, localizedDatePattern, expectedValue);
-
-
-        converter = new DateLocaleConverter(defaultValue,
-                                            localizedLocale,
-                                            defaultDatePattern,
-                                            false);
-
-
-        convertValueNoPattern(converter, "(C)", localizedDateValue, expectedValue);
-        convertValueWithPattern(converter, "(C)", localizedDateValue, defaultDatePattern, expectedValue);
-        convertInvalid(converter, "(C)", defaultValue);
-        convertNull(converter, "(C)", defaultValue);
-
-    }
-
-    /**
-     * Test Converter() constructor
-     *
-     * Uses the default locale, no default value
-     *
-     */
-    public void testConstructor_2() {
-
-        converter = new DateLocaleConverter();
-
-        // Perform Tests
-        convertValueNoPattern(converter, defaultShortDateValue, expectedValue);
-        convertValueWithPattern(converter, defaultDateValue, defaultDatePattern, expectedValue);
-        convertInvalid(converter, null);
-        convertNull(converter, null);
-
-    }
-
-    /**
-     * Test Converter(locPattern) constructor
-     *
-     * Uses the default locale, no default value
-     *
-     */
-    public void testConstructor_3() {
-
-        converter = new DateLocaleConverter(true);
-
-        // Perform Tests
-        convertValueNoPattern(converter, defaultShortDateValue, expectedValue);
-        convertValueWithPattern(converter, defaultDateValue, defaultDatePattern, expectedValue);
-        convertInvalid(converter, null);
-        convertNull(converter, null);
-
-
-    }
-
-    /**
-     * Test Converter(Locale) constructor
-     */
-    public void testConstructor_4() {
-
-        converter = new DateLocaleConverter(localizedLocale);
-
-        // Perform Tests
-        convertValueNoPattern(converter, localizedShortDateValue, expectedValue);
-        convertValueWithPattern(converter, localizedDateValue, defaultDatePattern, expectedValue);
-        convertInvalid(converter, null);
-        convertNull(converter, null);
-
-
-    }
-
-
-    /**
-     * Test Converter(Locale, locPattern) constructor
-     */
-    public void testConstructor_5() {
-
-        // Skip this test if no valid symbols for the locale
-        if (!validLocalDateSymbols) {
-            log.error("Invalid locale symbols *** skipping testConstructor_5() **");
-            return;
-        }
-
-        converter = new DateLocaleConverter(localizedLocale, true);
-
-        // Perform Tests
-        convertValueNoPattern(converter, localizedShortDateValue, expectedValue);
-        convertValueWithPattern(converter, localizedDateValue, localizedDatePattern, expectedValue);
-        convertInvalid(converter, null);
-        convertNull(converter, null);
-
-
-    }
-
-    /**
-     * Test Converter(Locale, pattern) constructor
-     */
-    public void testConstructor_6() {
-
-        converter = new DateLocaleConverter(localizedLocale, defaultDatePattern);
-
-        // Perform Tests
-        convertValueNoPattern(converter, localizedDateValue, expectedValue);
-        convertValueWithPattern(converter, localizedDateValue, defaultDatePattern, expectedValue);
-        convertInvalid(converter, null);
-        convertNull(converter, null);
-
-    }
-
-    /**
-     * Test Converter(Locale, pattern, locPattern) constructor
-     */
-    public void testConstructor_7() {
-
-        // Skip this test if no valid symbols for the locale
-        if (!validLocalDateSymbols) {
-            log.error("Invalid locale symbols *** skipping testConstructor_7() **");
-            return;
-        }
-
-        converter = new DateLocaleConverter(localizedLocale, localizedDatePattern, true);
-
-        // Perform Tests
-        convertValueNoPattern(converter, localizedDateValue, expectedValue);
-        convertValueWithPattern(converter, localizedDateValue, localizedDatePattern, expectedValue);
-        convertInvalid(converter, null);
-        convertNull(converter, null);
-
-    }
-
-    /**
-     * Test Converter(defaultValue) constructor
-     */
-    public void testConstructor_8() {
-
-        converter = new DateLocaleConverter(defaultValue);
-
-        // Perform Tests
-        convertValueNoPattern(converter, defaultShortDateValue, expectedValue);
-        convertValueWithPattern(converter, defaultDateValue, defaultDatePattern, expectedValue);
-        convertInvalid(converter, defaultValue);
-        convertNull(converter, defaultValue);
-
-    }
-
-    /**
-     * Test Converter(defaultValue, locPattern) constructor
-     */
-    public void testConstructor_9() {
-
-        converter = new DateLocaleConverter(defaultValue, true);
-
-        // Perform Tests
-        convertValueNoPattern(converter, defaultShortDateValue, expectedValue);
-        convertValueWithPattern(converter, defaultDateValue, defaultDatePattern, expectedValue);
-        convertInvalid(converter, defaultValue);
-        convertNull(converter, defaultValue);
-
-    }
-
-    /**
-     * Test invalid date
-     */
-    public void testInvalidDate() {
-
-        converter = new DateLocaleConverter(defaultLocale);
-
-        try {
-            converter.convert("01/10/2004", "dd-MM-yyyy");
-        } catch (final ConversionException e) {
-            assertEquals("Parse Error", "Error parsing date '01/10/2004' at position=2", e.getMessage());
-        }
-
-        try {
-            converter.convert("01-10-2004X", "dd-MM-yyyy");
-        } catch (final ConversionException e) {
-            assertEquals("Parse Length", "Date '01-10-2004X' contains unparsed characters from position=10", e.getMessage());
-        }
-
-    }
-
-    /**
-     * Test java.util.Date
-     */
-    public void testDateObject() {
-        converter = new DateLocaleConverter(defaultLocale);
-        assertEquals("java.util.Date", expectedValue, converter.convert(expectedValue));
-    }
-
-    /**
-     * Test Calendar
-     */
-    public void testCalendarObject() {
-        converter = new DateLocaleConverter(defaultLocale);
-        final java.util.Calendar calendar = java.util.Calendar.getInstance();
-        calendar.setTime((java.util.Date)expectedValue);
-        assertEquals("java.util.Calendar", expectedValue, converter.convert(calendar));
     }
 
 }

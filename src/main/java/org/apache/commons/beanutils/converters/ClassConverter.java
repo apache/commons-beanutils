@@ -51,17 +51,6 @@ public final class ClassConverter extends AbstractConverter {
     }
 
     /**
-     * Return the default type this <code>Converter</code> handles.
-     *
-     * @return The default type this <code>Converter</code> handles.
-     * @since 1.8.0
-     */
-    @Override
-    protected Class<?> getDefaultType() {
-        return Class.class;
-    }
-
-    /**
      * <p>Convert a java.lang.Class or object into a String.</p>
      *
      * @param value The input value to be converted
@@ -103,6 +92,17 @@ public final class ClassConverter extends AbstractConverter {
         }
 
         throw conversionException(type, value);
+    }
+
+    /**
+     * Return the default type this <code>Converter</code> handles.
+     *
+     * @return The default type this <code>Converter</code> handles.
+     * @since 1.8.0
+     */
+    @Override
+    protected Class<?> getDefaultType() {
+        return Class.class;
     }
 
 }

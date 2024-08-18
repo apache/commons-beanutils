@@ -33,11 +33,21 @@ public class BeanComparatorTestCase extends TestCase {
 
 
     /**
+     * Return the tests included in this test suite.
+     */
+    public static Test suite() {
+        return new TestSuite(BeanComparatorTestCase.class);
+    }
+    /**
      * The test beans for each test.
      */
     protected TestBean bean = null;
     protected AlphaBean alphaBean1 = null;
+
+
+
     protected AlphaBean alphaBean2 = null;
+
 
 
 
@@ -51,8 +61,6 @@ public class BeanComparatorTestCase extends TestCase {
     }
 
 
-
-
     /**
      * Set up instance variables required by this test case.
      */
@@ -63,14 +71,6 @@ public class BeanComparatorTestCase extends TestCase {
         alphaBean2 = new AlphaBean("alphaBean2");
 
 
-    }
-
-
-    /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(BeanComparatorTestCase.class);
     }
 
     /**
@@ -87,25 +87,14 @@ public class BeanComparatorTestCase extends TestCase {
 
 
     /**
-     *  tests comparing two beans via their name using the default Comparator
+     *  tests comparing one bean against itself.
      */
-    public void testSimpleCompare() {
+    public void testCompareBeanAgainstSelf() {
         final BeanComparator<AlphaBean> beanComparator = new BeanComparator<>(
                 "name");
-        final int result = beanComparator.compare(alphaBean1, alphaBean2);
+        final int result = beanComparator.compare(alphaBean1, alphaBean1);
         assertTrue("Comparator did not sort properly.  Result:" + result,
-                result == -1);
-    }
-
-    /**
-     *  tests comparing two beans via their name using the default Comparator, but the inverse
-     */
-    public void testSimpleCompareInverse() {
-        final BeanComparator<AlphaBean> beanComparator = new BeanComparator<>(
-                "name");
-        final int result = beanComparator.compare(alphaBean2, alphaBean1);
-        assertTrue("Comparator did not sort properly.  Result:" + result,
-                result == 1);
+                result == 0);
     }
 
     /**
@@ -119,49 +108,6 @@ public class BeanComparatorTestCase extends TestCase {
         final int result = beanComparator.compare(alphaBean1, alphaBean2);
         assertTrue("Comparator did not sort properly.  Result:" + result,
                 result == 0);
-    }
-
-    /**
-     *  tests comparing one bean against itself.
-     */
-    public void testCompareBeanAgainstSelf() {
-        final BeanComparator<AlphaBean> beanComparator = new BeanComparator<>(
-                "name");
-        final int result = beanComparator.compare(alphaBean1, alphaBean1);
-        assertTrue("Comparator did not sort properly.  Result:" + result,
-                result == 0);
-    }
-
-    /**
-     *  tests comparing two beans via their name using the default Comparator, but with one of the beans
-     *  being null.
-     */
-    public void testCompareWithNulls() {
-        try {
-          final BeanComparator<AlphaBean> beanComparator = new BeanComparator<>("name");
-          beanComparator.compare(alphaBean2, null);
-
-          fail("Should not be able to compare a null value.");
-        }
-        catch (final Exception e) {
-            // expected result
-        }
-    }
-
-    /**
-     *  tests comparing two beans who don't have a property
-     */
-    public void testCompareOnMissingProperty() {
-        try {
-          final BeanComparator<AlphaBean> beanComparator = new BeanComparator<>("bogusName");
-          beanComparator.compare(alphaBean2, alphaBean1);
-          fail("should not be able to compare");
-
-
-        }
-        catch (final Exception e) {
-          assertTrue("Wrong exception was thrown: " + e, e.toString().indexOf("Unknown property") > -1);
-        }
     }
 
     /**
@@ -185,6 +131,38 @@ public class BeanComparatorTestCase extends TestCase {
         }
         catch (final ClassCastException cce){
           // Expected result
+        }
+    }
+
+    /**
+     *  tests comparing two beans who don't have a property
+     */
+    public void testCompareOnMissingProperty() {
+        try {
+          final BeanComparator<AlphaBean> beanComparator = new BeanComparator<>("bogusName");
+          beanComparator.compare(alphaBean2, alphaBean1);
+          fail("should not be able to compare");
+
+
+        }
+        catch (final Exception e) {
+          assertTrue("Wrong exception was thrown: " + e, e.toString().indexOf("Unknown property") > -1);
+        }
+    }
+
+    /**
+     *  tests comparing two beans via their name using the default Comparator, but with one of the beans
+     *  being null.
+     */
+    public void testCompareWithNulls() {
+        try {
+          final BeanComparator<AlphaBean> beanComparator = new BeanComparator<>("name");
+          beanComparator.compare(alphaBean2, null);
+
+          fail("Should not be able to compare a null value.");
+        }
+        catch (final Exception e) {
+            // expected result
         }
     }
 
@@ -214,5 +192,27 @@ public class BeanComparatorTestCase extends TestCase {
 
         assertTrue("Comparator did not sort properly.  Result:" + result,
                 result == -1);
+    }
+
+    /**
+     *  tests comparing two beans via their name using the default Comparator
+     */
+    public void testSimpleCompare() {
+        final BeanComparator<AlphaBean> beanComparator = new BeanComparator<>(
+                "name");
+        final int result = beanComparator.compare(alphaBean1, alphaBean2);
+        assertTrue("Comparator did not sort properly.  Result:" + result,
+                result == -1);
+    }
+
+    /**
+     *  tests comparing two beans via their name using the default Comparator, but the inverse
+     */
+    public void testSimpleCompareInverse() {
+        final BeanComparator<AlphaBean> beanComparator = new BeanComparator<>(
+                "name");
+        final int result = beanComparator.compare(alphaBean2, alphaBean1);
+        assertTrue("Comparator did not sort properly.  Result:" + result,
+                result == 1);
     }
 }

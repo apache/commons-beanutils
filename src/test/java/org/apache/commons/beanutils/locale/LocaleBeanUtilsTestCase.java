@@ -33,6 +33,17 @@ public class LocaleBeanUtilsTestCase extends TestCase {
     private static Log log = LogFactory.getLog(LocaleBeanUtilsTestCase.class);
 
     /**
+     * Return the tests included in this test suite.
+     * @return Test Suite
+     */
+    public static Test suite() {
+        return new TestSuite(LocaleBeanUtilsTestCase.class);
+    }
+
+
+
+
+    /**
      * Construct a new instance of this test case.
      *
      * @param name Name of the test case
@@ -40,8 +51,6 @@ public class LocaleBeanUtilsTestCase extends TestCase {
     public LocaleBeanUtilsTestCase(final String name) {
         super(name);
     }
-
-
 
 
     /**
@@ -53,15 +62,6 @@ public class LocaleBeanUtilsTestCase extends TestCase {
 
 
     /**
-     * Return the tests included in this test suite.
-     * @return Test Suite
-     */
-    public static Test suite() {
-        return new TestSuite(LocaleBeanUtilsTestCase.class);
-    }
-
-
-    /**
      * Tear down instance variables required by this test case.
      */
     @Override
@@ -69,22 +69,6 @@ public class LocaleBeanUtilsTestCase extends TestCase {
     }
 
 
-
-    /**
-     * Test setting a nested simple property
-     */
-    public void testSetNestedPropertySimple() {
-        final TestBean bean = new TestBean();
-        bean.getNested().setIntProperty(5);
-        assertEquals("Initial value 5", 5, bean.getNested().getIntProperty());
-        try {
-            LocaleBeanUtils.setProperty(bean, "nested.intProperty", "123", null);
-        } catch (final Throwable t) {
-            log.error(t);
-            fail("Threw " + t);
-        }
-        assertEquals("Check Set Value", 123, bean.getNested().getIntProperty());
-    }
 
     /**
      * Test setting a nested indexed property
@@ -100,6 +84,22 @@ public class LocaleBeanUtilsTestCase extends TestCase {
             fail("Threw " + t);
         }
         assertEquals("Check Set Value", 123, bean.getNested().getIntIndexed(1));
+    }
+
+    /**
+     * Test setting a nested simple property
+     */
+    public void testSetNestedPropertySimple() {
+        final TestBean bean = new TestBean();
+        bean.getNested().setIntProperty(5);
+        assertEquals("Initial value 5", 5, bean.getNested().getIntProperty());
+        try {
+            LocaleBeanUtils.setProperty(bean, "nested.intProperty", "123", null);
+        } catch (final Throwable t) {
+            log.error(t);
+            fail("Threw " + t);
+        }
+        assertEquals("Check Set Value", 123, bean.getNested().getIntProperty());
     }
 }
 

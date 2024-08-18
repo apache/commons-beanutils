@@ -84,6 +84,92 @@ import org.apache.commons.logging.LogFactory;
 public class LocaleConvertUtilsBean {
 
     /**
+     * FastHashMap implementation that uses WeakReferences to overcome
+     * memory leak problems.
+     *
+     * This is a hack to retain binary compatibility with previous
+     * releases (where FastHashMap is exposed in the API), but
+     * use WeakHashMap to resolve memory leaks.
+     */
+    private static class DelegateFastHashMap extends FastHashMap {
+
+        private static final long serialVersionUID = 1L;
+        private final Map<Object, Object> map;
+
+        private DelegateFastHashMap(final Map<Object, Object> map) {
+            this.map = map;
+        }
+        @Override
+        public void clear() {
+            map.clear();
+        }
+        @Override
+        public boolean containsKey(final Object key) {
+            return map.containsKey(key);
+        }
+        @Override
+        public boolean containsValue(final Object value) {
+            return map.containsValue(value);
+        }
+        @Override
+        public Set<Map.Entry<Object, Object>> entrySet() {
+            return map.entrySet();
+        }
+        @Override
+        public boolean equals(final Object o) {
+            return map.equals(o);
+        }
+        @Override
+        public Object get(final Object key) {
+            return map.get(key);
+        }
+        @Override
+        public boolean getFast() {
+            return BeanUtils.getCacheFast(map);
+        }
+        @Override
+        public int hashCode() {
+            return map.hashCode();
+        }
+        @Override
+        public boolean isEmpty() {
+            return map.isEmpty();
+        }
+        @Override
+        public Set<Object> keySet() {
+            return map.keySet();
+        }
+        @Override
+        public Object put(final Object key, final Object value) {
+            return map.put(key, value);
+        }
+        @SuppressWarnings({ "rawtypes", "unchecked" })
+        // we operate on very generic types (<Object, Object>), so there is
+        // no need for doing type checks
+        @Override
+        public void putAll(final Map m) {
+            map.putAll(m);
+        }
+        @Override
+        public Object remove(final Object key) {
+            return map.remove(key);
+        }
+        @Override
+        public void setFast(final boolean fast) {
+            BeanUtils.setCacheFast(map, fast);
+        }
+        @Override
+        public int size() {
+            return map.size();
+        }
+        @Override
+        public Collection<Object> values() {
+            return map.values();
+        }
+    }
+
+
+    /**
      * Gets singleton instance.
      * This is the same as the instance used by the default {@link LocaleBeanUtilsBean} singleton.
      * @return the singleton instance
@@ -91,7 +177,6 @@ public class LocaleConvertUtilsBean {
     public static LocaleConvertUtilsBean getInstance() {
         return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getLocaleConvertUtils();
     }
-
 
     /** The locale - default for convertion. */
     private Locale defaultLocale = Locale.getDefault();
@@ -101,6 +186,7 @@ public class LocaleConvertUtilsBean {
 
     /** The <code>Log</code> instance for this class. */
     private final Log log = LogFactory.getLog(LocaleConvertUtils.class);
+
 
     /** Every entry of the mapConverters is:
      *  key = locale
@@ -119,51 +205,6 @@ public class LocaleConvertUtilsBean {
         mapConverters.setFast(true);
     }
 
-
-    /**
-     * getter for defaultLocale.
-     * @return the default locale
-     */
-    public Locale getDefaultLocale() {
-
-        return defaultLocale;
-    }
-
-    /**
-     * setter for defaultLocale.
-     * @param locale the default locale
-     */
-    public void setDefaultLocale(final Locale locale) {
-
-        if (locale == null) {
-            defaultLocale = Locale.getDefault();
-        }
-        else {
-            defaultLocale = locale;
-        }
-    }
-
-    /**
-     * getter for applyLocalized
-     *
-     * @return <code>true</code> if pattern is localized,
-     * otherwise <code>false</code>
-     */
-    public boolean getApplyLocalized() {
-        return applyLocalized;
-    }
-
-    /**
-     * setter for applyLocalized
-     *
-     * @param newApplyLocalized <code>true</code> if pattern is localized,
-     * otherwise <code>false</code>
-     */
-    public void setApplyLocalized(final boolean newApplyLocalized) {
-        applyLocalized = newApplyLocalized;
-    }
-
-
     /**
      * Convert the specified locale-sensitive value into a String.
      *
@@ -175,21 +216,6 @@ public class LocaleConvertUtilsBean {
      */
     public String convert(final Object value) {
         return convert(value, defaultLocale, null);
-    }
-
-    /**
-     * Convert the specified locale-sensitive value into a String
-     * using the conversion pattern.
-     *
-     * @param value The Value to be converted
-     * @param pattern       The convertion pattern
-     * @return the converted value
-     *
-     * @throws org.apache.commons.beanutils.ConversionException if thrown by an
-     * underlying Converter
-     */
-    public String convert(final Object value, final String pattern) {
-        return convert(value, defaultLocale, pattern);
     }
 
     /**
@@ -212,6 +238,22 @@ public class LocaleConvertUtilsBean {
     }
 
     /**
+     * Convert the specified locale-sensitive value into a String
+     * using the conversion pattern.
+     *
+     * @param value The Value to be converted
+     * @param pattern       The convertion pattern
+     * @return the converted value
+     *
+     * @throws org.apache.commons.beanutils.ConversionException if thrown by an
+     * underlying Converter
+     */
+    public String convert(final Object value, final String pattern) {
+        return convert(value, defaultLocale, pattern);
+    }
+
+
+    /**
      * Convert the specified value to an object of the specified class (if
      * possible).  Otherwise, return a String representation of the value.
      *
@@ -225,24 +267,6 @@ public class LocaleConvertUtilsBean {
     public Object convert(final String value, final Class<?> clazz) {
 
         return convert(value, clazz, defaultLocale, null);
-    }
-
-    /**
-     * Convert the specified value to an object of the specified class (if
-     * possible) using the convertion pattern. Otherwise, return a String
-     * representation of the value.
-     *
-     * @param value The String scalar value to be converted
-     * @param clazz The Data type to which this value should be converted.
-     * @param pattern The convertion pattern
-     * @return the converted value
-     *
-     * @throws org.apache.commons.beanutils.ConversionException if thrown by an
-     * underlying Converter
-     */
-    public Object convert(final String value, final Class<?> clazz, final String pattern) {
-
-        return convert(value, clazz, defaultLocale, pattern);
     }
 
     /**
@@ -282,37 +306,38 @@ public class LocaleConvertUtilsBean {
     }
 
     /**
-     * Convert an array of specified values to an array of objects of the
-     * specified class (if possible) using the convertion pattern.
+     * Convert the specified value to an object of the specified class (if
+     * possible) using the convertion pattern. Otherwise, return a String
+     * representation of the value.
      *
-     * @param values Value to be converted (may be null)
-     * @param clazz Java array or element class to be converted to
+     * @param value The String scalar value to be converted
+     * @param clazz The Data type to which this value should be converted.
      * @param pattern The convertion pattern
      * @return the converted value
      *
      * @throws org.apache.commons.beanutils.ConversionException if thrown by an
      * underlying Converter
      */
-    public Object convert(final String[] values, final Class<?> clazz, final String pattern) {
+    public Object convert(final String value, final Class<?> clazz, final String pattern) {
 
-        return convert(values, clazz, getDefaultLocale(), pattern);
+        return convert(value, clazz, defaultLocale, pattern);
     }
 
-   /**
-    * Convert an array of specified values to an array of objects of the
-    * specified class (if possible) .
-    *
-    * @param values Value to be converted (may be null)
-    * @param clazz Java array or element class to be converted to
-    * @return the converted value
-    *
-     * @throws org.apache.commons.beanutils.ConversionException if thrown by an
-     * underlying Converter
-    */
-   public Object convert(final String[] values, final Class<?> clazz) {
-
-       return convert(values, clazz, getDefaultLocale(), null);
-   }
+    /**
+        * Convert an array of specified values to an array of objects of the
+        * specified class (if possible) .
+        *
+        * @param values Value to be converted (may be null)
+        * @param clazz Java array or element class to be converted to
+        * @return the converted value
+        *
+         * @throws org.apache.commons.beanutils.ConversionException if thrown by an
+         * underlying Converter
+        */
+       public Object convert(final String[] values, final Class<?> clazz) {
+    
+           return convert(values, clazz, getDefaultLocale(), null);
+       }
 
     /**
      * Convert an array of specified values to an array of objects of the
@@ -348,103 +373,20 @@ public class LocaleConvertUtilsBean {
     }
 
     /**
-     * Register a custom {@link LocaleConverter} for the specified destination
-     * <code>Class</code>, replacing any previously registered converter.
+     * Convert an array of specified values to an array of objects of the
+     * specified class (if possible) using the convertion pattern.
      *
-     * @param converter The LocaleConverter to be registered
-     * @param clazz The Destination class for conversions performed by this
-     *  Converter
-     * @param locale The locale
-     */
-    public void register(final LocaleConverter converter, final Class<?> clazz, final Locale locale) {
-
-        lookup(locale).put(clazz, converter);
-    }
-
-    /**
-     * Remove any registered {@link LocaleConverter}.
-     */
-    public void deregister() {
-
-        final FastHashMap defaultConverter = lookup(defaultLocale);
-
-        mapConverters.setFast(false);
-
-        mapConverters.clear();
-        mapConverters.put(defaultLocale, defaultConverter);
-
-        mapConverters.setFast(true);
-    }
-
-
-    /**
-     * Remove any registered {@link LocaleConverter} for the specified locale
+     * @param values Value to be converted (may be null)
+     * @param clazz Java array or element class to be converted to
+     * @param pattern The convertion pattern
+     * @return the converted value
      *
-     * @param locale The locale
+     * @throws org.apache.commons.beanutils.ConversionException if thrown by an
+     * underlying Converter
      */
-    public void deregister(final Locale locale) {
+    public Object convert(final String[] values, final Class<?> clazz, final String pattern) {
 
-        mapConverters.remove(locale);
-    }
-
-
-    /**
-     * Remove any registered {@link LocaleConverter} for the specified locale and Class.
-     *
-     * @param clazz Class for which to remove a registered Converter
-     * @param locale The locale
-     */
-    public void deregister(final Class<?> clazz, final Locale locale) {
-
-        lookup(locale).remove(clazz);
-    }
-
-    /**
-     * Look up and return any registered {@link LocaleConverter} for the specified
-     * destination class and locale; if there is no registered Converter, return
-     * <code>null</code>.
-     *
-     * @param clazz Class for which to return a registered Converter
-     * @param locale The Locale
-     * @return The registered locale Converter, if any
-     */
-    public LocaleConverter lookup(final Class<?> clazz, final Locale locale) {
-
-        final LocaleConverter converter = (LocaleConverter) lookup(locale).get(clazz);
-
-        if (log.isTraceEnabled()) {
-            log.trace("LocaleConverter:" + converter);
-        }
-
-        return converter;
-    }
-
-    /**
-     * Look up and return any registered FastHashMap instance for the specified locale;
-     * if there is no registered one, return <code>null</code>.
-     *
-     * @param locale The Locale
-     * @return The FastHashMap instance contains the all {@link LocaleConverter} types for
-     *  the specified locale.
-     * @deprecated This method will be modified to return a Map in the next release.
-     */
-    @Deprecated
-    protected FastHashMap lookup(final Locale locale) {
-        FastHashMap localeConverters;
-
-        if (locale == null) {
-            localeConverters = (FastHashMap) mapConverters.get(defaultLocale);
-        }
-        else {
-            localeConverters = (FastHashMap) mapConverters.get(locale);
-
-            if (localeConverters == null) {
-                localeConverters = create(locale);
-                mapConverters.put(locale, localeConverters);
-            }
-        }
-
-        return localeConverters;
+        return convert(values, clazz, getDefaultLocale(), pattern);
     }
 
     /**
@@ -497,88 +439,146 @@ public class LocaleConvertUtilsBean {
         return converter;
     }
 
+   /**
+ * Remove any registered {@link LocaleConverter}.
+ */
+public void deregister() {
+
+    final FastHashMap defaultConverter = lookup(defaultLocale);
+
+    mapConverters.setFast(false);
+
+    mapConverters.clear();
+    mapConverters.put(defaultLocale, defaultConverter);
+
+    mapConverters.setFast(true);
+}
+
     /**
-     * FastHashMap implementation that uses WeakReferences to overcome
-     * memory leak problems.
+     * Remove any registered {@link LocaleConverter} for the specified locale and Class.
      *
-     * This is a hack to retain binary compatibility with previous
-     * releases (where FastHashMap is exposed in the API), but
-     * use WeakHashMap to resolve memory leaks.
+     * @param clazz Class for which to remove a registered Converter
+     * @param locale The locale
      */
-    private static class DelegateFastHashMap extends FastHashMap {
+    public void deregister(final Class<?> clazz, final Locale locale) {
 
-        private static final long serialVersionUID = 1L;
-        private final Map<Object, Object> map;
+        lookup(locale).remove(clazz);
+    }
 
-        private DelegateFastHashMap(final Map<Object, Object> map) {
-            this.map = map;
+    /**
+     * Remove any registered {@link LocaleConverter} for the specified locale
+     *
+     * @param locale The locale
+     */
+    public void deregister(final Locale locale) {
+
+        mapConverters.remove(locale);
+    }
+
+    /**
+     * getter for applyLocalized
+     *
+     * @return <code>true</code> if pattern is localized,
+     * otherwise <code>false</code>
+     */
+    public boolean getApplyLocalized() {
+        return applyLocalized;
+    }
+
+
+    /**
+     * getter for defaultLocale.
+     * @return the default locale
+     */
+    public Locale getDefaultLocale() {
+
+        return defaultLocale;
+    }
+
+
+    /**
+     * Look up and return any registered {@link LocaleConverter} for the specified
+     * destination class and locale; if there is no registered Converter, return
+     * <code>null</code>.
+     *
+     * @param clazz Class for which to return a registered Converter
+     * @param locale The Locale
+     * @return The registered locale Converter, if any
+     */
+    public LocaleConverter lookup(final Class<?> clazz, final Locale locale) {
+
+        final LocaleConverter converter = (LocaleConverter) lookup(locale).get(clazz);
+
+        if (log.isTraceEnabled()) {
+            log.trace("LocaleConverter:" + converter);
         }
-        @Override
-        public void clear() {
-            map.clear();
+
+        return converter;
+    }
+
+    /**
+     * Look up and return any registered FastHashMap instance for the specified locale;
+     * if there is no registered one, return <code>null</code>.
+     *
+     * @param locale The Locale
+     * @return The FastHashMap instance contains the all {@link LocaleConverter} types for
+     *  the specified locale.
+     * @deprecated This method will be modified to return a Map in the next release.
+     */
+    @Deprecated
+    protected FastHashMap lookup(final Locale locale) {
+        FastHashMap localeConverters;
+
+        if (locale == null) {
+            localeConverters = (FastHashMap) mapConverters.get(defaultLocale);
         }
-        @Override
-        public boolean containsKey(final Object key) {
-            return map.containsKey(key);
+        else {
+            localeConverters = (FastHashMap) mapConverters.get(locale);
+
+            if (localeConverters == null) {
+                localeConverters = create(locale);
+                mapConverters.put(locale, localeConverters);
+            }
         }
-        @Override
-        public boolean containsValue(final Object value) {
-            return map.containsValue(value);
+
+        return localeConverters;
+    }
+
+    /**
+     * Register a custom {@link LocaleConverter} for the specified destination
+     * <code>Class</code>, replacing any previously registered converter.
+     *
+     * @param converter The LocaleConverter to be registered
+     * @param clazz The Destination class for conversions performed by this
+     *  Converter
+     * @param locale The locale
+     */
+    public void register(final LocaleConverter converter, final Class<?> clazz, final Locale locale) {
+
+        lookup(locale).put(clazz, converter);
+    }
+
+    /**
+     * setter for applyLocalized
+     *
+     * @param newApplyLocalized <code>true</code> if pattern is localized,
+     * otherwise <code>false</code>
+     */
+    public void setApplyLocalized(final boolean newApplyLocalized) {
+        applyLocalized = newApplyLocalized;
+    }
+
+    /**
+     * setter for defaultLocale.
+     * @param locale the default locale
+     */
+    public void setDefaultLocale(final Locale locale) {
+
+        if (locale == null) {
+            defaultLocale = Locale.getDefault();
         }
-        @Override
-        public Set<Map.Entry<Object, Object>> entrySet() {
-            return map.entrySet();
-        }
-        @Override
-        public boolean equals(final Object o) {
-            return map.equals(o);
-        }
-        @Override
-        public Object get(final Object key) {
-            return map.get(key);
-        }
-        @Override
-        public int hashCode() {
-            return map.hashCode();
-        }
-        @Override
-        public boolean isEmpty() {
-            return map.isEmpty();
-        }
-        @Override
-        public Set<Object> keySet() {
-            return map.keySet();
-        }
-        @Override
-        public Object put(final Object key, final Object value) {
-            return map.put(key, value);
-        }
-        @SuppressWarnings({ "rawtypes", "unchecked" })
-        // we operate on very generic types (<Object, Object>), so there is
-        // no need for doing type checks
-        @Override
-        public void putAll(final Map m) {
-            map.putAll(m);
-        }
-        @Override
-        public Object remove(final Object key) {
-            return map.remove(key);
-        }
-        @Override
-        public int size() {
-            return map.size();
-        }
-        @Override
-        public Collection<Object> values() {
-            return map.values();
-        }
-        @Override
-        public boolean getFast() {
-            return BeanUtils.getCacheFast(map);
-        }
-        @Override
-        public void setFast(final boolean fast) {
-            BeanUtils.setCacheFast(map, fast);
+        else {
+            defaultLocale = locale;
         }
     }
 }

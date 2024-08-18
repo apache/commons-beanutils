@@ -34,17 +34,6 @@ import org.apache.commons.logging.LogFactory;
  */
 public class Jira298TestCase extends TestCase {
 
-    private final Log log = LogFactory.getLog(Jira298TestCase.class);
-
-    /**
-     * Create a test case with the specified name.
-     *
-     * @param name The name of the test
-     */
-    public Jira298TestCase(final String name) {
-        super(name);
-    }
-
     /**
      * Run the Test.
      *
@@ -61,6 +50,17 @@ public class Jira298TestCase extends TestCase {
      */
     public static Test suite() {
         return new TestSuite(Jira298TestCase.class);
+    }
+
+    private final Log log = LogFactory.getLog(Jira298TestCase.class);
+
+    /**
+     * Create a test case with the specified name.
+     *
+     * @param name The name of the test
+     */
+    public Jira298TestCase(final String name) {
+        super(name);
     }
 
     /**
@@ -81,6 +81,22 @@ public class Jira298TestCase extends TestCase {
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
+    }
+
+    /**
+     * Test {@link MethodUtils#getAccessibleMethod(Class, Method)}
+     */
+    public void testIssue_BEANUTILS_298_MethodUtils_getAccessibleMethod() {
+        final Object bean = Jira298BeanFactory.createImplX();
+        Object result = null;
+        try {
+            final Method m2 = MethodUtils.getAccessibleMethod(bean.getClass(), "getName", new Class[0]);
+            result = m2.invoke(bean);
+        } catch (final Throwable t) {
+            log.error("Failed: " + t.getMessage(), t);
+            fail("Threw exception: " + t);
+        }
+        assertEquals("BaseX name value", result);
     }
 
     /**
@@ -111,21 +127,5 @@ public class Jira298TestCase extends TestCase {
             fail("Threw exception: " + t);
         }
         assertEquals("new name", ((IX)bean).getName());
-    }
-
-    /**
-     * Test {@link MethodUtils#getAccessibleMethod(Class, Method)}
-     */
-    public void testIssue_BEANUTILS_298_MethodUtils_getAccessibleMethod() {
-        final Object bean = Jira298BeanFactory.createImplX();
-        Object result = null;
-        try {
-            final Method m2 = MethodUtils.getAccessibleMethod(bean.getClass(), "getName", new Class[0]);
-            result = m2.invoke(bean);
-        } catch (final Throwable t) {
-            log.error("Failed: " + t.getMessage(), t);
-            fail("Threw exception: " + t);
-        }
-        assertEquals("BaseX name value", result);
     }
 }

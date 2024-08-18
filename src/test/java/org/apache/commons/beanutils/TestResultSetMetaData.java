@@ -40,6 +40,27 @@ public class TestResultSetMetaData implements InvocationHandler {
 
 
     /**
+     * Factory method for creating {@link ResultSetMetaData} proxies.
+     *
+     * @return A result set meta data proxy
+     */
+    public static ResultSetMetaData createProxy() {
+        return TestResultSetMetaData.createProxy(new TestResultSetMetaData());
+    }
+
+
+    /**
+     * Factory method for creating {@link ResultSetMetaData} proxies.
+     * @param invocationHandler Invocation Handler
+     * @return A result set meta data proxy
+     */
+    public static ResultSetMetaData createProxy(final InvocationHandler invocationHandler) {
+        final ClassLoader classLoader = ResultSetMetaData.class.getClassLoader();
+        final Class<?>[] interfaces = new Class[] { ResultSetMetaData.class };
+        return (ResultSetMetaData)Proxy.newProxyInstance(classLoader, interfaces, invocationHandler);
+    }
+
+    /**
      * <p>Array of column names and class names for metadata.</p>
      */
     protected String metadata[][] = {
@@ -58,50 +79,8 @@ public class TestResultSetMetaData implements InvocationHandler {
         { "timestampProperty", java.sql.Timestamp.class.getName() },
     };
 
-
-    /**
-     * Factory method for creating {@link ResultSetMetaData} proxies.
-     *
-     * @return A result set meta data proxy
-     */
-    public static ResultSetMetaData createProxy() {
-        return TestResultSetMetaData.createProxy(new TestResultSetMetaData());
-    }
-
-    /**
-     * Factory method for creating {@link ResultSetMetaData} proxies.
-     * @param invocationHandler Invocation Handler
-     * @return A result set meta data proxy
-     */
-    public static ResultSetMetaData createProxy(final InvocationHandler invocationHandler) {
-        final ClassLoader classLoader = ResultSetMetaData.class.getClassLoader();
-        final Class<?>[] interfaces = new Class[] { ResultSetMetaData.class };
-        return (ResultSetMetaData)Proxy.newProxyInstance(classLoader, interfaces, invocationHandler);
-    }
-
-    /**
-     * Handles method invocation on the {@link ResultSetMetaData} proxy.
-     *
-     * @param proxy The proxy ResultSet object
-     * @param method the method being invoked
-     * @param args The method arguments
-     * @return The result of invoking the method.
-     * @throws Throwable if an error occurs.
-     */
-    @Override
-    public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
-        final String methodName = method.getName();
-        if ("getColumnClassName".equals(methodName)) {
-            return getColumnClassName(((Integer)args[0]).intValue());
-        } if ("getColumnCount".equals(methodName)) {
-            return Integer.valueOf(getColumnCount());
-        } if ("getColumnName".equals(methodName)) {
-            return getColumnName(((Integer)args[0]).intValue());
-        } if ("getColumnType".equals(methodName)) {
-            return getColumnType(((Integer)args[0]).intValue());
-        }
-
-        throw new UnsupportedOperationException(methodName + " not implemented");
+    public String getCatalogName(final int columnIndex) throws SQLException {
+        throw new UnsupportedOperationException();
     }
 
 
@@ -114,6 +93,18 @@ public class TestResultSetMetaData implements InvocationHandler {
     public int getColumnCount() throws SQLException {
         return metadata.length;
     }
+
+    public int getColumnDisplaySize(final int columnIndex) throws SQLException {
+        throw new UnsupportedOperationException();
+    }
+
+
+    public String getColumnLabel(final int columnIndex) throws SQLException {
+        throw new UnsupportedOperationException();
+    }
+
+
+
 
     public String getColumnName(final int columnIndex) throws SQLException {
         return metadata[columnIndex - 1][0];
@@ -157,23 +148,6 @@ public class TestResultSetMetaData implements InvocationHandler {
     }
 
 
-
-
-    public String getCatalogName(final int columnIndex) throws SQLException {
-        throw new UnsupportedOperationException();
-    }
-
-
-    public int getColumnDisplaySize(final int columnIndex) throws SQLException {
-        throw new UnsupportedOperationException();
-    }
-
-
-    public String getColumnLabel(final int columnIndex) throws SQLException {
-        throw new UnsupportedOperationException();
-    }
-
-
     public String getColumnTypeName(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
@@ -196,6 +170,32 @@ public class TestResultSetMetaData implements InvocationHandler {
 
     public String getTableName(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
+    }
+
+
+    /**
+     * Handles method invocation on the {@link ResultSetMetaData} proxy.
+     *
+     * @param proxy The proxy ResultSet object
+     * @param method the method being invoked
+     * @param args The method arguments
+     * @return The result of invoking the method.
+     * @throws Throwable if an error occurs.
+     */
+    @Override
+    public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
+        final String methodName = method.getName();
+        if ("getColumnClassName".equals(methodName)) {
+            return getColumnClassName(((Integer)args[0]).intValue());
+        } if ("getColumnCount".equals(methodName)) {
+            return Integer.valueOf(getColumnCount());
+        } if ("getColumnName".equals(methodName)) {
+            return getColumnName(((Integer)args[0]).intValue());
+        } if ("getColumnType".equals(methodName)) {
+            return getColumnType(((Integer)args[0]).intValue());
+        }
+
+        throw new UnsupportedOperationException(methodName + " not implemented");
     }
 
 

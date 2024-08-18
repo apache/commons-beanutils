@@ -29,43 +29,43 @@ public class PrimitiveBean {
     private long _long;
     private int _int;
 
-    public float getFloat() {
-        return _float;
-    }
-
-    public void setFloat(final float _float) {
-        this._float = _float;
+    public boolean getBoolean() {
+        return _boolean;
     }
 
     public double getDouble() {
         return _double;
     }
 
-    public void setDouble(final double _double) {
-        this._double = _double;
-    }
-
-    public boolean getBoolean() {
-        return _boolean;
-    }
-
-    public void setBoolean(final boolean _boolean) {
-        this._boolean = _boolean;
-    }
-
-    public long getLong() {
-        return _long;
-    }
-
-    public void setLong(final long _long) {
-        this._long = _long;
+    public float getFloat() {
+        return _float;
     }
 
     public int getInt() {
         return _int;
     }
 
+    public long getLong() {
+        return _long;
+    }
+
+    public void setBoolean(final boolean _boolean) {
+        this._boolean = _boolean;
+    }
+
+    public void setDouble(final double _double) {
+        this._double = _double;
+    }
+
+    public void setFloat(final float _float) {
+        this._float = _float;
+    }
+
     public void setInt(final int _int) {
         this._int = _int;
+    }
+
+    public void setLong(final long _long) {
+        this._long = _long;
     }
 }

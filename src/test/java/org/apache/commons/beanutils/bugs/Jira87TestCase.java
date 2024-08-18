@@ -40,17 +40,6 @@ import junit.framework.TestSuite;
  */
 public class Jira87TestCase extends TestCase {
 
-    private final Log log = LogFactory.getLog(Jira87TestCase.class);
-
-    /**
-     * Create a test case with the specified name.
-     *
-     * @param name The name of the test
-     */
-    public Jira87TestCase(final String name) {
-        super(name);
-    }
-
     /**
      * Run the Test.
      *
@@ -67,6 +56,17 @@ public class Jira87TestCase extends TestCase {
      */
     public static Test suite() {
         return new TestSuite(Jira87TestCase.class);
+    }
+
+    private final Log log = LogFactory.getLog(Jira87TestCase.class);
+
+    /**
+     * Create a test case with the specified name.
+     *
+     * @param name The name of the test
+     */
+    public Jira87TestCase(final String name) {
+        super(name);
     }
 
     /**

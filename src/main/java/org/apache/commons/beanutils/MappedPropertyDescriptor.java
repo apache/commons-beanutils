@@ -44,372 +44,6 @@ import java.lang.reflect.Modifier;
 public class MappedPropertyDescriptor extends PropertyDescriptor {
 
     /**
-     * The underlying data type of the property we are describing.
-     */
-    private Reference<Class<?>> mappedPropertyTypeRef;
-
-    /**
-     * The reader method for this property (if any).
-     */
-    private MappedMethodReference mappedReadMethodRef;
-
-    /**
-     * The writer method for this property (if any).
-     */
-    private MappedMethodReference mappedWriteMethodRef;
-
-    /**
-     * The parameter types array for the reader method signature.
-     */
-    private static final Class<?>[] STRING_CLASS_PARAMETER = new Class[]{String.class};
-
-
-    /**
-     * Constructs a MappedPropertyDescriptor for a property that follows
-     * the standard Java convention by having getFoo and setFoo
-     * accessor methods, with the addition of a String parameter (the key).
-     * Thus if the argument name is "fred", it will
-     * assume that the writer method is "setFred" and the reader method
-     * is "getFred".  Note that the property name should start with a lower
-     * case character, which will be capitalized in the method names.
-     *
-     * @param propertyName The programmatic name of the property.
-     * @param beanClass The Class object for the target bean.  For
-     *        example sun.beans.OurButton.class.
-     *
-     * @throws IntrospectionException if an exception occurs during
-     *              introspection.
-     */
-    public MappedPropertyDescriptor(final String propertyName, final Class<?> beanClass)
-            throws IntrospectionException {
-
-        super(propertyName, null, null);
-
-        if (propertyName == null || propertyName.length() == 0) {
-            throw new IntrospectionException("bad property name: " +
-                    propertyName + " on class: " + beanClass.getClass().getName());
-        }
-
-        setName(propertyName);
-        final String base = capitalizePropertyName(propertyName);
-
-        // Look for mapped read method and matching write method
-        Method mappedReadMethod = null;
-        Method mappedWriteMethod = null;
-        try {
-            try {
-                mappedReadMethod = getMethod(beanClass, "get" + base,
-                        STRING_CLASS_PARAMETER);
-            } catch (final IntrospectionException e) {
-                mappedReadMethod = getMethod(beanClass, "is" + base,
-                        STRING_CLASS_PARAMETER);
-            }
-            final Class<?>[] params = { String.class, mappedReadMethod.getReturnType() };
-            mappedWriteMethod = getMethod(beanClass, "set" + base, params);
-        } catch (final IntrospectionException e) {
-            /* Swallow IntrospectionException
-             * TODO: Why?
-             */
-        }
-
-        // If there's no read method, then look for just a write method
-        if (mappedReadMethod == null) {
-            mappedWriteMethod = getMethod(beanClass, "set" + base, 2);
-        }
-
-        if (mappedReadMethod == null && mappedWriteMethod == null) {
-            throw new IntrospectionException("Property '" + propertyName +
-                    "' not found on " +
-                    beanClass.getName());
-        }
-        mappedReadMethodRef  = new MappedMethodReference(mappedReadMethod);
-        mappedWriteMethodRef = new MappedMethodReference(mappedWriteMethod);
-
-        findMappedPropertyType();
-    }
-
-
-    /**
-     * This constructor takes the name of a mapped property, and method
-     * names for reading and writing the property.
-     *
-     * @param propertyName The programmatic name of the property.
-     * @param beanClass The Class object for the target bean.  For
-     *        example sun.beans.OurButton.class.
-     * @param mappedGetterName The name of the method used for
-     *          reading one of the property values.  May be null if the
-     *          property is write-only.
-     * @param mappedSetterName The name of the method used for writing
-     *          one of the property values.  May be null if the property is
-     *          read-only.
-     *
-     * @throws IntrospectionException if an exception occurs during
-     *              introspection.
-     */
-    public MappedPropertyDescriptor(final String propertyName, final Class<?> beanClass,
-                                    final String mappedGetterName, final String mappedSetterName)
-            throws IntrospectionException {
-
-        super(propertyName, null, null);
-
-        if (propertyName == null || propertyName.length() == 0) {
-            throw new IntrospectionException("bad property name: " +
-                    propertyName);
-        }
-        setName(propertyName);
-
-        // search the mapped get and set methods
-        Method mappedReadMethod = null;
-        Method mappedWriteMethod = null;
-        mappedReadMethod =
-            getMethod(beanClass, mappedGetterName, STRING_CLASS_PARAMETER);
-
-        if (mappedReadMethod != null) {
-            final Class<?>[] params = { String.class, mappedReadMethod.getReturnType() };
-            mappedWriteMethod =
-                getMethod(beanClass, mappedSetterName, params);
-        } else {
-            mappedWriteMethod =
-                getMethod(beanClass, mappedSetterName, 2);
-        }
-        mappedReadMethodRef  = new MappedMethodReference(mappedReadMethod);
-        mappedWriteMethodRef = new MappedMethodReference(mappedWriteMethod);
-
-        findMappedPropertyType();
-    }
-
-    /**
-     * This constructor takes the name of a mapped property, and Method
-     * objects for reading and writing the property.
-     *
-     * @param propertyName The programmatic name of the property.
-     * @param mappedGetter The method used for reading one of
-     *          the property values.  May be be null if the property
-     *          is write-only.
-     * @param mappedSetter The method used for writing one the
-     *          property values.  May be null if the property is read-only.
-     *
-     * @throws IntrospectionException if an exception occurs during
-     *              introspection.
-     */
-    public MappedPropertyDescriptor(final String propertyName,
-                                    final Method mappedGetter, final Method mappedSetter)
-            throws IntrospectionException {
-
-        super(propertyName, mappedGetter, mappedSetter);
-
-        if (propertyName == null || propertyName.length() == 0) {
-            throw new IntrospectionException("bad property name: " +
-                    propertyName);
-        }
-
-        setName(propertyName);
-        mappedReadMethodRef  = new MappedMethodReference(mappedGetter);
-        mappedWriteMethodRef = new MappedMethodReference(mappedSetter);
-        findMappedPropertyType();
-    }
-
-
-    /**
-     * Gets the Class object for the property values.
-     *
-     * @return The Java type info for the property values.  Note that
-     * the "Class" object may describe a built-in Java type such as "int".
-     * The result may be "null" if this is a mapped property that
-     * does not support non-keyed access.
-     * <p>
-     * This is the type that will be returned by the mappedReadMethod.
-     */
-    public Class<?> getMappedPropertyType() {
-        return mappedPropertyTypeRef.get();
-    }
-
-    /**
-     * Gets the method that should be used to read one of the property value.
-     *
-     * @return The method that should be used to read the property value.
-     * May return null if the property can't be read.
-     */
-    public Method getMappedReadMethod() {
-        return mappedReadMethodRef.get();
-    }
-
-    /**
-     * Sets the method that should be used to read one of the property value.
-     *
-     * @param mappedGetter The mapped getter method.
-     * @throws IntrospectionException If an error occurs finding the
-     * mapped property
-     */
-    public void setMappedReadMethod(final Method mappedGetter)
-            throws IntrospectionException {
-        mappedReadMethodRef = new MappedMethodReference(mappedGetter);
-        findMappedPropertyType();
-    }
-
-    /**
-     * Gets the method that should be used to write one of the property value.
-     *
-     * @return The method that should be used to write one of the property value.
-     * May return null if the property can't be written.
-     */
-    public Method getMappedWriteMethod() {
-        return mappedWriteMethodRef.get();
-    }
-
-    /**
-     * Sets the method that should be used to write the property value.
-     *
-     * @param mappedSetter The mapped setter method.
-     * @throws IntrospectionException If an error occurs finding the
-     * mapped property
-     */
-    public void setMappedWriteMethod(final Method mappedSetter)
-            throws IntrospectionException {
-        mappedWriteMethodRef = new MappedMethodReference(mappedSetter);
-        findMappedPropertyType();
-    }
-
-
-    /**
-     * Introspect our bean class to identify the corresponding getter
-     * and setter methods.
-     */
-    private void findMappedPropertyType() throws IntrospectionException {
-        try {
-            final Method mappedReadMethod  = getMappedReadMethod();
-            final Method mappedWriteMethod = getMappedWriteMethod();
-            Class<?> mappedPropertyType = null;
-            if (mappedReadMethod != null) {
-                if (mappedReadMethod.getParameterTypes().length != 1) {
-                    throw new IntrospectionException
-                            ("bad mapped read method arg count");
-                }
-                mappedPropertyType = mappedReadMethod.getReturnType();
-                if (mappedPropertyType == Void.TYPE) {
-                    throw new IntrospectionException
-                            ("mapped read method " +
-                            mappedReadMethod.getName() + " returns void");
-                }
-            }
-
-            if (mappedWriteMethod != null) {
-                final Class<?>[] params = mappedWriteMethod.getParameterTypes();
-                if (params.length != 2) {
-                    throw new IntrospectionException
-                            ("bad mapped write method arg count");
-                }
-                if (mappedPropertyType != null &&
-                        mappedPropertyType != params[1]) {
-                    throw new IntrospectionException
-                            ("type mismatch between mapped read and write methods");
-                }
-                mappedPropertyType = params[1];
-            }
-            // Compiler needs generic.
-            mappedPropertyTypeRef = new SoftReference<Class<?>>(mappedPropertyType);
-        } catch (final IntrospectionException ex) {
-            throw ex;
-        }
-    }
-
-
-    /**
-     * Return a capitalized version of the specified property name.
-     *
-     * @param s The property name
-     */
-    private static String capitalizePropertyName(final String s) {
-        if (s.length() == 0) {
-            return s;
-        }
-
-        final char[] chars = s.toCharArray();
-        chars[0] = Character.toUpperCase(chars[0]);
-        return new String(chars);
-    }
-
-    /**
-     * Find a method on a class with a specified number of parameters.
-     */
-    private static Method internalGetMethod(final Class<?> initial, final String methodName,
-                                            final int parameterCount) {
-        // For overridden methods we need to find the most derived version.
-        // So we start with the given class and walk up the superclass chain.
-        for (Class<?> clazz = initial; clazz != null; clazz = clazz.getSuperclass()) {
-            final Method[] methods = clazz.getDeclaredMethods();
-            for (final Method method : methods) {
-                if (method == null) {
-                    continue;
-                }
-                // skip static methods.
-                final int mods = method.getModifiers();
-                if (!Modifier.isPublic(mods) ||
-                    Modifier.isStatic(mods)) {
-                    continue;
-                }
-                if (method.getName().equals(methodName) &&
-                        method.getParameterTypes().length == parameterCount) {
-                    return method;
-                }
-            }
-        }
-
-        // Now check any inherited interfaces.  This is necessary both when
-        // the argument class is itself an interface, and when the argument
-        // class is an abstract class.
-        final Class<?>[] interfaces = initial.getInterfaces();
-        for (final Class<?> interface1 : interfaces) {
-            final Method method = internalGetMethod(interface1, methodName, parameterCount);
-            if (method != null) {
-                return method;
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * Find a method on a class with a specified number of parameters.
-     */
-    private static Method getMethod(final Class<?> clazz, final String methodName, final int parameterCount)
-            throws IntrospectionException {
-        if (methodName == null) {
-            return null;
-        }
-
-        final Method method = internalGetMethod(clazz, methodName, parameterCount);
-        if (method != null) {
-            return method;
-        }
-
-        // No Method found
-        throw new IntrospectionException("No method \"" + methodName +
-                "\" with " + parameterCount + " parameter(s)");
-    }
-
-    /**
-     * Find a method on a class with a specified parameter list.
-     */
-    private static Method getMethod(final Class<?> clazz, final String methodName, final Class<?>[] parameterTypes)
-                                           throws IntrospectionException {
-        if (methodName == null) {
-            return null;
-        }
-
-        final Method method = MethodUtils.getMatchingAccessibleMethod(clazz, methodName, parameterTypes);
-        if (method != null) {
-            return method;
-        }
-
-        final int parameterCount = parameterTypes == null ? 0 : parameterTypes.length;
-
-        // No Method found
-        throw new IntrospectionException("No method \"" + methodName +
-                "\" with " + parameterCount + " parameter(s) of matching types.");
-    }
-
-    /**
      * Holds a {@link Method} in a {@link SoftReference} so that it
      * it doesn't prevent any ClassLoader being garbage collected, but
      * tries to re-create the method if the method reference has been
@@ -529,5 +163,371 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                 return null;
             }
         }
+    }
+
+    /**
+     * The parameter types array for the reader method signature.
+     */
+    private static final Class<?>[] STRING_CLASS_PARAMETER = new Class[]{String.class};
+
+    /**
+     * Return a capitalized version of the specified property name.
+     *
+     * @param s The property name
+     */
+    private static String capitalizePropertyName(final String s) {
+        if (s.length() == 0) {
+            return s;
+        }
+
+        final char[] chars = s.toCharArray();
+        chars[0] = Character.toUpperCase(chars[0]);
+        return new String(chars);
+    }
+
+    /**
+     * Find a method on a class with a specified parameter list.
+     */
+    private static Method getMethod(final Class<?> clazz, final String methodName, final Class<?>[] parameterTypes)
+                                           throws IntrospectionException {
+        if (methodName == null) {
+            return null;
+        }
+
+        final Method method = MethodUtils.getMatchingAccessibleMethod(clazz, methodName, parameterTypes);
+        if (method != null) {
+            return method;
+        }
+
+        final int parameterCount = parameterTypes == null ? 0 : parameterTypes.length;
+
+        // No Method found
+        throw new IntrospectionException("No method \"" + methodName +
+                "\" with " + parameterCount + " parameter(s) of matching types.");
+    }
+
+
+    /**
+     * Find a method on a class with a specified number of parameters.
+     */
+    private static Method getMethod(final Class<?> clazz, final String methodName, final int parameterCount)
+            throws IntrospectionException {
+        if (methodName == null) {
+            return null;
+        }
+
+        final Method method = internalGetMethod(clazz, methodName, parameterCount);
+        if (method != null) {
+            return method;
+        }
+
+        // No Method found
+        throw new IntrospectionException("No method \"" + methodName +
+                "\" with " + parameterCount + " parameter(s)");
+    }
+
+
+    /**
+     * Find a method on a class with a specified number of parameters.
+     */
+    private static Method internalGetMethod(final Class<?> initial, final String methodName,
+                                            final int parameterCount) {
+        // For overridden methods we need to find the most derived version.
+        // So we start with the given class and walk up the superclass chain.
+        for (Class<?> clazz = initial; clazz != null; clazz = clazz.getSuperclass()) {
+            final Method[] methods = clazz.getDeclaredMethods();
+            for (final Method method : methods) {
+                if (method == null) {
+                    continue;
+                }
+                // skip static methods.
+                final int mods = method.getModifiers();
+                if (!Modifier.isPublic(mods) ||
+                    Modifier.isStatic(mods)) {
+                    continue;
+                }
+                if (method.getName().equals(methodName) &&
+                        method.getParameterTypes().length == parameterCount) {
+                    return method;
+                }
+            }
+        }
+
+        // Now check any inherited interfaces.  This is necessary both when
+        // the argument class is itself an interface, and when the argument
+        // class is an abstract class.
+        final Class<?>[] interfaces = initial.getInterfaces();
+        for (final Class<?> interface1 : interfaces) {
+            final Method method = internalGetMethod(interface1, methodName, parameterCount);
+            if (method != null) {
+                return method;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * The underlying data type of the property we are describing.
+     */
+    private Reference<Class<?>> mappedPropertyTypeRef;
+
+
+    /**
+     * The reader method for this property (if any).
+     */
+    private MappedMethodReference mappedReadMethodRef;
+
+    /**
+     * The writer method for this property (if any).
+     */
+    private MappedMethodReference mappedWriteMethodRef;
+
+    /**
+     * Constructs a MappedPropertyDescriptor for a property that follows
+     * the standard Java convention by having getFoo and setFoo
+     * accessor methods, with the addition of a String parameter (the key).
+     * Thus if the argument name is "fred", it will
+     * assume that the writer method is "setFred" and the reader method
+     * is "getFred".  Note that the property name should start with a lower
+     * case character, which will be capitalized in the method names.
+     *
+     * @param propertyName The programmatic name of the property.
+     * @param beanClass The Class object for the target bean.  For
+     *        example sun.beans.OurButton.class.
+     *
+     * @throws IntrospectionException if an exception occurs during
+     *              introspection.
+     */
+    public MappedPropertyDescriptor(final String propertyName, final Class<?> beanClass)
+            throws IntrospectionException {
+
+        super(propertyName, null, null);
+
+        if (propertyName == null || propertyName.length() == 0) {
+            throw new IntrospectionException("bad property name: " +
+                    propertyName + " on class: " + beanClass.getClass().getName());
+        }
+
+        setName(propertyName);
+        final String base = capitalizePropertyName(propertyName);
+
+        // Look for mapped read method and matching write method
+        Method mappedReadMethod = null;
+        Method mappedWriteMethod = null;
+        try {
+            try {
+                mappedReadMethod = getMethod(beanClass, "get" + base,
+                        STRING_CLASS_PARAMETER);
+            } catch (final IntrospectionException e) {
+                mappedReadMethod = getMethod(beanClass, "is" + base,
+                        STRING_CLASS_PARAMETER);
+            }
+            final Class<?>[] params = { String.class, mappedReadMethod.getReturnType() };
+            mappedWriteMethod = getMethod(beanClass, "set" + base, params);
+        } catch (final IntrospectionException e) {
+            /* Swallow IntrospectionException
+             * TODO: Why?
+             */
+        }
+
+        // If there's no read method, then look for just a write method
+        if (mappedReadMethod == null) {
+            mappedWriteMethod = getMethod(beanClass, "set" + base, 2);
+        }
+
+        if (mappedReadMethod == null && mappedWriteMethod == null) {
+            throw new IntrospectionException("Property '" + propertyName +
+                    "' not found on " +
+                    beanClass.getName());
+        }
+        mappedReadMethodRef  = new MappedMethodReference(mappedReadMethod);
+        mappedWriteMethodRef = new MappedMethodReference(mappedWriteMethod);
+
+        findMappedPropertyType();
+    }
+
+    /**
+     * This constructor takes the name of a mapped property, and method
+     * names for reading and writing the property.
+     *
+     * @param propertyName The programmatic name of the property.
+     * @param beanClass The Class object for the target bean.  For
+     *        example sun.beans.OurButton.class.
+     * @param mappedGetterName The name of the method used for
+     *          reading one of the property values.  May be null if the
+     *          property is write-only.
+     * @param mappedSetterName The name of the method used for writing
+     *          one of the property values.  May be null if the property is
+     *          read-only.
+     *
+     * @throws IntrospectionException if an exception occurs during
+     *              introspection.
+     */
+    public MappedPropertyDescriptor(final String propertyName, final Class<?> beanClass,
+                                    final String mappedGetterName, final String mappedSetterName)
+            throws IntrospectionException {
+
+        super(propertyName, null, null);
+
+        if (propertyName == null || propertyName.length() == 0) {
+            throw new IntrospectionException("bad property name: " +
+                    propertyName);
+        }
+        setName(propertyName);
+
+        // search the mapped get and set methods
+        Method mappedReadMethod = null;
+        Method mappedWriteMethod = null;
+        mappedReadMethod =
+            getMethod(beanClass, mappedGetterName, STRING_CLASS_PARAMETER);
+
+        if (mappedReadMethod != null) {
+            final Class<?>[] params = { String.class, mappedReadMethod.getReturnType() };
+            mappedWriteMethod =
+                getMethod(beanClass, mappedSetterName, params);
+        } else {
+            mappedWriteMethod =
+                getMethod(beanClass, mappedSetterName, 2);
+        }
+        mappedReadMethodRef  = new MappedMethodReference(mappedReadMethod);
+        mappedWriteMethodRef = new MappedMethodReference(mappedWriteMethod);
+
+        findMappedPropertyType();
+    }
+
+    /**
+     * This constructor takes the name of a mapped property, and Method
+     * objects for reading and writing the property.
+     *
+     * @param propertyName The programmatic name of the property.
+     * @param mappedGetter The method used for reading one of
+     *          the property values.  May be be null if the property
+     *          is write-only.
+     * @param mappedSetter The method used for writing one the
+     *          property values.  May be null if the property is read-only.
+     *
+     * @throws IntrospectionException if an exception occurs during
+     *              introspection.
+     */
+    public MappedPropertyDescriptor(final String propertyName,
+                                    final Method mappedGetter, final Method mappedSetter)
+            throws IntrospectionException {
+
+        super(propertyName, mappedGetter, mappedSetter);
+
+        if (propertyName == null || propertyName.length() == 0) {
+            throw new IntrospectionException("bad property name: " +
+                    propertyName);
+        }
+
+        setName(propertyName);
+        mappedReadMethodRef  = new MappedMethodReference(mappedGetter);
+        mappedWriteMethodRef = new MappedMethodReference(mappedSetter);
+        findMappedPropertyType();
+    }
+
+
+    /**
+     * Introspect our bean class to identify the corresponding getter
+     * and setter methods.
+     */
+    private void findMappedPropertyType() throws IntrospectionException {
+        try {
+            final Method mappedReadMethod  = getMappedReadMethod();
+            final Method mappedWriteMethod = getMappedWriteMethod();
+            Class<?> mappedPropertyType = null;
+            if (mappedReadMethod != null) {
+                if (mappedReadMethod.getParameterTypes().length != 1) {
+                    throw new IntrospectionException
+                            ("bad mapped read method arg count");
+                }
+                mappedPropertyType = mappedReadMethod.getReturnType();
+                if (mappedPropertyType == Void.TYPE) {
+                    throw new IntrospectionException
+                            ("mapped read method " +
+                            mappedReadMethod.getName() + " returns void");
+                }
+            }
+
+            if (mappedWriteMethod != null) {
+                final Class<?>[] params = mappedWriteMethod.getParameterTypes();
+                if (params.length != 2) {
+                    throw new IntrospectionException
+                            ("bad mapped write method arg count");
+                }
+                if (mappedPropertyType != null &&
+                        mappedPropertyType != params[1]) {
+                    throw new IntrospectionException
+                            ("type mismatch between mapped read and write methods");
+                }
+                mappedPropertyType = params[1];
+            }
+            // Compiler needs generic.
+            mappedPropertyTypeRef = new SoftReference<Class<?>>(mappedPropertyType);
+        } catch (final IntrospectionException ex) {
+            throw ex;
+        }
+    }
+
+
+    /**
+     * Gets the Class object for the property values.
+     *
+     * @return The Java type info for the property values.  Note that
+     * the "Class" object may describe a built-in Java type such as "int".
+     * The result may be "null" if this is a mapped property that
+     * does not support non-keyed access.
+     * <p>
+     * This is the type that will be returned by the mappedReadMethod.
+     */
+    public Class<?> getMappedPropertyType() {
+        return mappedPropertyTypeRef.get();
+    }
+
+    /**
+     * Gets the method that should be used to read one of the property value.
+     *
+     * @return The method that should be used to read the property value.
+     * May return null if the property can't be read.
+     */
+    public Method getMappedReadMethod() {
+        return mappedReadMethodRef.get();
+    }
+
+    /**
+     * Gets the method that should be used to write one of the property value.
+     *
+     * @return The method that should be used to write one of the property value.
+     * May return null if the property can't be written.
+     */
+    public Method getMappedWriteMethod() {
+        return mappedWriteMethodRef.get();
+    }
+
+    /**
+     * Sets the method that should be used to read one of the property value.
+     *
+     * @param mappedGetter The mapped getter method.
+     * @throws IntrospectionException If an error occurs finding the
+     * mapped property
+     */
+    public void setMappedReadMethod(final Method mappedGetter)
+            throws IntrospectionException {
+        mappedReadMethodRef = new MappedMethodReference(mappedGetter);
+        findMappedPropertyType();
+    }
+
+    /**
+     * Sets the method that should be used to write the property value.
+     *
+     * @param mappedSetter The mapped setter method.
+     * @throws IntrospectionException If an error occurs finding the
+     * mapped property
+     */
+    public void setMappedWriteMethod(final Method mappedSetter)
+            throws IntrospectionException {
+        mappedWriteMethodRef = new MappedMethodReference(mappedSetter);
+        findMappedPropertyType();
     }
 }

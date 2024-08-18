@@ -29,6 +29,12 @@ import org.apache.commons.beanutils.Converter;
 
 public class DoubleConverterTestCase extends NumberConverterTestBase {
 
+    public static TestSuite suite() {
+        return new TestSuite(DoubleConverterTestCase.class);
+    }
+
+    // ------------------------------------------------------------------------
+
     private Converter converter = null;
 
     // ------------------------------------------------------------------------
@@ -37,7 +43,22 @@ public class DoubleConverterTestCase extends NumberConverterTestBase {
         super(name);
     }
 
+    @Override
+    protected Class<?> getExpectedType() {
+        return Double.class;
+    }
+
+    @Override
+    protected NumberConverter makeConverter() {
+        return new DoubleConverter();
+    }
+
     // ------------------------------------------------------------------------
+
+    @Override
+    protected NumberConverter makeConverter(final Object defaultValue) {
+        return new DoubleConverter(defaultValue);
+    }
 
     @Override
     public void setUp() throws Exception {
@@ -48,30 +69,9 @@ public class DoubleConverterTestCase extends NumberConverterTestBase {
         numbers[3] = Double.valueOf("23");
     }
 
-    public static TestSuite suite() {
-        return new TestSuite(DoubleConverterTestCase.class);
-    }
-
     @Override
     public void tearDown() throws Exception {
         converter = null;
-    }
-
-    // ------------------------------------------------------------------------
-
-    @Override
-    protected NumberConverter makeConverter() {
-        return new DoubleConverter();
-    }
-
-    @Override
-    protected NumberConverter makeConverter(final Object defaultValue) {
-        return new DoubleConverter(defaultValue);
-    }
-
-    @Override
-    protected Class<?> getExpectedType() {
-        return Double.class;
     }
 
     // ------------------------------------------------------------------------

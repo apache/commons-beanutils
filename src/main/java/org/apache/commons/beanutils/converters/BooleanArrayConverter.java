@@ -45,6 +45,30 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
 
 
     /**
+     * Type which this class converts its input to. This value can be
+     * used as a parameter to the ConvertUtils.register method.
+     * @since 1.8.0
+     */
+    public static final Class MODEL = new boolean[0].getClass();
+
+
+    /**
+     * The converter that all instances of this class will use to
+     * do individual string->boolean conversions, unless overridden
+     * in the constructor.
+     */
+    private static final BooleanConverter DEFAULT_CONVERTER
+        = new BooleanConverter();
+
+
+    /**
+     * This object is used to perform the conversion of individual strings
+     * into Boolean/boolean values.
+     */
+    protected final BooleanConverter booleanConverter;
+
+
+    /**
      * Create a {@link org.apache.commons.beanutils.Converter} that will throw
      * a {@link ConversionException} if a conversion error occurs.
      *
@@ -56,24 +80,6 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
         this.booleanConverter = DEFAULT_CONVERTER;
 
     }
-
-
-    /**
-     * Create a {@link org.apache.commons.beanutils.Converter} that will return
-     * the specified default value if a conversion error occurs.
-     *
-     * <p>Conversion of strings to boolean values will be done via a default
-     * instance of class BooleanConverter.</p>
-     *
-     * @param defaultValue The default value to be returned
-     */
-    public BooleanArrayConverter(final Object defaultValue) {
-
-        super(defaultValue);
-        this.booleanConverter = DEFAULT_CONVERTER;
-
-    }
-
 
     /**
      * Create a {@link org.apache.commons.beanutils.Converter} that will return
@@ -101,26 +107,20 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
 
 
     /**
-     * Type which this class converts its input to. This value can be
-     * used as a parameter to the ConvertUtils.register method.
-     * @since 1.8.0
+     * Create a {@link org.apache.commons.beanutils.Converter} that will return
+     * the specified default value if a conversion error occurs.
+     *
+     * <p>Conversion of strings to boolean values will be done via a default
+     * instance of class BooleanConverter.</p>
+     *
+     * @param defaultValue The default value to be returned
      */
-    public static final Class MODEL = new boolean[0].getClass();
+    public BooleanArrayConverter(final Object defaultValue) {
 
-    /**
-     * The converter that all instances of this class will use to
-     * do individual string->boolean conversions, unless overridden
-     * in the constructor.
-     */
-    private static final BooleanConverter DEFAULT_CONVERTER
-        = new BooleanConverter();
+        super(defaultValue);
+        this.booleanConverter = DEFAULT_CONVERTER;
 
-
-    /**
-     * This object is used to perform the conversion of individual strings
-     * into Boolean/boolean values.
-     */
-    protected final BooleanConverter booleanConverter;
+    }
 
 
 

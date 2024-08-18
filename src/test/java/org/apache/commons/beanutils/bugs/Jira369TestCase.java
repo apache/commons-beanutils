@@ -28,12 +28,27 @@ import org.apache.commons.beanutils.BeanUtils;
 public class Jira369TestCase extends TestCase {
 
     /**
-     * Create a test case with the specified name.
-     *
-     * @param name The name of the test
+     * Test Bean
      */
-    public Jira369TestCase(final String name) {
-        super(name);
+    public static class TestBean {
+        private String aproperty;
+        private String bproperty;
+
+        public String getARatedCd() {
+            return aproperty;
+        }
+
+        public String getbRatedCd() {
+            return bproperty;
+        }
+
+        public void setARatedCd(final String aproperty) {
+            this.aproperty = aproperty;
+        }
+
+        public void setbRatedCd(final String bproperty) {
+            this.bproperty = bproperty;
+        }
     }
 
     /**
@@ -52,6 +67,15 @@ public class Jira369TestCase extends TestCase {
      */
     public static Test suite() {
         return new TestSuite(Jira369TestCase.class);
+    }
+
+    /**
+     * Create a test case with the specified name.
+     *
+     * @param name The name of the test
+     */
+    public Jira369TestCase(final String name) {
+        super(name);
     }
 
     /**
@@ -114,30 +138,6 @@ public class Jira369TestCase extends TestCase {
             assertEquals("foo", BeanUtils.getProperty(bean, "bRatedCd"));
         } catch (final Exception e) {
             fail("Threw " + e);
-        }
-    }
-
-    /**
-     * Test Bean
-     */
-    public static class TestBean {
-        private String aproperty;
-        private String bproperty;
-
-        public String getARatedCd() {
-            return aproperty;
-        }
-
-        public void setARatedCd(final String aproperty) {
-            this.aproperty = aproperty;
-        }
-
-        public String getbRatedCd() {
-            return bproperty;
-        }
-
-        public void setbRatedCd(final String bproperty) {
-            this.bproperty = bproperty;
         }
     }
 }

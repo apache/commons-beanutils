@@ -29,7 +29,34 @@ import org.junit.Test;
  */
 public class Jira541TestCase {
 
+    public static class BaseType {
+
+        private String field;
+
+        public String getField() {
+            return field;
+        }
+
+        public BaseType setField(final String objectName) {
+            this.field = objectName;
+            return this;
+        }
+    }
+    public static class SubTypeA extends BaseType {
+
+        @Override
+        public SubTypeA setField(final String field) {
+            super.setField(field);
+            return this;
+        }
+    }
+
+    public static class SubTypeB extends BaseType {
+
+    }
+
     private static final String FIELD_NAME = "field";
+
     private static final String FIELD_VALUE = "name";
 
     @Test
@@ -47,32 +74,5 @@ public class Jira541TestCase {
 
         assertEquals(FIELD_VALUE, subTypeA.getField());
         assertEquals(FIELD_VALUE, subTypeB.getField());
-    }
-
-    public static class BaseType {
-
-        private String field;
-
-        public BaseType setField(final String objectName) {
-            this.field = objectName;
-            return this;
-        }
-
-        public String getField() {
-            return field;
-        }
-    }
-
-    public static class SubTypeA extends BaseType {
-
-        @Override
-        public SubTypeA setField(final String field) {
-            super.setField(field);
-            return this;
-        }
-    }
-
-    public static class SubTypeB extends BaseType {
-
     }
 }

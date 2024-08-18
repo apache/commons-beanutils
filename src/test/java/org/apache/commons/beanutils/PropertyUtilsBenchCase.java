@@ -38,13 +38,11 @@ public class PropertyUtilsBenchCase extends TestCase {
 
 
     /**
-     * Construct a new instance of this test case.
-     *
-     * @param name Name of the test case
+     * Return the tests included in this test suite.
      */
-    public PropertyUtilsBenchCase(final String name) {
+    public static Test suite() {
 
-        super(name);
+        return new TestSuite(PropertyUtilsBenchCase.class);
 
     }
 
@@ -70,6 +68,18 @@ public class PropertyUtilsBenchCase extends TestCase {
     private PropertyUtilsBean pu = null;
 
 
+
+
+    /**
+     * Construct a new instance of this test case.
+     *
+     * @param name Name of the test case
+     */
+    public PropertyUtilsBenchCase(final String name) {
+
+        super(name);
+
+    }
 
 
     /**
@@ -124,16 +134,6 @@ public class PropertyUtilsBenchCase extends TestCase {
 
         // Set up PropertyUtilsBean instance we will use
         pu = PropertyUtilsBean.getInstance();
-
-    }
-
-
-    /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-
-        return new TestSuite(PropertyUtilsBenchCase.class);
 
     }
 

@@ -29,6 +29,18 @@ import junit.framework.TestCase;
  *
  */
 public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
+    public static final class CapsBean {
+		private URI mURI;
+
+		public URI getURI() {
+			return mURI;
+		}
+
+		public void setURI(final URI theURI) {
+			mURI = theURI;
+		}
+	}
+
     /**
      * Puts all property descriptors into a map so that they can be accessed by
      * property name.
@@ -94,7 +106,7 @@ public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
                 pd.getWriteMethod());
     }
 
-    public void testIntrospectionCaps() throws Exception {
+	public void testIntrospectionCaps() throws Exception {
 	    final PropertyUtilsBean pu = new PropertyUtilsBean();
 
         final FluentPropertyBeanIntrospector introspector = new FluentPropertyBeanIntrospector();
@@ -113,16 +125,4 @@ public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
 
 	    assertNull("Should not find mis-capitalized property", props.get("uRI"));
     }
-
-	public static final class CapsBean {
-		private URI mURI;
-
-		public URI getURI() {
-			return mURI;
-		}
-
-		public void setURI(final URI theURI) {
-			mURI = theURI;
-		}
-	}
 }

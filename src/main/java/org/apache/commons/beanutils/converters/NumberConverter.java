@@ -116,75 +116,6 @@ public abstract class NumberConverter extends AbstractConverter {
 
 
     /**
-     * Return whether decimals are allowed in the number.
-     *
-     * @return Whether decimals are allowed in the number
-     */
-    public boolean isAllowDecimals() {
-        return allowDecimals;
-    }
-
-    /**
-     * Set whether a format should be used to convert
-     * the Number.
-     *
-     * @param useLocaleFormat <code>true</code> if a number format
-     * should be used.
-     */
-    public void setUseLocaleFormat(final boolean useLocaleFormat) {
-        this.useLocaleFormat = useLocaleFormat;
-    }
-
-    /**
-     * Return the number format pattern used to convert
-     * Numbers to/from a <code>java.lang.String</code>
-     * (or <code>null</code> if none specified).
-     * <p>
-     * See <code>java.text.DecimalFormat</code> for details
-     * of how to specify the pattern.
-     *
-     * @return The format pattern.
-     */
-    public String getPattern() {
-        return pattern;
-    }
-
-    /**
-     * Set a number format pattern to use to convert
-     * Numbers to/from a <code>java.lang.String</code>.
-     * <p>
-     * See <code>java.text.DecimalFormat</code> for details
-     * of how to specify the pattern.
-     *
-     * @param pattern The format pattern.
-     */
-    public void setPattern(final String pattern) {
-        this.pattern = pattern;
-        setUseLocaleFormat(true);
-    }
-
-    /**
-     * Return the Locale for the <em>Converter</em>
-     * (or <code>null</code> if none specified).
-     *
-     * @return The locale to use for conversion
-     */
-    public Locale getLocale() {
-        return locale;
-    }
-
-    /**
-     * Set the Locale for the <em>Converter</em>.
-     *
-     * @param locale The locale to use for conversion
-     */
-    public void setLocale(final Locale locale) {
-        this.locale = locale;
-        setUseLocaleFormat(true);
-    }
-
-
-    /**
      * Convert an input Number object into a String.
      *
      * @param value The input value to be converted
@@ -268,6 +199,214 @@ public abstract class NumberConverter extends AbstractConverter {
         // Ensure the correct number type is returned
         return toNumber(sourceType, targetType, number);
 
+    }
+
+    /**
+     * Return a NumberFormat to use for Conversion.
+     *
+     * @return The NumberFormat.
+     */
+    private NumberFormat getFormat() {
+        NumberFormat format = null;
+        if (pattern != null) {
+            if (locale == null) {
+                if (log().isDebugEnabled()) {
+                    log().debug("    Using pattern '" + pattern + "'");
+                }
+                format = new DecimalFormat(pattern);
+            } else {
+                if (log().isDebugEnabled()) {
+                    log().debug("    Using pattern '" + pattern + "'" +
+                              " with Locale[" + locale + "]");
+                }
+                final DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
+                format = new DecimalFormat(pattern, symbols);
+            }
+        } else {
+            if (locale == null) {
+                if (log().isDebugEnabled()) {
+                    log().debug("    Using default Locale format");
+                }
+                format = NumberFormat.getInstance();
+            } else {
+                if (log().isDebugEnabled()) {
+                    log().debug("    Using Locale[" + locale + "] format");
+                }
+                format = NumberFormat.getInstance(locale);
+            }
+        }
+        if (!allowDecimals) {
+            format.setParseIntegerOnly(true);
+        }
+        return format;
+    }
+
+    /**
+     * Return the Locale for the <em>Converter</em>
+     * (or <code>null</code> if none specified).
+     *
+     * @return The locale to use for conversion
+     */
+    public Locale getLocale() {
+        return locale;
+    }
+
+    /**
+     * Return the number format pattern used to convert
+     * Numbers to/from a <code>java.lang.String</code>
+     * (or <code>null</code> if none specified).
+     * <p>
+     * See <code>java.text.DecimalFormat</code> for details
+     * of how to specify the pattern.
+     *
+     * @return The format pattern.
+     */
+    public String getPattern() {
+        return pattern;
+    }
+
+    /**
+     * Return whether decimals are allowed in the number.
+     *
+     * @return Whether decimals are allowed in the number
+     */
+    public boolean isAllowDecimals() {
+        return allowDecimals;
+    }
+
+
+    /**
+     * Convert a String into a <code>Number</code> object.
+     * @param sourceType the source type of the conversion
+     * @param targetType The type to convert the value to
+     * @param value The String date value.
+     * @param format The NumberFormat to parse the String value.
+     *
+     * @return The converted Number object.
+     * @throws ConversionException if the String cannot be converted.
+     */
+    private Number parse(final Class<?> sourceType, final Class<?> targetType, final String value, final NumberFormat format) {
+        final ParsePosition pos = new ParsePosition(0);
+        final Number parsedNumber = format.parse(value, pos);
+        if (pos.getErrorIndex() >= 0 || pos.getIndex() != value.length() || parsedNumber == null) {
+            String msg = "Error converting from '" + toString(sourceType) + "' to '" + toString(targetType) + "'";
+            if (format instanceof DecimalFormat) {
+                msg += " using pattern '" + ((DecimalFormat)format).toPattern() + "'";
+            }
+            if (locale != null) {
+                msg += " for locale=[" + locale + "]";
+            }
+            if (log().isDebugEnabled()) {
+                log().debug("    " + msg);
+            }
+            throw new ConversionException(msg);
+        }
+        return parsedNumber;
+    }
+
+    /**
+     * Set the Locale for the <em>Converter</em>.
+     *
+     * @param locale The locale to use for conversion
+     */
+    public void setLocale(final Locale locale) {
+        this.locale = locale;
+        setUseLocaleFormat(true);
+    }
+
+    /**
+     * Set a number format pattern to use to convert
+     * Numbers to/from a <code>java.lang.String</code>.
+     * <p>
+     * See <code>java.text.DecimalFormat</code> for details
+     * of how to specify the pattern.
+     *
+     * @param pattern The format pattern.
+     */
+    public void setPattern(final String pattern) {
+        this.pattern = pattern;
+        setUseLocaleFormat(true);
+    }
+
+    /**
+     * Set whether a format should be used to convert
+     * the Number.
+     *
+     * @param useLocaleFormat <code>true</code> if a number format
+     * should be used.
+     */
+    public void setUseLocaleFormat(final boolean useLocaleFormat) {
+        this.useLocaleFormat = useLocaleFormat;
+    }
+
+    /**
+     * Default String to Number conversion.
+     * <p>
+     * This method handles conversion from a String to the following types:
+     * <ul>
+     *     <li><code>java.lang.Byte</code></li>
+     *     <li><code>java.lang.Short</code></li>
+     *     <li><code>java.lang.Integer</code></li>
+     *     <li><code>java.lang.Long</code></li>
+     *     <li><code>java.lang.Float</code></li>
+     *     <li><code>java.lang.Double</code></li>
+     *     <li><code>java.math.BigDecimal</code></li>
+     *     <li><code>java.math.BigInteger</code></li>
+     * </ul>
+     * @param sourceType The type being converted from
+     * @param targetType The Number type to convert to
+     * @param value The String value to convert.
+     *
+     * @return The converted Number value.
+     */
+    private Number toNumber(final Class<?> sourceType, final Class<?> targetType, final String value) {
+
+        // Byte
+        if (targetType.equals(Byte.class)) {
+            return Byte.valueOf(value);
+        }
+
+        // Short
+        if (targetType.equals(Short.class)) {
+            return Short.valueOf(value);
+        }
+
+        // Integer
+        if (targetType.equals(Integer.class)) {
+            return Integer.valueOf(value);
+        }
+
+        // Long
+        if (targetType.equals(Long.class)) {
+            return Long.valueOf(value);
+        }
+
+        // Float
+        if (targetType.equals(Float.class)) {
+            return Float.valueOf(value);
+        }
+
+        // Double
+        if (targetType.equals(Double.class)) {
+            return Double.valueOf(value);
+        }
+
+        // BigDecimal
+        if (targetType.equals(BigDecimal.class)) {
+            return new BigDecimal(value);
+        }
+
+        // BigInteger
+        if (targetType.equals(BigInteger.class)) {
+            return new BigInteger(value);
+        }
+
+        final String msg = toString(getClass()) + " cannot handle conversion from '" +
+                     toString(sourceType) + "' to '" + toString(targetType) + "'";
+        if (log().isWarnEnabled()) {
+            log().warn("    " + msg);
+        }
+        throw new ConversionException(msg);
     }
 
     /**
@@ -391,76 +530,6 @@ public abstract class NumberConverter extends AbstractConverter {
     }
 
     /**
-     * Default String to Number conversion.
-     * <p>
-     * This method handles conversion from a String to the following types:
-     * <ul>
-     *     <li><code>java.lang.Byte</code></li>
-     *     <li><code>java.lang.Short</code></li>
-     *     <li><code>java.lang.Integer</code></li>
-     *     <li><code>java.lang.Long</code></li>
-     *     <li><code>java.lang.Float</code></li>
-     *     <li><code>java.lang.Double</code></li>
-     *     <li><code>java.math.BigDecimal</code></li>
-     *     <li><code>java.math.BigInteger</code></li>
-     * </ul>
-     * @param sourceType The type being converted from
-     * @param targetType The Number type to convert to
-     * @param value The String value to convert.
-     *
-     * @return The converted Number value.
-     */
-    private Number toNumber(final Class<?> sourceType, final Class<?> targetType, final String value) {
-
-        // Byte
-        if (targetType.equals(Byte.class)) {
-            return Byte.valueOf(value);
-        }
-
-        // Short
-        if (targetType.equals(Short.class)) {
-            return Short.valueOf(value);
-        }
-
-        // Integer
-        if (targetType.equals(Integer.class)) {
-            return Integer.valueOf(value);
-        }
-
-        // Long
-        if (targetType.equals(Long.class)) {
-            return Long.valueOf(value);
-        }
-
-        // Float
-        if (targetType.equals(Float.class)) {
-            return Float.valueOf(value);
-        }
-
-        // Double
-        if (targetType.equals(Double.class)) {
-            return Double.valueOf(value);
-        }
-
-        // BigDecimal
-        if (targetType.equals(BigDecimal.class)) {
-            return new BigDecimal(value);
-        }
-
-        // BigInteger
-        if (targetType.equals(BigInteger.class)) {
-            return new BigInteger(value);
-        }
-
-        final String msg = toString(getClass()) + " cannot handle conversion from '" +
-                     toString(sourceType) + "' to '" + toString(targetType) + "'";
-        if (log().isWarnEnabled()) {
-            log().warn("    " + msg);
-        }
-        throw new ConversionException(msg);
-    }
-
-    /**
      * Provide a String representation of this number converter.
      *
      * @return A String representation of this number converter
@@ -483,75 +552,6 @@ public abstract class NumberConverter extends AbstractConverter {
         }
         buffer.append(']');
         return buffer.toString();
-    }
-
-    /**
-     * Return a NumberFormat to use for Conversion.
-     *
-     * @return The NumberFormat.
-     */
-    private NumberFormat getFormat() {
-        NumberFormat format = null;
-        if (pattern != null) {
-            if (locale == null) {
-                if (log().isDebugEnabled()) {
-                    log().debug("    Using pattern '" + pattern + "'");
-                }
-                format = new DecimalFormat(pattern);
-            } else {
-                if (log().isDebugEnabled()) {
-                    log().debug("    Using pattern '" + pattern + "'" +
-                              " with Locale[" + locale + "]");
-                }
-                final DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
-                format = new DecimalFormat(pattern, symbols);
-            }
-        } else {
-            if (locale == null) {
-                if (log().isDebugEnabled()) {
-                    log().debug("    Using default Locale format");
-                }
-                format = NumberFormat.getInstance();
-            } else {
-                if (log().isDebugEnabled()) {
-                    log().debug("    Using Locale[" + locale + "] format");
-                }
-                format = NumberFormat.getInstance(locale);
-            }
-        }
-        if (!allowDecimals) {
-            format.setParseIntegerOnly(true);
-        }
-        return format;
-    }
-
-    /**
-     * Convert a String into a <code>Number</code> object.
-     * @param sourceType the source type of the conversion
-     * @param targetType The type to convert the value to
-     * @param value The String date value.
-     * @param format The NumberFormat to parse the String value.
-     *
-     * @return The converted Number object.
-     * @throws ConversionException if the String cannot be converted.
-     */
-    private Number parse(final Class<?> sourceType, final Class<?> targetType, final String value, final NumberFormat format) {
-        final ParsePosition pos = new ParsePosition(0);
-        final Number parsedNumber = format.parse(value, pos);
-        if (pos.getErrorIndex() >= 0 || pos.getIndex() != value.length() || parsedNumber == null) {
-            String msg = "Error converting from '" + toString(sourceType) + "' to '" + toString(targetType) + "'";
-            if (format instanceof DecimalFormat) {
-                msg += " using pattern '" + ((DecimalFormat)format).toPattern() + "'";
-            }
-            if (locale != null) {
-                msg += " for locale=[" + locale + "]";
-            }
-            if (log().isDebugEnabled()) {
-                log().debug("    " + msg);
-            }
-            throw new ConversionException(msg);
-        }
-        return parsedNumber;
     }
 
 }

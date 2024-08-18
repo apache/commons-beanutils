@@ -43,6 +43,20 @@ public final class StringArrayConverter extends AbstractArrayConverter {
 
 
     /**
+     * <p>Model object for type comparisons.</p>
+     */
+    private static final String[] MODEL = {};
+
+
+    /**
+     * <p> Model object for int arrays.</p>
+     */
+    private static final int[] INT_MODEL = {};
+
+
+
+
+    /**
      * Create a {@link org.apache.commons.beanutils.Converter} that will throw
      * a {@link ConversionException} if a conversion error occurs.
      */
@@ -52,7 +66,6 @@ public final class StringArrayConverter extends AbstractArrayConverter {
         this.useDefault = false;
 
     }
-
 
     /**
      * Create a {@link org.apache.commons.beanutils.Converter} that will return
@@ -66,19 +79,6 @@ public final class StringArrayConverter extends AbstractArrayConverter {
         this.useDefault = true;
 
     }
-
-
-
-
-    /**
-     * <p>Model object for type comparisons.</p>
-     */
-    private static final String[] MODEL = {};
-
-    /**
-     * <p> Model object for int arrays.</p>
-     */
-    private static final int[] INT_MODEL = {};
 
 
 

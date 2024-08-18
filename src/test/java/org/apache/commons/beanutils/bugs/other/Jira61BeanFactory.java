@@ -28,15 +28,6 @@ import org.apache.commons.beanutils.bugs.Jira61TestCase;
 public class Jira61BeanFactory {
 
     /**
-     * Factory method which creates a new {@link TestBean}.
-     *
-     * @return a new {@link TestBean}.
-     */
-    public static TestBean createBean() {
-        return new TestBean();
-    }
-
-    /**
      * Test Bean
      */
     public static class TestBean {
@@ -52,24 +43,6 @@ public class Jira61BeanFactory {
         }
 
         /**
-         * Return simpleReadOnly
-         *
-         * @return the simple value
-         */
-        public String getSimpleReadOnly() {
-            return simple;
-        }
-
-        /**
-         * Set simpleWriteOnly
-         *
-         * @param simple simple value
-         */
-        public void setSimpleWriteOnly(final String simple) {
-            this.simple = simple;
-        }
-
-        /**
          * Return indexed property.
          *
          * @param index The index
@@ -77,16 +50,6 @@ public class Jira61BeanFactory {
          */
         public String getIndexedReadOnly(final int index) {
             return indexed[index];
-        }
-
-        /**
-         * Set indexed property.
-         *
-         * @param index The index
-         * @param value The indexed value
-         */
-        public void setIndexedWriteOnly(final int index, final String value) {
-            this.indexed[index] = value;
         }
 
         /**
@@ -100,6 +63,25 @@ public class Jira61BeanFactory {
         }
 
         /**
+         * Return simpleReadOnly
+         *
+         * @return the simple value
+         */
+        public String getSimpleReadOnly() {
+            return simple;
+        }
+
+        /**
+         * Set indexed property.
+         *
+         * @param index The index
+         * @param value The indexed value
+         */
+        public void setIndexedWriteOnly(final int index, final String value) {
+            this.indexed[index] = value;
+        }
+
+        /**
          * Set mapped property.
          *
          * @param key The mapped key
@@ -109,6 +91,24 @@ public class Jira61BeanFactory {
             mapped.put(key, value);
         }
 
+        /**
+         * Set simpleWriteOnly
+         *
+         * @param simple simple value
+         */
+        public void setSimpleWriteOnly(final String simple) {
+            this.simple = simple;
+        }
+
+    }
+
+    /**
+     * Factory method which creates a new {@link TestBean}.
+     *
+     * @return a new {@link TestBean}.
+     */
+    public static TestBean createBean() {
+        return new TestBean();
     }
 
 }

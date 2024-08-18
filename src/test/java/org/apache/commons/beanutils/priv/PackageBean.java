@@ -35,19 +35,19 @@ class PackageBean {
 
 
     /**
+     */
+    private String bar = "This is bar";
+
+
+
+
+    /**
      * Package private constructor - can only use factory method to create
      * beans.
      */
     PackageBean() {
 
     }
-
-
-
-
-    /**
-     */
-    private String bar = "This is bar";
 
     public String getBar() {
 

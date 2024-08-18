@@ -195,27 +195,6 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
     /**
-     * Construct a LazyDynaList with the
-     * specified capacity.
-     *
-     * @param capacity The initial capacity of the list.
-     */
-    public LazyDynaList(final int capacity) {
-        super(capacity);
-
-    }
-
-    /**
-     * Construct a  LazyDynaList with a
-     * specified DynaClass for its elements.
-     *
-     * @param elementDynaClass The DynaClass of the List's elements.
-     */
-    public LazyDynaList(final DynaClass elementDynaClass) {
-        setElementDynaClass(elementDynaClass);
-    }
-
-    /**
      * Construct a  LazyDynaList with a
      * specified type for its elements.
      *
@@ -234,6 +213,27 @@ public class LazyDynaList extends ArrayList<Object> {
     public LazyDynaList(final Collection<?> collection) {
         super(collection.size());
         addAll(collection);
+    }
+
+    /**
+     * Construct a  LazyDynaList with a
+     * specified DynaClass for its elements.
+     *
+     * @param elementDynaClass The DynaClass of the List's elements.
+     */
+    public LazyDynaList(final DynaClass elementDynaClass) {
+        setElementDynaClass(elementDynaClass);
+    }
+
+    /**
+     * Construct a LazyDynaList with the
+     * specified capacity.
+     *
+     * @param capacity The initial capacity of the list.
+     */
+    public LazyDynaList(final int capacity) {
+        super(capacity);
+
     }
 
     /**
@@ -350,6 +350,20 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
     /**
+     * Creates a new {@code LazyDynaMap} object for the given property value.
+     *
+     * @param value the property value
+     * @return the newly created {@code LazyDynaMap}
+     */
+    private LazyDynaMap createDynaBeanForMapProperty(final Object value) {
+        @SuppressWarnings("unchecked")
+        final
+        // map properties are always stored as Map<String, Object>
+        Map<String, Object> valueMap = (Map<String, Object>) value;
+        return new LazyDynaMap(valueMap);
+    }
+
+    /**
      * <p>Return the element at the specified position.</p>
      *
      * <p>If the position requested is greater than the current
@@ -367,6 +381,37 @@ public class LazyDynaList extends ArrayList<Object> {
         return super.get(index);
 
     }
+
+    /**
+     * Return the DynaClass.
+     */
+    private DynaClass getDynaClass() {
+        return elementDynaClass == null ? wrapDynaClass : elementDynaClass;
+    }
+
+    /**
+     * <p>Automatically <em>grown</em> the List
+     *    to the appropriate size, populating with
+     *    DynaBeans.</p>
+     *
+     * @param requiredSize the required size of the List.
+     */
+    private void growList(final int requiredSize) {
+
+        if (requiredSize < size()) {
+            return;
+        }
+
+        ensureCapacity(requiredSize + 1);
+
+        for (int i = size(); i < requiredSize; i++) {
+            final DynaBean dynaBean = transform(null);
+            super.add(dynaBean);
+        }
+
+    }
+
+
 
     /**
      * <p>Set the element at the specified position.</p>
@@ -389,6 +434,100 @@ public class LazyDynaList extends ArrayList<Object> {
         return super.set(index, dynaBean);
 
     }
+
+    /**
+     * <p>Set the element Type and DynaClass.</p>
+     *
+     * @param elementDynaClass The DynaClass of the elements.
+     * @throws IllegalArgumentException if the List already
+     *            contains elements or the DynaClass is null.
+     */
+    public void setElementDynaClass(final DynaClass elementDynaClass) {
+
+        if (elementDynaClass == null) {
+            throw new IllegalArgumentException("Element DynaClass is missing");
+        }
+
+        if (size() > 0) {
+            throw new IllegalStateException("Element DynaClass cannot be reset");
+        }
+
+        // Try to create a new instance of the DynaBean
+        try {
+            final DynaBean dynaBean  = elementDynaClass.newInstance();
+            this.elementDynaBeanType = dynaBean.getClass();
+            if (WrapDynaBean.class.isAssignableFrom(elementDynaBeanType)) {
+                this.elementType = ((WrapDynaBean)dynaBean).getInstance().getClass();
+                this.wrapDynaClass = (WrapDynaClass)elementDynaClass;
+            } else if (LazyDynaMap.class.isAssignableFrom(elementDynaBeanType)) {
+                this.elementType = ((LazyDynaMap)dynaBean).getMap().getClass();
+                this.elementDynaClass = elementDynaClass;
+            } else {
+                this.elementType = dynaBean.getClass();
+                this.elementDynaClass = elementDynaClass;
+            }
+        } catch (final Exception e) {
+            throw new IllegalArgumentException(
+                        "Error creating DynaBean from " +
+                        elementDynaClass.getClass().getName() + " - " + e);
+        }
+
+    }
+
+    /**
+     * <p>Set the element Type and DynaClass.</p>
+     *
+     * @param elementType The type of the elements.
+     * @throws IllegalArgumentException if the List already
+     *            contains elements or the DynaClass is null.
+     */
+    public void setElementType(final Class<?> elementType) {
+
+        if (elementType == null) {
+            throw new IllegalArgumentException("Element Type is missing");
+        }
+
+        final boolean changeType = this.elementType != null && !this.elementType.equals(elementType);
+        if (changeType && size() > 0) {
+            throw new IllegalStateException("Element Type cannot be reset");
+        }
+
+        this.elementType = elementType;
+
+        // Create a new object of the specified type
+        Object object = null;
+        try {
+            object = elementType.getConstructor().newInstance();
+        } catch (final Exception e) {
+            throw new IllegalArgumentException("Error creating type: "
+                           + elementType.getName() + " - " + e);
+        }
+
+        // Create a DynaBean
+        DynaBean dynaBean = null;
+        if (Map.class.isAssignableFrom(elementType)) {
+            dynaBean = createDynaBeanForMapProperty(object);
+            this.elementDynaClass = dynaBean.getDynaClass();
+        } else if (DynaBean.class.isAssignableFrom(elementType)) {
+            dynaBean = (DynaBean)object;
+            this.elementDynaClass = dynaBean.getDynaClass();
+        } else {
+            dynaBean = new WrapDynaBean(object);
+            this.wrapDynaClass = (WrapDynaClass)dynaBean.getDynaClass();
+        }
+
+        this.elementDynaBeanType = dynaBean.getClass();
+
+        // Re-calculate the type
+        if (WrapDynaBean.class.isAssignableFrom(elementDynaBeanType )) {
+            this.elementType = ((WrapDynaBean)dynaBean).getInstance().getClass();
+        } else if (LazyDynaMap.class.isAssignableFrom(elementDynaBeanType )) {
+            this.elementType = ((LazyDynaMap)dynaBean).getMap().getClass();
+        }
+
+    }
+
+
 
     /**
      * <p>Converts the List to an Array.</p>
@@ -474,8 +613,6 @@ public class LazyDynaList extends ArrayList<Object> {
 
     }
 
-
-
     /**
      * <p>Converts the List to an DynaBean Array.</p>
      *
@@ -492,122 +629,6 @@ public class LazyDynaList extends ArrayList<Object> {
             array[i] = (DynaBean)get(i);
         }
         return array;
-
-    }
-
-    /**
-     * <p>Set the element Type and DynaClass.</p>
-     *
-     * @param elementType The type of the elements.
-     * @throws IllegalArgumentException if the List already
-     *            contains elements or the DynaClass is null.
-     */
-    public void setElementType(final Class<?> elementType) {
-
-        if (elementType == null) {
-            throw new IllegalArgumentException("Element Type is missing");
-        }
-
-        final boolean changeType = this.elementType != null && !this.elementType.equals(elementType);
-        if (changeType && size() > 0) {
-            throw new IllegalStateException("Element Type cannot be reset");
-        }
-
-        this.elementType = elementType;
-
-        // Create a new object of the specified type
-        Object object = null;
-        try {
-            object = elementType.getConstructor().newInstance();
-        } catch (final Exception e) {
-            throw new IllegalArgumentException("Error creating type: "
-                           + elementType.getName() + " - " + e);
-        }
-
-        // Create a DynaBean
-        DynaBean dynaBean = null;
-        if (Map.class.isAssignableFrom(elementType)) {
-            dynaBean = createDynaBeanForMapProperty(object);
-            this.elementDynaClass = dynaBean.getDynaClass();
-        } else if (DynaBean.class.isAssignableFrom(elementType)) {
-            dynaBean = (DynaBean)object;
-            this.elementDynaClass = dynaBean.getDynaClass();
-        } else {
-            dynaBean = new WrapDynaBean(object);
-            this.wrapDynaClass = (WrapDynaClass)dynaBean.getDynaClass();
-        }
-
-        this.elementDynaBeanType = dynaBean.getClass();
-
-        // Re-calculate the type
-        if (WrapDynaBean.class.isAssignableFrom(elementDynaBeanType )) {
-            this.elementType = ((WrapDynaBean)dynaBean).getInstance().getClass();
-        } else if (LazyDynaMap.class.isAssignableFrom(elementDynaBeanType )) {
-            this.elementType = ((LazyDynaMap)dynaBean).getMap().getClass();
-        }
-
-    }
-
-    /**
-     * <p>Set the element Type and DynaClass.</p>
-     *
-     * @param elementDynaClass The DynaClass of the elements.
-     * @throws IllegalArgumentException if the List already
-     *            contains elements or the DynaClass is null.
-     */
-    public void setElementDynaClass(final DynaClass elementDynaClass) {
-
-        if (elementDynaClass == null) {
-            throw new IllegalArgumentException("Element DynaClass is missing");
-        }
-
-        if (size() > 0) {
-            throw new IllegalStateException("Element DynaClass cannot be reset");
-        }
-
-        // Try to create a new instance of the DynaBean
-        try {
-            final DynaBean dynaBean  = elementDynaClass.newInstance();
-            this.elementDynaBeanType = dynaBean.getClass();
-            if (WrapDynaBean.class.isAssignableFrom(elementDynaBeanType)) {
-                this.elementType = ((WrapDynaBean)dynaBean).getInstance().getClass();
-                this.wrapDynaClass = (WrapDynaClass)elementDynaClass;
-            } else if (LazyDynaMap.class.isAssignableFrom(elementDynaBeanType)) {
-                this.elementType = ((LazyDynaMap)dynaBean).getMap().getClass();
-                this.elementDynaClass = elementDynaClass;
-            } else {
-                this.elementType = dynaBean.getClass();
-                this.elementDynaClass = elementDynaClass;
-            }
-        } catch (final Exception e) {
-            throw new IllegalArgumentException(
-                        "Error creating DynaBean from " +
-                        elementDynaClass.getClass().getName() + " - " + e);
-        }
-
-    }
-
-
-
-    /**
-     * <p>Automatically <em>grown</em> the List
-     *    to the appropriate size, populating with
-     *    DynaBeans.</p>
-     *
-     * @param requiredSize the required size of the List.
-     */
-    private void growList(final int requiredSize) {
-
-        if (requiredSize < size()) {
-            return;
-        }
-
-        ensureCapacity(requiredSize + 1);
-
-        for (int i = size(); i < requiredSize; i++) {
-            final DynaBean dynaBean = transform(null);
-            super.add(dynaBean);
-        }
 
     }
 
@@ -686,26 +707,5 @@ public class LazyDynaList extends ArrayList<Object> {
 
         return dynaBean;
 
-    }
-
-    /**
-     * Creates a new {@code LazyDynaMap} object for the given property value.
-     *
-     * @param value the property value
-     * @return the newly created {@code LazyDynaMap}
-     */
-    private LazyDynaMap createDynaBeanForMapProperty(final Object value) {
-        @SuppressWarnings("unchecked")
-        final
-        // map properties are always stored as Map<String, Object>
-        Map<String, Object> valueMap = (Map<String, Object>) value;
-        return new LazyDynaMap(valueMap);
-    }
-
-    /**
-     * Return the DynaClass.
-     */
-    private DynaClass getDynaClass() {
-        return elementDynaClass == null ? wrapDynaClass : elementDynaClass;
     }
 }

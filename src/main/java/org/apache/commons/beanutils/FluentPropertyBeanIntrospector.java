@@ -79,11 +79,27 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
     /** The default prefix for write methods. */
     public static final String DEFAULT_WRITE_METHOD_PREFIX = "set";
 
+    private static void clearDescriptorsCacheHierarchy(final Class<?> cls) {
+        if (cls != null && cls != Object.class) {
+            Introspector.flushFromCaches(cls);
+            clearDescriptorsCacheHierarchy(cls.getSuperclass());
+        }
+    }
+
     /** The logger. */
     private final Log log = LogFactory.getLog(getClass());
 
     /** The prefix of write methods to search for. */
     private final String writeMethodPrefix;
+
+    /**
+     *
+     * Creates a new instance of <code>FluentPropertyBeanIntrospector</code> and
+     * sets the default prefix for write methods.
+     */
+    public FluentPropertyBeanIntrospector() {
+        this(DEFAULT_WRITE_METHOD_PREFIX);
+    }
 
     /**
      *
@@ -103,12 +119,16 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
     }
 
     /**
+     * Creates a property descriptor for a fluent API property.
      *
-     * Creates a new instance of <code>FluentPropertyBeanIntrospector</code> and
-     * sets the default prefix for write methods.
+     * @param m the set method for the fluent API property
+     * @param propertyName the name of the corresponding property
+     * @return the descriptor
+     * @throws IntrospectionException if an error occurs
      */
-    public FluentPropertyBeanIntrospector() {
-        this(DEFAULT_WRITE_METHOD_PREFIX);
+    private PropertyDescriptor createFluentPropertyDescritor(final Method m,
+            final String propertyName) throws IntrospectionException {
+        return new PropertyDescriptor(propertyName(m), null, m);
     }
 
     /**
@@ -156,13 +176,6 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
         }
     }
 
-    private static void clearDescriptorsCacheHierarchy(final Class<?> cls) {
-        if (cls != null && cls != Object.class) {
-            Introspector.flushFromCaches(cls);
-            clearDescriptorsCacheHierarchy(cls.getSuperclass());
-        }
-    }
-
     /**
      * Derives the name of a property from the given set method.
      *
@@ -174,18 +187,5 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
                 getWriteMethodPrefix().length());
         return methodName.length() > 1 ? Introspector.decapitalize(methodName) : methodName
                 .toLowerCase(Locale.ROOT);
-    }
-
-    /**
-     * Creates a property descriptor for a fluent API property.
-     *
-     * @param m the set method for the fluent API property
-     * @param propertyName the name of the corresponding property
-     * @return the descriptor
-     * @throws IntrospectionException if an error occurs
-     */
-    private PropertyDescriptor createFluentPropertyDescritor(final Method m,
-            final String propertyName) throws IntrospectionException {
-        return new PropertyDescriptor(propertyName(m), null, m);
     }
 }

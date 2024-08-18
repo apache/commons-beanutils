@@ -32,6 +32,54 @@ import org.apache.commons.beanutils.BeanUtils;
  * href="https://issues.apache.org/jira/browse/BEANUTILS-465">https://issues.apache.org/jira/browse/BEANUTILS-465</a>
  */
 public class Jira465TestCase extends TestCase {
+    public static class ArrayIndexedProp {
+        private final Object[] foo = { OLD_VALUE };
+
+        public Object getFoo(final int i) {
+            return foo[i];
+        }
+
+        public void setFoo(final int i, final Object value) {
+            this.foo[i] = value;
+        }
+    }
+
+    public static class ArrayProp {
+        private Object[] foo = { OLD_VALUE };
+
+        public Object[] getFoo() {
+            return foo;
+        }
+
+        public void setFoo(final Object[] foo) {
+            this.foo = foo;
+        }
+    }
+
+    public static class ListIndexedProp {
+        private final List<String> foo = new ArrayList<>(Arrays.asList(OLD_VALUE));
+
+        public String getFoo(final int i) {
+            return foo.get(i);
+        }
+
+        public void setFoo(final int i, final String value) {
+            this.foo.set(i, value);
+        }
+    }
+
+    public static class ListProp {
+        private List<String> foo = new ArrayList<>(Arrays.asList(OLD_VALUE));
+
+        public List<String> getFoo() {
+            return foo;
+        }
+
+        public void setFoo(final List<String> foo) {
+            this.foo = foo;
+        }
+    }
+
     /** Constant for the property path. */
     private static final String PATH = "foo[0]";
 
@@ -54,23 +102,17 @@ public class Jira465TestCase extends TestCase {
         }
     }
 
-    public void testArrayProperty() throws InvocationTargetException,
-            IllegalAccessException {
-        final ArrayProp bean = new ArrayProp();
-        changeValue(bean);
-        assertEquals("Wrong value", NEW_VALUE, bean.getFoo()[0]);
-    }
-
     public void testArrayIndexedProperty() {
         final ArrayIndexedProp bean = new ArrayIndexedProp();
         changeValue(bean);
         assertEquals("Wrong value", NEW_VALUE, bean.getFoo(0));
     }
 
-    public void testListProperty() {
-        final ListProp bean = new ListProp();
+    public void testArrayProperty() throws InvocationTargetException,
+            IllegalAccessException {
+        final ArrayProp bean = new ArrayProp();
         changeValue(bean);
-        assertEquals("Wrong value", NEW_VALUE, bean.getFoo().get(0));
+        assertEquals("Wrong value", NEW_VALUE, bean.getFoo()[0]);
     }
 
     public void testListIndexedProperty() {
@@ -79,51 +121,9 @@ public class Jira465TestCase extends TestCase {
         assertEquals("Wrong value", NEW_VALUE, bean.getFoo(0));
     }
 
-    public static class ArrayProp {
-        private Object[] foo = { OLD_VALUE };
-
-        public Object[] getFoo() {
-            return foo;
-        }
-
-        public void setFoo(final Object[] foo) {
-            this.foo = foo;
-        }
-    }
-
-    public static class ArrayIndexedProp {
-        private final Object[] foo = { OLD_VALUE };
-
-        public Object getFoo(final int i) {
-            return foo[i];
-        }
-
-        public void setFoo(final int i, final Object value) {
-            this.foo[i] = value;
-        }
-    }
-
-    public static class ListProp {
-        private List<String> foo = new ArrayList<>(Arrays.asList(OLD_VALUE));
-
-        public List<String> getFoo() {
-            return foo;
-        }
-
-        public void setFoo(final List<String> foo) {
-            this.foo = foo;
-        }
-    }
-
-    public static class ListIndexedProp {
-        private final List<String> foo = new ArrayList<>(Arrays.asList(OLD_VALUE));
-
-        public String getFoo(final int i) {
-            return foo.get(i);
-        }
-
-        public void setFoo(final int i, final String value) {
-            this.foo.set(i, value);
-        }
+    public void testListProperty() {
+        final ListProp bean = new ListProp();
+        changeValue(bean);
+        assertEquals("Wrong value", NEW_VALUE, bean.getFoo().get(0));
     }
 }

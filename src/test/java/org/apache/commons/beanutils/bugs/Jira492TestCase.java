@@ -48,39 +48,11 @@ public class Jira492TestCase {
 
     private IndexedBean bean;
 
-    @Before
-    public void makeBean() {
-        bean = new IndexedBean();
-        bean.setSomeList(Arrays.asList("item0", "item1"));
-    }
-
     @Test
-    public void getIndexedProperty() throws Exception {
-        assertEquals("item0", beanUtils.getIndexedProperty(bean, "someList", 0));
-        assertEquals("item1", beanUtils.getIndexedProperty(bean, "someList[1]"));
-    }
-
-    @Test
-    public void getPropertySubScript() throws Exception {
-        assertEquals("item0", beanUtils.getProperty(bean, "someList[0]"));
-        assertEquals("item1", beanUtils.getProperty(bean, "someList[1]"));
-    }
-
-    @Test
-    public void setIndexedProperty() throws Exception {
-        beanUtils.setProperty(bean, "someList[1]", "item1-modified");
-        assertEquals("item1-modified", beanUtils.getIndexedProperty(bean, "someList", 1));
-    }
-
-    @Test
-    public void getProperty() throws Exception {
-        assertEquals("item0", beanUtils.getProperty(bean, "someList"));
-    }
-
-    @Test
-    public void getPropertyUnconverted() throws Exception {
-        final Object someList = propertyUtils.getProperty(bean, "someList");
-        assertTrue("Did not retrieve list", someList instanceof List);
+    public void describe() throws Exception {
+        final Map<String, String> described = beanUtils.describe(bean);
+        // Only first element survives as a String
+        assertEquals("item0", described.get("someList"));
     }
 
     public void getArrayProperty() throws Exception {
@@ -91,10 +63,30 @@ public class Jira492TestCase {
     }
 
     @Test
-    public void describe() throws Exception {
-        final Map<String, String> described = beanUtils.describe(bean);
-        // Only first element survives as a String
-        assertEquals("item0", described.get("someList"));
+    public void getIndexedProperty() throws Exception {
+        assertEquals("item0", beanUtils.getIndexedProperty(bean, "someList", 0));
+        assertEquals("item1", beanUtils.getIndexedProperty(bean, "someList[1]"));
+    }
+
+    @Test
+    public void getProperty() throws Exception {
+        assertEquals("item0", beanUtils.getProperty(bean, "someList"));
+    }
+
+    @Test
+    public void getPropertyDescriptor() throws Exception {
+        final PropertyDescriptor propDesc = propertyUtils.getPropertyDescriptor(bean, "someList");
+        if (supportsIndexedLists()) {
+            // Java 7 or earlier? (BEANUTILS-492)
+            final IndexedPropertyDescriptor indexed = (IndexedPropertyDescriptor) propDesc;
+            assertEquals(String.class, indexed.getIndexedReadMethod().getReturnType());
+        }
+    }
+
+    @Test
+    public void getPropertySubScript() throws Exception {
+        assertEquals("item0", beanUtils.getProperty(bean, "someList[0]"));
+        assertEquals("item1", beanUtils.getProperty(bean, "someList[1]"));
     }
 
     @Test
@@ -108,13 +100,21 @@ public class Jira492TestCase {
     }
 
     @Test
-    public void getPropertyDescriptor() throws Exception {
-        final PropertyDescriptor propDesc = propertyUtils.getPropertyDescriptor(bean, "someList");
-        if (supportsIndexedLists()) {
-            // Java 7 or earlier? (BEANUTILS-492)
-            final IndexedPropertyDescriptor indexed = (IndexedPropertyDescriptor) propDesc;
-            assertEquals(String.class, indexed.getIndexedReadMethod().getReturnType());
-        }
+    public void getPropertyUnconverted() throws Exception {
+        final Object someList = propertyUtils.getProperty(bean, "someList");
+        assertTrue("Did not retrieve list", someList instanceof List);
+    }
+
+    @Before
+    public void makeBean() {
+        bean = new IndexedBean();
+        bean.setSomeList(Arrays.asList("item0", "item1"));
+    }
+
+    @Test
+    public void setIndexedProperty() throws Exception {
+        beanUtils.setProperty(bean, "someList[1]", "item1-modified");
+        assertEquals("item1-modified", beanUtils.getIndexedProperty(bean, "someList", 1));
     }
 
 

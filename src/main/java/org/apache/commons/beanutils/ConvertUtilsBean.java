@@ -129,14 +129,22 @@ public class ConvertUtilsBean {
     private static final Character SPACE = Character.valueOf(' ');
 
     /**
+     * The default value for Short conversions.
+     * @deprecated Register replacement converters for Short.TYPE and
+     *  Short.class instead
+     */
+    @Deprecated
+    private static Short defaultShort = Short.valueOf((short) 0);
+
+
+
+    /**
      * Get singleton instance
      * @return The singleton instance
      */
     protected static ConvertUtilsBean getInstance() {
         return BeanUtilsBean.getInstance().getConvertUtils();
     }
-
-
 
     /**
      * The set of {@link Converter}s that can be used to convert Strings
@@ -145,18 +153,11 @@ public class ConvertUtilsBean {
     private final WeakFastHashMap<Class<?>, Converter> converters =
             new WeakFastHashMap<>();
 
+
     /**
      * The <code>Log</code> instance for this class.
      */
     private final Log log = LogFactory.getLog(ConvertUtils.class);
-
-
-    /** Construct a bean with standard converters registered */
-    public ConvertUtilsBean() {
-        converters.setFast(false);
-        deregister();
-        converters.setFast(true);
-    }
 
 
     /**
@@ -168,31 +169,6 @@ public class ConvertUtilsBean {
     private Boolean defaultBoolean = Boolean.FALSE;
 
     /**
-     * Gets the default value for Boolean conversions.
-     * @return The default Boolean value
-     * @deprecated Register replacement converters for Boolean.TYPE and
-     *  Boolean.class instead
-     */
-    @Deprecated
-    public boolean getDefaultBoolean() {
-        return defaultBoolean.booleanValue();
-    }
-
-    /**
-     * Sets the default value for Boolean conversions.
-     * @param newDefaultBoolean The default Boolean value
-     * @deprecated Register replacement converters for Boolean.TYPE and
-     *  Boolean.class instead
-     */
-    @Deprecated
-    public void setDefaultBoolean(final boolean newDefaultBoolean) {
-        defaultBoolean = newDefaultBoolean ? Boolean.TRUE : Boolean.FALSE;
-        register(new BooleanConverter(defaultBoolean), Boolean.TYPE);
-        register(new BooleanConverter(defaultBoolean), Boolean.class);
-    }
-
-
-    /**
      * The default value for Byte conversions.
      * @deprecated Register replacement converters for Byte.TYPE and
      *  Byte.class instead
@@ -201,63 +177,12 @@ public class ConvertUtilsBean {
     private Byte defaultByte = Byte.valueOf((byte) 0);
 
     /**
-     * Gets the default value for Byte conversions.
-     * @return The default Byte value
-     * @deprecated Register replacement converters for Byte.TYPE and
-     *  Byte.class instead
-     */
-    @Deprecated
-    public byte getDefaultByte() {
-        return defaultByte.byteValue();
-    }
-
-    /**
-     * Sets the default value for Byte conversions.
-     * @param newDefaultByte The default Byte value
-     * @deprecated Register replacement converters for Byte.TYPE and
-     *  Byte.class instead
-     */
-    @Deprecated
-    public void setDefaultByte(final byte newDefaultByte) {
-        defaultByte = Byte.valueOf(newDefaultByte);
-        register(new ByteConverter(defaultByte), Byte.TYPE);
-        register(new ByteConverter(defaultByte), Byte.class);
-    }
-
-
-    /**
      * The default value for Character conversions.
      * @deprecated Register replacement converters for Character.TYPE and
      *  Character.class instead
      */
     @Deprecated
     private Character defaultCharacter = Character.valueOf(' ');
-
-    /**
-     * Gets the default value for Character conversions.
-     * @return The default Character value
-     * @deprecated Register replacement converters for Character.TYPE and
-     *  Character.class instead
-     */
-    @Deprecated
-    public char getDefaultCharacter() {
-        return defaultCharacter.charValue();
-    }
-
-    /**
-     * Sets the default value for Character conversions.
-     * @param newDefaultCharacter The default Character value
-     * @deprecated Register replacement converters for Character.TYPE and
-     *  Character.class instead
-     */
-    @Deprecated
-    public void setDefaultCharacter(final char newDefaultCharacter) {
-        defaultCharacter = Character.valueOf(newDefaultCharacter);
-        register(new CharacterConverter(defaultCharacter),
-                    Character.TYPE);
-        register(new CharacterConverter(defaultCharacter),
-                    Character.class);
-    }
 
 
     /**
@@ -269,31 +194,6 @@ public class ConvertUtilsBean {
     private Double defaultDouble = Double.valueOf(0.0);
 
     /**
-     * Gets the default value for Double conversions.
-     * @return The default Double value
-     * @deprecated Register replacement converters for Double.TYPE and
-     *  Double.class instead
-     */
-    @Deprecated
-    public double getDefaultDouble() {
-        return defaultDouble.doubleValue();
-    }
-
-    /**
-     * Sets the default value for Double conversions.
-     * @param newDefaultDouble The default Double value
-     * @deprecated Register replacement converters for Double.TYPE and
-     *  Double.class instead
-     */
-    @Deprecated
-    public void setDefaultDouble(final double newDefaultDouble) {
-        defaultDouble = Double.valueOf(newDefaultDouble);
-        register(new DoubleConverter(defaultDouble), Double.TYPE);
-        register(new DoubleConverter(defaultDouble), Double.class);
-    }
-
-
-    /**
      * The default value for Float conversions.
      * @deprecated Register replacement converters for Float.TYPE and
      *  Float.class instead
@@ -302,61 +202,12 @@ public class ConvertUtilsBean {
     private Float defaultFloat = Float.valueOf((float) 0.0);
 
     /**
-     * Gets the default value for Float conversions.
-     * @return The default Float value
-     * @deprecated Register replacement converters for Float.TYPE and
-     *  Float.class instead
-     */
-    @Deprecated
-    public float getDefaultFloat() {
-        return defaultFloat.floatValue();
-    }
-
-    /**
-     * Sets the default value for Float conversions.
-     * @param newDefaultFloat The default Float value
-     * @deprecated Register replacement converters for Float.TYPE and
-     *  Float.class instead
-     */
-    @Deprecated
-    public void setDefaultFloat(final float newDefaultFloat) {
-        defaultFloat = Float.valueOf(newDefaultFloat);
-        register(new FloatConverter(defaultFloat), Float.TYPE);
-        register(new FloatConverter(defaultFloat), Float.class);
-    }
-
-
-    /**
      * The default value for Integer conversions.
      * @deprecated Register replacement converters for Integer.TYPE and
      *  Integer.class instead
      */
     @Deprecated
     private Integer defaultInteger = Integer.valueOf(0);
-
-    /**
-     * Gets the default value for Integer conversions.
-     * @return The default Integer value
-     * @deprecated Register replacement converters for Integer.TYPE and
-     *  Integer.class instead
-     */
-    @Deprecated
-    public int getDefaultInteger() {
-        return defaultInteger.intValue();
-    }
-
-    /**
-     * Sets the default value for Integer conversions.
-     * @param newDefaultInteger The default Integer value
-     * @deprecated Register replacement converters for Integer.TYPE and
-     *  Integer.class instead
-     */
-    @Deprecated
-    public void setDefaultInteger(final int newDefaultInteger) {
-        defaultInteger = Integer.valueOf(newDefaultInteger);
-        register(new IntegerConverter(defaultInteger), Integer.TYPE);
-        register(new IntegerConverter(defaultInteger), Integer.class);
-    }
 
 
     /**
@@ -367,64 +218,12 @@ public class ConvertUtilsBean {
     @Deprecated
     private Long defaultLong = Long.valueOf(0);
 
-    /**
-     * Gets the default value for Long conversions.
-     * @return The default Long value
-     * @deprecated Register replacement converters for Long.TYPE and
-     *  Long.class instead
-     */
-    @Deprecated
-    public long getDefaultLong() {
-        return defaultLong.longValue();
+    /** Construct a bean with standard converters registered */
+    public ConvertUtilsBean() {
+        converters.setFast(false);
+        deregister();
+        converters.setFast(true);
     }
-
-    /**
-     * Sets the default value for Long conversions.
-     * @param newDefaultLong The default Long value
-     * @deprecated Register replacement converters for Long.TYPE and
-     *  Long.class instead
-     */
-    @Deprecated
-    public void setDefaultLong(final long newDefaultLong) {
-        defaultLong = Long.valueOf(newDefaultLong);
-        register(new LongConverter(defaultLong), Long.TYPE);
-        register(new LongConverter(defaultLong), Long.class);
-    }
-
-
-    /**
-     * The default value for Short conversions.
-     * @deprecated Register replacement converters for Short.TYPE and
-     *  Short.class instead
-     */
-    @Deprecated
-    private static Short defaultShort = Short.valueOf((short) 0);
-
-    /**
-     * Gets the default value for Short conversions.
-     * @return The default Short value
-     * @deprecated Register replacement converters for Short.TYPE and
-     *  Short.class instead
-     */
-    @Deprecated
-    public short getDefaultShort() {
-        return defaultShort.shortValue();
-    }
-
-    /**
-     * Sets the default value for Short conversions.
-     * @param newDefaultShort The default Short value
-     * @deprecated Register replacement converters for Short.TYPE and
-     *  Short.class instead
-     */
-    @Deprecated
-    public void setDefaultShort(final short newDefaultShort) {
-        defaultShort = Short.valueOf(newDefaultShort);
-        register(new ShortConverter(defaultShort), Short.TYPE);
-        register(new ShortConverter(defaultShort), Short.class);
-    }
-
-
 
     /**
      * Convert the specified value into a String.  If the specified value
@@ -455,73 +254,6 @@ public class ConvertUtilsBean {
         }
         final Converter converter = lookup(String.class);
         return converter.convert(String.class, value);
-
-    }
-
-
-    /**
-     * Convert the specified value to an object of the specified class (if
-     * possible).  Otherwise, return a String representation of the value.
-     *
-     * @param value Value to be converted (may be null)
-     * @param clazz Java class to be converted to (must not be null)
-     * @return The converted value
-     *
-     * @throws ConversionException if thrown by an underlying Converter
-     */
-    public Object convert(final String value, final Class<?> clazz) {
-
-        if (log.isDebugEnabled()) {
-            log.debug("Convert string '" + value + "' to class '" +
-                      clazz.getName() + "'");
-        }
-        Converter converter = lookup(clazz);
-        if (converter == null) {
-            converter = lookup(String.class);
-        }
-        if (log.isTraceEnabled()) {
-            log.trace("  Using converter " + converter);
-        }
-        return converter.convert(clazz, value);
-
-    }
-
-
-    /**
-     * Convert an array of specified values to an array of objects of the
-     * specified class (if possible).  If the specified Java class is itself
-     * an array class, this class will be the type of the returned value.
-     * Otherwise, an array will be constructed whose component type is the
-     * specified class.
-     *
-     * @param values Array of values to be converted
-     * @param clazz Java array or element class to be converted to (must not be null)
-     * @return The converted value
-     *
-     * @throws ConversionException if thrown by an underlying Converter
-     */
-    public Object convert(final String[] values, final Class<?> clazz) {
-
-        Class<?> type = clazz;
-        if (clazz.isArray()) {
-            type = clazz.getComponentType();
-        }
-        if (log.isDebugEnabled()) {
-            log.debug("Convert String[" + values.length + "] to class '" +
-                      type.getName() + "[]'");
-        }
-        Converter converter = lookup(type);
-        if (converter == null) {
-            converter = lookup(String.class);
-        }
-        if (log.isTraceEnabled()) {
-            log.trace("  Using converter " + converter);
-        }
-        final Object array = Array.newInstance(type, values.length);
-        for (int i = 0; i < values.length; i++) {
-            Array.set(array, i, converter.convert(type, values[i]));
-        }
-        return array;
 
     }
 
@@ -584,6 +316,72 @@ public class ConvertUtilsBean {
     }
 
     /**
+     * Convert the specified value to an object of the specified class (if
+     * possible).  Otherwise, return a String representation of the value.
+     *
+     * @param value Value to be converted (may be null)
+     * @param clazz Java class to be converted to (must not be null)
+     * @return The converted value
+     *
+     * @throws ConversionException if thrown by an underlying Converter
+     */
+    public Object convert(final String value, final Class<?> clazz) {
+
+        if (log.isDebugEnabled()) {
+            log.debug("Convert string '" + value + "' to class '" +
+                      clazz.getName() + "'");
+        }
+        Converter converter = lookup(clazz);
+        if (converter == null) {
+            converter = lookup(String.class);
+        }
+        if (log.isTraceEnabled()) {
+            log.trace("  Using converter " + converter);
+        }
+        return converter.convert(clazz, value);
+
+    }
+
+    /**
+     * Convert an array of specified values to an array of objects of the
+     * specified class (if possible).  If the specified Java class is itself
+     * an array class, this class will be the type of the returned value.
+     * Otherwise, an array will be constructed whose component type is the
+     * specified class.
+     *
+     * @param values Array of values to be converted
+     * @param clazz Java array or element class to be converted to (must not be null)
+     * @return The converted value
+     *
+     * @throws ConversionException if thrown by an underlying Converter
+     */
+    public Object convert(final String[] values, final Class<?> clazz) {
+
+        Class<?> type = clazz;
+        if (clazz.isArray()) {
+            type = clazz.getComponentType();
+        }
+        if (log.isDebugEnabled()) {
+            log.debug("Convert String[" + values.length + "] to class '" +
+                      type.getName() + "[]'");
+        }
+        Converter converter = lookup(type);
+        if (converter == null) {
+            converter = lookup(String.class);
+        }
+        if (log.isTraceEnabled()) {
+            log.trace("  Using converter " + converter);
+        }
+        final Object array = Array.newInstance(type, values.length);
+        for (int i = 0; i < values.length; i++) {
+            Array.set(array, i, converter.convert(type, values[i]));
+        }
+        return array;
+
+    }
+
+
+    /**
      * Remove all registered {@link Converter}s, and re-establish the
      * standard Converters.
      */
@@ -598,6 +396,172 @@ public class ConvertUtilsBean {
         register(BigDecimal.class, new BigDecimalConverter());
         register(BigInteger.class, new BigIntegerConverter());
     }
+
+    /**
+     * Remove any registered {@link Converter} for the specified destination
+     * <code>Class</code>.
+     *
+     * @param clazz Class for which to remove a registered Converter
+     */
+    public void deregister(final Class<?> clazz) {
+
+        converters.remove(clazz);
+
+    }
+
+    /**
+     * Gets the default value for Boolean conversions.
+     * @return The default Boolean value
+     * @deprecated Register replacement converters for Boolean.TYPE and
+     *  Boolean.class instead
+     */
+    @Deprecated
+    public boolean getDefaultBoolean() {
+        return defaultBoolean.booleanValue();
+    }
+
+
+    /**
+     * Gets the default value for Byte conversions.
+     * @return The default Byte value
+     * @deprecated Register replacement converters for Byte.TYPE and
+     *  Byte.class instead
+     */
+    @Deprecated
+    public byte getDefaultByte() {
+        return defaultByte.byteValue();
+    }
+
+    /**
+     * Gets the default value for Character conversions.
+     * @return The default Character value
+     * @deprecated Register replacement converters for Character.TYPE and
+     *  Character.class instead
+     */
+    @Deprecated
+    public char getDefaultCharacter() {
+        return defaultCharacter.charValue();
+    }
+
+    /**
+     * Gets the default value for Double conversions.
+     * @return The default Double value
+     * @deprecated Register replacement converters for Double.TYPE and
+     *  Double.class instead
+     */
+    @Deprecated
+    public double getDefaultDouble() {
+        return defaultDouble.doubleValue();
+    }
+
+
+    /**
+     * Gets the default value for Float conversions.
+     * @return The default Float value
+     * @deprecated Register replacement converters for Float.TYPE and
+     *  Float.class instead
+     */
+    @Deprecated
+    public float getDefaultFloat() {
+        return defaultFloat.floatValue();
+    }
+
+    /**
+     * Gets the default value for Integer conversions.
+     * @return The default Integer value
+     * @deprecated Register replacement converters for Integer.TYPE and
+     *  Integer.class instead
+     */
+    @Deprecated
+    public int getDefaultInteger() {
+        return defaultInteger.intValue();
+    }
+
+    /**
+     * Gets the default value for Long conversions.
+     * @return The default Long value
+     * @deprecated Register replacement converters for Long.TYPE and
+     *  Long.class instead
+     */
+    @Deprecated
+    public long getDefaultLong() {
+        return defaultLong.longValue();
+    }
+
+
+    /**
+     * Gets the default value for Short conversions.
+     * @return The default Short value
+     * @deprecated Register replacement converters for Short.TYPE and
+     *  Short.class instead
+     */
+    @Deprecated
+    public short getDefaultShort() {
+        return defaultShort.shortValue();
+    }
+
+    /**
+     * Look up and return any registered {@link Converter} for the specified
+     * destination class; if there is no registered Converter, return
+     * <code>null</code>.
+     *
+     * @param clazz Class for which to return a registered Converter
+     * @return The registered {@link Converter} or <code>null</code> if not found
+     */
+    public Converter lookup(final Class<?> clazz) {
+
+        return converters.get(clazz);
+
+    }
+
+    /**
+     * Look up and return any registered {@link Converter} for the specified
+     * source and destination class; if there is no registered Converter,
+     * return <code>null</code>.
+     *
+     * @param sourceType Class of the value being converted
+     * @param targetType Class of the value to be converted to
+     * @return The registered {@link Converter} or <code>null</code> if not found
+     */
+    public Converter lookup(final Class<?> sourceType, final Class<?> targetType) {
+
+        if (targetType == null) {
+            throw new IllegalArgumentException("Target type is missing");
+        }
+        if (sourceType == null) {
+            return lookup(targetType);
+        }
+
+        Converter converter = null;
+        // Convert --> String
+        if (targetType == String.class) {
+            converter = lookup(sourceType);
+            if (converter == null && (sourceType.isArray() ||
+                        Collection.class.isAssignableFrom(sourceType))) {
+                converter = lookup(String[].class);
+            }
+            if (converter == null) {
+                converter = lookup(String.class);
+            }
+            return converter;
+        }
+
+        // Convert --> String array
+        if (targetType == String[].class) {
+            if (sourceType.isArray() || Collection.class.isAssignableFrom(sourceType)) {
+                converter = lookup(sourceType);
+            }
+            if (converter == null) {
+                converter = lookup(String[].class);
+            }
+            return converter;
+        }
+
+        return lookup(targetType);
+
+    }
+
+
 
     /**
      * Register the provided converters with the specified defaults.
@@ -619,6 +583,127 @@ public class ConvertUtilsBean {
         registerStandard(throwException, defaultNull);
         registerOther(throwException);
         registerArrays(throwException, defaultArraySize);
+    }
+
+
+    /** strictly for convenience since it has same parameter order as Map.put */
+    private void register(final Class<?> clazz, final Converter converter) {
+        register(new ConverterFacade(converter), clazz);
+    }
+
+
+    /**
+     * Register a custom {@link Converter} for the specified destination
+     * <code>Class</code>, replacing any previously registered Converter.
+     *
+     * @param converter Converter to be registered
+     * @param clazz Destination class for conversions performed by this
+     *  Converter
+     */
+    public void register(final Converter converter, final Class<?> clazz) {
+
+        converters.put(clazz, converter);
+
+    }
+
+
+    /**
+     * Register a new ArrayConverter with the specified element delegate converter
+     * that returns a default array of the specified size in the event of conversion errors.
+     *
+     * @param componentType The component type of the array
+     * @param componentConverter The converter to delegate to for the array elements
+     * @param throwException Whether a conversion exception should be thrown or a default
+     * value used in the event of a conversion error
+     * @param defaultArraySize The size of the default array
+     */
+    private void registerArrayConverter(final Class<?> componentType, final Converter componentConverter,
+            final boolean throwException, final int defaultArraySize) {
+        final Class<?> arrayType = Array.newInstance(componentType, 0).getClass();
+        Converter arrayConverter = null;
+        if (throwException) {
+            arrayConverter = new ArrayConverter(arrayType, componentConverter);
+        } else {
+            arrayConverter = new ArrayConverter(arrayType, componentConverter, defaultArraySize);
+        }
+        register(arrayType, arrayConverter);
+    }
+
+    /**
+     * Register array converters.
+     *
+     * @param throwException <code>true</code> if the converters should
+     * throw an exception when a conversion error occurs, otherwise <code>
+     * <code>false</code> if a default value should be used.
+     * @param defaultArraySize The size of the default array value for array converters
+     * (N.B. This values is ignored if <code>throwException</code> is <code>true</code>).
+     * Specifying a value less than zero causes a <code>null<code> value to be used for
+     * the default.
+     */
+    private void registerArrays(final boolean throwException, final int defaultArraySize) {
+
+        // Primitives
+        registerArrayConverter(Boolean.TYPE,   new BooleanConverter(),   throwException, defaultArraySize);
+        registerArrayConverter(Byte.TYPE,      new ByteConverter(),      throwException, defaultArraySize);
+        registerArrayConverter(Character.TYPE, new CharacterConverter(), throwException, defaultArraySize);
+        registerArrayConverter(Double.TYPE,    new DoubleConverter(),    throwException, defaultArraySize);
+        registerArrayConverter(Float.TYPE,     new FloatConverter(),     throwException, defaultArraySize);
+        registerArrayConverter(Integer.TYPE,   new IntegerConverter(),   throwException, defaultArraySize);
+        registerArrayConverter(Long.TYPE,      new LongConverter(),      throwException, defaultArraySize);
+        registerArrayConverter(Short.TYPE,     new ShortConverter(),     throwException, defaultArraySize);
+
+        // Standard
+        registerArrayConverter(BigDecimal.class, new BigDecimalConverter(), throwException, defaultArraySize);
+        registerArrayConverter(BigInteger.class, new BigIntegerConverter(), throwException, defaultArraySize);
+        registerArrayConverter(Boolean.class,    new BooleanConverter(),    throwException, defaultArraySize);
+        registerArrayConverter(Byte.class,       new ByteConverter(),       throwException, defaultArraySize);
+        registerArrayConverter(Character.class,  new CharacterConverter(),  throwException, defaultArraySize);
+        registerArrayConverter(Double.class,     new DoubleConverter(),     throwException, defaultArraySize);
+        registerArrayConverter(Float.class,      new FloatConverter(),      throwException, defaultArraySize);
+        registerArrayConverter(Integer.class,    new IntegerConverter(),    throwException, defaultArraySize);
+        registerArrayConverter(Long.class,       new LongConverter(),       throwException, defaultArraySize);
+        registerArrayConverter(Short.class,      new ShortConverter(),      throwException, defaultArraySize);
+        registerArrayConverter(String.class,     new StringConverter(),     throwException, defaultArraySize);
+
+        // Other
+        registerArrayConverter(Class.class,          new ClassConverter(),        throwException, defaultArraySize);
+        registerArrayConverter(java.util.Date.class, new DateConverter(),         throwException, defaultArraySize);
+        registerArrayConverter(Calendar.class,       new DateConverter(),         throwException, defaultArraySize);
+        registerArrayConverter(File.class,           new FileConverter(),         throwException, defaultArraySize);
+        registerArrayConverter(java.sql.Date.class,  new SqlDateConverter(),      throwException, defaultArraySize);
+        registerArrayConverter(java.sql.Time.class,  new SqlTimeConverter(),      throwException, defaultArraySize);
+        registerArrayConverter(Timestamp.class,      new SqlTimestampConverter(), throwException, defaultArraySize);
+        registerArrayConverter(URL.class,            new URLConverter(),          throwException, defaultArraySize);
+
+    }
+
+    /**
+     * Register the converters for other types.
+     * </p>
+     * This method registers the following converters:
+     * <ul>
+     *     <li><code>Class.class</code> - {@link ClassConverter}</li>
+     *     <li><code>java.util.Date.class</code> - {@link DateConverter}</li>
+     *     <li><code>java.util.Calendar.class</code> - {@link CalendarConverter}</li>
+     *     <li><code>File.class</code> - {@link FileConverter}</li>
+     *     <li><code>java.sql.Date.class</code> - {@link SqlDateConverter}</li>
+     *     <li><code>java.sql.Time.class</code> - {@link SqlTimeConverter}</li>
+     *     <li><code>java.sql.Timestamp.class</code> - {@link SqlTimestampConverter}</li>
+     *     <li><code>URL.class</code> - {@link URLConverter}</li>
+     * </ul>
+     * @param throwException <code>true</code> if the converters should
+     * throw an exception when a conversion error occurs, otherwise <code>
+     * <code>false</code> if a default value should be used.
+     */
+    private void registerOther(final boolean throwException) {
+        register(Class.class,         throwException ? new ClassConverter()        : new ClassConverter(null));
+        register(java.util.Date.class, throwException ? new DateConverter()        : new DateConverter(null));
+        register(Calendar.class,      throwException ? new CalendarConverter()     : new CalendarConverter(null));
+        register(File.class,          throwException ? new FileConverter()         : new FileConverter(null));
+        register(java.sql.Date.class, throwException ? new SqlDateConverter()      : new SqlDateConverter(null));
+        register(java.sql.Time.class, throwException ? new SqlTimeConverter()      : new SqlTimeConverter(null));
+        register(Timestamp.class,     throwException ? new SqlTimestampConverter() : new SqlTimestampConverter(null));
+        register(URL.class,           throwException ? new URLConverter()          : new URLConverter(null));
     }
 
     /**
@@ -699,194 +784,109 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Register the converters for other types.
-     * </p>
-     * This method registers the following converters:
-     * <ul>
-     *     <li><code>Class.class</code> - {@link ClassConverter}</li>
-     *     <li><code>java.util.Date.class</code> - {@link DateConverter}</li>
-     *     <li><code>java.util.Calendar.class</code> - {@link CalendarConverter}</li>
-     *     <li><code>File.class</code> - {@link FileConverter}</li>
-     *     <li><code>java.sql.Date.class</code> - {@link SqlDateConverter}</li>
-     *     <li><code>java.sql.Time.class</code> - {@link SqlTimeConverter}</li>
-     *     <li><code>java.sql.Timestamp.class</code> - {@link SqlTimestampConverter}</li>
-     *     <li><code>URL.class</code> - {@link URLConverter}</li>
-     * </ul>
-     * @param throwException <code>true</code> if the converters should
-     * throw an exception when a conversion error occurs, otherwise <code>
-     * <code>false</code> if a default value should be used.
+     * Sets the default value for Boolean conversions.
+     * @param newDefaultBoolean The default Boolean value
+     * @deprecated Register replacement converters for Boolean.TYPE and
+     *  Boolean.class instead
      */
-    private void registerOther(final boolean throwException) {
-        register(Class.class,         throwException ? new ClassConverter()        : new ClassConverter(null));
-        register(java.util.Date.class, throwException ? new DateConverter()        : new DateConverter(null));
-        register(Calendar.class,      throwException ? new CalendarConverter()     : new CalendarConverter(null));
-        register(File.class,          throwException ? new FileConverter()         : new FileConverter(null));
-        register(java.sql.Date.class, throwException ? new SqlDateConverter()      : new SqlDateConverter(null));
-        register(java.sql.Time.class, throwException ? new SqlTimeConverter()      : new SqlTimeConverter(null));
-        register(Timestamp.class,     throwException ? new SqlTimestampConverter() : new SqlTimestampConverter(null));
-        register(URL.class,           throwException ? new URLConverter()          : new URLConverter(null));
+    @Deprecated
+    public void setDefaultBoolean(final boolean newDefaultBoolean) {
+        defaultBoolean = newDefaultBoolean ? Boolean.TRUE : Boolean.FALSE;
+        register(new BooleanConverter(defaultBoolean), Boolean.TYPE);
+        register(new BooleanConverter(defaultBoolean), Boolean.class);
     }
 
     /**
-     * Register array converters.
-     *
-     * @param throwException <code>true</code> if the converters should
-     * throw an exception when a conversion error occurs, otherwise <code>
-     * <code>false</code> if a default value should be used.
-     * @param defaultArraySize The size of the default array value for array converters
-     * (N.B. This values is ignored if <code>throwException</code> is <code>true</code>).
-     * Specifying a value less than zero causes a <code>null<code> value to be used for
-     * the default.
+     * Sets the default value for Byte conversions.
+     * @param newDefaultByte The default Byte value
+     * @deprecated Register replacement converters for Byte.TYPE and
+     *  Byte.class instead
      */
-    private void registerArrays(final boolean throwException, final int defaultArraySize) {
-
-        // Primitives
-        registerArrayConverter(Boolean.TYPE,   new BooleanConverter(),   throwException, defaultArraySize);
-        registerArrayConverter(Byte.TYPE,      new ByteConverter(),      throwException, defaultArraySize);
-        registerArrayConverter(Character.TYPE, new CharacterConverter(), throwException, defaultArraySize);
-        registerArrayConverter(Double.TYPE,    new DoubleConverter(),    throwException, defaultArraySize);
-        registerArrayConverter(Float.TYPE,     new FloatConverter(),     throwException, defaultArraySize);
-        registerArrayConverter(Integer.TYPE,   new IntegerConverter(),   throwException, defaultArraySize);
-        registerArrayConverter(Long.TYPE,      new LongConverter(),      throwException, defaultArraySize);
-        registerArrayConverter(Short.TYPE,     new ShortConverter(),     throwException, defaultArraySize);
-
-        // Standard
-        registerArrayConverter(BigDecimal.class, new BigDecimalConverter(), throwException, defaultArraySize);
-        registerArrayConverter(BigInteger.class, new BigIntegerConverter(), throwException, defaultArraySize);
-        registerArrayConverter(Boolean.class,    new BooleanConverter(),    throwException, defaultArraySize);
-        registerArrayConverter(Byte.class,       new ByteConverter(),       throwException, defaultArraySize);
-        registerArrayConverter(Character.class,  new CharacterConverter(),  throwException, defaultArraySize);
-        registerArrayConverter(Double.class,     new DoubleConverter(),     throwException, defaultArraySize);
-        registerArrayConverter(Float.class,      new FloatConverter(),      throwException, defaultArraySize);
-        registerArrayConverter(Integer.class,    new IntegerConverter(),    throwException, defaultArraySize);
-        registerArrayConverter(Long.class,       new LongConverter(),       throwException, defaultArraySize);
-        registerArrayConverter(Short.class,      new ShortConverter(),      throwException, defaultArraySize);
-        registerArrayConverter(String.class,     new StringConverter(),     throwException, defaultArraySize);
-
-        // Other
-        registerArrayConverter(Class.class,          new ClassConverter(),        throwException, defaultArraySize);
-        registerArrayConverter(java.util.Date.class, new DateConverter(),         throwException, defaultArraySize);
-        registerArrayConverter(Calendar.class,       new DateConverter(),         throwException, defaultArraySize);
-        registerArrayConverter(File.class,           new FileConverter(),         throwException, defaultArraySize);
-        registerArrayConverter(java.sql.Date.class,  new SqlDateConverter(),      throwException, defaultArraySize);
-        registerArrayConverter(java.sql.Time.class,  new SqlTimeConverter(),      throwException, defaultArraySize);
-        registerArrayConverter(Timestamp.class,      new SqlTimestampConverter(), throwException, defaultArraySize);
-        registerArrayConverter(URL.class,            new URLConverter(),          throwException, defaultArraySize);
-
+    @Deprecated
+    public void setDefaultByte(final byte newDefaultByte) {
+        defaultByte = Byte.valueOf(newDefaultByte);
+        register(new ByteConverter(defaultByte), Byte.TYPE);
+        register(new ByteConverter(defaultByte), Byte.class);
     }
 
     /**
-     * Register a new ArrayConverter with the specified element delegate converter
-     * that returns a default array of the specified size in the event of conversion errors.
-     *
-     * @param componentType The component type of the array
-     * @param componentConverter The converter to delegate to for the array elements
-     * @param throwException Whether a conversion exception should be thrown or a default
-     * value used in the event of a conversion error
-     * @param defaultArraySize The size of the default array
+     * Sets the default value for Character conversions.
+     * @param newDefaultCharacter The default Character value
+     * @deprecated Register replacement converters for Character.TYPE and
+     *  Character.class instead
      */
-    private void registerArrayConverter(final Class<?> componentType, final Converter componentConverter,
-            final boolean throwException, final int defaultArraySize) {
-        final Class<?> arrayType = Array.newInstance(componentType, 0).getClass();
-        Converter arrayConverter = null;
-        if (throwException) {
-            arrayConverter = new ArrayConverter(arrayType, componentConverter);
-        } else {
-            arrayConverter = new ArrayConverter(arrayType, componentConverter, defaultArraySize);
-        }
-        register(arrayType, arrayConverter);
-    }
-
-    /** strictly for convenience since it has same parameter order as Map.put */
-    private void register(final Class<?> clazz, final Converter converter) {
-        register(new ConverterFacade(converter), clazz);
+    @Deprecated
+    public void setDefaultCharacter(final char newDefaultCharacter) {
+        defaultCharacter = Character.valueOf(newDefaultCharacter);
+        register(new CharacterConverter(defaultCharacter),
+                    Character.TYPE);
+        register(new CharacterConverter(defaultCharacter),
+                    Character.class);
     }
 
     /**
-     * Remove any registered {@link Converter} for the specified destination
-     * <code>Class</code>.
-     *
-     * @param clazz Class for which to remove a registered Converter
+     * Sets the default value for Double conversions.
+     * @param newDefaultDouble The default Double value
+     * @deprecated Register replacement converters for Double.TYPE and
+     *  Double.class instead
      */
-    public void deregister(final Class<?> clazz) {
+    @Deprecated
+    public void setDefaultDouble(final double newDefaultDouble) {
+        defaultDouble = Double.valueOf(newDefaultDouble);
+        register(new DoubleConverter(defaultDouble), Double.TYPE);
+        register(new DoubleConverter(defaultDouble), Double.class);
+    }
 
-        converters.remove(clazz);
-
+    /**
+     * Sets the default value for Float conversions.
+     * @param newDefaultFloat The default Float value
+     * @deprecated Register replacement converters for Float.TYPE and
+     *  Float.class instead
+     */
+    @Deprecated
+    public void setDefaultFloat(final float newDefaultFloat) {
+        defaultFloat = Float.valueOf(newDefaultFloat);
+        register(new FloatConverter(defaultFloat), Float.TYPE);
+        register(new FloatConverter(defaultFloat), Float.class);
     }
 
 
     /**
-     * Look up and return any registered {@link Converter} for the specified
-     * destination class; if there is no registered Converter, return
-     * <code>null</code>.
-     *
-     * @param clazz Class for which to return a registered Converter
-     * @return The registered {@link Converter} or <code>null</code> if not found
+     * Sets the default value for Integer conversions.
+     * @param newDefaultInteger The default Integer value
+     * @deprecated Register replacement converters for Integer.TYPE and
+     *  Integer.class instead
      */
-    public Converter lookup(final Class<?> clazz) {
-
-        return converters.get(clazz);
-
+    @Deprecated
+    public void setDefaultInteger(final int newDefaultInteger) {
+        defaultInteger = Integer.valueOf(newDefaultInteger);
+        register(new IntegerConverter(defaultInteger), Integer.TYPE);
+        register(new IntegerConverter(defaultInteger), Integer.class);
     }
 
     /**
-     * Look up and return any registered {@link Converter} for the specified
-     * source and destination class; if there is no registered Converter,
-     * return <code>null</code>.
-     *
-     * @param sourceType Class of the value being converted
-     * @param targetType Class of the value to be converted to
-     * @return The registered {@link Converter} or <code>null</code> if not found
+     * Sets the default value for Long conversions.
+     * @param newDefaultLong The default Long value
+     * @deprecated Register replacement converters for Long.TYPE and
+     *  Long.class instead
      */
-    public Converter lookup(final Class<?> sourceType, final Class<?> targetType) {
-
-        if (targetType == null) {
-            throw new IllegalArgumentException("Target type is missing");
-        }
-        if (sourceType == null) {
-            return lookup(targetType);
-        }
-
-        Converter converter = null;
-        // Convert --> String
-        if (targetType == String.class) {
-            converter = lookup(sourceType);
-            if (converter == null && (sourceType.isArray() ||
-                        Collection.class.isAssignableFrom(sourceType))) {
-                converter = lookup(String[].class);
-            }
-            if (converter == null) {
-                converter = lookup(String.class);
-            }
-            return converter;
-        }
-
-        // Convert --> String array
-        if (targetType == String[].class) {
-            if (sourceType.isArray() || Collection.class.isAssignableFrom(sourceType)) {
-                converter = lookup(sourceType);
-            }
-            if (converter == null) {
-                converter = lookup(String[].class);
-            }
-            return converter;
-        }
-
-        return lookup(targetType);
-
+    @Deprecated
+    public void setDefaultLong(final long newDefaultLong) {
+        defaultLong = Long.valueOf(newDefaultLong);
+        register(new LongConverter(defaultLong), Long.TYPE);
+        register(new LongConverter(defaultLong), Long.class);
     }
 
     /**
-     * Register a custom {@link Converter} for the specified destination
-     * <code>Class</code>, replacing any previously registered Converter.
-     *
-     * @param converter Converter to be registered
-     * @param clazz Destination class for conversions performed by this
-     *  Converter
+     * Sets the default value for Short conversions.
+     * @param newDefaultShort The default Short value
+     * @deprecated Register replacement converters for Short.TYPE and
+     *  Short.class instead
      */
-    public void register(final Converter converter, final Class<?> clazz) {
-
-        converters.put(clazz, converter);
-
+    @Deprecated
+    public void setDefaultShort(final short newDefaultShort) {
+        defaultShort = Short.valueOf(newDefaultShort);
+        register(new ShortConverter(defaultShort), Short.TYPE);
+        register(new ShortConverter(defaultShort), Short.class);
     }
 }

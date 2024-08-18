@@ -37,13 +37,6 @@ import java.util.Set;
  */
 public interface IntrospectionContext {
     /**
-     * Returns the class that is subject of introspection.
-     *
-     * @return the current class
-     */
-    Class<?> getTargetClass();
-
-    /**
      * Adds the given property descriptor to this context. This method is called
      * by a {@code BeanIntrospector} during introspection for each detected
      * property. If this context already contains a descriptor for the affected
@@ -62,6 +55,23 @@ public interface IntrospectionContext {
     void addPropertyDescriptors(PropertyDescriptor[] descriptors);
 
     /**
+     * Returns the descriptor for the property with the given name or
+     * <b>null</b> if this property is unknown.
+     *
+     * @param name the name of the property in question
+     * @return the descriptor for this property or <b>null</b> if this property
+     *         is unknown
+     */
+    PropertyDescriptor getPropertyDescriptor(String name);
+
+    /**
+     * Returns the class that is subject of introspection.
+     *
+     * @return the current class
+     */
+    Class<?> getTargetClass();
+
+    /**
      * Tests whether a descriptor for the property with the given name is
      * already contained in this context. This method can be used for instance
      * to prevent that an already existing property descriptor is overridden.
@@ -73,14 +83,11 @@ public interface IntrospectionContext {
     boolean hasProperty(String name);
 
     /**
-     * Returns the descriptor for the property with the given name or
-     * <b>null</b> if this property is unknown.
+     * Returns a set with the names of all properties known to this context.
      *
-     * @param name the name of the property in question
-     * @return the descriptor for this property or <b>null</b> if this property
-     *         is unknown
+     * @return a set with the known property names
      */
-    PropertyDescriptor getPropertyDescriptor(String name);
+    Set<String> propertyNames();
 
     /**
      * Removes the descriptor for the property with the given name.
@@ -88,11 +95,4 @@ public interface IntrospectionContext {
      * @param name the name of the affected property
      */
     void removePropertyDescriptor(String name);
-
-    /**
-     * Returns a set with the names of all properties known to this context.
-     *
-     * @return a set with the known property names
-     */
-    Set<String> propertyNames();
 }

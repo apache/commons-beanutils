@@ -43,150 +43,6 @@ public class BeanToPropertyValueTransformerTestCase extends TestCase {
     }
 
     /**
-     * Test transform with simple String property.
-     */
-    public void testTransformWithSimpleStringProperty() {
-        final BeanToPropertyValueTransformer transformer =
-            new BeanToPropertyValueTransformer("stringProperty");
-        final TestBean testBean = new TestBean("foo");
-        assertEquals("foo", transformer.transform(testBean));
-    }
-
-    /**
-     * Test transform with simple String property and null value.
-     *
-     */
-    public void testTransformWithSimpleStringPropertyAndNullValue() {
-        final BeanToPropertyValueTransformer transformer =
-            new BeanToPropertyValueTransformer("stringProperty");
-        final TestBean testBean = new TestBean((String) null);
-        assertNull(transformer.transform(testBean));
-    }
-
-    /**
-     * Test transform with simple int property.
-     */
-    public void testTransformWithSimpleIntProperty() {
-        final BeanToPropertyValueTransformer transformer =
-            new BeanToPropertyValueTransformer("intProperty");
-        final TestBean testBean = new TestBean(expectedIntegerValue.intValue());
-        assertEquals(expectedIntegerValue, transformer.transform(testBean));
-    }
-
-    /**
-     * Test transform with simple long property.
-     */
-    public void testTransformWithSimpleLongProperty() {
-        final BeanToPropertyValueTransformer transformer =
-            new BeanToPropertyValueTransformer("longProperty");
-        final TestBean testBean = new TestBean();
-        testBean.setLongProperty(expectedLongValue.longValue());
-        assertEquals(expectedLongValue, transformer.transform(testBean));
-    }
-
-    /**
-     * Test transform with simple float property.
-     */
-    public void testTransformWithSimpleFloatProperty() {
-        final BeanToPropertyValueTransformer transformer =
-            new BeanToPropertyValueTransformer("floatProperty");
-        final TestBean testBean = new TestBean(expectedFloatValue.floatValue());
-        assertEquals(expectedFloatValue, transformer.transform(testBean));
-    }
-
-    /**
-     * Test transform with simple double property.
-     */
-    public void testTransformWithSimpleDoubleProperty() {
-        final BeanToPropertyValueTransformer transformer =
-            new BeanToPropertyValueTransformer("doubleProperty");
-        final TestBean testBean = new TestBean(expectedDoubleValue.doubleValue());
-        assertEquals(expectedDoubleValue, transformer.transform(testBean));
-    }
-
-    /**
-     * Test transform with simple byte property.
-     */
-    public void testTransformWithSimpleByteProperty() {
-        final BeanToPropertyValueTransformer transformer =
-            new BeanToPropertyValueTransformer("byteProperty");
-        final TestBean testBean = new TestBean();
-        testBean.setByteProperty(expectedByteValue.byteValue());
-        assertEquals(expectedByteValue, transformer.transform(testBean));
-    }
-
-    /**
-     * Test transform with simple boolean property.
-     */
-    public void testTransformWithSimpleBooleanProperty() {
-        final BeanToPropertyValueTransformer transformer =
-            new BeanToPropertyValueTransformer("booleanProperty");
-        final TestBean testBean = new TestBean(expectedBooleanValue.booleanValue());
-        assertEquals(expectedBooleanValue, transformer.transform(testBean));
-    }
-
-    /**
-     * Test transform with write only property.
-     */
-    public void testTransformWithWriteOnlyProperty() {
-        try {
-            new BeanToPropertyValueTransformer("writeOnlyProperty").transform(new TestBean());
-        } catch (final IllegalArgumentException e) {
-            /* This is what should happen */
-        }
-    }
-
-    /**
-     * Test transform with read only property.
-     */
-    public void testTransformWithReadOnlyProperty() {
-        final BeanToPropertyValueTransformer transformer =
-            new BeanToPropertyValueTransformer("readOnlyProperty");
-        final TestBean testBean = new TestBean();
-        assertEquals(testBean.getReadOnlyProperty(), transformer.transform(testBean));
-    }
-
-    /**
-     * Test transform with invalid property.
-     */
-    public void testTransformWithInvalidProperty() {
-        try {
-            new BeanToPropertyValueTransformer("bogusProperty").transform(new TestBean());
-        } catch (final IllegalArgumentException e) {
-            /* This is what should happen */
-        }
-    }
-
-    /**
-     * Test transform with nested property.
-     */
-    public void testTransformWithNestedProperty() {
-        final BeanToPropertyValueTransformer transformer =
-            new BeanToPropertyValueTransformer("anotherNested.stringProperty");
-        final TestBean testBean = new TestBean();
-        final TestBean nestedBean = new TestBean("foo");
-        testBean.setAnotherNested(nestedBean);
-        assertEquals("foo", transformer.transform(testBean));
-    }
-
-    /**
-     * Test transform with mapped property.
-     */
-    public void testTransformWithMappedProperty() {
-        BeanToPropertyValueTransformer transformer =
-            new BeanToPropertyValueTransformer("mappedProperty(test-key)");
-        final TestBean testBean = new TestBean();
-
-        // try a valid key
-        testBean.setMappedProperty("test-key", "test-value");
-        assertEquals("test-value", transformer.transform(testBean));
-
-        // now try an invalid key
-        transformer = new BeanToPropertyValueTransformer("mappedProperty(bogus-key)");
-        assertEquals(null, transformer.transform(testBean));
-    }
-
-    /**
      * Test transform with indexed property.
      */
     public void testTransformWithIndexedProperty() {
@@ -208,6 +64,34 @@ public class BeanToPropertyValueTransformerTestCase extends TestCase {
     }
 
     /**
+     * Test transform with invalid property.
+     */
+    public void testTransformWithInvalidProperty() {
+        try {
+            new BeanToPropertyValueTransformer("bogusProperty").transform(new TestBean());
+        } catch (final IllegalArgumentException e) {
+            /* This is what should happen */
+        }
+    }
+
+    /**
+     * Test transform with mapped property.
+     */
+    public void testTransformWithMappedProperty() {
+        BeanToPropertyValueTransformer transformer =
+            new BeanToPropertyValueTransformer("mappedProperty(test-key)");
+        final TestBean testBean = new TestBean();
+
+        // try a valid key
+        testBean.setMappedProperty("test-key", "test-value");
+        assertEquals("test-value", transformer.transform(testBean));
+
+        // now try an invalid key
+        transformer = new BeanToPropertyValueTransformer("mappedProperty(bogus-key)");
+        assertEquals(null, transformer.transform(testBean));
+    }
+
+    /**
      * Test transform with nested indexed property.
      */
     public void testTransformWithNestedIndexedProperty() {
@@ -218,6 +102,18 @@ public class BeanToPropertyValueTransformerTestCase extends TestCase {
         nestedBean.setIntIndexed(0, expectedIntegerValue.intValue());
         testBean.setAnotherNested(nestedBean);
         assertEquals(expectedIntegerValue, transformer.transform(testBean));
+    }
+
+    /**
+     * Test transform with nested property.
+     */
+    public void testTransformWithNestedProperty() {
+        final BeanToPropertyValueTransformer transformer =
+            new BeanToPropertyValueTransformer("anotherNested.stringProperty");
+        final TestBean testBean = new TestBean();
+        final TestBean nestedBean = new TestBean("foo");
+        testBean.setAnotherNested(nestedBean);
+        assertEquals("foo", transformer.transform(testBean));
     }
 
     /**
@@ -242,5 +138,109 @@ public class BeanToPropertyValueTransformerTestCase extends TestCase {
         final BeanToPropertyValueTransformer transformer =
             new BeanToPropertyValueTransformer("anotherNested.stringProperty",true);
         assertEquals(null, transformer.transform(new TestBean()));
+    }
+
+    /**
+     * Test transform with read only property.
+     */
+    public void testTransformWithReadOnlyProperty() {
+        final BeanToPropertyValueTransformer transformer =
+            new BeanToPropertyValueTransformer("readOnlyProperty");
+        final TestBean testBean = new TestBean();
+        assertEquals(testBean.getReadOnlyProperty(), transformer.transform(testBean));
+    }
+
+    /**
+     * Test transform with simple boolean property.
+     */
+    public void testTransformWithSimpleBooleanProperty() {
+        final BeanToPropertyValueTransformer transformer =
+            new BeanToPropertyValueTransformer("booleanProperty");
+        final TestBean testBean = new TestBean(expectedBooleanValue.booleanValue());
+        assertEquals(expectedBooleanValue, transformer.transform(testBean));
+    }
+
+    /**
+     * Test transform with simple byte property.
+     */
+    public void testTransformWithSimpleByteProperty() {
+        final BeanToPropertyValueTransformer transformer =
+            new BeanToPropertyValueTransformer("byteProperty");
+        final TestBean testBean = new TestBean();
+        testBean.setByteProperty(expectedByteValue.byteValue());
+        assertEquals(expectedByteValue, transformer.transform(testBean));
+    }
+
+    /**
+     * Test transform with simple double property.
+     */
+    public void testTransformWithSimpleDoubleProperty() {
+        final BeanToPropertyValueTransformer transformer =
+            new BeanToPropertyValueTransformer("doubleProperty");
+        final TestBean testBean = new TestBean(expectedDoubleValue.doubleValue());
+        assertEquals(expectedDoubleValue, transformer.transform(testBean));
+    }
+
+    /**
+     * Test transform with simple float property.
+     */
+    public void testTransformWithSimpleFloatProperty() {
+        final BeanToPropertyValueTransformer transformer =
+            new BeanToPropertyValueTransformer("floatProperty");
+        final TestBean testBean = new TestBean(expectedFloatValue.floatValue());
+        assertEquals(expectedFloatValue, transformer.transform(testBean));
+    }
+
+    /**
+     * Test transform with simple int property.
+     */
+    public void testTransformWithSimpleIntProperty() {
+        final BeanToPropertyValueTransformer transformer =
+            new BeanToPropertyValueTransformer("intProperty");
+        final TestBean testBean = new TestBean(expectedIntegerValue.intValue());
+        assertEquals(expectedIntegerValue, transformer.transform(testBean));
+    }
+
+    /**
+     * Test transform with simple long property.
+     */
+    public void testTransformWithSimpleLongProperty() {
+        final BeanToPropertyValueTransformer transformer =
+            new BeanToPropertyValueTransformer("longProperty");
+        final TestBean testBean = new TestBean();
+        testBean.setLongProperty(expectedLongValue.longValue());
+        assertEquals(expectedLongValue, transformer.transform(testBean));
+    }
+
+    /**
+     * Test transform with simple String property.
+     */
+    public void testTransformWithSimpleStringProperty() {
+        final BeanToPropertyValueTransformer transformer =
+            new BeanToPropertyValueTransformer("stringProperty");
+        final TestBean testBean = new TestBean("foo");
+        assertEquals("foo", transformer.transform(testBean));
+    }
+
+    /**
+     * Test transform with simple String property and null value.
+     *
+     */
+    public void testTransformWithSimpleStringPropertyAndNullValue() {
+        final BeanToPropertyValueTransformer transformer =
+            new BeanToPropertyValueTransformer("stringProperty");
+        final TestBean testBean = new TestBean((String) null);
+        assertNull(transformer.transform(testBean));
+    }
+
+    /**
+     * Test transform with write only property.
+     */
+    public void testTransformWithWriteOnlyProperty() {
+        try {
+            new BeanToPropertyValueTransformer("writeOnlyProperty").transform(new TestBean());
+        } catch (final IllegalArgumentException e) {
+            /* This is what should happen */
+        }
     }
 }

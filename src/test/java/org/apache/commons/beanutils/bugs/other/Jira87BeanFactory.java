@@ -24,13 +24,20 @@ import org.apache.commons.beanutils.bugs.Jira87TestCase;
  */
 public class Jira87BeanFactory {
 
-    /**
-     * Factory method which creates beans bean with mapped method.
-     *
-     * @return The the mapped property bean instance
-     */
-    public static PublicMappedInterface createMappedPropertyBean() {
-        return new PackageMappedImpl();
+    /* =============== Package Friendly implementation of public interface =============== */
+    static class PackageMappedImpl implements PublicMappedInterface {
+
+        /**
+         * This implementation returns the key value.
+         *
+         * @param key The key of the mapped value
+         * @return The key value
+         */
+        @Override
+        public Object getValue(final String key) {
+            return key;
+        }
+
     }
 
     /* =================== Public interface with Mapped Property ========================= */
@@ -48,20 +55,13 @@ public class Jira87BeanFactory {
 
     }
 
-    /* =============== Package Friendly implementation of public interface =============== */
-    static class PackageMappedImpl implements PublicMappedInterface {
-
-        /**
-         * This implementation returns the key value.
-         *
-         * @param key The key of the mapped value
-         * @return The key value
-         */
-        @Override
-        public Object getValue(final String key) {
-            return key;
-        }
-
+    /**
+     * Factory method which creates beans bean with mapped method.
+     *
+     * @return The the mapped property bean instance
+     */
+    public static PublicMappedInterface createMappedPropertyBean() {
+        return new PackageMappedImpl();
     }
 
 }

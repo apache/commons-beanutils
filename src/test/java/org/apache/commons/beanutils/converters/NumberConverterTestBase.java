@@ -46,12 +46,47 @@ public abstract class NumberConverterTestBase extends TestCase {
 
     // ------------------------------------------------------------------------
 
+    protected abstract Class<?> getExpectedType();
     protected abstract NumberConverter makeConverter();
     protected abstract NumberConverter makeConverter(Object defaultValue);
-    protected abstract Class<?> getExpectedType();
 
     // ------------------------------------------------------------------------
 
+    /**
+     * Convert Boolean --> Number (default conversion)
+     */
+    public void testBooleanToNumberDefault() {
+
+        final NumberConverter converter = makeConverter();
+
+        // Other type --> String conversion
+        assertEquals("Boolean.FALSE to Number ", 0, ((Number)converter.convert(getExpectedType(), Boolean.FALSE)).intValue());
+        assertEquals("Boolean.TRUE to Number ",  1, ((Number)converter.convert(getExpectedType(), Boolean.TRUE)).intValue());
+
+    }
+
+    /**
+     * Convert Calendar --> Long
+     */
+    public void testCalendarToNumber() {
+
+        final NumberConverter converter = makeConverter();
+
+        final Calendar calendarValue = Calendar.getInstance();
+        final long longValue = calendarValue.getTime().getTime();
+
+        // Calendar --> Long conversion
+        assertEquals("Calendar to Long", Long.valueOf(longValue), converter.convert(Long.class, calendarValue));
+
+        // Calendar --> Integer
+        try {
+            converter.convert(Integer.class, calendarValue);
+            fail("Calendar to Integer - expected a ConversionException");
+        } catch (final ConversionException e) {
+            // expected result - too large for Integer
+        }
+
+    }
     /**
      * Assumes ConversionException in response to covert(getExpectedType(),null).
      */
@@ -101,215 +136,6 @@ public abstract class NumberConverterTestBase extends TestCase {
                 getExpectedType().isInstance(val));
         }
     }
-    /**
-     * Convert Number --> String (using a Pattern, with default and specified Locales)
-     */
-    public void testNumberToStringPattern() {
-
-        // Re-set the default Locale to Locale.US
-        final Locale defaultLocale = Locale.getDefault();
-        Locale.setDefault(Locale.US);
-
-        final NumberConverter converter = makeConverter();
-        converter.setPattern("[0,0.0];(0,0.0)");
-
-        // Default Locale
-        assertEquals("Default Locale " + numbers[0], "(12.0)", converter.convert(String.class, numbers[0]));
-        assertEquals("Default Locale " + numbers[1], "[13.0]", converter.convert(String.class, numbers[1]));
-
-        // Locale.GERMAN
-        converter.setLocale(Locale.GERMAN);
-        assertEquals("Locale.GERMAN " + numbers[2], "(22,0)", converter.convert(String.class, numbers[2]));
-        assertEquals("Locale.GERMAN " + numbers[3], "[23,0]", converter.convert(String.class, numbers[3]));
-
-        // Restore the default Locale
-        Locale.setDefault(defaultLocale);
-    }
-
-    /**
-     * Convert Number --> String (using default and specified Locales)
-     */
-    public void testNumberToStringLocale() {
-
-        // Re-set the default Locale to Locale.US
-        final Locale defaultLocale = Locale.getDefault();
-        Locale.setDefault(Locale.US);
-
-        final NumberConverter converter = makeConverter();
-        converter.setUseLocaleFormat(true);
-
-        // Default Locale
-        assertEquals("Default Locale " + numbers[0], "-12", converter.convert(String.class, numbers[0]));
-        assertEquals("Default Locale " + numbers[1], "13",  converter.convert(String.class, numbers[1]));
-
-        // Locale.GERMAN
-        converter.setLocale(Locale.GERMAN);
-        assertEquals("Locale.GERMAN " + numbers[2], "-22", converter.convert(String.class, numbers[2]));
-        assertEquals("Locale.GERMAN " + numbers[3], "23",  converter.convert(String.class, numbers[3]));
-
-        // Restore the default Locale
-        Locale.setDefault(defaultLocale);
-    }
-
-    /**
-     * Convert Array --> Number
-     */
-    public void testStringArrayToInteger() {
-
-        final Integer defaultValue = Integer.valueOf(-1);
-        final NumberConverter converter = makeConverter(defaultValue);
-
-        // Default Locale
-        assertEquals("Valid First",   Integer.valueOf(5), converter.convert(Integer.class, new String[] {"5", "4", "3"}));
-        assertEquals("Invalid First", defaultValue,   converter.convert(Integer.class, new String[] {"FOO", "1", "2"}));
-        assertEquals("Null First",    defaultValue,   converter.convert(Integer.class, new String[] {null, "1", "2"}));
-        assertEquals("Long Array",    Integer.valueOf(9), converter.convert(Integer.class, new long[] {9, 2, 6}));
-    }
-
-    /**
-     * Convert Number --> String (default conversion)
-     */
-    public void testNumberToStringDefault() {
-
-        final NumberConverter converter = makeConverter();
-
-        // Default Number --> String conversion
-        assertEquals("Default Convert " + numbers[0], numbers[0].toString(), converter.convert(String.class, numbers[0]));
-        assertEquals("Default Convert " + numbers[1], numbers[1].toString(), converter.convert(String.class, numbers[1]));
-
-    }
-
-    /**
-     * Convert String --> Number (using a Pattern, with default and specified Locales)
-     */
-    public void testStringToNumberPattern() {
-
-        // Re-set the default Locale to Locale.US
-        final Locale defaultLocale = Locale.getDefault();
-        Locale.setDefault(Locale.US);
-
-        final NumberConverter converter = makeConverter();
-        converter.setPattern("[0,0];(0,0)");
-
-        // Default Locale
-        assertEquals("Default Locale " + numbers[0], numbers[0], converter.convert(getExpectedType(), "(1,2)"));
-        assertEquals("Default Locale " + numbers[1], numbers[1], converter.convert(getExpectedType(), "[1,3]"));
-
-        // Locale.GERMAN
-        converter.setLocale(Locale.GERMAN);
-        assertEquals("Locale.GERMAN " + numbers[2], numbers[2], converter.convert(getExpectedType(), "(2.2)"));
-        assertEquals("Locale.GERMAN " + numbers[3], numbers[3], converter.convert(getExpectedType(), "[2.3]"));
-
-        // Invalid Value
-        try {
-            converter.convert(getExpectedType(), "1,2");
-            fail("Expected invalid value to cause ConversionException");
-        } catch (final Exception e) {
-            // expected result
-        }
-
-        // Invalid Type (will try via String)
-        final Object obj =  new Object() {
-            @Override
-            public String toString() {
-                return "dsdgsdsdg";
-            }
-        };
-        try {
-            converter.convert(getExpectedType(), obj);
-            fail("Expected invalid value to cause ConversionException");
-        } catch (final Exception e) {
-            // expected result
-        }
-
-        // Restore the default Locale
-        Locale.setDefault(defaultLocale);
-    }
-
-    /**
-     * Convert String --> Number (using default and specified Locales)
-     */
-    public void testStringToNumberLocale() {
-
-        // Re-set the default Locale to Locale.US
-        final Locale defaultLocale = Locale.getDefault();
-        Locale.setDefault(Locale.US);
-
-        final NumberConverter converter = makeConverter();
-        converter.setUseLocaleFormat(true);
-
-        // Default Locale
-        assertEquals("Default Locale " + numbers[0], numbers[0], converter.convert(getExpectedType(), "-0,012"));
-        assertEquals("Default Locale " + numbers[1], numbers[1], converter.convert(getExpectedType(), "0,013"));
-
-        // Invalid Value
-        try {
-            converter.convert(getExpectedType(), "0,02x");
-            fail("Expected invalid value to cause ConversionException");
-        } catch (final Exception e) {
-            // expected result
-        }
-
-        // Locale.GERMAN
-        converter.setLocale(Locale.GERMAN);
-        assertEquals("Locale.GERMAN " + numbers[2], numbers[2], converter.convert(getExpectedType(), "-0.022"));
-        assertEquals("Locale.GERMAN " + numbers[3], numbers[3], converter.convert(getExpectedType(), "0.023"));
-
-        // Invalid Value
-        try {
-            converter.convert(getExpectedType(), "0.02x");
-            fail("Expected invalid value to cause ConversionException");
-        } catch (final Exception e) {
-            // expected result
-        }
-
-        // Restore the default Locale
-        Locale.setDefault(defaultLocale);
-    }
-
-    /**
-     * Convert String --> Number (default conversion)
-     */
-    public void testStringToNumberDefault() {
-
-        final NumberConverter converter = makeConverter();
-        converter.setUseLocaleFormat(false);
-
-        // Default String --> Number conversion
-        assertEquals("Default Convert " + numbers[0], numbers[0], converter.convert(getExpectedType(), numbers[0].toString()));
-
-        // Invalid
-        try {
-            converter.convert(getExpectedType(), "12x");
-            fail("Expected invalid value to cause ConversionException");
-        } catch (final Exception e) {
-            // expected result
-        }
-    }
-
-    /**
-     * Convert String --> Number if the target type is not defined. Then the
-     * default type should be used.
-     */
-    public void testStringToNumberDefaultType() {
-        final NumberConverter converter = makeConverter();
-        converter.setUseLocaleFormat(false);
-
-        assertEquals("Default Convert " + numbers[0], numbers[0], converter.convert(null, numbers[0].toString()));
-    }
-
-    /**
-     * Convert Boolean --> Number (default conversion)
-     */
-    public void testBooleanToNumberDefault() {
-
-        final NumberConverter converter = makeConverter();
-
-        // Other type --> String conversion
-        assertEquals("Boolean.FALSE to Number ", 0, ((Number)converter.convert(getExpectedType(), Boolean.FALSE)).intValue());
-        assertEquals("Boolean.TRUE to Number ",  1, ((Number)converter.convert(getExpectedType(), Boolean.TRUE)).intValue());
-
-    }
 
     /**
      * Convert Date --> Long
@@ -331,41 +157,6 @@ public abstract class NumberConverterTestBase extends TestCase {
         } catch (final ConversionException e) {
             // expected result - too large for Integer
         }
-
-    }
-
-    /**
-     * Convert Calendar --> Long
-     */
-    public void testCalendarToNumber() {
-
-        final NumberConverter converter = makeConverter();
-
-        final Calendar calendarValue = Calendar.getInstance();
-        final long longValue = calendarValue.getTime().getTime();
-
-        // Calendar --> Long conversion
-        assertEquals("Calendar to Long", Long.valueOf(longValue), converter.convert(Long.class, calendarValue));
-
-        // Calendar --> Integer
-        try {
-            converter.convert(Integer.class, calendarValue);
-            fail("Calendar to Integer - expected a ConversionException");
-        } catch (final ConversionException e) {
-            // expected result - too large for Integer
-        }
-
-    }
-
-    /**
-     * Convert Other --> String (default conversion)
-     */
-    public void testOtherToStringDefault() {
-
-        final NumberConverter converter = makeConverter();
-
-        // Other type --> String conversion
-        assertEquals("Default Convert ", "ABC", converter.convert(String.class, new StringBuilder("ABC")));
 
     }
 
@@ -431,6 +222,215 @@ public abstract class NumberConverterTestBase extends TestCase {
         } catch(final ConversionException e) {
             // expected result
         }
+    }
+
+    /**
+     * Convert Number --> String (default conversion)
+     */
+    public void testNumberToStringDefault() {
+
+        final NumberConverter converter = makeConverter();
+
+        // Default Number --> String conversion
+        assertEquals("Default Convert " + numbers[0], numbers[0].toString(), converter.convert(String.class, numbers[0]));
+        assertEquals("Default Convert " + numbers[1], numbers[1].toString(), converter.convert(String.class, numbers[1]));
+
+    }
+
+    /**
+     * Convert Number --> String (using default and specified Locales)
+     */
+    public void testNumberToStringLocale() {
+
+        // Re-set the default Locale to Locale.US
+        final Locale defaultLocale = Locale.getDefault();
+        Locale.setDefault(Locale.US);
+
+        final NumberConverter converter = makeConverter();
+        converter.setUseLocaleFormat(true);
+
+        // Default Locale
+        assertEquals("Default Locale " + numbers[0], "-12", converter.convert(String.class, numbers[0]));
+        assertEquals("Default Locale " + numbers[1], "13",  converter.convert(String.class, numbers[1]));
+
+        // Locale.GERMAN
+        converter.setLocale(Locale.GERMAN);
+        assertEquals("Locale.GERMAN " + numbers[2], "-22", converter.convert(String.class, numbers[2]));
+        assertEquals("Locale.GERMAN " + numbers[3], "23",  converter.convert(String.class, numbers[3]));
+
+        // Restore the default Locale
+        Locale.setDefault(defaultLocale);
+    }
+
+    /**
+     * Convert Number --> String (using a Pattern, with default and specified Locales)
+     */
+    public void testNumberToStringPattern() {
+
+        // Re-set the default Locale to Locale.US
+        final Locale defaultLocale = Locale.getDefault();
+        Locale.setDefault(Locale.US);
+
+        final NumberConverter converter = makeConverter();
+        converter.setPattern("[0,0.0];(0,0.0)");
+
+        // Default Locale
+        assertEquals("Default Locale " + numbers[0], "(12.0)", converter.convert(String.class, numbers[0]));
+        assertEquals("Default Locale " + numbers[1], "[13.0]", converter.convert(String.class, numbers[1]));
+
+        // Locale.GERMAN
+        converter.setLocale(Locale.GERMAN);
+        assertEquals("Locale.GERMAN " + numbers[2], "(22,0)", converter.convert(String.class, numbers[2]));
+        assertEquals("Locale.GERMAN " + numbers[3], "[23,0]", converter.convert(String.class, numbers[3]));
+
+        // Restore the default Locale
+        Locale.setDefault(defaultLocale);
+    }
+
+    /**
+     * Convert Other --> String (default conversion)
+     */
+    public void testOtherToStringDefault() {
+
+        final NumberConverter converter = makeConverter();
+
+        // Other type --> String conversion
+        assertEquals("Default Convert ", "ABC", converter.convert(String.class, new StringBuilder("ABC")));
+
+    }
+
+    /**
+     * Convert Array --> Number
+     */
+    public void testStringArrayToInteger() {
+
+        final Integer defaultValue = Integer.valueOf(-1);
+        final NumberConverter converter = makeConverter(defaultValue);
+
+        // Default Locale
+        assertEquals("Valid First",   Integer.valueOf(5), converter.convert(Integer.class, new String[] {"5", "4", "3"}));
+        assertEquals("Invalid First", defaultValue,   converter.convert(Integer.class, new String[] {"FOO", "1", "2"}));
+        assertEquals("Null First",    defaultValue,   converter.convert(Integer.class, new String[] {null, "1", "2"}));
+        assertEquals("Long Array",    Integer.valueOf(9), converter.convert(Integer.class, new long[] {9, 2, 6}));
+    }
+
+    /**
+     * Convert String --> Number (default conversion)
+     */
+    public void testStringToNumberDefault() {
+
+        final NumberConverter converter = makeConverter();
+        converter.setUseLocaleFormat(false);
+
+        // Default String --> Number conversion
+        assertEquals("Default Convert " + numbers[0], numbers[0], converter.convert(getExpectedType(), numbers[0].toString()));
+
+        // Invalid
+        try {
+            converter.convert(getExpectedType(), "12x");
+            fail("Expected invalid value to cause ConversionException");
+        } catch (final Exception e) {
+            // expected result
+        }
+    }
+
+    /**
+     * Convert String --> Number if the target type is not defined. Then the
+     * default type should be used.
+     */
+    public void testStringToNumberDefaultType() {
+        final NumberConverter converter = makeConverter();
+        converter.setUseLocaleFormat(false);
+
+        assertEquals("Default Convert " + numbers[0], numbers[0], converter.convert(null, numbers[0].toString()));
+    }
+
+    /**
+     * Convert String --> Number (using default and specified Locales)
+     */
+    public void testStringToNumberLocale() {
+
+        // Re-set the default Locale to Locale.US
+        final Locale defaultLocale = Locale.getDefault();
+        Locale.setDefault(Locale.US);
+
+        final NumberConverter converter = makeConverter();
+        converter.setUseLocaleFormat(true);
+
+        // Default Locale
+        assertEquals("Default Locale " + numbers[0], numbers[0], converter.convert(getExpectedType(), "-0,012"));
+        assertEquals("Default Locale " + numbers[1], numbers[1], converter.convert(getExpectedType(), "0,013"));
+
+        // Invalid Value
+        try {
+            converter.convert(getExpectedType(), "0,02x");
+            fail("Expected invalid value to cause ConversionException");
+        } catch (final Exception e) {
+            // expected result
+        }
+
+        // Locale.GERMAN
+        converter.setLocale(Locale.GERMAN);
+        assertEquals("Locale.GERMAN " + numbers[2], numbers[2], converter.convert(getExpectedType(), "-0.022"));
+        assertEquals("Locale.GERMAN " + numbers[3], numbers[3], converter.convert(getExpectedType(), "0.023"));
+
+        // Invalid Value
+        try {
+            converter.convert(getExpectedType(), "0.02x");
+            fail("Expected invalid value to cause ConversionException");
+        } catch (final Exception e) {
+            // expected result
+        }
+
+        // Restore the default Locale
+        Locale.setDefault(defaultLocale);
+    }
+
+    /**
+     * Convert String --> Number (using a Pattern, with default and specified Locales)
+     */
+    public void testStringToNumberPattern() {
+
+        // Re-set the default Locale to Locale.US
+        final Locale defaultLocale = Locale.getDefault();
+        Locale.setDefault(Locale.US);
+
+        final NumberConverter converter = makeConverter();
+        converter.setPattern("[0,0];(0,0)");
+
+        // Default Locale
+        assertEquals("Default Locale " + numbers[0], numbers[0], converter.convert(getExpectedType(), "(1,2)"));
+        assertEquals("Default Locale " + numbers[1], numbers[1], converter.convert(getExpectedType(), "[1,3]"));
+
+        // Locale.GERMAN
+        converter.setLocale(Locale.GERMAN);
+        assertEquals("Locale.GERMAN " + numbers[2], numbers[2], converter.convert(getExpectedType(), "(2.2)"));
+        assertEquals("Locale.GERMAN " + numbers[3], numbers[3], converter.convert(getExpectedType(), "[2.3]"));
+
+        // Invalid Value
+        try {
+            converter.convert(getExpectedType(), "1,2");
+            fail("Expected invalid value to cause ConversionException");
+        } catch (final Exception e) {
+            // expected result
+        }
+
+        // Invalid Type (will try via String)
+        final Object obj =  new Object() {
+            @Override
+            public String toString() {
+                return "dsdgsdsdg";
+            }
+        };
+        try {
+            converter.convert(getExpectedType(), obj);
+            fail("Expected invalid value to cause ConversionException");
+        } catch (final Exception e) {
+            // expected result
+        }
+
+        // Restore the default Locale
+        Locale.setDefault(defaultLocale);
     }
 
 }

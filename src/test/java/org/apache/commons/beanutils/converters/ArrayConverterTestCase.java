@@ -31,16 +31,6 @@ import junit.framework.TestSuite;
 public class ArrayConverterTestCase extends TestCase {
 
     /**
-     * Construct a new Array Converter test case.
-     * @param name Test Name
-     */
-    public ArrayConverterTestCase(final String name) {
-        super(name);
-    }
-
-    // ------------------------------------------------------------------------
-
-    /**
      * Create Test Suite
      * @return test suite
      */
@@ -48,18 +38,49 @@ public class ArrayConverterTestCase extends TestCase {
         return new TestSuite(ArrayConverterTestCase.class);
     }
 
+    // ------------------------------------------------------------------------
+
+    /**
+     * Construct a new Array Converter test case.
+     * @param name Test Name
+     */
+    public ArrayConverterTestCase(final String name) {
+        super(name);
+    }
+
+    /**
+     * Check that two arrays are the same.
+     * @param msg Test prefix msg
+     * @param expected Expected Array value
+     * @param result Result array value
+     */
+    private void checkArray(final String msg, final Object expected, final Object result) {
+        assertNotNull(msg + " Expected Null", expected);
+        assertNotNull(msg + " Result   Null", result);
+        assertTrue(msg + " Result   not array", result.getClass().isArray());
+        assertTrue(msg + " Expected not array", expected.getClass().isArray());
+        final int resultLth = Array.getLength(result);
+        assertEquals(msg + " Size", Array.getLength(expected), resultLth);
+        assertEquals(msg + " Type", expected.getClass(), result.getClass());
+        for (int i = 0; i < resultLth; i++) {
+            final Object expectElement = Array.get(expected, i);
+            final Object resultElement = Array.get(result, i);
+            assertEquals(msg + " Element " + i, expectElement, resultElement);
+        }
+    }
+
     /** Set Up */
     @Override
     public void setUp() throws Exception {
     }
 
+
+    // ------------------------------------------------------------------------
+
     /** Tear Down */
     @Override
     public void tearDown() throws Exception {
     }
-
-
-    // ------------------------------------------------------------------------
 
     /**
      * Test Converting using the IntegerConverter as the component Converter
@@ -206,6 +227,54 @@ public class ArrayConverterTestCase extends TestCase {
     }
 
     /**
+     * Test Empty String
+     */
+    public void testEmptyString() {
+        final int[]  zeroArray  = {};
+        final IntegerConverter intConverter = new IntegerConverter();
+
+        checkArray("Empty String",  zeroArray, new ArrayConverter(int[].class, intConverter, -1).convert(int[].class, ""));
+        assertEquals("Default String",  null, new ArrayConverter(int[].class, intConverter).convert(String.class, null));
+    }
+
+    /**
+     * Test Errors creating the converter
+     */
+    public void testErrors() {
+        try {
+            new ArrayConverter(null, new DateConverter());
+            fail("Default Type missing - expected IllegalArgumentException");
+        } catch (final IllegalArgumentException e) {
+            // expected result
+        }
+        try {
+            new ArrayConverter(Boolean.class, new DateConverter());
+            fail("Default Type not an array - expected IllegalArgumentException");
+        } catch (final IllegalArgumentException e) {
+            // expected result
+        }
+        try {
+            new ArrayConverter(int[].class, null);
+            fail("Component Converter missing - expected IllegalArgumentException");
+        } catch (final IllegalArgumentException e) {
+            // expected result
+        }
+    }
+
+    /**
+     * Test Converting using the IntegerConverter as the component Converter
+     */
+    public void testInvalidWithDefault() {
+        final int[]  zeroArray  = {};
+        final int[]  oneArray   = new int[1];
+        final IntegerConverter intConverter = new IntegerConverter();
+
+        assertEquals("Null Default", null,   new ArrayConverter(int[].class, intConverter, -1).convert(int[].class, null));
+        checkArray("Zero Length",  zeroArray, new ArrayConverter(int[].class, intConverter, 0).convert(int[].class, null));
+        checkArray("One Length",   oneArray,  new ArrayConverter(Integer[].class, intConverter, 1).convert(int[].class, null));
+    }
+
+    /**
      * Test Converting a String[] to integer array (with leading/trailing whitespace)
      */
     public void testStringArrayToNumber() {
@@ -311,54 +380,6 @@ public class ArrayConverterTestCase extends TestCase {
     }
 
     /**
-     * Test Converting using the IntegerConverter as the component Converter
-     */
-    public void testInvalidWithDefault() {
-        final int[]  zeroArray  = {};
-        final int[]  oneArray   = new int[1];
-        final IntegerConverter intConverter = new IntegerConverter();
-
-        assertEquals("Null Default", null,   new ArrayConverter(int[].class, intConverter, -1).convert(int[].class, null));
-        checkArray("Zero Length",  zeroArray, new ArrayConverter(int[].class, intConverter, 0).convert(int[].class, null));
-        checkArray("One Length",   oneArray,  new ArrayConverter(Integer[].class, intConverter, 1).convert(int[].class, null));
-    }
-
-    /**
-     * Test Empty String
-     */
-    public void testEmptyString() {
-        final int[]  zeroArray  = {};
-        final IntegerConverter intConverter = new IntegerConverter();
-
-        checkArray("Empty String",  zeroArray, new ArrayConverter(int[].class, intConverter, -1).convert(int[].class, ""));
-        assertEquals("Default String",  null, new ArrayConverter(int[].class, intConverter).convert(String.class, null));
-    }
-
-    /**
-     * Test Errors creating the converter
-     */
-    public void testErrors() {
-        try {
-            new ArrayConverter(null, new DateConverter());
-            fail("Default Type missing - expected IllegalArgumentException");
-        } catch (final IllegalArgumentException e) {
-            // expected result
-        }
-        try {
-            new ArrayConverter(Boolean.class, new DateConverter());
-            fail("Default Type not an array - expected IllegalArgumentException");
-        } catch (final IllegalArgumentException e) {
-            // expected result
-        }
-        try {
-            new ArrayConverter(int[].class, null);
-            fail("Component Converter missing - expected IllegalArgumentException");
-        } catch (final IllegalArgumentException e) {
-            // expected result
-        }
-    }
-
-    /**
      * Test for BEANUTILS-302 - throwing a NPE when underscore used
      */
     public void testUnderscore_BEANUTILS_302() {
@@ -383,26 +404,5 @@ public class ArrayConverterTestCase extends TestCase {
         assertEquals("result.length", 2, result.length);
         assertEquals("result[0]", "first_value", result[0]);
         assertEquals("result[1]", "second_value", result[1]);
-    }
-
-    /**
-     * Check that two arrays are the same.
-     * @param msg Test prefix msg
-     * @param expected Expected Array value
-     * @param result Result array value
-     */
-    private void checkArray(final String msg, final Object expected, final Object result) {
-        assertNotNull(msg + " Expected Null", expected);
-        assertNotNull(msg + " Result   Null", result);
-        assertTrue(msg + " Result   not array", result.getClass().isArray());
-        assertTrue(msg + " Expected not array", expected.getClass().isArray());
-        final int resultLth = Array.getLength(result);
-        assertEquals(msg + " Size", Array.getLength(expected), resultLth);
-        assertEquals(msg + " Type", expected.getClass(), result.getClass());
-        for (int i = 0; i < resultLth; i++) {
-            final Object expectElement = Array.get(expected, i);
-            final Object resultElement = Array.get(result, i);
-            assertEquals(msg + " Element " + i, expectElement, resultElement);
-        }
     }
 }

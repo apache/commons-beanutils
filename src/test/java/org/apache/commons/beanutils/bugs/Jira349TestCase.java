@@ -29,15 +29,30 @@ import org.apache.commons.logging.LogFactory;
  */
 public class Jira349TestCase extends TestCase {
 
-    private final Log log = LogFactory.getLog(Jira349TestCase .class);
+    /**
+     * Test Bean with a Boolean object property.
+     */
+    public static class ObjectBean {
+        private Boolean testProperty;
+        public Boolean getTestProperty() {
+            return testProperty;
+        }
+        public void setTestProperty(final Boolean testProperty) {
+            this.testProperty = testProperty;
+        }
+    }
 
     /**
-     * Create a test case with the specified name.
-     *
-     * @param name The name of the test
+     * Test Bean with a primitive boolean property.
      */
-    public Jira349TestCase(final String name) {
-        super(name);
+    public static class PrimitiveBean {
+        private boolean testProperty;
+        public boolean getTestProperty() {
+            return testProperty;
+        }
+        public void setTestProperty(final boolean testProperty) {
+            this.testProperty = testProperty;
+        }
     }
 
     /**
@@ -56,6 +71,17 @@ public class Jira349TestCase extends TestCase {
      */
     public static Test suite() {
         return new TestSuite(Jira349TestCase.class);
+    }
+
+    private final Log log = LogFactory.getLog(Jira349TestCase .class);
+
+    /**
+     * Create a test case with the specified name.
+     *
+     * @param name The name of the test
+     */
+    public Jira349TestCase(final String name) {
+        super(name);
     }
 
     /**
@@ -94,32 +120,6 @@ public class Jira349TestCase extends TestCase {
         } catch (final Throwable t) {
             log.error("Failed", t);
             fail("Threw exception: " + t);
-        }
-    }
-
-    /**
-     * Test Bean with a primitive boolean property.
-     */
-    public static class PrimitiveBean {
-        private boolean testProperty;
-        public boolean getTestProperty() {
-            return testProperty;
-        }
-        public void setTestProperty(final boolean testProperty) {
-            this.testProperty = testProperty;
-        }
-    }
-
-    /**
-     * Test Bean with a Boolean object property.
-     */
-    public static class ObjectBean {
-        private Boolean testProperty;
-        public Boolean getTestProperty() {
-            return testProperty;
-        }
-        public void setTestProperty(final Boolean testProperty) {
-            this.testProperty = testProperty;
         }
     }
 }

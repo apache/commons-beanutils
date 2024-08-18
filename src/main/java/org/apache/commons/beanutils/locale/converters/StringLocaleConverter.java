@@ -213,6 +213,35 @@ public class StringLocaleConverter extends BaseLocaleConverter {
 
 
     /**
+     * Make an instance of DecimalFormat.
+     *
+     * @param locale The locale
+     * @param pattern The pattern is used for the convertion
+     * @return The format for the locale and pattern
+     *
+     * @throws ConversionException if conversion cannot be performed
+     *  successfully
+     * @throws ParseException if an error occurs parsing a String to a Number
+     */
+    private DecimalFormat getDecimalFormat(final Locale locale, final String pattern) {
+
+        final DecimalFormat numberFormat = (DecimalFormat) NumberFormat.getInstance(locale);
+
+        // if some constructors default pattern to null, it makes only sense to handle null pattern gracefully
+        if (pattern != null) {
+            if (locPattern) {
+                numberFormat.applyLocalizedPattern(pattern);
+            } else {
+                numberFormat.applyPattern(pattern);
+            }
+        } else {
+            log.debug("No pattern provided, using default.");
+        }
+
+        return numberFormat;
+    }
+
+    /**
      * Convert the specified locale-sensitive input object into an output object of the
      * specified type.
      *
@@ -255,34 +284,5 @@ public class StringLocaleConverter extends BaseLocaleConverter {
         }
 
         return result;
-    }
-
-    /**
-     * Make an instance of DecimalFormat.
-     *
-     * @param locale The locale
-     * @param pattern The pattern is used for the convertion
-     * @return The format for the locale and pattern
-     *
-     * @throws ConversionException if conversion cannot be performed
-     *  successfully
-     * @throws ParseException if an error occurs parsing a String to a Number
-     */
-    private DecimalFormat getDecimalFormat(final Locale locale, final String pattern) {
-
-        final DecimalFormat numberFormat = (DecimalFormat) NumberFormat.getInstance(locale);
-
-        // if some constructors default pattern to null, it makes only sense to handle null pattern gracefully
-        if (pattern != null) {
-            if (locPattern) {
-                numberFormat.applyLocalizedPattern(pattern);
-            } else {
-                numberFormat.applyPattern(pattern);
-            }
-        } else {
-            log.debug("No pattern provided, using default.");
-        }
-
-        return numberFormat;
     }
 }

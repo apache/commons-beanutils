@@ -21,6 +21,10 @@ import static org.junit.Assert.assertEquals;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.junit.Test;
 
+class FirstChildBeanB extends RootBeanB {
+}
+
+
 /**
  * Variant of {@link Jira422TestCase} that is compatible with BEANUTILS-492
  *
@@ -46,17 +50,12 @@ public class Jira422bTestCase {
 
 }
 
-
 class RootBeanB {
 
     private String[] file;
 
     public String[] getFile() {
         return file;
-    }
-
-    public void setFile(final String[] file) {
-        this.file = file;
     }
 
     public String getFile(final int i) {
@@ -67,9 +66,10 @@ class RootBeanB {
         this.file[i] = file;
     }
 
-}
+    public void setFile(final String[] file) {
+        this.file = file;
+    }
 
-class FirstChildBeanB extends RootBeanB {
 }
 
 class SecondChildBeanB extends RootBeanB {

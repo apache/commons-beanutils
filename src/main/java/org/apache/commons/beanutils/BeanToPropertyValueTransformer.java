@@ -126,6 +126,32 @@ public class BeanToPropertyValueTransformer implements Transformer {
     }
 
     /**
+     * Returns the name of the property that will be used in the transformation of the bean.
+     *
+     * @return The name of the property that will be used in the transformation of the bean.
+     */
+    public String getPropertyName() {
+        return propertyName;
+    }
+
+    /**
+     * Returns the flag which determines whether <code>null</code> objects in the property path will
+     * genenerate an <code>IllegalArgumentException</code> or not. If set to <code>true</code> then
+     * if any objects in the property path evaluate to <code>null</code> then the
+     * <code>IllegalArgumentException</code> throw by <code>PropertyUtils</code> will be logged but
+     * not rethrown and <code>null</code> will be returned.  If set to <code>false</code> then if any
+     * objects in the property path evaluate to <code>null</code> then the
+     * <code>IllegalArgumentException</code> throw by <code>PropertyUtils</code> will be logged and
+     * rethrown.
+     *
+     * @return The flag which determines whether <code>null</code> objects in the property path will
+     * genenerate an <code>IllegalArgumentException</code> or not.
+     */
+    public boolean isIgnoreNull() {
+        return ignoreNull;
+    }
+
+    /**
      * Returns the value of the property named in the transformer's constructor for
      * the object provided. If any object in the property path leading up to the target property is
      * <code>null</code> then the outcome will be based on the value of the <code>ignoreNull</code>
@@ -184,31 +210,5 @@ public class BeanToPropertyValueTransformer implements Transformer {
         }
 
         return propertyValue;
-    }
-
-    /**
-     * Returns the name of the property that will be used in the transformation of the bean.
-     *
-     * @return The name of the property that will be used in the transformation of the bean.
-     */
-    public String getPropertyName() {
-        return propertyName;
-    }
-
-    /**
-     * Returns the flag which determines whether <code>null</code> objects in the property path will
-     * genenerate an <code>IllegalArgumentException</code> or not. If set to <code>true</code> then
-     * if any objects in the property path evaluate to <code>null</code> then the
-     * <code>IllegalArgumentException</code> throw by <code>PropertyUtils</code> will be logged but
-     * not rethrown and <code>null</code> will be returned.  If set to <code>false</code> then if any
-     * objects in the property path evaluate to <code>null</code> then the
-     * <code>IllegalArgumentException</code> throw by <code>PropertyUtils</code> will be logged and
-     * rethrown.
-     *
-     * @return The flag which determines whether <code>null</code> objects in the property path will
-     * genenerate an <code>IllegalArgumentException</code> or not.
-     */
-    public boolean isIgnoreNull() {
-        return ignoreNull;
     }
 }

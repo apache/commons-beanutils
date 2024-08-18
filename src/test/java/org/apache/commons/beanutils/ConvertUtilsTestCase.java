@@ -46,12 +46,53 @@ public class ConvertUtilsTestCase extends TestCase {
 
 
     /**
+     * Return the tests included in this test suite.
+     */
+    public static Test suite() {
+        return new TestSuite(ConvertUtilsTestCase.class);
+    }
+
+
+
+
+    /**
      * Construct a new instance of this test case.
      *
      * @param name Name of the test case
      */
     public ConvertUtilsTestCase(final String name) {
         super(name);
+    }
+
+
+    private void checkIntegerArray(final Object value, final int intArray[]) {
+
+        assertNotNull("Returned value is not null", value);
+        assertEquals("Returned value is int[]",
+                     intArray.getClass(), value.getClass());
+        final int results[] = (int[]) value;
+        assertEquals("Returned array length", intArray.length, results.length);
+        for (int i = 0; i < intArray.length; i++) {
+            assertEquals("Returned array value " + i,
+                         intArray[i], results[i]);
+        }
+
+    }
+
+
+    private void checkStringArray(final Object value, final String stringArray[]) {
+
+        assertNotNull("Returned value is not null", value);
+        assertEquals("Returned value is String[]",
+                     stringArray.getClass(), value.getClass());
+        final String results[] = (String[]) value;
+        assertEquals("Returned array length",
+                     stringArray.length, results.length);
+        for (int i = 0; i < stringArray.length; i++) {
+            assertEquals("Returned array value " + i,
+                         stringArray[i], results[i]);
+        }
+
     }
 
 
@@ -69,14 +110,6 @@ public class ConvertUtilsTestCase extends TestCase {
 
 
     /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(ConvertUtilsTestCase.class);
-    }
-
-
-    /**
      * Tear down instance variables required by this test case.
      */
     @Override
@@ -85,6 +118,81 @@ public class ConvertUtilsTestCase extends TestCase {
     }
 
 
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    // We need to use raw types in order to test legacy converters
+    public void testConvertToString() throws Exception {
+        final Converter dummyConverter = new Converter() {
+            @Override
+            public Object convert(final Class type, final Object value) {
+                return value;
+            }
+        };
+
+        final Converter fooConverter = new Converter() {
+            @Override
+            public Object convert(final Class type, final Object value) {
+                return "Foo-Converter";
+            }
+        };
+
+        final DateConverter dateConverter = new DateConverter();
+        dateConverter.setLocale(Locale.US);
+
+        final ConvertUtilsBean utils = new ConvertUtilsBean();
+        utils.register(dateConverter, java.util.Date.class);
+        utils.register(fooConverter, String.class);
+
+        // Convert using registerd DateConverter
+        final java.util.Date today = new java.util.Date();
+        final DateFormat fmt = new SimpleDateFormat("M/d/yy"); /* US Short Format */
+        final String expected = fmt.format(today);
+        assertEquals("DateConverter M/d/yy", expected, utils.convert(today, String.class));
+
+        // Date converter doesn't do String conversion - use String Converter
+        utils.register(dummyConverter, java.util.Date.class);
+        assertEquals("Date Converter doesn't do String conversion", "Foo-Converter", utils.convert(today, String.class));
+
+        // No registered Date converter - use String Converter
+        utils.deregister(java.util.Date.class);
+        assertEquals("No registered Date converter", "Foo-Converter", utils.convert(today, String.class));
+
+        // String Converter doesn't do Strings!!!
+        utils.register(dummyConverter, String.class);
+        assertEquals("String Converter doesn't do Strings!!!", today.toString(), utils.convert(today, String.class));
+
+        // No registered Date or String converter - use Object's toString()
+        utils.deregister(String.class);
+        assertEquals("Object's toString()", today.toString(), utils.convert(today, String.class));
+
+    }
+
+
+    /**
+     * Tests a conversion to an unsupported target type.
+     */
+    public void testConvertUnsupportedTargetType() {
+        final ConvertUtilsBean utils = new ConvertUtilsBean();
+        final Object value = "A test value";
+        assertSame("Got different object", value,
+                utils.convert(value, getClass()));
+    }
+
+
+    public void testDeregisteringSingleConverter() throws Exception {
+        // make sure that the test work ok before anything's changed
+        final Object
+        value = ConvertUtils.convert("true", Boolean.TYPE);
+        assertTrue(value instanceof Boolean);
+        assertEquals(
+                    "Standard conversion failed (1)",
+                    ((Boolean) value).booleanValue(),
+                    true);
+
+        // we'll test deregister
+        ConvertUtils.deregister(Boolean.TYPE);
+        assertNull("Converter should be null",ConvertUtils.lookup(Boolean.TYPE));
+
+    }
 
 
     /**
@@ -234,7 +342,6 @@ public class ConvertUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test conversion of object to string for scalars.
      */
@@ -265,7 +372,6 @@ public class ConvertUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Positive array conversion tests.
      */
@@ -289,7 +395,6 @@ public class ConvertUtilsTestCase extends TestCase {
         assertEquals(results2[2], 300);
 
     }
-
 
     /**
      * Positive String to primitive integer array tests.
@@ -325,7 +430,6 @@ public class ConvertUtilsTestCase extends TestCase {
         checkIntegerArray(value, intArray2);
 
     }
-
 
     /**
      * Positive scalar conversion tests.
@@ -480,6 +584,7 @@ public class ConvertUtilsTestCase extends TestCase {
     }
 
 
+
     /**
      * Positive String to String array tests.
      */
@@ -533,6 +638,7 @@ public class ConvertUtilsTestCase extends TestCase {
 
 
     }
+
 
     public void testSeparateConvertInstances() throws Exception {
         final ConvertUtilsBean utilsOne = new ConvertUtilsBean();
@@ -591,112 +697,6 @@ public class ConvertUtilsTestCase extends TestCase {
                     "Standard conversion failed (4)",
                     ((Boolean) value).booleanValue(),
                     true);
-    }
-
-    public void testDeregisteringSingleConverter() throws Exception {
-        // make sure that the test work ok before anything's changed
-        final Object
-        value = ConvertUtils.convert("true", Boolean.TYPE);
-        assertTrue(value instanceof Boolean);
-        assertEquals(
-                    "Standard conversion failed (1)",
-                    ((Boolean) value).booleanValue(),
-                    true);
-
-        // we'll test deregister
-        ConvertUtils.deregister(Boolean.TYPE);
-        assertNull("Converter should be null",ConvertUtils.lookup(Boolean.TYPE));
-
-    }
-
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    // We need to use raw types in order to test legacy converters
-    public void testConvertToString() throws Exception {
-        final Converter dummyConverter = new Converter() {
-            @Override
-            public Object convert(final Class type, final Object value) {
-                return value;
-            }
-        };
-
-        final Converter fooConverter = new Converter() {
-            @Override
-            public Object convert(final Class type, final Object value) {
-                return "Foo-Converter";
-            }
-        };
-
-        final DateConverter dateConverter = new DateConverter();
-        dateConverter.setLocale(Locale.US);
-
-        final ConvertUtilsBean utils = new ConvertUtilsBean();
-        utils.register(dateConverter, java.util.Date.class);
-        utils.register(fooConverter, String.class);
-
-        // Convert using registerd DateConverter
-        final java.util.Date today = new java.util.Date();
-        final DateFormat fmt = new SimpleDateFormat("M/d/yy"); /* US Short Format */
-        final String expected = fmt.format(today);
-        assertEquals("DateConverter M/d/yy", expected, utils.convert(today, String.class));
-
-        // Date converter doesn't do String conversion - use String Converter
-        utils.register(dummyConverter, java.util.Date.class);
-        assertEquals("Date Converter doesn't do String conversion", "Foo-Converter", utils.convert(today, String.class));
-
-        // No registered Date converter - use String Converter
-        utils.deregister(java.util.Date.class);
-        assertEquals("No registered Date converter", "Foo-Converter", utils.convert(today, String.class));
-
-        // String Converter doesn't do Strings!!!
-        utils.register(dummyConverter, String.class);
-        assertEquals("String Converter doesn't do Strings!!!", today.toString(), utils.convert(today, String.class));
-
-        // No registered Date or String converter - use Object's toString()
-        utils.deregister(String.class);
-        assertEquals("Object's toString()", today.toString(), utils.convert(today, String.class));
-
-    }
-
-    /**
-     * Tests a conversion to an unsupported target type.
-     */
-    public void testConvertUnsupportedTargetType() {
-        final ConvertUtilsBean utils = new ConvertUtilsBean();
-        final Object value = "A test value";
-        assertSame("Got different object", value,
-                utils.convert(value, getClass()));
-    }
-
-
-
-    private void checkIntegerArray(final Object value, final int intArray[]) {
-
-        assertNotNull("Returned value is not null", value);
-        assertEquals("Returned value is int[]",
-                     intArray.getClass(), value.getClass());
-        final int results[] = (int[]) value;
-        assertEquals("Returned array length", intArray.length, results.length);
-        for (int i = 0; i < intArray.length; i++) {
-            assertEquals("Returned array value " + i,
-                         intArray[i], results[i]);
-        }
-
-    }
-
-
-    private void checkStringArray(final Object value, final String stringArray[]) {
-
-        assertNotNull("Returned value is not null", value);
-        assertEquals("Returned value is String[]",
-                     stringArray.getClass(), value.getClass());
-        final String results[] = (String[]) value;
-        assertEquals("Returned array length",
-                     stringArray.length, results.length);
-        for (int i = 0; i < stringArray.length; i++) {
-            assertEquals("Returned array value " + i,
-                         stringArray[i], results[i]);
-        }
-
     }
 
 

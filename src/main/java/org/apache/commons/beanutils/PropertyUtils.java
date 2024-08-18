@@ -115,26 +115,17 @@ public class PropertyUtils {
     private static int debug = 0;
 
     /**
-     * The <code>debug</code> static property is no longer used
-     * @return debug property
-     * @deprecated The <code>debug</code> static property is no longer used
+     * Adds a <code>BeanIntrospector</code>. This object is invoked when the
+     * property descriptors of a class need to be obtained.
+     *
+     * @param introspector the <code>BeanIntrospector</code> to be added (must
+     *        not be <b>null</b>
+     * @throws IllegalArgumentException if the argument is <b>null</b>
+     * @since 1.9
      */
-    @Deprecated
-    public static int getDebug() {
-        return debug;
+    public static void addBeanIntrospector(final BeanIntrospector introspector) {
+        PropertyUtilsBean.getInstance().addBeanIntrospector(introspector);
     }
-
-    /**
-     * The <code>debug</code> static property is no longer used
-     * @param newDebug debug property
-     * @deprecated The <code>debug</code> static property is no longer used
-     */
-    @Deprecated
-    public static void setDebug(final int newDebug) {
-        debug = newDebug;
-    }
-
-
 
     /**
      * Clear any cached property descriptors information for all classes
@@ -151,41 +142,7 @@ public class PropertyUtils {
 
     }
 
-    /**
-     * Resets the registered {@link BeanIntrospector} objects to the initial default
-     * state.
-     *
-     * @since 1.9
-     */
-    public static void resetBeanIntrospectors() {
-        PropertyUtilsBean.getInstance().resetBeanIntrospectors();
-    }
 
-    /**
-     * Adds a <code>BeanIntrospector</code>. This object is invoked when the
-     * property descriptors of a class need to be obtained.
-     *
-     * @param introspector the <code>BeanIntrospector</code> to be added (must
-     *        not be <b>null</b>
-     * @throws IllegalArgumentException if the argument is <b>null</b>
-     * @since 1.9
-     */
-    public static void addBeanIntrospector(final BeanIntrospector introspector) {
-        PropertyUtilsBean.getInstance().addBeanIntrospector(introspector);
-    }
-
-    /**
-     * Removes the specified <code>BeanIntrospector</code>.
-     *
-     * @param introspector the <code>BeanIntrospector</code> to be removed
-     * @return <b>true</b> if the <code>BeanIntrospector</code> existed and
-     *         could be removed, <b>false</b> otherwise
-     * @since 1.9
-     */
-    public static boolean removeBeanIntrospector(final BeanIntrospector introspector) {
-        return PropertyUtilsBean.getInstance().removeBeanIntrospector(
-                introspector);
-    }
 
     /**
      * <p>Copy property values from the "origin" bean to the "destination" bean
@@ -215,7 +172,6 @@ public class PropertyUtils {
         PropertyUtilsBean.getInstance().copyProperties(dest, orig);
     }
 
-
     /**
      * <p>Return the entire set of properties for which the specified bean
      * provides a read method.</p>
@@ -242,6 +198,15 @@ public class PropertyUtils {
 
     }
 
+    /**
+     * The <code>debug</code> static property is no longer used
+     * @return debug property
+     * @deprecated The <code>debug</code> static property is no longer used
+     */
+    @Deprecated
+    public static int getDebug() {
+        return debug;
+    }
 
     /**
      * <p>Return the value of the specified indexed property of the specified
@@ -273,7 +238,6 @@ public class PropertyUtils {
         return PropertyUtilsBean.getInstance().getIndexedProperty(bean, name);
 
     }
-
 
     /**
      * <p>Return the value of the specified indexed property of the specified
@@ -711,36 +675,38 @@ public class PropertyUtils {
 
 
     /**
-     * <p>Sets the value of the specified indexed property of the specified
-     * bean, with no type conversions.</p>
+     * Removes the specified <code>BeanIntrospector</code>.
      *
-     * <p>For more details see <code>PropertyUtilsBean</code>.</p>
-     *
-     * @param bean Bean whose property is to be modified
-     * @param name <code>propertyname[index]</code> of the property value
-     *  to be modified
-     * @param value Value to which the specified property element
-     *  should be set
-     *
-     * @throws IndexOutOfBoundsException if the specified index
-     *  is outside the valid range for the underlying property
-     * @throws IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @throws IllegalArgumentException if <code>bean</code> or
-     *  <code>name</code> is null
-     * @throws InvocationTargetException if the property accessor method
-     *  throws an exception
-     * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
-     * @see PropertyUtilsBean#setIndexedProperty(Object, String, Object)
+     * @param introspector the <code>BeanIntrospector</code> to be removed
+     * @return <b>true</b> if the <code>BeanIntrospector</code> existed and
+     *         could be removed, <b>false</b> otherwise
+     * @since 1.9
      */
-    public static void setIndexedProperty(final Object bean, final String name,
-                                          final Object value)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+    public static boolean removeBeanIntrospector(final BeanIntrospector introspector) {
+        return PropertyUtilsBean.getInstance().removeBeanIntrospector(
+                introspector);
+    }
 
-        PropertyUtilsBean.getInstance().setIndexedProperty(bean, name, value);
 
+    /**
+     * Resets the registered {@link BeanIntrospector} objects to the initial default
+     * state.
+     *
+     * @since 1.9
+     */
+    public static void resetBeanIntrospectors() {
+        PropertyUtilsBean.getInstance().resetBeanIntrospectors();
+    }
+
+
+    /**
+     * The <code>debug</code> static property is no longer used
+     * @param newDebug debug property
+     * @deprecated The <code>debug</code> static property is no longer used
+     */
+    @Deprecated
+    public static void setDebug(final int newDebug) {
+        debug = newDebug;
     }
 
 
@@ -773,6 +739,40 @@ public class PropertyUtils {
             NoSuchMethodException {
 
         PropertyUtilsBean.getInstance().setIndexedProperty(bean, name, index, value);
+    }
+
+
+    /**
+     * <p>Sets the value of the specified indexed property of the specified
+     * bean, with no type conversions.</p>
+     *
+     * <p>For more details see <code>PropertyUtilsBean</code>.</p>
+     *
+     * @param bean Bean whose property is to be modified
+     * @param name <code>propertyname[index]</code> of the property value
+     *  to be modified
+     * @param value Value to which the specified property element
+     *  should be set
+     *
+     * @throws IndexOutOfBoundsException if the specified index
+     *  is outside the valid range for the underlying property
+     * @throws IllegalAccessException if the caller does not have
+     *  access to the property accessor method
+     * @throws IllegalArgumentException if <code>bean</code> or
+     *  <code>name</code> is null
+     * @throws InvocationTargetException if the property accessor method
+     *  throws an exception
+     * @throws NoSuchMethodException if an accessor method for this
+     *  propety cannot be found
+     * @see PropertyUtilsBean#setIndexedProperty(Object, String, Object)
+     */
+    public static void setIndexedProperty(final Object bean, final String name,
+                                          final Object value)
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
+
+        PropertyUtilsBean.getInstance().setIndexedProperty(bean, name, value);
+
     }
 
 
