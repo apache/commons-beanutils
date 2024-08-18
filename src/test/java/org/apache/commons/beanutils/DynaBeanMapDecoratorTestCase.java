@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import junit.framework.Test;
@@ -217,11 +218,9 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
 
         assertEquals("entrySet size", properties.length, set.size());
 
-        final Iterator<Map.Entry<Object, Object>> iterator = set.iterator();
-        final List<String> namesList = new ArrayList<String>();
+        final List<String> namesList = new ArrayList<>();
         int i = 0;
-        while (iterator.hasNext()) {
-            final Map.Entry<Object, Object> entry = iterator.next();
+        for (Entry<Object, Object> entry : set) {
             final String name  = (String)entry.getKey();
             namesList.add(name);
             final Object expectValue = decoratedMap.get(name);
