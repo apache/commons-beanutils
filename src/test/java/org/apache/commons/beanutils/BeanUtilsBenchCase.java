@@ -39,13 +39,11 @@ public class BeanUtilsBenchCase extends TestCase {
 
 
     /**
-     * Construct a new instance of this test case.
-     *
-     * @param name Name of the test case
+     * Return the tests included in this test suite.
      */
-    public BeanUtilsBenchCase(final String name) {
+    public static Test suite() {
 
-        super(name);
+        return new TestSuite(BeanUtilsBenchCase.class);
 
     }
 
@@ -72,6 +70,18 @@ public class BeanUtilsBenchCase extends TestCase {
     private BeanUtilsBean bu = null;
 
 
+
+
+    /**
+     * Construct a new instance of this test case.
+     *
+     * @param name Name of the test case
+     */
+    public BeanUtilsBenchCase(final String name) {
+
+        super(name);
+
+    }
 
 
     /**
@@ -127,22 +137,12 @@ public class BeanUtilsBenchCase extends TestCase {
         // Create output instances
         outBean = new BenchBean();
         outDyna = dynaClass.newInstance();
-        for (String outKey : inMap.keySet()) {
+        for (final String outKey : inMap.keySet()) {
             outDyna.set(outKey, inMap.get(outKey));
         }
 
         // Set up BeanUtilsBean instance we will use
         bu = BeanUtilsBean.getInstance();
-
-    }
-
-
-    /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-
-        return new TestSuite(BeanUtilsBenchCase.class);
 
     }
 

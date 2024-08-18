@@ -24,19 +24,36 @@ import org.apache.commons.beanutils.bugs.Jira273TestCase;
  */
 public class Jira273BeanFactory {
 
-    /**
-     * Factory method which creates annonymous
-     * {@link PublicBeanWithMethod} with method NOT overriden.
-     *
-     * @return a new annonymous {@link PublicBeanWithMethod}.
-     */
-    public static Object createAnnonymousOverriden() {
-        return new PublicBeanWithMethod() {
-            @Override
-            public String getBeanValue() {
-                return "AnnonymousOverriden";
-            }
-        };
+    private static class PrivateBeanWithMethod {
+        public String getBeanValue() {
+            return "PrivateBeanWithMethod";
+        }
+    }
+
+    private static class PrivatePrivatePublicNotOverriden extends PrivatePublicNotOverriden {
+    }
+
+    private static class PrivatePrivatePublicOverriden extends PrivatePublicNotOverriden {
+        @Override
+        public String getBeanValue() {
+            return "PrivatePrivatePublicOverriden";
+        }
+    }
+
+    private static class PrivatePublicNotOverriden extends PublicBeanWithMethod {
+    }
+
+    private static class PrivatePublicOverriden extends PublicBeanWithMethod {
+        @Override
+        public String getBeanValue() {
+            return "PrivatePublicOverriden";
+        }
+    }
+
+    public static class PublicBeanWithMethod {
+        public String getBeanValue() {
+            return "PublicBeanWithMethod";
+        }
     }
 
     /**
@@ -51,23 +68,19 @@ public class Jira273BeanFactory {
     }
 
     /**
-     * Factory method which creates a PrivatePublicOverriden bean.
+     * Factory method which creates annonymous
+     * {@link PublicBeanWithMethod} with method NOT overriden.
      *
-     * @return a new a PrivatePublicOverriden bean.
+     * @return a new annonymous {@link PublicBeanWithMethod}.
      */
-    public static Object createPrivatePublicOverriden() {
-        return new PrivatePublicOverriden();
+    public static Object createAnnonymousOverriden() {
+        return new PublicBeanWithMethod() {
+            @Override
+            public String getBeanValue() {
+                return "AnnonymousOverriden";
+            }
+        };
     }
-
-    /**
-     * Factory method which creates a PrivatePrivatePublicOverriden bean.
-     *
-     * @return a new a PrivatePrivatePublicOverriden bean.
-     */
-    public static Object createPrivatePrivatePublicOverriden() {
-        return new PrivatePrivatePublicOverriden();
-    }
-
     /**
      * Factory method which creates a PrivatePrivatePublicNotOverriden bean.
      *
@@ -76,7 +89,14 @@ public class Jira273BeanFactory {
     public static Object createPrivatePrivatePublicNotOverriden() {
         return new PrivatePrivatePublicNotOverriden();
     }
-
+    /**
+     * Factory method which creates a PrivatePrivatePublicOverriden bean.
+     *
+     * @return a new a PrivatePrivatePublicOverriden bean.
+     */
+    public static Object createPrivatePrivatePublicOverriden() {
+        return new PrivatePrivatePublicOverriden();
+    }
     /**
      * Factory method which creates a PrivatePublicNotOverriden bean.
      *
@@ -85,32 +105,12 @@ public class Jira273BeanFactory {
     public static Object createPrivatePublicNotOverriden() {
         return new PrivatePublicNotOverriden();
     }
-
-    private static class PrivateBeanWithMethod {
-        public String getBeanValue() {
-            return "PrivateBeanWithMethod";
-        }
-    }
-
-    public static class PublicBeanWithMethod {
-        public String getBeanValue() {
-            return "PublicBeanWithMethod";
-        }
-    }
-    private static class PrivatePublicOverriden extends PublicBeanWithMethod {
-        @Override
-        public String getBeanValue() {
-            return "PrivatePublicOverriden";
-        }
-    }
-    private static class PrivatePublicNotOverriden extends PublicBeanWithMethod {
-    }
-    private static class PrivatePrivatePublicOverriden extends PrivatePublicNotOverriden {
-        @Override
-        public String getBeanValue() {
-            return "PrivatePrivatePublicOverriden";
-        }
-    }
-    private static class PrivatePrivatePublicNotOverriden extends PrivatePublicNotOverriden {
+    /**
+     * Factory method which creates a PrivatePublicOverriden bean.
+     *
+     * @return a new a PrivatePublicOverriden bean.
+     */
+    public static Object createPrivatePublicOverriden() {
+        return new PrivatePublicOverriden();
     }
 }

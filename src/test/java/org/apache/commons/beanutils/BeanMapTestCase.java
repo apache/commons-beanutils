@@ -37,16 +37,105 @@ import org.apache.commons.collections.map.AbstractTestMap;
 @SuppressWarnings("deprecation")
 public class BeanMapTestCase extends AbstractTestMap {
 
-    public BeanMapTestCase(final String testName) {
-        super(testName);
+    public static class BeanThrowingExceptions extends BeanWithProperties {
+        private static final long serialVersionUID = 1L;
+        public String getValueThrowingException() {
+            throw new TestException();
+        }
+        public void setValueThrowingException(final String value) {
+            throw new TestException();
+        }
     }
 
-    public static void main(final String[] args) {
-        TestRunner.run(suite());
+    public static class BeanWithProperties implements Serializable {
+        private static final long serialVersionUID = 1L;
+        private int someInt;
+        private long someLong;
+        private double someDouble;
+        private float someFloat;
+        private short someShort;
+        private byte someByte;
+        private char someChar;
+        private Integer someInteger;
+        private String someString;
+        private Object someObject;
+
+        public byte getSomeByteValue() {
+            return someByte;
+        }
+        public char getSomeCharValue() {
+            return someChar;
+        }
+
+        public double getSomeDoubleValue() {
+            return someDouble;
+        }
+        public float getSomeFloatValue() {
+            return someFloat;
+        }
+
+        public Integer getSomeIntegerValue() {
+            return someInteger;
+        }
+        public int getSomeIntValue() {
+            return someInt;
+        }
+
+        public long getSomeLongValue() {
+            return someLong;
+        }
+        public Object getSomeObjectValue() {
+            return someObject;
+        }
+
+        public short getSomeShortValue() {
+            return someShort;
+        }
+        public String getSomeStringValue() {
+            return someString;
+        }
+
+        public void setSomeByteValue(final byte value) {
+            someByte = value;
+        }
+        public void setSomeCharValue(final char value) {
+            someChar = value;
+        }
+
+        public void setSomeDoubleValue(final double value) {
+            someDouble = value;
+        }
+        public void setSomeFloatValue(final float value) {
+            someFloat = value;
+        }
+
+        public void setSomeIntegerValue(final Integer value) {
+            someInteger = value;
+        }
+        public void setSomeIntValue(final int value) {
+            someInt = value;
+        }
+
+        public void setSomeLongValue(final long value) {
+            someLong = value;
+        }
+        public void setSomeObjectValue(final Object value) {
+            someObject = value;
+        }
+
+        public void setSomeShortValue(final short value) {
+            someShort = value;
+        }
+        public void setSomeStringValue(final String value) {
+            someString = value;
+        }
     }
 
-    public static Test suite() {
-        return BulkTest.makeSuite(BeanMapTestCase.class);
+    /**
+     * Exception for testing exception handling.
+     */
+    public static class TestException extends RuntimeException {
+        private static final long serialVersionUID = 1L;
     }
 
 /*
@@ -68,105 +157,41 @@ public class BeanMapTestCase extends AbstractTestMap {
 */
 
 
-    public static class BeanWithProperties implements Serializable {
-        private static final long serialVersionUID = 1L;
-        private int someInt;
-        private long someLong;
-        private double someDouble;
-        private float someFloat;
-        private short someShort;
-        private byte someByte;
-        private char someChar;
-        private Integer someInteger;
-        private String someString;
-        private Object someObject;
-
-        public int getSomeIntValue() {
-            return someInt;
-        }
-        public void setSomeIntValue(final int value) {
-            someInt = value;
-        }
-
-        public long getSomeLongValue() {
-            return someLong;
-        }
-        public void setSomeLongValue(final long value) {
-            someLong = value;
-        }
-
-        public double getSomeDoubleValue() {
-            return someDouble;
-        }
-        public void setSomeDoubleValue(final double value) {
-            someDouble = value;
-        }
-
-        public float getSomeFloatValue() {
-            return someFloat;
-        }
-        public void setSomeFloatValue(final float value) {
-            someFloat = value;
-        }
-
-        public short getSomeShortValue() {
-            return someShort;
-        }
-        public void setSomeShortValue(final short value) {
-            someShort = value;
-        }
-
-        public byte getSomeByteValue() {
-            return someByte;
-        }
-        public void setSomeByteValue(final byte value) {
-            someByte = value;
-        }
-
-        public char getSomeCharValue() {
-            return someChar;
-        }
-        public void setSomeCharValue(final char value) {
-            someChar = value;
-        }
-
-        public String getSomeStringValue() {
-            return someString;
-        }
-        public void setSomeStringValue(final String value) {
-            someString = value;
-        }
-
-        public Integer getSomeIntegerValue() {
-            return someInteger;
-        }
-        public void setSomeIntegerValue(final Integer value) {
-            someInteger = value;
-        }
-
-        public Object getSomeObjectValue() {
-            return someObject;
-        }
-        public void setSomeObjectValue(final Object value) {
-            someObject = value;
-        }
+    public static void main(final String[] args) {
+        TestRunner.run(suite());
     }
 
-    public static class BeanThrowingExceptions extends BeanWithProperties {
-        private static final long serialVersionUID = 1L;
-        public void setValueThrowingException(final String value) {
-            throw new TestException();
-        }
-        public String getValueThrowingException() {
-            throw new TestException();
-        }
+    public static Test suite() {
+        return BulkTest.makeSuite(BeanMapTestCase.class);
     }
 
     /**
-     * Exception for testing exception handling.
-     */
-    public static class TestException extends RuntimeException {
-        private static final long serialVersionUID = 1L;
+     *  An object value that will be stored in the bean map as a value.  Need
+     *  to save this externally so that we can make sure the object instances
+     *  are equivalent since getSampleValues() would otherwise construct a new
+     *  and different Object each time.
+     **/
+    private final Object objectInFullMap = new Object();
+
+    public BeanMapTestCase(final String testName) {
+        super(testName);
+    }
+
+    @Override
+    public Object[] getNewSampleValues() {
+        return new Object[] {
+            Integer.valueOf(223),
+            Long.valueOf(23341928234L),
+            Double.valueOf(23423.34),
+            Float.valueOf(213332.12f),
+            Short.valueOf((short)234),
+            Byte.valueOf((byte)20),
+            Character.valueOf('b'),
+            Integer.valueOf(232),
+            "SomeNewStringValue",
+            new Object(),
+            null,
+        };
     }
 
     // note to self.  The Sample keys were generated by copying the field
@@ -196,14 +221,6 @@ public class BeanMapTestCase extends AbstractTestMap {
         };
     }
 
-    /**
-     *  An object value that will be stored in the bean map as a value.  Need
-     *  to save this externally so that we can make sure the object instances
-     *  are equivalent since getSampleValues() would otherwise construct a new
-     *  and different Object each time.
-     **/
-    private final Object objectInFullMap = new Object();
-
     // note to self: the sample values were created manually
     @Override
     public Object[] getSampleValues() {
@@ -223,29 +240,20 @@ public class BeanMapTestCase extends AbstractTestMap {
     }
 
     @Override
-    public Object[] getNewSampleValues() {
-        return new Object[] {
-            Integer.valueOf(223),
-            Long.valueOf(23341928234L),
-            Double.valueOf(23423.34),
-            Float.valueOf(213332.12f),
-            Short.valueOf((short)234),
-            Byte.valueOf((byte)20),
-            Character.valueOf('b'),
-            Integer.valueOf(232),
-            "SomeNewStringValue",
-            new Object(),
-            null,
+    public String[] ignoredTests() {
+        // Ignore the serialization tests on collection views.
+        return new String[] {
+         "TestBeanMap.bulkTestMapEntrySet.testCanonicalEmptyCollectionExists",
+         "TestBeanMap.bulkTestMapEntrySet.testCanonicalFullCollectionExists",
+         "TestBeanMap.bulkTestMapKeySet.testCanonicalEmptyCollectionExists",
+         "TestBeanMap.bulkTestMapKeySet.testCanonicalFullCollectionExists",
+         "TestBeanMap.bulkTestMapValues.testCanonicalEmptyCollectionExists",
+         "TestBeanMap.bulkTestMapValues.testCanonicalFullCollectionExists",
+         "TestBeanMap.bulkTestMapEntrySet.testSimpleSerialization",
+         "TestBeanMap.bulkTestMapKeySet.testSimpleSerialization",
+         "TestBeanMap.bulkTestMapEntrySet.testSerializeDeserializeThenCompare",
+         "TestBeanMap.bulkTestMapKeySet.testSerializeDeserializeThenCompare"
         };
-    }
-
-    /**
-     * Values is a dead copy in BeanMap, so refresh each time.
-     */
-    @Override
-    public void verifyValues() {
-        values = map.values();
-        super.verifyValues();
     }
 
     /**
@@ -269,6 +277,11 @@ public class BeanMapTestCase extends AbstractTestMap {
     }
 
     @Override
+    public Map<Object, Object> makeEmptyMap() {
+        return new BeanMap();
+    }
+
+    @Override
     public Map<Object, Object> makeFullMap() {
         // note: These values must match (i.e. .equals() must return true)
         // those returned from getSampleValues().
@@ -284,51 +297,6 @@ public class BeanMapTestCase extends AbstractTestMap {
         bean.setSomeStringValue("SomeStringValue");
         bean.setSomeObjectValue(objectInFullMap);
         return new BeanMap(bean);
-    }
-
-    @Override
-    public Map<Object, Object> makeEmptyMap() {
-        return new BeanMap();
-    }
-
-    @Override
-    public String[] ignoredTests() {
-        // Ignore the serialization tests on collection views.
-        return new String[] {
-         "TestBeanMap.bulkTestMapEntrySet.testCanonicalEmptyCollectionExists",
-         "TestBeanMap.bulkTestMapEntrySet.testCanonicalFullCollectionExists",
-         "TestBeanMap.bulkTestMapKeySet.testCanonicalEmptyCollectionExists",
-         "TestBeanMap.bulkTestMapKeySet.testCanonicalFullCollectionExists",
-         "TestBeanMap.bulkTestMapValues.testCanonicalEmptyCollectionExists",
-         "TestBeanMap.bulkTestMapValues.testCanonicalFullCollectionExists",
-         "TestBeanMap.bulkTestMapEntrySet.testSimpleSerialization",
-         "TestBeanMap.bulkTestMapKeySet.testSimpleSerialization",
-         "TestBeanMap.bulkTestMapEntrySet.testSerializeDeserializeThenCompare",
-         "TestBeanMap.bulkTestMapKeySet.testSerializeDeserializeThenCompare"
-        };
-    }
-
-    /**
-     * Need to override this method because the "clear()" method on the bean
-     * map just returns the bean properties to their default states.  It does
-     * not actually remove the mappings as per the map contract.  The default
-     * testClear() methods checks that the clear method throws an
-     * UnsupportedOperationException since this class is not add/remove
-     * modifiable.  In our case though, we do not always throw that exception.
-     */
-    @Override
-    public void testMapClear() {
-        //TODO: make sure a call to BeanMap.clear returns the bean to its
-        //default initialization values.
-    }
-
-    /**
-     * Need to override this method because the "put()" method on the bean
-     * doesn't work for this type of Map.
-     */
-    @Override
-    public void testMapPut() {
-        // see testBeanMapPutAllWriteable
     }
 
     public void testBeanMapClone() {
@@ -355,47 +323,6 @@ public class BeanMapTestCase extends AbstractTestMap {
         map2.put("someIntValue", Integer.valueOf(0));
         map1.putAllWriteable(map2);
         assertEquals(map1.get("someIntValue"), Integer.valueOf(0));
-    }
-
-    public void testMethodAccessor() throws Exception {
-        final BeanMap map = (BeanMap) makeFullMap();
-        final Method method = BeanWithProperties.class.getDeclaredMethod("getSomeIntegerValue");
-        assertEquals(method, map.getReadMethod("someIntegerValue"));
-    }
-
-    public void testMethodMutator() throws Exception {
-        final BeanMap map = (BeanMap) makeFullMap();
-        final Method method = BeanWithProperties.class.getDeclaredMethod("setSomeIntegerValue", Integer.class);
-        assertEquals(method, map.getWriteMethod("someIntegerValue"));
-    }
-
-    /**
-     *  Test the default transformers using the getTypeTransformer() method
-     */
-    public void testGetTypeTransformerMethod() {
-        final BeanMap beanMap = new BeanMap();
-        assertEquals("Boolean.TYPE",   Boolean.TRUE,        beanMap.getTypeTransformer(Boolean.TYPE).transform("true"));
-        assertEquals("Character.TYPE", Character.valueOf('B'),  beanMap.getTypeTransformer(Character.TYPE).transform("BCD"));
-        assertEquals("Byte.TYPE",      Byte.valueOf((byte)1),   beanMap.getTypeTransformer(Byte.TYPE).transform("1"));
-        assertEquals("Short.TYPE",     Short.valueOf((short)2), beanMap.getTypeTransformer(Short.TYPE).transform("2"));
-        assertEquals("Integer.TYPE",   Integer.valueOf(3),      beanMap.getTypeTransformer(Integer.TYPE).transform("3"));
-        assertEquals("Long.TYPE",      Long.valueOf(4),         beanMap.getTypeTransformer(Long.TYPE).transform("4"));
-        assertEquals("Float.TYPE",     Float.valueOf("5"),      beanMap.getTypeTransformer(Float.TYPE).transform("5"));
-        assertEquals("Double.TYPE",    Double.valueOf("6"),     beanMap.getTypeTransformer(Double.TYPE).transform("6"));
-    }
-
-    /**
-     *  Test the default transformers via the public static Map instance
-     */
-    public void testGetDefaultTransformersMap() {
-        assertEquals("Boolean.TYPE",   Boolean.TRUE,        ((Transformer)BeanMap.defaultTransformers.get(Boolean.TYPE)).transform("true"));
-        assertEquals("Character.TYPE", Character.valueOf('B'),  ((Transformer)BeanMap.defaultTransformers.get(Character.TYPE)).transform("BCD"));
-        assertEquals("Byte.TYPE",      Byte.valueOf((byte)1),   ((Transformer)BeanMap.defaultTransformers.get(Byte.TYPE)).transform("1"));
-        assertEquals("Short.TYPE",     Short.valueOf((short)2), ((Transformer)BeanMap.defaultTransformers.get(Short.TYPE)).transform("2"));
-        assertEquals("Integer.TYPE",   Integer.valueOf(3),      ((Transformer)BeanMap.defaultTransformers.get(Integer.TYPE)).transform("3"));
-        assertEquals("Long.TYPE",      Long.valueOf(4),         ((Transformer)BeanMap.defaultTransformers.get(Long.TYPE)).transform("4"));
-        assertEquals("Float.TYPE",     Float.valueOf("5"),      ((Transformer)BeanMap.defaultTransformers.get(Float.TYPE)).transform("5"));
-        assertEquals("Double.TYPE",    Double.valueOf("6"),     ((Transformer)BeanMap.defaultTransformers.get(Double.TYPE)).transform("6"));
     }
 
     /**
@@ -435,6 +362,33 @@ public class BeanMapTestCase extends AbstractTestMap {
             fail("remove() - expected UnsupportedOperationException");
         } catch(final UnsupportedOperationException e) {
             // expected result
+        }
+    }
+
+    /**
+     * Test that the cause of exception thrown by clear() is initialised.
+     */
+    public void testExceptionThrowFromClear() {
+
+        if (BeanUtilsTestCase.isPre14JVM()) {
+            System.out.println("testExceptionThrowFromClear() skipped on pre 1.4 JVM");
+            return;
+        }
+
+        try {
+            final Object bean = Jira87BeanFactory.createMappedPropertyBean();
+            final BeanMap map = new BeanMap(bean);
+            map.clear();
+            fail("clear() - expected UnsupportedOperationException");
+        } catch (final UnsupportedOperationException e) {
+            Throwable cause = null;
+            try {
+                cause = (Throwable)PropertyUtils.getProperty(e, "cause");
+            } catch (final Exception e2) {
+                fail("Retrieving the cause threw " + e2);
+            }
+            assertNotNull("Cause null", cause);
+            assertEquals("Cause", NoSuchMethodException.class, cause.getClass());
         }
     }
 
@@ -483,33 +437,6 @@ public class BeanMapTestCase extends AbstractTestMap {
     }
 
     /**
-     * Test that the cause of exception thrown by clear() is initialised.
-     */
-    public void testExceptionThrowFromClear() {
-
-        if (BeanUtilsTestCase.isPre14JVM()) {
-            System.out.println("testExceptionThrowFromClear() skipped on pre 1.4 JVM");
-            return;
-        }
-
-        try {
-            final Object bean = Jira87BeanFactory.createMappedPropertyBean();
-            final BeanMap map = new BeanMap(bean);
-            map.clear();
-            fail("clear() - expected UnsupportedOperationException");
-        } catch (final UnsupportedOperationException e) {
-            Throwable cause = null;
-            try {
-                cause = (Throwable)PropertyUtils.getProperty(e, "cause");
-            } catch (final Exception e2) {
-                fail("Retrieving the cause threw " + e2);
-            }
-            assertNotNull("Cause null", cause);
-            assertEquals("Cause", NoSuchMethodException.class, cause.getClass());
-        }
-    }
-
-    /**
      * Test that the cause of exception thrown by put() is initialized.
      */
     public void testExceptionThrowFromPut() {
@@ -537,5 +464,78 @@ public class BeanMapTestCase extends AbstractTestMap {
             assertNotNull("Setter exception cause 2 null", cause2);
             assertEquals("Setter exception cause 2", TestException.class, cause2.getClass());
         }
+    }
+
+    /**
+     *  Test the default transformers via the public static Map instance
+     */
+    public void testGetDefaultTransformersMap() {
+        assertEquals("Boolean.TYPE",   Boolean.TRUE,        ((Transformer)BeanMap.defaultTransformers.get(Boolean.TYPE)).transform("true"));
+        assertEquals("Character.TYPE", Character.valueOf('B'),  ((Transformer)BeanMap.defaultTransformers.get(Character.TYPE)).transform("BCD"));
+        assertEquals("Byte.TYPE",      Byte.valueOf((byte)1),   ((Transformer)BeanMap.defaultTransformers.get(Byte.TYPE)).transform("1"));
+        assertEquals("Short.TYPE",     Short.valueOf((short)2), ((Transformer)BeanMap.defaultTransformers.get(Short.TYPE)).transform("2"));
+        assertEquals("Integer.TYPE",   Integer.valueOf(3),      ((Transformer)BeanMap.defaultTransformers.get(Integer.TYPE)).transform("3"));
+        assertEquals("Long.TYPE",      Long.valueOf(4),         ((Transformer)BeanMap.defaultTransformers.get(Long.TYPE)).transform("4"));
+        assertEquals("Float.TYPE",     Float.valueOf("5"),      ((Transformer)BeanMap.defaultTransformers.get(Float.TYPE)).transform("5"));
+        assertEquals("Double.TYPE",    Double.valueOf("6"),     ((Transformer)BeanMap.defaultTransformers.get(Double.TYPE)).transform("6"));
+    }
+
+    /**
+     *  Test the default transformers using the getTypeTransformer() method
+     */
+    public void testGetTypeTransformerMethod() {
+        final BeanMap beanMap = new BeanMap();
+        assertEquals("Boolean.TYPE",   Boolean.TRUE,        beanMap.getTypeTransformer(Boolean.TYPE).transform("true"));
+        assertEquals("Character.TYPE", Character.valueOf('B'),  beanMap.getTypeTransformer(Character.TYPE).transform("BCD"));
+        assertEquals("Byte.TYPE",      Byte.valueOf((byte)1),   beanMap.getTypeTransformer(Byte.TYPE).transform("1"));
+        assertEquals("Short.TYPE",     Short.valueOf((short)2), beanMap.getTypeTransformer(Short.TYPE).transform("2"));
+        assertEquals("Integer.TYPE",   Integer.valueOf(3),      beanMap.getTypeTransformer(Integer.TYPE).transform("3"));
+        assertEquals("Long.TYPE",      Long.valueOf(4),         beanMap.getTypeTransformer(Long.TYPE).transform("4"));
+        assertEquals("Float.TYPE",     Float.valueOf("5"),      beanMap.getTypeTransformer(Float.TYPE).transform("5"));
+        assertEquals("Double.TYPE",    Double.valueOf("6"),     beanMap.getTypeTransformer(Double.TYPE).transform("6"));
+    }
+
+    /**
+     * Need to override this method because the "clear()" method on the bean
+     * map just returns the bean properties to their default states.  It does
+     * not actually remove the mappings as per the map contract.  The default
+     * testClear() methods checks that the clear method throws an
+     * UnsupportedOperationException since this class is not add/remove
+     * modifiable.  In our case though, we do not always throw that exception.
+     */
+    @Override
+    public void testMapClear() {
+        //TODO: make sure a call to BeanMap.clear returns the bean to its
+        //default initialization values.
+    }
+
+    /**
+     * Need to override this method because the "put()" method on the bean
+     * doesn't work for this type of Map.
+     */
+    @Override
+    public void testMapPut() {
+        // see testBeanMapPutAllWriteable
+    }
+
+    public void testMethodAccessor() throws Exception {
+        final BeanMap map = (BeanMap) makeFullMap();
+        final Method method = BeanWithProperties.class.getDeclaredMethod("getSomeIntegerValue");
+        assertEquals(method, map.getReadMethod("someIntegerValue"));
+    }
+
+    public void testMethodMutator() throws Exception {
+        final BeanMap map = (BeanMap) makeFullMap();
+        final Method method = BeanWithProperties.class.getDeclaredMethod("setSomeIntegerValue", Integer.class);
+        assertEquals(method, map.getWriteMethod("someIntegerValue"));
+    }
+
+    /**
+     * Values is a dead copy in BeanMap, so refresh each time.
+     */
+    @Override
+    public void verifyValues() {
+        values = map.values();
+        super.verifyValues();
     }
 }

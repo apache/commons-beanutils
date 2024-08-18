@@ -54,32 +54,6 @@ public class BeanUtils {
     private static int debug = 0;
 
     /**
-     * The <code>debug</code> static property is no longer used
-     * @return debug property
-     * @deprecated BeanUtils now uses commons-logging for all log messages.
-     *             Use your favorite logging tool to configure logging for
-     *             this class.
-     */
-    @Deprecated
-    public static int getDebug() {
-        return debug;
-    }
-
-    /**
-     * The <code>debug</code> static property is no longer used
-     * @param newDebug debug property
-     * @deprecated BeanUtils now uses commons-logging for all log messages.
-     *             Use your favorite logging tool to configure logging for
-     *             this class.
-     */
-    @Deprecated
-    public static void setDebug(final int newDebug) {
-        debug = newDebug;
-    }
-
-
-
-    /**
      * <p>Clone a bean based on the available property getters and setters,
      * even if the bean class itself does not implement Cloneable.</p>
      *
@@ -105,7 +79,6 @@ public class BeanUtils {
         return BeanUtilsBean.getInstance().cloneBean(bean);
 
     }
-
 
     /**
      * <p>Copy property values from the origin bean to the destination bean
@@ -133,6 +106,7 @@ public class BeanUtils {
     }
 
 
+
     /**
      * <p>Copy the specified property value to the specified destination bean,
      * performing any type conversion that is required.</p>
@@ -153,6 +127,18 @@ public class BeanUtils {
         throws IllegalAccessException, InvocationTargetException {
 
         BeanUtilsBean.getInstance().copyProperty(bean, name, value);
+    }
+
+
+    /**
+     * Create a cache.
+     * @param <K> the key type of the cache
+     * @param <V> the value type of the cache
+     * @return a new cache
+     * @since 1.8.0
+     */
+    public static <K, V> Map<K, V> createCache() {
+        return new WeakFastHashMap<>();
     }
 
 
@@ -204,6 +190,33 @@ public class BeanUtils {
             NoSuchMethodException {
 
         return BeanUtilsBean.getInstance().getArrayProperty(bean, name);
+    }
+
+
+    /**
+     * Return whether a Map is fast
+     * @param map The map
+     * @return Whether it is fast or not.
+     * @since 1.8.0
+     */
+    public static boolean getCacheFast(final Map<?, ?> map) {
+        if (map instanceof WeakFastHashMap) {
+            return ((WeakFastHashMap<?, ?>) map).getFast();
+        }
+        return false;
+    }
+
+
+    /**
+     * The <code>debug</code> static property is no longer used
+     * @return debug property
+     * @deprecated BeanUtils now uses commons-logging for all log messages.
+     *             Use your favorite logging tool to configure logging for
+     *             this class.
+     */
+    @Deprecated
+    public static int getDebug() {
+        return debug;
     }
 
 
@@ -407,6 +420,18 @@ public class BeanUtils {
 
 
     /**
+     * If we're running on JDK 1.4 or later, initialize the cause for the given throwable.
+     *
+     * @param  throwable The throwable.
+     * @param  cause     The cause of the throwable.
+     * @return  true if the cause was initialized, otherwise false.
+     * @since 1.8.0
+     */
+    public static boolean initCause(final Throwable throwable, final Throwable cause) {
+        return BeanUtilsBean.getInstance().initCause(throwable, cause);
+    }
+
+    /**
      * <p>Populate the JavaBeans properties of the specified bean, based on
      * the specified name/value pairs.</p>
      *
@@ -428,6 +453,29 @@ public class BeanUtils {
         BeanUtilsBean.getInstance().populate(bean, properties);
     }
 
+    /**
+     * Set whether fast on a Map
+     * @param map The map
+     * @param fast Whether it should be fast or not.
+     * @since 1.8.0
+     */
+    public static void setCacheFast(final Map<?, ?> map, final boolean fast) {
+        if (map instanceof WeakFastHashMap) {
+            ((WeakFastHashMap<?, ?>)map).setFast(fast);
+        }
+    }
+
+    /**
+     * The <code>debug</code> static property is no longer used
+     * @param newDebug debug property
+     * @deprecated BeanUtils now uses commons-logging for all log messages.
+     *             Use your favorite logging tool to configure logging for
+     *             this class.
+     */
+    @Deprecated
+    public static void setDebug(final int newDebug) {
+        debug = newDebug;
+    }
 
     /**
      * <p>Set the specified property value, performing type conversions as
@@ -449,53 +497,5 @@ public class BeanUtils {
         throws IllegalAccessException, InvocationTargetException {
 
         BeanUtilsBean.getInstance().setProperty(bean, name, value);
-    }
-
-    /**
-     * If we're running on JDK 1.4 or later, initialize the cause for the given throwable.
-     *
-     * @param  throwable The throwable.
-     * @param  cause     The cause of the throwable.
-     * @return  true if the cause was initialized, otherwise false.
-     * @since 1.8.0
-     */
-    public static boolean initCause(final Throwable throwable, final Throwable cause) {
-        return BeanUtilsBean.getInstance().initCause(throwable, cause);
-    }
-
-    /**
-     * Create a cache.
-     * @param <K> the key type of the cache
-     * @param <V> the value type of the cache
-     * @return a new cache
-     * @since 1.8.0
-     */
-    public static <K, V> Map<K, V> createCache() {
-        return new WeakFastHashMap<>();
-    }
-
-    /**
-     * Return whether a Map is fast
-     * @param map The map
-     * @return Whether it is fast or not.
-     * @since 1.8.0
-     */
-    public static boolean getCacheFast(final Map<?, ?> map) {
-        if (map instanceof WeakFastHashMap) {
-            return ((WeakFastHashMap<?, ?>) map).getFast();
-        }
-        return false;
-    }
-
-    /**
-     * Set whether fast on a Map
-     * @param map The map
-     * @param fast Whether it should be fast or not.
-     * @since 1.8.0
-     */
-    public static void setCacheFast(final Map<?, ?> map, final boolean fast) {
-        if (map instanceof WeakFastHashMap) {
-            ((WeakFastHashMap<?, ?>)map).setFast(fast);
-        }
     }
 }

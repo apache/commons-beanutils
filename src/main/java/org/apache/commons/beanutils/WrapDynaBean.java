@@ -52,6 +52,19 @@ public class WrapDynaBean implements DynaBean, Serializable {
 
 
     /**
+     * The <code>DynaClass</code> "base class" that this DynaBean
+     * is associated with.
+     */
+    protected transient WrapDynaClass dynaClass = null;
+
+    /**
+     * The JavaBean instance wrapped by this WrapDynaBean.
+     */
+    protected Object instance = null;
+
+
+
+    /**
      * Construct a new <code>DynaBean</code> associated with the specified
      * JavaBean instance.
      *
@@ -62,6 +75,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
         this(instance, null);
 
     }
+
 
     /**
      * Creates a new instance of {@code WrapDynaBean}, associates it with the specified
@@ -80,20 +94,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
         this.dynaClass = cls != null ? cls : (WrapDynaClass) getDynaClass();
 
     }
-
-
-
-    /**
-     * The <code>DynaClass</code> "base class" that this DynaBean
-     * is associated with.
-     */
-    protected transient WrapDynaClass dynaClass = null;
-
-
-    /**
-     * The JavaBean instance wrapped by this WrapDynaBean.
-     */
-    protected Object instance = null;
 
 
 
@@ -240,6 +240,59 @@ public class WrapDynaBean implements DynaBean, Serializable {
 
 
     /**
+     * Return the property descriptor for the specified property name.
+     *
+     * @param name Name of the property for which to retrieve the descriptor
+     * @return The descriptor for the specified property
+     *
+     * @throws IllegalArgumentException if this is not a valid property
+     *  name for our DynaClass
+     */
+    protected DynaProperty getDynaProperty(final String name) {
+
+        final DynaProperty descriptor = getDynaClass().getDynaProperty(name);
+        if (descriptor == null) {
+            throw new IllegalArgumentException
+                    ("Invalid property name '" + name + "'");
+        }
+        return descriptor;
+
+    }
+
+
+    /**
+     * Gets the bean instance wrapped by this DynaBean.
+     * For most common use cases,
+     * this object should already be known
+     * and this method safely be ignored.
+     * But some creators of frameworks using <code>DynaBean</code>'s may
+     * find this useful.
+     *
+     * @return the java bean Object wrapped by this <code>DynaBean</code>
+     */
+    public Object getInstance() {
+        return instance;
+    }
+
+
+    /**
+     * Returns the {@code PropertyUtilsBean} instance to be used for accessing properties.
+     * If available, this object is obtained from the associated {@code WrapDynaClass}.
+     *
+     * @return the associated {@code PropertyUtilsBean}
+     */
+    private PropertyUtilsBean getPropertyUtils() {
+
+        PropertyUtilsBean propUtils = null;
+        if (dynaClass != null) {
+            propUtils = dynaClass.getPropertyUtilsBean();
+        }
+        return propUtils != null ? propUtils : PropertyUtilsBean.getInstance();
+
+    }
+
+
+    /**
      * Remove any existing value for the specified key on the
      * specified mapped property.
      *
@@ -258,39 +311,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
                 ("WrapDynaBean does not support remove()");
 
     }
-
-
-    /**
-     * Set the value of a simple property with the specified name.
-     *
-     * @param name Name of the property whose value is to be set
-     * @param value Value to which this property is to be set
-     *
-     * @throws ConversionException if the specified value cannot be
-     *  converted to the type required for this property
-     * @throws IllegalArgumentException if there is no property
-     *  of the specified name
-     * @throws NullPointerException if an attempt is made to set a
-     *  primitive property to null
-     */
-    @Override
-    public void set(final String name, final Object value) {
-
-        try {
-            getPropertyUtils().setSimpleProperty(instance, name, value);
-        } catch (final InvocationTargetException ite) {
-            final Throwable cause = ite.getTargetException();
-            throw new IllegalArgumentException
-                    ("Error setting property '" + name +
-                              "' nested exception -" + cause);
-        } catch (final Throwable t) {
-            throw new IllegalArgumentException
-                    ("Error setting property '" + name +
-                              "', exception - " + t);
-        }
-
-    }
-
 
     /**
      * Set the value of an indexed property with the specified name.
@@ -329,6 +349,39 @@ public class WrapDynaBean implements DynaBean, Serializable {
     }
 
 
+
+
+    /**
+     * Set the value of a simple property with the specified name.
+     *
+     * @param name Name of the property whose value is to be set
+     * @param value Value to which this property is to be set
+     *
+     * @throws ConversionException if the specified value cannot be
+     *  converted to the type required for this property
+     * @throws IllegalArgumentException if there is no property
+     *  of the specified name
+     * @throws NullPointerException if an attempt is made to set a
+     *  primitive property to null
+     */
+    @Override
+    public void set(final String name, final Object value) {
+
+        try {
+            getPropertyUtils().setSimpleProperty(instance, name, value);
+        } catch (final InvocationTargetException ite) {
+            final Throwable cause = ite.getTargetException();
+            throw new IllegalArgumentException
+                    ("Error setting property '" + name +
+                              "' nested exception -" + cause);
+        } catch (final Throwable t) {
+            throw new IllegalArgumentException
+                    ("Error setting property '" + name +
+                              "', exception - " + t);
+        }
+
+    }
+
     /**
      * Set the value of a mapped property with the specified name.
      *
@@ -358,59 +411,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
                     ("Error setting mapped property '" + name +
                               "', exception - " + t);
         }
-
-    }
-
-    /**
-     * Gets the bean instance wrapped by this DynaBean.
-     * For most common use cases,
-     * this object should already be known
-     * and this method safely be ignored.
-     * But some creators of frameworks using <code>DynaBean</code>'s may
-     * find this useful.
-     *
-     * @return the java bean Object wrapped by this <code>DynaBean</code>
-     */
-    public Object getInstance() {
-        return instance;
-    }
-
-
-
-
-    /**
-     * Return the property descriptor for the specified property name.
-     *
-     * @param name Name of the property for which to retrieve the descriptor
-     * @return The descriptor for the specified property
-     *
-     * @throws IllegalArgumentException if this is not a valid property
-     *  name for our DynaClass
-     */
-    protected DynaProperty getDynaProperty(final String name) {
-
-        final DynaProperty descriptor = getDynaClass().getDynaProperty(name);
-        if (descriptor == null) {
-            throw new IllegalArgumentException
-                    ("Invalid property name '" + name + "'");
-        }
-        return descriptor;
-
-    }
-
-    /**
-     * Returns the {@code PropertyUtilsBean} instance to be used for accessing properties.
-     * If available, this object is obtained from the associated {@code WrapDynaClass}.
-     *
-     * @return the associated {@code PropertyUtilsBean}
-     */
-    private PropertyUtilsBean getPropertyUtils() {
-
-        PropertyUtilsBean propUtils = null;
-        if (dynaClass != null) {
-            propUtils = dynaClass.getPropertyUtilsBean();
-        }
-        return propUtils != null ? propUtils : PropertyUtilsBean.getInstance();
 
     }
 }

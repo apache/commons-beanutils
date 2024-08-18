@@ -46,6 +46,167 @@ public class ConstructorUtils {
 
 
     /**
+     * Returns a constructor with single argument.
+     * @param <T> the type of the constructor
+     * @param klass the class to be constructed
+     * @param parameterType The constructor parameter type
+     * @return null if matching accessible constructor can not be found.
+     * @see Class#getConstructor
+     * @see #getAccessibleConstructor(java.lang.reflect.Constructor)
+     */
+    public static <T> Constructor<T> getAccessibleConstructor(
+        final Class<T> klass,
+        final Class<?> parameterType) {
+
+        final Class<?>[] parameterTypes = { parameterType };
+        return getAccessibleConstructor(klass, parameterTypes);
+    }
+
+    /**
+     * Returns a constructor given a class and signature.
+     * @param <T> the type to be constructed
+     * @param klass the class to be constructed
+     * @param parameterTypes the parameter array
+     * @return null if matching accessible constructor can not be found
+     * @see Class#getConstructor
+     * @see #getAccessibleConstructor(java.lang.reflect.Constructor)
+     */
+    public static <T> Constructor<T> getAccessibleConstructor(
+        final Class<T> klass,
+        final Class<?>[] parameterTypes) {
+
+        try {
+            return getAccessibleConstructor(
+                klass.getConstructor(parameterTypes));
+        } catch (final NoSuchMethodException e) {
+            return null;
+        }
+    }
+
+    /**
+     * Returns accessible version of the given constructor.
+     * @param <T> the type of the constructor
+     * @param ctor prototype constructor object.
+     * @return <code>null</code> if accessible constructor can not be found.
+     * @see java.lang.SecurityManager
+     */
+    public static <T> Constructor<T> getAccessibleConstructor(final Constructor<T> ctor) {
+
+        // Make sure we have a method to check
+        if (ctor == null) {
+            return null;
+        }
+
+        // If the requested method is not public we cannot call it
+        if (!Modifier.isPublic(ctor.getModifiers())) {
+            return null;
+        }
+
+        // If the declaring class is public, we are done
+        final Class<T> clazz = ctor.getDeclaringClass();
+        if (Modifier.isPublic(clazz.getModifiers())) {
+            return ctor;
+        }
+
+        // what else can we do?
+        return null;
+    }
+
+
+    /**
+     * <p>Find an accessible constructor with compatible parameters.
+     * Compatible parameters mean that every method parameter is assignable from
+     * the given parameters. In other words, it finds constructor that will take
+     * the parameters given.</p>
+     *
+     * <p>First it checks if there is constructor matching the exact signature.
+     * If no such, all the constructors of the class are tested if their signatures
+     * are assignment compatible with the parameter types.
+     * The first matching constructor is returned.</p>
+     *
+     * @param <T> the type of the class to be inspected
+     * @param clazz find constructor for this class
+     * @param parameterTypes find method with compatible parameters
+     * @return a valid Constructor object. If there's no matching constructor, returns <code>null</code>.
+     */
+    private static <T> Constructor<T> getMatchingAccessibleConstructor(
+        final Class<T> clazz,
+        final Class<?>[] parameterTypes) {
+        // see if we can find the method directly
+        // most of the time this works and it's much faster
+        try {
+            final Constructor<T> ctor = clazz.getConstructor(parameterTypes);
+            try {
+                //
+                // XXX Default access superclass workaround
+                //
+                // When a public class has a default access superclass
+                // with public methods, these methods are accessible.
+                // Calling them from compiled code works fine.
+                //
+                // Unfortunately, using reflection to invoke these methods
+                // seems to (wrongly) to prevent access even when the method
+                // modifer is public.
+                //
+                // The following workaround solves the problem but will only
+                // work from sufficiently privilages code.
+                //
+                // Better workarounds would be greatfully accepted.
+                //
+                ctor.setAccessible(true);
+            } catch (final SecurityException se) {
+                /* SWALLOW, if workaround fails don't fret. */
+            }
+            return ctor;
+
+        } catch (final NoSuchMethodException e) { /* SWALLOW */
+        }
+
+        // search through all methods
+        final int paramSize = parameterTypes.length;
+        final Constructor<?>[] ctors = clazz.getConstructors();
+        for (final Constructor<?> ctor2 : ctors) {
+            // compare parameters
+            final Class<?>[] ctorParams = ctor2.getParameterTypes();
+            final int ctorParamSize = ctorParams.length;
+            if (ctorParamSize == paramSize) {
+                boolean match = true;
+                for (int n = 0; n < ctorParamSize; n++) {
+                    if (!MethodUtils
+                        .isAssignmentCompatible(
+                            ctorParams[n],
+                            parameterTypes[n])) {
+                        match = false;
+                        break;
+                    }
+                }
+
+                if (match) {
+                    // get accessible version of method
+                    final Constructor<?> ctor = getAccessibleConstructor(ctor2);
+                    if (ctor != null) {
+                        try {
+                            ctor.setAccessible(true);
+                        } catch (final SecurityException se) {
+                            /* Swallow SecurityException
+                             * TODO: Why?
+                             */
+                        }
+                        @SuppressWarnings("unchecked")
+                        final
+                        // Class.getConstructors() actually returns constructors
+                        // of type T, so it is safe to cast.
+                        Constructor<T> typedCtor = (Constructor<T>) ctor;
+                        return typedCtor;
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * <p>Convenience method returning new instance of <code>klazz</code> using a single argument constructor.
      * The formal parameter type is inferred from the actual values of <code>arg</code>.
      * See {@link #invokeExactConstructor(Class, Object[], Class[])} for more details.</p>
@@ -155,7 +316,6 @@ public class ConstructorUtils {
         }
         return ctor.newInstance(args);
     }
-
 
     /**
      * <p>Convenience method returning new instance of <code>klazz</code> using a single argument constructor.
@@ -269,172 +429,12 @@ public class ConstructorUtils {
         return ctor.newInstance(args);
     }
 
-    /**
-     * Returns a constructor with single argument.
-     * @param <T> the type of the constructor
-     * @param klass the class to be constructed
-     * @param parameterType The constructor parameter type
-     * @return null if matching accessible constructor can not be found.
-     * @see Class#getConstructor
-     * @see #getAccessibleConstructor(java.lang.reflect.Constructor)
-     */
-    public static <T> Constructor<T> getAccessibleConstructor(
-        final Class<T> klass,
-        final Class<?> parameterType) {
-
-        final Class<?>[] parameterTypes = { parameterType };
-        return getAccessibleConstructor(klass, parameterTypes);
-    }
-
-    /**
-     * Returns a constructor given a class and signature.
-     * @param <T> the type to be constructed
-     * @param klass the class to be constructed
-     * @param parameterTypes the parameter array
-     * @return null if matching accessible constructor can not be found
-     * @see Class#getConstructor
-     * @see #getAccessibleConstructor(java.lang.reflect.Constructor)
-     */
-    public static <T> Constructor<T> getAccessibleConstructor(
-        final Class<T> klass,
-        final Class<?>[] parameterTypes) {
-
-        try {
-            return getAccessibleConstructor(
-                klass.getConstructor(parameterTypes));
-        } catch (final NoSuchMethodException e) {
-            return null;
-        }
-    }
-
-    /**
-     * Returns accessible version of the given constructor.
-     * @param <T> the type of the constructor
-     * @param ctor prototype constructor object.
-     * @return <code>null</code> if accessible constructor can not be found.
-     * @see java.lang.SecurityManager
-     */
-    public static <T> Constructor<T> getAccessibleConstructor(final Constructor<T> ctor) {
-
-        // Make sure we have a method to check
-        if (ctor == null) {
-            return null;
-        }
-
-        // If the requested method is not public we cannot call it
-        if (!Modifier.isPublic(ctor.getModifiers())) {
-            return null;
-        }
-
-        // If the declaring class is public, we are done
-        final Class<T> clazz = ctor.getDeclaringClass();
-        if (Modifier.isPublic(clazz.getModifiers())) {
-            return ctor;
-        }
-
-        // what else can we do?
-        return null;
-    }
-
     private static Object[] toArray(final Object arg) {
         Object[] args = null;
         if (arg != null) {
             args = new Object[] { arg };
         }
         return args;
-    }
-
-    /**
-     * <p>Find an accessible constructor with compatible parameters.
-     * Compatible parameters mean that every method parameter is assignable from
-     * the given parameters. In other words, it finds constructor that will take
-     * the parameters given.</p>
-     *
-     * <p>First it checks if there is constructor matching the exact signature.
-     * If no such, all the constructors of the class are tested if their signatures
-     * are assignment compatible with the parameter types.
-     * The first matching constructor is returned.</p>
-     *
-     * @param <T> the type of the class to be inspected
-     * @param clazz find constructor for this class
-     * @param parameterTypes find method with compatible parameters
-     * @return a valid Constructor object. If there's no matching constructor, returns <code>null</code>.
-     */
-    private static <T> Constructor<T> getMatchingAccessibleConstructor(
-        final Class<T> clazz,
-        final Class<?>[] parameterTypes) {
-        // see if we can find the method directly
-        // most of the time this works and it's much faster
-        try {
-            final Constructor<T> ctor = clazz.getConstructor(parameterTypes);
-            try {
-                //
-                // XXX Default access superclass workaround
-                //
-                // When a public class has a default access superclass
-                // with public methods, these methods are accessible.
-                // Calling them from compiled code works fine.
-                //
-                // Unfortunately, using reflection to invoke these methods
-                // seems to (wrongly) to prevent access even when the method
-                // modifer is public.
-                //
-                // The following workaround solves the problem but will only
-                // work from sufficiently privilages code.
-                //
-                // Better workarounds would be greatfully accepted.
-                //
-                ctor.setAccessible(true);
-            } catch (final SecurityException se) {
-                /* SWALLOW, if workaround fails don't fret. */
-            }
-            return ctor;
-
-        } catch (final NoSuchMethodException e) { /* SWALLOW */
-        }
-
-        // search through all methods
-        final int paramSize = parameterTypes.length;
-        final Constructor<?>[] ctors = clazz.getConstructors();
-        for (final Constructor<?> ctor2 : ctors) {
-            // compare parameters
-            final Class<?>[] ctorParams = ctor2.getParameterTypes();
-            final int ctorParamSize = ctorParams.length;
-            if (ctorParamSize == paramSize) {
-                boolean match = true;
-                for (int n = 0; n < ctorParamSize; n++) {
-                    if (!MethodUtils
-                        .isAssignmentCompatible(
-                            ctorParams[n],
-                            parameterTypes[n])) {
-                        match = false;
-                        break;
-                    }
-                }
-
-                if (match) {
-                    // get accessible version of method
-                    final Constructor<?> ctor = getAccessibleConstructor(ctor2);
-                    if (ctor != null) {
-                        try {
-                            ctor.setAccessible(true);
-                        } catch (final SecurityException se) {
-                            /* Swallow SecurityException
-                             * TODO: Why?
-                             */
-                        }
-                        @SuppressWarnings("unchecked")
-                        final
-                        // Class.getConstructors() actually returns constructors
-                        // of type T, so it is safe to cast.
-                        Constructor<T> typedCtor = (Constructor<T>) ctor;
-                        return typedCtor;
-                    }
-                }
-            }
-        }
-
-        return null;
     }
 
 }

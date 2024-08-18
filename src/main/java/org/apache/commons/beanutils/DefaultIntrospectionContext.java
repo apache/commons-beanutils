@@ -57,11 +57,6 @@ class DefaultIntrospectionContext implements IntrospectionContext {
     }
 
     @Override
-    public Class<?> getTargetClass() {
-        return currentClass;
-    }
-
-    @Override
     public void addPropertyDescriptor(final PropertyDescriptor desc) {
         if (desc == null) {
             throw new IllegalArgumentException(
@@ -83,23 +78,8 @@ class DefaultIntrospectionContext implements IntrospectionContext {
     }
 
     @Override
-    public boolean hasProperty(final String name) {
-        return descriptors.containsKey(name);
-    }
-
-    @Override
     public PropertyDescriptor getPropertyDescriptor(final String name) {
         return descriptors.get(name);
-    }
-
-    @Override
-    public void removePropertyDescriptor(final String name) {
-        descriptors.remove(name);
-    }
-
-    @Override
-    public Set<String> propertyNames() {
-        return descriptors.keySet();
     }
 
     /**
@@ -110,5 +90,25 @@ class DefaultIntrospectionContext implements IntrospectionContext {
      */
     public PropertyDescriptor[] getPropertyDescriptors() {
         return descriptors.values().toArray(EMPTY_DESCRIPTORS);
+    }
+
+    @Override
+    public Class<?> getTargetClass() {
+        return currentClass;
+    }
+
+    @Override
+    public boolean hasProperty(final String name) {
+        return descriptors.containsKey(name);
+    }
+
+    @Override
+    public Set<String> propertyNames() {
+        return descriptors.keySet();
+    }
+
+    @Override
+    public void removePropertyDescriptor(final String name) {
+        descriptors.remove(name);
     }
 }

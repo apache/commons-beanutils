@@ -62,425 +62,6 @@ import java.util.WeakHashMap;
  */
 class WeakFastHashMap<K, V> extends HashMap<K, V> {
 
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * The underlying map we are managing.
-     */
-    private Map<K, V> map = null;
-
-    /**
-     * Are we currently operating in "fast" mode?
-     */
-    private boolean fast = false;
-
-    // Constructors
-    // ----------------------------------------------------------------------
-
-    /**
-     * Construct an empty map.
-     */
-    public WeakFastHashMap() {
-        this.map = createMap();
-    }
-
-    /**
-     * Construct an empty map with the specified capacity.
-     *
-     * @param capacity  the initial capacity of the empty map
-     */
-    public WeakFastHashMap(final int capacity) {
-        this.map = createMap(capacity);
-    }
-
-    /**
-     * Construct an empty map with the specified capacity and load factor.
-     *
-     * @param capacity  the initial capacity of the empty map
-     * @param factor  the load factor of the new map
-     */
-    public WeakFastHashMap(final int capacity, final float factor) {
-        this.map = createMap(capacity, factor);
-    }
-
-    /**
-     * Construct a new map with the same mappings as the specified map.
-     *
-     * @param map  the map whose mappings are to be copied
-     */
-    public WeakFastHashMap(final Map<? extends K, ? extends V> map) {
-        this.map = createMap(map);
-    }
-
-
-    // Property access
-    // ----------------------------------------------------------------------
-
-    /**
-     *  Returns true if this map is operating in fast mode.
-     *
-     *  @return true if this map is operating in fast mode
-     */
-    public boolean getFast() {
-        return this.fast;
-    }
-
-    /**
-     *  Sets whether this map is operating in fast mode.
-     *
-     *  @param fast true if this map should operate in fast mode
-     */
-    public void setFast(final boolean fast) {
-        this.fast = fast;
-    }
-
-
-    // Map access
-    // ----------------------------------------------------------------------
-    // These methods can forward straight to the wrapped Map in 'fast' mode.
-    // (because they are query methods)
-
-    /**
-     * Return the value to which this map maps the specified key.  Returns
-     * <code>null</code> if the map contains no mapping for this key, or if
-     * there is a mapping with a value of <code>null</code>.  Use the
-     * <code>containsKey()</code> method to disambiguate these cases.
-     *
-     * @param key  the key whose value is to be returned
-     * @return the value mapped to that key, or null
-     */
-    @Override
-    public V get(final Object key) {
-        if (fast) {
-            return map.get(key);
-        }
-        synchronized (map) {
-            return map.get(key);
-        }
-    }
-
-    /**
-     * Return the number of key-value mappings in this map.
-     *
-     * @return the current size of the map
-     */
-    @Override
-    public int size() {
-        if (fast) {
-            return map.size();
-        }
-        synchronized (map) {
-            return map.size();
-        }
-    }
-
-    /**
-     * Return <code>true</code> if this map contains no mappings.
-     *
-     * @return is the map currently empty
-     */
-    @Override
-    public boolean isEmpty() {
-        if (fast) {
-            return map.isEmpty();
-        }
-        synchronized (map) {
-            return map.isEmpty();
-        }
-    }
-
-    /**
-     * Return <code>true</code> if this map contains a mapping for the
-     * specified key.
-     *
-     * @param key  the key to be searched for
-     * @return true if the map contains the key
-     */
-    @Override
-    public boolean containsKey(final Object key) {
-        if (fast) {
-            return map.containsKey(key);
-        }
-        synchronized (map) {
-            return map.containsKey(key);
-        }
-    }
-
-    /**
-     * Return <code>true</code> if this map contains one or more keys mapping
-     * to the specified value.
-     *
-     * @param value  the value to be searched for
-     * @return true if the map contains the value
-     */
-    @Override
-    public boolean containsValue(final Object value) {
-        if (fast) {
-            return map.containsValue(value);
-        }
-        synchronized (map) {
-            return map.containsValue(value);
-        }
-    }
-
-    // Map modification
-    // ----------------------------------------------------------------------
-    // These methods perform special behaviour in 'fast' mode.
-    // The map is cloned, updated and then assigned back.
-    // See the comments at the top as to why this won't always work.
-
-    /**
-     * Associate the specified value with the specified key in this map.
-     * If the map previously contained a mapping for this key, the old
-     * value is replaced and returned.
-     *
-     * @param key  the key with which the value is to be associated
-     * @param value  the value to be associated with this key
-     * @return the value previously mapped to the key, or null
-     */
-    @Override
-    public V put(final K key, final V value) {
-        if (fast) {
-            synchronized (this) {
-                final Map<K, V> temp = cloneMap(map);
-                final V result = temp.put(key, value);
-                map = temp;
-                return result;
-            }
-        } else {
-            synchronized (map) {
-                return map.put(key, value);
-            }
-        }
-    }
-
-    /**
-     * Copy all of the mappings from the specified map to this one, replacing
-     * any mappings with the same keys.
-     *
-     * @param in  the map whose mappings are to be copied
-     */
-    @Override
-    public void putAll(final Map<? extends K, ? extends V> in) {
-        if (fast) {
-            synchronized (this) {
-                final Map<K, V> temp =  cloneMap(map);
-                temp.putAll(in);
-                map = temp;
-            }
-        } else {
-            synchronized (map) {
-                map.putAll(in);
-            }
-        }
-    }
-
-    /**
-     * Remove any mapping for this key, and return any previously
-     * mapped value.
-     *
-     * @param key  the key whose mapping is to be removed
-     * @return the value removed, or null
-     */
-    @Override
-    public V remove(final Object key) {
-        if (fast) {
-            synchronized (this) {
-                final Map<K, V> temp = cloneMap(map);
-                final V result = temp.remove(key);
-                map = temp;
-                return result;
-            }
-        } else {
-            synchronized (map) {
-                return map.remove(key);
-            }
-        }
-    }
-
-    /**
-     * Remove all mappings from this map.
-     */
-    @Override
-    public void clear() {
-        if (fast) {
-            synchronized (this) {
-                map = createMap();
-            }
-        } else {
-            synchronized (map) {
-                map.clear();
-            }
-        }
-    }
-
-    // Basic object methods
-    // ----------------------------------------------------------------------
-
-    /**
-     * Compare the specified object with this list for equality.  This
-     * implementation uses exactly the code that is used to define the
-     * list equals function in the documentation for the
-     * <code>Map.equals</code> method.
-     *
-     * @param o  the object to be compared to this list
-     * @return true if the two maps are equal
-     */
-    @Override
-    public boolean equals(final Object o) {
-        // Simple tests that require no synchronization
-        if (o == this) {
-            return true;
-        }
-        if (!(o instanceof Map)) {
-            return false;
-        }
-        final Map<?, ?> mo = (Map<?, ?>) o;
-
-        // Compare the two maps for equality
-        if (fast) {
-            if (mo.size() != map.size()) {
-                return false;
-            }
-            for (final Map.Entry<K, V> e : map.entrySet()) {
-                final K key = e.getKey();
-                final V value = e.getValue();
-                if (value == null) {
-                    if (!(mo.get(key) == null && mo.containsKey(key))) {
-                        return false;
-                    }
-                } else {
-                    if (!value.equals(mo.get(key))) {
-                        return false;
-                    }
-                }
-            }
-            return true;
-
-        }
-        synchronized (map) {
-            if (mo.size() != map.size()) {
-                return false;
-            }
-            for (final Map.Entry<K, V> e : map.entrySet()) {
-                final K key = e.getKey();
-                final V value = e.getValue();
-                if (value == null) {
-                    if (!(mo.get(key) == null && mo.containsKey(key))) {
-                        return false;
-                    }
-                } else {
-                    if (!value.equals(mo.get(key))) {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
-    }
-
-    /**
-     * Return the hash code value for this map.  This implementation uses
-     * exactly the code that is used to define the list hash function in the
-     * documentation for the <code>Map.hashCode</code> method.
-     *
-     * @return suitable integer hash code
-     */
-    @Override
-    public int hashCode() {
-        if (fast) {
-            int h = 0;
-            for (final Map.Entry<K, V> e : map.entrySet()) {
-                h += e.hashCode();
-            }
-            return h;
-        }
-        synchronized (map) {
-            int h = 0;
-            for (final Map.Entry<K, V> e : map.entrySet()) {
-                h += e.hashCode();
-            }
-            return h;
-        }
-    }
-
-    /**
-     * Return a shallow copy of this <code>FastHashMap</code> instance.
-     * The keys and values themselves are not copied.
-     *
-     * @return a clone of this map
-     */
-    @Override
-    public Object clone() {
-        WeakFastHashMap<K, V> results = null;
-        if (fast) {
-            results = new WeakFastHashMap<>(map);
-        } else {
-            synchronized (map) {
-                results = new WeakFastHashMap<>(map);
-            }
-        }
-        results.setFast(getFast());
-        return results;
-    }
-
-    // Map views
-    // ----------------------------------------------------------------------
-
-    /**
-     * Return a collection view of the mappings contained in this map.  Each
-     * element in the returned collection is a <code>Map.Entry</code>.
-     * @return the set of map Map entries
-     */
-    @Override
-    public Set<Map.Entry<K, V>> entrySet() {
-        return new EntrySet();
-    }
-
-    /**
-     * Return a set view of the keys contained in this map.
-     * @return the set of the Map's keys
-     */
-    @Override
-    public Set<K> keySet() {
-        return new KeySet();
-    }
-
-    /**
-     * Return a collection view of the values contained in this map.
-     * @return the set of the Map's values
-     */
-    @Override
-    public Collection<V> values() {
-        return new Values();
-    }
-
-    // Abstractions on Map creations (for subclasses such as WeakFastHashMap)
-    // ----------------------------------------------------------------------
-
-    protected Map<K, V> createMap() {
-        return new WeakHashMap<>();
-    }
-
-    protected Map<K, V> createMap(final int capacity) {
-        return new WeakHashMap<>(capacity);
-    }
-
-    protected Map<K, V> createMap(final int capacity, final float factor) {
-        return new WeakHashMap<>(capacity, factor);
-    }
-
-    protected Map<K, V> createMap(final Map<? extends K, ? extends V> map) {
-        return new WeakHashMap<>(map);
-    }
-
-    protected Map<K, V> cloneMap(final Map<? extends K, ? extends V> map) {
-        return createMap(map);
-    }
-
-    // Map view inner classes
-    // ----------------------------------------------------------------------
-
     /**
      * Abstract collection implementation shared by keySet(), values() and entrySet().
      *
@@ -488,12 +69,67 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
      */
     private abstract class CollectionView<E> implements Collection<E> {
 
-        public CollectionView() {
+        private class CollectionViewIterator implements Iterator<E> {
+
+            private Map<K, V> expected;
+            private Map.Entry<K, V> lastReturned = null;
+            private final Iterator<Map.Entry<K, V>> iterator;
+
+            public CollectionViewIterator() {
+                this.expected = map;
+                this.iterator = expected.entrySet().iterator();
+            }
+
+            @Override
+            public boolean hasNext() {
+                if (expected != map) {
+                    throw new ConcurrentModificationException();
+                }
+                return iterator.hasNext();
+            }
+
+            @Override
+            public E next() {
+                if (expected != map) {
+                    throw new ConcurrentModificationException();
+                }
+                lastReturned = iterator.next();
+                return iteratorNext(lastReturned);
+            }
+
+            @Override
+            public void remove() {
+                if (lastReturned == null) {
+                    throw new IllegalStateException();
+                }
+                if (fast) {
+                    synchronized (WeakFastHashMap.this) {
+                        if (expected != map) {
+                            throw new ConcurrentModificationException();
+                        }
+                        WeakFastHashMap.this.remove(lastReturned.getKey());
+                        lastReturned = null;
+                        expected = map;
+                    }
+                } else {
+                    iterator.remove();
+                    lastReturned = null;
+                }
+            }
         }
 
-        protected abstract Collection<E> get(Map<K, V> map);
-        protected abstract E iteratorNext(Map.Entry<K, V> entry);
+        public CollectionView() {
+        }
+        @Override
+        public boolean add(final E o) {
+            throw new UnsupportedOperationException();
+        }
 
+
+        @Override
+        public boolean addAll(final Collection<? extends E> c) {
+            throw new UnsupportedOperationException();
+        }
 
         @Override
         public void clear() {
@@ -507,6 +143,70 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
                 }
             }
         }
+
+        @Override
+        public boolean contains(final Object o) {
+            if (fast) {
+                return get(map).contains(o);
+            }
+            synchronized (map) {
+                return get(map).contains(o);
+            }
+        }
+
+        @Override
+        public boolean containsAll(final Collection<?> o) {
+            if (fast) {
+                return get(map).containsAll(o);
+            }
+            synchronized (map) {
+                return get(map).containsAll(o);
+            }
+        }
+
+        @Override
+        public boolean equals(final Object o) {
+            if (o == this) {
+                return true;
+            }
+            if (fast) {
+                return get(map).equals(o);
+            }
+            synchronized (map) {
+                return get(map).equals(o);
+            }
+        }
+
+
+        protected abstract Collection<E> get(Map<K, V> map);
+
+        @Override
+        public int hashCode() {
+            if (fast) {
+                return get(map).hashCode();
+            }
+            synchronized (map) {
+                return get(map).hashCode();
+            }
+        }
+
+        @Override
+        public boolean isEmpty() {
+            if (fast) {
+                return get(map).isEmpty();
+            }
+            synchronized (map) {
+                return get(map).isEmpty();
+            }
+        }
+
+        @Override
+        public Iterator<E> iterator() {
+            return new CollectionViewIterator();
+        }
+
+        protected abstract E iteratorNext(Map.Entry<K, V> entry);
+
 
         @Override
         public boolean remove(final Object o) {
@@ -566,34 +266,13 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
             }
         }
 
-
         @Override
-        public boolean isEmpty() {
+        public Object[] toArray() {
             if (fast) {
-                return get(map).isEmpty();
+                return get(map).toArray();
             }
             synchronized (map) {
-                return get(map).isEmpty();
-            }
-        }
-
-        @Override
-        public boolean contains(final Object o) {
-            if (fast) {
-                return get(map).contains(o);
-            }
-            synchronized (map) {
-                return get(map).contains(o);
-            }
-        }
-
-        @Override
-        public boolean containsAll(final Collection<?> o) {
-            if (fast) {
-                return get(map).containsAll(o);
-            }
-            synchronized (map) {
-                return get(map).containsAll(o);
+                return get(map).toArray();
             }
         }
 
@@ -606,104 +285,23 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
                 return get(map).toArray(o);
             }
         }
+    }
+
+    /**
+     * Set implementation over the entries of the FastHashMap
+     */
+    private class EntrySet extends CollectionView<Map.Entry<K, V>> implements Set<Map.Entry<K, V>> {
 
         @Override
-        public Object[] toArray() {
-            if (fast) {
-                return get(map).toArray();
-            }
-            synchronized (map) {
-                return get(map).toArray();
-            }
-        }
-
-
-        @Override
-        public boolean equals(final Object o) {
-            if (o == this) {
-                return true;
-            }
-            if (fast) {
-                return get(map).equals(o);
-            }
-            synchronized (map) {
-                return get(map).equals(o);
-            }
+        protected Collection<Map.Entry<K, V>> get(final Map<K, V> map) {
+            return map.entrySet();
         }
 
         @Override
-        public int hashCode() {
-            if (fast) {
-                return get(map).hashCode();
-            }
-            synchronized (map) {
-                return get(map).hashCode();
-            }
+        protected Map.Entry<K, V> iteratorNext(final Map.Entry<K, V> entry) {
+            return entry;
         }
 
-        @Override
-        public boolean add(final E o) {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public boolean addAll(final Collection<? extends E> c) {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public Iterator<E> iterator() {
-            return new CollectionViewIterator();
-        }
-
-        private class CollectionViewIterator implements Iterator<E> {
-
-            private Map<K, V> expected;
-            private Map.Entry<K, V> lastReturned = null;
-            private final Iterator<Map.Entry<K, V>> iterator;
-
-            public CollectionViewIterator() {
-                this.expected = map;
-                this.iterator = expected.entrySet().iterator();
-            }
-
-            @Override
-            public boolean hasNext() {
-                if (expected != map) {
-                    throw new ConcurrentModificationException();
-                }
-                return iterator.hasNext();
-            }
-
-            @Override
-            public E next() {
-                if (expected != map) {
-                    throw new ConcurrentModificationException();
-                }
-                lastReturned = iterator.next();
-                return iteratorNext(lastReturned);
-            }
-
-            @Override
-            public void remove() {
-                if (lastReturned == null) {
-                    throw new IllegalStateException();
-                }
-                if (fast) {
-                    synchronized (WeakFastHashMap.this) {
-                        if (expected != map) {
-                            throw new ConcurrentModificationException();
-                        }
-                        WeakFastHashMap.this.remove(lastReturned.getKey());
-                        lastReturned = null;
-                        expected = map;
-                    }
-                } else {
-                    iterator.remove();
-                    lastReturned = null;
-                }
-            }
-        }
     }
 
     /**
@@ -723,6 +321,9 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
 
     }
 
+    // Constructors
+    // ----------------------------------------------------------------------
+
     /**
      * Collection implementation over the values of the FastHashMap
      */
@@ -739,21 +340,416 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
         }
     }
 
+    private static final long serialVersionUID = 1L;
+
     /**
-     * Set implementation over the entries of the FastHashMap
+     * The underlying map we are managing.
      */
-    private class EntrySet extends CollectionView<Map.Entry<K, V>> implements Set<Map.Entry<K, V>> {
+    private Map<K, V> map = null;
 
-        @Override
-        protected Collection<Map.Entry<K, V>> get(final Map<K, V> map) {
-            return map.entrySet();
+    /**
+     * Are we currently operating in "fast" mode?
+     */
+    private boolean fast = false;
+
+
+    // Property access
+    // ----------------------------------------------------------------------
+
+    /**
+     * Construct an empty map.
+     */
+    public WeakFastHashMap() {
+        this.map = createMap();
+    }
+
+    /**
+     * Construct an empty map with the specified capacity.
+     *
+     * @param capacity  the initial capacity of the empty map
+     */
+    public WeakFastHashMap(final int capacity) {
+        this.map = createMap(capacity);
+    }
+
+
+    // Map access
+    // ----------------------------------------------------------------------
+    // These methods can forward straight to the wrapped Map in 'fast' mode.
+    // (because they are query methods)
+
+    /**
+     * Construct an empty map with the specified capacity and load factor.
+     *
+     * @param capacity  the initial capacity of the empty map
+     * @param factor  the load factor of the new map
+     */
+    public WeakFastHashMap(final int capacity, final float factor) {
+        this.map = createMap(capacity, factor);
+    }
+
+    /**
+     * Construct a new map with the same mappings as the specified map.
+     *
+     * @param map  the map whose mappings are to be copied
+     */
+    public WeakFastHashMap(final Map<? extends K, ? extends V> map) {
+        this.map = createMap(map);
+    }
+
+    /**
+     * Remove all mappings from this map.
+     */
+    @Override
+    public void clear() {
+        if (fast) {
+            synchronized (this) {
+                map = createMap();
+            }
+        } else {
+            synchronized (map) {
+                map.clear();
+            }
         }
+    }
 
-        @Override
-        protected Map.Entry<K, V> iteratorNext(final Map.Entry<K, V> entry) {
-            return entry;
+    /**
+     * Return a shallow copy of this <code>FastHashMap</code> instance.
+     * The keys and values themselves are not copied.
+     *
+     * @return a clone of this map
+     */
+    @Override
+    public Object clone() {
+        WeakFastHashMap<K, V> results = null;
+        if (fast) {
+            results = new WeakFastHashMap<>(map);
+        } else {
+            synchronized (map) {
+                results = new WeakFastHashMap<>(map);
+            }
         }
+        results.setFast(getFast());
+        return results;
+    }
 
+    protected Map<K, V> cloneMap(final Map<? extends K, ? extends V> map) {
+        return createMap(map);
+    }
+
+    // Map modification
+    // ----------------------------------------------------------------------
+    // These methods perform special behaviour in 'fast' mode.
+    // The map is cloned, updated and then assigned back.
+    // See the comments at the top as to why this won't always work.
+
+    /**
+     * Return <code>true</code> if this map contains a mapping for the
+     * specified key.
+     *
+     * @param key  the key to be searched for
+     * @return true if the map contains the key
+     */
+    @Override
+    public boolean containsKey(final Object key) {
+        if (fast) {
+            return map.containsKey(key);
+        }
+        synchronized (map) {
+            return map.containsKey(key);
+        }
+    }
+
+    /**
+     * Return <code>true</code> if this map contains one or more keys mapping
+     * to the specified value.
+     *
+     * @param value  the value to be searched for
+     * @return true if the map contains the value
+     */
+    @Override
+    public boolean containsValue(final Object value) {
+        if (fast) {
+            return map.containsValue(value);
+        }
+        synchronized (map) {
+            return map.containsValue(value);
+        }
+    }
+
+    protected Map<K, V> createMap() {
+        return new WeakHashMap<>();
+    }
+
+    protected Map<K, V> createMap(final int capacity) {
+        return new WeakHashMap<>(capacity);
+    }
+
+    // Basic object methods
+    // ----------------------------------------------------------------------
+
+    protected Map<K, V> createMap(final int capacity, final float factor) {
+        return new WeakHashMap<>(capacity, factor);
+    }
+
+    protected Map<K, V> createMap(final Map<? extends K, ? extends V> map) {
+        return new WeakHashMap<>(map);
+    }
+
+    /**
+     * Return a collection view of the mappings contained in this map.  Each
+     * element in the returned collection is a <code>Map.Entry</code>.
+     * @return the set of map Map entries
+     */
+    @Override
+    public Set<Map.Entry<K, V>> entrySet() {
+        return new EntrySet();
+    }
+
+    // Map views
+    // ----------------------------------------------------------------------
+
+    /**
+     * Compare the specified object with this list for equality.  This
+     * implementation uses exactly the code that is used to define the
+     * list equals function in the documentation for the
+     * <code>Map.equals</code> method.
+     *
+     * @param o  the object to be compared to this list
+     * @return true if the two maps are equal
+     */
+    @Override
+    public boolean equals(final Object o) {
+        // Simple tests that require no synchronization
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Map)) {
+            return false;
+        }
+        final Map<?, ?> mo = (Map<?, ?>) o;
+
+        // Compare the two maps for equality
+        if (fast) {
+            if (mo.size() != map.size()) {
+                return false;
+            }
+            for (final Map.Entry<K, V> e : map.entrySet()) {
+                final K key = e.getKey();
+                final V value = e.getValue();
+                if (value == null) {
+                    if (!(mo.get(key) == null && mo.containsKey(key))) {
+                        return false;
+                    }
+                } else if (!value.equals(mo.get(key))) {
+                    return false;
+                }
+            }
+            return true;
+
+        }
+        synchronized (map) {
+            if (mo.size() != map.size()) {
+                return false;
+            }
+            for (final Map.Entry<K, V> e : map.entrySet()) {
+                final K key = e.getKey();
+                final V value = e.getValue();
+                if (value == null) {
+                    if (!(mo.get(key) == null && mo.containsKey(key))) {
+                        return false;
+                    }
+                } else if (!value.equals(mo.get(key))) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    /**
+     * Return the value to which this map maps the specified key.  Returns
+     * <code>null</code> if the map contains no mapping for this key, or if
+     * there is a mapping with a value of <code>null</code>.  Use the
+     * <code>containsKey()</code> method to disambiguate these cases.
+     *
+     * @param key  the key whose value is to be returned
+     * @return the value mapped to that key, or null
+     */
+    @Override
+    public V get(final Object key) {
+        if (fast) {
+            return map.get(key);
+        }
+        synchronized (map) {
+            return map.get(key);
+        }
+    }
+
+    /**
+     *  Returns true if this map is operating in fast mode.
+     *
+     *  @return true if this map is operating in fast mode
+     */
+    public boolean getFast() {
+        return this.fast;
+    }
+
+    // Abstractions on Map creations (for subclasses such as WeakFastHashMap)
+    // ----------------------------------------------------------------------
+
+    /**
+     * Return the hash code value for this map.  This implementation uses
+     * exactly the code that is used to define the list hash function in the
+     * documentation for the <code>Map.hashCode</code> method.
+     *
+     * @return suitable integer hash code
+     */
+    @Override
+    public int hashCode() {
+        if (fast) {
+            int h = 0;
+            for (final Map.Entry<K, V> e : map.entrySet()) {
+                h += e.hashCode();
+            }
+            return h;
+        }
+        synchronized (map) {
+            int h = 0;
+            for (final Map.Entry<K, V> e : map.entrySet()) {
+                h += e.hashCode();
+            }
+            return h;
+        }
+    }
+
+    /**
+     * Return <code>true</code> if this map contains no mappings.
+     *
+     * @return is the map currently empty
+     */
+    @Override
+    public boolean isEmpty() {
+        if (fast) {
+            return map.isEmpty();
+        }
+        synchronized (map) {
+            return map.isEmpty();
+        }
+    }
+
+    /**
+     * Return a set view of the keys contained in this map.
+     * @return the set of the Map's keys
+     */
+    @Override
+    public Set<K> keySet() {
+        return new KeySet();
+    }
+
+    /**
+     * Associate the specified value with the specified key in this map.
+     * If the map previously contained a mapping for this key, the old
+     * value is replaced and returned.
+     *
+     * @param key  the key with which the value is to be associated
+     * @param value  the value to be associated with this key
+     * @return the value previously mapped to the key, or null
+     */
+    @Override
+    public V put(final K key, final V value) {
+        if (fast) {
+            synchronized (this) {
+                final Map<K, V> temp = cloneMap(map);
+                final V result = temp.put(key, value);
+                map = temp;
+                return result;
+            }
+        } else {
+            synchronized (map) {
+                return map.put(key, value);
+            }
+        }
+    }
+
+    /**
+     * Copy all of the mappings from the specified map to this one, replacing
+     * any mappings with the same keys.
+     *
+     * @param in  the map whose mappings are to be copied
+     */
+    @Override
+    public void putAll(final Map<? extends K, ? extends V> in) {
+        if (fast) {
+            synchronized (this) {
+                final Map<K, V> temp =  cloneMap(map);
+                temp.putAll(in);
+                map = temp;
+            }
+        } else {
+            synchronized (map) {
+                map.putAll(in);
+            }
+        }
+    }
+
+    // Map view inner classes
+    // ----------------------------------------------------------------------
+
+    /**
+     * Remove any mapping for this key, and return any previously
+     * mapped value.
+     *
+     * @param key  the key whose mapping is to be removed
+     * @return the value removed, or null
+     */
+    @Override
+    public V remove(final Object key) {
+        if (fast) {
+            synchronized (this) {
+                final Map<K, V> temp = cloneMap(map);
+                final V result = temp.remove(key);
+                map = temp;
+                return result;
+            }
+        } else {
+            synchronized (map) {
+                return map.remove(key);
+            }
+        }
+    }
+
+    /**
+     *  Sets whether this map is operating in fast mode.
+     *
+     *  @param fast true if this map should operate in fast mode
+     */
+    public void setFast(final boolean fast) {
+        this.fast = fast;
+    }
+
+    /**
+     * Return the number of key-value mappings in this map.
+     *
+     * @return the current size of the map
+     */
+    @Override
+    public int size() {
+        if (fast) {
+            return map.size();
+        }
+        synchronized (map) {
+            return map.size();
+        }
+    }
+
+    /**
+     * Return a collection view of the values contained in this map.
+     * @return the set of the Map's values
+     */
+    @Override
+    public Collection<V> values() {
+        return new Values();
     }
 
 }

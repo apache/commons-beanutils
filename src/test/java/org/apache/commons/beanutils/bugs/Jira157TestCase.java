@@ -38,15 +38,25 @@ import org.apache.commons.logging.LogFactory;
  */
 public class Jira157TestCase extends TestCase {
 
-    private final Log log = LogFactory.getLog(Jira157TestCase.class);
+    public static class FooBar {
+        String getPackageFoo() {
+            return "Package Value";
+        }
+        @SuppressWarnings("unused")
+        private String getPrivateFoo() {
+            return "PrivateFoo Value";
+        }
+        protected String getProtectedFoo() {
+            return "ProtectedFoo Value";
+        }
+        public String getPublicFoo() {
+            return "PublicFoo Value";
+        }
+    }
 
-    /**
-     * Create a test case with the specified name.
-     *
-     * @param name The name of the test
-     */
-    public Jira157TestCase(final String name) {
-        super(name);
+    public interface XY {
+        String getX();
+        String getY();
     }
 
     /**
@@ -65,6 +75,17 @@ public class Jira157TestCase extends TestCase {
      */
     public static Test suite() {
         return new TestSuite(Jira157TestCase.class);
+    }
+
+    private final Log log = LogFactory.getLog(Jira157TestCase.class);
+
+    /**
+     * Create a test case with the specified name.
+     *
+     * @param name The name of the test
+     */
+    public Jira157TestCase(final String name) {
+        super(name);
     }
 
     /**
@@ -96,28 +117,19 @@ public class Jira157TestCase extends TestCase {
      * <p />
      * See Jira issue# BEANUTILS-157.
      */
-    public void testIssue_BEANUTILS_157_BeanUtils_Describe_Serializable() {
-        final Object bean = new Serializable() {
-            private static final long serialVersionUID = 1L;
-
-            @SuppressWarnings("unused")
-            public String getX() {
-                return "x-value";
-            }
-            @SuppressWarnings("unused")
-            public String getY() {
-                return "y-value";
-            }
-        };
+    public void testIssue_BEANUTILS_157_BeanUtils_Describe_Bean() {
+        final Object bean = new FooBar();
         Map<String, String> result = null;
         try {
             result = BeanUtils.describe(bean);
         } catch (final Throwable t) {
-            log.error("Describe Serializable: " + t.getMessage(), t);
-            fail("Describe Serializable Threw exception: " + t);
+            log.error("Describe Bean: " + t.getMessage(), t);
+            fail("Describe Bean Threw exception: " + t);
         }
-        assertEquals("Check Size", 1, result.size());
+        assertEquals("Check Size", 2, result.size());
         assertTrue("Class", result.containsKey("class"));
+        assertTrue("publicFoo Key", result.containsKey("publicFoo"));
+        assertEquals("publicFoo Value", "PublicFoo Value", result.get("publicFoo"));
     }
 
     /**
@@ -158,39 +170,27 @@ public class Jira157TestCase extends TestCase {
      * <p />
      * See Jira issue# BEANUTILS-157.
      */
-    public void testIssue_BEANUTILS_157_BeanUtils_Describe_Bean() {
-        final Object bean = new FooBar();
+    public void testIssue_BEANUTILS_157_BeanUtils_Describe_Serializable() {
+        final Object bean = new Serializable() {
+            private static final long serialVersionUID = 1L;
+
+            @SuppressWarnings("unused")
+            public String getX() {
+                return "x-value";
+            }
+            @SuppressWarnings("unused")
+            public String getY() {
+                return "y-value";
+            }
+        };
         Map<String, String> result = null;
         try {
             result = BeanUtils.describe(bean);
         } catch (final Throwable t) {
-            log.error("Describe Bean: " + t.getMessage(), t);
-            fail("Describe Bean Threw exception: " + t);
+            log.error("Describe Serializable: " + t.getMessage(), t);
+            fail("Describe Serializable Threw exception: " + t);
         }
-        assertEquals("Check Size", 2, result.size());
+        assertEquals("Check Size", 1, result.size());
         assertTrue("Class", result.containsKey("class"));
-        assertTrue("publicFoo Key", result.containsKey("publicFoo"));
-        assertEquals("publicFoo Value", "PublicFoo Value", result.get("publicFoo"));
-    }
-
-    public interface XY {
-        String getX();
-        String getY();
-    }
-
-    public static class FooBar {
-        String getPackageFoo() {
-            return "Package Value";
-        }
-        @SuppressWarnings("unused")
-        private String getPrivateFoo() {
-            return "PrivateFoo Value";
-        }
-        protected String getProtectedFoo() {
-            return "ProtectedFoo Value";
-        }
-        public String getPublicFoo() {
-            return "PublicFoo Value";
-        }
     }
 }

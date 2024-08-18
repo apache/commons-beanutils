@@ -33,191 +33,6 @@ public class ConvertUtils {
 
 
     /**
-     * Gets the default value for Boolean conversions.
-     * @return The default Boolean value
-     * @deprecated Register replacement converters for Boolean.TYPE and
-     *  Boolean.class instead
-     */
-    @Deprecated
-    public static boolean getDefaultBoolean() {
-        return ConvertUtilsBean.getInstance().getDefaultBoolean();
-    }
-
-    /**
-     * Sets the default value for Boolean conversions.
-     * @param newDefaultBoolean The default Boolean value
-     * @deprecated Register replacement converters for Boolean.TYPE and
-     *  Boolean.class instead
-     */
-    @Deprecated
-    public static void setDefaultBoolean(final boolean newDefaultBoolean) {
-        ConvertUtilsBean.getInstance().setDefaultBoolean(newDefaultBoolean);
-    }
-
-
-    /**
-     * Gets the default value for Byte conversions.
-     * @return The default Byte value
-     * @deprecated Register replacement converters for Byte.TYPE and
-     *  Byte.class instead
-     */
-    @Deprecated
-    public static byte getDefaultByte() {
-        return ConvertUtilsBean.getInstance().getDefaultByte();
-    }
-
-    /**
-     * Sets the default value for Byte conversions.
-     * @param newDefaultByte The default Byte value
-     * @deprecated Register replacement converters for Byte.TYPE and
-     *  Byte.class instead
-     */
-    @Deprecated
-    public static void setDefaultByte(final byte newDefaultByte) {
-        ConvertUtilsBean.getInstance().setDefaultByte(newDefaultByte);
-    }
-
-
-    /**
-     * Gets the default value for Character conversions.
-     * @return The default Character value
-     * @deprecated Register replacement converters for Character.TYPE and
-     *  Character.class instead
-     */
-    @Deprecated
-    public static char getDefaultCharacter() {
-        return ConvertUtilsBean.getInstance().getDefaultCharacter();
-    }
-
-    /**
-     * Sets the default value for Character conversions.
-     * @param newDefaultCharacter The default Character value
-     * @deprecated Register replacement converters for Character.TYPE and
-     *  Character.class instead
-     */
-    @Deprecated
-    public static void setDefaultCharacter(final char newDefaultCharacter) {
-        ConvertUtilsBean.getInstance().setDefaultCharacter(newDefaultCharacter);
-    }
-
-
-    /**
-     * Gets the default value for Double conversions.
-     * @return The default Double value
-     * @deprecated Register replacement converters for Double.TYPE and
-     *  Double.class instead
-     */
-    @Deprecated
-    public static double getDefaultDouble() {
-        return ConvertUtilsBean.getInstance().getDefaultDouble();
-    }
-
-    /**
-     * Sets the default value for Double conversions.
-     * @param newDefaultDouble The default Double value
-     * @deprecated Register replacement converters for Double.TYPE and
-     *  Double.class instead
-     */
-    @Deprecated
-    public static void setDefaultDouble(final double newDefaultDouble) {
-        ConvertUtilsBean.getInstance().setDefaultDouble(newDefaultDouble);
-    }
-
-
-    /**
-     * Get the default value for Float conversions.
-     * @return The default Float value
-     * @deprecated Register replacement converters for Float.TYPE and
-     *  Float.class instead
-     */
-    @Deprecated
-    public static float getDefaultFloat() {
-        return ConvertUtilsBean.getInstance().getDefaultFloat();
-    }
-
-    /**
-     * Sets the default value for Float conversions.
-     * @param newDefaultFloat The default Float value
-     * @deprecated Register replacement converters for Float.TYPE and
-     *  Float.class instead
-     */
-    @Deprecated
-    public static void setDefaultFloat(final float newDefaultFloat) {
-        ConvertUtilsBean.getInstance().setDefaultFloat(newDefaultFloat);
-    }
-
-
-    /**
-     * Gets the default value for Integer conversions.
-     * @return The default Integer value
-     * @deprecated Register replacement converters for Integer.TYPE and
-     *  Integer.class instead
-     */
-    @Deprecated
-    public static int getDefaultInteger() {
-        return ConvertUtilsBean.getInstance().getDefaultInteger();
-    }
-
-    /**
-     * Sets the default value for Integer conversions.
-     * @param newDefaultInteger The default Integer value
-     * @deprecated Register replacement converters for Integer.TYPE and
-     *  Integer.class instead
-     */
-    @Deprecated
-    public static void setDefaultInteger(final int newDefaultInteger) {
-        ConvertUtilsBean.getInstance().setDefaultInteger(newDefaultInteger);
-    }
-
-
-    /**
-     * Gets the default value for Long conversions.
-     * @return The default Long value
-     * @deprecated Register replacement converters for Long.TYPE and
-     *  Long.class instead
-     */
-    @Deprecated
-    public static long getDefaultLong() {
-        return ConvertUtilsBean.getInstance().getDefaultLong();
-    }
-
-    /**
-     * Sets the default value for Long conversions.
-     * @param newDefaultLong The default Long value
-     * @deprecated Register replacement converters for Long.TYPE and
-     *  Long.class instead
-     */
-    @Deprecated
-    public static void setDefaultLong(final long newDefaultLong) {
-        ConvertUtilsBean.getInstance().setDefaultLong(newDefaultLong);
-    }
-
-
-    /**
-     * Gets the default value for Short conversions.
-     * @return The default Short value
-     * @deprecated Register replacement converters for Short.TYPE and
-     *  Short.class instead
-     */
-    @Deprecated
-    public static short getDefaultShort() {
-        return ConvertUtilsBean.getInstance().getDefaultShort();
-    }
-
-    /**
-     * Sets the default value for Short conversions.
-     * @param newDefaultShort The default Short value
-     * @deprecated Register replacement converters for Short.TYPE and
-     *  Short.class instead
-     */
-    @Deprecated
-    public static void setDefaultShort(final short newDefaultShort) {
-        ConvertUtilsBean.getInstance().setDefaultShort(newDefaultShort);
-    }
-
-
-
-    /**
      * <p>Convert the specified value into a String.</p>
      *
      * <p>For more details see <code>ConvertUtilsBean</code>.</p>
@@ -229,6 +44,20 @@ public class ConvertUtils {
      */
     public static String convert(final Object value) {
         return ConvertUtilsBean.getInstance().convert(value);
+    }
+
+    /**
+     * <p>Convert the value to an object of the specified class (if
+     * possible).</p>
+     *
+     * @param value Value to be converted (may be null)
+     * @param targetType Class of the value to be converted to (must not be null)
+     * @return The converted value
+     *
+     * @throws ConversionException if thrown by an underlying Converter
+     */
+    public static Object convert(final Object value, final Class<?> targetType) {
+        return ConvertUtilsBean.getInstance().convert(value, targetType);
     }
 
 
@@ -248,7 +77,6 @@ public class ConvertUtils {
         return ConvertUtilsBean.getInstance().convert(value, clazz);
     }
 
-
     /**
      * <p>Convert an array of specified values to an array of objects of the
      * specified class (if possible).</p>
@@ -265,19 +93,6 @@ public class ConvertUtils {
         return ConvertUtilsBean.getInstance().convert(values, clazz);
     }
 
-    /**
-     * <p>Convert the value to an object of the specified class (if
-     * possible).</p>
-     *
-     * @param value Value to be converted (may be null)
-     * @param targetType Class of the value to be converted to (must not be null)
-     * @return The converted value
-     *
-     * @throws ConversionException if thrown by an underlying Converter
-     */
-    public static Object convert(final Object value, final Class<?> targetType) {
-        return ConvertUtilsBean.getInstance().convert(value, targetType);
-    }
 
     /**
      * <p>Remove all registered {@link Converter}s, and re-establish the
@@ -291,7 +106,6 @@ public class ConvertUtils {
         ConvertUtilsBean.getInstance().deregister();
     }
 
-
     /**
      * <p>Remove any registered {@link Converter} for the specified destination
      * <code>Class</code>.</p>
@@ -303,6 +117,98 @@ public class ConvertUtils {
      */
     public static void deregister(final Class<?> clazz) {
         ConvertUtilsBean.getInstance().deregister(clazz);
+    }
+
+
+    /**
+     * Gets the default value for Boolean conversions.
+     * @return The default Boolean value
+     * @deprecated Register replacement converters for Boolean.TYPE and
+     *  Boolean.class instead
+     */
+    @Deprecated
+    public static boolean getDefaultBoolean() {
+        return ConvertUtilsBean.getInstance().getDefaultBoolean();
+    }
+
+    /**
+     * Gets the default value for Byte conversions.
+     * @return The default Byte value
+     * @deprecated Register replacement converters for Byte.TYPE and
+     *  Byte.class instead
+     */
+    @Deprecated
+    public static byte getDefaultByte() {
+        return ConvertUtilsBean.getInstance().getDefaultByte();
+    }
+
+
+    /**
+     * Gets the default value for Character conversions.
+     * @return The default Character value
+     * @deprecated Register replacement converters for Character.TYPE and
+     *  Character.class instead
+     */
+    @Deprecated
+    public static char getDefaultCharacter() {
+        return ConvertUtilsBean.getInstance().getDefaultCharacter();
+    }
+
+    /**
+     * Gets the default value for Double conversions.
+     * @return The default Double value
+     * @deprecated Register replacement converters for Double.TYPE and
+     *  Double.class instead
+     */
+    @Deprecated
+    public static double getDefaultDouble() {
+        return ConvertUtilsBean.getInstance().getDefaultDouble();
+    }
+
+
+    /**
+     * Get the default value for Float conversions.
+     * @return The default Float value
+     * @deprecated Register replacement converters for Float.TYPE and
+     *  Float.class instead
+     */
+    @Deprecated
+    public static float getDefaultFloat() {
+        return ConvertUtilsBean.getInstance().getDefaultFloat();
+    }
+
+    /**
+     * Gets the default value for Integer conversions.
+     * @return The default Integer value
+     * @deprecated Register replacement converters for Integer.TYPE and
+     *  Integer.class instead
+     */
+    @Deprecated
+    public static int getDefaultInteger() {
+        return ConvertUtilsBean.getInstance().getDefaultInteger();
+    }
+
+
+    /**
+     * Gets the default value for Long conversions.
+     * @return The default Long value
+     * @deprecated Register replacement converters for Long.TYPE and
+     *  Long.class instead
+     */
+    @Deprecated
+    public static long getDefaultLong() {
+        return ConvertUtilsBean.getInstance().getDefaultLong();
+    }
+
+    /**
+     * Gets the default value for Short conversions.
+     * @return The default Short value
+     * @deprecated Register replacement converters for Short.TYPE and
+     *  Short.class instead
+     */
+    @Deprecated
+    public static short getDefaultShort() {
+        return ConvertUtilsBean.getInstance().getDefaultShort();
     }
 
 
@@ -334,20 +240,6 @@ public class ConvertUtils {
         return ConvertUtilsBean.getInstance().lookup(sourceType, targetType);
     }
 
-    /**
-     * <p>Register a custom {@link Converter} for the specified destination
-     * <code>Class</code>, replacing any previously registered Converter.</p>
-     *
-     * <p>For more details see <code>ConvertUtilsBean</code>.</p>
-     *
-     * @param converter Converter to be registered
-     * @param clazz Destination class for conversions performed by this
-     *  Converter
-     * @see ConvertUtilsBean#register(Converter, Class)
-     */
-    public static void register(final Converter converter, final Class<?> clazz) {
-        ConvertUtilsBean.getInstance().register(converter, clazz);
-    }
 
 
     /**
@@ -392,5 +284,113 @@ public class ConvertUtils {
             return (Class<T>) Character.class;
         }
         return type;
+    }
+
+
+    /**
+     * <p>Register a custom {@link Converter} for the specified destination
+     * <code>Class</code>, replacing any previously registered Converter.</p>
+     *
+     * <p>For more details see <code>ConvertUtilsBean</code>.</p>
+     *
+     * @param converter Converter to be registered
+     * @param clazz Destination class for conversions performed by this
+     *  Converter
+     * @see ConvertUtilsBean#register(Converter, Class)
+     */
+    public static void register(final Converter converter, final Class<?> clazz) {
+        ConvertUtilsBean.getInstance().register(converter, clazz);
+    }
+
+
+    /**
+     * Sets the default value for Boolean conversions.
+     * @param newDefaultBoolean The default Boolean value
+     * @deprecated Register replacement converters for Boolean.TYPE and
+     *  Boolean.class instead
+     */
+    @Deprecated
+    public static void setDefaultBoolean(final boolean newDefaultBoolean) {
+        ConvertUtilsBean.getInstance().setDefaultBoolean(newDefaultBoolean);
+    }
+
+    /**
+     * Sets the default value for Byte conversions.
+     * @param newDefaultByte The default Byte value
+     * @deprecated Register replacement converters for Byte.TYPE and
+     *  Byte.class instead
+     */
+    @Deprecated
+    public static void setDefaultByte(final byte newDefaultByte) {
+        ConvertUtilsBean.getInstance().setDefaultByte(newDefaultByte);
+    }
+
+    /**
+     * Sets the default value for Character conversions.
+     * @param newDefaultCharacter The default Character value
+     * @deprecated Register replacement converters for Character.TYPE and
+     *  Character.class instead
+     */
+    @Deprecated
+    public static void setDefaultCharacter(final char newDefaultCharacter) {
+        ConvertUtilsBean.getInstance().setDefaultCharacter(newDefaultCharacter);
+    }
+
+
+    /**
+     * Sets the default value for Double conversions.
+     * @param newDefaultDouble The default Double value
+     * @deprecated Register replacement converters for Double.TYPE and
+     *  Double.class instead
+     */
+    @Deprecated
+    public static void setDefaultDouble(final double newDefaultDouble) {
+        ConvertUtilsBean.getInstance().setDefaultDouble(newDefaultDouble);
+    }
+
+
+    /**
+     * Sets the default value for Float conversions.
+     * @param newDefaultFloat The default Float value
+     * @deprecated Register replacement converters for Float.TYPE and
+     *  Float.class instead
+     */
+    @Deprecated
+    public static void setDefaultFloat(final float newDefaultFloat) {
+        ConvertUtilsBean.getInstance().setDefaultFloat(newDefaultFloat);
+    }
+
+    /**
+     * Sets the default value for Integer conversions.
+     * @param newDefaultInteger The default Integer value
+     * @deprecated Register replacement converters for Integer.TYPE and
+     *  Integer.class instead
+     */
+    @Deprecated
+    public static void setDefaultInteger(final int newDefaultInteger) {
+        ConvertUtilsBean.getInstance().setDefaultInteger(newDefaultInteger);
+    }
+
+    /**
+     * Sets the default value for Long conversions.
+     * @param newDefaultLong The default Long value
+     * @deprecated Register replacement converters for Long.TYPE and
+     *  Long.class instead
+     */
+    @Deprecated
+    public static void setDefaultLong(final long newDefaultLong) {
+        ConvertUtilsBean.getInstance().setDefaultLong(newDefaultLong);
+    }
+
+
+    /**
+     * Sets the default value for Short conversions.
+     * @param newDefaultShort The default Short value
+     * @deprecated Register replacement converters for Short.TYPE and
+     *  Short.class instead
+     */
+    @Deprecated
+    public static void setDefaultShort(final short newDefaultShort) {
+        ConvertUtilsBean.getInstance().setDefaultShort(newDefaultShort);
     }
 }

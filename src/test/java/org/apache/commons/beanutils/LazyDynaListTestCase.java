@@ -39,26 +39,6 @@ public class LazyDynaListTestCase extends TestCase {
     private static final String BASIC_PROP1 = "BasicDynaClass_Property1";
     private static final String BASIC_PROP2 = "BasicDynaClass_Property2";
 
-    protected DynaProperty[] properties = new DynaProperty[] {
-                                               new DynaProperty(BASIC_PROP1, String.class),
-                                               new DynaProperty(BASIC_PROP2, HashMap.class)};
-
-    protected DynaClass treeMapDynaClass = new LazyDynaMap(new TreeMap<String, Object>());
-    protected DynaClass hashMapDynaClass = new LazyDynaMap(new HashMap<String, Object>());
-    protected DynaClass pojoDynaClass = new WrapDynaBean(new TestBean()).getDynaClass();
-    protected DynaClass basicDynaClass = new BasicDynaClass("test", BasicDynaBean.class, properties);
-
-
-    /**
-     * Construct a new instance of this test case.
-     *
-     * @param name Name of the test case
-     */
-    public LazyDynaListTestCase(final String name) {
-        super(name);
-    }
-
-
     /**
      * Run thus Test
      */
@@ -70,158 +50,27 @@ public class LazyDynaListTestCase extends TestCase {
      * Return the tests included in this test suite.
      */
     public static Test suite() {
-        return (new TestSuite(LazyDynaListTestCase.class));
+        return new TestSuite(LazyDynaListTestCase.class);
     }
+    protected DynaProperty[] properties = {
+                                               new DynaProperty(BASIC_PROP1, String.class),
+                                               new DynaProperty(BASIC_PROP2, HashMap.class)};
+    protected DynaClass treeMapDynaClass = new LazyDynaMap(new TreeMap<>());
+    protected DynaClass hashMapDynaClass = new LazyDynaMap(new HashMap<>());
+
+
+    protected DynaClass pojoDynaClass = new WrapDynaBean(new TestBean()).getDynaClass();
+
+
+    protected DynaClass basicDynaClass = new BasicDynaClass("test", BasicDynaBean.class, properties);
 
     /**
-     * Set up instance variables required by this test case.
+     * Construct a new instance of this test case.
+     *
+     * @param name Name of the test case
      */
-    @Override
-    public void setUp() throws Exception {
-    }
-
-    /**
-     * Tear down instance variables required by this test case.
-     */
-    @Override
-    public void tearDown() {
-    }
-
-
-    /**
-     * Test DynaBean Create
-     */
-    public void testDynaBeanDynaClass() {
-
-        // Create LazyArrayList for DynaBeans
-        final LazyDynaList list = new LazyDynaList(basicDynaClass);
-
-        // test
-        dynaBeanTest(list, BasicDynaBean.class, basicDynaClass, new BenchBean());
-    }
-
-    /**
-     * Test DynaBean Create
-     */
-    public void testDynaBeanType() {
-
-        // Create LazyArrayList for DynaBeans
-        final LazyDynaList list = new LazyDynaList(LazyDynaBean.class);
-
-
-        final LazyDynaBean bean = new LazyDynaBean();
-        bean.set("prop1", "val");
-
-        // test
-        dynaBeanTest(list, LazyDynaBean.class, bean.getDynaClass(), new BenchBean());
-    }
-
-    /**
-     * Test Map Create
-     */
-    public void testMapDynaClass() {
-
-        // Create LazyArrayList for TreeMap's
-        final LazyDynaList list = new LazyDynaList(treeMapDynaClass);
-
-        // test
-        mapTest(list, TreeMap.class, new BenchBean());
-
-    }
-
-    /**
-     * Test Map Create
-     */
-    public void testMapType() {
-
-        // Create LazyArrayList for HashMap's
-        final LazyDynaList list = new LazyDynaList(HashMap.class);
-
-        // test
-        mapTest(list, HashMap.class, new BenchBean());
-
-    }
-
-    /**
-     * Test Pojo Create
-     */
-    public void testPojoDynaClass() {
-
-        // Create LazyArrayList for POJO's
-        final LazyDynaList list = new LazyDynaList(pojoDynaClass);
-
-        // test
-        pojoTest(list, TestBean.class, new BenchBean());
-
-    }
-
-    /**
-     * Test Pojo Create
-     */
-    public void testPojoType() {
-
-        // Create LazyArrayList for POJO's
-        final LazyDynaList list = new LazyDynaList(TestBean.class);
-
-        // test
-        pojoTest(list, TestBean.class, new BenchBean());
-
-    }
-
-    /**
-     * Test Collection
-     */
-    public void testCollection(final LazyDynaList list, final Class<?> testClass, final DynaClass testDynaClass, final Object wrongBean) {
-
-        final int size = 5;
-        final List<Object> testList = new ArrayList<Object>(size);
-        final TreeMap<?, ?>[] testArray = new TreeMap[size];
-        for (int i = 0; i < size; i++) {
-            final TreeMap<String, Object> map = new TreeMap<String, Object>();
-            map.put("prop"+i, "val"+i);
-            testArray[i] = map;
-            testList.add(testArray[i]);
-        }
-
-
-        LazyDynaList lazyList = new LazyDynaList(testList);
-        assertEquals("1. check size", size, lazyList.size());
-
-        DynaBean[] dynaArray = lazyList.toDynaBeanArray();
-        TreeMap<?, ?>[]  mapArray  = (TreeMap[])lazyList.toArray();
-
-        // Check values
-        assertEquals("2. check size", size, dynaArray.length);
-        assertEquals("3. check size", size, mapArray.length);
-        for (int i = 0; i < size; i++) {
-            assertEquals("4."+i+" DynaBean error ", "val"+i, dynaArray[i].get("prop"+i));
-            assertEquals("5."+i+" Map error ", "val"+i, mapArray[i].get("prop"+i));
-        }
-
-
-
-        lazyList = new LazyDynaList(testArray);
-        assertEquals("6. check size", size, lazyList.size());
-
-        dynaArray = lazyList.toDynaBeanArray();
-        mapArray  = (TreeMap[])lazyList.toArray();
-
-        // Check values
-        assertEquals("7. check size", size, dynaArray.length);
-        assertEquals("8. check size", size, mapArray.length);
-        for (int i = 0; i < size; i++) {
-            assertEquals("9."+i+" DynaBean error ", "val"+i, dynaArray[i].get("prop"+i));
-            assertEquals("10."+i+" Map error ", "val"+i, mapArray[i].get("prop"+i));
-        }
-
-    }
-
-    /**
-     * Test adding a map to List with no type set.
-     */
-    public void testNullType() {
-        final LazyDynaList lazyList = new LazyDynaList();
-        lazyList.add(new HashMap<String, Object>());
+    public LazyDynaListTestCase(final String name) {
+        super(name);
     }
 
     /**
@@ -271,7 +120,7 @@ public class LazyDynaListTestCase extends TestCase {
         }
 
         // Create Collection
-        final List<Object> collection = new ArrayList<Object>();
+        final List<Object> collection = new ArrayList<>();
         try {
             collection.add(testDynaClass.newInstance());
             collection.add(testDynaClass.newInstance());
@@ -321,14 +170,13 @@ public class LazyDynaListTestCase extends TestCase {
      */
     private String findStringProperty(final DynaClass dynaClass) {
         final DynaProperty[] properties = dynaClass.getDynaProperties();
-        for (DynaProperty propertie : properties) {
+        for (final DynaProperty propertie : properties) {
             if (propertie.getType() == String.class) {
                 return propertie.getName();
             }
         }
         return null;
     }
-
 
 
     /**
@@ -426,6 +274,189 @@ public class LazyDynaListTestCase extends TestCase {
         } catch(final IllegalArgumentException ignore) {
             // expected result
         }
+
+    }
+
+    /**
+     * Do serialization and deserialization.
+     */
+    private Object serializeDeserialize(final Object target, final String text) {
+
+        // Serialize the test object
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try {
+            final ObjectOutputStream oos = new ObjectOutputStream(baos);
+            oos.writeObject(target);
+            oos.flush();
+            oos.close();
+        } catch (final Exception e) {
+            fail(text + ": Exception during serialization: " + e);
+        }
+
+        // Deserialize the test object
+        Object result = null;
+        try {
+            final ByteArrayInputStream bais =
+                new ByteArrayInputStream(baos.toByteArray());
+            final ObjectInputStream ois = new ObjectInputStream(bais);
+            result = ois.readObject();
+            bais.close();
+        } catch (final Exception e) {
+            fail(text + ": Exception during deserialization: " + e);
+        }
+        return result;
+
+    }
+
+    /**
+     * Set up instance variables required by this test case.
+     */
+    @Override
+    public void setUp() throws Exception {
+    }
+
+    /**
+     * Tear down instance variables required by this test case.
+     */
+    @Override
+    public void tearDown() {
+    }
+
+    /**
+     * Test Collection
+     */
+    public void testCollection(final LazyDynaList list, final Class<?> testClass, final DynaClass testDynaClass, final Object wrongBean) {
+
+        final int size = 5;
+        final List<Object> testList = new ArrayList<>(size);
+        final TreeMap<?, ?>[] testArray = new TreeMap[size];
+        for (int i = 0; i < size; i++) {
+            final TreeMap<String, Object> map = new TreeMap<>();
+            map.put("prop"+i, "val"+i);
+            testArray[i] = map;
+            testList.add(testArray[i]);
+        }
+
+
+        LazyDynaList lazyList = new LazyDynaList(testList);
+        assertEquals("1. check size", size, lazyList.size());
+
+        DynaBean[] dynaArray = lazyList.toDynaBeanArray();
+        TreeMap<?, ?>[]  mapArray  = (TreeMap[])lazyList.toArray();
+
+        // Check values
+        assertEquals("2. check size", size, dynaArray.length);
+        assertEquals("3. check size", size, mapArray.length);
+        for (int i = 0; i < size; i++) {
+            assertEquals("4."+i+" DynaBean error ", "val"+i, dynaArray[i].get("prop"+i));
+            assertEquals("5."+i+" Map error ", "val"+i, mapArray[i].get("prop"+i));
+        }
+
+
+
+        lazyList = new LazyDynaList(testArray);
+        assertEquals("6. check size", size, lazyList.size());
+
+        dynaArray = lazyList.toDynaBeanArray();
+        mapArray  = (TreeMap[])lazyList.toArray();
+
+        // Check values
+        assertEquals("7. check size", size, dynaArray.length);
+        assertEquals("8. check size", size, mapArray.length);
+        for (int i = 0; i < size; i++) {
+            assertEquals("9."+i+" DynaBean error ", "val"+i, dynaArray[i].get("prop"+i));
+            assertEquals("10."+i+" Map error ", "val"+i, mapArray[i].get("prop"+i));
+        }
+
+    }
+
+    /**
+     * Test DynaBean Create
+     */
+    public void testDynaBeanDynaClass() {
+
+        // Create LazyArrayList for DynaBeans
+        final LazyDynaList list = new LazyDynaList(basicDynaClass);
+
+        // test
+        dynaBeanTest(list, BasicDynaBean.class, basicDynaClass, new BenchBean());
+    }
+
+    /**
+     * Test DynaBean Create
+     */
+    public void testDynaBeanType() {
+
+        // Create LazyArrayList for DynaBeans
+        final LazyDynaList list = new LazyDynaList(LazyDynaBean.class);
+
+
+        final LazyDynaBean bean = new LazyDynaBean();
+        bean.set("prop1", "val");
+
+        // test
+        dynaBeanTest(list, LazyDynaBean.class, bean.getDynaClass(), new BenchBean());
+    }
+
+    /**
+     * Test Map Create
+     */
+    public void testMapDynaClass() {
+
+        // Create LazyArrayList for TreeMap's
+        final LazyDynaList list = new LazyDynaList(treeMapDynaClass);
+
+        // test
+        mapTest(list, TreeMap.class, new BenchBean());
+
+    }
+
+    /**
+     * Test Map Create
+     */
+    public void testMapType() {
+
+        // Create LazyArrayList for HashMap's
+        final LazyDynaList list = new LazyDynaList(HashMap.class);
+
+        // test
+        mapTest(list, HashMap.class, new BenchBean());
+
+    }
+
+
+
+    /**
+     * Test adding a map to List with no type set.
+     */
+    public void testNullType() {
+        final LazyDynaList lazyList = new LazyDynaList();
+        lazyList.add(new HashMap<>());
+    }
+
+    /**
+     * Test Pojo Create
+     */
+    public void testPojoDynaClass() {
+
+        // Create LazyArrayList for POJO's
+        final LazyDynaList list = new LazyDynaList(pojoDynaClass);
+
+        // test
+        pojoTest(list, TestBean.class, new BenchBean());
+
+    }
+
+    /**
+     * Test Pojo Create
+     */
+    public void testPojoType() {
+
+        // Create LazyArrayList for POJO's
+        final LazyDynaList list = new LazyDynaList(TestBean.class);
+
+        // test
+        pojoTest(list, TestBean.class, new BenchBean());
 
     }
 
@@ -533,37 +564,6 @@ public class LazyDynaListTestCase extends TestCase {
     }
 
     /**
-     * Do serialization and deserialization.
-     */
-    private Object serializeDeserialize(final Object target, final String text) {
-
-        // Serialize the test object
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        try {
-            final ObjectOutputStream oos = new ObjectOutputStream(baos);
-            oos.writeObject(target);
-            oos.flush();
-            oos.close();
-        } catch (final Exception e) {
-            fail(text + ": Exception during serialization: " + e);
-        }
-
-        // Deserialize the test object
-        Object result = null;
-        try {
-            final ByteArrayInputStream bais =
-                new ByteArrayInputStream(baos.toByteArray());
-            final ObjectInputStream ois = new ObjectInputStream(bais);
-            result = ois.readObject();
-            bais.close();
-        } catch (final Exception e) {
-            fail(text + ": Exception during deserialization: " + e);
-        }
-        return result;
-
-    }
-
-    /**
      * Tests toArray() if the list contains DynaBean objects.
      */
     public void testToArrayDynaBeans() {
@@ -580,7 +580,7 @@ public class LazyDynaListTestCase extends TestCase {
      */
     public void testToArrayMapType() {
         final LazyDynaList list = new LazyDynaList(HashMap.class);
-        final HashMap<String, Object> elem = new HashMap<String, Object>();
+        final HashMap<String, Object> elem = new HashMap<>();
         list.add(elem);
         final Map<?, ?>[] array = new Map[1];
         assertSame("Wrong array", array, list.toArray(array));

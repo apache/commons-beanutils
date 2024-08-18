@@ -40,6 +40,87 @@ public class DynaRowSetTestCase extends TestCase {
 
 
 
+    private static class CustomTimestamp {
+        private final long timestamp = new java.util.Date().getTime();
+        @Override
+        public String toString() {
+            return "CustomTimestamp[" + timestamp + "]";
+        }
+    }
+
+
+    /**
+     * A proxy ResultSet implementation that returns Timstamp for a date column.
+     *
+     * See issue# https://issues.apache.org/jira/browse/BEANUTILS-142
+     */
+    private static class TestResultSetInconsistent extends  TestResultSet {
+
+        public TestResultSetInconsistent(final ResultSetMetaData metaData) {
+            super(metaData);
+        }
+        /**
+         * Get an columns's value
+         * @param columnName Name of the column
+         * @return the column value
+         * @throws SQLException if an error occurs
+         */
+        @Override
+        public Object getObject(final String columnName) throws SQLException {
+            if ("timestampProperty".equals(columnName)) {
+                return new CustomTimestamp();
+            }
+            return super.getObject(columnName);
+        }
+
+    }
+
+
+
+
+    /**
+     * A proxy ResultSetMetaData implementation that returns a class name that
+     * is inconsistent with the type returned by the ResultSet.getObject() method.
+     *
+     * See issue# https://issues.apache.org/jira/browse/BEANUTILS-142
+     */
+    private static class TestResultSetMetaDataInconsistent extends  TestResultSetMetaData {
+
+        /**
+         * This method substitues class names of "java.sql.Timestamp" with
+         * "java.sql.Date" to test inconsistent JDBC drivers.
+         *
+         * @param columnIndex The column index
+         * @return The column class name
+         * @throws SQLException if an error occurs
+         */
+        @Override
+        public String getColumnClassName(final int columnIndex) throws SQLException {
+            final String columnName = getColumnName(columnIndex);
+            if (columnName.equals("dateProperty")) {
+                return java.sql.Timestamp.class.getName();
+            }
+            if (columnName.equals("timestampProperty")) {
+                return CustomTimestamp.class.getName();
+            } else {
+                return super.getColumnClassName(columnIndex);
+            }
+        }
+    }
+
+
+
+
+    /**
+     * Return the tests included in this test suite.
+     */
+    public static Test suite() {
+
+        return new TestSuite(DynaRowSetTestCase.class);
+
+    }
+
+
     /**
      * The mock result set DynaClass to be tested.
      */
@@ -62,6 +143,7 @@ public class DynaRowSetTestCase extends TestCase {
 
 
 
+
     /**
      * Construct a new instance of this test case.
      *
@@ -74,8 +156,6 @@ public class DynaRowSetTestCase extends TestCase {
     }
 
 
-
-
     /**
      * Set up instance variables required by this test case.
      */
@@ -83,16 +163,6 @@ public class DynaRowSetTestCase extends TestCase {
     public void setUp() throws Exception {
 
         dynaClass = new RowSetDynaClass(TestResultSet.createProxy());
-
-    }
-
-
-    /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-
-        return new TestSuite(DynaRowSetTestCase.class);
 
     }
 
@@ -108,15 +178,15 @@ public class DynaRowSetTestCase extends TestCase {
     }
 
 
+    public void testGetDynaProperties() {
 
-
-
-    public void testGetName() {
-
-        assertEquals("DynaClass name",
-                     "org.apache.commons.beanutils.RowSetDynaClass",
-                     dynaClass.getName());
-
+        final DynaProperty dynaProps[] = dynaClass.getDynaProperties();
+        assertNotNull("dynaProps exists", dynaProps);
+        assertEquals("dynaProps length", columns.length, dynaProps.length);
+        for (int i = 0; i < columns.length; i++) {
+            assertEquals("Property " + columns[i],
+                         columns[i], dynaProps[i].getName());
+        }
 
     }
 
@@ -147,32 +217,69 @@ public class DynaRowSetTestCase extends TestCase {
     }
 
 
-    public void testGetDynaProperties() {
+    public void testGetName() {
 
-        final DynaProperty dynaProps[] = dynaClass.getDynaProperties();
-        assertNotNull("dynaProps exists", dynaProps);
-        assertEquals("dynaProps length", columns.length, dynaProps.length);
-        for (int i = 0; i < columns.length; i++) {
-            assertEquals("Property " + columns[i],
-                         columns[i], dynaProps[i].getName());
-        }
+        assertEquals("DynaClass name",
+                     "org.apache.commons.beanutils.RowSetDynaClass",
+                     dynaClass.getName());
+
 
     }
 
+    /**
+     * Test issues associated with Oracle JDBC driver.
+     *
+     * See issue# https://issues.apache.org/jira/browse/BEANUTILS-142
+     *
+     * @throws Exception if an error occurs
+     */
+    public void testInconsistentOracleDriver() throws Exception {
 
-    public void testNewInstance() {
+        final ResultSetMetaData metaData = TestResultSetMetaData.createProxy(new TestResultSetMetaDataInconsistent());
+        final ResultSet resultSet = TestResultSet.createProxy(new TestResultSetInconsistent(metaData));
 
-        try {
-            dynaClass.newInstance();
-            fail("Did not throw UnsupportedOperationException()");
-        } catch (final UnsupportedOperationException e) {
-            // Expected result
-        } catch (final Exception e) {
-            fail("Threw exception " + e);
-        }
+        // Date Column returns "java.sql.Timestamp" for the column class name but ResultSet getObject
+        // returns a java.sql.Date value
+        final int dateColIdx = 4;
+        assertEquals("Date Meta Name",       "dateProperty",       metaData.getColumnName(dateColIdx));
+        assertEquals("Date Meta Class",      "java.sql.Timestamp", metaData.getColumnClassName(dateColIdx));
+        assertEquals("Date Meta Type",       java.sql.Types.DATE,  metaData.getColumnType(dateColIdx));
+        assertEquals("Date ResultSet Value", java.sql.Date.class,  resultSet.getObject("dateProperty").getClass());
 
+        // Timestamp column class returns a custom Timestamp impl for the column class name and ResultSet getObject
+        final int timestampColIdx = 13;
+        assertEquals("Timestamp Meta Name",       "timestampProperty",             metaData.getColumnName(timestampColIdx));
+        assertEquals("Timestamp Meta Class",      CustomTimestamp.class.getName(), metaData.getColumnClassName(timestampColIdx));
+        assertEquals("Timestamp Meta Type",       java.sql.Types.TIMESTAMP,        metaData.getColumnType(timestampColIdx));
+        assertEquals("Timestamp ResultSet Value", CustomTimestamp.class,           resultSet.getObject("timestampProperty").getClass());
+
+        final RowSetDynaClass inconsistentDynaClass = new RowSetDynaClass(resultSet);
+        final DynaBean firstRow = inconsistentDynaClass.getRows().get(0);
+        Class<?> expectedType = null;
+        DynaProperty property = null;
+
+        // Test Date
+        property = firstRow.getDynaClass().getDynaProperty("dateproperty");
+        expectedType = java.sql.Date.class;
+        assertEquals("Date Class", expectedType, property.getType());
+        assertEquals("Date Value", expectedType, firstRow.get(property.getName()).getClass());
+
+        // Test Timestamp
+        property = firstRow.getDynaClass().getDynaProperty("timestampproperty");
+        expectedType = java.sql.Timestamp.class;
+        assertEquals("Timestamp Class", expectedType, property.getType());
+        assertEquals("Timestamp Value", expectedType, firstRow.get(property.getName()).getClass());
     }
 
+    public void testLimitedRows() throws Exception {
+
+        // created one with low limit
+        final RowSetDynaClass limitedDynaClass = new RowSetDynaClass(TestResultSet.createProxy(), 3);
+        final List<DynaBean> rows = limitedDynaClass.getRows();
+        assertNotNull("list exists", rows);
+        assertEquals("limited row count", 3, rows.size());
+
+    }
 
     public void testListCount() {
 
@@ -181,7 +288,6 @@ public class DynaRowSetTestCase extends TestCase {
         assertEquals("list row count", 5, rows.size());
 
     }
-
 
     public void testListResults() {
 
@@ -285,122 +391,16 @@ public class DynaRowSetTestCase extends TestCase {
 
 
     }
+    public void testNewInstance() {
 
-    public void testLimitedRows() throws Exception {
-
-        // created one with low limit
-        final RowSetDynaClass limitedDynaClass = new RowSetDynaClass(TestResultSet.createProxy(), 3);
-        final List<DynaBean> rows = limitedDynaClass.getRows();
-        assertNotNull("list exists", rows);
-        assertEquals("limited row count", 3, rows.size());
-
-    }
-
-    /**
-     * Test issues associated with Oracle JDBC driver.
-     *
-     * See issue# https://issues.apache.org/jira/browse/BEANUTILS-142
-     *
-     * @throws Exception if an error occurs
-     */
-    public void testInconsistentOracleDriver() throws Exception {
-
-        final ResultSetMetaData metaData = TestResultSetMetaData.createProxy(new TestResultSetMetaDataInconsistent());
-        final ResultSet resultSet = TestResultSet.createProxy(new TestResultSetInconsistent(metaData));
-
-        // Date Column returns "java.sql.Timestamp" for the column class name but ResultSet getObject
-        // returns a java.sql.Date value
-        final int dateColIdx = 4;
-        assertEquals("Date Meta Name",       "dateProperty",       metaData.getColumnName(dateColIdx));
-        assertEquals("Date Meta Class",      "java.sql.Timestamp", metaData.getColumnClassName(dateColIdx));
-        assertEquals("Date Meta Type",       java.sql.Types.DATE,  metaData.getColumnType(dateColIdx));
-        assertEquals("Date ResultSet Value", java.sql.Date.class,  resultSet.getObject("dateProperty").getClass());
-
-        // Timestamp column class returns a custom Timestamp impl for the column class name and ResultSet getObject
-        final int timestampColIdx = 13;
-        assertEquals("Timestamp Meta Name",       "timestampProperty",             metaData.getColumnName(timestampColIdx));
-        assertEquals("Timestamp Meta Class",      CustomTimestamp.class.getName(), metaData.getColumnClassName(timestampColIdx));
-        assertEquals("Timestamp Meta Type",       java.sql.Types.TIMESTAMP,        metaData.getColumnType(timestampColIdx));
-        assertEquals("Timestamp ResultSet Value", CustomTimestamp.class,           resultSet.getObject("timestampProperty").getClass());
-
-        final RowSetDynaClass inconsistentDynaClass = new RowSetDynaClass(resultSet);
-        final DynaBean firstRow = inconsistentDynaClass.getRows().get(0);
-        Class<?> expectedType = null;
-        DynaProperty property = null;
-
-        // Test Date
-        property = firstRow.getDynaClass().getDynaProperty("dateproperty");
-        expectedType = java.sql.Date.class;
-        assertEquals("Date Class", expectedType, property.getType());
-        assertEquals("Date Value", expectedType, firstRow.get(property.getName()).getClass());
-
-        // Test Timestamp
-        property = firstRow.getDynaClass().getDynaProperty("timestampproperty");
-        expectedType = java.sql.Timestamp.class;
-        assertEquals("Timestamp Class", expectedType, property.getType());
-        assertEquals("Timestamp Value", expectedType, firstRow.get(property.getName()).getClass());
-    }
-
-    /**
-     * A proxy ResultSet implementation that returns Timstamp for a date column.
-     *
-     * See issue# https://issues.apache.org/jira/browse/BEANUTILS-142
-     */
-    private static class TestResultSetInconsistent extends  TestResultSet {
-
-        public TestResultSetInconsistent(final ResultSetMetaData metaData) {
-            super(metaData);
-        }
-        /**
-         * Get an columns's value
-         * @param columnName Name of the column
-         * @return the column value
-         * @throws SQLException if an error occurs
-         */
-        @Override
-        public Object getObject(final String columnName) throws SQLException {
-            if ("timestampProperty".equals(columnName)) {
-                return new CustomTimestamp();
-            }
-            return super.getObject(columnName);
+        try {
+            dynaClass.newInstance();
+            fail("Did not throw UnsupportedOperationException()");
+        } catch (final UnsupportedOperationException e) {
+            // Expected result
+        } catch (final Exception e) {
+            fail("Threw exception " + e);
         }
 
-    }
-
-    /**
-     * A proxy ResultSetMetaData implementation that returns a class name that
-     * is inconsistent with the type returned by the ResultSet.getObject() method.
-     *
-     * See issue# https://issues.apache.org/jira/browse/BEANUTILS-142
-     */
-    private static class TestResultSetMetaDataInconsistent extends  TestResultSetMetaData {
-
-        /**
-         * This method substitues class names of "java.sql.Timestamp" with
-         * "java.sql.Date" to test inconsistent JDBC drivers.
-         *
-         * @param columnIndex The column index
-         * @return The column class name
-         * @throws SQLException if an error occurs
-         */
-        @Override
-        public String getColumnClassName(final int columnIndex) throws SQLException {
-            final String columnName = getColumnName(columnIndex);
-            if (columnName.equals("dateProperty")) {
-                return java.sql.Timestamp.class.getName();
-            }
-            if (columnName.equals("timestampProperty")) {
-                return CustomTimestamp.class.getName();
-            } else {
-                return super.getColumnClassName(columnIndex);
-            }
-        }
-    }
-    private static class CustomTimestamp {
-        private final long timestamp = new java.util.Date().getTime();
-        @Override
-        public String toString() {
-            return "CustomTimestamp[" + timestamp + "]";
-        }
     }
 }

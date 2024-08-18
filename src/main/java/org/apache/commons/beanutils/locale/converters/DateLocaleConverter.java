@@ -43,18 +43,28 @@ import org.apache.commons.logging.LogFactory;
 public class DateLocaleConverter extends BaseLocaleConverter {
 
 
-    /** All logging goes through this logger */
-    private final Log log = LogFactory.getLog(DateLocaleConverter.class);
-
-    /** Should the date conversion be lenient? */
-    boolean isLenient = false;
-
     /**
      * Default Pattern Characters
      *
      */
     private static final String DEFAULT_PATTERN_CHARS = DateLocaleConverter.initDefaultChars();
 
+    /**
+     * This method is called at class initialization time to define the
+     * value for constant member DEFAULT_PATTERN_CHARS. All other methods needing
+     * this data should just read that constant.
+     */
+    private static String initDefaultChars() {
+        final DateFormatSymbols defaultSymbols = new DateFormatSymbols(Locale.US);
+        return defaultSymbols.getLocalPatternChars();
+    }
+
+    /** All logging goes through this logger */
+    private final Log log = LogFactory.getLog(DateLocaleConverter.class);
+
+
+    /** Should the date conversion be lenient? */
+    boolean isLenient = false;
 
     /**
      * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
@@ -175,6 +185,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
         this(defaultValue, locale, false);
     }
 
+
     /**
      * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
@@ -189,7 +200,6 @@ public class DateLocaleConverter extends BaseLocaleConverter {
         this(defaultValue, locale, null, locPattern);
     }
 
-
     /**
      * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
@@ -203,6 +213,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
 
         this(defaultValue, locale, pattern, false);
     }
+
 
     /**
      * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
@@ -219,8 +230,80 @@ public class DateLocaleConverter extends BaseLocaleConverter {
         super(defaultValue, locale, pattern, locPattern);
     }
 
+    /**
+      * Convert a pattern from a localized format to the default format.
+      *
+      * @param locale   The locale
+      * @param localizedPattern The pattern in 'local' symbol format
+      * @return pattern in 'default' symbol format
+      */
+     private String convertLocalizedPattern(final String localizedPattern, final Locale locale) {
+
+         if (localizedPattern == null) {
+            return null;
+         }
+
+         // Note that this is a little obtuse.
+         // However, it is the best way that anyone can come up with
+         // that works with some 1.4 series JVM.
+
+         // Get the symbols for the localized pattern
+         final DateFormatSymbols localizedSymbols = new DateFormatSymbols(locale);
+         final String localChars = localizedSymbols.getLocalPatternChars();
+
+         if (DEFAULT_PATTERN_CHARS.equals(localChars)) {
+             return localizedPattern;
+         }
+
+         // Convert the localized pattern to default
+         String convertedPattern = null;
+         try {
+             convertedPattern = convertPattern(localizedPattern,
+                                                localChars,
+                                                DEFAULT_PATTERN_CHARS);
+         } catch (final Exception ex) {
+             log.debug("Converting pattern '" + localizedPattern + "' for " + locale, ex);
+         }
+         return convertedPattern;
+    }
+
 
     /**
+     * <p>Converts a Pattern from one character set to another.</p>
+     */
+    private String convertPattern(final String pattern, final String fromChars, final String toChars) {
+
+        final StringBuilder converted = new StringBuilder();
+        boolean quoted = false;
+
+        for (int i = 0; i < pattern.length(); ++i) {
+            char thisChar = pattern.charAt(i);
+            if (quoted) {
+                if (thisChar == '\'') {
+                    quoted = false;
+                }
+            } else if (thisChar == '\'') {
+               quoted = true;
+            } else if (thisChar >= 'a' && thisChar <= 'z' ||
+                       thisChar >= 'A' && thisChar <= 'Z') {
+                final int index = fromChars.indexOf(thisChar );
+                if (index == -1) {
+                    throw new IllegalArgumentException(
+                        "Illegal pattern character '" + thisChar + "'");
+                }
+                thisChar = toChars.charAt(index);
+            }
+            converted.append(thisChar);
+        }
+
+        if (quoted) {
+            throw new IllegalArgumentException("Unfinished quote in pattern");
+        }
+
+        return converted.toString();
+    }
+
+     /**
      * Returns whether date formatting is lenient.
      *
      * @return true if the <code>DateFormat</code> used for formatting is lenient
@@ -229,17 +312,6 @@ public class DateLocaleConverter extends BaseLocaleConverter {
     public boolean isLenient() {
         return isLenient;
     }
-
-    /**
-     * Specify whether or not date-time parsing should be lenient.
-     *
-     * @param lenient true if the <code>DateFormat</code> used for formatting should be lenient
-     * @see java.text.DateFormat#setLenient
-     */
-    public void setLenient(final boolean lenient) {
-        isLenient = lenient;
-    }
-
 
     /**
      * Convert the specified locale-sensitive input object into an output object of the
@@ -292,88 +364,14 @@ public class DateLocaleConverter extends BaseLocaleConverter {
         return parsedValue;
      }
 
-     /**
-      * Convert a pattern from a localized format to the default format.
-      *
-      * @param locale   The locale
-      * @param localizedPattern The pattern in 'local' symbol format
-      * @return pattern in 'default' symbol format
-      */
-     private String convertLocalizedPattern(final String localizedPattern, final Locale locale) {
-
-         if (localizedPattern == null) {
-            return null;
-         }
-
-         // Note that this is a little obtuse.
-         // However, it is the best way that anyone can come up with
-         // that works with some 1.4 series JVM.
-
-         // Get the symbols for the localized pattern
-         final DateFormatSymbols localizedSymbols = new DateFormatSymbols(locale);
-         final String localChars = localizedSymbols.getLocalPatternChars();
-
-         if (DEFAULT_PATTERN_CHARS.equals(localChars)) {
-             return localizedPattern;
-         }
-
-         // Convert the localized pattern to default
-         String convertedPattern = null;
-         try {
-             convertedPattern = convertPattern(localizedPattern,
-                                                localChars,
-                                                DEFAULT_PATTERN_CHARS);
-         } catch (final Exception ex) {
-             log.debug("Converting pattern '" + localizedPattern + "' for " + locale, ex);
-         }
-         return convertedPattern;
-    }
-
     /**
-     * <p>Converts a Pattern from one character set to another.</p>
+     * Specify whether or not date-time parsing should be lenient.
+     *
+     * @param lenient true if the <code>DateFormat</code> used for formatting should be lenient
+     * @see java.text.DateFormat#setLenient
      */
-    private String convertPattern(final String pattern, final String fromChars, final String toChars) {
-
-        final StringBuilder converted = new StringBuilder();
-        boolean quoted = false;
-
-        for (int i = 0; i < pattern.length(); ++i) {
-            char thisChar = pattern.charAt(i);
-            if (quoted) {
-                if (thisChar == '\'') {
-                    quoted = false;
-                }
-            } else {
-                if (thisChar == '\'') {
-                   quoted = true;
-                } else if (thisChar >= 'a' && thisChar <= 'z' ||
-                           thisChar >= 'A' && thisChar <= 'Z') {
-                    final int index = fromChars.indexOf(thisChar );
-                    if (index == -1) {
-                        throw new IllegalArgumentException(
-                            "Illegal pattern character '" + thisChar + "'");
-                    }
-                    thisChar = toChars.charAt(index);
-                }
-            }
-            converted.append(thisChar);
-        }
-
-        if (quoted) {
-            throw new IllegalArgumentException("Unfinished quote in pattern");
-        }
-
-        return converted.toString();
-    }
-
-    /**
-     * This method is called at class initialization time to define the
-     * value for constant member DEFAULT_PATTERN_CHARS. All other methods needing
-     * this data should just read that constant.
-     */
-    private static String initDefaultChars() {
-        final DateFormatSymbols defaultSymbols = new DateFormatSymbols(Locale.US);
-        return defaultSymbols.getLocalPatternChars();
+    public void setLenient(final boolean lenient) {
+        isLenient = lenient;
     }
 
 }

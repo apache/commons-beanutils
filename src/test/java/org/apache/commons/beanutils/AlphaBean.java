@@ -29,6 +29,11 @@ public class AlphaBean extends AbstractParent implements Child {
         setName(name);
     }
 
+    /**
+     * Used for testing that correct exception is thrown.
+     */
+    public void bogus(final String badParameter){}
+
     @Override
     public String getName() {
         return name;
@@ -37,9 +42,4 @@ public class AlphaBean extends AbstractParent implements Child {
     public void setName(final String name) {
         this.name = name;
     }
-
-    /**
-     * Used for testing that correct exception is thrown.
-     */
-    public void bogus(final String badParameter){}
 }

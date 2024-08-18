@@ -47,15 +47,6 @@ public class BeanIntrospectionDataTestCase extends TestCase {
     }
 
     /**
-     * Creates a test instance which is initialized with default property descriptors.
-     *
-     * @return the test instance
-     */
-    private static BeanIntrospectionData setUpData() {
-        return new BeanIntrospectionData(fetchDescriptors());
-    }
-
-    /**
      * Returns the property descriptor for the test property.
      *
      * @param bid the data object
@@ -63,6 +54,15 @@ public class BeanIntrospectionDataTestCase extends TestCase {
      */
     private static PropertyDescriptor fetchTestDescriptor(final BeanIntrospectionData bid) {
         return bid.getDescriptor(TEST_PROP);
+    }
+
+    /**
+     * Creates a test instance which is initialized with default property descriptors.
+     *
+     * @return the test instance
+     */
+    private static BeanIntrospectionData setUpData() {
+        return new BeanIntrospectionData(fetchDescriptors());
     }
 
     /**
@@ -74,20 +74,6 @@ public class BeanIntrospectionDataTestCase extends TestCase {
         assertNotNull("No write method", pd.getWriteMethod());
         assertEquals("Wrong write method", pd.getWriteMethod(),
                 data.getWriteMethod(BEAN_CLASS, pd));
-    }
-
-    /**
-     * Tests whether a write method can be queried that is currently not available in the
-     * property descriptor.
-     */
-    public void testGetWriteMethodUndefined() throws Exception {
-        final BeanIntrospectionData data = setUpData();
-        final PropertyDescriptor pd = fetchTestDescriptor(data);
-        final Method writeMethod = pd.getWriteMethod();
-        pd.setWriteMethod(null);
-        assertEquals("Wrong write method", writeMethod,
-                data.getWriteMethod(BEAN_CLASS, pd));
-        assertEquals("Method not set in descriptor", writeMethod, pd.getWriteMethod());
     }
 
     /**
@@ -104,6 +90,20 @@ public class BeanIntrospectionDataTestCase extends TestCase {
                 new PropertyDescriptor[] { pd }, methods);
         pd.setWriteMethod(null);
         assertNull("Got a write method", data.getWriteMethod(BEAN_CLASS, pd));
+    }
+
+    /**
+     * Tests whether a write method can be queried that is currently not available in the
+     * property descriptor.
+     */
+    public void testGetWriteMethodUndefined() throws Exception {
+        final BeanIntrospectionData data = setUpData();
+        final PropertyDescriptor pd = fetchTestDescriptor(data);
+        final Method writeMethod = pd.getWriteMethod();
+        pd.setWriteMethod(null);
+        assertEquals("Wrong write method", writeMethod,
+                data.getWriteMethod(BEAN_CLASS, pd));
+        assertEquals("Method not set in descriptor", writeMethod, pd.getWriteMethod());
     }
 
     /**

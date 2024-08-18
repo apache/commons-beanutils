@@ -96,6 +96,60 @@ public class PropertyUtilsTestCase extends TestCase {
 
 
     /**
+     * The set of property names we expect to have returned when calling
+     * <code>getPropertyDescriptors()</code>.  You should update this list
+     * when new properties are added to TestBean.
+     */
+    protected final static String[] properties = {
+        "booleanProperty",
+        "booleanSecond",
+        "doubleProperty",
+        "dupProperty",
+        "floatProperty",
+        "intArray",
+        "intIndexed",
+        "intProperty",
+        "listIndexed",
+        "longProperty",
+        "nested",
+        "nullProperty",
+        "readOnlyProperty",
+        "shortProperty",
+        "stringArray",
+        "stringIndexed",
+        "stringProperty",
+        "writeOnlyProperty",
+    };
+
+
+    /**
+     * Finds the descriptor of the name property.
+     *
+     * @param desc the array with descriptors
+     * @return the found descriptor or null
+     */
+    private static PropertyDescriptor findNameDescriptor(
+            final PropertyDescriptor[] desc) {
+        for (final PropertyDescriptor element : desc) {
+            if (element.getName().equals("name")) {
+                return element;
+            }
+        }
+        return null;
+    }
+
+
+    /**
+     * Return the tests included in this test suite.
+     */
+    public static Test suite() {
+
+        return new TestSuite(PropertyUtilsTestCase.class);
+
+    }
+
+
+    /**
      * The basic test bean for each test.
      */
     protected TestBean bean = null;
@@ -119,10 +173,14 @@ public class PropertyUtilsTestCase extends TestCase {
     protected PrivateDirect beanPrivateSubclass = null;
 
 
+
+
     /**
      * The "public subclass" test bean for each test.
      */
     protected TestBeanPublicSubclass beanPublicSubclass = null;
+
+
 
 
     /**
@@ -152,35 +210,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
 
     /**
-     * The set of property names we expect to have returned when calling
-     * <code>getPropertyDescriptors()</code>.  You should update this list
-     * when new properties are added to TestBean.
-     */
-    protected final static String[] properties = {
-        "booleanProperty",
-        "booleanSecond",
-        "doubleProperty",
-        "dupProperty",
-        "floatProperty",
-        "intArray",
-        "intIndexed",
-        "intProperty",
-        "listIndexed",
-        "longProperty",
-        "nested",
-        "nullProperty",
-        "readOnlyProperty",
-        "shortProperty",
-        "stringArray",
-        "stringIndexed",
-        "stringProperty",
-        "writeOnlyProperty",
-    };
-
-
-
-
-    /**
      * Construct a new instance of this test case.
      *
      * @param name Name of the test case
@@ -190,6 +219,27 @@ public class PropertyUtilsTestCase extends TestCase {
         super(name);
 
     }
+
+
+    /**
+     * Returns a single string containing all the keys in the map,
+     * sorted in alphabetical order and separated by ", ".
+     * <p>
+     * If there are no keys, an empty string is returned.
+     */
+    private String keysToString(final Map<?, ?> map) {
+        final Object[] mapKeys = map.keySet().toArray();
+        java.util.Arrays.sort(mapKeys);
+        final StringBuilder buf = new StringBuilder();
+        for(int i=0; i<mapKeys.length; ++i) {
+            if (i != 0) {
+                buf.append(", ");
+            }
+            buf.append(mapKeys[i]);
+        }
+        return buf.toString();
+    }
+
 
 
 
@@ -220,16 +270,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
 
     /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-
-        return new TestSuite(PropertyUtilsTestCase.class);
-
-    }
-
-
-    /**
      * Tear down instance variables required by this test case.
      */
     @Override
@@ -245,7 +285,17 @@ public class PropertyUtilsTestCase extends TestCase {
     }
 
 
-
+    /**
+     * Tries to add a null BeanIntrospector.
+     */
+    public void testAddBeanIntrospectorNull() {
+        try {
+            PropertyUtils.addBeanIntrospector(null);
+            fail("Could add null BeanIntrospector!");
+        } catch (final IllegalArgumentException iex) {
+            // ok
+        }
+    }
 
 
     /**
@@ -304,6 +354,58 @@ public class PropertyUtilsTestCase extends TestCase {
 
 
     /**
+     * Tests whether the default introspection mechanism can be replaced by a
+     * custom BeanIntrospector.
+     */
+    public void testCustomIntrospection() {
+        final PropertyDescriptor[] desc1 = PropertyUtils
+                .getPropertyDescriptors(AlphaBean.class);
+        PropertyDescriptor nameDescriptor = findNameDescriptor(desc1);
+        assertNotNull("No write method", nameDescriptor.getWriteMethod());
+
+        final BeanIntrospector bi = icontext -> {
+            final Set<String> names = icontext.propertyNames();
+            final PropertyDescriptor[] newDescs = new PropertyDescriptor[names
+            .size()];
+            int idx = 0;
+            for (final Iterator<String> it = names.iterator(); it.hasNext(); idx++) {
+        final String propName = it.next();
+        final PropertyDescriptor pd = icontext
+                .getPropertyDescriptor(propName);
+        newDescs[idx] = new PropertyDescriptor(pd.getName(),
+                pd.getReadMethod(), null);
+            }
+            icontext.addPropertyDescriptors(newDescs);
+         };
+        PropertyUtils.clearDescriptors();
+        PropertyUtils.addBeanIntrospector(bi);
+        final PropertyDescriptor[] desc2 = PropertyUtils
+                .getPropertyDescriptors(AlphaBean.class);
+        assertEquals("Different number of properties", desc1.length,
+                desc2.length);
+        nameDescriptor = findNameDescriptor(desc2);
+        assertNull("Got a write method", nameDescriptor.getWriteMethod());
+        PropertyUtils.removeBeanIntrospector(bi);
+    }
+
+
+    /**
+     * Tests whether exceptions during custom introspection are handled.
+     */
+    public void testCustomIntrospectionEx() {
+        final BeanIntrospector bi = icontext -> {
+            throw new IntrospectionException("TestException");
+         };
+        PropertyUtils.clearDescriptors();
+        PropertyUtils.addBeanIntrospector(bi);
+        final PropertyDescriptor[] desc = PropertyUtils
+                .getPropertyDescriptors(AlphaBean.class);
+        assertNotNull("Introspection did not work", findNameDescriptor(desc));
+        PropertyUtils.removeBeanIntrospector(bi);
+    }
+
+
+    /**
      * Test the describe() method.
      */
     public void testDescribe() {
@@ -344,6 +446,30 @@ public class PropertyUtilsTestCase extends TestCase {
 
 
     /**
+     * Test {@link PropertyUtilsBean}'s invoke method throwing an IllegalArgumentException
+     * and check that the "cause" has been properly initialized for JDK 1.4+
+     * See BEANUTILS-266 for changes and reason for test
+     */
+    public void testExceptionFromInvoke() throws Exception {
+        if (BeanUtilsTestCase.isPre14JVM()) {
+            return;
+        }
+        try {
+            PropertyUtils.setSimpleProperty(bean, "intProperty","XXX");
+        } catch(final IllegalArgumentException t) {
+            final Throwable cause = (Throwable)PropertyUtils.getProperty(t, "cause");
+            assertNotNull("Cause not found", cause);
+            assertTrue("Expected cause to be IllegalArgumentException, but was: " + cause.getClass(),
+                    cause instanceof IllegalArgumentException);
+            // JDK 1.6 doesn't have "argument type mismatch" message
+            // assertEquals("Check error message", "argument type mismatch", cause.getMessage());
+        } catch(final Throwable t) {
+            fail("Expected IllegalArgumentException, but threw " + t);
+        }
+    }
+
+
+    /**
      * Corner cases on getPropertyDescriptor invalid arguments.
      */
     public void testGetDescriptorArguments() {
@@ -364,6 +490,50 @@ public class PropertyUtilsTestCase extends TestCase {
             // Expected response
         } catch (final Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 2");
+        }
+
+    }
+
+    /**
+     * Base for testGetDescriptorXxxxx() series of tests.
+     *
+     * @param name Name of the property to be retrieved
+     * @param read Expected name of the read method (or null)
+     * @param write Expected name of the write method (or null)
+     */
+    protected void testGetDescriptorBase(final String name, final String read,
+                                         final String write) {
+
+        try {
+            final PropertyDescriptor pd =
+                    PropertyUtils.getPropertyDescriptor(bean, name);
+            if (read == null && write == null) {
+                assertNull("Got descriptor", pd);
+                return;
+            }
+            assertNotNull("Got descriptor", pd);
+            final Method rm = pd.getReadMethod();
+            if (read != null) {
+                assertNotNull("Got read method", rm);
+                assertEquals("Got correct read method",
+                        rm.getName(), read);
+            } else {
+                assertNull("Got read method", rm);
+            }
+            final Method wm = pd.getWriteMethod();
+            if (write != null) {
+                assertNotNull("Got write method", wm);
+                assertEquals("Got correct write method",
+                        wm.getName(), write);
+            } else {
+                assertNull("Got write method", wm);
+            }
+        } catch (final IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (final InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (final NoSuchMethodException e) {
+            fail("NoSuchMethodException");
         }
 
     }
@@ -450,6 +620,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
+
     /**
      * Test getting mapped descriptor with periods in the key.
      */
@@ -503,62 +674,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
 
     /**
-     * Positive getPropertyDescriptor on property <code>booleanSecond</code>
-     * that uses an "is" method as the getter.
-     */
-    public void testGetDescriptorSecond() {
-
-        testGetDescriptorBase("booleanSecond", "isBooleanSecond",
-                "setBooleanSecond");
-
-    }
-
-
-    /**
-     * Positive getPropertyDescriptor on property <code>shortProperty</code>.
-     */
-    public void testGetDescriptorShort() {
-
-        testGetDescriptorBase("shortProperty", "getShortProperty",
-                "setShortProperty");
-
-    }
-
-
-    /**
-     * Positive getPropertyDescriptor on property <code>stringProperty</code>.
-     */
-    public void testGetDescriptorString() {
-
-        testGetDescriptorBase("stringProperty", "getStringProperty",
-                "setStringProperty");
-
-    }
-
-
-    /**
-     * Negative getPropertyDescriptor on property <code>unknown</code>.
-     */
-    public void testGetDescriptorUnknown() {
-
-        testGetDescriptorBase("unknown", null, null);
-
-    }
-
-
-    /**
-     * Positive getPropertyDescriptor on property
-     * <code>writeOnlyProperty</code>.
-     */
-    public void testGetDescriptorWriteOnly() {
-
-        testGetDescriptorBase("writeOnlyProperty", null,
-                "setWriteOnlyProperty");
-
-    }
-
-
-    /**
      * Positive test for getPropertyDescriptors().  Each property name
      * listed in <code>properties</code> should be returned exactly once.
      */
@@ -603,6 +718,57 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
+
+    /**
+     * Positive getPropertyDescriptor on property <code>booleanSecond</code>
+     * that uses an "is" method as the getter.
+     */
+    public void testGetDescriptorSecond() {
+
+        testGetDescriptorBase("booleanSecond", "isBooleanSecond",
+                "setBooleanSecond");
+
+    }
+
+    /**
+     * Positive getPropertyDescriptor on property <code>shortProperty</code>.
+     */
+    public void testGetDescriptorShort() {
+
+        testGetDescriptorBase("shortProperty", "getShortProperty",
+                "setShortProperty");
+
+    }
+
+    /**
+     * Positive getPropertyDescriptor on property <code>stringProperty</code>.
+     */
+    public void testGetDescriptorString() {
+
+        testGetDescriptorBase("stringProperty", "getStringProperty",
+                "setStringProperty");
+
+    }
+
+    /**
+     * Negative getPropertyDescriptor on property <code>unknown</code>.
+     */
+    public void testGetDescriptorUnknown() {
+
+        testGetDescriptorBase("unknown", null, null);
+
+    }
+
+    /**
+     * Positive getPropertyDescriptor on property
+     * <code>writeOnlyProperty</code>.
+     */
+    public void testGetDescriptorWriteOnly() {
+
+        testGetDescriptorBase("writeOnlyProperty", null,
+                "setWriteOnlyProperty");
+
+    }
 
     /**
      * Corner cases on getIndexedProperty invalid arguments.
@@ -709,6 +875,76 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("Threw " + t + " instead of IllegalArgumentException 5");
         }
 
+    }
+
+    /**
+     * Test getting an indexed value out of a multi-dimensional array
+     */
+    public void testGetIndexedArray() {
+        final String[] firstArray = {"FIRST-1", "FIRST-2", "FIRST-3"};
+        final String[] secondArray = {"SECOND-1", "SECOND-2", "SECOND-3",  "SECOND-4"};
+        final String[][] mainArray = {firstArray, secondArray};
+        final TestBean bean = new TestBean(mainArray);
+        try {
+            assertEquals("firstArray[0]", firstArray[0],  PropertyUtils.getProperty(bean, "string2dArray[0][0]"));
+            assertEquals("firstArray[1]", firstArray[1],  PropertyUtils.getProperty(bean, "string2dArray[0][1]"));
+            assertEquals("firstArray[2]", firstArray[2],  PropertyUtils.getProperty(bean, "string2dArray[0][2]"));
+            assertEquals("secondArray[0]", secondArray[0], PropertyUtils.getProperty(bean, "string2dArray[1][0]"));
+            assertEquals("secondArray[1]", secondArray[1], PropertyUtils.getProperty(bean, "string2dArray[1][1]"));
+            assertEquals("secondArray[2]", secondArray[2], PropertyUtils.getProperty(bean, "string2dArray[1][2]"));
+            assertEquals("secondArray[3]", secondArray[3], PropertyUtils.getProperty(bean, "string2dArray[1][3]"));
+        } catch (final Throwable t) {
+            fail("Threw " + t + "");
+        }
+    }
+
+    /**
+     * Test getting an indexed value out of List of Lists
+     */
+    public void testGetIndexedList() {
+        final String[] firstArray = {"FIRST-1", "FIRST-2", "FIRST-3"};
+        final String[] secondArray = {"SECOND-1", "SECOND-2", "SECOND-3",  "SECOND-4"};
+        final List<Object> mainList = new ArrayList<>();
+        mainList.add(Arrays.asList(firstArray));
+        mainList.add(Arrays.asList(secondArray));
+        final TestBean bean = new TestBean(mainList);
+        try {
+            assertEquals("firstArray[0]", firstArray[0],  PropertyUtils.getProperty(bean, "listIndexed[0][0]"));
+            assertEquals("firstArray[1]", firstArray[1],  PropertyUtils.getProperty(bean, "listIndexed[0][1]"));
+            assertEquals("firstArray[2]", firstArray[2],  PropertyUtils.getProperty(bean, "listIndexed[0][2]"));
+            assertEquals("secondArray[0]", secondArray[0], PropertyUtils.getProperty(bean, "listIndexed[1][0]"));
+            assertEquals("secondArray[1]", secondArray[1], PropertyUtils.getProperty(bean, "listIndexed[1][1]"));
+            assertEquals("secondArray[2]", secondArray[2], PropertyUtils.getProperty(bean, "listIndexed[1][2]"));
+            assertEquals("secondArray[3]", secondArray[3], PropertyUtils.getProperty(bean, "listIndexed[1][3]"));
+        } catch (final Throwable t) {
+            fail("Threw " + t + "");
+        }
+    }
+
+
+    /**
+     * Test getting a value out of a mapped Map
+     */
+    public void testGetIndexedMap() {
+        final Map<String, Object> firstMap  = new HashMap<>();
+        firstMap.put("FIRST-KEY-1", "FIRST-VALUE-1");
+        firstMap.put("FIRST-KEY-2", "FIRST-VALUE-2");
+        final Map<String, Object> secondMap  = new HashMap<>();
+        secondMap.put("SECOND-KEY-1", "SECOND-VALUE-1");
+        secondMap.put("SECOND-KEY-2", "SECOND-VALUE-2");
+
+        final List<Object> mainList   = new ArrayList<>();
+        mainList.add(firstMap);
+        mainList.add(secondMap);
+        final TestBean bean = new TestBean(mainList);
+        try {
+            assertEquals("listIndexed[0](FIRST-KEY-1)",  "FIRST-VALUE-1",   PropertyUtils.getProperty(bean, "listIndexed[0](FIRST-KEY-1)"));
+            assertEquals("listIndexed[0](FIRST-KEY-2)",  "FIRST-VALUE-2",   PropertyUtils.getProperty(bean, "listIndexed[0](FIRST-KEY-2)"));
+            assertEquals("listIndexed[1](SECOND-KEY-1)", "SECOND-VALUE-1",  PropertyUtils.getProperty(bean, "listIndexed[1](SECOND-KEY-1)"));
+            assertEquals("listIndexed[1](SECOND-KEY-2)", "SECOND-VALUE-2",  PropertyUtils.getProperty(bean, "listIndexed[1](SECOND-KEY-2)"));
+        } catch (final Throwable t) {
+            fail("Threw " + t + "");
+        }
     }
 
 
@@ -1020,75 +1256,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
 
     /**
-     * Test getting an indexed value out of a multi-dimensional array
-     */
-    public void testGetIndexedArray() {
-        final String[] firstArray = {"FIRST-1", "FIRST-2", "FIRST-3"};
-        final String[] secondArray = {"SECOND-1", "SECOND-2", "SECOND-3",  "SECOND-4"};
-        final String[][] mainArray = {firstArray, secondArray};
-        final TestBean bean = new TestBean(mainArray);
-        try {
-            assertEquals("firstArray[0]", firstArray[0],  PropertyUtils.getProperty(bean, "string2dArray[0][0]"));
-            assertEquals("firstArray[1]", firstArray[1],  PropertyUtils.getProperty(bean, "string2dArray[0][1]"));
-            assertEquals("firstArray[2]", firstArray[2],  PropertyUtils.getProperty(bean, "string2dArray[0][2]"));
-            assertEquals("secondArray[0]", secondArray[0], PropertyUtils.getProperty(bean, "string2dArray[1][0]"));
-            assertEquals("secondArray[1]", secondArray[1], PropertyUtils.getProperty(bean, "string2dArray[1][1]"));
-            assertEquals("secondArray[2]", secondArray[2], PropertyUtils.getProperty(bean, "string2dArray[1][2]"));
-            assertEquals("secondArray[3]", secondArray[3], PropertyUtils.getProperty(bean, "string2dArray[1][3]"));
-        } catch (final Throwable t) {
-            fail("Threw " + t + "");
-        }
-    }
-
-    /**
-     * Test getting an indexed value out of List of Lists
-     */
-    public void testGetIndexedList() {
-        final String[] firstArray = {"FIRST-1", "FIRST-2", "FIRST-3"};
-        final String[] secondArray = {"SECOND-1", "SECOND-2", "SECOND-3",  "SECOND-4"};
-        final List<Object> mainList = new ArrayList<>();
-        mainList.add(Arrays.asList(firstArray));
-        mainList.add(Arrays.asList(secondArray));
-        final TestBean bean = new TestBean(mainList);
-        try {
-            assertEquals("firstArray[0]", firstArray[0],  PropertyUtils.getProperty(bean, "listIndexed[0][0]"));
-            assertEquals("firstArray[1]", firstArray[1],  PropertyUtils.getProperty(bean, "listIndexed[0][1]"));
-            assertEquals("firstArray[2]", firstArray[2],  PropertyUtils.getProperty(bean, "listIndexed[0][2]"));
-            assertEquals("secondArray[0]", secondArray[0], PropertyUtils.getProperty(bean, "listIndexed[1][0]"));
-            assertEquals("secondArray[1]", secondArray[1], PropertyUtils.getProperty(bean, "listIndexed[1][1]"));
-            assertEquals("secondArray[2]", secondArray[2], PropertyUtils.getProperty(bean, "listIndexed[1][2]"));
-            assertEquals("secondArray[3]", secondArray[3], PropertyUtils.getProperty(bean, "listIndexed[1][3]"));
-        } catch (final Throwable t) {
-            fail("Threw " + t + "");
-        }
-    }
-
-    /**
-     * Test getting a value out of a mapped Map
-     */
-    public void testGetIndexedMap() {
-        final Map<String, Object> firstMap  = new HashMap<>();
-        firstMap.put("FIRST-KEY-1", "FIRST-VALUE-1");
-        firstMap.put("FIRST-KEY-2", "FIRST-VALUE-2");
-        final Map<String, Object> secondMap  = new HashMap<>();
-        secondMap.put("SECOND-KEY-1", "SECOND-VALUE-1");
-        secondMap.put("SECOND-KEY-2", "SECOND-VALUE-2");
-
-        final List<Object> mainList   = new ArrayList<>();
-        mainList.add(firstMap);
-        mainList.add(secondMap);
-        final TestBean bean = new TestBean(mainList);
-        try {
-            assertEquals("listIndexed[0](FIRST-KEY-1)",  "FIRST-VALUE-1",   PropertyUtils.getProperty(bean, "listIndexed[0](FIRST-KEY-1)"));
-            assertEquals("listIndexed[0](FIRST-KEY-2)",  "FIRST-VALUE-2",   PropertyUtils.getProperty(bean, "listIndexed[0](FIRST-KEY-2)"));
-            assertEquals("listIndexed[1](SECOND-KEY-1)", "SECOND-VALUE-1",  PropertyUtils.getProperty(bean, "listIndexed[1](SECOND-KEY-1)"));
-            assertEquals("listIndexed[1](SECOND-KEY-2)", "SECOND-VALUE-2",  PropertyUtils.getProperty(bean, "listIndexed[1](SECOND-KEY-2)"));
-        } catch (final Throwable t) {
-            fail("Threw " + t + "");
-        }
-    }
-
-    /**
      * Corner cases on getMappedProperty invalid arguments.
      */
     public void testGetMappedArguments() {
@@ -1155,6 +1322,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
+
     /**
      * Test getting an indexed value out of a mapped array
      */
@@ -1170,6 +1338,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("Threw " + t + "");
         }
     }
+
 
     /**
      * Test getting an indexed value out of a mapped List
@@ -1190,6 +1359,7 @@ public class PropertyUtilsTestCase extends TestCase {
         }
     }
 
+
     /**
      * Test getting a value out of a mapped Map
      */
@@ -1208,6 +1378,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("Threw " + t + "");
         }
     }
+
 
     /**
      * Test getting mapped values with periods in the key.
@@ -1478,7 +1649,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test getNestedProperty on a float property.
      */
@@ -1505,7 +1675,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test getNestedProperty on an int property.
@@ -1662,23 +1831,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-    /**
-     * When a bean has a null property which is reference by the standard access language,
-     * this should throw a NestedNullException.
-     */
-    public void testThrowNestedNull() throws Exception {
-        final NestedTestBean nestedBean = new NestedTestBean("base");
-        // don't init!
-
-        try {
-            PropertyUtils.getProperty(
-                                nestedBean,
-                                "simpleBeanProperty.indexedProperty[0]");
-            fail("NestedNullException not thrown");
-        } catch (final NestedNullException e) {
-            // that's what we wanted!
-        }
-    }
 
     /**
      * Test getNestedProperty on a write-only String property.
@@ -1846,6 +1998,63 @@ public class PropertyUtilsTestCase extends TestCase {
 
 
     /**
+     * Base for testGetReadMethod() series of tests.
+     *
+     * @param bean Bean for which to retrieve read methods.
+     * @param properties Property names to search for
+     * @param className Class name where this method should be defined
+     */
+    protected void testGetReadMethod(final Object bean, final String properties[],
+                                     final String className) {
+
+        final PropertyDescriptor pd[] =
+                PropertyUtils.getPropertyDescriptors(bean);
+        for (final String propertie : properties) {
+
+            // Identify the property descriptor for this property
+            if (propertie.equals("intIndexed")) {
+                continue;
+            }
+            if (propertie.equals("stringIndexed")) {
+                continue;
+            }
+            if (propertie.equals("writeOnlyProperty")) {
+                continue;
+            }
+            int n = -1;
+            for (int j = 0; j < pd.length; j++) {
+                if (propertie.equals(pd[j].getName())) {
+                    n = j;
+                    break;
+                }
+            }
+            assertTrue("PropertyDescriptor for " + propertie,
+                    n >= 0);
+
+            // Locate an accessible property reader method for it
+            final Method reader = PropertyUtils.getReadMethod(pd[n]);
+            assertNotNull("Reader for " + propertie,
+                    reader);
+            final Class<?> clazz = reader.getDeclaringClass();
+            assertNotNull("Declaring class for " + propertie,
+                    clazz);
+            assertEquals("Correct declaring class for " + propertie,
+                    clazz.getName(),
+                    className);
+
+            // Actually call the reader method we received
+            try {
+                reader.invoke(bean, (Object[]) new Class<?>[0]);
+            } catch (final Throwable t) {
+                fail("Call for " + propertie + ": " + t);
+            }
+
+        }
+
+    }
+
+
+    /**
      * Test getting accessible property reader methods for a specified
      * list of properties of our standard test bean.
      */
@@ -1928,6 +2137,45 @@ public class PropertyUtilsTestCase extends TestCase {
 
         testGetReadMethod(beanPublicSubclass, properties, TEST_BEAN_CLASS);
 
+    }
+
+
+    /** Text case for setting properties on inner classes */
+    public void testGetSetInnerBean() throws Exception {
+        final BeanWithInnerBean bean = new BeanWithInnerBean();
+
+        PropertyUtils.setProperty(bean, "innerBean.fish(loiterTimer)", "5");
+        String out = (String) PropertyUtils.getProperty(bean.getInnerBean(), "fish(loiterTimer)");
+        assertEquals(
+                "(1) Inner class property set/get property failed.",
+                "5",
+                out);
+
+        out = (String) PropertyUtils.getProperty(bean, "innerBean.fish(loiterTimer)");
+
+        assertEquals(
+                "(2) Inner class property set/get property failed.",
+                "5",
+                out);
+    }
+
+
+    /** Text case for setting properties on parent */
+    public void testGetSetParentBean() throws Exception {
+
+        final SonOfAlphaBean bean = new SonOfAlphaBean("Roger");
+
+        final String out = (String) PropertyUtils.getProperty(bean, "name");
+        assertEquals(
+                "(1) Get/Set On Parent.",
+                "Roger",
+                out);
+
+        PropertyUtils.setProperty(bean, "name", "abcd");
+        assertEquals(
+                "(2) Get/Set On Parent.",
+                "abcd",
+                bean.getName());
     }
 
 
@@ -2114,7 +2362,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Negative test getSimpleProperty on a nested property.
      */
@@ -2135,7 +2382,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test getSimpleProperty on a read-only String property.
@@ -2217,7 +2463,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Negative test getSimpleProperty on an unknown property.
      */
@@ -2240,7 +2485,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test getSimpleProperty on a write-only String property.
      */
@@ -2259,6 +2503,63 @@ public class PropertyUtilsTestCase extends TestCase {
             // Correct result for this test
             assertEquals("Property 'writeOnlyProperty' has no getter method in class '" +
                          bean.getClass() + "'", e.getMessage() );
+        }
+
+    }
+
+    /**
+     * Base for testGetWriteMethod() series of tests.
+     *
+     * @param bean Bean for which to retrieve write methods.
+     * @param properties Property names to search for
+     * @param className Class name where this method should be defined
+     */
+    protected void testGetWriteMethod(final Object bean, final String properties[],
+                                      final String className) {
+
+
+        final PropertyDescriptor pd[] =
+                PropertyUtils.getPropertyDescriptors(bean);
+        for (final String propertie : properties) {
+
+            // Identify the property descriptor for this property
+            if (propertie.equals("intIndexed")) {
+                continue;
+            }
+            if (propertie.equals("listIndexed")) {
+                continue;
+            }
+            if (propertie.equals("nested"))
+             {
+                continue; // This property is read only
+            }
+            if (propertie.equals("readOnlyProperty")) {
+                continue;
+            }
+            if (propertie.equals("stringIndexed")) {
+                continue;
+            }
+            int n = -1;
+            for (int j = 0; j < pd.length; j++) {
+                if (propertie.equals(pd[j].getName())) {
+                    n = j;
+                    break;
+                }
+            }
+            assertTrue("PropertyDescriptor for " + propertie,
+                    n >= 0);
+
+            // Locate an accessible property reader method for it
+            final Method writer = PropertyUtils.getWriteMethod(pd[n]);
+            assertNotNull("Writer for " + propertie,
+                    writer);
+            final Class<?> clazz = writer.getDeclaringClass();
+            assertNotNull("Declaring class for " + propertie,
+                    clazz);
+            assertEquals("Correct declaring class for " + propertie,
+                    clazz.getName(),
+                    className);
+
         }
 
     }
@@ -2452,6 +2753,80 @@ public class PropertyUtilsTestCase extends TestCase {
         }
     }
 
+    /**
+     * This tests to see that it is possible to subclass PropertyUtilsBean
+     * and change the behaviour of setNestedProperty/getNestedProperty when
+     * dealing with objects that implement Map.
+     */
+    public void testMapExtensionCustom() throws Exception {
+        final PropsFirstPropertyUtilsBean utilsBean = new PropsFirstPropertyUtilsBean();
+        final ExtendMapBean bean = new ExtendMapBean();
+
+        // hardly worth testing this, really :-)
+        bean.setUnusuallyNamedProperty("bean value");
+        assertEquals("Set property direct failed", "bean value", bean.getUnusuallyNamedProperty());
+
+        // setSimpleProperty should affect the simple property
+        utilsBean.setSimpleProperty(bean, "unusuallyNamedProperty", "new value");
+        assertEquals("Set property on map failed (1)", "new value", bean.getUnusuallyNamedProperty());
+
+        // setNestedProperty with setter should affect the simple property
+        // getNestedProperty with getter should obtain the simple property
+        utilsBean.setProperty(bean, "unusuallyNamedProperty", "next value");
+        assertEquals("Set property on map failed (2)", "next value", bean.getUnusuallyNamedProperty());
+        assertEquals("setNestedProperty on non-simple property failed",
+                "next value",
+                utilsBean.getNestedProperty(bean, "unusuallyNamedProperty"));
+
+        // setting property without setter should update the map
+        // getting property without setter should fetch from the map
+        utilsBean.setProperty(bean, "mapProperty", "value1");
+        assertEquals("setNestedProperty on non-simple property failed",
+                "value1", utilsBean.getNestedProperty(bean, "mapProperty"));
+
+        final HashMap<String, Object> myMap = new HashMap<>();
+        myMap.put("thebean", bean);
+        utilsBean.getNestedProperty(myMap, "thebean.mapitem");
+        utilsBean.getNestedProperty(myMap, "thebean(mapitem)");
+    }
+
+    /**
+     * This tests to see that classes that implement Map always have their
+     * custom properties ignored.
+     * <p>
+     * Note that this behaviour has changed several times over past releases
+     * of beanutils, breaking backwards compatibility each time. Here's hoping
+     * that the current 1.7.1 release is the last time this behaviour changes!
+     */
+    public void testMapExtensionDefault() throws Exception {
+        final ExtendMapBean bean = new ExtendMapBean();
+
+        // setting property direct should work, and not affect map
+        bean.setUnusuallyNamedProperty("bean value");
+        assertEquals("Set property direct failed", "bean value", bean.getUnusuallyNamedProperty());
+        assertNull("Get on unset map property failed",
+                PropertyUtils.getNestedProperty(bean, "unusuallyNamedProperty"));
+
+        // setting simple property should call the setter method only, and not
+        // affect the map.
+        PropertyUtils.setSimpleProperty(bean, "unusuallyNamedProperty", "new value");
+        assertEquals("Set property on map failed (1)", "new value", bean.getUnusuallyNamedProperty());
+        assertNull("Get on unset map property failed",
+                PropertyUtils.getNestedProperty(bean, "unusuallyNamedProperty"));
+
+        // setting via setNestedProperty should affect the map only, and not
+        // call the setter method.
+        PropertyUtils.setProperty(bean, "unusuallyNamedProperty", "next value");
+        assertEquals(
+                "setNestedProperty on map not visible to getNestedProperty",
+                "next value",
+                PropertyUtils.getNestedProperty(bean, "unusuallyNamedProperty"));
+        assertEquals(
+            "Set nested property on map unexpected affected simple property",
+            "new value",
+            bean.getUnusuallyNamedProperty());
+    }
+
 
     /**
      * Test the mappedPropertyType of MappedPropertyDescriptor.
@@ -2472,6 +2847,198 @@ public class PropertyUtilsTestCase extends TestCase {
                         "mappedIntProperty");
         assertEquals(Integer.TYPE, desc.getMappedPropertyType());
 
+    }
+
+
+    /**
+     * There is an issue in setNestedProperty/getNestedProperty when the
+     * target bean is a map and the name string requests mapped or indexed
+     * operations on a field. These are not supported for fields of a Map,
+     * but it's an easy mistake to make and this test case ensures that an
+     * appropriate exception is thrown when a user does this.
+     * <p>
+     * The problem is with passing strings of form "a(b)" or "a[3]" to
+     * setNestedProperty or getNestedProperty when the target bean they
+     * are applied to implements Map. These strings are actually requesting
+     * "the result of calling mapped method a on the target object with
+     * a parameter of b" or "the result of calling indexed method a on the
+     * target object with a parameter of 3". And these requests are not valid
+     * when the target is a Map as a Map only supports calling get(fieldName)
+     * or put(fieldName), neither of which can be further indexed with a
+     * string or an integer.
+     * <p>
+     * However it is likely that some users will assume that "a[3]" when applied
+     * to a map will be equivalent to (map.get("a"))[3] with the appropriate
+     * typecasting, or for "a(b)" to be equivalent to map.get("a").get("b").
+     * <p>
+     * Here we verify that an exception is thrown if the user makes this
+     * mistake.
+     */
+    public void testNestedPropertyKeyOrIndexOnBeanImplementingMap() throws Exception {
+        final HashMap<String, Object> map = new HashMap<>();
+        final HashMap<String, Object> submap = new HashMap<>();
+        final BetaBean betaBean1 = new BetaBean("test1");
+        final BetaBean betaBean2 = new BetaBean("test2");
+
+        // map.put("submap", submap)
+        PropertyUtils.setNestedProperty(map, "submap", submap);
+
+        // map.get("submap").put("beta1", betaBean1)
+        PropertyUtils.setNestedProperty(map, "submap.beta1", betaBean1);
+        assertEquals("Unexpected keys in map", "submap", keysToString(map));
+        assertEquals("Unexpected keys in submap", "beta1", keysToString(submap));
+
+        try {
+            // One would expect that the command below would be equivalent to
+            //   Map m = (Map) map.get("submap");
+            //   m.put("beta2", betaBean2)
+            // However this isn't how javabeans property methods work. A map
+            // only effectively has "simple" properties, even when the
+            // returned object is a Map or Array.
+            PropertyUtils.setNestedProperty(map, "submap(beta2)", betaBean2);
+
+            // What, no exception? In that case, setNestedProperties has
+            // probably just tried to do
+            //    map.set("submap(beta2)", betaBean2)
+            // which is almost certainly not what the used expected. This is
+            // what beanutils 1.5.0 to 1.7.1 did....
+            fail("Exception not thrown for invalid setNestedProperty syntax");
+        } catch(final IllegalArgumentException ex) {
+            // ok, getting an exception was expected. As it is of a generic
+            // type, let's check the message string to make sure it really
+            // was caused by the issue we expected.
+            final int index = ex.getMessage().indexOf(
+                    "Indexed or mapped properties are not supported");
+            assertTrue("Unexpected exception message", index>=0);
+        }
+
+        try {
+            // One would expect that "submap[3]" would be equivalent to
+            //   Object[] objects = (Object[]) map.get("submap");
+            //   return objects[3];
+            // However this isn't how javabeans property methods work. A map
+            // only effectively has "simple" properties, even when the
+            // returned object is a Map or Array.
+            PropertyUtils.getNestedProperty(map, "submap[3]");
+
+            // What, no exception? In that case, getNestedProperties has
+            // probably just tried to do
+            //    map.get("submap[3]")
+            // which is almost certainly not what the used expected. This is
+            // what beanutils 1.5.0 to 1.7.1 did....
+            fail("Exception not thrown for invalid setNestedProperty syntax");
+        } catch(final IllegalArgumentException ex) {
+            // ok, getting an exception was expected. As it is of a generic
+            // type, let's check the message string to make sure it really
+            // was caused by the issue we expected.
+            final int index = ex.getMessage().indexOf(
+                    "Indexed or mapped properties are not supported");
+            assertTrue("Unexpected exception message", index>=0);
+        }
+    }
+
+
+    public void testNestedWithIndex() throws Exception
+    {
+        final NestedTestBean nestedBean = new NestedTestBean("base");
+        nestedBean.init();
+        nestedBean.getSimpleBeanProperty().init();
+
+        NestedTestBean
+
+        // test first calling properties on indexed beans
+
+        value = (NestedTestBean) PropertyUtils.getProperty(
+                                nestedBean,
+                                "indexedProperty[0]");
+        assertEquals("Cannot get simple index(1)", "Bean@0", value.getName());
+        assertEquals("Bug in NestedTestBean", "NOT SET", value.getTestString());
+
+        value = (NestedTestBean) PropertyUtils.getProperty(
+                                nestedBean,
+                                "indexedProperty[1]");
+        assertEquals("Cannot get simple index(1)", "Bean@1", value.getName());
+        assertEquals("Bug in NestedTestBean", "NOT SET", value.getTestString());
+
+        String
+        prop = (String) PropertyUtils.getProperty(
+                                nestedBean,
+                                "indexedProperty[0].testString");
+        assertEquals("Get property on indexes failed (1)", "NOT SET", prop);
+
+        prop = (String) PropertyUtils.getProperty(
+                                nestedBean,
+                                "indexedProperty[1].testString");
+        assertEquals("Get property on indexes failed (2)", "NOT SET", prop);
+
+        PropertyUtils.setProperty(
+                                nestedBean,
+                                "indexedProperty[0].testString",
+                                "Test#1");
+        assertEquals(
+                "Cannot set property on indexed bean (1)",
+                "Test#1",
+                nestedBean.getIndexedProperty(0).getTestString());
+
+        PropertyUtils.setProperty(
+                                nestedBean,
+                                "indexedProperty[1].testString",
+                                "Test#2");
+        assertEquals(
+                "Cannot set property on indexed bean (2)",
+                "Test#2",
+                nestedBean.getIndexedProperty(1).getTestString());
+
+
+        // test first calling indexed properties on a simple property
+
+        value = (NestedTestBean) PropertyUtils.getProperty(
+                                nestedBean,
+                                "simpleBeanProperty");
+        assertEquals("Cannot get simple bean", "Simple Property Bean", value.getName());
+        assertEquals("Bug in NestedTestBean", "NOT SET", value.getTestString());
+
+        value = (NestedTestBean) PropertyUtils.getProperty(
+                                nestedBean,
+                                "simpleBeanProperty.indexedProperty[3]");
+        assertEquals("Cannot get index property on property", "Bean@3", value.getName());
+        assertEquals("Bug in NestedTestBean", "NOT SET", value.getTestString());
+
+        PropertyUtils.setProperty(
+                                nestedBean,
+                                "simpleBeanProperty.indexedProperty[3].testString",
+                                "Test#3");
+        assertEquals(
+            "Cannot set property on indexed property on property",
+            "Test#3",
+            nestedBean.getSimpleBeanProperty().getIndexedProperty(3).getTestString());
+    }
+
+
+    /**
+     * Tests whether a BeanIntrospector can be removed.
+     */
+    public void testRemoveBeanIntrospector() {
+        assertTrue(
+                "Wrong result",
+                PropertyUtils
+                        .removeBeanIntrospector(DefaultBeanIntrospector.INSTANCE));
+        final PropertyDescriptor[] desc = PropertyUtils
+                .getPropertyDescriptors(AlphaBean.class);
+        assertEquals("Got descriptors", 0, desc.length);
+        PropertyUtils.addBeanIntrospector(DefaultBeanIntrospector.INSTANCE);
+    }
+
+
+    /**
+     * Tests whether a reset of the registered BeanIntrospectors can be performed.
+     */
+    public void testResetBeanIntrospectors() {
+        assertTrue("Wrong result",
+                PropertyUtils.removeBeanIntrospector(DefaultBeanIntrospector.INSTANCE));
+        PropertyUtils.resetBeanIntrospectors();
+        final PropertyDescriptor[] desc = PropertyUtils.getPropertyDescriptors(AlphaBean.class);
+        assertTrue("Got no descriptors", desc.length > 0);
     }
 
 
@@ -2592,6 +3159,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
+
     /**
      * Test setting an indexed value out of a multi-dimensional array
      */
@@ -2608,6 +3176,7 @@ public class PropertyUtilsTestCase extends TestCase {
         }
         assertEquals("AFTER", "SECOND-3-UPDATED", bean.getString2dArray(1)[2]);
     }
+
 
     /**
      * Test setting an indexed value out of List of Lists
@@ -2627,6 +3196,7 @@ public class PropertyUtilsTestCase extends TestCase {
         }
         assertEquals("AFTER", "SECOND-4-UPDATED", ((List<?>)bean.getListIndexed().get(1)).get(3));
     }
+
 
     /**
      * Test setting a value out of a mapped Map
@@ -3087,6 +3657,7 @@ public class PropertyUtilsTestCase extends TestCase {
         assertEquals("AFTER", "DEF-UPDATED", ((String[])bean.getMapProperty().get("mappedArray"))[1]);
     }
 
+
     /**
      * Test setting an indexed value out of a mapped List
      */
@@ -3107,6 +3678,7 @@ public class PropertyUtilsTestCase extends TestCase {
         assertEquals("AFTER", "KLM-UPDATED", ((List<?>)bean.getMapProperty().get("mappedList")).get(0));
     }
 
+
     /**
      * Test setting a value out of a mapped Map
      */
@@ -3126,6 +3698,74 @@ public class PropertyUtilsTestCase extends TestCase {
         }
         assertEquals("AFTER", "SUB-KEY-3-UPDATED", ((Map<?, ?>)bean.getMapProperty().get("mappedMap")).get("sub-key-3"));
     }
+
+
+    /**
+     * Test setting mapped values with periods in the key.
+     */
+    public void testSetMappedPeriods() {
+
+
+        bean.setMappedProperty("key.with.a.dot", "Special Value");
+        assertEquals("Can retrieve directly (A)",
+                     "Special Value",
+                     bean.getMappedProperty("key.with.a.dot"));
+
+        try {
+            PropertyUtils.setMappedProperty(bean, "mappedProperty", "key.with.a.dot", "Updated Special Value");
+            assertEquals("Check set via setMappedProperty",
+                         "Updated Special Value",
+                          bean.getMappedProperty("key.with.a.dot"));
+        } catch (final Exception e) {
+            fail("Thew exception: " + e);
+        }
+
+        bean.setMappedProperty("key.with.a.dot", "Special Value");
+        assertEquals("Can retrieve directly (B)",
+                     "Special Value",
+                     bean.getMappedProperty("key.with.a.dot"));
+        try {
+            PropertyUtils.setNestedProperty(bean, "mappedProperty(key.with.a.dot)", "Updated Special Value");
+            assertEquals("Check set via setNestedProperty (B)",
+                         "Updated Special Value",
+                         bean.getMappedProperty("key.with.a.dot"));
+        } catch (final Exception e) {
+            fail("Thew exception: " + e);
+        }
+
+
+        final TestBean testBean = new TestBean();
+        bean.setMappedObjects("nested.property", testBean);
+        assertEquals("Can retrieve directly (C)",
+                     "This is a string",
+                     testBean.getStringProperty());
+        try {
+            PropertyUtils.setNestedProperty(bean, "mappedObjects(nested.property).stringProperty",
+                                                  "Updated String Value");
+            assertEquals("Check set via setNestedProperty (C)",
+                         "Updated String Value",
+                         testBean.getStringProperty());
+        } catch (final Exception e) {
+            fail("Thew exception: " + e);
+        }
+
+        bean.getNested().setMappedProperty("Mapped Key", "Nested Mapped Value");
+        try {
+            assertEquals("Can retrieve via getNestedProperty (D)",
+                         "Nested Mapped Value",
+                         PropertyUtils.getNestedProperty(
+                             bean,"nested.mappedProperty(Mapped Key)"));
+            PropertyUtils.setNestedProperty(bean, "nested.mappedProperty(Mapped Key)",
+                                                  "Updated Nested Mapped Value");
+            assertEquals("Check set via setNestedProperty (D)",
+                         "Updated Nested Mapped Value",
+                         PropertyUtils.getNestedProperty(
+                             bean,"nested.mappedProperty(Mapped Key)"));
+        } catch (final Exception e) {
+            fail("Thew exception: " + e);
+        }
+    }
+
 
     /**
      * Positive and negative tests on setMappedProperty valid arguments.
@@ -3215,72 +3855,6 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("Finding sixth value threw " + t);
         }
 
-    }
-
-    /**
-     * Test setting mapped values with periods in the key.
-     */
-    public void testSetMappedPeriods() {
-
-
-        bean.setMappedProperty("key.with.a.dot", "Special Value");
-        assertEquals("Can retrieve directly (A)",
-                     "Special Value",
-                     bean.getMappedProperty("key.with.a.dot"));
-
-        try {
-            PropertyUtils.setMappedProperty(bean, "mappedProperty", "key.with.a.dot", "Updated Special Value");
-            assertEquals("Check set via setMappedProperty",
-                         "Updated Special Value",
-                          bean.getMappedProperty("key.with.a.dot"));
-        } catch (final Exception e) {
-            fail("Thew exception: " + e);
-        }
-
-        bean.setMappedProperty("key.with.a.dot", "Special Value");
-        assertEquals("Can retrieve directly (B)",
-                     "Special Value",
-                     bean.getMappedProperty("key.with.a.dot"));
-        try {
-            PropertyUtils.setNestedProperty(bean, "mappedProperty(key.with.a.dot)", "Updated Special Value");
-            assertEquals("Check set via setNestedProperty (B)",
-                         "Updated Special Value",
-                         bean.getMappedProperty("key.with.a.dot"));
-        } catch (final Exception e) {
-            fail("Thew exception: " + e);
-        }
-
-
-        final TestBean testBean = new TestBean();
-        bean.setMappedObjects("nested.property", testBean);
-        assertEquals("Can retrieve directly (C)",
-                     "This is a string",
-                     testBean.getStringProperty());
-        try {
-            PropertyUtils.setNestedProperty(bean, "mappedObjects(nested.property).stringProperty",
-                                                  "Updated String Value");
-            assertEquals("Check set via setNestedProperty (C)",
-                         "Updated String Value",
-                         testBean.getStringProperty());
-        } catch (final Exception e) {
-            fail("Thew exception: " + e);
-        }
-
-        bean.getNested().setMappedProperty("Mapped Key", "Nested Mapped Value");
-        try {
-            assertEquals("Can retrieve via getNestedProperty (D)",
-                         "Nested Mapped Value",
-                         PropertyUtils.getNestedProperty(
-                             bean,"nested.mappedProperty(Mapped Key)"));
-            PropertyUtils.setNestedProperty(bean, "nested.mappedProperty(Mapped Key)",
-                                                  "Updated Nested Mapped Value");
-            assertEquals("Check set via setNestedProperty (D)",
-                         "Updated Nested Mapped Value",
-                         PropertyUtils.getNestedProperty(
-                             bean,"nested.mappedProperty(Mapped Key)"));
-        } catch (final Exception e) {
-            fail("Thew exception: " + e);
-        }
     }
 
 
@@ -3500,6 +4074,8 @@ public class PropertyUtilsTestCase extends TestCase {
     }
 
 
+
+
     /**
      * Test setNestedProperty on a String property.
      */
@@ -3577,625 +4153,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
-    /**
-     * Corner cases on setSimpleProperty invalid arguments.
-     */
-    public void testSetSimpleArguments() {
-
-        try {
-            PropertyUtils.setSimpleProperty(null, "stringProperty", "");
-            fail("Should throw IllegalArgumentException 1");
-        } catch (final IllegalArgumentException e) {
-            // Expected response
-        } catch (final Throwable t) {
-            fail("Threw " + t + " instead of IllegalArgumentException 1");
-        }
-
-        try {
-            PropertyUtils.setSimpleProperty(bean, null, "");
-            fail("Should throw IllegalArgumentException 2");
-        } catch (final IllegalArgumentException e) {
-            // Expected response
-        } catch (final Throwable t) {
-            fail("Threw " + t + " instead of IllegalArgumentException 2");
-        }
-
-    }
-
-
-    /**
-     * Test setSimpleProperty on a boolean property.
-     */
-    public void testSetSimpleBoolean() {
-
-        try {
-            final boolean oldValue = bean.getBooleanProperty();
-            final boolean newValue = !oldValue;
-            PropertyUtils.setSimpleProperty(bean,
-                    "booleanProperty",
-                    Boolean.valueOf(newValue));
-            assertTrue("Matched new value",
-                    newValue ==
-                    bean.getBooleanProperty());
-        } catch (final IllegalAccessException e) {
-            fail("IllegalAccessException");
-        } catch (final IllegalArgumentException e) {
-            fail("IllegalArgumentException");
-        } catch (final InvocationTargetException e) {
-            fail("InvocationTargetException");
-        } catch (final NoSuchMethodException e) {
-            fail("NoSuchMethodException");
-        }
-
-    }
-
-
-    /**
-     * Test setSimpleProperty on a double property.
-     */
-    public void testSetSimpleDouble() {
-
-        try {
-            final double oldValue = bean.getDoubleProperty();
-            final double newValue = oldValue + 1.0;
-            PropertyUtils.setSimpleProperty(bean,
-                    "doubleProperty",
-                    Double.valueOf(newValue));
-            assertEquals("Matched new value",
-                    newValue,
-                    bean.getDoubleProperty(),
-                    0.005);
-        } catch (final IllegalAccessException e) {
-            fail("IllegalAccessException");
-        } catch (final IllegalArgumentException e) {
-            fail("IllegalArgumentException");
-        } catch (final InvocationTargetException e) {
-            fail("InvocationTargetException");
-        } catch (final NoSuchMethodException e) {
-            fail("NoSuchMethodException");
-        }
-
-    }
-
-
-    /**
-     * Test setSimpleProperty on a float property.
-     */
-    public void testSetSimpleFloat() {
-
-        try {
-            final float oldValue = bean.getFloatProperty();
-            final float newValue = oldValue + (float) 1.0;
-            PropertyUtils.setSimpleProperty(bean,
-                    "floatProperty",
-                    Float.valueOf(newValue));
-            assertEquals("Matched new value",
-                    newValue,
-                    bean.getFloatProperty(),
-                    (float) 0.005);
-        } catch (final IllegalAccessException e) {
-            fail("IllegalAccessException");
-        } catch (final IllegalArgumentException e) {
-            fail("IllegalArgumentException");
-        } catch (final InvocationTargetException e) {
-            fail("InvocationTargetException");
-        } catch (final NoSuchMethodException e) {
-            fail("NoSuchMethodException");
-        }
-
-    }
-
-
-    /**
-     * Negative test setSimpleProperty on an indexed property.
-     */
-    public void testSetSimpleIndexed() {
-
-        try {
-            PropertyUtils.setSimpleProperty(bean,
-                    "stringIndexed[0]",
-                    "New String Value");
-            fail("Should have thrown IllegalArgumentException");
-        } catch (final IllegalAccessException e) {
-            fail("IllegalAccessException");
-        } catch (final IllegalArgumentException e) {
-            // Correct result for this test
-        } catch (final InvocationTargetException e) {
-            fail("InvocationTargetException");
-        } catch (final NoSuchMethodException e) {
-            fail("NoSuchMethodException");
-        }
-
-    }
-
-
-    /**
-     * Test setSimpleProperty on a int property.
-     */
-    public void testSetSimpleInt() {
-
-        try {
-            final int oldValue = bean.getIntProperty();
-            final int newValue = oldValue + 1;
-            PropertyUtils.setSimpleProperty(bean,
-                    "intProperty",
-                    Integer.valueOf(newValue));
-            assertEquals("Matched new value",
-                    newValue,
-                    bean.getIntProperty());
-        } catch (final IllegalAccessException e) {
-            fail("IllegalAccessException");
-        } catch (final IllegalArgumentException e) {
-            fail("IllegalArgumentException");
-        } catch (final InvocationTargetException e) {
-            fail("InvocationTargetException");
-        } catch (final NoSuchMethodException e) {
-            fail("NoSuchMethodException");
-        }
-
-    }
-
-
-    /**
-     * Test setSimpleProperty on a long property.
-     */
-    public void testSetSimpleLong() {
-
-        try {
-            final long oldValue = bean.getLongProperty();
-            final long newValue = oldValue + 1;
-            PropertyUtils.setSimpleProperty(bean,
-                    "longProperty",
-                    Long.valueOf(newValue));
-            assertEquals("Matched new value",
-                    newValue,
-                    bean.getLongProperty());
-        } catch (final IllegalAccessException e) {
-            fail("IllegalAccessException");
-        } catch (final IllegalArgumentException e) {
-            fail("IllegalArgumentException");
-        } catch (final InvocationTargetException e) {
-            fail("InvocationTargetException");
-        } catch (final NoSuchMethodException e) {
-            fail("NoSuchMethodException");
-        }
-
-    }
-
-
-    /**
-     * Negative test setSimpleProperty on a nested property.
-     */
-    public void testSetSimpleNested() {
-
-        try {
-            PropertyUtils.setSimpleProperty(bean,
-                    "nested.stringProperty",
-                    "New String Value");
-            fail("Should have thrown IllegalArgumentException");
-        } catch (final IllegalAccessException e) {
-            fail("IllegalAccessException");
-        } catch (final IllegalArgumentException e) {
-            // Correct result for this test
-        } catch (final InvocationTargetException e) {
-            fail("InvocationTargetException");
-        } catch (final NoSuchMethodException e) {
-            fail("NoSuchMethodException");
-        }
-
-    }
-
-
-    /**
-     * Test setSimpleProperty on a read-only String property.
-     */
-    public void testSetSimpleReadOnly() {
-
-        try {
-            final String oldValue = bean.getWriteOnlyPropertyValue();
-            final String newValue = oldValue + " Extra Value";
-            PropertyUtils.setSimpleProperty(bean,
-                    "readOnlyProperty",
-                    newValue);
-            fail("Should have thrown NoSuchMethodException");
-        } catch (final IllegalAccessException e) {
-            fail("IllegalAccessException");
-        } catch (final IllegalArgumentException e) {
-            fail("IllegalArgumentException");
-        } catch (final InvocationTargetException e) {
-            fail("InvocationTargetException");
-        } catch (final NoSuchMethodException e) {
-            // Correct result for this test
-            assertEquals("Property 'readOnlyProperty' has no setter method in class '" +
-                         bean.getClass() + "'", e.getMessage() );
-        }
-
-    }
-
-
-    /**
-     * Test setSimpleProperty on a short property.
-     */
-    public void testSetSimpleShort() {
-
-        try {
-            final short oldValue = bean.getShortProperty();
-            short newValue = oldValue;
-            newValue++;
-            PropertyUtils.setSimpleProperty(bean,
-                    "shortProperty",
-                    Short.valueOf(newValue));
-            assertEquals("Matched new value",
-                    newValue,
-                    bean.getShortProperty());
-        } catch (final IllegalAccessException e) {
-            fail("IllegalAccessException");
-        } catch (final IllegalArgumentException e) {
-            fail("IllegalArgumentException");
-        } catch (final InvocationTargetException e) {
-            fail("InvocationTargetException");
-        } catch (final NoSuchMethodException e) {
-            fail("NoSuchMethodException");
-        }
-
-    }
-
-
-    /**
-     * Test setSimpleProperty on a String property.
-     */
-    public void testSetSimpleString() {
-
-        try {
-            final String oldValue = bean.getStringProperty();
-            final String newValue = oldValue + " Extra Value";
-            PropertyUtils.setSimpleProperty(bean,
-                    "stringProperty",
-                    newValue);
-            assertEquals("Matched new value",
-                    newValue,
-                    bean.getStringProperty());
-        } catch (final IllegalAccessException e) {
-            fail("IllegalAccessException");
-        } catch (final IllegalArgumentException e) {
-            fail("IllegalArgumentException");
-        } catch (final InvocationTargetException e) {
-            fail("InvocationTargetException");
-        } catch (final NoSuchMethodException e) {
-            fail("NoSuchMethodException");
-        }
-
-    }
-
-
-    /**
-     * Test setSimpleProperty on an unknown property name.
-     */
-    public void testSetSimpleUnknown() {
-
-        try {
-            final String newValue = "New String Value";
-            PropertyUtils.setSimpleProperty(bean,
-                    "unknown",
-                    newValue);
-            fail("Should have thrown NoSuchMethodException");
-        } catch (final IllegalAccessException e) {
-            fail("IllegalAccessException");
-        } catch (final IllegalArgumentException e) {
-            fail("IllegalArgumentException");
-        } catch (final InvocationTargetException e) {
-            fail("InvocationTargetException");
-        } catch (final NoSuchMethodException e) {
-            // Correct result for this test
-            assertEquals("Unknown property 'unknown' on class '" +
-                         bean.getClass() + "'", e.getMessage() );
-        }
-
-    }
-
-
-    /**
-     * Test setSimpleProperty on a write-only String property.
-     */
-    public void testSetSimpleWriteOnly() {
-
-        try {
-            final String oldValue = bean.getWriteOnlyPropertyValue();
-            final String newValue = oldValue + " Extra Value";
-            PropertyUtils.setSimpleProperty(bean,
-                    "writeOnlyProperty",
-                    newValue);
-            assertEquals("Matched new value",
-                    newValue,
-                    bean.getWriteOnlyPropertyValue());
-        } catch (final IllegalAccessException e) {
-            fail("IllegalAccessException");
-        } catch (final IllegalArgumentException e) {
-            fail("IllegalArgumentException");
-        } catch (final InvocationTargetException e) {
-            fail("InvocationTargetException");
-        } catch (final NoSuchMethodException e) {
-            fail("NoSuchMethodException");
-        }
-
-    }
-
-
-
-
-    /**
-     * Base for testGetDescriptorXxxxx() series of tests.
-     *
-     * @param name Name of the property to be retrieved
-     * @param read Expected name of the read method (or null)
-     * @param write Expected name of the write method (or null)
-     */
-    protected void testGetDescriptorBase(final String name, final String read,
-                                         final String write) {
-
-        try {
-            final PropertyDescriptor pd =
-                    PropertyUtils.getPropertyDescriptor(bean, name);
-            if (read == null && write == null) {
-                assertNull("Got descriptor", pd);
-                return;
-            }
-            assertNotNull("Got descriptor", pd);
-            final Method rm = pd.getReadMethod();
-            if (read != null) {
-                assertNotNull("Got read method", rm);
-                assertEquals("Got correct read method",
-                        rm.getName(), read);
-            } else {
-                assertNull("Got read method", rm);
-            }
-            final Method wm = pd.getWriteMethod();
-            if (write != null) {
-                assertNotNull("Got write method", wm);
-                assertEquals("Got correct write method",
-                        wm.getName(), write);
-            } else {
-                assertNull("Got write method", wm);
-            }
-        } catch (final IllegalAccessException e) {
-            fail("IllegalAccessException");
-        } catch (final InvocationTargetException e) {
-            fail("InvocationTargetException");
-        } catch (final NoSuchMethodException e) {
-            fail("NoSuchMethodException");
-        }
-
-    }
-
-
-    /**
-     * Base for testGetReadMethod() series of tests.
-     *
-     * @param bean Bean for which to retrieve read methods.
-     * @param properties Property names to search for
-     * @param className Class name where this method should be defined
-     */
-    protected void testGetReadMethod(final Object bean, final String properties[],
-                                     final String className) {
-
-        final PropertyDescriptor pd[] =
-                PropertyUtils.getPropertyDescriptors(bean);
-        for (final String propertie : properties) {
-
-            // Identify the property descriptor for this property
-            if (propertie.equals("intIndexed")) {
-                continue;
-            }
-            if (propertie.equals("stringIndexed")) {
-                continue;
-            }
-            if (propertie.equals("writeOnlyProperty")) {
-                continue;
-            }
-            int n = -1;
-            for (int j = 0; j < pd.length; j++) {
-                if (propertie.equals(pd[j].getName())) {
-                    n = j;
-                    break;
-                }
-            }
-            assertTrue("PropertyDescriptor for " + propertie,
-                    n >= 0);
-
-            // Locate an accessible property reader method for it
-            final Method reader = PropertyUtils.getReadMethod(pd[n]);
-            assertNotNull("Reader for " + propertie,
-                    reader);
-            final Class<?> clazz = reader.getDeclaringClass();
-            assertNotNull("Declaring class for " + propertie,
-                    clazz);
-            assertEquals("Correct declaring class for " + propertie,
-                    clazz.getName(),
-                    className);
-
-            // Actually call the reader method we received
-            try {
-                reader.invoke(bean, (Object[]) new Class<?>[0]);
-            } catch (final Throwable t) {
-                fail("Call for " + propertie + ": " + t);
-            }
-
-        }
-
-    }
-
-
-    /**
-     * Base for testGetWriteMethod() series of tests.
-     *
-     * @param bean Bean for which to retrieve write methods.
-     * @param properties Property names to search for
-     * @param className Class name where this method should be defined
-     */
-    protected void testGetWriteMethod(final Object bean, final String properties[],
-                                      final String className) {
-
-
-        final PropertyDescriptor pd[] =
-                PropertyUtils.getPropertyDescriptors(bean);
-        for (final String propertie : properties) {
-
-            // Identify the property descriptor for this property
-            if (propertie.equals("intIndexed")) {
-                continue;
-            }
-            if (propertie.equals("listIndexed")) {
-                continue;
-            }
-            if (propertie.equals("nested"))
-             {
-                continue; // This property is read only
-            }
-            if (propertie.equals("readOnlyProperty")) {
-                continue;
-            }
-            if (propertie.equals("stringIndexed")) {
-                continue;
-            }
-            int n = -1;
-            for (int j = 0; j < pd.length; j++) {
-                if (propertie.equals(pd[j].getName())) {
-                    n = j;
-                    break;
-                }
-            }
-            assertTrue("PropertyDescriptor for " + propertie,
-                    n >= 0);
-
-            // Locate an accessible property reader method for it
-            final Method writer = PropertyUtils.getWriteMethod(pd[n]);
-            assertNotNull("Writer for " + propertie,
-                    writer);
-            final Class<?> clazz = writer.getDeclaringClass();
-            assertNotNull("Declaring class for " + propertie,
-                    clazz);
-            assertEquals("Correct declaring class for " + propertie,
-                    clazz.getName(),
-                    className);
-
-        }
-
-    }
-
-    public void testNestedWithIndex() throws Exception
-    {
-        final NestedTestBean nestedBean = new NestedTestBean("base");
-        nestedBean.init();
-        nestedBean.getSimpleBeanProperty().init();
-
-        NestedTestBean
-
-        // test first calling properties on indexed beans
-
-        value = (NestedTestBean) PropertyUtils.getProperty(
-                                nestedBean,
-                                "indexedProperty[0]");
-        assertEquals("Cannot get simple index(1)", "Bean@0", value.getName());
-        assertEquals("Bug in NestedTestBean", "NOT SET", value.getTestString());
-
-        value = (NestedTestBean) PropertyUtils.getProperty(
-                                nestedBean,
-                                "indexedProperty[1]");
-        assertEquals("Cannot get simple index(1)", "Bean@1", value.getName());
-        assertEquals("Bug in NestedTestBean", "NOT SET", value.getTestString());
-
-        String
-        prop = (String) PropertyUtils.getProperty(
-                                nestedBean,
-                                "indexedProperty[0].testString");
-        assertEquals("Get property on indexes failed (1)", "NOT SET", prop);
-
-        prop = (String) PropertyUtils.getProperty(
-                                nestedBean,
-                                "indexedProperty[1].testString");
-        assertEquals("Get property on indexes failed (2)", "NOT SET", prop);
-
-        PropertyUtils.setProperty(
-                                nestedBean,
-                                "indexedProperty[0].testString",
-                                "Test#1");
-        assertEquals(
-                "Cannot set property on indexed bean (1)",
-                "Test#1",
-                nestedBean.getIndexedProperty(0).getTestString());
-
-        PropertyUtils.setProperty(
-                                nestedBean,
-                                "indexedProperty[1].testString",
-                                "Test#2");
-        assertEquals(
-                "Cannot set property on indexed bean (2)",
-                "Test#2",
-                nestedBean.getIndexedProperty(1).getTestString());
-
-
-        // test first calling indexed properties on a simple property
-
-        value = (NestedTestBean) PropertyUtils.getProperty(
-                                nestedBean,
-                                "simpleBeanProperty");
-        assertEquals("Cannot get simple bean", "Simple Property Bean", value.getName());
-        assertEquals("Bug in NestedTestBean", "NOT SET", value.getTestString());
-
-        value = (NestedTestBean) PropertyUtils.getProperty(
-                                nestedBean,
-                                "simpleBeanProperty.indexedProperty[3]");
-        assertEquals("Cannot get index property on property", "Bean@3", value.getName());
-        assertEquals("Bug in NestedTestBean", "NOT SET", value.getTestString());
-
-        PropertyUtils.setProperty(
-                                nestedBean,
-                                "simpleBeanProperty.indexedProperty[3].testString",
-                                "Test#3");
-        assertEquals(
-            "Cannot set property on indexed property on property",
-            "Test#3",
-            nestedBean.getSimpleBeanProperty().getIndexedProperty(3).getTestString());
-    }
-
-    /** Text case for setting properties on inner classes */
-    public void testGetSetInnerBean() throws Exception {
-        final BeanWithInnerBean bean = new BeanWithInnerBean();
-
-        PropertyUtils.setProperty(bean, "innerBean.fish(loiterTimer)", "5");
-        String out = (String) PropertyUtils.getProperty(bean.getInnerBean(), "fish(loiterTimer)");
-        assertEquals(
-                "(1) Inner class property set/get property failed.",
-                "5",
-                out);
-
-        out = (String) PropertyUtils.getProperty(bean, "innerBean.fish(loiterTimer)");
-
-        assertEquals(
-                "(2) Inner class property set/get property failed.",
-                "5",
-                out);
-    }
-
-    /** Text case for setting properties on parent */
-    public void testGetSetParentBean() throws Exception {
-
-        final SonOfAlphaBean bean = new SonOfAlphaBean("Roger");
-
-        final String out = (String) PropertyUtils.getProperty(bean, "name");
-        assertEquals(
-                "(1) Get/Set On Parent.",
-                "Roger",
-                out);
-
-        PropertyUtils.setProperty(bean, "name", "abcd");
-        assertEquals(
-                "(2) Get/Set On Parent.",
-                "abcd",
-                bean.getName());
-    }
-
     public void testSetNoGetter() throws Exception
     {
         final BetaBean bean = new BetaBean("Cedric");
@@ -4243,317 +4200,351 @@ public class PropertyUtilsTestCase extends TestCase {
     }
 
     /**
-     * There is an issue in setNestedProperty/getNestedProperty when the
-     * target bean is a map and the name string requests mapped or indexed
-     * operations on a field. These are not supported for fields of a Map,
-     * but it's an easy mistake to make and this test case ensures that an
-     * appropriate exception is thrown when a user does this.
-     * <p>
-     * The problem is with passing strings of form "a(b)" or "a[3]" to
-     * setNestedProperty or getNestedProperty when the target bean they
-     * are applied to implements Map. These strings are actually requesting
-     * "the result of calling mapped method a on the target object with
-     * a parameter of b" or "the result of calling indexed method a on the
-     * target object with a parameter of 3". And these requests are not valid
-     * when the target is a Map as a Map only supports calling get(fieldName)
-     * or put(fieldName), neither of which can be further indexed with a
-     * string or an integer.
-     * <p>
-     * However it is likely that some users will assume that "a[3]" when applied
-     * to a map will be equivalent to (map.get("a"))[3] with the appropriate
-     * typecasting, or for "a(b)" to be equivalent to map.get("a").get("b").
-     * <p>
-     * Here we verify that an exception is thrown if the user makes this
-     * mistake.
+     * Corner cases on setSimpleProperty invalid arguments.
      */
-    public void testNestedPropertyKeyOrIndexOnBeanImplementingMap() throws Exception {
-        final HashMap<String, Object> map = new HashMap<>();
-        final HashMap<String, Object> submap = new HashMap<>();
-        final BetaBean betaBean1 = new BetaBean("test1");
-        final BetaBean betaBean2 = new BetaBean("test2");
-
-        // map.put("submap", submap)
-        PropertyUtils.setNestedProperty(map, "submap", submap);
-
-        // map.get("submap").put("beta1", betaBean1)
-        PropertyUtils.setNestedProperty(map, "submap.beta1", betaBean1);
-        assertEquals("Unexpected keys in map", "submap", keysToString(map));
-        assertEquals("Unexpected keys in submap", "beta1", keysToString(submap));
+    public void testSetSimpleArguments() {
 
         try {
-            // One would expect that the command below would be equivalent to
-            //   Map m = (Map) map.get("submap");
-            //   m.put("beta2", betaBean2)
-            // However this isn't how javabeans property methods work. A map
-            // only effectively has "simple" properties, even when the
-            // returned object is a Map or Array.
-            PropertyUtils.setNestedProperty(map, "submap(beta2)", betaBean2);
-
-            // What, no exception? In that case, setNestedProperties has
-            // probably just tried to do
-            //    map.set("submap(beta2)", betaBean2)
-            // which is almost certainly not what the used expected. This is
-            // what beanutils 1.5.0 to 1.7.1 did....
-            fail("Exception not thrown for invalid setNestedProperty syntax");
-        } catch(final IllegalArgumentException ex) {
-            // ok, getting an exception was expected. As it is of a generic
-            // type, let's check the message string to make sure it really
-            // was caused by the issue we expected.
-            final int index = ex.getMessage().indexOf(
-                    "Indexed or mapped properties are not supported");
-            assertTrue("Unexpected exception message", index>=0);
+            PropertyUtils.setSimpleProperty(null, "stringProperty", "");
+            fail("Should throw IllegalArgumentException 1");
+        } catch (final IllegalArgumentException e) {
+            // Expected response
+        } catch (final Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 1");
         }
 
         try {
-            // One would expect that "submap[3]" would be equivalent to
-            //   Object[] objects = (Object[]) map.get("submap");
-            //   return objects[3];
-            // However this isn't how javabeans property methods work. A map
-            // only effectively has "simple" properties, even when the
-            // returned object is a Map or Array.
-            PropertyUtils.getNestedProperty(map, "submap[3]");
-
-            // What, no exception? In that case, getNestedProperties has
-            // probably just tried to do
-            //    map.get("submap[3]")
-            // which is almost certainly not what the used expected. This is
-            // what beanutils 1.5.0 to 1.7.1 did....
-            fail("Exception not thrown for invalid setNestedProperty syntax");
-        } catch(final IllegalArgumentException ex) {
-            // ok, getting an exception was expected. As it is of a generic
-            // type, let's check the message string to make sure it really
-            // was caused by the issue we expected.
-            final int index = ex.getMessage().indexOf(
-                    "Indexed or mapped properties are not supported");
-            assertTrue("Unexpected exception message", index>=0);
+            PropertyUtils.setSimpleProperty(bean, null, "");
+            fail("Should throw IllegalArgumentException 2");
+        } catch (final IllegalArgumentException e) {
+            // Expected response
+        } catch (final Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 2");
         }
+
     }
 
     /**
-     * Returns a single string containing all the keys in the map,
-     * sorted in alphabetical order and separated by ", ".
-     * <p>
-     * If there are no keys, an empty string is returned.
+     * Test setSimpleProperty on a boolean property.
      */
-    private String keysToString(final Map<?, ?> map) {
-        final Object[] mapKeys = map.keySet().toArray();
-        java.util.Arrays.sort(mapKeys);
-        final StringBuilder buf = new StringBuilder();
-        for(int i=0; i<mapKeys.length; ++i) {
-            if (i != 0) {
-                buf.append(", ");
-            }
-            buf.append(mapKeys[i]);
-        }
-        return buf.toString();
-    }
+    public void testSetSimpleBoolean() {
 
-    /**
-     * This tests to see that classes that implement Map always have their
-     * custom properties ignored.
-     * <p>
-     * Note that this behaviour has changed several times over past releases
-     * of beanutils, breaking backwards compatibility each time. Here's hoping
-     * that the current 1.7.1 release is the last time this behaviour changes!
-     */
-    public void testMapExtensionDefault() throws Exception {
-        final ExtendMapBean bean = new ExtendMapBean();
-
-        // setting property direct should work, and not affect map
-        bean.setUnusuallyNamedProperty("bean value");
-        assertEquals("Set property direct failed", "bean value", bean.getUnusuallyNamedProperty());
-        assertNull("Get on unset map property failed",
-                PropertyUtils.getNestedProperty(bean, "unusuallyNamedProperty"));
-
-        // setting simple property should call the setter method only, and not
-        // affect the map.
-        PropertyUtils.setSimpleProperty(bean, "unusuallyNamedProperty", "new value");
-        assertEquals("Set property on map failed (1)", "new value", bean.getUnusuallyNamedProperty());
-        assertNull("Get on unset map property failed",
-                PropertyUtils.getNestedProperty(bean, "unusuallyNamedProperty"));
-
-        // setting via setNestedProperty should affect the map only, and not
-        // call the setter method.
-        PropertyUtils.setProperty(bean, "unusuallyNamedProperty", "next value");
-        assertEquals(
-                "setNestedProperty on map not visible to getNestedProperty",
-                "next value",
-                PropertyUtils.getNestedProperty(bean, "unusuallyNamedProperty"));
-        assertEquals(
-            "Set nested property on map unexpected affected simple property",
-            "new value",
-            bean.getUnusuallyNamedProperty());
-    }
-
-    /**
-     * This tests to see that it is possible to subclass PropertyUtilsBean
-     * and change the behaviour of setNestedProperty/getNestedProperty when
-     * dealing with objects that implement Map.
-     */
-    public void testMapExtensionCustom() throws Exception {
-        final PropsFirstPropertyUtilsBean utilsBean = new PropsFirstPropertyUtilsBean();
-        final ExtendMapBean bean = new ExtendMapBean();
-
-        // hardly worth testing this, really :-)
-        bean.setUnusuallyNamedProperty("bean value");
-        assertEquals("Set property direct failed", "bean value", bean.getUnusuallyNamedProperty());
-
-        // setSimpleProperty should affect the simple property
-        utilsBean.setSimpleProperty(bean, "unusuallyNamedProperty", "new value");
-        assertEquals("Set property on map failed (1)", "new value", bean.getUnusuallyNamedProperty());
-
-        // setNestedProperty with setter should affect the simple property
-        // getNestedProperty with getter should obtain the simple property
-        utilsBean.setProperty(bean, "unusuallyNamedProperty", "next value");
-        assertEquals("Set property on map failed (2)", "next value", bean.getUnusuallyNamedProperty());
-        assertEquals("setNestedProperty on non-simple property failed",
-                "next value",
-                utilsBean.getNestedProperty(bean, "unusuallyNamedProperty"));
-
-        // setting property without setter should update the map
-        // getting property without setter should fetch from the map
-        utilsBean.setProperty(bean, "mapProperty", "value1");
-        assertEquals("setNestedProperty on non-simple property failed",
-                "value1", utilsBean.getNestedProperty(bean, "mapProperty"));
-
-        final HashMap<String, Object> myMap = new HashMap<>();
-        myMap.put("thebean", bean);
-        utilsBean.getNestedProperty(myMap, "thebean.mapitem");
-        utilsBean.getNestedProperty(myMap, "thebean(mapitem)");
-    }
-
-    /**
-     * Test {@link PropertyUtilsBean}'s invoke method throwing an IllegalArgumentException
-     * and check that the "cause" has been properly initialized for JDK 1.4+
-     * See BEANUTILS-266 for changes and reason for test
-     */
-    public void testExceptionFromInvoke() throws Exception {
-        if (BeanUtilsTestCase.isPre14JVM()) {
-            return;
-        }
         try {
-            PropertyUtils.setSimpleProperty(bean, "intProperty","XXX");
-        } catch(final IllegalArgumentException t) {
-            final Throwable cause = (Throwable)PropertyUtils.getProperty(t, "cause");
-            assertNotNull("Cause not found", cause);
-            assertTrue("Expected cause to be IllegalArgumentException, but was: " + cause.getClass(),
-                    cause instanceof IllegalArgumentException);
-            // JDK 1.6 doesn't have "argument type mismatch" message
-            // assertEquals("Check error message", "argument type mismatch", cause.getMessage());
-        } catch(final Throwable t) {
-            fail("Expected IllegalArgumentException, but threw " + t);
+            final boolean oldValue = bean.getBooleanProperty();
+            final boolean newValue = !oldValue;
+            PropertyUtils.setSimpleProperty(bean,
+                    "booleanProperty",
+                    Boolean.valueOf(newValue));
+            assertTrue("Matched new value",
+                    newValue ==
+                    bean.getBooleanProperty());
+        } catch (final IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (final IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (final InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (final NoSuchMethodException e) {
+            fail("NoSuchMethodException");
         }
+
     }
 
     /**
-     * Tests whether the default introspection mechanism can be replaced by a
-     * custom BeanIntrospector.
+     * Test setSimpleProperty on a double property.
      */
-    public void testCustomIntrospection() {
-        final PropertyDescriptor[] desc1 = PropertyUtils
-                .getPropertyDescriptors(AlphaBean.class);
-        PropertyDescriptor nameDescriptor = findNameDescriptor(desc1);
-        assertNotNull("No write method", nameDescriptor.getWriteMethod());
+    public void testSetSimpleDouble() {
 
-        final BeanIntrospector bi = new BeanIntrospector() {
-            // Only produce read-only property descriptors
-            @Override
-            public void introspect(final IntrospectionContext icontext)
-                    throws IntrospectionException {
-                final Set<String> names = icontext.propertyNames();
-                final PropertyDescriptor[] newDescs = new PropertyDescriptor[names
-                        .size()];
-                int idx = 0;
-                for (final Iterator<String> it = names.iterator(); it.hasNext(); idx++) {
-                    final String propName = it.next();
-                    final PropertyDescriptor pd = icontext
-                            .getPropertyDescriptor(propName);
-                    newDescs[idx] = new PropertyDescriptor(pd.getName(),
-                            pd.getReadMethod(), null);
-                }
-                icontext.addPropertyDescriptors(newDescs);
-            }
-        };
-        PropertyUtils.clearDescriptors();
-        PropertyUtils.addBeanIntrospector(bi);
-        final PropertyDescriptor[] desc2 = PropertyUtils
-                .getPropertyDescriptors(AlphaBean.class);
-        assertEquals("Different number of properties", desc1.length,
-                desc2.length);
-        nameDescriptor = findNameDescriptor(desc2);
-        assertNull("Got a write method", nameDescriptor.getWriteMethod());
-        PropertyUtils.removeBeanIntrospector(bi);
-    }
-
-    /**
-     * Finds the descriptor of the name property.
-     *
-     * @param desc the array with descriptors
-     * @return the found descriptor or null
-     */
-    private static PropertyDescriptor findNameDescriptor(
-            final PropertyDescriptor[] desc) {
-        for (final PropertyDescriptor element : desc) {
-            if (element.getName().equals("name")) {
-                return element;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Tests whether exceptions during custom introspection are handled.
-     */
-    public void testCustomIntrospectionEx() {
-        final BeanIntrospector bi = new BeanIntrospector() {
-            @Override
-            public void introspect(final IntrospectionContext icontext)
-                    throws IntrospectionException {
-                throw new IntrospectionException("TestException");
-            }
-        };
-        PropertyUtils.clearDescriptors();
-        PropertyUtils.addBeanIntrospector(bi);
-        final PropertyDescriptor[] desc = PropertyUtils
-                .getPropertyDescriptors(AlphaBean.class);
-        assertNotNull("Introspection did not work", findNameDescriptor(desc));
-        PropertyUtils.removeBeanIntrospector(bi);
-    }
-
-    /**
-     * Tests whether a BeanIntrospector can be removed.
-     */
-    public void testRemoveBeanIntrospector() {
-        assertTrue(
-                "Wrong result",
-                PropertyUtils
-                        .removeBeanIntrospector(DefaultBeanIntrospector.INSTANCE));
-        final PropertyDescriptor[] desc = PropertyUtils
-                .getPropertyDescriptors(AlphaBean.class);
-        assertEquals("Got descriptors", 0, desc.length);
-        PropertyUtils.addBeanIntrospector(DefaultBeanIntrospector.INSTANCE);
-    }
-
-    /**
-     * Tries to add a null BeanIntrospector.
-     */
-    public void testAddBeanIntrospectorNull() {
         try {
-            PropertyUtils.addBeanIntrospector(null);
-            fail("Could add null BeanIntrospector!");
-        } catch (final IllegalArgumentException iex) {
-            // ok
+            final double oldValue = bean.getDoubleProperty();
+            final double newValue = oldValue + 1.0;
+            PropertyUtils.setSimpleProperty(bean,
+                    "doubleProperty",
+                    Double.valueOf(newValue));
+            assertEquals("Matched new value",
+                    newValue,
+                    bean.getDoubleProperty(),
+                    0.005);
+        } catch (final IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (final IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (final InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (final NoSuchMethodException e) {
+            fail("NoSuchMethodException");
         }
+
     }
 
     /**
-     * Tests whether a reset of the registered BeanIntrospectors can be performed.
+     * Test setSimpleProperty on a float property.
      */
-    public void testResetBeanIntrospectors() {
-        assertTrue("Wrong result",
-                PropertyUtils.removeBeanIntrospector(DefaultBeanIntrospector.INSTANCE));
-        PropertyUtils.resetBeanIntrospectors();
-        final PropertyDescriptor[] desc = PropertyUtils.getPropertyDescriptors(AlphaBean.class);
-        assertTrue("Got no descriptors", desc.length > 0);
+    public void testSetSimpleFloat() {
+
+        try {
+            final float oldValue = bean.getFloatProperty();
+            final float newValue = oldValue + (float) 1.0;
+            PropertyUtils.setSimpleProperty(bean,
+                    "floatProperty",
+                    Float.valueOf(newValue));
+            assertEquals("Matched new value",
+                    newValue,
+                    bean.getFloatProperty(),
+                    (float) 0.005);
+        } catch (final IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (final IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (final InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (final NoSuchMethodException e) {
+            fail("NoSuchMethodException");
+        }
+
+    }
+
+    /**
+     * Negative test setSimpleProperty on an indexed property.
+     */
+    public void testSetSimpleIndexed() {
+
+        try {
+            PropertyUtils.setSimpleProperty(bean,
+                    "stringIndexed[0]",
+                    "New String Value");
+            fail("Should have thrown IllegalArgumentException");
+        } catch (final IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (final IllegalArgumentException e) {
+            // Correct result for this test
+        } catch (final InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (final NoSuchMethodException e) {
+            fail("NoSuchMethodException");
+        }
+
+    }
+
+    /**
+     * Test setSimpleProperty on a int property.
+     */
+    public void testSetSimpleInt() {
+
+        try {
+            final int oldValue = bean.getIntProperty();
+            final int newValue = oldValue + 1;
+            PropertyUtils.setSimpleProperty(bean,
+                    "intProperty",
+                    Integer.valueOf(newValue));
+            assertEquals("Matched new value",
+                    newValue,
+                    bean.getIntProperty());
+        } catch (final IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (final IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (final InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (final NoSuchMethodException e) {
+            fail("NoSuchMethodException");
+        }
+
+    }
+
+    /**
+     * Test setSimpleProperty on a long property.
+     */
+    public void testSetSimpleLong() {
+
+        try {
+            final long oldValue = bean.getLongProperty();
+            final long newValue = oldValue + 1;
+            PropertyUtils.setSimpleProperty(bean,
+                    "longProperty",
+                    Long.valueOf(newValue));
+            assertEquals("Matched new value",
+                    newValue,
+                    bean.getLongProperty());
+        } catch (final IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (final IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (final InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (final NoSuchMethodException e) {
+            fail("NoSuchMethodException");
+        }
+
+    }
+
+    /**
+     * Negative test setSimpleProperty on a nested property.
+     */
+    public void testSetSimpleNested() {
+
+        try {
+            PropertyUtils.setSimpleProperty(bean,
+                    "nested.stringProperty",
+                    "New String Value");
+            fail("Should have thrown IllegalArgumentException");
+        } catch (final IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (final IllegalArgumentException e) {
+            // Correct result for this test
+        } catch (final InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (final NoSuchMethodException e) {
+            fail("NoSuchMethodException");
+        }
+
+    }
+
+    /**
+     * Test setSimpleProperty on a read-only String property.
+     */
+    public void testSetSimpleReadOnly() {
+
+        try {
+            final String oldValue = bean.getWriteOnlyPropertyValue();
+            final String newValue = oldValue + " Extra Value";
+            PropertyUtils.setSimpleProperty(bean,
+                    "readOnlyProperty",
+                    newValue);
+            fail("Should have thrown NoSuchMethodException");
+        } catch (final IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (final IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (final InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (final NoSuchMethodException e) {
+            // Correct result for this test
+            assertEquals("Property 'readOnlyProperty' has no setter method in class '" +
+                         bean.getClass() + "'", e.getMessage() );
+        }
+
+    }
+
+    /**
+     * Test setSimpleProperty on a short property.
+     */
+    public void testSetSimpleShort() {
+
+        try {
+            final short oldValue = bean.getShortProperty();
+            short newValue = oldValue;
+            newValue++;
+            PropertyUtils.setSimpleProperty(bean,
+                    "shortProperty",
+                    Short.valueOf(newValue));
+            assertEquals("Matched new value",
+                    newValue,
+                    bean.getShortProperty());
+        } catch (final IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (final IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (final InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (final NoSuchMethodException e) {
+            fail("NoSuchMethodException");
+        }
+
+    }
+
+    /**
+     * Test setSimpleProperty on a String property.
+     */
+    public void testSetSimpleString() {
+
+        try {
+            final String oldValue = bean.getStringProperty();
+            final String newValue = oldValue + " Extra Value";
+            PropertyUtils.setSimpleProperty(bean,
+                    "stringProperty",
+                    newValue);
+            assertEquals("Matched new value",
+                    newValue,
+                    bean.getStringProperty());
+        } catch (final IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (final IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (final InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (final NoSuchMethodException e) {
+            fail("NoSuchMethodException");
+        }
+
+    }
+
+    /**
+     * Test setSimpleProperty on an unknown property name.
+     */
+    public void testSetSimpleUnknown() {
+
+        try {
+            final String newValue = "New String Value";
+            PropertyUtils.setSimpleProperty(bean,
+                    "unknown",
+                    newValue);
+            fail("Should have thrown NoSuchMethodException");
+        } catch (final IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (final IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (final InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (final NoSuchMethodException e) {
+            // Correct result for this test
+            assertEquals("Unknown property 'unknown' on class '" +
+                         bean.getClass() + "'", e.getMessage() );
+        }
+
+    }
+
+    /**
+     * Test setSimpleProperty on a write-only String property.
+     */
+    public void testSetSimpleWriteOnly() {
+
+        try {
+            final String oldValue = bean.getWriteOnlyPropertyValue();
+            final String newValue = oldValue + " Extra Value";
+            PropertyUtils.setSimpleProperty(bean,
+                    "writeOnlyProperty",
+                    newValue);
+            assertEquals("Matched new value",
+                    newValue,
+                    bean.getWriteOnlyPropertyValue());
+        } catch (final IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (final IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (final InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (final NoSuchMethodException e) {
+            fail("NoSuchMethodException");
+        }
+
+    }
+
+    /**
+     * When a bean has a null property which is reference by the standard access language,
+     * this should throw a NestedNullException.
+     */
+    public void testThrowNestedNull() throws Exception {
+        final NestedTestBean nestedBean = new NestedTestBean("base");
+        // don't init!
+
+        try {
+            PropertyUtils.getProperty(
+                                nestedBean,
+                                "simpleBeanProperty.indexedProperty[0]");
+            fail("NestedNullException not thrown");
+        } catch (final NestedNullException e) {
+            // that's what we wanted!
+        }
     }
 }

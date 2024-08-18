@@ -37,14 +37,14 @@ public class Jira492IndexedListsSupport {
         public List<String> getSomeList() {
             return someList;
         }
-        public void setSomeList(final List<String> someList) {
-            this.someList = someList;
+        public String getSomeList(final int i) {
+            return someList.get(i);
         }
         public void setSomeList(final int i, final String value) {
             someList.set(i, value);
         }
-        public String getSomeList(final int i) {
-            return someList.get(i);
+        public void setSomeList(final List<String> someList) {
+            this.someList = someList;
         }
     }
 

@@ -38,27 +38,13 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
 
 
     /**
-     * <p>Construct an <code>Iterator</code> for the result set being wrapped
-     * by the specified {@link ResultSetDynaClass}.</p>
-     *
-     * @param dynaClass The {@link ResultSetDynaClass} wrapping the
-     *  result set we will iterate over
-     */
-    ResultSetIterator(final ResultSetDynaClass dynaClass) {
-
-        this.dynaClass = dynaClass;
-
-    }
-
-
-
-
-
-    /**
      * <p>Flag indicating whether the result set is currently positioned at a
      * row for which we have not yet returned an element in the iteration.</p>
      */
     protected boolean current = false;
+
+
+
 
 
     /**
@@ -74,6 +60,41 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
     protected boolean eof = false;
 
 
+    /**
+     * <p>Construct an <code>Iterator</code> for the result set being wrapped
+     * by the specified {@link ResultSetDynaClass}.</p>
+     *
+     * @param dynaClass The {@link ResultSetDynaClass} wrapping the
+     *  result set we will iterate over
+     */
+    ResultSetIterator(final ResultSetDynaClass dynaClass) {
+
+        this.dynaClass = dynaClass;
+
+    }
+
+
+
+
+    /**
+     * <p>Advance the result set to the next row, if there is not a current
+     * row (and if we are not already at eof).</p>
+     *
+     * @throws SQLException if the result set throws an exception
+     */
+    protected void advance() throws SQLException {
+
+        if (!current && !eof) {
+            if (dynaClass.getResultSet().next()) {
+                current = true;
+                eof = false;
+            } else {
+                current = false;
+                eof = true;
+            }
+        }
+
+    }
 
 
     /**
@@ -184,105 +205,6 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
 
 
     /**
-     * Remove any existing value for the specified key on the
-     * specified mapped property.
-     *
-     * @param name Name of the property for which a value is to
-     *  be removed
-     * @param key Key of the value to be removed
-     *
-     * @throws IllegalArgumentException if there is no property
-     *  of the specified name
-     */
-    @Override
-    public void remove(final String name, final String key) {
-
-        throw new UnsupportedOperationException
-            ("FIXME - mapped operations not currently supported");
-
-    }
-
-
-    /**
-     * Set the value of a simple property with the specified name.
-     *
-     * @param name Name of the property whose value is to be set
-     * @param value Value to which this property is to be set
-     *
-     * @throws ConversionException if the specified value cannot be
-     *  converted to the type required for this property
-     * @throws IllegalArgumentException if there is no property
-     *  of the specified name
-     * @throws NullPointerException if an attempt is made to set a
-     *  primitive property to null
-     */
-    @Override
-    public void set(final String name, final Object value) {
-
-        if (dynaClass.getDynaProperty(name) == null) {
-            throw new IllegalArgumentException(name);
-        }
-        try {
-            dynaClass.getResultSet().updateObject(name, value);
-        } catch (final SQLException e) {
-            throw new RuntimeException
-                ("set(" + name + "): SQLException: " + e);
-        }
-
-    }
-
-
-    /**
-     * Set the value of an indexed property with the specified name.
-     *
-     * @param name Name of the property whose value is to be set
-     * @param index Index of the property to be set
-     * @param value Value to which this property is to be set
-     *
-     * @throws ConversionException if the specified value cannot be
-     *  converted to the type required for this property
-     * @throws IllegalArgumentException if there is no property
-     *  of the specified name
-     * @throws IllegalArgumentException if the specified property
-     *  exists, but is not indexed
-     * @throws IndexOutOfBoundsException if the specified index
-     *  is outside the range of the underlying property
-     */
-    @Override
-    public void set(final String name, final int index, final Object value) {
-
-        throw new UnsupportedOperationException
-            ("FIXME - indexed properties not currently supported");
-
-    }
-
-
-    /**
-     * Set the value of a mapped property with the specified name.
-     *
-     * @param name Name of the property whose value is to be set
-     * @param key Key of the property to be set
-     * @param value Value to which this property is to be set
-     *
-     * @throws ConversionException if the specified value cannot be
-     *  converted to the type required for this property
-     * @throws IllegalArgumentException if there is no property
-     *  of the specified name
-     * @throws IllegalArgumentException if the specified property
-     *  exists, but is not mapped
-     */
-    @Override
-    public void set(final String name, final String key, final Object value) {
-
-        throw new UnsupportedOperationException
-            ("FIXME - mapped properties not currently supported");
-
-    }
-
-
-
-
-    /**
      * <p>Return <code>true</code> if the iteration has more elements.</p>
      *
      * @return <code>true</code> if the result set has another
@@ -338,22 +260,100 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
 
 
     /**
-     * <p>Advance the result set to the next row, if there is not a current
-     * row (and if we are not already at eof).</p>
+     * Remove any existing value for the specified key on the
+     * specified mapped property.
      *
-     * @throws SQLException if the result set throws an exception
+     * @param name Name of the property for which a value is to
+     *  be removed
+     * @param key Key of the value to be removed
+     *
+     * @throws IllegalArgumentException if there is no property
+     *  of the specified name
      */
-    protected void advance() throws SQLException {
+    @Override
+    public void remove(final String name, final String key) {
 
-        if (!current && !eof) {
-            if (dynaClass.getResultSet().next()) {
-                current = true;
-                eof = false;
-            } else {
-                current = false;
-                eof = true;
-            }
+        throw new UnsupportedOperationException
+            ("FIXME - mapped operations not currently supported");
+
+    }
+
+
+    /**
+     * Set the value of an indexed property with the specified name.
+     *
+     * @param name Name of the property whose value is to be set
+     * @param index Index of the property to be set
+     * @param value Value to which this property is to be set
+     *
+     * @throws ConversionException if the specified value cannot be
+     *  converted to the type required for this property
+     * @throws IllegalArgumentException if there is no property
+     *  of the specified name
+     * @throws IllegalArgumentException if the specified property
+     *  exists, but is not indexed
+     * @throws IndexOutOfBoundsException if the specified index
+     *  is outside the range of the underlying property
+     */
+    @Override
+    public void set(final String name, final int index, final Object value) {
+
+        throw new UnsupportedOperationException
+            ("FIXME - indexed properties not currently supported");
+
+    }
+
+
+    /**
+     * Set the value of a simple property with the specified name.
+     *
+     * @param name Name of the property whose value is to be set
+     * @param value Value to which this property is to be set
+     *
+     * @throws ConversionException if the specified value cannot be
+     *  converted to the type required for this property
+     * @throws IllegalArgumentException if there is no property
+     *  of the specified name
+     * @throws NullPointerException if an attempt is made to set a
+     *  primitive property to null
+     */
+    @Override
+    public void set(final String name, final Object value) {
+
+        if (dynaClass.getDynaProperty(name) == null) {
+            throw new IllegalArgumentException(name);
         }
+        try {
+            dynaClass.getResultSet().updateObject(name, value);
+        } catch (final SQLException e) {
+            throw new RuntimeException
+                ("set(" + name + "): SQLException: " + e);
+        }
+
+    }
+
+
+
+
+    /**
+     * Set the value of a mapped property with the specified name.
+     *
+     * @param name Name of the property whose value is to be set
+     * @param key Key of the property to be set
+     * @param value Value to which this property is to be set
+     *
+     * @throws ConversionException if the specified value cannot be
+     *  converted to the type required for this property
+     * @throws IllegalArgumentException if there is no property
+     *  of the specified name
+     * @throws IllegalArgumentException if the specified property
+     *  exists, but is not mapped
+     */
+    @Override
+    public void set(final String name, final String key, final Object value) {
+
+        throw new UnsupportedOperationException
+            ("FIXME - mapped properties not currently supported");
 
     }
 

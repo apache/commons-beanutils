@@ -38,6 +38,36 @@ import org.apache.commons.logging.LogFactory;
 public abstract class BaseLocaleConverter implements LocaleConverter {
 
 
+    /**
+     * Checks whether the result of a conversion is conform to the specified
+     * target type. If this is the case, the passed in result object is cast to
+     * the correct target type. Otherwise, an exception is thrown.
+     *
+     * @param <T> the desired result type
+     * @param type the target class of the conversion
+     * @param result the conversion result object
+     * @return the result cast to the target class
+     * @throws ConversionException if the result object is not compatible with
+     *         the target type
+     */
+    private static <T> T checkConversionResult(final Class<T> type, final Object result) {
+        if (type == null) {
+            // in this case we cannot do much; the result object is returned
+            @SuppressWarnings("unchecked")
+            final
+            T temp = (T) result;
+            return temp;
+        }
+
+        if (result == null) {
+            return null;
+        }
+        if (type.isInstance(result)) {
+            return type.cast(result);
+        }
+        throw new ConversionException("Unsupported target type: " + type);
+    }
+
     /** All logging goes through this logger */
     private final Log log = LogFactory.getLog(BaseLocaleConverter.class);
 
@@ -53,9 +83,9 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
     /** The default pattern specified to our Constructor, if any. */
     protected String pattern = null;
 
+
     /** The flag indicating whether the given pattern string is localized or not. */
     protected boolean locPattern = false;
-
 
     /**
      * Create a {@link LocaleConverter} that will throw a {@link ConversionException}
@@ -111,6 +141,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
         this(defaultValue, locale, pattern, true, locPattern);
     }
 
+
     /**
      * Create a {@link LocaleConverter} that will return the specified default value
      * or throw a {@link ConversionException} if a conversion error occurs.
@@ -137,49 +168,6 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
         this.locPattern = locPattern;
     }
 
-
-    /**
-     * Convert the specified locale-sensitive input object into an output object of the
-     * specified type.
-     *
-     * @param value The input object to be converted
-     * @param pattern The pattern is used for the convertion
-     * @return The converted value
-     *
-     * @throws ParseException if conversion cannot be performed
-     *  successfully
-     */
-
-    abstract protected Object parse(Object value, String pattern) throws ParseException;
-
-
-    /**
-     * Convert the specified locale-sensitive input object into an output object.
-     * The default pattern is used for the conversion.
-     *
-     * @param value The input object to be converted
-     * @return The converted value
-     *
-     * @throws ConversionException if conversion cannot be performed
-     *  successfully
-     */
-    public Object convert(final Object value) {
-        return convert(value, null);
-    }
-
-    /**
-     * Convert the specified locale-sensitive input object into an output object.
-     *
-     * @param value The input object to be converted
-     * @param pattern The pattern is used for the conversion
-     * @return The converted value
-     *
-     * @throws ConversionException if conversion cannot be performed
-     *  successfully
-     */
-    public Object convert(final Object value, final String pattern) {
-        return convert(null, value, pattern);
-    }
 
     /**
      * Convert the specified locale-sensitive input object into an output object of the
@@ -243,6 +231,34 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
     }
 
     /**
+     * Convert the specified locale-sensitive input object into an output object.
+     * The default pattern is used for the conversion.
+     *
+     * @param value The input object to be converted
+     * @return The converted value
+     *
+     * @throws ConversionException if conversion cannot be performed
+     *  successfully
+     */
+    public Object convert(final Object value) {
+        return convert(value, null);
+    }
+
+    /**
+     * Convert the specified locale-sensitive input object into an output object.
+     *
+     * @param value The input object to be converted
+     * @param pattern The pattern is used for the conversion
+     * @return The converted value
+     *
+     * @throws ConversionException if conversion cannot be performed
+     *  successfully
+     */
+    public Object convert(final Object value, final String pattern) {
+        return convert(null, value, pattern);
+    }
+
+    /**
      * Returns the default object specified for this converter cast for the
      * given target type. If the default value is not conform to the given type,
      * an exception is thrown.
@@ -258,32 +274,16 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
     }
 
     /**
-     * Checks whether the result of a conversion is conform to the specified
-     * target type. If this is the case, the passed in result object is cast to
-     * the correct target type. Otherwise, an exception is thrown.
+     * Convert the specified locale-sensitive input object into an output object of the
+     * specified type.
      *
-     * @param <T> the desired result type
-     * @param type the target class of the conversion
-     * @param result the conversion result object
-     * @return the result cast to the target class
-     * @throws ConversionException if the result object is not compatible with
-     *         the target type
+     * @param value The input object to be converted
+     * @param pattern The pattern is used for the convertion
+     * @return The converted value
+     *
+     * @throws ParseException if conversion cannot be performed
+     *  successfully
      */
-    private static <T> T checkConversionResult(final Class<T> type, final Object result) {
-        if (type == null) {
-            // in this case we cannot do much; the result object is returned
-            @SuppressWarnings("unchecked")
-            final
-            T temp = (T) result;
-            return temp;
-        }
 
-        if (result == null) {
-            return null;
-        }
-        if (type.isInstance(result)) {
-            return type.cast(result);
-        }
-        throw new ConversionException("Unsupported target type: " + type);
-    }
+    abstract protected Object parse(Object value, String pattern) throws ParseException;
 }

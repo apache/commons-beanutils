@@ -16,11 +16,11 @@
  */
 package org.apache.commons.beanutils.bugs;
 
+import junit.framework.TestCase;
+
 import org.apache.commons.beanutils.AlphaBean;
 import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.SuppressPropertiesBeanIntrospector;
-
-import junit.framework.TestCase;
 
 /**
  * Fix CVE: https://nvd.nist.gov/vuln/detail/CVE-2014-0114
@@ -28,6 +28,17 @@ import junit.framework.TestCase;
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-520">https://issues.apache.org/jira/browse/BEANUTILS-520</a>
  */
 public class Jira520TestCase extends TestCase {
+    /**
+     * Allow opt-out to make your app less secure but allow access to "class".
+     */
+    public void testAllowAccessToClassProperty() throws Exception {
+        final BeanUtilsBean bub = new BeanUtilsBean();
+        bub.getPropertyUtils().removeBeanIntrospector(SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
+        final AlphaBean bean = new AlphaBean();
+        final String result = bub.getProperty(bean, "class");
+        assertEquals("Class property should have been accessed", "class org.apache.commons.beanutils.AlphaBean", result);
+    }
+
     /**
      * By default opt-in to security that does not allow access to "class".
      */
@@ -40,16 +51,5 @@ public class Jira520TestCase extends TestCase {
         } catch (final NoSuchMethodException ex) {
             // ok
         }
-    }
-
-    /**
-     * Allow opt-out to make your app less secure but allow access to "class".
-     */
-    public void testAllowAccessToClassProperty() throws Exception {
-        final BeanUtilsBean bub = new BeanUtilsBean();
-        bub.getPropertyUtils().removeBeanIntrospector(SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
-        final AlphaBean bean = new AlphaBean();
-        final String result = bub.getProperty(bean, "class");
-        assertEquals("Class property should have been accessed", "class org.apache.commons.beanutils.AlphaBean", result);
     }
 }

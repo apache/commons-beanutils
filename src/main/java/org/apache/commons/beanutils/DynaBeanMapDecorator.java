@@ -71,6 +71,17 @@ package org.apache.commons.beanutils;
 @Deprecated
 public class DynaBeanMapDecorator extends BaseDynaBeanMapDecorator<Object> {
     /**
+     * Constructs a read only Map for the specified
+     * {@link DynaBean}.
+     *
+     * @param dynaBean The dyna bean being decorated
+     * @throws IllegalArgumentException if the {@link DynaBean} is null.
+     */
+    public DynaBeanMapDecorator(final DynaBean dynaBean) {
+        super(dynaBean);
+    }
+
+    /**
      * Construct a Map for the specified {@link DynaBean}.
      *
      * @param dynaBean The dyna bean being decorated
@@ -80,17 +91,6 @@ public class DynaBeanMapDecorator extends BaseDynaBeanMapDecorator<Object> {
      */
     public DynaBeanMapDecorator(final DynaBean dynaBean, final boolean readOnly) {
         super(dynaBean, readOnly);
-    }
-
-    /**
-     * Constructs a read only Map for the specified
-     * {@link DynaBean}.
-     *
-     * @param dynaBean The dyna bean being decorated
-     * @throws IllegalArgumentException if the {@link DynaBean} is null.
-     */
-    public DynaBeanMapDecorator(final DynaBean dynaBean) {
-        super(dynaBean);
     }
 
     @Override

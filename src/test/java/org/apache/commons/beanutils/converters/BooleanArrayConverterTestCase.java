@@ -48,6 +48,132 @@ public class BooleanArrayConverterTestCase extends TestCase {
     }
 
     /**
+     * Check that the user can specify non-standard true/false values by
+     * providing a customised BooleanConverter.
+     */
+    public void testAdditionalStrings() {
+        final String[] trueStrings = {"sure"};
+        final String[] falseStrings = {"nope"};
+        final BooleanConverter bc = new BooleanConverter(
+            trueStrings, falseStrings, BooleanConverter.NO_DEFAULT);
+        final BooleanArrayConverter converter = new BooleanArrayConverter(
+            bc, BooleanArrayConverter.NO_DEFAULT);
+
+        final boolean[] results = (boolean[]) converter.convert(null, "NOPE, sure, sure");
+        assertNotNull(results);
+        assertEquals(3, results.length);
+        assertFalse(results[0]);
+        assertTrue(results[1]);
+        assertTrue(results[2]);
+
+        try {
+            // the literal string 'true' should no longer be recognized as
+            // a true value..
+            converter.convert(null, "true");
+            fail("Converting invalid string should have generated an exception");
+        } catch(final Exception ex) {
+            // ok, expected
+        }
+    }
+
+    /**
+     * Check that when a custom BooleanConverter is used, and that converter
+     * has a (per-element) default, then that element (and just that element)
+     * is assigned the default value.
+     * <p>
+     * With the standard BooleanArrayConverter, if <em>any</em> of the elements
+     * in the array are bad, then the array-wide default value is returned.
+     * However by specifying a custom BooleanConverter which has a per-element
+     * default, the unrecognized elements get that per-element default but the
+     * others are converted as expected.
+     */
+    public void testElementDefault() {
+        final boolean[] defaults = new boolean[1];
+        final BooleanConverter bc = new BooleanConverter(Boolean.TRUE);
+        final BooleanArrayConverter converter = new BooleanArrayConverter(bc, defaults);
+        final boolean[] results = (boolean[]) converter.convert(null, "true,bogus");
+
+        assertEquals(2, results.length);
+        assertTrue(results[0]);
+        assertTrue(results[1]);
+    }
+
+    /**
+     * Check that when one of the elements in a comma-separated string is not
+     * a valid boolean, and there is a default value then the default value
+     * is returned.
+     * <p>
+     * Note that the default value is for the complete array object returned,
+     * not for the failed element.
+     */
+    public void testInvalidElementWithDefault() {
+        final boolean[] defaults = new boolean[1];
+        final BooleanArrayConverter converter = new BooleanArrayConverter(defaults);
+        final Object o = converter.convert(null, "true,bogus");
+        assertSame("Unexpected object returned for failed conversion", o, defaults);
+    }
+
+    /**
+     * Check that when one of the elements in a comma-separated string is not
+     * a valid boolean, and there is no default value then an exception is thrown.
+     */
+    public void testInvalidElementWithoutDefault() {
+        final BooleanArrayConverter converter = new BooleanArrayConverter();
+        try {
+            converter.convert(null, "true,bogus");
+            fail("Converting invalid string should have generated an exception");
+        } catch (final ConversionException expected) {
+            // Exception is successful test
+        }
+    }
+
+    /**
+     * Check that when the input string cannot be split into a String[], and
+     * there is a default value then that default is returned.
+     */
+    public void testInvalidStringWithDefault() {
+        final boolean[] defaults = new boolean[1];
+        final BooleanArrayConverter converter = new BooleanArrayConverter(defaults);
+        final Object o = converter.convert(null, "true!");
+        assertSame("Unexpected object returned for failed conversion", o, defaults);
+    }
+
+    /**
+     * Check that when the input string cannot be split into a String[], and
+     * there is no default value then an exception is thrown.
+     */
+    public void testInvalidStringWithoutDefault() {
+        final BooleanArrayConverter converter = new BooleanArrayConverter();
+        try {
+            converter.convert(null, "true!");
+            fail("Converting invalid string should have generated an exception");
+        } catch (final ConversionException expected) {
+            // Exception is successful test
+        }
+    }
+
+    /**
+     * Check that registration of a custom converter works.
+     */
+    public void testRegistration() {
+        final String[] trueStrings = {"sure"};
+        final String[] falseStrings = {"nope"};
+        final BooleanConverter bc = new BooleanConverter(
+            trueStrings, falseStrings, BooleanConverter.NO_DEFAULT);
+
+        final BooleanArrayConverter converter = new BooleanArrayConverter(
+            bc, BooleanArrayConverter.NO_DEFAULT);
+
+        ConvertUtils.register(converter, BooleanArrayConverter.MODEL);
+        final boolean[] sample = {};
+        final boolean[] results = (boolean[]) ConvertUtils.convert("sure,nope", sample.getClass());
+
+        assertEquals(2, results.length);
+        assertTrue(results[0]);
+        assertFalse(results[1]);
+    }
+
+    /**
      * Check that an object of type String[] with valid boolean string
      * values gets converted nicely.
      */
@@ -143,131 +269,5 @@ public class BooleanArrayConverterTestCase extends TestCase {
         assertEquals(1, results.length);
         assertTrue(results[0]);
 
-    }
-
-    /**
-     * Check that the user can specify non-standard true/false values by
-     * providing a customised BooleanConverter.
-     */
-    public void testAdditionalStrings() {
-        final String[] trueStrings = {"sure"};
-        final String[] falseStrings = {"nope"};
-        final BooleanConverter bc = new BooleanConverter(
-            trueStrings, falseStrings, BooleanConverter.NO_DEFAULT);
-        final BooleanArrayConverter converter = new BooleanArrayConverter(
-            bc, BooleanArrayConverter.NO_DEFAULT);
-
-        final boolean[] results = (boolean[]) converter.convert(null, "NOPE, sure, sure");
-        assertNotNull(results);
-        assertEquals(3, results.length);
-        assertFalse(results[0]);
-        assertTrue(results[1]);
-        assertTrue(results[2]);
-
-        try {
-            // the literal string 'true' should no longer be recognized as
-            // a true value..
-            converter.convert(null, "true");
-            fail("Converting invalid string should have generated an exception");
-        } catch(final Exception ex) {
-            // ok, expected
-        }
-    }
-
-    /**
-     * Check that when the input string cannot be split into a String[], and
-     * there is no default value then an exception is thrown.
-     */
-    public void testInvalidStringWithoutDefault() {
-        final BooleanArrayConverter converter = new BooleanArrayConverter();
-        try {
-            converter.convert(null, "true!");
-            fail("Converting invalid string should have generated an exception");
-        } catch (final ConversionException expected) {
-            // Exception is successful test
-        }
-    }
-
-    /**
-     * Check that when the input string cannot be split into a String[], and
-     * there is a default value then that default is returned.
-     */
-    public void testInvalidStringWithDefault() {
-        final boolean[] defaults = new boolean[1];
-        final BooleanArrayConverter converter = new BooleanArrayConverter(defaults);
-        final Object o = converter.convert(null, "true!");
-        assertSame("Unexpected object returned for failed conversion", o, defaults);
-    }
-
-    /**
-     * Check that when one of the elements in a comma-separated string is not
-     * a valid boolean, and there is no default value then an exception is thrown.
-     */
-    public void testInvalidElementWithoutDefault() {
-        final BooleanArrayConverter converter = new BooleanArrayConverter();
-        try {
-            converter.convert(null, "true,bogus");
-            fail("Converting invalid string should have generated an exception");
-        } catch (final ConversionException expected) {
-            // Exception is successful test
-        }
-    }
-
-    /**
-     * Check that when one of the elements in a comma-separated string is not
-     * a valid boolean, and there is a default value then the default value
-     * is returned.
-     * <p>
-     * Note that the default value is for the complete array object returned,
-     * not for the failed element.
-     */
-    public void testInvalidElementWithDefault() {
-        final boolean[] defaults = new boolean[1];
-        final BooleanArrayConverter converter = new BooleanArrayConverter(defaults);
-        final Object o = converter.convert(null, "true,bogus");
-        assertSame("Unexpected object returned for failed conversion", o, defaults);
-    }
-
-    /**
-     * Check that when a custom BooleanConverter is used, and that converter
-     * has a (per-element) default, then that element (and just that element)
-     * is assigned the default value.
-     * <p>
-     * With the standard BooleanArrayConverter, if <em>any</em> of the elements
-     * in the array are bad, then the array-wide default value is returned.
-     * However by specifying a custom BooleanConverter which has a per-element
-     * default, the unrecognized elements get that per-element default but the
-     * others are converted as expected.
-     */
-    public void testElementDefault() {
-        final boolean[] defaults = new boolean[1];
-        final BooleanConverter bc = new BooleanConverter(Boolean.TRUE);
-        final BooleanArrayConverter converter = new BooleanArrayConverter(bc, defaults);
-        final boolean[] results = (boolean[]) converter.convert(null, "true,bogus");
-
-        assertEquals(2, results.length);
-        assertTrue(results[0]);
-        assertTrue(results[1]);
-    }
-
-    /**
-     * Check that registration of a custom converter works.
-     */
-    public void testRegistration() {
-        final String[] trueStrings = {"sure"};
-        final String[] falseStrings = {"nope"};
-        final BooleanConverter bc = new BooleanConverter(
-            trueStrings, falseStrings, BooleanConverter.NO_DEFAULT);
-
-        final BooleanArrayConverter converter = new BooleanArrayConverter(
-            bc, BooleanArrayConverter.NO_DEFAULT);
-
-        ConvertUtils.register(converter, BooleanArrayConverter.MODEL);
-        final boolean[] sample = {};
-        final boolean[] results = (boolean[]) ConvertUtils.convert("sure,nope", sample.getClass());
-
-        assertEquals(2, results.length);
-        assertTrue(results[0]);
-        assertFalse(results[1]);
     }
 }

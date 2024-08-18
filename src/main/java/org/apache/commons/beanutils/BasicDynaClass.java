@@ -44,6 +44,56 @@ public class BasicDynaClass implements DynaClass, Serializable {
 
 
     /**
+     * The method signature of the constructor we will use to create
+     * new DynaBean instances.
+     */
+    protected static Class<?>[] constructorTypes = { DynaClass.class };
+
+
+    /**
+     * The constructor of the <code>dynaBeanClass</code> that we will use
+     * for creating new instances.
+     */
+    protected transient Constructor<?> constructor = null;
+
+
+    /**
+     * The argument values to be passed to the constructore we will use
+     * to create new DynaBean instances.
+     */
+    protected Object[] constructorValues = { this };
+
+
+
+
+    /**
+     * The <code>DynaBean</code> implementation class we will use for
+     * creating new instances.
+     */
+    protected Class<?> dynaBeanClass = BasicDynaBean.class;
+
+
+    /**
+     * The "name" of this DynaBean class.
+     */
+    protected String name = this.getClass().getName();
+
+
+    /**
+     * The set of dynamic properties that are part of this DynaClass.
+     */
+    protected DynaProperty[] properties = {};
+
+
+    /**
+     * The set of dynamic properties that are part of this DynaClass,
+     * keyed by the property name.  Individual descriptor instances will
+     * be the same instances as those in the <code>properties</code> list.
+     */
+    protected HashMap<String, DynaProperty> propertiesMap = new HashMap<>();
+
+
+    /**
      * Construct a new BasicDynaClass with default parameters.
      */
     public BasicDynaClass() {
@@ -93,67 +143,34 @@ public class BasicDynaClass implements DynaClass, Serializable {
 
 
     /**
-     * The constructor of the <code>dynaBeanClass</code> that we will use
-     * for creating new instances.
-     */
-    protected transient Constructor<?> constructor = null;
-
-
-    /**
-     * The method signature of the constructor we will use to create
-     * new DynaBean instances.
-     */
-    protected static Class<?>[] constructorTypes = { DynaClass.class };
-
-
-    /**
-     * The argument values to be passed to the constructore we will use
-     * to create new DynaBean instances.
-     */
-    protected Object[] constructorValues = { this };
-
-
-    /**
-     * The <code>DynaBean</code> implementation class we will use for
-     * creating new instances.
-     */
-    protected Class<?> dynaBeanClass = BasicDynaBean.class;
-
-
-    /**
-     * The "name" of this DynaBean class.
-     */
-    protected String name = this.getClass().getName();
-
-
-    /**
-     * The set of dynamic properties that are part of this DynaClass.
-     */
-    protected DynaProperty[] properties = {};
-
-
-    /**
-     * The set of dynamic properties that are part of this DynaClass,
-     * keyed by the property name.  Individual descriptor instances will
-     * be the same instances as those in the <code>properties</code> list.
-     */
-    protected HashMap<String, DynaProperty> propertiesMap = new HashMap<>();
-
-
-
-
-    /**
-     * Return the name of this DynaClass (analogous to the
-     * <code>getName()</code> method of <code>java.lang.Class</code), which
-     * allows the same <code>DynaClass</code> implementation class to support
-     * different dynamic classes, with different sets of properties.
+     * Return the Class object we will use to create new instances in the
+     * <code>newInstance()</code> method.  This Class <strong>MUST</strong>
+     * implement the <code>DynaBean</code> interface.
      *
-     * @return the name of the DynaClass
+     * @return The class of the {@link DynaBean}
+     */
+    public Class<?> getDynaBeanClass() {
+
+        return this.dynaBeanClass;
+
+    }
+
+
+    /**
+     * <p>Return an array of <code>ProperyDescriptors</code> for the properties
+     * currently defined in this DynaClass.  If no properties are defined, a
+     * zero-length array will be returned.</p>
+     *
+     * <p><strong>FIXME</strong> - Should we really be implementing
+     * <code>getBeanInfo()</code> instead, which returns property descriptors
+     * and a bunch of other stuff?</p>
+     *
+     * @return the set of properties for this DynaClass
      */
     @Override
-    public String getName() {
+    public DynaProperty[] getDynaProperties() {
 
-        return this.name;
+        return properties;
 
     }
 
@@ -181,22 +198,21 @@ public class BasicDynaClass implements DynaClass, Serializable {
 
 
     /**
-     * <p>Return an array of <code>ProperyDescriptors</code> for the properties
-     * currently defined in this DynaClass.  If no properties are defined, a
-     * zero-length array will be returned.</p>
+     * Return the name of this DynaClass (analogous to the
+     * <code>getName()</code> method of <code>java.lang.Class</code), which
+     * allows the same <code>DynaClass</code> implementation class to support
+     * different dynamic classes, with different sets of properties.
      *
-     * <p><strong>FIXME</strong> - Should we really be implementing
-     * <code>getBeanInfo()</code> instead, which returns property descriptors
-     * and a bunch of other stuff?</p>
-     *
-     * @return the set of properties for this DynaClass
+     * @return the name of the DynaClass
      */
     @Override
-    public DynaProperty[] getDynaProperties() {
+    public String getName() {
 
-        return properties;
+        return this.name;
 
     }
+
+
 
 
     /**
@@ -225,22 +241,6 @@ public class BasicDynaClass implements DynaClass, Serializable {
             throw new InstantiationException
                     (e.getTargetException().getMessage());
         }
-
-    }
-
-
-
-
-    /**
-     * Return the Class object we will use to create new instances in the
-     * <code>newInstance()</code> method.  This Class <strong>MUST</strong>
-     * implement the <code>DynaBean</code> interface.
-     *
-     * @return The class of the {@link DynaBean}
-     */
-    public Class<?> getDynaBeanClass() {
-
-        return this.dynaBeanClass;
 
     }
 

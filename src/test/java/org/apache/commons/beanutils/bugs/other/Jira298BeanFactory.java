@@ -24,20 +24,6 @@ import org.apache.commons.beanutils.bugs.Jira298TestCase;
  */
 public class Jira298BeanFactory {
 
-    /**
-     * Factory method which creates ImplX.
-     *
-     * @return a new ImplX.
-     */
-    public static IX createImplX() {
-        return new ImplX();
-    }
-
-    public interface IX {
-        String getName();
-        void setName(String name);
-    }
-
     static class BaseX {
         private String name = "BaseX name value";
         public String getName() {
@@ -49,5 +35,19 @@ public class Jira298BeanFactory {
     }
 
     static class ImplX extends BaseX implements IX {
+    }
+
+    public interface IX {
+        String getName();
+        void setName(String name);
+    }
+
+    /**
+     * Factory method which creates ImplX.
+     *
+     * @return a new ImplX.
+     */
+    public static IX createImplX() {
+        return new ImplX();
     }
 }

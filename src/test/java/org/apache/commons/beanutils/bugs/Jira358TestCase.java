@@ -29,15 +29,6 @@ import org.apache.commons.beanutils.TestBean;
 public class Jira358TestCase extends TestCase {
 
     /**
-     * Create a test case with the specified name.
-     *
-     * @param name The name of the test
-     */
-    public Jira358TestCase(final String name) {
-        super(name);
-    }
-
-    /**
      * Run the Test.
      *
      * @param args Arguments
@@ -53,6 +44,15 @@ public class Jira358TestCase extends TestCase {
      */
     public static Test suite() {
         return new TestSuite(Jira358TestCase.class);
+    }
+
+    /**
+     * Create a test case with the specified name.
+     *
+     * @param name The name of the test
+     */
+    public Jira358TestCase(final String name) {
+        super(name);
     }
 
     /**

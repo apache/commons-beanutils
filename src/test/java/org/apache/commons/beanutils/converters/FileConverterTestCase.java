@@ -33,12 +33,26 @@ import org.apache.commons.beanutils.Converter;
 
 public class FileConverterTestCase extends TestCase {
 
+    public static TestSuite suite() {
+        return new TestSuite(FileConverterTestCase.class);
+    }
+
+    // ------------------------------------------------------------------------
+
     private Converter converter = null;
 
     // ------------------------------------------------------------------------
 
     public FileConverterTestCase(final String name) {
         super(name);
+    }
+
+    protected Class<?> getExpectedType() {
+        return File.class;
+    }
+
+    protected Converter makeConverter() {
+        return new FileConverter();
     }
 
     // ------------------------------------------------------------------------
@@ -48,23 +62,9 @@ public class FileConverterTestCase extends TestCase {
         converter = makeConverter();
     }
 
-    public static TestSuite suite() {
-        return new TestSuite(FileConverterTestCase.class);
-    }
-
     @Override
     public void tearDown() throws Exception {
         converter = null;
-    }
-
-    // ------------------------------------------------------------------------
-
-    protected Converter makeConverter() {
-        return new FileConverter();
-    }
-
-    protected Class<?> getExpectedType() {
-        return File.class;
     }
 
     // ------------------------------------------------------------------------

@@ -25,25 +25,35 @@ import junit.framework.TestSuite;
  */
 public class DefaultResolverTestCase extends TestCase {
 
-    private final DefaultResolver resolver = new DefaultResolver();
+    /**
+     * Create Test Suite
+     * @return test suite
+     */
+    public static TestSuite suite() {
+        return new TestSuite(DefaultResolverTestCase.class);
+    }
 
+    private final DefaultResolver resolver = new DefaultResolver();
     // Simple Properties Test Data
     private final String[] validProperties = {null, "", "a", "bc", "def", "g.h", "ij.k", "lm.no", "pqr.stu"};
-    private final String[] validNames      = {null, "", "a", "bc", "def", "g",   "ij",   "lm",    "pqr"};
 
+    private final String[] validNames      = {null, "", "a", "bc", "def", "g",   "ij",   "lm",    "pqr"};
     // Indexed Properties Test Data
     private final String[] validIndexProperties = {"a[1]", "b[12]", "cd[3]", "ef[45]", "ghi[6]", "jkl[789]", };
     private final String[] validIndexNames      = {"a",    "b",     "cd",    "ef",     "ghi",    "jkl"};
-    private final int[]    validIndexValues     = {1,      12,      3,       45,       6,        789};
 
+    private final int[]    validIndexValues     = {1,      12,      3,       45,       6,        789};
     // Mapped Properties Test Data
     private final String[] validMapProperties = {"a(b)", "c(de)", "fg(h)", "ij(kl)", "mno(pqr.s)", "tuv(wx).yz[1]"};
     private final String[] validMapNames      = {"a",    "c",     "fg",    "ij",     "mno",        "tuv"};
-    private final String[] validMapKeys       = {"b",    "de",    "h",     "kl",     "pqr.s",      "wx"};
 
+    private final String[] validMapKeys       = {"b",    "de",    "h",     "kl",     "pqr.s",      "wx"};
     private final String[] nextExpressions   = {"a", "bc", "d.e", "fg.h", "ij.kl", "m(12)", "no(3.4)", "pq(r).s", "t[12]", "uv[34].wx"};
     private final String[] nextProperties    = {"a", "bc", "d",   "fg",   "ij",    "m(12)", "no(3.4)", "pq(r)",   "t[12]", "uv[34]"};
+
     private final String[] removeProperties  = {null, null, "e",  "h",    "kl",    null,    null,      "s",       null,    "wx"};
+
+    // ------------------------------------------------------------------------
 
     /**
      * Construct a DefaultResolver Test Case.
@@ -53,14 +63,8 @@ public class DefaultResolverTestCase extends TestCase {
         super(name);
     }
 
-    // ------------------------------------------------------------------------
-
-    /**
-     * Create Test Suite
-     * @return test suite
-     */
-    public static TestSuite suite() {
-        return new TestSuite(DefaultResolverTestCase.class);
+    private String label(final String expression, final int i) {
+        return "Expression[" + i + "]=\"" + expression + "\"";
     }
 
     /**
@@ -70,14 +74,14 @@ public class DefaultResolverTestCase extends TestCase {
     protected void setUp() {
     }
 
+    // ------------------------------------------------------------------------
+
     /**
      * Tear Down
      */
     @Override
     protected void tearDown() {
     }
-
-    // ------------------------------------------------------------------------
 
     /**
      * Test getIndex() method.
@@ -198,6 +202,43 @@ public class DefaultResolverTestCase extends TestCase {
  }
 
     /**
+     * Test getName() method.
+     */
+    public void testGetName() {
+        String label = null;
+
+        // Simple Properties
+        for (int i = 0; i < validProperties.length; i++) {
+            try {
+                label = "Simple " + label(validProperties[i], i);
+                assertEquals(label, validNames[i], resolver.getProperty(validProperties[i]));
+            } catch (final Throwable t) {
+                fail(label + " threw " + t);
+            }
+        }
+
+        // Indexed Properties
+        for (int i = 0; i < validIndexProperties.length; i++) {
+            try {
+                label = "Indexed " + label(validIndexProperties[i], i);
+                assertEquals(label, validIndexNames[i], resolver.getProperty(validIndexProperties[i]));
+            } catch (final Throwable t) {
+                fail(label + " threw " + t);
+            }
+        }
+
+        // Mapped Properties
+        for (int i = 0; i < validMapProperties.length; i++) {
+            try {
+                label = "Mapped " + label(validMapProperties[i], i);
+                assertEquals(label, validMapNames[i], resolver.getProperty(validMapProperties[i]));
+            } catch (final Throwable t) {
+                fail(label + " threw " + t);
+            }
+        }
+    }
+
+    /**
      * Test isIndexed() method.
      */
     public void testIsIndexed() {
@@ -272,43 +313,6 @@ public class DefaultResolverTestCase extends TestCase {
     }
 
     /**
-     * Test getName() method.
-     */
-    public void testGetName() {
-        String label = null;
-
-        // Simple Properties
-        for (int i = 0; i < validProperties.length; i++) {
-            try {
-                label = "Simple " + label(validProperties[i], i);
-                assertEquals(label, validNames[i], resolver.getProperty(validProperties[i]));
-            } catch (final Throwable t) {
-                fail(label + " threw " + t);
-            }
-        }
-
-        // Indexed Properties
-        for (int i = 0; i < validIndexProperties.length; i++) {
-            try {
-                label = "Indexed " + label(validIndexProperties[i], i);
-                assertEquals(label, validIndexNames[i], resolver.getProperty(validIndexProperties[i]));
-            } catch (final Throwable t) {
-                fail(label + " threw " + t);
-            }
-        }
-
-        // Mapped Properties
-        for (int i = 0; i < validMapProperties.length; i++) {
-            try {
-                label = "Mapped " + label(validMapProperties[i], i);
-                assertEquals(label, validMapNames[i], resolver.getProperty(validMapProperties[i]));
-            } catch (final Throwable t) {
-                fail(label + " threw " + t);
-            }
-        }
-    }
-
-    /**
      * Test next() method.
      */
     public void testNext() {
@@ -336,9 +340,5 @@ public class DefaultResolverTestCase extends TestCase {
                 fail(label + " threw " + t);
             }
         }
-    }
-
-    private String label(final String expression, final int i) {
-        return "Expression[" + i + "]=\"" + expression + "\"";
     }
 }

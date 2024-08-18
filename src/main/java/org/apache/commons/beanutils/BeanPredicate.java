@@ -17,11 +17,11 @@
 
 package org.apache.commons.beanutils;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.apache.commons.collections.Predicate;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * <p>Predicate implementation that applies the given <code>Predicate</code>
@@ -89,24 +89,6 @@ public class BeanPredicate implements Predicate {
     }
 
     /**
-     * Gets the name of the property whose value is to be predicated.
-     * in the evaluation.
-     * @return the property name, not null
-     */
-    public String getPropertyName() {
-        return propertyName;
-    }
-
-    /**
-     * Sets the name of the property whose value is to be predicated.
-     * @param propertyName the name of the property whose value is to be predicated,
-     * not null
-     */
-    public void setPropertyName(final String propertyName) {
-        this.propertyName = propertyName;
-    }
-
-    /**
      * Gets the <code>Predicate</code> to be applied to the value of the named property
      * during {@link #evaluate}.
      * @return <code>Predicate</code>, not null
@@ -116,12 +98,30 @@ public class BeanPredicate implements Predicate {
     }
 
     /**
+     * Gets the name of the property whose value is to be predicated.
+     * in the evaluation.
+     * @return the property name, not null
+     */
+    public String getPropertyName() {
+        return propertyName;
+    }
+
+    /**
      * Sets the <code>Predicate</code> to be applied to the value of the named property
      * during {@link #evaluate(Object)}.
      * @param predicate <code>Predicate</code>, not null
      */
     public void setPredicate(final Predicate predicate) {
         this.predicate = predicate;
+    }
+
+    /**
+     * Sets the name of the property whose value is to be predicated.
+     * @param propertyName the name of the property whose value is to be predicated,
+     * not null
+     */
+    public void setPropertyName(final String propertyName) {
+        this.propertyName = propertyName;
     }
 
 }

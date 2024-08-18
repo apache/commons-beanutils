@@ -113,38 +113,6 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
     }
 
     /**
-     * Sets the method to be called to compare two JavaBeans
-     *
-     * @param property String method name to call to compare
-     * If the property passed in is null then the actual objects will be compared
-     */
-    public void setProperty( final String property ) {
-        this.property = property;
-    }
-
-
-    /**
-     * Gets the property attribute of the BeanComparator
-     *
-     * @return String method name to call to compare.
-     * A null value indicates that the actual objects will be compared
-     */
-    public String getProperty() {
-        return property;
-    }
-
-
-    /**
-     * Gets the Comparator being used to compare beans.
-     *
-     * @return the Comparator being used to compare beans
-     */
-    public Comparator<?> getComparator() {
-        return comparator;
-    }
-
-
-    /**
      * Compare two JavaBeans by their shared property.
      * If {@link #getProperty} is null then the actual objects will be compared.
      *
@@ -175,6 +143,7 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
             throw new RuntimeException( "NoSuchMethodException: " + nsme.toString() );
         }
     }
+
 
     /**
      * Two <code>BeanComparator</code>'s are equals if and only if
@@ -207,6 +176,27 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
         return true;
     }
 
+
+    /**
+     * Gets the Comparator being used to compare beans.
+     *
+     * @return the Comparator being used to compare beans
+     */
+    public Comparator<?> getComparator() {
+        return comparator;
+    }
+
+
+    /**
+     * Gets the property attribute of the BeanComparator
+     *
+     * @return String method name to call to compare.
+     * A null value indicates that the actual objects will be compared
+     */
+    public String getProperty() {
+        return property;
+    }
+
     /**
      * Hash code compatible with equals.
      * @return the hash code for this comparator
@@ -231,5 +221,15 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
         // to make the compiler happy
         Comparator c = comparator;
         return c.compare(val1, val2);
+    }
+
+    /**
+     * Sets the method to be called to compare two JavaBeans
+     *
+     * @param property String method name to call to compare
+     * If the property passed in is null then the actual objects will be compared
+     */
+    public void setProperty( final String property ) {
+        this.property = property;
     }
 }

@@ -38,9 +38,21 @@ public class DynaResultSetTestCase extends TestCase {
 
 
     /**
+     * Return the tests included in this test suite.
+     */
+    public static Test suite() {
+
+        return new TestSuite(DynaResultSetTestCase.class);
+
+    }
+
+
+    /**
      * The mock result set DynaClass to be tested.
      */
     protected ResultSetDynaClass dynaClass = null;
+
+
 
 
     /**
@@ -71,8 +83,6 @@ public class DynaResultSetTestCase extends TestCase {
     }
 
 
-
-
     /**
      * Set up instance variables required by this test case.
      */
@@ -80,16 +90,6 @@ public class DynaResultSetTestCase extends TestCase {
     public void setUp() throws Exception {
 
         dynaClass = new ResultSetDynaClass(TestResultSet.createProxy());
-
-    }
-
-
-    /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-
-        return new TestSuite(DynaResultSetTestCase.class);
 
     }
 
@@ -108,12 +108,15 @@ public class DynaResultSetTestCase extends TestCase {
 
 
 
-    public void testGetName() {
+    public void testGetDynaProperties() {
 
-        assertEquals("DynaClass name",
-                     "org.apache.commons.beanutils.ResultSetDynaClass",
-                     dynaClass.getName());
-
+        final DynaProperty dynaProps[] = dynaClass.getDynaProperties();
+        assertNotNull("dynaProps exists", dynaProps);
+        assertEquals("dynaProps length", columns.length, dynaProps.length);
+        for (int i = 0; i < columns.length; i++) {
+            assertEquals("Property " + columns[i],
+                         columns[i], dynaProps[i].getName());
+        }
 
     }
 
@@ -144,29 +147,12 @@ public class DynaResultSetTestCase extends TestCase {
     }
 
 
-    public void testGetDynaProperties() {
+    public void testGetName() {
 
-        final DynaProperty dynaProps[] = dynaClass.getDynaProperties();
-        assertNotNull("dynaProps exists", dynaProps);
-        assertEquals("dynaProps length", columns.length, dynaProps.length);
-        for (int i = 0; i < columns.length; i++) {
-            assertEquals("Property " + columns[i],
-                         columns[i], dynaProps[i].getName());
-        }
+        assertEquals("DynaClass name",
+                     "org.apache.commons.beanutils.ResultSetDynaClass",
+                     dynaClass.getName());
 
-    }
-
-
-    public void testNewInstance() {
-
-        try {
-            dynaClass.newInstance();
-            fail("Did not throw UnsupportedOperationException()");
-        } catch (final UnsupportedOperationException e) {
-            // Expected result
-        } catch (final Exception e) {
-            fail("Threw exception " + e);
-        }
 
     }
 
@@ -293,6 +279,20 @@ public class DynaResultSetTestCase extends TestCase {
                      "This is a string",
                      (String) stringProperty);
 
+
+    }
+
+
+    public void testNewInstance() {
+
+        try {
+            dynaClass.newInstance();
+            fail("Did not throw UnsupportedOperationException()");
+        } catch (final UnsupportedOperationException e) {
+            // Expected result
+        } catch (final Exception e) {
+            fail("Threw exception " + e);
+        }
 
     }
 

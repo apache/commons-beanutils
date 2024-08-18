@@ -29,14 +29,17 @@ public interface DynaClass {
 
 
     /**
-     * Return the name of this DynaClass (analogous to the
-     * <code>getName()</code> method of <code>java.lang.Class</code), which
-     * allows the same <code>DynaClass</code> implementation class to support
-     * different dynamic classes, with different sets of properties.
+     * <p>Return an array of <code>ProperyDescriptors</code> for the properties
+     * currently defined in this DynaClass.  If no properties are defined, a
+     * zero-length array will be returned.</p>
      *
-     * @return the name of the DynaClass
+     * <p><strong>FIXME</strong> - Should we really be implementing
+     * <code>getBeanInfo()</code> instead, which returns property descriptors
+     * and a bunch of other stuff?</p>
+     *
+     * @return the set of properties for this DynaClass
      */
-    String getName();
+    DynaProperty[] getDynaProperties();
 
 
     /**
@@ -53,17 +56,14 @@ public interface DynaClass {
 
 
     /**
-     * <p>Return an array of <code>ProperyDescriptors</code> for the properties
-     * currently defined in this DynaClass.  If no properties are defined, a
-     * zero-length array will be returned.</p>
+     * Return the name of this DynaClass (analogous to the
+     * <code>getName()</code> method of <code>java.lang.Class</code), which
+     * allows the same <code>DynaClass</code> implementation class to support
+     * different dynamic classes, with different sets of properties.
      *
-     * <p><strong>FIXME</strong> - Should we really be implementing
-     * <code>getBeanInfo()</code> instead, which returns property descriptors
-     * and a bunch of other stuff?</p>
-     *
-     * @return the set of properties for this DynaClass
+     * @return the name of the DynaClass
      */
-    DynaProperty[] getDynaProperties();
+    String getName();
 
 
     /**

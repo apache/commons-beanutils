@@ -29,21 +29,21 @@ import org.apache.commons.beanutils.Converter;
 public class ClassConverterTestCase extends TestCase {
 
     /**
-     * Construct a new Class Converter test case.
-     * @param name Test Name
-     */
-    public ClassConverterTestCase(final String name) {
-        super(name);
-    }
-
-    // ------------------------------------------------------------------------
-
-    /**
      * Create Test Suite
      * @return test suite
      */
     public static TestSuite suite() {
         return new TestSuite(ClassConverterTestCase.class);
+    }
+
+    // ------------------------------------------------------------------------
+
+    /**
+     * Construct a new Class Converter test case.
+     * @param name Test Name
+     */
+    public ClassConverterTestCase(final String name) {
+        super(name);
     }
 
     /** Set Up */
@@ -60,15 +60,17 @@ public class ClassConverterTestCase extends TestCase {
     // ------------------------------------------------------------------------
 
     /**
-     * Test Conversion to String
+     * Test Array Conversion
      */
-    public void testConvertToString() {
+    public void testArray() {
         final Converter converter = new ClassConverter();
 
-        assertEquals("Class Test", "java.lang.Integer", converter.convert(String.class, Integer.class));
-        assertEquals("Value Test", "foo", converter.convert(String.class, "foo"));
-        assertEquals("Value Test", "bar", converter.convert(String.class, new StringBuilder("bar")));
-        assertEquals("Null Test",   null, converter.convert(String.class, null));
+        // Test Array Class to String
+        assertEquals("Array to String", "[Ljava.lang.Boolean;", converter.convert(String.class, Boolean[].class));
+
+        // *** N.B. for some reason the following works on m1, but not m2
+        // Test String to Array Class
+        // assertEquals("String to Array", Boolean[].class, converter.convert(Class.class, "[Ljava.lang.Boolean;"));
     }
 
     /**
@@ -121,17 +123,15 @@ public class ClassConverterTestCase extends TestCase {
     }
 
     /**
-     * Test Array Conversion
+     * Test Conversion to String
      */
-    public void testArray() {
+    public void testConvertToString() {
         final Converter converter = new ClassConverter();
 
-        // Test Array Class to String
-        assertEquals("Array to String", "[Ljava.lang.Boolean;", converter.convert(String.class, Boolean[].class));
-
-        // *** N.B. for some reason the following works on m1, but not m2
-        // Test String to Array Class
-        // assertEquals("String to Array", Boolean[].class, converter.convert(Class.class, "[Ljava.lang.Boolean;"));
+        assertEquals("Class Test", "java.lang.Integer", converter.convert(String.class, Integer.class));
+        assertEquals("Value Test", "foo", converter.convert(String.class, "foo"));
+        assertEquals("Value Test", "bar", converter.convert(String.class, new StringBuilder("bar")));
+        assertEquals("Null Test",   null, converter.convert(String.class, null));
     }
 
     /**

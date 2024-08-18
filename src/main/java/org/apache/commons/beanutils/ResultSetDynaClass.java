@@ -88,6 +88,12 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
 
 
     /**
+     * <p>The <code>ResultSet</code> we are wrapping.</p>
+     */
+    protected ResultSet resultSet = null;
+
+
+    /**
      * <p>Construct a new ResultSetDynaClass for the specified
      * <code>ResultSet</code>.  The property names corresponding
      * to column names in the result set will be lower cased.</p>
@@ -135,6 +141,8 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
     }
 
 
+
+
     /**
      * <p>Construct a new ResultSetDynaClass for the specified
      * <code>ResultSet</code>.  The property names corresponding
@@ -175,28 +183,6 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
 
 
     /**
-     * <p>The <code>ResultSet</code> we are wrapping.</p>
-     */
-    protected ResultSet resultSet = null;
-
-
-
-
-    /**
-     * <p>Return an <code>Iterator</code> of {@link DynaBean} instances for
-     * each row of the wrapped <code>ResultSet</code>, in "forward" order.
-     * Unless the underlying result set supports scrolling, this method
-     * should be called only once.</p>
-     * @return An <code>Iterator</code> of {@link DynaBean} instances
-     */
-    public Iterator<DynaBean> iterator() {
-
-        return new ResultSetIterator(this);
-
-    }
-
-
-    /**
      * Get a value from the {@link ResultSet} for the specified
      * property name.
      *
@@ -210,13 +196,27 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
     }
 
 
-
     /**
      * <p>Return the result set we are wrapping.</p>
      */
     ResultSet getResultSet() {
 
         return this.resultSet;
+
+    }
+
+
+
+    /**
+     * <p>Return an <code>Iterator</code> of {@link DynaBean} instances for
+     * each row of the wrapped <code>ResultSet</code>, in "forward" order.
+     * Unless the underlying result set supports scrolling, this method
+     * should be called only once.</p>
+     * @return An <code>Iterator</code> of {@link DynaBean} instances
+     */
+    public Iterator<DynaBean> iterator() {
+
+        return new ResultSetIterator(this);
 
     }
 

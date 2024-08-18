@@ -27,6 +27,16 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
 
 
     /**
+     * Return the tests included in this test suite.
+     */
+    public static Test suite() {
+        return new TestSuite(BeanUtils2TestCase.class);
+    }
+
+
+
+
+    /**
      * Construct a new instance of this test case.
      *
      * @param name Name of the test case
@@ -34,8 +44,6 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
     public BeanUtils2TestCase(final String name) {
         super(name);
     }
-
-
 
 
     /**
@@ -46,14 +54,6 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
         ConvertUtils.deregister();
         BeanUtilsBean.setInstance(new BeanUtilsBean2());
         setUpShared();
-    }
-
-
-    /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(BeanUtils2TestCase.class);
     }
 
     /**

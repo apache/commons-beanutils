@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import junit.framework.Test;
@@ -48,25 +49,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
     private static String  stringVal = "somevalue";
     private static Integer intVal    = Integer.valueOf(5);
     private static Date    dateVal   = new Date();
-    private final Map<Object, Object>     mapVal    = new HashMap<>();
-
-    private final Object[] values = {stringVal, null, intVal, dateVal, mapVal};
-
-    private BasicDynaBean dynaBean;
-    private Map<Object, Object> decoratedMap;
-    private Map<Object, Object> modifiableMap;
     private static final Map<Object, Object> emptyMap = new DynaBeanMapDecorator(new BasicDynaBean(new BasicDynaClass()));
-
-
-    /**
-     * Construct a new instance of this test case.
-     *
-     * @param name Name of the test case
-     */
-    public DynaBeanMapDecoratorTestCase(final String name) {
-        super(name);
-    }
-
 
     /**
      * Run thus Test
@@ -80,6 +63,79 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
      */
     public static Test suite() {
         return new TestSuite(DynaBeanMapDecoratorTestCase.class);
+    }
+    private final Map<Object, Object>     mapVal    = new HashMap<>();
+    private final Object[] values = {stringVal, null, intVal, dateVal, mapVal};
+    private BasicDynaBean dynaBean;
+
+
+    private Map<Object, Object> decoratedMap;
+
+
+    private Map<Object, Object> modifiableMap;
+
+    /**
+     * Construct a new instance of this test case.
+     *
+     * @param name Name of the test case
+     */
+    public DynaBeanMapDecoratorTestCase(final String name) {
+        super(name);
+    }
+
+    /**
+     * Check that a Collection is not modifiable
+     */
+    private <E> void checkUnmodifiable(final String desc, final Collection<E> collection, final E addElem) {
+        // Check can't add()
+        try {
+            collection.add(addElem);
+            fail(desc + ".add()");
+        } catch(final UnsupportedOperationException ignore) {
+            // expected result
+        }
+
+        // Check can't addAll()
+        final List<E> list = new ArrayList<>(1);
+        list.add(addElem);
+        try {
+            collection.addAll(list);
+            fail(desc + ".addAll()");
+        } catch(final UnsupportedOperationException ignore) {
+            // expected result
+        }
+
+        // Check can't clear()
+        try {
+            collection.clear();
+            fail(desc + ".clear()");
+        } catch(final UnsupportedOperationException ignore) {
+            // expected result
+        }
+
+        // Check can't remove()
+        try {
+            collection.remove("abc");
+            fail(desc + ".remove()");
+        } catch(final UnsupportedOperationException ignore) {
+            // expected result
+        }
+
+        // Check can't removeAll()
+        try {
+            collection.removeAll(list);
+            fail(desc + ".removeAll()");
+        } catch(final UnsupportedOperationException ignore) {
+            // expected result
+        }
+
+        // Check can't retainAll()
+        try {
+            collection.retainAll(list);
+            fail(desc + ".retainAll()");
+        } catch(final UnsupportedOperationException ignore) {
+            // expected result
+        }
     }
 
     /**
@@ -104,6 +160,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
 
     }
 
+
     /**
      * Tear down instance variables required by this test case.
      */
@@ -112,15 +169,6 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
         dynaBean = null;
         decoratedMap = null;
         modifiableMap = null;
-    }
-
-
-    /**
-     * Test isReadOnly() method
-     */
-    public void testIsReadOnly() {
-        assertTrue("decoratedMap true",   ((DynaBeanMapDecorator)decoratedMap).isReadOnly());
-        assertFalse("modifiableMap false", ((DynaBeanMapDecorator)modifiableMap).isReadOnly());
     }
 
     /**
@@ -170,11 +218,9 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
 
         assertEquals("entrySet size", properties.length, set.size());
 
-        final Iterator<Map.Entry<Object, Object>> iterator = set.iterator();
-        final List<String> namesList = new ArrayList<String>();
+        final List<String> namesList = new ArrayList<>();
         int i = 0;
-        while (iterator.hasNext()) {
-            final Map.Entry<Object, Object> entry = iterator.next();
+        for (final Entry<Object, Object> entry : set) {
             final String name  = (String)entry.getKey();
             namesList.add(name);
             final Object expectValue = decoratedMap.get(name);
@@ -210,6 +256,14 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
     public void testIsEmpty() {
         assertTrue("Empty",      emptyMap.isEmpty());
         assertFalse("Not Empty", decoratedMap.isEmpty());
+    }
+
+    /**
+     * Test isReadOnly() method
+     */
+    public void testIsReadOnly() {
+        assertTrue("decoratedMap true",   ((DynaBeanMapDecorator)decoratedMap).isReadOnly());
+        assertFalse("modifiableMap false", ((DynaBeanMapDecorator)modifiableMap).isReadOnly());
     }
 
     /**
@@ -316,61 +370,6 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
         while (iterator.hasNext()) {
             assertEquals("values("+i+")", values[i], iterator.next());
             i++;
-        }
-    }
-
-    /**
-     * Check that a Collection is not modifiable
-     */
-    private <E> void checkUnmodifiable(final String desc, final Collection<E> collection, final E addElem) {
-        // Check can't add()
-        try {
-            collection.add(addElem);
-            fail(desc + ".add()");
-        } catch(final UnsupportedOperationException ignore) {
-            // expected result
-        }
-
-        // Check can't addAll()
-        final List<E> list = new ArrayList<>(1);
-        list.add(addElem);
-        try {
-            collection.addAll(list);
-            fail(desc + ".addAll()");
-        } catch(final UnsupportedOperationException ignore) {
-            // expected result
-        }
-
-        // Check can't clear()
-        try {
-            collection.clear();
-            fail(desc + ".clear()");
-        } catch(final UnsupportedOperationException ignore) {
-            // expected result
-        }
-
-        // Check can't remove()
-        try {
-            collection.remove("abc");
-            fail(desc + ".remove()");
-        } catch(final UnsupportedOperationException ignore) {
-            // expected result
-        }
-
-        // Check can't removeAll()
-        try {
-            collection.removeAll(list);
-            fail(desc + ".removeAll()");
-        } catch(final UnsupportedOperationException ignore) {
-            // expected result
-        }
-
-        // Check can't retainAll()
-        try {
-            collection.retainAll(list);
-            fail(desc + ".retainAll()");
-        } catch(final UnsupportedOperationException ignore) {
-            // expected result
         }
     }
 }

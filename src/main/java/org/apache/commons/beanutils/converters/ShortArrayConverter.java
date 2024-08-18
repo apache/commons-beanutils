@@ -20,6 +20,7 @@ package org.apache.commons.beanutils.converters;
 
 
 import java.util.List;
+
 import org.apache.commons.beanutils.ConversionException;
 
 
@@ -40,6 +41,12 @@ public final class ShortArrayConverter extends AbstractArrayConverter {
 
 
     /**
+     * <p>Model object for type comparisons.</p>
+     */
+    private static final short[] MODEL = {};
+
+
+    /**
      * Create a {@link org.apache.commons.beanutils.Converter} that will throw
      * a {@link ConversionException} if a conversion error occurs.
      */
@@ -49,6 +56,8 @@ public final class ShortArrayConverter extends AbstractArrayConverter {
         this.useDefault = false;
 
     }
+
+
 
 
     /**
@@ -63,14 +72,6 @@ public final class ShortArrayConverter extends AbstractArrayConverter {
         this.useDefault = true;
 
     }
-
-
-
-
-    /**
-     * <p>Model object for type comparisons.</p>
-     */
-    private static final short[] MODEL = {};
 
 
 

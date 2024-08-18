@@ -29,8 +29,7 @@ public class ClassReloaderTestCase extends TestCase {
 
     // ------------------------------------------------------------------------
 
-    public ClassReloaderTestCase(final String name) {
-        super(name);
+    public static class DummyClass {
     }
 
 
@@ -40,7 +39,8 @@ public class ClassReloaderTestCase extends TestCase {
 
     // ------------------------------------------------------------------------
 
-    public static class DummyClass {
+    public ClassReloaderTestCase(final String name) {
+        super(name);
     }
 
     /**

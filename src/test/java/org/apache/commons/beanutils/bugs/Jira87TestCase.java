@@ -16,13 +16,14 @@
  */
 package org.apache.commons.beanutils.bugs;
 
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.beanutils.bugs.other.Jira87BeanFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * Test case for Jiar issue# BEANUTILS-87.
@@ -40,17 +41,6 @@ import junit.framework.TestSuite;
  */
 public class Jira87TestCase extends TestCase {
 
-    private final Log log = LogFactory.getLog(Jira87TestCase.class);
-
-    /**
-     * Create a test case with the specified name.
-     *
-     * @param name The name of the test
-     */
-    public Jira87TestCase(final String name) {
-        super(name);
-    }
-
     /**
      * Run the Test.
      *
@@ -67,6 +57,17 @@ public class Jira87TestCase extends TestCase {
      */
     public static Test suite() {
         return new TestSuite(Jira87TestCase.class);
+    }
+
+    private final Log log = LogFactory.getLog(Jira87TestCase.class);
+
+    /**
+     * Create a test case with the specified name.
+     *
+     * @param name The name of the test
+     */
+    public Jira87TestCase(final String name) {
+        super(name);
     }
 
     /**

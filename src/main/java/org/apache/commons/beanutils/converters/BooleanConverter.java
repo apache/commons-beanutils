@@ -54,6 +54,46 @@ public final class BooleanConverter extends AbstractConverter {
 
 
     /**
+     * This is a special reference that can be passed as the "default object"
+     * to the constructor to indicate that no default is desired. Note that
+     * the value 'null' cannot be used for this purpose, as the caller may
+     * want a null to be returned as the default.
+     * @deprecated Use constructors without default value.
+     */
+    @Deprecated
+    public static final Object NO_DEFAULT = new Object();
+
+
+    /**
+     * This method creates a copy of the provided array, and ensures that
+     * all the strings in the newly created array contain only lower-case
+     * letters.
+     * <p>
+     * Using this method to copy string arrays means that changes to the
+     * src array do not modify the dst array.
+     */
+    private static String[] copyStrings(final String[] src) {
+        final String[] dst = new String[src.length];
+        for(int i=0; i<src.length; ++i) {
+            dst[i] = src[i].toLowerCase();
+        }
+        return dst;
+    }
+
+    /**
+     * The set of strings that are known to map to Boolean.TRUE.
+     */
+    private String[] trueStrings = {"true", "yes", "y", "on", "1"};
+
+    /**
+     * The set of strings that are known to map to Boolean.FALSE.
+     */
+    private String[] falseStrings = {"false", "no", "n", "off", "0"};
+
+
+
+
+    /**
      * Create a {@link org.apache.commons.beanutils.Converter} that will throw a
      * {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs, ie the string value being converted is
@@ -61,6 +101,7 @@ public final class BooleanConverter extends AbstractConverter {
      */
     public BooleanConverter() {
     }
+
 
 
     /**
@@ -104,6 +145,7 @@ public final class BooleanConverter extends AbstractConverter {
         this.falseStrings = copyStrings(falseStrings);
     }
 
+
     /**
      * Create a {@link org.apache.commons.beanutils.Converter} that will return
      * the specified default value if a conversion error occurs.
@@ -134,43 +176,6 @@ public final class BooleanConverter extends AbstractConverter {
         if (defaultValue != NO_DEFAULT) {
             setDefaultValue(defaultValue);
         }
-    }
-
-
-
-
-    /**
-     * This is a special reference that can be passed as the "default object"
-     * to the constructor to indicate that no default is desired. Note that
-     * the value 'null' cannot be used for this purpose, as the caller may
-     * want a null to be returned as the default.
-     * @deprecated Use constructors without default value.
-     */
-    @Deprecated
-    public static final Object NO_DEFAULT = new Object();
-
-
-
-    /**
-     * The set of strings that are known to map to Boolean.TRUE.
-     */
-    private String[] trueStrings = {"true", "yes", "y", "on", "1"};
-
-    /**
-     * The set of strings that are known to map to Boolean.FALSE.
-     */
-    private String[] falseStrings = {"false", "no", "n", "off", "0"};
-
-
-    /**
-     * Return the default type this <code>Converter</code> handles.
-     *
-     * @return The default type this <code>Converter</code> handles.
-     * @since 1.8.0
-     */
-    @Override
-    protected Class<Boolean> getDefaultType() {
-        return Boolean.class;
     }
 
     /**
@@ -220,18 +225,13 @@ public final class BooleanConverter extends AbstractConverter {
     }
 
     /**
-     * This method creates a copy of the provided array, and ensures that
-     * all the strings in the newly created array contain only lower-case
-     * letters.
-     * <p>
-     * Using this method to copy string arrays means that changes to the
-     * src array do not modify the dst array.
+     * Return the default type this <code>Converter</code> handles.
+     *
+     * @return The default type this <code>Converter</code> handles.
+     * @since 1.8.0
      */
-    private static String[] copyStrings(final String[] src) {
-        final String[] dst = new String[src.length];
-        for(int i=0; i<src.length; ++i) {
-            dst[i] = src[i].toLowerCase();
-        }
-        return dst;
+    @Override
+    protected Class<Boolean> getDefaultType() {
+        return Boolean.class;
     }
 }

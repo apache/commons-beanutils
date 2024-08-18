@@ -28,19 +28,6 @@ import org.apache.commons.beanutils.BeanUtilsBean;
  */
 public class Jira411TestCase extends TestCase {
 
-    private BeanUtilsBean instance;
-    private DummyBean testBean;
-
-    @Override
-    protected void setUp() throws Exception {
-        instance = new BeanUtilsBean();
-        testBean = new DummyBean();
-    }
-
-    public void testSetProperty() throws Exception {
-        instance.setProperty(testBean, "imgLink.x", "1");
-    }
-
     public class DummyBean {
 
         private String imgLink = null;
@@ -52,5 +39,18 @@ public class Jira411TestCase extends TestCase {
         public void setImgLink(final String imgLink) {
             this.imgLink = imgLink;
         }
+    }
+    private BeanUtilsBean instance;
+
+    private DummyBean testBean;
+
+    @Override
+    protected void setUp() throws Exception {
+        instance = new BeanUtilsBean();
+        testBean = new DummyBean();
+    }
+
+    public void testSetProperty() throws Exception {
+        instance.setProperty(testBean, "imgLink.x", "1");
     }
 }
