@@ -116,7 +116,7 @@ public class LocaleBeanificationTestCase extends TestCase {
      * Return the tests included in this test suite.
      */
     public static Test suite() {
-        return (new TestSuite(LocaleBeanificationTestCase.class));
+        return new TestSuite(LocaleBeanificationTestCase.class);
     }
 
 
@@ -212,9 +212,11 @@ public class LocaleBeanificationTestCase extends TestCase {
                 try {
                     signal.setSignal(3);
                     LocaleConvertUtils.register(new LocaleConverter() {
+                                            @Override
                                             public <T> T convert(final Class<T> type, final Object value) {
                                                 return ConvertUtils.primitiveToWrapper(type).cast(9);
                                             }
+                                            @Override
                                             public <T> T convert(final Class<T> type, final Object value, final String pattern) {
                                                 return ConvertUtils.primitiveToWrapper(type).cast(9);
                                             }
@@ -237,9 +239,11 @@ public class LocaleBeanificationTestCase extends TestCase {
         assertEquals("Wrong property value (1)", 1, bean.getInt());
 
         LocaleConvertUtils.register(new LocaleConverter() {
+                                @Override
                                 public <T> T convert(final Class<T> type, final Object value) {
                                     return ConvertUtils.primitiveToWrapper(type).cast(5);
                                 }
+                                @Override
                                 public <T> T convert(final Class<T> type, final Object value, final String pattern) {
                                     return ConvertUtils.primitiveToWrapper(type).cast(5);
                                 }
@@ -291,7 +295,7 @@ public class LocaleBeanificationTestCase extends TestCase {
             }
         }
 
-        final ContextClassLoaderLocal<Integer> ccll = new ContextClassLoaderLocal<Integer>();
+        final ContextClassLoaderLocal<Integer> ccll = new ContextClassLoaderLocal<>();
         ccll.set(1776);
         assertEquals("Start thread sets value", new Integer(1776), ccll.get());
 
@@ -312,7 +316,7 @@ public class LocaleBeanificationTestCase extends TestCase {
     /** Tests whether the unset method works*/
     public void testContextClassLoaderUnset() throws Exception {
         final LocaleBeanUtilsBean beanOne = new LocaleBeanUtilsBean();
-        final ContextClassLoaderLocal<LocaleBeanUtilsBean> ccll = new ContextClassLoaderLocal<LocaleBeanUtilsBean>();
+        final ContextClassLoaderLocal<LocaleBeanUtilsBean> ccll = new ContextClassLoaderLocal<>();
         ccll.set(beanOne);
         assertEquals("Start thread gets right instance", beanOne, ccll.get());
         ccll.unset();
@@ -419,7 +423,7 @@ public class LocaleBeanificationTestCase extends TestCase {
 
         // many thanks to Juozas Baliuka for suggesting this methodology
         TestClassLoader loader = new TestClassLoader();
-        final WeakReference<TestClassLoader> loaderReference = new  WeakReference<TestClassLoader>(loader);
+        final WeakReference<TestClassLoader> loaderReference = new  WeakReference<>(loader);
         LocaleBeanUtilsBean.getLocaleBeanUtilsInstance();
 
         class GetBeanUtilsBeanThread extends Thread {
@@ -445,14 +449,14 @@ public class LocaleBeanificationTestCase extends TestCase {
 
 
         GetBeanUtilsBeanThread thread = new GetBeanUtilsBeanThread();
-        final WeakReference<GetBeanUtilsBeanThread> threadWeakReference = new WeakReference<GetBeanUtilsBeanThread>(thread);
+        final WeakReference<GetBeanUtilsBeanThread> threadWeakReference = new WeakReference<>(thread);
         thread.setContextClassLoader(loader);
 
         thread.start();
         thread.join();
 
-        final WeakReference<LocaleBeanUtilsBean> beanUtilsReference = new WeakReference<LocaleBeanUtilsBean>(thread.beanUtils);
-        final WeakReference<LocaleConvertUtilsBean> convertUtilsReference = new WeakReference<LocaleConvertUtilsBean>(thread.convertUtils);
+        final WeakReference<LocaleBeanUtilsBean> beanUtilsReference = new WeakReference<>(thread.beanUtils);
+        final WeakReference<LocaleConvertUtilsBean> convertUtilsReference = new WeakReference<>(thread.convertUtils);
 
         assertNotNull("Weak reference released early (1)", loaderReference.get());
         assertNotNull("Weak reference released early (2)", beanUtilsReference.get());
@@ -498,13 +502,13 @@ public class LocaleBeanificationTestCase extends TestCase {
 
         // many thanks to Juozas Baliuka for suggesting this methodology
         TestClassLoader loader = new TestClassLoader();
-        final ReferenceQueue<Object> queue = new ReferenceQueue<Object>();
-        final WeakReference<ClassLoader> loaderReference = new WeakReference<ClassLoader>(loader, queue);
+        final ReferenceQueue<Object> queue = new ReferenceQueue<>();
+        final WeakReference<ClassLoader> loaderReference = new WeakReference<>(loader, queue);
         Integer test = new Integer(1);
 
-        final WeakReference<Integer> testReference = new WeakReference<Integer>(test, queue);
+        final WeakReference<Integer> testReference = new WeakReference<>(test, queue);
         //Map map = new ReferenceMap(ReferenceMap.WEAK, ReferenceMap.HARD, true);
-        final Map<TestClassLoader, Integer> map = new WeakHashMap<TestClassLoader, Integer>();
+        final Map<TestClassLoader, Integer> map = new WeakHashMap<>();
         map.put(loader, test);
 
         assertEquals("In map", test, map.get(loader));
@@ -542,7 +546,7 @@ public class LocaleBeanificationTestCase extends TestCase {
         // test methodology
         // many thanks to Juozas Baliuka for suggesting this method
         ClassLoader loader = new ClassLoader(this.getClass().getClassLoader()) {};
-        final WeakReference<ClassLoader> reference = new  WeakReference<ClassLoader>(loader);
+        final WeakReference<ClassLoader> reference = new  WeakReference<>(loader);
         Class<?> myClass = loader.loadClass("org.apache.commons.beanutils.BetaBean");
 
         assertNotNull("Weak reference released early", reference.get());
