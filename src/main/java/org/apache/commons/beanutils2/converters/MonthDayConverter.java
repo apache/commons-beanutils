@@ -63,7 +63,7 @@ public final class MonthDayConverter extends AbstractConverter<MonthDay> {
     @Override
     protected <T> T convertToType(final Class<T> type, final Object value) throws Throwable {
         if (MonthDay.class.equals(type)) {
-            return type.cast(MonthDay.parse((String.valueOf(value))));
+            return type.cast(MonthDay.parse(String.valueOf(value)));
         }
 
         throw conversionException(type, value);
