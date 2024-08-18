@@ -349,7 +349,7 @@ public class WrapDynaClass implements DynaClass {
      */
     private WrapDynaClass(final Class<?> beanClass, final PropertyUtilsBean propUtils) {
         // Compiler needs generic.
-        this.beanClassRef = new SoftReference<Class<?>>(beanClass);
+        this.beanClassRef = new SoftReference<>(beanClass);
         this.beanClassName = beanClass.getName();
         propertyUtilsBean = propUtils;
         introspect();
