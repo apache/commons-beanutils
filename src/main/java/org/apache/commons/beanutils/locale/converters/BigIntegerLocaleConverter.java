@@ -17,9 +17,10 @@
 
 package org.apache.commons.beanutils.locale.converters;
 
-import java.util.Locale;
 import java.math.BigInteger;
 import java.text.ParseException;
+import java.util.Locale;
+
 import org.apache.commons.beanutils.ConversionException;
 
 /**

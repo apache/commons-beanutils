@@ -17,11 +17,11 @@
 
 package org.apache.commons.beanutils;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.apache.commons.collections.Predicate;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * <p>Predicate implementation that applies the given <code>Predicate</code>

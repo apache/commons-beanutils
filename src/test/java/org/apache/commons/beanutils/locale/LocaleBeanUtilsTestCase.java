@@ -16,8 +16,8 @@
  */
 package org.apache.commons.beanutils.locale;
 
-import junit.framework.TestCase;
 import junit.framework.Test;
+import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.apache.commons.beanutils.TestBean;

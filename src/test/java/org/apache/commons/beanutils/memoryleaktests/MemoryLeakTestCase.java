@@ -16,6 +16,12 @@
  */
 package org.apache.commons.beanutils.memoryleaktests;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+
 import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.net.MalformedURLException;
@@ -36,7 +42,6 @@ import org.apache.commons.beanutils.locale.LocaleConvertUtils;
 import org.apache.commons.beanutils.locale.converters.IntegerLocaleConverter;
 import org.junit.Assume;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  * Tests BeanUtils memory leaks.

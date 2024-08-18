@@ -17,8 +17,13 @@
 
 package org.apache.commons.beanutils.converters;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import java.lang.ref.WeakReference;
-import static org.junit.Assert.*;
+
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
 import org.junit.Test;

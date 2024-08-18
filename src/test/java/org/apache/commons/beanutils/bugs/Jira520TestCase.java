@@ -16,11 +16,11 @@
  */
 package org.apache.commons.beanutils.bugs;
 
+import junit.framework.TestCase;
+
 import org.apache.commons.beanutils.AlphaBean;
 import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.SuppressPropertiesBeanIntrospector;
-
-import junit.framework.TestCase;
 
 /**
  * Fix CVE: https://nvd.nist.gov/vuln/detail/CVE-2014-0114

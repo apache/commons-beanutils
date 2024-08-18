@@ -20,6 +20,7 @@ package org.apache.commons.beanutils.converters;
 import java.math.BigDecimal;
 
 import junit.framework.TestSuite;
+
 import org.apache.commons.beanutils.Converter;
 
 
