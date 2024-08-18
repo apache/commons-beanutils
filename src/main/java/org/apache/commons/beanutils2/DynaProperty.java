@@ -124,9 +124,9 @@ public class DynaProperty implements Serializable {
         if (!result && obj instanceof DynaProperty) {
             final DynaProperty that = (DynaProperty) obj;
             result =
-               (Objects.equals(this.name, that.name)) &&
-               (Objects.equals(this.type, that.type)) &&
-               (Objects.equals(this.contentType, that.contentType));
+               Objects.equals(this.name, that.name) &&
+               Objects.equals(this.type, that.type) &&
+               Objects.equals(this.contentType, that.contentType);
         }
 
         return result;
