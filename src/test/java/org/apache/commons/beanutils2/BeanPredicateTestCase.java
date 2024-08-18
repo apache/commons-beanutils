@@ -38,7 +38,7 @@ public class BeanPredicateTestCase extends TestCase {
     }
 
     public void testInstanceOf() {
-        final Predicate<String> p = s -> s instanceof String;
+        final Predicate<String> p = String.class::isInstance;
         final BeanPredicate<String> predicate = new BeanPredicate<>("stringProperty", p);
         assertTrue(predicate.test(new TestBean("foo")));
         assertTrue(predicate.test(new TestBean("bar")));
