@@ -137,7 +137,7 @@ public class BeanUtilsBenchCase extends TestCase {
         // Create output instances
         outBean = new BenchBean();
         outDyna = dynaClass.newInstance();
-        for (String outKey : inMap.keySet()) {
+        for (final String outKey : inMap.keySet()) {
             outDyna.set(outKey, inMap.get(outKey));
         }
 
