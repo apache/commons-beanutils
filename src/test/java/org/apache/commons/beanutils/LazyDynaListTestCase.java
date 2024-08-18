@@ -50,13 +50,13 @@ public class LazyDynaListTestCase extends TestCase {
      * Return the tests included in this test suite.
      */
     public static Test suite() {
-        return (new TestSuite(LazyDynaListTestCase.class));
+        return new TestSuite(LazyDynaListTestCase.class);
     }
-    protected DynaProperty[] properties = new DynaProperty[] {
+    protected DynaProperty[] properties = {
                                                new DynaProperty(BASIC_PROP1, String.class),
                                                new DynaProperty(BASIC_PROP2, HashMap.class)};
-    protected DynaClass treeMapDynaClass = new LazyDynaMap(new TreeMap<String, Object>());
-    protected DynaClass hashMapDynaClass = new LazyDynaMap(new HashMap<String, Object>());
+    protected DynaClass treeMapDynaClass = new LazyDynaMap(new TreeMap<>());
+    protected DynaClass hashMapDynaClass = new LazyDynaMap(new HashMap<>());
 
 
     protected DynaClass pojoDynaClass = new WrapDynaBean(new TestBean()).getDynaClass();
@@ -120,7 +120,7 @@ public class LazyDynaListTestCase extends TestCase {
         }
 
         // Create Collection
-        final List<Object> collection = new ArrayList<Object>();
+        final List<Object> collection = new ArrayList<>();
         try {
             collection.add(testDynaClass.newInstance());
             collection.add(testDynaClass.newInstance());
@@ -170,7 +170,7 @@ public class LazyDynaListTestCase extends TestCase {
      */
     private String findStringProperty(final DynaClass dynaClass) {
         final DynaProperty[] properties = dynaClass.getDynaProperties();
-        for (DynaProperty propertie : properties) {
+        for (final DynaProperty propertie : properties) {
             if (propertie.getType() == String.class) {
                 return propertie.getName();
             }
@@ -328,10 +328,10 @@ public class LazyDynaListTestCase extends TestCase {
     public void testCollection(final LazyDynaList list, final Class<?> testClass, final DynaClass testDynaClass, final Object wrongBean) {
 
         final int size = 5;
-        final List<Object> testList = new ArrayList<Object>(size);
+        final List<Object> testList = new ArrayList<>(size);
         final TreeMap<?, ?>[] testArray = new TreeMap[size];
         for (int i = 0; i < size; i++) {
-            final TreeMap<String, Object> map = new TreeMap<String, Object>();
+            final TreeMap<String, Object> map = new TreeMap<>();
             map.put("prop"+i, "val"+i);
             testArray[i] = map;
             testList.add(testArray[i]);
@@ -431,7 +431,7 @@ public class LazyDynaListTestCase extends TestCase {
      */
     public void testNullType() {
         final LazyDynaList lazyList = new LazyDynaList();
-        lazyList.add(new HashMap<String, Object>());
+        lazyList.add(new HashMap<>());
     }
 
     /**
@@ -580,7 +580,7 @@ public class LazyDynaListTestCase extends TestCase {
      */
     public void testToArrayMapType() {
         final LazyDynaList list = new LazyDynaList(HashMap.class);
-        final HashMap<String, Object> elem = new HashMap<String, Object>();
+        final HashMap<String, Object> elem = new HashMap<>();
         list.add(elem);
         final Map<?, ?>[] array = new Map[1];
         assertSame("Wrong array", array, list.toArray(array));
