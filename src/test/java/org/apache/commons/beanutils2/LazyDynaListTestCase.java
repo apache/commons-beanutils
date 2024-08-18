@@ -54,8 +54,8 @@ public class LazyDynaListTestCase extends TestCase {
         return new TestSuite(LazyDynaListTestCase.class);
     }
     protected DynaProperty[] properties = { new DynaProperty(BASIC_PROP1, String.class), new DynaProperty(BASIC_PROP2, HashMap.class) };
-    protected DynaClass treeMapDynaClass = new LazyDynaMap(new TreeMap<String, Object>());
-    protected DynaClass hashMapDynaClass = new LazyDynaMap(new HashMap<String, Object>());
+    protected DynaClass treeMapDynaClass = new LazyDynaMap(new TreeMap<>());
+    protected DynaClass hashMapDynaClass = new LazyDynaMap(new HashMap<>());
 
     protected DynaClass pojoDynaClass = new WrapDynaBean(new TestBean()).getDynaClass();
 
@@ -421,7 +421,7 @@ public class LazyDynaListTestCase extends TestCase {
      */
     public void testNullType() {
         final LazyDynaList lazyList = new LazyDynaList();
-        lazyList.add(new HashMap<String, Object>());
+        lazyList.add(new HashMap<>());
     }
 
     /**
