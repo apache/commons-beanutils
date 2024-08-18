@@ -43,7 +43,6 @@ public class DimensionConverter extends AbstractConverter<Dimension> {
      * occurs.
      */
     public DimensionConverter() {
-        super();
     }
 
     /**
@@ -86,18 +85,18 @@ public class DimensionConverter extends AbstractConverter<Dimension> {
                 throw new IllegalArgumentException("Dimensions can not be empty.");
             }
 
-            Matcher matcher = DIMENSION_PATTERN.matcher(stringValue);
+            final Matcher matcher = DIMENSION_PATTERN.matcher(stringValue);
 
             if (!matcher.matches()) {
                 throw new IllegalArgumentException(
                     "Dimension doesn't match format: {width/height} or {width}x{height}");
             }
 
-            String x = matcher.group(1);
-            String y = matcher.group(2);
+            final String x = matcher.group(1);
+            final String y = matcher.group(2);
 
-            int xValue = Integer.parseInt(x);
-            int yValue = (y == null || x.equals(y)) ? xValue : Integer.parseInt(y);
+            final int xValue = Integer.parseInt(x);
+            final int yValue = y == null || x.equals(y) ? xValue : Integer.parseInt(y);
 
             return type.cast(new Dimension(xValue, yValue));
         }
