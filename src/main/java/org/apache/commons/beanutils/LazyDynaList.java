@@ -459,11 +459,12 @@ public class LazyDynaList extends ArrayList<Object> {
             if (WrapDynaBean.class.isAssignableFrom(elementDynaBeanType)) {
                 this.elementType = ((WrapDynaBean)dynaBean).getInstance().getClass();
                 this.wrapDynaClass = (WrapDynaClass)elementDynaClass;
-            } else if (LazyDynaMap.class.isAssignableFrom(elementDynaBeanType)) {
-                this.elementType = ((LazyDynaMap)dynaBean).getMap().getClass();
-                this.elementDynaClass = elementDynaClass;
             } else {
-                this.elementType = dynaBean.getClass();
+                if (LazyDynaMap.class.isAssignableFrom(elementDynaBeanType)) {
+                    this.elementType = ((LazyDynaMap)dynaBean).getMap().getClass();
+                } else {
+                    this.elementType = dynaBean.getClass();
+                }
                 this.elementDynaClass = elementDynaClass;
             }
         } catch (final Exception e) {
