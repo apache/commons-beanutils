@@ -45,16 +45,16 @@ public class Jira541TestCase {
 
     @Test
     public void testFluentBeanIntrospectorOnOverriddenSetterConcurrent() throws Exception {
-        ExecutorService executionService = Executors.newFixedThreadPool(256);
+        final ExecutorService executionService = Executors.newFixedThreadPool(256);
         try {
-            List<Future<?>> futures = new ArrayList<>();
+            final List<Future<?>> futures = new ArrayList<>();
             for (int i = 0; i < 10000; i++) {
                 futures.add(executionService.submit(() -> {
                     testImpl();
                     return null;
                 }));
             }
-            for (Future<?> future : futures) {
+            for (final Future<?> future : futures) {
                 future.get();
             }
         } finally {
@@ -63,15 +63,15 @@ public class Jira541TestCase {
     }
 
     private static void testImpl() throws ReflectiveOperationException {
-        PropertyUtilsBean propertyUtilsBean = new PropertyUtilsBean();
+        final PropertyUtilsBean propertyUtilsBean = new PropertyUtilsBean();
         propertyUtilsBean.addBeanIntrospector(new FluentPropertyBeanIntrospector());
 
         // note: we should setProperty first on SubTypeA (with overridden setter), then on subTypeB
         // but not vice versa
-        SubTypeA subTypeA = new SubTypeA();
+        final SubTypeA subTypeA = new SubTypeA();
         propertyUtilsBean.setProperty(subTypeA, FIELD_NAME, FIELD_VALUE);
 
-        SubTypeB subTypeB = new SubTypeB();
+        final SubTypeB subTypeB = new SubTypeB();
         propertyUtilsBean.setProperty(subTypeB, FIELD_NAME, FIELD_VALUE);
 
         assertEquals(FIELD_VALUE, subTypeA.getField());
@@ -82,7 +82,7 @@ public class Jira541TestCase {
 
         private String field;
 
-        public BaseType setField(String objectName) {
+        public BaseType setField(final String objectName) {
             this.field = objectName;
             return this;
         }
@@ -95,7 +95,7 @@ public class Jira541TestCase {
     public static class SubTypeA extends BaseType {
 
         @Override
-        public SubTypeA setField(String field) {
+        public SubTypeA setField(final String field) {
             super.setField(field);
             return this;
         }
