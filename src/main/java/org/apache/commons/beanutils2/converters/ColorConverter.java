@@ -47,7 +47,6 @@ public class ColorConverter extends AbstractConverter<Color> {
      * Construct a <b>{@link Color}</b> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
      */
     public ColorConverter() {
-        super();
     }
 
     /**
@@ -178,7 +177,7 @@ public class ColorConverter extends AbstractConverter<Color> {
     private Color parseToStringColor(final String value) {
         Objects.requireNonNull(value);
 
-        Matcher matcher = JAVA_COLOR_PATTERN.matcher(value);
+        final Matcher matcher = JAVA_COLOR_PATTERN.matcher(value);
 
         if (!matcher.matches()) {
             throw new IllegalArgumentException("Invalid Color String provided. Could not parse.");
