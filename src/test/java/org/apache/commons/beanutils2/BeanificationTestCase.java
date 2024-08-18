@@ -198,7 +198,7 @@ public class BeanificationTestCase extends TestCase {
             public void run() {
                 try {
                     signal.setSignal(3);
-                    Converter c = (type, value) -> ConvertUtils.primitiveToWrapper(Integer.TYPE).cast(new Integer(9));
+                    final Converter c = (type, value) -> ConvertUtils.primitiveToWrapper(Integer.TYPE).cast(new Integer(9));
                     ConvertUtils.register(c, Integer.TYPE);
                     BeanUtils.setProperty(bean, "int", new Integer(1));
                 } catch (final Exception e) {
@@ -217,7 +217,7 @@ public class BeanificationTestCase extends TestCase {
         BeanUtils.setProperty(bean, "int", new Integer(1));
         assertEquals("Wrong property value (1)", 1, bean.getInt());
 
-        Converter c = (type, value) -> ConvertUtils.primitiveToWrapper(type).cast(new Integer(5));
+        final Converter c = (type, value) -> ConvertUtils.primitiveToWrapper(type).cast(new Integer(5));
         ConvertUtils.register(c, Integer.TYPE);
         BeanUtils.setProperty(bean, "int", new Integer(1));
         assertEquals("Wrong property value(2)", 5, bean.getInt());
