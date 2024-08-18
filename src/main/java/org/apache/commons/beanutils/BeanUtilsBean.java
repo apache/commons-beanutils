@@ -1113,7 +1113,6 @@ public class BeanUtilsBean {
             } else {
                 newValue = convert(value, type.getComponentType());
             }
-        // Value into scalar
         } else if (value instanceof String) {
             newValue = getConvertUtils().convert((String) value, type);
         } else if (value instanceof String[]) {
