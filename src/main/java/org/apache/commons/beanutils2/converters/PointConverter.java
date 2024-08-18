@@ -35,7 +35,6 @@ public class PointConverter extends AbstractConverter<Point> {
      * Construct a <b>{@link Point}</b> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
      */
     public PointConverter() {
-        super();
     }
 
     /**
