@@ -184,7 +184,7 @@ public class BeanMapTestCase extends AbstractMapTest<String, Object> {
     // all beans (and all objects for that matter.
     @Override
     public String[] getSampleKeys() {
-        final String[] keys = new String[] {
+        final String[] keys = {
             "someIntValue",
             "someLongValue",
             "someDoubleValue",
@@ -211,7 +211,7 @@ public class BeanMapTestCase extends AbstractMapTest<String, Object> {
 
     @Override
     public Object[] getNewSampleValues() {
-        final Object[] values = new Object[] {
+        final Object[] values = {
             Integer.valueOf(223),
             Long.valueOf(23341928234L),
             Double.valueOf(23423.34),
