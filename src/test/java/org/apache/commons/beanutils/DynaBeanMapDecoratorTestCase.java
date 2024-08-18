@@ -220,7 +220,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
 
         final List<String> namesList = new ArrayList<>();
         int i = 0;
-        for (Entry<Object, Object> entry : set) {
+        for (final Entry<Object, Object> entry : set) {
             final String name  = (String)entry.getKey();
             namesList.add(name);
             final Object expectValue = decoratedMap.get(name);
