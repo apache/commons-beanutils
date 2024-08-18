@@ -148,7 +148,7 @@ public class DefaultResolver implements Resolver {
         }
         for (int i = 0; i < expression.length(); i++) {
             final char c = expression.charAt(i);
-            if ((c == NESTED) || (c == MAPPED_START || c == INDEXED_START)) {
+            if (c == NESTED || c == MAPPED_START || c == INDEXED_START) {
                 return expression.substring(0, i);
             }
         }
