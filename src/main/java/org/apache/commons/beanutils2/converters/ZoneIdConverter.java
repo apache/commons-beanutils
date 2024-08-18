@@ -63,7 +63,7 @@ public final class ZoneIdConverter extends AbstractConverter<ZoneId> {
     @Override
     protected <T> T convertToType(final Class<T> type, final Object value) throws Throwable {
         if (ZoneId.class.equals(type)) {
-            return type.cast(ZoneId.of((String.valueOf(value))));
+            return type.cast(ZoneId.of(String.valueOf(value)));
         }
 
         throw conversionException(type, value);
