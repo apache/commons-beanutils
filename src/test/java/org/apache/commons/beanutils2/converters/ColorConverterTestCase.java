@@ -39,44 +39,14 @@ public class ColorConverterTestCase {
         converter = new ColorConverter();
     }
 
-    @Test
-    public void testConvertingPattern() {
-        final Color expected = Color.BLACK;
-        final Color actual = converter.convert(Color.class, "#000000");
-
-        Assert.assertEquals(expected, actual);
+    @Test(expected = ConversionException.class)
+    public void testColorBlank() {
+        converter.convert(Color.class, "#");
     }
 
-    @Test
-    public void testConvertingPatternWithAlpha() {
-        final Color expected = Color.LIGHT_GRAY;
-        final Color actual = converter.convert(Color.class, "#C0C0C0FF");
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testConvertingPattern3Digit() {
-        final Color expected = Color.WHITE;
-        final Color actual = converter.convert(Color.class, "#FFF");
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testConvertingPattern4Digit() {
-        final Color expected = Color.YELLOW;
-        final Color actual = converter.convert(Color.class, "#FF0F");
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testConvertingLiteralHex() {
-        final Color expected = Color.BLUE;
-        final Color actual = converter.convert(Color.class, "0x0000FF");
-
-        Assert.assertEquals(expected, actual);
+    @Test(expected = ConversionException.class)
+    public void testColorInvalidLength() {
+        converter.convert(Color.class, "#F");
     }
 
     @Test
@@ -103,26 +73,6 @@ public class ColorConverterTestCase {
         Assert.assertEquals(expected, actual);
     }
 
-    /**
-     * Color can be extended without the {@link Override overriding} the {@link Color#toString()} method.
-     * This tests that it can continue to parse the {@link String} from an inherited class.
-     */
-    @Test
-    public void testConvertingJavaExtendsColorString() {
-        final Color expected = Color.MAGENTA;
-        final Color actual = converter.convert(Color.class, "org.apache.ExtendedColor[r=255,g=0,b=255]");
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testConvertingJavaColorStringWithoutPackage() {
-        final Color expected = Color.GREEN;
-        final Color actual = converter.convert(Color.class, "[r=0,g=255,b=0]");
-
-        Assert.assertEquals(expected, actual);
-    }
-
     @Test
     public void testConvertingJavaColorStringWithoutBrackets() {
         final Color expected = Color.DARK_GRAY;
@@ -139,6 +89,66 @@ public class ColorConverterTestCase {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void testConvertingJavaColorStringWithoutPackage() {
+        final Color expected = Color.GREEN;
+        final Color actual = converter.convert(Color.class, "[r=0,g=255,b=0]");
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    /**
+     * Color can be extended without the {@link Override overriding} the {@link Color#toString()} method.
+     * This tests that it can continue to parse the {@link String} from an inherited class.
+     */
+    @Test
+    public void testConvertingJavaExtendsColorString() {
+        final Color expected = Color.MAGENTA;
+        final Color actual = converter.convert(Color.class, "org.apache.ExtendedColor[r=255,g=0,b=255]");
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testConvertingLiteralHex() {
+        final Color expected = Color.BLUE;
+        final Color actual = converter.convert(Color.class, "0x0000FF");
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testConvertingPattern() {
+        final Color expected = Color.BLACK;
+        final Color actual = converter.convert(Color.class, "#000000");
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testConvertingPattern3Digit() {
+        final Color expected = Color.WHITE;
+        final Color actual = converter.convert(Color.class, "#FFF");
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testConvertingPattern4Digit() {
+        final Color expected = Color.YELLOW;
+        final Color actual = converter.convert(Color.class, "#FF0F");
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testConvertingPatternWithAlpha() {
+        final Color expected = Color.LIGHT_GRAY;
+        final Color actual = converter.convert(Color.class, "#C0C0C0FF");
+
+        Assert.assertEquals(expected, actual);
+    }
+
     @Test(expected = ConversionException.class)
     public void testInvalidNumber3() {
         converter.convert(Color.class, "#FFZ");
@@ -147,15 +157,5 @@ public class ColorConverterTestCase {
     @Test(expected = ConversionException.class)
     public void testInvalidNumber4() {
         converter.convert(Color.class, "#FFFY");
-    }
-
-    @Test(expected = ConversionException.class)
-    public void testColorBlank() {
-        converter.convert(Color.class, "#");
-    }
-
-    @Test(expected = ConversionException.class)
-    public void testColorInvalidLength() {
-        converter.convert(Color.class, "#F");
     }
 }

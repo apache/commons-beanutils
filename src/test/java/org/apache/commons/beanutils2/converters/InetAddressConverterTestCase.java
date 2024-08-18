@@ -65,12 +65,12 @@ public class InetAddressConverterTestCase {
     }
 
     @Test(expected = ConversionException.class)
-    public void testText() {
-        converter.convert(InetAddress.class, "Hello, world!");
+    public void testInvalidIp() {
+        converter.convert(InetAddress.class, "512.512.512.512");
     }
 
     @Test(expected = ConversionException.class)
-    public void testInvalidIp() {
-        converter.convert(InetAddress.class, "512.512.512.512");
+    public void testText() {
+        converter.convert(InetAddress.class, "Hello, world!");
     }
 }

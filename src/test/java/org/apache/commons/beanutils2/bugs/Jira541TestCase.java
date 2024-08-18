@@ -35,8 +35,51 @@ import org.junit.jupiter.api.Test;
  */
 public class Jira541TestCase {
 
+    public static class BaseType {
+
+        private String field;
+
+        public String getField() {
+            return field;
+        }
+
+        public BaseType setField(final String objectName) {
+            this.field = objectName;
+            return this;
+        }
+    }
+    public static class SubTypeA extends BaseType {
+
+        @Override
+        public SubTypeA setField(final String field) {
+            super.setField(field);
+            return this;
+        }
+    }
+
+    public static class SubTypeB extends BaseType {
+
+    }
+
     private static final String FIELD_NAME = "field";
+
     private static final String FIELD_VALUE = "name";
+
+    private static void testImpl() throws ReflectiveOperationException {
+        final PropertyUtilsBean propertyUtilsBean = new PropertyUtilsBean();
+        propertyUtilsBean.addBeanIntrospector(new FluentPropertyBeanIntrospector());
+
+        // note: we should setProperty first on SubTypeA (with overridden setter), then on subTypeB
+        // but not vice versa
+        final SubTypeA subTypeA = new SubTypeA();
+        propertyUtilsBean.setProperty(subTypeA, FIELD_NAME, FIELD_VALUE);
+
+        final SubTypeB subTypeB = new SubTypeB();
+        propertyUtilsBean.setProperty(subTypeB, FIELD_NAME, FIELD_VALUE);
+
+        assertEquals(FIELD_VALUE, subTypeA.getField());
+        assertEquals(FIELD_VALUE, subTypeB.getField());
+    }
 
     @Test
     public void testFluentBeanIntrospectorOnOverriddenSetter() throws Exception {
@@ -60,48 +103,5 @@ public class Jira541TestCase {
         } finally {
             executionService.shutdown();
         }
-    }
-
-    private static void testImpl() throws ReflectiveOperationException {
-        final PropertyUtilsBean propertyUtilsBean = new PropertyUtilsBean();
-        propertyUtilsBean.addBeanIntrospector(new FluentPropertyBeanIntrospector());
-
-        // note: we should setProperty first on SubTypeA (with overridden setter), then on subTypeB
-        // but not vice versa
-        final SubTypeA subTypeA = new SubTypeA();
-        propertyUtilsBean.setProperty(subTypeA, FIELD_NAME, FIELD_VALUE);
-
-        final SubTypeB subTypeB = new SubTypeB();
-        propertyUtilsBean.setProperty(subTypeB, FIELD_NAME, FIELD_VALUE);
-
-        assertEquals(FIELD_VALUE, subTypeA.getField());
-        assertEquals(FIELD_VALUE, subTypeB.getField());
-    }
-
-    public static class BaseType {
-
-        private String field;
-
-        public BaseType setField(final String objectName) {
-            this.field = objectName;
-            return this;
-        }
-
-        public String getField() {
-            return field;
-        }
-    }
-
-    public static class SubTypeA extends BaseType {
-
-        @Override
-        public SubTypeA setField(final String field) {
-            super.setField(field);
-            return this;
-        }
-    }
-
-    public static class SubTypeB extends BaseType {
-
     }
 }

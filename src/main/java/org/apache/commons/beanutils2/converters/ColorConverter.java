@@ -61,17 +61,6 @@ public class ColorConverter extends AbstractConverter<Color> {
     }
 
     /**
-     * Gets the default type this {@code Converter} handles.
-     *
-     * @return The default type this {@code Converter} handles.
-     * @since 2.0.0
-     */
-    @Override
-    protected Class<Color> getDefaultType() {
-        return Color.class;
-    }
-
-    /**
      * Converts a {@link Color} into a {@link String}.
      *
      * <p>
@@ -159,39 +148,14 @@ public class ColorConverter extends AbstractConverter<Color> {
     }
 
     /**
-     * Parses the Color based on the result of the {@link Color#toString()} method.
+     * Gets the default type this {@code Converter} handles.
      *
-     * Accepts the following values:
-     * <ul>
-     *     <li>{@code java.awt.Color[r=255,g=255,b=255]}</li>
-     *     <li>{@code [r=255,g=255,b=255]}</li>
-     *     <li>{@code r=255,g=255,b=255}</li>
-     *     <li>{@code 255,255,255}</li>
-     * </ul>
-     *
-     * @param value A color as represented by {@link Color#toString()}.
-     * @return The Java friendly {@link Color} this color represents.
-     * @throws IllegalArgumentException If the input can't be matches by the {@link #JAVA_COLOR_PATTERN}
-     * or a {@link Color} component specified is over 255.
+     * @return The default type this {@code Converter} handles.
+     * @since 2.0.0
      */
-    private Color parseToStringColor(final String value) {
-        Objects.requireNonNull(value);
-
-        final Matcher matcher = JAVA_COLOR_PATTERN.matcher(value);
-
-        if (!matcher.matches()) {
-            throw new IllegalArgumentException("Invalid Color String provided. Could not parse.");
-        }
-
-        final int red = Integer.parseInt(matcher.group(1));
-        final int green = Integer.parseInt(matcher.group(2));
-        final int blue = Integer.parseInt(matcher.group(3));
-
-        if (red > 255 || green > 255 || blue > 255) {
-            throw new IllegalArgumentException("Color component integers must be between 0 and 255.");
-        }
-
-        return new Color(red, green, blue);
+    @Override
+    protected Class<Color> getDefaultType() {
+        return Color.class;
     }
 
     /**
@@ -235,5 +199,41 @@ public class ColorConverter extends AbstractConverter<Color> {
                 throw new IllegalArgumentException("Value is an malformed hexadecimal color, if literal value decoding " +
                     "is required, prefix with 0x instead of #, otherwise expecting 3, 4, 6, or 8 characters only.");
         }
+    }
+
+    /**
+     * Parses the Color based on the result of the {@link Color#toString()} method.
+     *
+     * Accepts the following values:
+     * <ul>
+     *     <li>{@code java.awt.Color[r=255,g=255,b=255]}</li>
+     *     <li>{@code [r=255,g=255,b=255]}</li>
+     *     <li>{@code r=255,g=255,b=255}</li>
+     *     <li>{@code 255,255,255}</li>
+     * </ul>
+     *
+     * @param value A color as represented by {@link Color#toString()}.
+     * @return The Java friendly {@link Color} this color represents.
+     * @throws IllegalArgumentException If the input can't be matches by the {@link #JAVA_COLOR_PATTERN}
+     * or a {@link Color} component specified is over 255.
+     */
+    private Color parseToStringColor(final String value) {
+        Objects.requireNonNull(value);
+
+        final Matcher matcher = JAVA_COLOR_PATTERN.matcher(value);
+
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException("Invalid Color String provided. Could not parse.");
+        }
+
+        final int red = Integer.parseInt(matcher.group(1));
+        final int green = Integer.parseInt(matcher.group(2));
+        final int blue = Integer.parseInt(matcher.group(3));
+
+        if (red > 255 || green > 255 || blue > 255) {
+            throw new IllegalArgumentException("Color component integers must be between 0 and 255.");
+        }
+
+        return new Color(red, green, blue);
     }
 }

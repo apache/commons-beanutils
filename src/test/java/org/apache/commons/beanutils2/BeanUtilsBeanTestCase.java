@@ -754,18 +754,6 @@ public class BeanUtilsBeanTestCase extends TestCase {
         }
     }
 
-    public void testGetMappedProperty2Args() throws Exception {
-        assertThrows(NullPointerException.class, () -> BeanUtils.getMappedProperty(null, null));
-        assertThrows(NullPointerException.class, () -> BeanUtils.getMappedProperty(null, ""));
-        assertThrows(NullPointerException.class, () -> BeanUtils.getMappedProperty("", null));
-    }
-
-    public void testGetMappedProperty3Args() throws Exception {
-        assertThrows(NullPointerException.class, () -> BeanUtils.getMappedProperty(null, null));
-        assertThrows(NullPointerException.class, () -> BeanUtils.getMappedProperty(null, "", null));
-        assertThrows(NullPointerException.class, () -> BeanUtils.getMappedProperty("", null, null));
-    }
-
     /**
      * tests getting an indexed property
      */
@@ -823,6 +811,18 @@ public class BeanUtilsBeanTestCase extends TestCase {
             fail("Threw " + t);
         }
         assertEquals("java.util.Date[0] --> String", testUtilDate.toString(), value);
+    }
+
+    public void testGetMappedProperty2Args() throws Exception {
+        assertThrows(NullPointerException.class, () -> BeanUtils.getMappedProperty(null, null));
+        assertThrows(NullPointerException.class, () -> BeanUtils.getMappedProperty(null, ""));
+        assertThrows(NullPointerException.class, () -> BeanUtils.getMappedProperty("", null));
+    }
+
+    public void testGetMappedProperty3Args() throws Exception {
+        assertThrows(NullPointerException.class, () -> BeanUtils.getMappedProperty(null, null));
+        assertThrows(NullPointerException.class, () -> BeanUtils.getMappedProperty(null, "", null));
+        assertThrows(NullPointerException.class, () -> BeanUtils.getMappedProperty("", null, null));
     }
 
     /**
@@ -903,6 +903,12 @@ public class BeanUtilsBeanTestCase extends TestCase {
         assertEquals("Mapped property set correctly", "some.dotty.value", bean.getMapproperty("this.that.the-other"));
     }
 
+    public void testPopulate() throws Exception {
+        BeanUtilsBean.getInstance().populate(null, null);
+        BeanUtilsBean.getInstance().populate("", null);
+        BeanUtilsBean.getInstance().populate(null, new HashMap<>());
+    }
+
     /**
      * Test populate() method on individual array elements.
      */
@@ -941,12 +947,6 @@ public class BeanUtilsBeanTestCase extends TestCase {
             fail("InvocationTargetException");
         }
 
-    }
-
-    public void testPopulate() throws Exception {
-        BeanUtilsBean.getInstance().populate(null, null);
-        BeanUtilsBean.getInstance().populate("", null);
-        BeanUtilsBean.getInstance().populate(null, new HashMap<>());
     }
 
     /**

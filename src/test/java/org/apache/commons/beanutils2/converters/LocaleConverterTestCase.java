@@ -39,17 +39,17 @@ public class LocaleConverterTestCase {
     }
 
     @Test
-    public void testConvertStandardLocale() {
-        final Locale expected = Locale.ENGLISH;
-        final Locale actual = converter.convert(Locale.class, "en");
+    public void testConvertCustomLocale() {
+        final Locale expected = Locale.forLanguageTag("en-owo");
+        final Locale actual = converter.convert(Locale.class, "en-owo");
 
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void testConvertCustomLocale() {
-        final Locale expected = Locale.forLanguageTag("en-owo");
-        final Locale actual = converter.convert(Locale.class, "en-owo");
+    public void testConvertStandardLocale() {
+        final Locale expected = Locale.ENGLISH;
+        final Locale actual = converter.convert(Locale.class, "en");
 
         Assert.assertEquals(expected, actual);
     }

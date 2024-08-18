@@ -39,17 +39,17 @@ public class PointConverterTestCase {
     }
 
     @Test
-    public void testConvertingPoint() {
+    public void testConvertingNoSpace() {
         final Point expected = new Point(100, 200);
-        final Point actual = converter.convert(Point.class, "(100, 200)");
+        final Point actual = converter.convert(Point.class, "(100,200)");
 
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void testConvertingNoSpace() {
+    public void testConvertingPoint() {
         final Point expected = new Point(100, 200);
-        final Point actual = converter.convert(Point.class, "(100,200)");
+        final Point actual = converter.convert(Point.class, "(100, 200)");
 
         Assert.assertEquals(expected, actual);
     }

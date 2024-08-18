@@ -45,17 +45,6 @@ public class PatternConverter extends AbstractConverter<Pattern> {
     }
 
     /**
-     * Gets the default type this {@code Converter} handles.
-     *
-     * @return The default type this {@code Converter} handles.
-     * @since 2.0.0
-     */
-    @Override
-    protected Class<Pattern> getDefaultType() {
-        return Pattern.class;
-    }
-
-    /**
      * Converts the specified input object into an output object of the specified type.
      *
      * @param type Data type to which this value should be converted.
@@ -72,5 +61,16 @@ public class PatternConverter extends AbstractConverter<Pattern> {
         }
 
         throw conversionException(type, value);
+    }
+
+    /**
+     * Gets the default type this {@code Converter} handles.
+     *
+     * @return The default type this {@code Converter} handles.
+     * @since 2.0.0
+     */
+    @Override
+    protected Class<Pattern> getDefaultType() {
+        return Pattern.class;
     }
 }

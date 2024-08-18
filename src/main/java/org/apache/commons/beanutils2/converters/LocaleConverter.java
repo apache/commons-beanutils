@@ -45,17 +45,6 @@ public class LocaleConverter extends AbstractConverter<Locale> {
     }
 
     /**
-     * Gets the default type this {@code Converter} handles.
-     *
-     * @return The default type this {@code Converter} handles.
-     * @since 2.0.0
-     */
-    @Override
-    protected Class<Locale> getDefaultType() {
-        return Locale.class;
-    }
-
-    /**
      * Converts the specified input object into an output object of the specified type.
      *
      * @param type Data type to which this value should be converted.
@@ -71,5 +60,16 @@ public class LocaleConverter extends AbstractConverter<Locale> {
         }
 
         throw conversionException(type, value);
+    }
+
+    /**
+     * Gets the default type this {@code Converter} handles.
+     *
+     * @return The default type this {@code Converter} handles.
+     * @since 2.0.0
+     */
+    @Override
+    protected Class<Locale> getDefaultType() {
+        return Locale.class;
     }
 }

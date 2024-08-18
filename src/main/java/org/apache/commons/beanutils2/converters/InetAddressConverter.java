@@ -48,17 +48,6 @@ public class InetAddressConverter extends AbstractConverter<InetAddress> {
     }
 
     /**
-     * Gets the default type this {@code Converter} handles.
-     *
-     * @return The default type this {@code Converter} handles.
-     * @since 2.0.0
-     */
-    @Override
-    protected Class<InetAddress> getDefaultType() {
-        return InetAddress.class;
-    }
-
-    /**
      * Converts the specified input object into an output object of the specified type.
      *
      * @param type Data type to which this value should be converted.
@@ -80,5 +69,16 @@ public class InetAddressConverter extends AbstractConverter<InetAddress> {
         }
 
         throw conversionException(type, value);
+    }
+
+    /**
+     * Gets the default type this {@code Converter} handles.
+     *
+     * @return The default type this {@code Converter} handles.
+     * @since 2.0.0
+     */
+    @Override
+    protected Class<InetAddress> getDefaultType() {
+        return InetAddress.class;
     }
 }

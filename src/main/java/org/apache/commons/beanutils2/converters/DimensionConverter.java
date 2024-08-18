@@ -57,17 +57,6 @@ public class DimensionConverter extends AbstractConverter<Dimension> {
     }
 
     /**
-     * Gets the default type this {@code Converter} handles.
-     *
-     * @return The default type this {@code Converter} handles.
-     * @since 2.0.0
-     */
-    @Override
-    protected Class<Dimension> getDefaultType() {
-        return Dimension.class;
-    }
-
-    /**
      * Converts the input object into an output object of the specified type.
      *
      * @param type Data type to which this value should be converted.
@@ -102,5 +91,16 @@ public class DimensionConverter extends AbstractConverter<Dimension> {
         }
 
         throw conversionException(type, value);
+    }
+
+    /**
+     * Gets the default type this {@code Converter} handles.
+     *
+     * @return The default type this {@code Converter} handles.
+     * @since 2.0.0
+     */
+    @Override
+    protected Class<Dimension> getDefaultType() {
+        return Dimension.class;
     }
 }
