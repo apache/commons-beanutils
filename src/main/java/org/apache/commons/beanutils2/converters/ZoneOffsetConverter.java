@@ -63,7 +63,7 @@ public final class ZoneOffsetConverter extends AbstractConverter<ZoneOffset> {
     @Override
     protected <T> T convertToType(final Class<T> type, final Object value) throws Throwable {
         if (ZoneOffset.class.equals(type)) {
-            return type.cast(ZoneOffset.of((String.valueOf(value))));
+            return type.cast(ZoneOffset.of(String.valueOf(value)));
         }
 
         throw conversionException(type, value);
