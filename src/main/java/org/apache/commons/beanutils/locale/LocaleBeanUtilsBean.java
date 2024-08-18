@@ -322,7 +322,6 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
             else {
                 newValue = value;
             }
-        // Value into scalar
         } else if (value instanceof String) {
             newValue = ConvertUtils.convert((String) value, type);
         }
