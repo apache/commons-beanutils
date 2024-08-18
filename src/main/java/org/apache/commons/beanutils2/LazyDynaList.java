@@ -316,7 +316,7 @@ public class LazyDynaList extends ArrayList<Object> {
             return false;
         }
 
-        ensureCapacity((Math.max(index, size())) + collection.size());
+        ensureCapacity(Math.max(index, size()) + collection.size());
 
         // Call "transform" with first element, before
         // List is "grown" to ensure the correct DynaClass
@@ -433,11 +433,12 @@ public class LazyDynaList extends ArrayList<Object> {
             if (WrapDynaBean.class.isAssignableFrom(elementDynaBeanType)) {
                 this.elementType = ((WrapDynaBean)dynaBean).getInstance().getClass();
                 this.wrapDynaClass = (WrapDynaClass)elementDynaClass;
-            } else if (LazyDynaMap.class.isAssignableFrom(elementDynaBeanType)) {
-                this.elementType = ((LazyDynaMap)dynaBean).getMap().getClass();
-                this.elementDynaClass = elementDynaClass;
             } else {
-                this.elementType = dynaBean.getClass();
+                if (LazyDynaMap.class.isAssignableFrom(elementDynaBeanType)) {
+                    this.elementType = ((LazyDynaMap)dynaBean).getMap().getClass();
+                } else {
+                    this.elementType = dynaBean.getClass();
+                }
                 this.elementDynaClass = elementDynaClass;
             }
         } catch (final Exception e) {
