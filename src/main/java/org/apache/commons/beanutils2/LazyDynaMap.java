@@ -360,7 +360,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
 
         // Crate new LazyDynaMap and initialize properties
         final LazyDynaMap lazyMap = new LazyDynaMap(newMap);
-        final DynaProperty[] properties = this.getDynaProperties();
+        final DynaProperty[] properties = getDynaProperties();
         if (properties != null) {
             for (final DynaProperty property : properties) {
                 lazyMap.add(property);
