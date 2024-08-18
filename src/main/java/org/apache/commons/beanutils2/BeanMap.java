@@ -644,7 +644,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
     public void putAllWriteable(final BeanMap map) {
         map.readMethods.keySet().forEach(key -> {
             if (getWriteMethod(key) != null) {
-                this.put(key, map.get(key));
+                put(key, map.get(key));
             }
         });
     }
