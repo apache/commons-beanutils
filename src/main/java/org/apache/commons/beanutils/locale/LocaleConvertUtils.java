@@ -145,7 +145,7 @@ public class LocaleConvertUtils {
         * @see LocaleConvertUtilsBean#convert(String[], Class)
         */
        public static Object convert(final String[] values, final Class<?> clazz) {
-    
+
            return LocaleConvertUtilsBean.getInstance().convert(values, clazz);
        }
 
