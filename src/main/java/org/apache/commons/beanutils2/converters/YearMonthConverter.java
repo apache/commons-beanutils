@@ -63,7 +63,7 @@ public final class YearMonthConverter extends AbstractConverter<YearMonth> {
     @Override
     protected <T> T convertToType(final Class<T> type, final Object value) throws Throwable {
         if (YearMonth.class.equals(type)) {
-            return type.cast(YearMonth.parse((String.valueOf(value))));
+            return type.cast(YearMonth.parse(String.valueOf(value)));
         }
 
         throw conversionException(type, value);
