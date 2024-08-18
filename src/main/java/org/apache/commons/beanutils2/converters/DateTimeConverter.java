@@ -142,16 +142,16 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
         } else if (value instanceof Long) {
             date = new Date(((Long) value).longValue());
         } else if (value instanceof LocalDateTime) {
-            date = java.sql.Timestamp.valueOf(((LocalDateTime) value));
+            date = java.sql.Timestamp.valueOf((LocalDateTime) value);
         } else if (value instanceof LocalDate) {
-            date = java.sql.Date.valueOf(((LocalDate) value));
+            date = java.sql.Date.valueOf((LocalDate) value);
         } else if (value instanceof ZonedDateTime) {
             date = Date.from(((ZonedDateTime) value).toInstant());
         } else if (value instanceof OffsetDateTime) {
             date = Date.from(((OffsetDateTime) value).toInstant());
         } else if (value instanceof TemporalAccessor) {
             // Backstop for other TemporalAccessor implementations.
-            date = Date.from(Instant.from(((TemporalAccessor) value)));
+            date = Date.from(Instant.from((TemporalAccessor) value));
         }
 
         String result = null;
@@ -221,7 +221,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
             //      didn't include the milliseconds. The following code
             //      ensures it works consistently across JDK versions
             final java.sql.Timestamp timestamp = (java.sql.Timestamp)value;
-            long timeInMillis = ((timestamp.getTime() / 1000) * 1000);
+            long timeInMillis = timestamp.getTime() / 1000 * 1000;
             timeInMillis += timestamp.getNanos() / 1000000;
 
             return toDate(targetType, timeInMillis);
@@ -449,7 +449,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
         format.setLenient(false);
         final ParsePosition pos = new ParsePosition(0);
         final Date parsedDate = format.parse(value, pos); // ignore the result (use the Calendar)
-        int errorIndex = pos.getErrorIndex();
+        final int errorIndex = pos.getErrorIndex();
         if (errorIndex >= 0 || pos.getIndex() != value.length() || parsedDate == null) {
             String msg = "Error converting '" + toString(sourceType) + "' to '" + toString(targetType) + "'";
             if (format instanceof SimpleDateFormat) {
