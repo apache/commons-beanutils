@@ -168,10 +168,8 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
                 if (prop == null) {
                     return true;
                 }
-            } else {
-                if (value.equals(prop)) {
-                    return true;
-                }
+            } else if (value.equals(prop)) {
+                return true;
             }
         }
         return false;
