@@ -63,7 +63,7 @@ public final class LocalTimeConverter extends AbstractConverter<LocalTime> {
     @Override
     protected <T> T convertToType(final Class<T> type, final Object value) throws Throwable {
         if (LocalTime.class.equals(type)) {
-            return type.cast(LocalTime.parse((String.valueOf(value))));
+            return type.cast(LocalTime.parse(String.valueOf(value)));
         }
 
         throw conversionException(type, value);
