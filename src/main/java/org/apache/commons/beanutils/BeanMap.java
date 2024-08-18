@@ -159,75 +159,35 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
                 new HashMap<>();
         defaultTransformers.put(
             Boolean.TYPE,
-            new Transformer() {
-                @Override
-                public Object transform( final Object input ) {
-                    return Boolean.valueOf( input.toString() );
-                }
-            }
+            input -> Boolean.valueOf( input.toString() )
         );
         defaultTransformers.put(
             Character.TYPE,
-            new Transformer() {
-                @Override
-                public Object transform( final Object input ) {
-                    return Character.valueOf(input.toString().charAt( 0 ));
-                }
-            }
+            input -> Character.valueOf(input.toString().charAt( 0 ))
         );
         defaultTransformers.put(
             Byte.TYPE,
-            new Transformer() {
-                @Override
-                public Object transform( final Object input ) {
-                    return Byte.valueOf( input.toString() );
-                }
-            }
+            input -> Byte.valueOf( input.toString() )
         );
         defaultTransformers.put(
             Short.TYPE,
-            new Transformer() {
-                @Override
-                public Object transform( final Object input ) {
-                    return Short.valueOf( input.toString() );
-                }
-            }
+            input -> Short.valueOf( input.toString() )
         );
         defaultTransformers.put(
             Integer.TYPE,
-            new Transformer() {
-                @Override
-                public Object transform( final Object input ) {
-                    return Integer.valueOf( input.toString() );
-                }
-            }
+            input -> Integer.valueOf( input.toString() )
         );
         defaultTransformers.put(
             Long.TYPE,
-            new Transformer() {
-                @Override
-                public Object transform( final Object input ) {
-                    return Long.valueOf( input.toString() );
-                }
-            }
+            input -> Long.valueOf( input.toString() )
         );
         defaultTransformers.put(
             Float.TYPE,
-            new Transformer() {
-                @Override
-                public Object transform( final Object input ) {
-                    return Float.valueOf( input.toString() );
-                }
-            }
+            input -> Float.valueOf( input.toString() )
         );
         defaultTransformers.put(
             Double.TYPE,
-            new Transformer() {
-                @Override
-                public Object transform( final Object input ) {
-                    return Double.valueOf( input.toString() );
-                }
-            }
+            input -> Double.valueOf( input.toString() )
         );
         return defaultTransformers;
     }
@@ -820,7 +780,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     public void putAllWriteable(final BeanMap map) {
         for (final Object key : map.readMethods.keySet()) {
             if (getWriteMethod(key) != null) {
-                this.put(key, map.get(key));
+                put(key, map.get(key));
             }
         }
     }
