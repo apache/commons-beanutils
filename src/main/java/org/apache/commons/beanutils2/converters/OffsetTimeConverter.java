@@ -63,7 +63,7 @@ public final class OffsetTimeConverter extends AbstractConverter<OffsetTime> {
     @Override
     protected <T> T convertToType(final Class<T> type, final Object value) throws Throwable {
         if (OffsetTime.class.equals(type)) {
-            return type.cast(OffsetTime.parse((String.valueOf(value))));
+            return type.cast(OffsetTime.parse(String.valueOf(value)));
         }
 
         throw conversionException(type, value);
