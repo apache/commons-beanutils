@@ -294,7 +294,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
         // Create the mapped object
         Object mappedProperty = null;
 
-        if ((type == null) || type.isInterface()) {
+        if (type == null || type.isInterface()) {
 
             mappedProperty = defaultMappedProperty(name);
 
