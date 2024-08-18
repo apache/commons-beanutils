@@ -333,13 +333,13 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
          */
         @Override
         protected boolean isDynaProperty(final String name) {
-    
+
             if (name == null) {
                 throw new IllegalArgumentException("Property name is missing.");
             }
-    
+
             return values.containsKey(name);
-    
+
         }
 
     /**
@@ -390,7 +390,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
 
         // Crate new LazyDynaMap and initialize properties
         final LazyDynaMap lazyMap = new LazyDynaMap(newMap);
-        final DynaProperty[] properties = this.getDynaProperties();
+        final DynaProperty[] properties = getDynaProperties();
         if (properties != null) {
             for (final DynaProperty propertie : properties) {
                 lazyMap.add(propertie);
