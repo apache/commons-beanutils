@@ -68,7 +68,7 @@ public class BooleanArrayConverterTestCase extends TestCase {
 
         try {
             // the literal string 'true' should no longer be recognized as
-            // a true value..
+            // a true value.
             converter.convert(null, "true");
             fail("Converting invalid string should have generated an exception");
         } catch(final Exception ex) {
