@@ -74,7 +74,7 @@ public class MemoryTestCase {
         }
 
         // and let's do one more just to clean up any garbage we might have
-        // created on the last pass..
+        // created on the last pass.
         System.gc();
     }
 
@@ -156,7 +156,7 @@ public class MemoryTestCase {
         } finally {
             // Restore context classloader that was present before this
             // test started. It is expected to be the same as the system
-            // classloader, but we handle all cases here..
+            // classloader, but we handle all cases here.
             Thread.currentThread().setContextClassLoader(origContextClassLoader);
 
             // and restore all the standard converters
@@ -202,7 +202,7 @@ public class MemoryTestCase {
 
                 // When we first do a ConvertUtils operation inside a custom
                 // classloader, we get a completely fresh copy of the
-                // ConvertUtilsBean, with all-new Converter objects in it..
+                // ConvertUtilsBean, with all-new Converter objects in it.
                 assertFalse(ConvertUtils.lookup(Float.TYPE) == origFloatConverter);
 
                 // Now we register a custom converter (but of a standard class).
@@ -266,7 +266,7 @@ public class MemoryTestCase {
         } finally {
             // Restore context classloader that was present before this
             // test started. It is expected to be the same as the system
-            // classloader, but we handle all cases here..
+            // classloader, but we handle all cases here.
             Thread.currentThread().setContextClassLoader(origContextClassLoader);
 
             // and restore all the standard converters
