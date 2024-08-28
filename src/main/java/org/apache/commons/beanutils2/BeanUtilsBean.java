@@ -33,7 +33,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <p>JavaBean property population methods.</p>
+ * <p>JavaBean property population methods, delegating
+ * conversions to {@link ConvertUtilsBean#convert(Object, Class)}.</p>
  *
  * <p>This class provides implementations for the utility methods in
  * {@link BeanUtils}.
@@ -214,23 +215,12 @@ public class BeanUtilsBean {
      * <p>Converts the value to an object of the specified class (if
      * possible).</p>
      *
-     * @param <R> The desired return type
      * @param value Value to be converted (may be null)
      * @param type Class of the value to be converted to
      * @return The converted value
-     *
-     * @throws ConversionException if thrown by an underlying Converter
-     * @since 1.8.0
      */
     protected <R> Object convert(final Object value, final Class<R> type) {
-        final Converter<R> converter = getConvertUtils().lookup(type);
-        if (converter != null) {
-            if (LOG.isTraceEnabled()) {
-                LOG.trace("        USING CONVERTER " + converter);
-            }
-            return converter.convert(type, value);
-        }
-        return value;
+        return getConvertUtils().convert(value, type);
     }
 
     /**
