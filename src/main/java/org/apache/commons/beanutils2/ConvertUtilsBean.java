@@ -221,16 +221,35 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Delegates to the new {@link ConvertUtilsBean#convert(Object, Class)}
-     * method.
+     * Convert the specified value into a String.  If the specified value
+     * is an array, the first element (converted to a String) will be
+     * returned.  The registered {@link Converter} for the
+     * {@link String} class will be used, which allows
+     * applications to customize Object-&gt;String conversions (the default
+     * implementation simply uses toString()).
      *
      * @param value Value to be converted (may be null)
      * @return The converted String value or null if value is null
-     *
-     * @see ConvertUtilsBean#convert(String[], Class)
      */
     public String convert(Object value) {
-        return (String) convert(value, String.class);
+
+        if (value == null) {
+            return null;
+        }
+        if (!value.getClass().isArray()) {
+            final Converter<String> converter = lookup(String.class);
+            return converter.convert(String.class, value);
+        }
+        if (Array.getLength(value) < 1) {
+            return null;
+        }
+        value = Array.get(value, 0);
+        if (value == null) {
+            return null;
+        }
+        final Converter<String> converter = lookup(String.class);
+        return converter.convert(String.class, value);
+
     }
 
     /**
