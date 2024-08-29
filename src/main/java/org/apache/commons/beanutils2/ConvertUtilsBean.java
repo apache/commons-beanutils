@@ -313,7 +313,15 @@ public class ConvertUtilsBean {
      * @see ConvertUtilsBean#convert(String[], Class)
      */
     public <T> Object convert(final String[] values, final Class<T> clazz) {
-        return convert((Object) values, clazz);
+        final Class<?> type = clazz.isArray() ? clazz.getComponentType() : clazz;
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Convert String[" + values.length + "] to class '" + type.getName() + "[]'");
+        }
+        Converter converter = lookup(type);
+        if (converter == null) {
+            converter = lookup(String.class);
+        }
+        return convert(values, type, converter);
     }
 
     private <T> Object convert(final String[] values, final Class<T> type, final Converter<T> converter) {
