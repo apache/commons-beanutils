@@ -322,14 +322,18 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Delegates to the new {@link ConvertUtilsBean#convert(Object, Class)}
-     * method.
+     * Convert an array of specified values to an array of objects of the
+     * specified class (if possible).  If the specified Java class is itself
+     * an array class, this class will be the type of the returned value.
+     * Otherwise, an array will be constructed whose component type is the
+     * specified class.
      *
+     * @param <T> The Class type.
      * @param values Array of values to be converted
      * @param clazz Java array or element class to be converted to (must not be null)
      * @return The converted value
      *
-     * @see ConvertUtilsBean#convert(String[], Class)
+     * @throws ConversionException if thrown by an underlying Converter
      */
     public <T> Object convert(final String[] values, final Class<T> clazz) {
         final Class<?> type = clazz.isArray() ? clazz.getComponentType() : clazz;
