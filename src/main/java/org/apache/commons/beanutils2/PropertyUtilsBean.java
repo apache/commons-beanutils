@@ -1219,7 +1219,7 @@ public class PropertyUtilsBean {
             final StringBuilder valueString = new StringBuilder();
             if (values != null) {
                 for (int i = 0; i < values.length; i++) {
-                    if (i>0) {
+                    if (i > 0) {
                         valueString.append(", ");
                     }
                     if (values[i] == null) {
