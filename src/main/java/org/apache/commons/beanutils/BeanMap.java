@@ -447,16 +447,11 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
         }
         catch ( final InvocationTargetException e ) {
             final IllegalArgumentException iae = new IllegalArgumentException(e.getMessage());
-            if (!BeanUtils.initCause(iae, e)) {
-                logInfo(e);
-            }
+            BeanUtils.initCause(iae, e);
             throw iae;
         }
         catch ( final InstantiationException e ) {
             final IllegalArgumentException iae = new IllegalArgumentException(e.getMessage());
-            if (!BeanUtils.initCause(iae, e)) {
-                logInfo(e);
-            }
             BeanUtils.initCause(iae, e);
             throw iae;
         }
@@ -761,9 +756,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
             }
             catch ( final InvocationTargetException | IllegalAccessException e ) {
                 final IllegalArgumentException iae = new IllegalArgumentException(e.getMessage());
-                if (!BeanUtils.initCause(iae, e)) {
-                    logInfo(e);
-                }
+                BeanUtils.initCause(iae, e);
                 throw iae;
             }
             return oldValue;

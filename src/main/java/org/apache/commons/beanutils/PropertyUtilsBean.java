@@ -1381,9 +1381,7 @@ public class PropertyUtilsBean {
             final IllegalArgumentException e = new IllegalArgumentException(
                 "Cannot invoke " + method.getDeclaringClass().getName() + "." + method.getName() + " on bean class '" + bean.getClass() + "' - " + cause.getMessage() + " - had objects of type \"" + valueString.append("\" but expected signature \"").append(expectedString.toString()).append("\"").toString()
                 );
-            if (!BeanUtils.initCause(e, cause)) {
-                log.error("Method invocation failed", cause);
-            }
+            BeanUtils.initCause(e, cause);
             throw e;
 
         }

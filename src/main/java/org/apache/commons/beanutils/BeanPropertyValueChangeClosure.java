@@ -166,32 +166,24 @@ public class BeanPropertyValueChangeClosure implements Closure {
 
             if (!ignoreNull) {
                 final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
-                if (!BeanUtils.initCause(iae, e)) {
-                    log.error(errorMsg, e);
-                }
+                BeanUtils.initCause(iae, e);
                 throw iae;
             }
             log.warn("WARNING: " + errorMsg + e);
         } catch (final IllegalAccessException e) {
             final String errorMsg = "Unable to access the property provided.";
             final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
-            if (!BeanUtils.initCause(iae, e)) {
-                log.error(errorMsg, e);
-            }
+            BeanUtils.initCause(iae, e);
             throw iae;
         } catch (final InvocationTargetException e) {
             final String errorMsg = "Exception occurred in property's getter";
             final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
-            if (!BeanUtils.initCause(iae, e)) {
-                log.error(errorMsg, e);
-            }
+            BeanUtils.initCause(iae, e);
             throw iae;
         } catch (final NoSuchMethodException e) {
             final String errorMsg = "Property not found";
             final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
-            if (!BeanUtils.initCause(iae, e)) {
-                log.error(errorMsg, e);
-            }
+            BeanUtils.initCause(iae, e);
             throw iae;
         }
     }

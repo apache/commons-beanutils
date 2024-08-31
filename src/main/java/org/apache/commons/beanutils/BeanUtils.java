@@ -424,7 +424,7 @@ public class BeanUtils {
      *
      * @param  throwable The throwable.
      * @param  cause     The cause of the throwable.
-     * @return  true if the cause was initialized, otherwise false.
+     * @return  always true in 1.10.0.
      * @since 1.8.0
      * @deprecated Use {@link Throwable#initCause(Throwable)}.
      * @see Throwable#initCause(Throwable)
