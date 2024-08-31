@@ -365,18 +365,6 @@ public class BeanUtils {
     }
 
     /**
-     * If we're running on JDK 1.4 or later, initialize the cause for the given throwable.
-     *
-     * @param  throwable The throwable.
-     * @param  cause     The cause of the throwable.
-     * @return  true if the cause was initialized, otherwise false.
-     * @since 1.8.0
-     */
-    public static boolean initCause(final Throwable throwable, final Throwable cause) {
-        return BeanUtilsBean.getInstance().initCause(throwable, cause);
-    }
-
-    /**
      * <p>Populate the JavaBeans properties of the specified bean, based on
      * the specified name/value pairs.</p>
      *

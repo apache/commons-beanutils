@@ -21,7 +21,6 @@ import java.beans.IndexedPropertyDescriptor;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -62,9 +61,6 @@ public class BeanUtilsBean {
      */
     private static final Log LOG = LogFactory.getLog(BeanUtilsBean.class);
 
-    /** A reference to Throwable's initCause method, or null if it's not there in this JVM */
-    private static final Method INIT_CAUSE_METHOD = getInitCauseMethod();
-
     /**
      * Determines the type of a {@code DynaProperty}. Here a special treatment
      * is needed for mapped properties.
@@ -79,34 +75,6 @@ public class BeanUtilsBean {
             return dynaProperty.getType();
         }
         return value == null ? String.class : value.getClass();
-    }
-
-    /**
-     * Returns a <code>Method<code> allowing access to
-     * {@link Throwable#initCause(Throwable)} method of {@link Throwable},
-     * or {@code null} if the method
-     * does not exist.
-     *
-     * @return A {@code Method<code> for <code>Throwable.initCause}, or
-     * {@code null} if unavailable.
-     */
-    private static Method getInitCauseMethod() {
-        try {
-            final Class<?>[] paramsClasses = { Throwable.class };
-            return Throwable.class.getMethod("initCause", paramsClasses);
-        } catch (final NoSuchMethodException e) {
-            final Log log = LogFactory.getLog(BeanUtils.class);
-            if (log.isWarnEnabled()) {
-                log.warn("Throwable does not have initCause() method in JDK 1.3");
-            }
-            return null;
-        } catch (final Throwable e) {
-            final Log log = LogFactory.getLog(BeanUtils.class);
-            if (log.isWarnEnabled()) {
-                log.warn("Error getting the Throwable initCause() method", e);
-            }
-            return null;
-        }
     }
 
     /**
@@ -795,26 +763,6 @@ public class BeanUtilsBean {
             NoSuchMethodException {
         final Object value = getPropertyUtils().getSimpleProperty(bean, name);
         return getConvertUtils().convert(value);
-    }
-
-    /**
-     * If we're running on JDK 1.4 or later, initialize the cause for the given throwable.
-     *
-     * @param  throwable The throwable.
-     * @param  cause     The cause of the throwable.
-     * @return  true if the cause was initialized, otherwise false.
-     * @since 1.8.0
-     */
-    public boolean initCause(final Throwable throwable, final Throwable cause) {
-        if (INIT_CAUSE_METHOD != null && cause != null) {
-            try {
-                INIT_CAUSE_METHOD.invoke(throwable, cause);
-                return true;
-            } catch (final Throwable e) {
-             // can't initialize cause
-            }
-        }
-        return false;
     }
 
     /**

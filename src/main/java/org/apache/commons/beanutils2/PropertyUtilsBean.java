@@ -1233,19 +1233,15 @@ public class PropertyUtilsBean {
                     expectedString.append(parTypes[i].getName());
                 }
             }
-            final IllegalArgumentException e = new IllegalArgumentException("Cannot invoke " + method.getDeclaringClass().getName() + "." + method.getName()
+            throw new IllegalArgumentException("Cannot invoke " + method.getDeclaringClass().getName() + "." + method.getName()
                     + " on bean class '" + bean.getClass() + "' - " + cause.getMessage()
                     // as per https://issues.apache.org/jira/browse/BEANUTILS-224
-                    + " - had objects of type \"" + valueString + "\" but expected signature \"" + expectedString + "\"");
-            if (!BeanUtils.initCause(e, cause)) {
-                LOG.error("Method invocation failed", cause);
-            }
-            throw e;
+                    + " - had objects of type \"" + valueString + "\" but expected signature \"" + expectedString + "\"", cause);
         }
     }
 
     /**
-     * <p>Return {@code true} if the specified property name identifies
+     * Return {@code true} if the specified property name identifies
      * a readable property on the specified bean; otherwise, return
      * {@code false}.
      *
@@ -1317,7 +1313,7 @@ public class PropertyUtilsBean {
     }
 
     /**
-     * <p>Return {@code true} if the specified property name identifies
+     * Return {@code true} if the specified property name identifies
      * a writable property on the specified bean; otherwise, return
      * {@code false}.
      *

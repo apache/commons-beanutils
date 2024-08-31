@@ -21,7 +21,6 @@ import java.util.Collection;
 import java.util.Locale;
 import java.util.Objects;
 
-import org.apache.commons.beanutils2.BeanUtils;
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.ConvertUtils;
 import org.apache.commons.beanutils2.Converter;
@@ -330,14 +329,12 @@ public abstract class AbstractConverter<D> implements Converter<D> {
                 log().debug("    Conversion threw " + cause);
             }
         }
-
         if (useDefault) {
             return handleMissing(type);
         }
-
         ConversionException cex = null;
         if (cause instanceof ConversionException) {
-            cex = (ConversionException)cause;
+            cex = (ConversionException) cause;
             if (log().isDebugEnabled()) {
                 log().debug("    Re-throwing ConversionException: " + cex.getMessage());
                 log().debug("    " + DEFAULT_CONFIG_MSG);
@@ -350,11 +347,8 @@ public abstract class AbstractConverter<D> implements Converter<D> {
                 log().debug("    Throwing ConversionException: " + msg);
                 log().debug("    " + DEFAULT_CONFIG_MSG);
             }
-            BeanUtils.initCause(cex, cause);
         }
-
         throw cex;
-
     }
 
     /**

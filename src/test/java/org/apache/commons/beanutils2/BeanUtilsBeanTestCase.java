@@ -128,9 +128,7 @@ public class BeanUtilsBeanTestCase extends TestCase {
         try {
             throwException(cause);
         } catch (final Throwable e) {
-            final Throwable t = new Exception(parent);
-            BeanUtils.initCause(t, e);
-            throw t;
+            throw new Exception(parent, e);
         }
     }
 
@@ -863,27 +861,6 @@ public class BeanUtilsBeanTestCase extends TestCase {
             fail("Threw " + t);
         }
         assertEquals("java.util.Date --> String", testUtilDate.toString(), value);
-    }
-
-    /**
-     * Test for {@link BeanUtilsBean#initCause(Throwable, Throwable)} method.
-     */
-    public void testInitCause() {
-        final String parentMsg = "PARENT-THROWABLE";
-        final String causeMsg = "THROWABLE-CAUSE";
-        try {
-            initCauseAndThrowException(parentMsg, causeMsg);
-        } catch (final Throwable thrownParent) {
-            assertEquals("Parent", parentMsg, thrownParent.getMessage());
-            try {
-                assertEquals("Parent", parentMsg, thrownParent.getMessage());
-                final Throwable thrownCause = getCause(thrownParent);
-                assertNotNull("Cause Null", thrownCause);
-                assertEquals("Cause", causeMsg, thrownCause.getMessage());
-            } catch (final Throwable testError) {
-                fail("If you're running JDK 1.3 then don't worry this should fail," + " if not then needs checking out: " + testError);
-            }
-        }
     }
 
     public void testMappedProperty() throws Exception {

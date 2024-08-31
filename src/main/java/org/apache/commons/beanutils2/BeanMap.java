@@ -149,16 +149,12 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
         if (bean == null) {
             return;
         }
-
         Class<? extends Object> beanClass = null;
         try {
             beanClass = bean.getClass();
             bean = beanClass.newInstance();
         } catch (final Exception e) {
-            final UnsupportedOperationException uoe = new UnsupportedOperationException(
-                    "Could not create new instance of class: " + beanClass);
-            BeanUtils.initCause(uoe, e);
-            throw uoe;
+            throw new UnsupportedOperationException("Could not create new instance of class: " + beanClass, e);
         }
     }
 
@@ -186,13 +182,11 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
     @Override
     public Object clone() throws CloneNotSupportedException {
         final BeanMap newMap = (BeanMap) super.clone();
-
         if (bean == null) {
             // no bean, just an empty bean map at the moment. return a newly
             // cloned and empty bean map.
             return newMap;
         }
-
         Object newBean = null;
         final Class<? extends Object> beanClass = bean.getClass(); // Cannot throw Exception
         try {
@@ -201,19 +195,16 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
             // unable to instantiate
             final CloneNotSupportedException cnse = new CloneNotSupportedException(
                     "Unable to instantiate the underlying bean \"" + beanClass.getName() + "\": " + e);
-            BeanUtils.initCause(cnse, e);
+            cnse.initCause(e);
             throw cnse;
         }
-
         try {
             newMap.setBean(newBean);
-        } catch (final Exception exception) {
-            final CloneNotSupportedException cnse = new CloneNotSupportedException(
-                    "Unable to set bean in the cloned bean map: " + exception);
-            BeanUtils.initCause(cnse, exception);
+        } catch (final Exception e) {
+            final CloneNotSupportedException cnse = new CloneNotSupportedException("Unable to set bean in the cloned bean map: " + e);
+            cnse.initCause(e);
             throw cnse;
         }
-
         try {
             // copy only properties that are readable and writable. If its
             // not readable, we can't get the value from the old map. If
@@ -223,13 +214,11 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
                     newMap.put(key, get(key));
                 }
             });
-        } catch (final Exception exception) {
-            final CloneNotSupportedException cnse = new CloneNotSupportedException(
-                    "Unable to copy bean values to cloned bean map: " + exception);
-            BeanUtils.initCause(cnse, exception);
+        } catch (final Exception e) {
+            final CloneNotSupportedException cnse = new CloneNotSupportedException("Unable to copy bean values to cloned bean map: " + e);
+            cnse.initCause(e);
             throw cnse;
         }
-
         return newMap;
     }
 
@@ -333,18 +322,9 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
 
             return new Object[] { value };
         } catch (final InvocationTargetException e) {
-            final IllegalArgumentException iae = new IllegalArgumentException(e.getMessage());
-            if (!BeanUtils.initCause(iae, e)) {
-                logInfo(e);
-            }
-            throw iae;
+            throw new IllegalArgumentException(e.getMessage(), e);
         } catch (final InstantiationException e) {
-            final IllegalArgumentException iae = new IllegalArgumentException(e.getMessage());
-            if (!BeanUtils.initCause(iae, e)) {
-                logInfo(e);
-            }
-            BeanUtils.initCause(iae, e);
-            throw iae;
+            throw new IllegalArgumentException(e.getMessage(), e);
         }
     }
 
@@ -624,11 +604,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
                 final Object newValue = get(name);
                 firePropertyChange(name, oldValue, newValue);
             } catch (final InvocationTargetException | IllegalAccessException e) {
-                final IllegalArgumentException iae = new IllegalArgumentException(e.getMessage());
-                if (!BeanUtils.initCause(iae, e)) {
-                    logInfo(e);
-                }
-                throw iae;
+                throw new IllegalArgumentException(e.getMessage(), e);
             }
             return oldValue;
         }
