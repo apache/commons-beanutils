@@ -22,6 +22,8 @@ import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import org.apache.commons.beanutils.ConversionException;
@@ -329,13 +331,13 @@ public class DateLocaleConverter extends BaseLocaleConverter {
     protected Object parse(final Object value, String pattern) throws ParseException {
 
         // Handle Date
-        if (value instanceof java.util.Date) {
+        if (value instanceof Date) {
             return value;
         }
 
         // Handle Calendar
-        if (value instanceof java.util.Calendar) {
-            return ((java.util.Calendar)value).getTime();
+        if (value instanceof Calendar) {
+            return ((Calendar) value).getTime();
         }
 
          if (locPattern) {

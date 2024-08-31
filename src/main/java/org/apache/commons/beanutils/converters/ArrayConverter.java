@@ -23,6 +23,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -218,7 +219,7 @@ public class ArrayConverter extends AbstractConverter {
         }
         if (value instanceof Number ||
             value instanceof Boolean ||
-            value instanceof java.util.Date) {
+            value instanceof Date) {
             final List<Object> list = new ArrayList<>(1);
             list.add(value);
             return list;

@@ -519,12 +519,12 @@ public class PropertyUtilsBean {
         // Call the property getter and return the value
         final Object value = invokeMethod(readMethod, bean, EMPTY_OBJECT_ARRAY);
         if (!value.getClass().isArray()) {
-            if (!(value instanceof java.util.List)) {
+            if (!(value instanceof List)) {
                 throw new IllegalArgumentException("Property '" + name +
                         "' is not indexed on bean class '" + bean.getClass() + "'");
             }
             //get the List's value
-            return ((java.util.List<?>) value).get(index);
+            return ((List<?>) value).get(index);
         }
         //get the array's value
         try {
@@ -693,8 +693,8 @@ public class PropertyUtilsBean {
           }
         final Object invokeResult = invokeMethod(readMethod, bean, EMPTY_OBJECT_ARRAY);
         /* test and fetch from the map */
-        if (invokeResult instanceof java.util.Map) {
-          result = ((java.util.Map<?, ?>)invokeResult).get(key);
+        if (invokeResult instanceof Map) {
+          result = ((Map<?, ?>)invokeResult).get(key);
         }
         }
         return result;
