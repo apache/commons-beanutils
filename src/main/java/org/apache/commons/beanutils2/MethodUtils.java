@@ -69,14 +69,9 @@ public class MethodUtils {
          */
         public MethodDescriptor(final Class<?> cls, final String methodName, Class<?>[] paramTypes,
                 final boolean exact) {
-            Objects.requireNonNull(cls, "cls");
-            Objects.requireNonNull(methodName, "methodName");
-            if (paramTypes == null) {
-                paramTypes = BeanUtils.EMPTY_CLASS_ARRAY;
-            }
-            this.cls = cls;
-            this.methodName = methodName;
-            this.paramTypes = paramTypes;
+            this.cls = Objects.requireNonNull(cls, "cls");
+            this.methodName = Objects.requireNonNull(methodName, "methodName");
+            this.paramTypes = paramTypes != null ? paramTypes : BeanUtils.EMPTY_CLASS_ARRAY;
             this.exact= exact;
             this.hashCode = methodName.length();
         }

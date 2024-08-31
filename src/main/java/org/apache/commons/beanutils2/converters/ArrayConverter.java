@@ -153,9 +153,8 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
         if (!defaultType.isArray()) {
             throw new IllegalArgumentException("Default type must be an array.");
         }
-        Objects.requireNonNull(elementConverter, "elementConverter");
+        this.elementConverter = Objects.requireNonNull(elementConverter, "elementConverter");
         this.defaultType = defaultType;
-        this.elementConverter = elementConverter;
     }
 
     /**

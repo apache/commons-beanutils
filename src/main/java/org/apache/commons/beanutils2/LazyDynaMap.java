@@ -310,8 +310,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
          */
         @Override
         protected boolean isDynaProperty(final String name) {
-            Objects.requireNonNull(name, "name");
-            return values.containsKey(name);
+            return values.containsKey(Objects.requireNonNull(name, "name"));
         }
 
     /**

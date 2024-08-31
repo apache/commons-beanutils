@@ -43,8 +43,7 @@ public final class ConverterFacade<T> implements Converter<T> {
      * @param converter The converter to delegate to
      */
     public ConverterFacade(final Converter<T> converter) {
-        Objects.requireNonNull(converter, "converter");
-        this.converter = converter;
+        this.converter = Objects.requireNonNull(converter, "converter");
     }
 
     /**

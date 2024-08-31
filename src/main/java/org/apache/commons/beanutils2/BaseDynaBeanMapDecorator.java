@@ -117,8 +117,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
      * @throws IllegalArgumentException if the {@link DynaBean} is null.
      */
     public BaseDynaBeanMapDecorator(final DynaBean dynaBean, final boolean readOnly) {
-        Objects.requireNonNull(dynaBean, "dynaBean");
-        this.dynaBean = dynaBean;
+        this.dynaBean = Objects.requireNonNull(dynaBean, "dynaBean");
         this.readOnly = readOnly;
     }
 

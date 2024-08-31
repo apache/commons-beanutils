@@ -246,8 +246,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @throws IllegalArgumentException if no property name is specified
      */
     public boolean isDynaProperty(final String name) {
-        Objects.requireNonNull(name, "name");
-        return propertiesMap.get(name) != null;
+        return propertiesMap.get(Objects.requireNonNull(name, "name")) != null;
     }
 
     /**

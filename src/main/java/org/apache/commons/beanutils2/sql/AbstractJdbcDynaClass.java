@@ -163,8 +163,7 @@ abstract class AbstractJdbcDynaClass implements DynaClass, Serializable {
      */
     @Override
     public DynaProperty getDynaProperty(final String name) {
-        Objects.requireNonNull(name, "name");
-        return propertiesMap.get(name);
+        return propertiesMap.get(Objects.requireNonNull(name, "name"));
 
     }
 

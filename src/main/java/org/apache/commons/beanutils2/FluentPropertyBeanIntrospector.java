@@ -105,8 +105,7 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
      * @throws IllegalArgumentException if the prefix is <b>null</b>
      */
     public FluentPropertyBeanIntrospector(final String writePrefix) {
-        Objects.requireNonNull(writePrefix, "writePrefix");
-        writeMethodPrefix = writePrefix;
+        writeMethodPrefix = Objects.requireNonNull(writePrefix, "writePrefix");
     }
 
     /**

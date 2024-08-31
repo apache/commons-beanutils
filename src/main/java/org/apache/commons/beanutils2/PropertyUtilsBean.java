@@ -165,8 +165,7 @@ public class PropertyUtilsBean {
      * @since 1.9
      */
     public void addBeanIntrospector(final BeanIntrospector introspector) {
-        Objects.requireNonNull(introspector, "introspector");
-        introspectors.add(introspector);
+        introspectors.add(Objects.requireNonNull(introspector, "introspector"));
     }
 
     /**
