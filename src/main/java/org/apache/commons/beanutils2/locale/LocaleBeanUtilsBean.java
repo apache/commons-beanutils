@@ -29,11 +29,11 @@ import org.apache.commons.beanutils2.ConvertUtilsBean;
 import org.apache.commons.beanutils2.DynaBean;
 import org.apache.commons.beanutils2.DynaClass;
 import org.apache.commons.beanutils2.DynaProperty;
+import org.apache.commons.beanutils2.LoggerUtil;
 import org.apache.commons.beanutils2.MappedPropertyDescriptor;
 import org.apache.commons.beanutils2.PropertyUtilsBean;
 import org.apache.commons.beanutils2.expression.Resolver;
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <p>Utility methods for populating JavaBeans properties
@@ -56,7 +56,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
                     };
 
      /** All logging goes through this logger */
-    private static final Log LOG = LogFactory.getLog(LocaleBeanUtilsBean.class);
+    private static final Log LOG = LoggerUtil.createLoggerWithContextClassLoader(LocaleBeanUtilsBean.class);
 
     /**
       * Gets singleton instance

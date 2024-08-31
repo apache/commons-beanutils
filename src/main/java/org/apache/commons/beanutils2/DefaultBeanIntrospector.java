@@ -25,7 +25,6 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <p>
@@ -54,7 +53,7 @@ public class DefaultBeanIntrospector implements BeanIntrospector {
     private static final Class<?>[] LIST_CLASS_PARAMETER = new Class[] { java.util.List.class };
 
     /** For logging. Each subclass gets its own log instance. */
-    private final Log log = LogFactory.getLog(getClass());
+    private final Log log = LoggerUtil.createLoggerWithContextClassLoader(getClass());
 
     /**
      * Private constructor so that no instances can be created.

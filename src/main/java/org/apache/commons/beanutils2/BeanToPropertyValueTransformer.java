@@ -21,7 +21,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.function.Function;
 
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <p>{@code Transformer} that outputs a property value.</p>
@@ -73,7 +72,7 @@ import org.apache.commons.logging.LogFactory;
 public class BeanToPropertyValueTransformer<T, R> implements Function<T, R> {
 
     /** For logging. Each subclass gets its own log instance. */
-    private final Log log = LogFactory.getLog(this.getClass());
+    private final Log log = LoggerUtil.createLoggerWithContextClassLoader(this.getClass());
 
     /** The name of the property that will be used in the transformation of the object. */
     private final String propertyName;

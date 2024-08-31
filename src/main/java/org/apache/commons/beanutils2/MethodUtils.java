@@ -30,7 +30,6 @@ import java.util.WeakHashMap;
 
 import org.apache.commons.lang3.SystemProperties;
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <p>Utility reflection methods focused on methods in general rather than properties in particular.</p>
@@ -110,7 +109,7 @@ public class MethodUtils {
         }
     }
 
-    private static final Log LOG = LogFactory.getLog(MethodUtils.class);
+    private static final Log LOG = LoggerUtil.createLoggerWithContextClassLoader(MethodUtils.class);
 
     /**
      * Only log warning about accessibility work around once.

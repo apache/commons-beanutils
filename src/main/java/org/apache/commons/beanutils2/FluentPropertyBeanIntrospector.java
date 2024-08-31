@@ -24,7 +24,6 @@ import java.util.Locale;
 import java.util.Objects;
 
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <p>
@@ -81,7 +80,7 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
     public static final String DEFAULT_WRITE_METHOD_PREFIX = "set";
 
     /** The logger. */
-    private final Log log = LogFactory.getLog(getClass());
+    private final Log log = LoggerUtil.createLoggerWithContextClassLoader(getClass());
 
     /** The prefix of write methods to search for. */
     private final String writeMethodPrefix;

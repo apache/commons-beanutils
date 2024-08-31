@@ -24,6 +24,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.beanutils2.ConversionException;
+import org.apache.commons.beanutils2.LoggerUtil;
 import org.apache.commons.beanutils2.WeakFastHashMap;
 import org.apache.commons.beanutils2.locale.converters.BigDecimalLocaleConverter;
 import org.apache.commons.beanutils2.locale.converters.BigIntegerLocaleConverter;
@@ -38,7 +39,6 @@ import org.apache.commons.beanutils2.sql.converters.locale.SqlDateLocaleConverte
 import org.apache.commons.beanutils2.sql.converters.locale.SqlTimeLocaleConverter;
 import org.apache.commons.beanutils2.sql.converters.locale.SqlTimestampLocaleConverter;
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <p>Utility methods for converting locale-sensitive String scalar values to objects of the
@@ -82,7 +82,7 @@ import org.apache.commons.logging.LogFactory;
 public class LocaleConvertUtilsBean {
 
     /** The {@code Log} instance for this class. */
-    private static final Log LOG = LogFactory.getLog(LocaleConvertUtilsBean.class);
+    private static final Log LOG = LoggerUtil.createLoggerWithContextClassLoader(LocaleConvertUtilsBean.class);
 
     /**
      * Gets singleton instance.
