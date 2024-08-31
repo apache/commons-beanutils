@@ -102,9 +102,8 @@ public class DynaRowSetTestCase extends TestCase {
             }
             if (columnName.equals("timestampProperty")) {
                 return CustomTimestamp.class.getName();
-            } else {
-                return super.getColumnClassName(columnIndex);
             }
+            return super.getColumnClassName(columnIndex);
         }
     }
 

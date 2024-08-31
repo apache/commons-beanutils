@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -364,11 +363,10 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
 
         assertEquals("values size", values.length, collection.size());
 
-        // Collection should be ordered in same sequence as properties
-        final Iterator<Object> iterator = collection.iterator();
         int i = 0;
-        while (iterator.hasNext()) {
-            assertEquals("values("+i+")", values[i], iterator.next());
+        // Collection should be ordered in same sequence as properties
+        for (final Object element : collection) {
+            assertEquals("values(" + i + ")", values[i], element);
             i++;
         }
     }
