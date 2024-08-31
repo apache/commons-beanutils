@@ -23,6 +23,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -191,7 +192,6 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
     }
 
     /**
-     * <p>
      * Converts non-array values to a Collection prior
      * to being converted either to an array or a String.
      * <ul>
@@ -216,7 +216,7 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
         }
         if (value instanceof Number ||
             value instanceof Boolean ||
-            value instanceof java.util.Date) {
+            value instanceof Date) {
             final List<Object> list = new ArrayList<>(1);
             list.add(value);
             return list;
