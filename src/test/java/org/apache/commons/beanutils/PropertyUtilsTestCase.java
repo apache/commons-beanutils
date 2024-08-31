@@ -69,9 +69,6 @@ import org.apache.commons.beanutils.priv.PublicSubBean;
 
 public class PropertyUtilsTestCase extends TestCase {
 
-
-
-
     /**
      * The fully qualified class name of our private directly
      * implemented interface.
@@ -451,9 +448,6 @@ public class PropertyUtilsTestCase extends TestCase {
      * See BEANUTILS-266 for changes and reason for test
      */
     public void testExceptionFromInvoke() throws Exception {
-        if (BeanUtilsTestCase.isPre14JVM()) {
-            return;
-        }
         try {
             PropertyUtils.setSimpleProperty(bean, "intProperty","XXX");
         } catch(final IllegalArgumentException t) {

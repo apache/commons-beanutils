@@ -369,12 +369,6 @@ public class BeanMapTestCase extends AbstractTestMap {
      * Test that the cause of exception thrown by clear() is initialised.
      */
     public void testExceptionThrowFromClear() {
-
-        if (BeanUtilsTestCase.isPre14JVM()) {
-            System.out.println("testExceptionThrowFromClear() skipped on pre 1.4 JVM");
-            return;
-        }
-
         try {
             final Object bean = Jira87BeanFactory.createMappedPropertyBean();
             final BeanMap map = new BeanMap(bean);
@@ -396,12 +390,6 @@ public class BeanMapTestCase extends AbstractTestMap {
      * Test that the cause of exception thrown by a clone() is initialised.
      */
     public void testExceptionThrowFromClone() {
-
-        if (BeanUtilsTestCase.isPre14JVM()) {
-            System.out.println("testExceptionThrowFromClone() skipped on pre 1.4 JVM");
-            return;
-        }
-
         // Test cloning a non-public bean (instantiation exception)
         try {
             final Object bean = Jira87BeanFactory.createMappedPropertyBean();
@@ -440,12 +428,6 @@ public class BeanMapTestCase extends AbstractTestMap {
      * Test that the cause of exception thrown by put() is initialized.
      */
     public void testExceptionThrowFromPut() {
-
-        if (BeanUtilsTestCase.isPre14JVM()) {
-            System.out.println("testExceptionThrowFromPut() skipped on pre 1.4 JVM");
-            return;
-        }
-
         try {
             final Map<Object, Object> map = new BeanMap(new BeanThrowingExceptions());
             map.put("valueThrowingException", "value");
