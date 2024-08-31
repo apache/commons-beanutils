@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils;
-
 
 import java.beans.IndexedPropertyDescriptor;
 import java.beans.PropertyDescriptor;
@@ -34,7 +32,6 @@ import org.apache.commons.beanutils.expression.Resolver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
 /**
  * <p>JavaBean property population methods.</p>
  *
@@ -49,8 +46,6 @@ import org.apache.commons.logging.LogFactory;
 
 public class BeanUtilsBean {
 
-
-
     /**
      * Contains <code>BeanUtilsBean</code> instances indexed by context classloader.
      */
@@ -62,9 +57,6 @@ public class BeanUtilsBean {
                             return new BeanUtilsBean();
                         }
                     };
-
-    /** A reference to Throwable's initCause method, or null if it's not there in this JVM */
-    private static final Method INIT_CAUSE_METHOD = getInitCauseMethod();
 
     /**
      * Determines the type of a {@code DynaProperty}. Here a special treatment
@@ -82,34 +74,6 @@ public class BeanUtilsBean {
         return value == null ? String.class : value.getClass();
     }
 
-
-    /**
-     * Returns a <code>Method<code> allowing access to
-     * {@link Throwable#initCause(Throwable)} method of {@link Throwable},
-     * or <code>null</code> if the method
-     * does not exist.
-     *
-     * @return A <code>Method<code> for <code>Throwable.initCause</code>, or
-     * <code>null</code> if unavailable.
-     */
-    private static Method getInitCauseMethod() {
-        try {
-            final Class<?>[] paramsClasses = { Throwable.class };
-            return Throwable.class.getMethod("initCause", paramsClasses);
-        } catch (final NoSuchMethodException e) {
-            final Log log = LogFactory.getLog(BeanUtils.class);
-            if (log.isWarnEnabled()) {
-                log.warn("Throwable does not have initCause() method in JDK 1.3");
-            }
-            return null;
-        } catch (final Throwable e) {
-            final Log log = LogFactory.getLog(BeanUtils.class);
-            if (log.isWarnEnabled()) {
-                log.warn("Error getting the Throwable initCause() method", e);
-            }
-            return null;
-        }
-    }
 
     /**
      * Gets the instance which provides the functionality for {@link BeanUtils}.
@@ -863,16 +827,12 @@ public class BeanUtilsBean {
      * @param  cause     The cause of the throwable.
      * @return  true if the cause was initialized, otherwise false.
      * @since 1.8.0
+     * @deprecated Use {@link Throwable#initCause(Throwable)}.
+     * @see Throwable#initCause(Throwable)
      */
+    @Deprecated
     public boolean initCause(final Throwable throwable, final Throwable cause) {
-        if (INIT_CAUSE_METHOD != null && cause != null) {
-            try {
-                INIT_CAUSE_METHOD.invoke(throwable, cause);
-                return true;
-            } catch (final Throwable e) {
-                // can't initialize cause
-            }
-        }
+        throwable.initCause(cause);
         return false;
     }
 
