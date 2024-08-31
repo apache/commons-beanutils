@@ -19,9 +19,9 @@ package org.apache.commons.beanutils2.converters;
 
 import java.util.Locale;
 
-import org.apache.commons.beanutils2.locale.BaseLocaleConverter;
-
 import junit.framework.TestCase;
+
+import org.apache.commons.beanutils2.locale.BaseLocaleConverter;
 
 /**
  * Base Test Case for the DecimalLocaleConverter classes. This class doesn't define any real tests; it just provides useful methods for the real test case

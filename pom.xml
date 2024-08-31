@@ -65,6 +65,7 @@
     <commons.jacoco.complexityRatio>0.61</commons.jacoco.complexityRatio>
     <commons.jacoco.lineRatio>0.73</commons.jacoco.lineRatio>
     <!-- Dependencies -->
+<!--    <commons.collections.version>4.5.0-M3-SNAPSHOT</commons.collections.version>-->
     <commons.collections.version>4.4</commons.collections.version>
   </properties>
 

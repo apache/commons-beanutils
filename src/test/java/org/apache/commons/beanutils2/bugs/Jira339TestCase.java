@@ -20,14 +20,14 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+
 import org.apache.commons.beanutils2.BeanUtils;
 import org.apache.commons.beanutils2.PropertyUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-339">https://issues.apache.org/jira/browse/BEANUTILS-339</a>
@@ -61,15 +61,6 @@ public class Jira339TestCase extends TestCase {
     }
 
     private static final Log LOG = LogFactory.getLog(Jira339TestCase.class);
-
-    /**
-     * Run the Test.
-     *
-     * @param args Arguments
-     */
-    public static void main(final String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 
     /**
      * Create a test suite for this test.

@@ -18,9 +18,9 @@ package org.apache.commons.beanutils2.bugs;
 
 import java.lang.reflect.Method;
 
-import org.apache.commons.beanutils2.MethodUtils;
-
 import junit.framework.TestCase;
+
+import org.apache.commons.beanutils2.MethodUtils;
 
 /**
  * MethodUtils's getMatchingAccessibleMethod() does not correctly handle inheritance and method overloading.

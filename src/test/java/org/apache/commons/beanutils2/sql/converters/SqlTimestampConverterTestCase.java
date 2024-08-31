@@ -23,9 +23,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import org.apache.commons.beanutils2.converters.AbstractDateConverterTest;
-
 import junit.framework.TestSuite;
+
+import org.apache.commons.beanutils2.converters.AbstractDateConverterTest;
 
 /**
  * Test Case for the {@link SqlTimestampConverter} class.

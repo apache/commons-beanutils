@@ -22,11 +22,11 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.NumberFormat;
 
-import org.apache.commons.beanutils2.ConversionException;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+
+import org.apache.commons.beanutils2.ConversionException;
 
 /**
  * <p>

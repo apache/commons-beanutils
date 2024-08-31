@@ -30,12 +30,6 @@ import junit.framework.TestSuite;
 public class LazyDynaClassTestCase extends TestCase {
 
     /**
-     * Run this Test
-     */
-    public static void main(final String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
-    /**
      * Creates the tests included in this test suite.
      */
     public static Test suite() {

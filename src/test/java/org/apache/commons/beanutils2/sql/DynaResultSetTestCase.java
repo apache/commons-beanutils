@@ -22,12 +22,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.math.BigDecimal;
 import java.util.Iterator;
 
-import org.apache.commons.beanutils2.DynaBean;
-import org.apache.commons.beanutils2.DynaProperty;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+
+import org.apache.commons.beanutils2.DynaBean;
+import org.apache.commons.beanutils2.DynaProperty;
 
 /**
  * Test accessing ResultSets via DynaBeans.

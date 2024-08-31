@@ -17,11 +17,11 @@
 
 package org.apache.commons.beanutils2.converters;
 
-import org.apache.commons.beanutils2.ConversionException;
-import org.apache.commons.beanutils2.Converter;
-
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+
+import org.apache.commons.beanutils2.ConversionException;
+import org.apache.commons.beanutils2.Converter;
 
 /**
  * Test Case for the EnumConverter class.

@@ -20,9 +20,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.beanutils2.BeanUtils;
-
 import junit.framework.TestCase;
+
+import org.apache.commons.beanutils2.BeanUtils;
 
 /**
  * Indexed List Setters no longer work.

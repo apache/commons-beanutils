@@ -18,6 +18,10 @@ package org.apache.commons.beanutils2.bugs;
 
 import java.lang.reflect.Method;
 
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+
 import org.apache.commons.beanutils2.MethodUtils;
 import org.apache.commons.beanutils2.PropertyUtils;
 import org.apache.commons.beanutils2.bugs.other.Jira298BeanFactory;
@@ -25,25 +29,12 @@ import org.apache.commons.beanutils2.bugs.other.Jira298BeanFactory.IX;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 /**
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-298">https://issues.apache.org/jira/browse/BEANUTILS-298</a>
  */
 public class Jira298TestCase extends TestCase {
 
     private static final Log LOG = LogFactory.getLog(Jira298TestCase.class);
-
-    /**
-     * Run the Test.
-     *
-     * @param args Arguments
-     */
-    public static void main(final String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 
     /**
      * Create a test suite for this test.

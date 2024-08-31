@@ -16,11 +16,11 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
-import org.apache.commons.beanutils2.BeanUtils;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+
+import org.apache.commons.beanutils2.BeanUtils;
 
 /**
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-369">https://issues.apache.org/jira/browse/BEANUTILS-369</a>
@@ -49,15 +49,6 @@ public class Jira369TestCase extends TestCase {
         public void setbRatedCd(final String bproperty) {
             this.bproperty = bproperty;
         }
-    }
-
-    /**
-     * Run the Test.
-     *
-     * @param args Arguments
-     */
-    public static void main(final String[] args) {
-        junit.textui.TestRunner.run(suite());
     }
 
     /**

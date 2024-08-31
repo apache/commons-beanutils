@@ -21,12 +21,12 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
-import org.apache.commons.beanutils2.priv.PrivateBeanFactory;
-import org.apache.commons.beanutils2.priv.PublicSubBean;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+
+import org.apache.commons.beanutils2.priv.PrivateBeanFactory;
+import org.apache.commons.beanutils2.priv.PublicSubBean;
 
 /**
  * <p>

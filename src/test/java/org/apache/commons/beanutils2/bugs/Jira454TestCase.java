@@ -18,9 +18,9 @@ package org.apache.commons.beanutils2.bugs;
 
 import java.util.Date;
 
-import org.apache.commons.beanutils2.BeanUtils;
-
 import junit.framework.TestCase;
+
+import org.apache.commons.beanutils2.BeanUtils;
 
 /**
  * copyProperties() throws a ConversionException : No value specified for 'Date' when the field is a java.util.Date with a null value

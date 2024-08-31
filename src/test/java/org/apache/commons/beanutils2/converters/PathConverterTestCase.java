@@ -21,11 +21,11 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.apache.commons.beanutils2.ConversionException;
-import org.apache.commons.beanutils2.Converter;
-
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+
+import org.apache.commons.beanutils2.ConversionException;
+import org.apache.commons.beanutils2.Converter;
 
 /**
  * Test Case for the UUIDConverter class.

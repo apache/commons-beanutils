@@ -18,11 +18,11 @@ package org.apache.commons.beanutils2.bugs;
 
 import java.beans.PropertyDescriptor;
 
+import junit.framework.TestCase;
+
 import org.apache.commons.beanutils2.FluentIntrospectionTestBean;
 import org.apache.commons.beanutils2.FluentPropertyBeanIntrospector;
 import org.apache.commons.beanutils2.PropertyUtilsBean;
-
-import junit.framework.TestCase;
 
 /**
  * Write methods for PropertyDescriptors created during custom introspection are lost. See <a href="https://issues.apache.org/jira/browse/BEANUTILS-456">JIRA

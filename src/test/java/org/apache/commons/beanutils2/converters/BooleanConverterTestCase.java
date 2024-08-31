@@ -17,9 +17,9 @@
 
 package org.apache.commons.beanutils2.converters;
 
-import org.apache.commons.beanutils2.ConversionException;
-
 import junit.framework.TestCase;
+
+import org.apache.commons.beanutils2.ConversionException;
 
 /**
  */

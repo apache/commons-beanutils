@@ -20,10 +20,10 @@ package org.apache.commons.beanutils2.sql.converters;
 import java.sql.Date;
 import java.util.Calendar;
 
+import junit.framework.TestSuite;
+
 import org.apache.commons.beanutils2.converters.AbstractDateConverterTest;
 import org.apache.commons.beanutils2.converters.DateTimeConverter;
-
-import junit.framework.TestSuite;
 
 /**
  * Test Case for the {@link SqlDateConverter} class.

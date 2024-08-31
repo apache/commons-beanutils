@@ -23,9 +23,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import org.apache.commons.beanutils2.ConversionException;
-
 import junit.framework.TestCase;
+
+import org.apache.commons.beanutils2.ConversionException;
 
 /**
  * Abstract base for &lt;Number&gt;Converter classes.

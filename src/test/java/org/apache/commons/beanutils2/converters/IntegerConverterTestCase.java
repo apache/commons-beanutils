@@ -19,10 +19,10 @@ package org.apache.commons.beanutils2.converters;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import junit.framework.TestSuite;
+
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
-
-import junit.framework.TestSuite;
 
 /**
  * Test Case for the IntegerConverter class.

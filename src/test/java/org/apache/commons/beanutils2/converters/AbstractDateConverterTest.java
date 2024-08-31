@@ -31,10 +31,10 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.Objects;
 
+import junit.framework.TestCase;
+
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
-
-import junit.framework.TestCase;
 
 /**
  * Abstract base for &lt;Date&gt;Converter classes.

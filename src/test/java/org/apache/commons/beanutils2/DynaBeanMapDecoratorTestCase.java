@@ -52,13 +52,6 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
     private static final Map<String, Object> emptyMap = new DynaBeanPropertyMapDecorator(new BasicDynaBean(new BasicDynaClass()));
 
     /**
-     * Run thus Test
-     */
-    public static void main(final String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
-
-    /**
      * Creates the tests included in this test suite.
      */
     public static Test suite() {

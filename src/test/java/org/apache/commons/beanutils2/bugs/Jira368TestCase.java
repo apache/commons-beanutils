@@ -18,25 +18,16 @@ package org.apache.commons.beanutils2.bugs;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.apache.commons.beanutils2.BeanUtils;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+
+import org.apache.commons.beanutils2.BeanUtils;
 
 /**
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-368">https://issues.apache.org/jira/browse/BEANUTILS-368</a>
  */
 public class Jira368TestCase extends TestCase {
-
-    /**
-     * Run the Test.
-     *
-     * @param args Arguments
-     */
-    public static void main(final String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 
     /**
      * Create a test suite for this test.

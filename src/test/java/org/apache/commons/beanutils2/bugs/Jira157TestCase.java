@@ -19,15 +19,15 @@ package org.apache.commons.beanutils2.bugs;
 import java.io.Serializable;
 import java.util.Map;
 
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+
 import org.apache.commons.beanutils2.BeanUtils;
 import org.apache.commons.beanutils2.BeanUtilsBean;
 import org.apache.commons.beanutils2.SuppressPropertiesBeanIntrospector;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * Beanutils's describe() method cannot determine reader methods for anonymous class - see Jira issue# BEANUTILS-157.
@@ -62,15 +62,6 @@ public class Jira157TestCase extends TestCase {
     }
 
     private static final Log LOG = LogFactory.getLog(Jira157TestCase.class);
-
-    /**
-     * Run the Test.
-     *
-     * @param args Arguments
-     */
-    public static void main(final String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 
     /**
      * Create a test suite for this test.

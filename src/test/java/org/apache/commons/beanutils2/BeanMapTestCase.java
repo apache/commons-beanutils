@@ -21,12 +21,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
+import junit.framework.Test;
+
 import org.apache.commons.beanutils2.bugs.other.Jira87BeanFactory;
 import org.apache.commons.collections4.BulkTest;
 import org.apache.commons.collections4.map.AbstractMapTest;
-
-import junit.framework.Test;
-import junit.textui.TestRunner;
 
 /**
  * Test cases for BeanMap
@@ -153,10 +152,6 @@ public class BeanMapTestCase extends AbstractMapTest<String, Object> {
      *
      * Also note: The sample keys and mappings were generated manually.
      */
-
-    public static void main(final String[] args) {
-        TestRunner.run(suite());
-    }
 
     public static Test suite() {
         return BulkTest.makeSuite(BeanMapTestCase.class);

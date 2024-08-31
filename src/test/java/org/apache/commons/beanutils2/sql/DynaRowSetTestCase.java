@@ -25,12 +25,12 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.apache.commons.beanutils2.DynaBean;
-import org.apache.commons.beanutils2.DynaProperty;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+
+import org.apache.commons.beanutils2.DynaBean;
+import org.apache.commons.beanutils2.DynaProperty;
 
 /**
  * Test accessing RowSets via DynaBeans.

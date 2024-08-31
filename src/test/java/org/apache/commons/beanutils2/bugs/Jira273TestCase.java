@@ -16,14 +16,14 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+
 import org.apache.commons.beanutils2.PropertyUtils;
 import org.apache.commons.beanutils2.bugs.other.Jira273BeanFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * Public methods overridden in anonymous or private subclasses are not recognized by PropertyUtils - see issue# BEANUTILS-273.
@@ -33,15 +33,6 @@ import junit.framework.TestSuite;
 public class Jira273TestCase extends TestCase {
 
     private static final Log LOG = LogFactory.getLog(Jira273TestCase.class);
-
-    /**
-     * Run the Test.
-     *
-     * @param args Arguments
-     */
-    public static void main(final String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 
     /**
      * Create a test suite for this test.

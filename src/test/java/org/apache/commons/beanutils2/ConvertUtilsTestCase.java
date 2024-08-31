@@ -24,12 +24,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-import org.apache.commons.beanutils2.converters.DateConverter;
-import org.apache.commons.lang3.ArrayUtils;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+
+import org.apache.commons.beanutils2.converters.DateConverter;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * <p>

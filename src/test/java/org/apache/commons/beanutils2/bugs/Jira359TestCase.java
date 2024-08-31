@@ -16,14 +16,14 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+
 import org.apache.commons.beanutils2.BeanUtils;
 import org.apache.commons.beanutils2.BeanUtilsBean;
 import org.apache.commons.beanutils2.converters.ArrayConverter;
 import org.apache.commons.beanutils2.converters.StringConverter;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-359">https://issues.apache.org/jira/browse/BEANUTILS-359</a>
@@ -43,15 +43,6 @@ public class Jira359TestCase extends TestCase {
         public void setJcrMixinTypes(final String[] mixinTypes) {
             this.jcrMixinTypes = mixinTypes;
         }
-    }
-
-    /**
-     * Run the Test.
-     *
-     * @param args Arguments
-     */
-    public static void main(final String[] args) {
-        junit.textui.TestRunner.run(suite());
     }
 
     /**

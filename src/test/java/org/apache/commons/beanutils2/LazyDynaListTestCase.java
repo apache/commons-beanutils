@@ -41,13 +41,6 @@ public class LazyDynaListTestCase extends TestCase {
     private static final String BASIC_PROP2 = "BasicDynaClass_Property2";
 
     /**
-     * Run thus Test
-     */
-    public static void main(final String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
-
-    /**
      * Creates the tests included in this test suite.
      */
     public static Test suite() {

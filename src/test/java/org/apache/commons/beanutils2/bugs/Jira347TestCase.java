@@ -25,10 +25,10 @@ import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import junit.framework.TestCase;
+
 import org.apache.commons.beanutils2.MappedPropertyDescriptor;
 import org.apache.commons.beanutils2.memoryleaktests.MemoryLeakTestCase;
-
-import junit.framework.TestCase;
 
 /**
  * Test case for Jira issue# BEANUTILS-347.
