@@ -833,7 +833,7 @@ public class BeanUtilsBean {
     @Deprecated
     public boolean initCause(final Throwable throwable, final Throwable cause) {
         throwable.initCause(cause);
-        return false;
+        return true;
     }
 
     /**
