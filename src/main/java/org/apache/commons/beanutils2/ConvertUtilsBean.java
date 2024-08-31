@@ -596,13 +596,13 @@ public class ConvertUtilsBean {
      * <ul>
      *     <li>{@code Class.class} - {@link ClassConverter}</li>
      *     <li>{@code Enum.class} - {@link EnumConverter}</li>
-     *     <li>{@link java.util.Date.class} - {@link DateConverter}</li>
-     *     <li>{@link java.util.Calendar.class} - {@link CalendarConverter}</li>
+     *     <li>{@code java.util.Date.class} - {@link DateConverter}</li>
+     *     <li>{@code java.util.Calendar.class} - {@link CalendarConverter}</li>
      *     <li>{@code File.class} - {@link FileConverter}</li>
      *     <li>{@code Path.class} - {@link PathConverter}</li>
-     *     <li>{@link java.sql.Date.class} - {@link SqlDateConverter}</li>
-     *     <li>{@link java.sql.Time.class} - {@link SqlTimeConverter}</li>
-     *     <li>{@link java.sql.Timestamp.class} - {@link SqlTimestampConverter}</li>
+     *     <li>{@code java.sql.Date.class} - {@link SqlDateConverter}</li>
+     *     <li>{@code java.sql.Time.class} - {@link SqlTimeConverter}</li>
+     *     <li>{@code java.sql.Timestamp.class} - {@link SqlTimestampConverter}</li>
      *     <li>{@code URL.class} - {@link URLConverter}</li>
      *     <li>{@code URI.class} - {@link URIConverter}</li>
      *     <li>{@code UUID.class} - {@link UUIDConverter}</li>
