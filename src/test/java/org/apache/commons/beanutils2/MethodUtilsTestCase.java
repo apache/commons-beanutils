@@ -21,9 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.apache.commons.beanutils2.priv.PrivateBeanFactory;
 import org.apache.commons.beanutils2.priv.PublicSubBean;
@@ -39,13 +37,6 @@ public class MethodUtilsTestCase extends TestCase {
         assertNotNull(method);
         assertEquals("Method is not named correctly", methodName, method.getName());
         assertTrue("Method is not public", Modifier.isPublic(method.getModifiers()));
-    }
-
-    /**
-     * Creates the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(MethodUtilsTestCase.class);
     }
 
     /**

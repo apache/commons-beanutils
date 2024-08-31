@@ -21,21 +21,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * JUnit Test Case containing microbenchmarks for BeanUtils.
  */
 public class BeanUtilsBenchCase extends TestCase {
-
-    /**
-     * Creates the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(BeanUtilsBenchCase.class);
-    }
 
     // Basic loop counter
     private long counter = 100000;

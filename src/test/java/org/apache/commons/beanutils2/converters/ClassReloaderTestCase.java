@@ -18,7 +18,6 @@
 package org.apache.commons.beanutils2.converters;
 
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * Tests for the ClassReloader utility class.
@@ -26,10 +25,6 @@ import junit.framework.TestSuite;
 public class ClassReloaderTestCase extends TestCase {
 
     public static class DummyClass {
-    }
-
-    public static TestSuite suite() {
-        return new TestSuite(ClassReloaderTestCase.class);
     }
 
     public ClassReloaderTestCase(final String name) {

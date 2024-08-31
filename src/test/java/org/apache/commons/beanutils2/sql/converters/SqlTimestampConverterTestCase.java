@@ -23,23 +23,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import junit.framework.TestSuite;
-
 import org.apache.commons.beanutils2.converters.AbstractDateConverterTest;
 
 /**
  * Test Case for the {@link SqlTimestampConverter} class.
  */
 public class SqlTimestampConverterTestCase extends AbstractDateConverterTest<Timestamp> {
-
-    /**
-     * Create Test Suite
-     *
-     * @return test suite
-     */
-    public static TestSuite suite() {
-        return new TestSuite(SqlTimestampConverterTestCase.class);
-    }
 
     /**
      * Constructs a new Date test case.

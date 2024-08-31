@@ -16,9 +16,7 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.apache.commons.beanutils2.BeanUtils;
 
@@ -49,15 +47,6 @@ public class Jira369TestCase extends TestCase {
         public void setbRatedCd(final String bproperty) {
             this.bproperty = bproperty;
         }
-    }
-
-    /**
-     * Create a test suite for this test.
-     *
-     * @return a test suite
-     */
-    public static Test suite() {
-        return new TestSuite(Jira369TestCase.class);
     }
 
     /**

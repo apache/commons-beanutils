@@ -22,9 +22,7 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.NumberFormat;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.apache.commons.beanutils2.ConversionException;
 
@@ -35,13 +33,6 @@ import org.apache.commons.beanutils2.ConversionException;
  */
 
 public class LocaleConvertUtilsTestCase extends TestCase {
-
-    /**
-     * Creates the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(LocaleConvertUtilsTestCase.class);
-    }
 
     private char decimalSeparator;
 

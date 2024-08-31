@@ -17,21 +17,11 @@
 package org.apache.commons.beanutils2.expression;
 
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * Junit Test for BasicResolver.
  */
 public class DefaultResolverTestCase extends TestCase {
-
-    /**
-     * Create Test Suite
-     *
-     * @return test suite
-     */
-    public static TestSuite suite() {
-        return new TestSuite(DefaultResolverTestCase.class);
-    }
 
     private final DefaultResolver resolver = new DefaultResolver();
     // Simple Properties Test Data

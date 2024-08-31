@@ -20,7 +20,6 @@ package org.apache.commons.beanutils2.converters;
 import java.util.UUID;
 
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
@@ -29,10 +28,6 @@ import org.apache.commons.beanutils2.Converter;
  * Test Case for the UUIDConverter class.
  */
 public class UUIDConverterTestCase extends TestCase {
-
-    public static TestSuite suite() {
-        return new TestSuite(UUIDConverterTestCase.class);
-    }
 
     private Converter<UUID> converter;
 

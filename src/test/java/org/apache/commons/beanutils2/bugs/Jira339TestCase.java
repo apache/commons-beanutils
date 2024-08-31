@@ -20,9 +20,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.apache.commons.beanutils2.BeanUtils;
 import org.apache.commons.beanutils2.PropertyUtils;
@@ -61,15 +59,6 @@ public class Jira339TestCase extends TestCase {
     }
 
     private static final Log LOG = LogFactory.getLog(Jira339TestCase.class);
-
-    /**
-     * Create a test suite for this test.
-     *
-     * @return a test suite
-     */
-    public static Test suite() {
-        return new TestSuite(Jira339TestCase.class);
-    }
 
     /**
      * Create a test case with the specified name.

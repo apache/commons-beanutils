@@ -19,18 +19,12 @@ package org.apache.commons.beanutils2.converters;
 
 import java.math.BigInteger;
 
-import junit.framework.TestSuite;
-
 import org.apache.commons.beanutils2.Converter;
 
 /**
  * Test Case for the BigInteger class.
  */
 public class BigIntegerConverterTestCase extends AbstractNumberConverterTest<BigInteger> {
-
-    public static TestSuite suite() {
-        return new TestSuite(BigIntegerConverterTestCase.class);
-    }
 
     private Converter<BigInteger> converter;
 

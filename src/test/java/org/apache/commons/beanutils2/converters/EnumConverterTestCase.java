@@ -18,7 +18,6 @@
 package org.apache.commons.beanutils2.converters;
 
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
@@ -30,10 +29,6 @@ public class EnumConverterTestCase extends TestCase {
 
     public enum PizzaStatus {
         ORDERED, READY, DELIVERED;
-    }
-
-    public static TestSuite suite() {
-        return new TestSuite(EnumConverterTestCase.class);
     }
 
     private Converter<Enum<PizzaStatus>> converter;

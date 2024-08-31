@@ -26,9 +26,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * <p>
@@ -51,12 +49,6 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
     private static final Date dateVal = new Date();
     private static final Map<String, Object> emptyMap = new DynaBeanPropertyMapDecorator(new BasicDynaBean(new BasicDynaClass()));
 
-    /**
-     * Creates the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(DynaBeanMapDecoratorTestCase.class);
-    }
     private final Map<Object, Object> mapVal = new HashMap<>();
     private final Object[] values = { stringVal, null, intVal, dateVal, mapVal };
     private BasicDynaBean dynaBean;

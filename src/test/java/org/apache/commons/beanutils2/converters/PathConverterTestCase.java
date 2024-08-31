@@ -22,7 +22,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
@@ -31,10 +30,6 @@ import org.apache.commons.beanutils2.Converter;
  * Test Case for the UUIDConverter class.
  */
 public class PathConverterTestCase extends TestCase {
-
-    public static TestSuite suite() {
-        return new TestSuite(PathConverterTestCase.class);
-    }
 
     private Converter<Path> converter;
 

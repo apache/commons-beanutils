@@ -18,9 +18,7 @@ package org.apache.commons.beanutils2.bugs;
 
 import java.lang.reflect.Method;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.apache.commons.beanutils2.MethodUtils;
 import org.apache.commons.beanutils2.PropertyUtils;
@@ -35,15 +33,6 @@ import org.apache.commons.logging.LogFactory;
 public class Jira298TestCase extends TestCase {
 
     private static final Log LOG = LogFactory.getLog(Jira298TestCase.class);
-
-    /**
-     * Create a test suite for this test.
-     *
-     * @return a test suite
-     */
-    public static Test suite() {
-        return new TestSuite(Jira298TestCase.class);
-    }
 
     /**
      * Create a test case with the specified name.

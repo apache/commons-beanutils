@@ -25,21 +25,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * Test accessing DynaBeans transparently via PropertyUtils.
  */
 public class DynaPropertyUtilsTestCase extends TestCase {
-
-    /**
-     * Creates the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(DynaPropertyUtilsTestCase.class);
-    }
 
     /**
      * The basic test bean for each test.

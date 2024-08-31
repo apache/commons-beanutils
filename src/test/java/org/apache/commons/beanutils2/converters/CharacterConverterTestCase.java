@@ -17,7 +17,6 @@
 package org.apache.commons.beanutils2.converters;
 
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
@@ -26,15 +25,6 @@ import org.apache.commons.beanutils2.Converter;
  * Test Case for the CharacterConverter class.
  */
 public class CharacterConverterTestCase extends TestCase {
-
-    /**
-     * Create Test Suite
-     *
-     * @return test suite
-     */
-    public static TestSuite suite() {
-        return new TestSuite(CharacterConverterTestCase.class);
-    }
 
     /**
      * Constructs a new Character Converter test case.

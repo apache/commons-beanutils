@@ -20,24 +20,13 @@ package org.apache.commons.beanutils2;
 import java.util.HashMap;
 import java.util.Map;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * JUnit Test Case containing microbenchmarks for PropertyUtils.
  */
 
 public class PropertyUtilsBenchCase extends TestCase {
-
-    /**
-     * Creates the tests included in this test suite.
-     */
-    public static Test suite() {
-
-        return new TestSuite(PropertyUtilsBenchCase.class);
-
-    }
 
     // Basic loop counter
     private long counter = 100000;

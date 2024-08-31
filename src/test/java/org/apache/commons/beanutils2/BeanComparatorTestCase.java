@@ -17,21 +17,13 @@
 
 package org.apache.commons.beanutils2;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * Test Case for the BeanComparator class.
  */
 public class BeanComparatorTestCase extends TestCase {
 
-    /**
-     * Returns the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(BeanComparatorTestCase.class);
-    }
     /**
      * The test beans for each test.
      */

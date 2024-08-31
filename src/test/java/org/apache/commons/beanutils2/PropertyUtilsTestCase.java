@@ -31,9 +31,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.apache.commons.beanutils2.priv.PrivateBeanFactory;
 import org.apache.commons.beanutils2.priv.PrivateDirect;
@@ -105,15 +103,6 @@ public class PropertyUtilsTestCase extends TestCase {
             }
         }
         return null;
-    }
-
-    /**
-     * Creates the tests included in this test suite.
-     */
-    public static Test suite() {
-
-        return new TestSuite(PropertyUtilsTestCase.class);
-
     }
 
     /**

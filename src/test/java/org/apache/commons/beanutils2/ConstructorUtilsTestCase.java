@@ -20,9 +20,7 @@ package org.apache.commons.beanutils2;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * <p>
@@ -30,13 +28,6 @@ import junit.framework.TestSuite;
  * </p>
  */
 public class ConstructorUtilsTestCase extends TestCase {
-
-    /**
-     * Creates the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(ConstructorUtilsTestCase.class);
-    }
 
     /**
      * Constructs a new instance of this test case.

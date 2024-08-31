@@ -20,8 +20,6 @@ package org.apache.commons.beanutils2.sql.converters;
 import java.sql.Date;
 import java.util.Calendar;
 
-import junit.framework.TestSuite;
-
 import org.apache.commons.beanutils2.converters.AbstractDateConverterTest;
 import org.apache.commons.beanutils2.converters.DateTimeConverter;
 
@@ -29,15 +27,6 @@ import org.apache.commons.beanutils2.converters.DateTimeConverter;
  * Test Case for the {@link SqlDateConverter} class.
  */
 public class SqlDateConverterTestCase extends AbstractDateConverterTest<Date> {
-
-    /**
-     * Create Test Suite
-     *
-     * @return test suite
-     */
-    public static TestSuite suite() {
-        return new TestSuite(SqlDateConverterTestCase.class);
-    }
 
     /**
      * Constructs a new Date test case.

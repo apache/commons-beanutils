@@ -21,21 +21,10 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Calendar;
 
-import junit.framework.TestSuite;
-
 /**
  * Test Case for the LocalDateTimeConverter class.
  */
 public class LocalDateTimeConverterTestCase extends AbstractDateConverterTest<LocalDateTime> {
-
-    /**
-     * Create Test Suite
-     *
-     * @return test suite
-     */
-    public static TestSuite suite() {
-        return new TestSuite(LocalDateTimeConverterTestCase.class);
-    }
 
     /**
      * Constructs a new Date test case.

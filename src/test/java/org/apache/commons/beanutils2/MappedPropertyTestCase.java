@@ -16,9 +16,7 @@
  */
 package org.apache.commons.beanutils2;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * <p>
@@ -26,13 +24,6 @@ import junit.framework.TestSuite;
  * </p>
  */
 public class MappedPropertyTestCase extends TestCase {
-
-    /**
-     * Creates the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(MappedPropertyTestCase.class);
-    }
 
     /**
      * Constructs a new instance of this test case.

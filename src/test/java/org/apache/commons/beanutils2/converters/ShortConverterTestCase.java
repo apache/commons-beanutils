@@ -17,18 +17,12 @@
 
 package org.apache.commons.beanutils2.converters;
 
-import junit.framework.TestSuite;
-
 import org.apache.commons.beanutils2.Converter;
 
 /**
  * Test Case for the ShortConverter class.
  */
 public class ShortConverterTestCase extends AbstractNumberConverterTest<Short> {
-
-    public static TestSuite suite() {
-        return new TestSuite(ShortConverterTestCase.class);
-    }
 
     private ShortConverter converter;
 

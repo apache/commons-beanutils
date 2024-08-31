@@ -17,18 +17,12 @@
 
 package org.apache.commons.beanutils2.converters;
 
-import junit.framework.TestSuite;
-
 import org.apache.commons.beanutils2.Converter;
 
 /**
  * Test Case for the FloatConverter class.
  */
 public class FloatConverterTestCase extends AbstractNumberConverterTest<Float> {
-
-    public static TestSuite suite() {
-        return new TestSuite(FloatConverterTestCase.class);
-    }
 
     private Converter<Float> converter;
 

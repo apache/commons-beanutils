@@ -16,9 +16,7 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.apache.commons.beanutils2.BeanUtils;
 
@@ -49,15 +47,6 @@ public class Jira345TestCase extends TestCase {
         public void setMatr3D(final String[][][] matr3D) {
             this.matr3D = matr3D;
         }
-    }
-
-    /**
-     * Create a test suite for this test.
-     *
-     * @return a test suite
-     */
-    public static Test suite() {
-        return new TestSuite(Jira345TestCase.class);
     }
 
     /**

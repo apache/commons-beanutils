@@ -21,21 +21,10 @@ import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.util.Calendar;
 
-import junit.framework.TestSuite;
-
 /**
  * Test Case for the OffsetDateTimeConverter class.
  */
 public class OffsetDateTimeConverterTestCase extends AbstractDateConverterTest<OffsetDateTime> {
-
-    /**
-     * Create Test Suite
-     *
-     * @return test suite
-     */
-    public static TestSuite suite() {
-        return new TestSuite(OffsetDateTimeConverterTestCase.class);
-    }
 
     /**
      * Constructs a new Date test case.

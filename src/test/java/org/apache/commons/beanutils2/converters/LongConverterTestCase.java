@@ -17,18 +17,12 @@
 
 package org.apache.commons.beanutils2.converters;
 
-import junit.framework.TestSuite;
-
 import org.apache.commons.beanutils2.Converter;
 
 /**
  * Test Case for the LongConverter class.
  */
 public class LongConverterTestCase extends AbstractNumberConverterTest<Long> {
-
-    public static TestSuite suite() {
-        return new TestSuite(LongConverterTestCase.class);
-    }
 
     private Converter<Long> converter;
 

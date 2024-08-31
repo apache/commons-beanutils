@@ -25,9 +25,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.apache.commons.beanutils2.converters.ArrayConverter;
 import org.apache.commons.beanutils2.converters.DateConverter;
@@ -61,13 +59,6 @@ public class BeanUtilsBeanTestCase extends TestCase {
      */
     public static boolean isPre14JVM() {
         return false;
-    }
-
-    /**
-     * Creates the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(BeanUtilsBeanTestCase.class);
     }
 
     /**

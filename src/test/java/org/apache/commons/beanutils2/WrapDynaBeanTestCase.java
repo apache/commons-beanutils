@@ -22,9 +22,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
-
 /**
  * <p>
  * Test Case for the {@code WrapDynaBean} implementation class. These tests were based on the ones in {@code PropertyUtilsTestCase} because the two classes
@@ -33,15 +30,6 @@ import junit.framework.TestSuite;
  */
 
 public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
-
-    /**
-     * Creates the tests included in this test suite.
-     */
-    public static Test suite() {
-
-        return new TestSuite(WrapDynaBeanTestCase.class);
-
-    }
 
     /**
      * Constructs a new instance of this test case.

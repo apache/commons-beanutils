@@ -17,18 +17,12 @@
 
 package org.apache.commons.beanutils2.converters;
 
-import junit.framework.TestSuite;
-
 import org.apache.commons.beanutils2.Converter;
 
 /**
  * Test Case for the DoubleConverter class.
  */
 public class DoubleConverterTestCase extends AbstractNumberConverterTest<Double> {
-
-    public static TestSuite suite() {
-        return new TestSuite(DoubleConverterTestCase.class);
-    }
 
     private Converter<Double> converter;
 

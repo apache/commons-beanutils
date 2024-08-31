@@ -24,9 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * <p>
@@ -35,12 +33,6 @@ import junit.framework.TestSuite;
  */
 public class LazyDynaMapTestCase extends TestCase {
 
-    /**
-     * Creates the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(LazyDynaMapTestCase.class);
-    }
     protected LazyDynaMap dynaMap;
     protected String testProperty = "myProperty";
     protected String testPropertyA = "myProperty-A";

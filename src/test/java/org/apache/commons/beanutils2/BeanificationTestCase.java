@@ -24,9 +24,7 @@ import java.lang.ref.WeakReference;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.apache.commons.logging.LogFactory;
 
@@ -103,13 +101,6 @@ public class BeanificationTestCase extends TestCase {
 
     /** Maximum number of iterations before our test fails */
     public static final int MAX_GC_ITERATIONS = 50;
-
-    /**
-     * Creates the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(BeanificationTestCase.class);
-    }
 
     /**
      * Constructs a new instance of this test case.

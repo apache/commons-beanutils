@@ -22,9 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.math.BigDecimal;
 import java.util.Iterator;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.apache.commons.beanutils2.DynaBean;
 import org.apache.commons.beanutils2.DynaProperty;
@@ -34,15 +32,6 @@ import org.apache.commons.beanutils2.DynaProperty;
  */
 
 public class DynaResultSetTestCase extends TestCase {
-
-    /**
-     * Creates the tests included in this test suite.
-     */
-    public static Test suite() {
-
-        return new TestSuite(DynaResultSetTestCase.class);
-
-    }
 
     /**
      * The mock result set DynaClass to be tested.

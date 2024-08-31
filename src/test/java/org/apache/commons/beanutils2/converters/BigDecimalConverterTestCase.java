@@ -19,8 +19,6 @@ package org.apache.commons.beanutils2.converters;
 
 import java.math.BigDecimal;
 
-import junit.framework.TestSuite;
-
 import org.apache.commons.beanutils2.Converter;
 
 /**
@@ -37,10 +35,6 @@ public class BigDecimalConverterTestCase extends AbstractNumberConverterTest<Big
         private ExtendingBigDecimal(final String val) {
             super(val);
         }
-    }
-
-    public static TestSuite suite() {
-        return new TestSuite(BigDecimalConverterTestCase.class);
     }
 
     private Converter<BigDecimal> converter;

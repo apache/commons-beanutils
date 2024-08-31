@@ -19,8 +19,6 @@ package org.apache.commons.beanutils2.converters;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import junit.framework.TestSuite;
-
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
 
@@ -28,10 +26,6 @@ import org.apache.commons.beanutils2.Converter;
  * Test Case for the IntegerConverter class.
  */
 public class IntegerConverterTestCase extends AbstractNumberConverterTest<Integer> {
-
-    public static TestSuite suite() {
-        return new TestSuite(IntegerConverterTestCase.class);
-    }
 
     private Converter<Integer> converter;
 

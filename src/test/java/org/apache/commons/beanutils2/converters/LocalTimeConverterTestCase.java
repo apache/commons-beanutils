@@ -20,7 +20,6 @@ package org.apache.commons.beanutils2.converters;
 import java.time.LocalTime;
 
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
@@ -29,10 +28,6 @@ import org.apache.commons.beanutils2.Converter;
  * Test Case for the LocalTimeConverter class.
  */
 public class LocalTimeConverterTestCase extends TestCase {
-
-    public static TestSuite suite() {
-        return new TestSuite(LocalTimeConverterTestCase.class);
-    }
 
     private Converter<LocalTime> converter;
 

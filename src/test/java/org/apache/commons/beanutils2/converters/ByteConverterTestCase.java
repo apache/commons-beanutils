@@ -17,18 +17,12 @@
 
 package org.apache.commons.beanutils2.converters;
 
-import junit.framework.TestSuite;
-
 import org.apache.commons.beanutils2.Converter;
 
 /**
  * Test Case for the ByteConverter class.
  */
 public class ByteConverterTestCase extends AbstractNumberConverterTest<Byte> {
-
-    public static TestSuite suite() {
-        return new TestSuite(ByteConverterTestCase.class);
-    }
 
     private Converter<Byte> converter;
 

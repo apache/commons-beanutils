@@ -29,9 +29,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * <p>
@@ -48,13 +46,6 @@ public class BasicDynaBeanTestCase extends TestCase {
     protected final static String[] properties = { "booleanProperty", "booleanSecond", "doubleProperty", "floatProperty", "intArray", "intIndexed",
             "intProperty", "listIndexed", "longProperty", "mappedProperty", "mappedIntProperty", "nullProperty", "shortProperty", "stringArray",
             "stringIndexed", "stringProperty", };
-
-    /**
-     * Creates the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(BasicDynaBeanTestCase.class);
-    }
 
     /**
      * The basic test bean for each test.

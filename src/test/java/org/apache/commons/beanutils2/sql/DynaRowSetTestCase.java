@@ -25,9 +25,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.List;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.apache.commons.beanutils2.DynaBean;
 import org.apache.commons.beanutils2.DynaProperty;
@@ -100,15 +98,6 @@ public class DynaRowSetTestCase extends TestCase {
             }
             return super.getColumnClassName(columnIndex);
         }
-    }
-
-    /**
-     * Creates the tests included in this test suite.
-     */
-    public static Test suite() {
-
-        return new TestSuite(DynaRowSetTestCase.class);
-
     }
 
     /**

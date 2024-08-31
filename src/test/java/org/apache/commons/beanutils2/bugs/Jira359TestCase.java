@@ -16,9 +16,7 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.apache.commons.beanutils2.BeanUtils;
 import org.apache.commons.beanutils2.BeanUtilsBean;
@@ -43,15 +41,6 @@ public class Jira359TestCase extends TestCase {
         public void setJcrMixinTypes(final String[] mixinTypes) {
             this.jcrMixinTypes = mixinTypes;
         }
-    }
-
-    /**
-     * Create a test suite for this test.
-     *
-     * @return a test suite
-     */
-    public static Test suite() {
-        return new TestSuite(Jira359TestCase.class);
     }
 
     /**

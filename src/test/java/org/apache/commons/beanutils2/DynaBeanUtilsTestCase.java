@@ -23,9 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * Test case for BeanUtils when the underlying bean is actually a DynaBean.
@@ -51,15 +49,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
                 new DynaProperty("stringArray", stringArray.getClass()), new DynaProperty("stringIndexed", stringArray.getClass()),
                 new DynaProperty("stringProperty", String.class), });
         return dynaClass;
-
-    }
-
-    /**
-     * Creates the tests included in this test suite.
-     */
-    public static Test suite() {
-
-        return new TestSuite(DynaBeanUtilsTestCase.class);
 
     }
 
