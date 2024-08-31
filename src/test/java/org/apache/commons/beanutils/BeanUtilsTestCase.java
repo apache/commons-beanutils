@@ -23,7 +23,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

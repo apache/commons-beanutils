@@ -27,7 +27,6 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import org.apache.commons.beanutils.BeanUtilsTestCase;
 import org.apache.commons.beanutils.ContextClassLoaderLocal;
 import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.ConvertUtils;
