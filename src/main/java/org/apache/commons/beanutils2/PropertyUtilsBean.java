@@ -1202,14 +1202,12 @@ public class PropertyUtilsBean {
         return MethodUtils.getAccessibleMethod(descriptor.getWriteMethod());
     }
 
-    /** This just catches and wraps IllegalArgumentException. */
-    private Object invokeMethod(
-                        final Method method,
-                        final Object bean,
-                        final Object[] values)
-                            throws
-                                IllegalAccessException,
-                                InvocationTargetException {
+    /**
+     * Delegates to {@link Method#invoke(Object, Object...)} and handles some unchecked exceptions.
+     *
+     * @see Method#invoke(Object, Object...)
+     */
+    private Object invokeMethod(final Method method, final Object bean, final Object[] values) throws IllegalAccessException, InvocationTargetException {
         Objects.requireNonNull(bean, "bean");
         try {
             return method.invoke(bean, values);
@@ -1239,15 +1237,10 @@ public class PropertyUtilsBean {
                     expectedString.append(parTypes[i].getName());
                 }
             }
-            final IllegalArgumentException e = new IllegalArgumentException(
-                "Cannot invoke " + method.getDeclaringClass().getName() + "."
-                + method.getName() + " on bean class '" + bean.getClass() +
-                "' - " + cause.getMessage()
-                // as per https://issues.apache.org/jira/browse/BEANUTILS-224
-                + " - had objects of type \"" + valueString
-                + "\" but expected signature \""
-                +   expectedString + "\""
-                );
+            final IllegalArgumentException e = new IllegalArgumentException("Cannot invoke " + method.getDeclaringClass().getName() + "." + method.getName()
+                    + " on bean class '" + bean.getClass() + "' - " + cause.getMessage()
+                    // as per https://issues.apache.org/jira/browse/BEANUTILS-224
+                    + " - had objects of type \"" + valueString + "\" but expected signature \"" + expectedString + "\"");
             if (!BeanUtils.initCause(e, cause)) {
                 LOG.error("Method invocation failed", cause);
             }
