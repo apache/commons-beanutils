@@ -453,10 +453,8 @@ public class PropertyUtilsBean {
                     getIndexedReadMethod();
             readMethod = MethodUtils.getAccessibleMethod(bean.getClass(), readMethod);
             if (readMethod != null) {
-                final Object[] subscript = new Object[1];
-                subscript[0] = Integer.valueOf(index);
                 try {
-                    return invokeMethod(readMethod, bean, subscript);
+                    return invokeMethod(readMethod, bean, Integer.valueOf(index));
                 } catch (final InvocationTargetException e) {
                     if (e.getTargetException() instanceof
                             IndexOutOfBoundsException) {
@@ -613,9 +611,7 @@ public class PropertyUtilsBean {
                         "' has no mapped getter method on bean class '" +
                         bean.getClass() + "'");
             }
-            final Object[] keyArray = new Object[1];
-            keyArray[0] = key;
-            result = invokeMethod(readMethod, bean, keyArray);
+            result = invokeMethod(readMethod, bean, key);
         } else {
           /* means that the result has to be retrieved from a map */
           final Method readMethod = getReadMethod(bean.getClass(), descriptor);
@@ -1207,7 +1203,7 @@ public class PropertyUtilsBean {
      *
      * @see Method#invoke(Object, Object...)
      */
-    private Object invokeMethod(final Method method, final Object bean, final Object[] values) throws IllegalAccessException, InvocationTargetException {
+    private Object invokeMethod(final Method method, final Object bean, final Object... values) throws IllegalAccessException, InvocationTargetException {
         Objects.requireNonNull(bean, "bean");
         try {
             return method.invoke(bean, values);
@@ -1481,9 +1477,6 @@ public class PropertyUtilsBean {
                     getIndexedWriteMethod();
             writeMethod = MethodUtils.getAccessibleMethod(bean.getClass(), writeMethod);
             if (writeMethod != null) {
-                final Object[] subscript = new Object[2];
-                subscript[0] = Integer.valueOf(index);
-                subscript[1] = value;
                 try {
                     if (LOG.isTraceEnabled()) {
                         final String valueClassName =
@@ -1494,7 +1487,7 @@ public class PropertyUtilsBean {
                                   + ", value=" + value
                                   + " (class " + valueClassName+ ")");
                     }
-                    invokeMethod(writeMethod, bean, subscript);
+                    invokeMethod(writeMethod, bean, Integer.valueOf(index), value);
                 } catch (final InvocationTargetException e) {
                     if (e.getTargetException() instanceof
                             IndexOutOfBoundsException) {
@@ -1683,9 +1676,6 @@ public class PropertyUtilsBean {
                     ("Property '" + name + "' has no mapped setter method" +
                      "on bean class '" + bean.getClass() + "'");
             }
-            final Object[] params = new Object[2];
-            params[0] = key;
-            params[1] = value;
             if (LOG.isTraceEnabled()) {
                 final String valueClassName =
                     value == null ? "<null>" : value.getClass().getName();
@@ -1694,7 +1684,7 @@ public class PropertyUtilsBean {
                           + ", value=" + value
                           + " (class " + valueClassName +")");
             }
-            invokeMethod(mappedWriteMethod, bean, params);
+            invokeMethod(mappedWriteMethod, bean, key, value);
         } else {
           /* means that the result has to be retrieved from a map */
           final Method readMethod = getReadMethod(bean.getClass(), descriptor);
@@ -1959,12 +1949,10 @@ public class PropertyUtilsBean {
         }
 
         // Call the property setter method
-        final Object[] values = new Object[1];
-        values[0] = value;
         if (LOG.isTraceEnabled()) {
             final String valueClassName = value == null ? "<null>" : value.getClass().getName();
             LOG.trace("setSimpleProperty: Invoking method " + writeMethod + " with value " + value + " (class " + valueClassName + ")");
         }
-        invokeMethod(writeMethod, bean, values);
+        invokeMethod(writeMethod, bean, value);
     }
 }
