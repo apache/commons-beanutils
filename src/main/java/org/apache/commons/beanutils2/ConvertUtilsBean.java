@@ -220,7 +220,7 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Convert the specified value into a String.  If the specified value
+     * Converts the specified value into a String.  If the specified value
      * is an array, the first element (converted to a String) will be
      * returned.  The registered {@link Converter} for the
      * {@link String} class will be used, which allows
@@ -252,7 +252,7 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Convert the value to an object of the specified class (if
+     * Converts the value to an object of the specified class (if
      * possible). If no converter for the desired target type is registered,
      * the passed in object is returned unchanged.
      *
@@ -307,7 +307,7 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Convert the specified value to an object of the specified class (if
+     * Converts the specified value to an object of the specified class (if
      * possible). Otherwise, return a {@link String} representation of the value.
      *
      * @param <T> The <em>desired</em> return type
@@ -336,7 +336,7 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Convert an array of specified values to an array of objects of the
+     * Converts an array of specified values to an array of objects of the
      * specified class (if possible).  If the specified Java class is itself
      * an array class, this class will be the type of the returned value.
      * Otherwise, an array will be constructed whose component type is the
@@ -373,7 +373,7 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Remove all registered {@link Converter}s, and re-establish the
+     * Deregisters all registered {@link Converter}s, and re-establish the
      * standard Converters.
      */
     public void deregister() {
@@ -399,7 +399,7 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Look up and return any registered {@link Converter} for the specified
+     * Looks up and return any registered {@link Converter} for the specified
      * source and destination class; if there is no registered Converter,
      * return {@code null}.
      *
@@ -443,7 +443,7 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Look up and return any registered {@link Converter} for the specified
+     * Looks up and return any registered {@link Converter} for the specified
      * destination class; if there is no registered Converter, return
      * {@code null}.
      *
@@ -457,7 +457,7 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Register the provided converters with the specified defaults.
+     * Registers the provided converters with the specified defaults.
      *
      * @param throwException {@code true} if the converters should
      * throw an exception when a conversion error occurs, otherwise
@@ -484,7 +484,7 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Register a custom {@link Converter} for the specified destination
+     * Registers a custom {@link Converter} for the specified destination
      * {@code Class}, replacing any previously registered Converter.
      *
      * @param converter Converter to be registered
@@ -496,7 +496,7 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Register a new ArrayConverter with the specified element delegate converter
+     * Registers a new ArrayConverter with the specified element delegate converter
      * that returns a default array of the specified size in the event of conversion errors.
      *
      * @param componentType The component type of the array
@@ -518,7 +518,7 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Register array converters.
+     * Registers array converters.
      *
      * @param throwException {@code true} if the converters should
      * throw an exception when a conversion error occurs, otherwise
@@ -590,7 +590,7 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Register the converters for other types.
+     * Registers the converters for other types.
      * </p>
      * This method registers the following converters:
      * <ul>
@@ -661,7 +661,7 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Register the converters for primitive types.
+     * Registers the converters for primitive types.
      * </p>
      * This method registers the following converters:
      * <ul>
@@ -690,7 +690,7 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Register the converters for standard types.
+     * Registers the converters for standard types.
      * </p>
      * This method registers the following converters:
      * <ul>
