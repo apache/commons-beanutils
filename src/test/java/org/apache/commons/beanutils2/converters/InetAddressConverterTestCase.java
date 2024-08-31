@@ -18,13 +18,15 @@
  */
 package org.apache.commons.beanutils2.converters;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link InetAddressConverter}.
@@ -35,7 +37,7 @@ public class InetAddressConverterTestCase {
 
     private InetAddressConverter converter;
 
-    @Before
+    @BeforeEach
     public void before() {
         converter = new InetAddressConverter();
     }
@@ -64,13 +66,13 @@ public class InetAddressConverterTestCase {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test(expected = ConversionException.class)
+    @Test
     public void testInvalidIp() {
-        converter.convert(InetAddress.class, "512.512.512.512");
+        assertThrows(ConversionException.class, () -> converter.convert(InetAddress.class, "512.512.512.512"));
     }
 
-    @Test(expected = ConversionException.class)
+    @Test
     public void testText() {
-        converter.convert(InetAddress.class, "Hello, world!");
+        assertThrows(ConversionException.class, () -> converter.convert(InetAddress.class, "Hello, world!"));
     }
 }

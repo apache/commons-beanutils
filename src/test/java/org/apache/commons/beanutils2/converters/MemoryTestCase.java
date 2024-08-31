@@ -27,7 +27,7 @@ import java.lang.ref.WeakReference;
 
 import org.apache.commons.beanutils2.ConvertUtils;
 import org.apache.commons.beanutils2.Converter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * This class provides a number of unit tests related to class loaders and garbage collection, particularly in j2ee-like situations.

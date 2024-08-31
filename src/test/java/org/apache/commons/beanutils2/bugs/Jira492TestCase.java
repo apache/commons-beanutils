@@ -29,8 +29,8 @@ import java.util.Map;
 import org.apache.commons.beanutils2.BeanUtilsBean;
 import org.apache.commons.beanutils2.PropertyUtilsBean;
 import org.apache.commons.beanutils2.bugs.other.Jira492IndexedListsSupport.IndexedBean;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * This test verifies that although BEANUTILS-492 means {@link IndexedPropertyDescriptor}s are not returned for properties of type {@link List}, they can still
@@ -103,7 +103,7 @@ public class Jira492TestCase {
         assertTrue("Did not retrieve list", someList instanceof List);
     }
 
-    @Before
+    @BeforeEach
     public void makeBean() {
         bean = new IndexedBean();
         bean.setSomeList(Arrays.asList("item0", "item1"));

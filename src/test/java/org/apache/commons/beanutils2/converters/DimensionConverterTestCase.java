@@ -18,12 +18,14 @@
  */
 package org.apache.commons.beanutils2.converters;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.awt.Dimension;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link DimensionConverter}.
@@ -34,7 +36,7 @@ public class DimensionConverterTestCase {
 
     private DimensionConverter converter;
 
-    @Before
+    @BeforeEach
     public void before() {
         converter = new DimensionConverter();
     }
@@ -55,18 +57,18 @@ public class DimensionConverterTestCase {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test(expected = ConversionException.class)
+    @Test
     public void testInvalidDimensions() {
-        converter.convert(Dimension.class, "512n512");
+        assertThrows(ConversionException.class, () -> converter.convert(Dimension.class, "512n512"));
     }
 
-    @Test(expected = ConversionException.class)
+    @Test
     public void testInvalidNumberFormatException() {
-        converter.convert(Dimension.class, "3000000000x100");
+        assertThrows(ConversionException.class, () -> converter.convert(Dimension.class, "3000000000x100"));
     }
 
-    @Test(expected = ConversionException.class)
+    @Test
     public void testNegativeDimension() {
-        converter.convert(Dimension.class, "-512x512");
+        assertThrows(ConversionException.class, () -> converter.convert(Dimension.class, "-512x512"));
     }
 }

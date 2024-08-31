@@ -28,8 +28,8 @@ import java.util.List;
 import org.apache.commons.beanutils2.PropertyUtils;
 import org.junit.Assert;
 import org.junit.Assume;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 final class FirstChildBean extends RootBean {
 }
@@ -49,7 +49,7 @@ public class Jira422TestCase {
      *
      * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-492">BEANUTILS-492</a>
      */
-    @BeforeClass
+    @BeforeAll
     public static void assumeSupportsIndexedLists() throws IntrospectionException {
         final BeanInfo beanInfo = Introspector.getBeanInfo(RootBean.class);
         for (final PropertyDescriptor pd : beanInfo.getPropertyDescriptors()) {

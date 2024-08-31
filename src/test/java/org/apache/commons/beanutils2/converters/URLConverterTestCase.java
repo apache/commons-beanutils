@@ -21,8 +21,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.net.URL;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test Case for the URLConverter class.
@@ -31,7 +31,7 @@ public class URLConverterTestCase {
 
     private URLConverter converter;
 
-    @Before
+    @BeforeEach
     public void before() {
         converter = new URLConverter();
     }

@@ -21,8 +21,8 @@ package org.apache.commons.beanutils2.converters;
 import java.util.Locale;
 
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link LocaleConverter}.
@@ -33,7 +33,7 @@ public class LocaleConverterTestCase {
 
     private LocaleConverter converter;
 
-    @Before
+    @BeforeEach
     public void before() {
         converter = new LocaleConverter();
     }

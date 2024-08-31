@@ -41,7 +41,7 @@ import org.apache.commons.beanutils2.locale.LocaleBeanUtilsBean;
 import org.apache.commons.beanutils2.locale.LocaleConvertUtils;
 import org.apache.commons.beanutils2.locale.converters.IntegerLocaleConverter;
 import org.junit.Assume;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests BeanUtils memory leaks.

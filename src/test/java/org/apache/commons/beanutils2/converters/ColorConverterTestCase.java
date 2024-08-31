@@ -18,12 +18,14 @@
  */
 package org.apache.commons.beanutils2.converters;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.awt.Color;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link ColorConverter}.
@@ -34,19 +36,19 @@ public class ColorConverterTestCase {
 
     private ColorConverter converter;
 
-    @Before
+    @BeforeEach
     public void before() {
         converter = new ColorConverter();
     }
 
-    @Test(expected = ConversionException.class)
+    @Test
     public void testColorBlank() {
-        converter.convert(Color.class, "#");
+        assertThrows(ConversionException.class, () -> converter.convert(Color.class, "#"));
     }
 
-    @Test(expected = ConversionException.class)
+    @Test
     public void testColorInvalidLength() {
-        converter.convert(Color.class, "#F");
+        assertThrows(ConversionException.class, () -> converter.convert(Color.class, "#F"));
     }
 
     @Test
@@ -149,13 +151,13 @@ public class ColorConverterTestCase {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test(expected = ConversionException.class)
+    @Test
     public void testInvalidNumber3() {
-        converter.convert(Color.class, "#FFZ");
+        assertThrows(ConversionException.class, () -> converter.convert(Color.class, "#FFZ"));
     }
 
-    @Test(expected = ConversionException.class)
+    @Test
     public void testInvalidNumber4() {
-        converter.convert(Color.class, "#FFFY");
+        assertThrows(ConversionException.class, () -> converter.convert(Color.class, "#FFFY"));
     }
 }

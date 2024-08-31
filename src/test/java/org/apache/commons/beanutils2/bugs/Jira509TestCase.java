@@ -32,15 +32,16 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.beanutils2.WrapDynaClass;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 /**
  * Tests Jira issue# BEANUTILS-509.
  *
  * The bug causes an infinite loop in WeakHashMap.get which was not accessed in a thread safe manner. This originates with WrapDynaClass.createDynaClass().
  */
-@Ignore("https://issues.apache.org/jira/browse/BEANUTILS-509.")
+@Disabled("https://issues.apache.org/jira/browse/BEANUTILS-509.")
 public class Jira509TestCase {
 
     protected int random(final int max) {
@@ -51,22 +52,22 @@ public class Jira509TestCase {
      * The bug makes the {@link WrapDynaClass#createDynaClass} method run in an infinite loop and acquire locks. The test case adds a timeout. The test case may
      * pass even without this fix because this is a rare scenario.
      */
-    @Test(timeout = 60_000)
+    @Timeout(value = 60, unit = TimeUnit.SECONDS)
+    @Test
     public void test_concurrent() throws InterruptedException {
         final List<Class<?>> classList = Arrays.asList(Map.class, HashMap.class, Collections.class, Arrays.class, Collection.class, Set.class, ArrayList.class,
                 List.class, HashSet.class);
-
         // All daemon threads.
         final ExecutorService executor = Executors.newFixedThreadPool(100, r -> {
             final Thread thread = new Thread(r);
             thread.setDaemon(true);
             return thread;
         });
-
         try {
             // Loop _may_ hang without fix.
             for (int i = 1; i < 10_000_000; i++) {
                 executor.submit(new Runnable() {
+
                     final Class<?> clazz = classList.get(random(classList.size()));
 
                     @Override
@@ -80,7 +81,6 @@ public class Jira509TestCase {
         } finally {
             executor.shutdown();
             executor.awaitTermination(3500, TimeUnit.MILLISECONDS);
-
         }
     }
 

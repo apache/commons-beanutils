@@ -27,9 +27,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.beanutils2.bugs.other.Jira492IndexedListsSupport;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * <p>
@@ -54,7 +54,7 @@ public class IndexedPropertyTestCase {
     /**
      * Sets up instance variables required by this test case.
      */
-    @Before
+    @BeforeEach
     public void setUp() {
 
         // BeanUtils
@@ -90,7 +90,7 @@ public class IndexedPropertyTestCase {
     /**
      * Tear down instance variables required by this test case.
      */
-    @After
+    @AfterEach
     public void tearDown() {
         bean = null;
     }
