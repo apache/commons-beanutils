@@ -16,6 +16,11 @@
  */
 package org.apache.commons.beanutils2;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -28,6 +33,10 @@ import org.apache.commons.collections4.map.AbstractMapTest;
  * Test cases for BeanMap
  */
 public class BeanMapTestCase extends AbstractMapTest<String, Object> {
+
+    public BeanMapTestCase() {
+        super("BeanMapTestCase");
+    }
 
     public static class BeanThrowingExceptions extends BeanWithProperties {
         private static final long serialVersionUID = 1L;
@@ -155,10 +164,6 @@ public class BeanMapTestCase extends AbstractMapTest<String, Object> {
      * since getSampleValues() would otherwise construct a new and different Object each time.
      **/
     private final Object objectInFullMap = new Object();
-
-    public BeanMapTestCase(final String testName) {
-        super(testName);
-    }
 
     @Override
     public Object[] getNewSampleValues() {
