@@ -26,10 +26,6 @@ public class ByteConverterTestCase extends AbstractNumberConverterTest<Byte> {
 
     private Converter<Byte> converter;
 
-    public ByteConverterTestCase(final String name) {
-        super(name);
-    }
-
     @Override
     protected Class<Byte> getExpectedType() {
         return Byte.class;

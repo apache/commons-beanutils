@@ -26,10 +26,6 @@ public class LongConverterTestCase extends AbstractNumberConverterTest<Long> {
 
     private Converter<Long> converter;
 
-    public LongConverterTestCase(final String name) {
-        super(name);
-    }
-
     @Override
     protected Class<Long> getExpectedType() {
         return Long.class;

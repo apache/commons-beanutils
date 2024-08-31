@@ -17,21 +17,26 @@
 
 package org.apache.commons.beanutils2.sql;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.math.BigDecimal;
 import java.util.Iterator;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.beanutils2.DynaBean;
 import org.apache.commons.beanutils2.DynaProperty;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test accessing ResultSets via DynaBeans.
  */
-
-public class DynaResultSetTestCase extends TestCase {
+public class DynaResultSetTestCase {
 
     /**
      * The mock result set DynaClass to be tested.
@@ -45,20 +50,9 @@ public class DynaResultSetTestCase extends TestCase {
             "longproperty", "nullproperty", "shortproperty", "stringproperty", "timeproperty", "timestampproperty" };
 
     /**
-     * Constructs a new instance of this test case.
-     *
-     * @param name Name of the test case
-     */
-    public DynaResultSetTestCase(final String name) {
-
-        super(name);
-
-    }
-
-    /**
      * Sets up instance variables required by this test case.
      */
-    @Override
+    @BeforeEach
     public void setUp() throws Exception {
 
         dynaClass = new ResultSetDynaClass(TestResultSet.createProxy());
@@ -68,45 +62,50 @@ public class DynaResultSetTestCase extends TestCase {
     /**
      * Tear down instance variables required by this test case.
      */
-    @Override
+    @AfterEach
     public void tearDown() {
 
         dynaClass = null;
 
     }
 
+    @Test
     public void testGetDynaProperties() {
 
         final DynaProperty[] dynaProps = dynaClass.getDynaProperties();
-        assertNotNull("dynaProps exists", dynaProps);
-        assertEquals("dynaProps length", columns.length, dynaProps.length);
+        assertNotNull(dynaProps, "dynaProps exists");
+        assertEquals(columns.length, dynaProps.length, "dynaProps length");
         for (int i = 0; i < columns.length; i++) {
-            assertEquals("Property " + columns[i], columns[i], dynaProps[i].getName());
+            assertEquals(columns[i], dynaProps[i].getName(), "Property " + columns[i]);
         }
 
     }
 
+    @Test
     public void testGetDynaProperty() {
         // Invalid argument test
         assertThrows(NullPointerException.class, () -> dynaClass.getDynaProperty(null));
         // Negative test
         DynaProperty dynaProp = dynaClass.getDynaProperty("unknownProperty");
-        assertNull("unknown property returns null", dynaProp);
+        assertNull(dynaProp, "unknown property returns null");
         // Positive test
         dynaProp = dynaClass.getDynaProperty("stringproperty");
-        assertNotNull("string property exists", dynaProp);
-        assertEquals("string property name", "stringproperty", dynaProp.getName());
-        assertEquals("string property class", String.class, dynaProp.getType());
+        assertNotNull(dynaProp, "string property exists");
+        assertEquals("stringproperty", dynaProp.getName(), "string property name");
+        assertEquals(String.class, dynaProp.getType(), "string property class");
     }
 
+    @Test
     public void testGetName() {
-        assertEquals("DynaClass name", "org.apache.commons.beanutils2.sql.ResultSetDynaClass", dynaClass.getName());
+        assertEquals("org.apache.commons.beanutils2.sql.ResultSetDynaClass", dynaClass.getName(),
+                                "DynaClass name");
     }
 
+    @Test
     public void testIteratorCount() {
 
         final Iterator<?> rows = dynaClass.iterator();
-        assertNotNull("iterator exists", rows);
+        assertNotNull(rows, "iterator exists");
         int n = 0;
         while (rows.hasNext()) {
             rows.next();
@@ -115,10 +114,11 @@ public class DynaResultSetTestCase extends TestCase {
                 fail("Returned too many rows");
             }
         }
-        assertEquals("iterator rows", 5, n);
+        assertEquals(5, n, "iterator rows");
 
     }
 
+    @Test
     public void testIteratorResults() {
 
         // Grab the third row
@@ -138,28 +138,30 @@ public class DynaResultSetTestCase extends TestCase {
         // Verify property values
 
         final Object bigDecimalProperty = row.get("bigdecimalproperty");
-        assertNotNull("bigDecimalProperty exists", bigDecimalProperty);
-        assertTrue("bigDecimalProperty type", bigDecimalProperty instanceof BigDecimal);
-        assertEquals("bigDecimalProperty value", 123.45, ((BigDecimal) bigDecimalProperty).doubleValue(), 0.005);
+        assertNotNull(bigDecimalProperty, "bigDecimalProperty exists");
+        assertTrue(bigDecimalProperty instanceof BigDecimal, "bigDecimalProperty type");
+        assertEquals(123.45, ((BigDecimal) bigDecimalProperty).doubleValue(), 0.005,
+                                "bigDecimalProperty value");
 
         final Object intProperty = row.get("intproperty");
-        assertNotNull("intProperty exists", intProperty);
-        assertTrue("intProperty type", intProperty instanceof Integer);
-        assertEquals("intProperty value", 103, ((Integer) intProperty).intValue());
+        assertNotNull(intProperty, "intProperty exists");
+        assertTrue(intProperty instanceof Integer, "intProperty type");
+        assertEquals(103, ((Integer) intProperty).intValue(), "intProperty value");
 
         final Object nullProperty = row.get("nullproperty");
-        assertNull("nullProperty null", nullProperty);
+        assertNull(nullProperty, "nullProperty null");
 
         final Object stringProperty = row.get("stringproperty");
-        assertNotNull("stringProperty exists", stringProperty);
-        assertTrue("stringProperty type", stringProperty instanceof String);
-        assertEquals("stringProperty value", "This is a string", (String) stringProperty);
+        assertNotNull(stringProperty, "stringProperty exists");
+        assertTrue(stringProperty instanceof String, "stringProperty type");
+        assertEquals("This is a string", (String) stringProperty, "stringProperty value");
 
     }
 
     /**
      * Test normal case column names (i.e. not converted to lower case)
      */
+    @Test
     public void testIteratorResultsNormalCase() {
         ResultSetDynaClass dynaClass = null;
         try {
@@ -185,25 +187,27 @@ public class DynaResultSetTestCase extends TestCase {
         // Verify property values
 
         final Object bigDecimalProperty = row.get("bigDecimalProperty");
-        assertNotNull("bigDecimalProperty exists", bigDecimalProperty);
-        assertTrue("bigDecimalProperty type", bigDecimalProperty instanceof BigDecimal);
-        assertEquals("bigDecimalProperty value", 123.45, ((BigDecimal) bigDecimalProperty).doubleValue(), 0.005);
+        assertNotNull(bigDecimalProperty, "bigDecimalProperty exists");
+        assertTrue(bigDecimalProperty instanceof BigDecimal, "bigDecimalProperty type");
+        assertEquals(123.45, ((BigDecimal) bigDecimalProperty).doubleValue(), 0.005,
+                                "bigDecimalProperty value");
 
         final Object intProperty = row.get("intProperty");
-        assertNotNull("intProperty exists", intProperty);
-        assertTrue("intProperty type", intProperty instanceof Integer);
-        assertEquals("intProperty value", 103, ((Integer) intProperty).intValue());
+        assertNotNull(intProperty, "intProperty exists");
+        assertTrue(intProperty instanceof Integer, "intProperty type");
+        assertEquals(103, ((Integer) intProperty).intValue(), "intProperty value");
 
         final Object nullProperty = row.get("nullProperty");
-        assertNull("nullProperty null", nullProperty);
+        assertNull(nullProperty, "nullProperty null");
 
         final Object stringProperty = row.get("stringProperty");
-        assertNotNull("stringProperty exists", stringProperty);
-        assertTrue("stringProperty type", stringProperty instanceof String);
-        assertEquals("stringProperty value", "This is a string", (String) stringProperty);
+        assertNotNull(stringProperty, "stringProperty exists");
+        assertTrue(stringProperty instanceof String, "stringProperty type");
+        assertEquals("This is a string", (String) stringProperty, "stringProperty value");
 
     }
 
+    @Test
     public void testNewInstance() {
 
         try {

@@ -16,19 +16,22 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
-import java.beans.PropertyDescriptor;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import junit.framework.TestCase;
+import java.beans.PropertyDescriptor;
 
 import org.apache.commons.beanutils2.FluentIntrospectionTestBean;
 import org.apache.commons.beanutils2.FluentPropertyBeanIntrospector;
 import org.apache.commons.beanutils2.PropertyUtilsBean;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Write methods for PropertyDescriptors created during custom introspection are lost. See <a href="https://issues.apache.org/jira/browse/BEANUTILS-456">JIRA
  * issue BEANUTILS-456</a>.
  */
-public class Jira456TestCase extends TestCase {
+public class Jira456TestCase {
     /** Constant for the name of the test property. */
     private static final String TEST_PROP = "fluentGetProperty";
 
@@ -51,9 +54,8 @@ public class Jira456TestCase extends TestCase {
         return bean;
     }
 
-    @Override
+    @BeforeEach
     protected void setUp() throws Exception {
-        super.setUp();
         pub = new PropertyUtilsBean();
         pub.addBeanIntrospector(new FluentPropertyBeanIntrospector());
     }
@@ -61,18 +63,20 @@ public class Jira456TestCase extends TestCase {
     /**
      * Tests whether a property is recognized as writable even if the reference to its write method was freed.
      */
+    @Test
     public void testPropertyIsWritable() throws Exception {
         final FluentIntrospectionTestBean bean = clearWriteMethodRef();
-        assertTrue("Not writable", pub.isWriteable(bean, TEST_PROP));
+        assertTrue(pub.isWriteable(bean, TEST_PROP), "Not writable");
     }
 
     /**
      * Tests whether a lost write method is automatically recovered and can be invoked.
      */
+    @Test
     public void testWriteMethodRecover() throws Exception {
         final FluentIntrospectionTestBean bean = clearWriteMethodRef();
         final String value = "Test value";
         pub.setProperty(bean, TEST_PROP, value);
-        assertEquals("Property not set", value, bean.getFluentGetProperty());
+        assertEquals(value, bean.getFluentGetProperty(), "Property not set");
     }
 }

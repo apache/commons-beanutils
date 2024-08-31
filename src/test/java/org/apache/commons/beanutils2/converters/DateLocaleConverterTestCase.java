@@ -46,10 +46,6 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase<Dat
     protected String defaultShortDateValue;
     protected boolean validLocalDateSymbols;
 
-    public DateLocaleConverterTestCase(final String name) {
-        super(name);
-    }
-
     /**
      * Sets up instance variables required by this test case.
      */

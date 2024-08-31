@@ -18,32 +18,23 @@ package org.apache.commons.beanutils2.bugs;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.beanutils2.BeanUtils;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-368">https://issues.apache.org/jira/browse/BEANUTILS-368</a>
  */
-public class Jira368TestCase extends TestCase {
-
-    /**
-     * Create a test case with the specified name.
-     *
-     * @param name The name of the test
-     */
-    public Jira368TestCase(final String name) {
-        super(name);
-    }
+public class Jira368TestCase {
 
     /**
      * Sets up.
      *
      * @throws Exception
      */
-    @Override
+    @BeforeEach
     protected void setUp() throws Exception {
-        super.setUp();
     }
 
     /**
@@ -51,14 +42,14 @@ public class Jira368TestCase extends TestCase {
      *
      * @throws Exception
      */
-    @Override
+    @AfterEach
     protected void tearDown() throws Exception {
-        super.tearDown();
     }
 
     /**
      * Test {@link BeanUtils} setProperty() with Null value
      */
+    @Test
     public void testBeanUtilsSetProperty_NullBean() throws Exception {
         assertThrows(NullPointerException.class, () -> BeanUtils.setProperty(null, "foo", "bar"));
     }

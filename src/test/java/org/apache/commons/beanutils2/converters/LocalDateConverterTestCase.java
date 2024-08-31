@@ -27,15 +27,6 @@ import java.util.Calendar;
 public class LocalDateConverterTestCase extends AbstractDateConverterTest<LocalDate> {
 
     /**
-     * Constructs a new Date test case.
-     *
-     * @param name Test Name
-     */
-    public LocalDateConverterTestCase(final String name) {
-        super(name);
-    }
-
-    /**
      * Gets the expected type
      *
      * @return The expected type

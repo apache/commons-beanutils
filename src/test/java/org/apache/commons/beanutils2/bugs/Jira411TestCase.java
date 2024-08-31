@@ -16,16 +16,16 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.beanutils2.BeanUtilsBean;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * BeanUtilsBean.setProperty throws IllegalArgumentException if getter of nested property returns null
  *
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-411">https://issues.apache.org/jira/browse/BEANUTILS-411</a>
  */
-public class Jira411TestCase extends TestCase {
+public class Jira411TestCase {
 
     public class DummyBean {
 
@@ -43,12 +43,13 @@ public class Jira411TestCase extends TestCase {
 
     private DummyBean testBean;
 
-    @Override
+    @BeforeEach
     protected void setUp() throws Exception {
         instance = new BeanUtilsBean();
         testBean = new DummyBean();
     }
 
+    @Test
     public void testSetProperty() throws Exception {
         instance.setProperty(testBean, "imgLink.x", "1");
     }

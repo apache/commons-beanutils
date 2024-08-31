@@ -29,15 +29,6 @@ import org.apache.commons.beanutils2.converters.DateTimeConverter;
 public class SqlDateConverterTestCase extends AbstractDateConverterTest<Date> {
 
     /**
-     * Constructs a new Date test case.
-     *
-     * @param name Test Name
-     */
-    public SqlDateConverterTestCase(final String name) {
-        super(name);
-    }
-
-    /**
      * Gets the expected type
      *
      * @return The expected type

@@ -26,10 +26,6 @@ public class FloatConverterTestCase extends AbstractNumberConverterTest<Float> {
 
     private Converter<Float> converter;
 
-    public FloatConverterTestCase(final String name) {
-        super(name);
-    }
-
     @Override
     protected Class<Float> getExpectedType() {
         return Float.class;

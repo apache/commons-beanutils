@@ -17,26 +17,27 @@
 
 package org.apache.commons.beanutils2;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.function.Predicate;
 
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit test for {@link BeanPredicate}
  */
-public class BeanPredicateTestCase extends TestCase {
+public class BeanPredicateTestCase {
 
-    public BeanPredicateTestCase(final String name) {
-        super(name);
-    }
-
+    @Test
     public void testEqual() {
         final Predicate<String> p = s -> s.equals("foo");
         final BeanPredicate<String> predicate = new BeanPredicate<>("stringProperty", p);
         assertTrue(predicate.test(new TestBean("foo")));
-        assertTrue(!predicate.test(new TestBean("bar")));
+        assertFalse(predicate.test(new TestBean("bar")));
     }
 
+    @Test
     public void testInstanceOf() {
         final Predicate<String> p = String.class::isInstance;
         final BeanPredicate<String> predicate = new BeanPredicate<>("stringProperty", p);
@@ -44,19 +45,21 @@ public class BeanPredicateTestCase extends TestCase {
         assertTrue(predicate.test(new TestBean("bar")));
     }
 
+    @Test
     public void testNotEqual() {
         final Predicate<String> p = s -> !s.equals("foo");
         final BeanPredicate<String> predicate = new BeanPredicate<>("stringProperty", p);
-        assertTrue(!predicate.test(new TestBean("foo")));
+        assertFalse(predicate.test(new TestBean("foo")));
         assertTrue(predicate.test(new TestBean("bar")));
     }
 
+    @Test
     public void testNull() {
         final Predicate<String> p = s -> s == null;
         final BeanPredicate<String> predicate = new BeanPredicate<>("stringProperty", p);
         final String nullString = null;
         assertTrue(predicate.test(new TestBean(nullString)));
-        assertTrue(!predicate.test(new TestBean("bar")));
+        assertFalse(predicate.test(new TestBean("bar")));
     }
 
 }

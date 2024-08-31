@@ -24,15 +24,6 @@ import java.util.Calendar;
 public class CalendarConverterTestCase extends AbstractDateConverterTest<Calendar> {
 
     /**
-     * Constructs a new Calendar test case.
-     *
-     * @param name Test Name
-     */
-    public CalendarConverterTestCase(final String name) {
-        super(name);
-    }
-
-    /**
      * Gets the expected type
      *
      * @return The expected type

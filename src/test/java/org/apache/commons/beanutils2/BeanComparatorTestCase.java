@@ -17,12 +17,18 @@
 
 package org.apache.commons.beanutils2;
 
-import junit.framework.TestCase;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test Case for the BeanComparator class.
  */
-public class BeanComparatorTestCase extends TestCase {
+public class BeanComparatorTestCase {
 
     /**
      * The test beans for each test.
@@ -33,18 +39,9 @@ public class BeanComparatorTestCase extends TestCase {
     protected AlphaBean alphaBean2;
 
     /**
-     * Constructs a new instance of this test case.
-     *
-     * @param name Name of the test case
-     */
-    public BeanComparatorTestCase(final String name) {
-        super(name);
-    }
-
-    /**
      * Sets up instance variables required by this test case.
      */
-    @Override
+    @BeforeEach
     public void setUp() {
         bean = new TestBean();
         alphaBean1 = new AlphaBean("alphaBean1");
@@ -54,7 +51,7 @@ public class BeanComparatorTestCase extends TestCase {
     /**
      * Tears down instance variables required by this test case.
      */
-    @Override
+    @AfterEach
     public void tearDown() {
         bean = null;
         alphaBean1 = null;
@@ -64,26 +61,29 @@ public class BeanComparatorTestCase extends TestCase {
     /**
      * Tests comparing one bean against itself.
      */
+    @Test
     public void testCompareBeanAgainstSelf() {
         final BeanComparator<AlphaBean, String> beanComparator = new BeanComparator<>("name");
         final int result = beanComparator.compare(alphaBean1, alphaBean1);
-        assertEquals("Comparator did not sort properly.  Result:" + result, 0, result);
+        assertEquals(0, result, () -> "Comparator did not sort properly.  Result:" + result);
     }
 
     /**
      * Tests comparing two beans via their name using the default Comparator where they have the same value.
      */
+    @Test
     public void testCompareIdentical() {
         alphaBean1 = new AlphaBean("alphabean");
         alphaBean2 = new AlphaBean("alphabean");
         final BeanComparator<AlphaBean, String> beanComparator = new BeanComparator<>("name");
         final int result = beanComparator.compare(alphaBean1, alphaBean2);
-        assertEquals("Comparator did not sort properly.  Result:" + result, 0, result);
+        assertEquals(0, result, () -> "Comparator did not sort properly.  Result:" + result);
     }
 
     /**
      * Tests comparing two beans on a boolean property, which is not possible.
      */
+    @Test
     public void testCompareOnBooleanProperty() {
         try {
             final TestBean testBeanA = new TestBean();
@@ -107,6 +107,7 @@ public class BeanComparatorTestCase extends TestCase {
     /**
      * Tests comparing two beans who don't have a property
      */
+    @Test
     public void testCompareOnMissingProperty() {
         try {
             final BeanComparator<AlphaBean, String> beanComparator = new BeanComparator<>("bogusName");
@@ -114,13 +115,14 @@ public class BeanComparatorTestCase extends TestCase {
             fail("should not be able to compare");
 
         } catch (final Exception e) {
-            assertTrue("Wrong exception was thrown: " + e, e.toString().contains("Unknown property"));
+            assertTrue(e.toString().contains("Unknown property"), () -> "Wrong exception was thrown: " + e);
         }
     }
 
     /**
      * Tests comparing two beans via their name using the default Comparator, but with one of the beans being null.
      */
+    @Test
     public void testCompareWithNulls() {
         try {
             final BeanComparator<AlphaBean, String> beanComparator = new BeanComparator<>("name");
@@ -135,6 +137,7 @@ public class BeanComparatorTestCase extends TestCase {
     /**
      * Tests comparing two beans on a boolean property, then changing the property and testing/
      */
+    @Test
     public void testSetProperty() {
         final TestBean testBeanA = new TestBean();
         final TestBean testBeanB = new TestBean();
@@ -143,35 +146,37 @@ public class BeanComparatorTestCase extends TestCase {
         testBeanB.setDoubleProperty(1.0);
 
         final BeanComparator<TestBean, String> beanComparator = new BeanComparator<>("doubleProperty");
-        int result = beanComparator.compare(testBeanA, testBeanB);
+        final int result1 = beanComparator.compare(testBeanA, testBeanB);
 
-        assertEquals("Comparator did not sort properly.  Result:" + result, 1, result);
+        assertEquals(1, result1, () -> "Comparator did not sort properly.  Result:" + result1);
 
         testBeanA.setStringProperty("string 1");
         testBeanB.setStringProperty("string 2");
 
         beanComparator.setProperty("stringProperty");
 
-        result = beanComparator.compare(testBeanA, testBeanB);
+        final int result2 = beanComparator.compare(testBeanA, testBeanB);
 
-        assertEquals("Comparator did not sort properly.  Result:" + result, -1, result);
+        assertEquals(-1, result2, () -> "Comparator did not sort properly.  Result:" + result2);
     }
 
     /**
      * Tests comparing two beans via their name using the default Comparator
      */
+    @Test
     public void testSimpleCompare() {
         final BeanComparator<AlphaBean, String> beanComparator = new BeanComparator<>("name");
         final int result = beanComparator.compare(alphaBean1, alphaBean2);
-        assertEquals("Comparator did not sort properly.  Result:" + result, -1, result);
+        assertEquals(-1, result, () -> "Comparator did not sort properly.  Result:" + result);
     }
 
     /**
      * Tests comparing two beans via their name using the default Comparator, but the inverse
      */
+    @Test
     public void testSimpleCompareInverse() {
         final BeanComparator<AlphaBean, String> beanComparator = new BeanComparator<>("name");
         final int result = beanComparator.compare(alphaBean2, alphaBean1);
-        assertEquals("Comparator did not sort properly.  Result:" + result, 1, result);
+        assertEquals(1, result, () -> "Comparator did not sort properly.  Result:" + result);
     }
 }

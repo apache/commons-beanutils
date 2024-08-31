@@ -58,10 +58,6 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
     protected String expectedDecimalValue;
     protected String expectedIntegerValue;
 
-    public BaseLocaleConverterTestCase(final String name) {
-        super(name);
-    }
-
     /**
      * Test Converting an invalid value.
      */

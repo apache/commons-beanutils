@@ -26,10 +26,6 @@ public class ShortConverterTestCase extends AbstractNumberConverterTest<Short> {
 
     private ShortConverter converter;
 
-    public ShortConverterTestCase(final String name) {
-        super(name);
-    }
-
     @Override
     protected Class<Short> getExpectedType() {
         return Short.class;

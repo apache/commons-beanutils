@@ -16,14 +16,19 @@
  */
 package org.apache.commons.beanutils2;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 import java.util.Collection;
 
-import junit.framework.TestCase;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link DynaProperty}.
  */
-public class DynaPropertyTestCase extends TestCase {
+public class DynaPropertyTestCase {
 
     private DynaProperty testPropertyWithName;
     private DynaProperty testProperty1Duplicate;
@@ -34,21 +39,10 @@ public class DynaPropertyTestCase extends TestCase {
     private DynaProperty testProperty3Duplicate;
 
     /**
-     * Constructs a new instance of this test case.
-     *
-     * @param name Name of the test case
-     */
-    public DynaPropertyTestCase(final String name) {
-        super(name);
-    }
-
-    /**
      * Sets up instance variables required by this test case.
      */
-    @Override
+    @BeforeEach
     protected void setUp() throws Exception {
-
-        super.setUp();
 
         testPropertyWithName = new DynaProperty("test1");
         testProperty1Duplicate = new DynaProperty("test1");
@@ -63,18 +57,18 @@ public class DynaPropertyTestCase extends TestCase {
     /**
      * Tear down instance variables required by this test case.
      */
-    @Override
+    @AfterEach
     protected void tearDown() throws Exception {
 
         testPropertyWithName = testProperty1Duplicate = null;
         testPropertyWithNameAndType = testProperty2Duplicate = null;
         testPropertyWithNameAndTypeAndContentType = testProperty3Duplicate = null;
-        super.tearDown();
     }
 
     /**
      * Class under test for boolean equals(Object)
      */
+    @Test
     public void testEqualsObject() {
 
         assertEquals(testPropertyWithName, testProperty1Duplicate);
@@ -88,12 +82,14 @@ public class DynaPropertyTestCase extends TestCase {
     /**
      * Class under test for int hashCode(Object)
      */
+    @Test
     public void testHashCode() {
 
         final int initialHashCode = testPropertyWithNameAndTypeAndContentType.hashCode();
         assertEquals(testPropertyWithName.hashCode(), testProperty1Duplicate.hashCode());
         assertEquals(testPropertyWithNameAndType.hashCode(), testProperty2Duplicate.hashCode());
-        assertEquals(testPropertyWithNameAndTypeAndContentType.hashCode(), testProperty3Duplicate.hashCode());
+        assertEquals(testPropertyWithNameAndTypeAndContentType.hashCode(),
+                                testProperty3Duplicate.hashCode());
         assertEquals(initialHashCode, testPropertyWithNameAndTypeAndContentType.hashCode());
     }
 

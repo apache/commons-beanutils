@@ -16,6 +16,12 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.beans.IntrospectionException;
 import java.lang.ref.SoftReference;
 import java.lang.reflect.Method;
@@ -25,17 +31,16 @@ import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.beanutils2.MappedPropertyDescriptor;
 import org.apache.commons.beanutils2.memoryleaktests.MemoryLeakTestCase;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for Jira issue# BEANUTILS-347.
  *
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-347">https://issues.apache.org/jira/browse/BEANUTILS-347</a>
  */
-public class Jira347TestCase extends TestCase {
+public class Jira347TestCase {
 
     /**
      * Create a new class loader instance.
@@ -114,6 +119,7 @@ public class Jira347TestCase extends TestCase {
      * the same method is returned or in both cases null. If the constructor of the MappedPropertyDescriptor would recognize the situation (of the first param
      * not being of type String) this would be fine as well.
      */
+    @Test
     public void testMappedPropertyDescriptor_AnyArgsProperty() throws Exception {
         final String className = "org.apache.commons.beanutils2.MappedPropertyTestBean";
         try (final URLClassLoader loader = newClassLoader()) {
@@ -121,10 +127,11 @@ public class Jira347TestCase extends TestCase {
             beanClass.newInstance();
 
             // Sanity checks only
-            assertNotNull("ClassLoader is null", loader);
-            assertNotNull("BeanClass is null", beanClass);
-            assertNotSame("ClassLoaders should be different..", getClass().getClassLoader(), beanClass.getClassLoader());
-            assertSame("BeanClass ClassLoader incorrect", beanClass.getClassLoader(), loader);
+            assertNotNull(loader, "ClassLoader is null");
+            assertNotNull(beanClass, "BeanClass is null");
+            assertNotSame(getClass().getClassLoader(), beanClass.getClassLoader(),
+                                     "ClassLoaders should be different..");
+            assertSame(beanClass.getClassLoader(), loader, "BeanClass ClassLoader incorrect");
 
             // now start the test
             MappedPropertyDescriptor descriptor = null;
@@ -139,7 +146,8 @@ public class Jira347TestCase extends TestCase {
                 forceGarbageCollection();
                 try {
                     final String m2 = getMappedWriteMethod(descriptor);
-                    assertEquals("Method returned post garbage collection differs from Method returned prior to gc", m1, m2);
+                    assertEquals(m1, m2,
+                                            "Method returned post garbage collection differs from Method returned prior to gc");
                 } catch (final RuntimeException e) {
                     fail("getMappedWriteMethod threw an exception after garbage collection " + e);
                 }

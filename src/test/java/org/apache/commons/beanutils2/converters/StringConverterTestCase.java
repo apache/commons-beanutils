@@ -16,34 +16,38 @@
  */
 package org.apache.commons.beanutils2.converters;
 
-import junit.framework.TestCase;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@code StringConverter}.
  */
-public class StringConverterTestCase extends TestCase {
+public class StringConverterTestCase {
     /** The converter to be tested. */
     private StringConverter converter;
 
-    @Override
+    @BeforeEach
     protected void setUp() throws Exception {
-        super.setUp();
         converter = new StringConverter();
     }
 
     /**
      * Tests a conversion to a string type.
      */
+    @Test
     public void testConvertToTypeString() {
         final Object value = new Object();
         final String strVal = converter.convert(String.class, value);
-        assertEquals("Wrong conversion result", value.toString(), strVal);
+        assertEquals(value.toString(), strVal, "Wrong conversion result");
     }
 
     /**
      * Tests whether the correct default type is returned.
      */
+    @Test
     public void testDefaultType() {
-        assertEquals("Wrong default type", String.class, converter.getDefaultType());
+        assertEquals(String.class, converter.getDefaultType(), "Wrong default type");
     }
 }

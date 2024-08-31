@@ -17,23 +17,23 @@
 
 package org.apache.commons.beanutils2.converters;
 
-import java.time.MonthDay;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import junit.framework.TestCase;
+import java.time.MonthDay;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test Case for the MonthDayConverter class.
  */
-public class MonthDayConverterTestCase extends TestCase {
+public class MonthDayConverterTestCase {
 
     private Converter<MonthDay> converter;
-
-    public MonthDayConverterTestCase(final String name) {
-        super(name);
-    }
 
     protected Class<?> getExpectedType() {
         return MonthDay.class;
@@ -43,16 +43,17 @@ public class MonthDayConverterTestCase extends TestCase {
         return new MonthDayConverter();
     }
 
-    @Override
+    @BeforeEach
     public void setUp() throws Exception {
         converter = makeConverter();
     }
 
-    @Override
+    @AfterEach
     public void tearDown() throws Exception {
         converter = null;
     }
 
+    @Test
     public void testSimpleConversion() throws Exception {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from String", };
 
@@ -61,18 +62,19 @@ public class MonthDayConverterTestCase extends TestCase {
         final MonthDay[] expected = { MonthDay.parse("--12-03"), MonthDay.parse("--05-30"), MonthDay.parse("--01-01") };
 
         for (int i = 0; i < expected.length; i++) {
-            assertEquals(message[i] + " to URI", expected[i], converter.convert(MonthDay.class, input[i]));
-            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
+            assertEquals(expected[i], converter.convert(MonthDay.class, input[i]), message[i] + " to URI");
+            assertEquals(expected[i], converter.convert(null, input[i]), message[i] + " to null type");
         }
 
         for (int i = 0; i < expected.length; i++) {
-            assertEquals(input[i] + " to String", input[i], converter.convert(String.class, expected[i]));
+            assertEquals(input[i], converter.convert(String.class, expected[i]), input[i] + " to String");
         }
     }
 
     /**
      * Tests a conversion to an unsupported type.
      */
+    @Test
     public void testUnsupportedType() {
         try {
             converter.convert(Integer.class, "http://www.apache.org");

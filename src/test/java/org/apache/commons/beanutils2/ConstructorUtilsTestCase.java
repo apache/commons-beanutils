@@ -17,43 +17,42 @@
 
 package org.apache.commons.beanutils2;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
 
-import junit.framework.TestCase;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * <p>
  * Test case for {@code ConstructorUtils}
  * </p>
  */
-public class ConstructorUtilsTestCase extends TestCase {
-
-    /**
-     * Constructs a new instance of this test case.
-     *
-     * @param name Name of the test case
-     */
-    public ConstructorUtilsTestCase(final String name) {
-        super(name);
-    }
+public class ConstructorUtilsTestCase {
 
     /**
      * Sets up instance variables required by this test case.
      */
-    @Override
+    @BeforeEach
     public void setUp() throws Exception {
-        super.setUp();
     }
 
     /**
      * Tear down instance variables required by this test case.
      */
-    @Override
+    @AfterEach
     public void tearDown() throws Exception {
-        super.tearDown();
     }
 
+    @Test
     public void testGetAccessibleConstructor() throws Exception {
         {
             final Constructor<?> ctor = ConstructorUtils.getAccessibleConstructor(TestBean.class, String.class);
@@ -71,6 +70,7 @@ public class ConstructorUtilsTestCase extends TestCase {
         }
     }
 
+    @Test
     public void testGetAccessibleConstructorWithConstructorArg() throws Exception {
         {
             final Class<?>[] types = { Integer.class };
@@ -94,6 +94,7 @@ public class ConstructorUtilsTestCase extends TestCase {
         }
     }
 
+    @Test
     public void testGetAccessibleConstructorWithTypeArray() throws Exception {
         {
             final Class<?>[] types = { Boolean.TYPE, String.class };
@@ -108,44 +109,48 @@ public class ConstructorUtilsTestCase extends TestCase {
         }
     }
 
+    @Test
     public void testInvokeConstructor() throws Exception {
         {
             final Object obj = ConstructorUtils.invokeConstructor(TestBean.class, "TEST");
             assertNotNull(obj);
-            assertTrue(obj instanceof TestBean);
+            assertInstanceOf(TestBean.class, obj);
             assertEquals("TEST", ((TestBean) obj).getStringProperty());
         }
         {
             final Object obj = ConstructorUtils.invokeConstructor(TestBean.class, Float.valueOf(17.3f));
             assertNotNull(obj);
-            assertTrue(obj instanceof TestBean);
+            assertInstanceOf(TestBean.class, obj);
             assertEquals(17.3f, ((TestBean) obj).getFloatProperty(), 0.0f);
         }
     }
 
+    @Test
     public void testInvokeConstructorNull() throws Exception {
         final Object obj = ConstructorUtils.invokeConstructor(TestBean.class, (Object) null);
         assertNotNull(obj);
-        assertTrue(obj instanceof TestBean);
+        assertInstanceOf(TestBean.class, obj);
     }
 
+    @Test
     public void testInvokeConstructorWithArgArray() throws Exception {
         final Object[] args = { Float.valueOf(17.3f), "TEST" };
         final Object obj = ConstructorUtils.invokeConstructor(TestBean.class, args);
         assertNotNull(obj);
-        assertTrue(obj instanceof TestBean);
+        assertInstanceOf(TestBean.class, obj);
         assertEquals(17.3f, ((TestBean) obj).getFloatProperty(), 0.0f);
         assertEquals("TEST", ((TestBean) obj).getStringProperty());
     }
 
+    @Test
     public void testInvokeConstructorWithTypeArray() throws Exception {
         {
             final Object[] args = { Boolean.TRUE, "TEST" };
             final Class<?>[] types = { Boolean.TYPE, String.class };
             final Object obj = ConstructorUtils.invokeConstructor(TestBean.class, args, types);
             assertNotNull(obj);
-            assertTrue(obj instanceof TestBean);
-            assertTrue( ((TestBean) obj).getBooleanProperty());
+            assertInstanceOf(TestBean.class, obj);
+            assertTrue(((TestBean) obj).getBooleanProperty());
             assertEquals("TEST", ((TestBean) obj).getStringProperty());
         }
         {
@@ -153,17 +158,18 @@ public class ConstructorUtilsTestCase extends TestCase {
             final Class<?>[] types = { Boolean.class, String.class };
             final Object obj = ConstructorUtils.invokeConstructor(TestBean.class, args, types);
             assertNotNull(obj);
-            assertTrue(obj instanceof TestBean);
-            assertTrue( ((TestBean) obj).isBooleanSecond());
+            assertInstanceOf(TestBean.class, obj);
+            assertTrue(((TestBean) obj).isBooleanSecond());
             assertEquals("TEST", ((TestBean) obj).getStringProperty());
         }
     }
 
+    @Test
     public void testInvokeExactConstructor() throws Exception {
         {
             final Object obj = ConstructorUtils.invokeExactConstructor(TestBean.class, "TEST");
             assertNotNull(obj);
-            assertTrue(obj instanceof TestBean);
+            assertInstanceOf(TestBean.class, obj);
             assertEquals("TEST", ((TestBean) obj).getStringProperty());
         }
         {
@@ -177,11 +183,12 @@ public class ConstructorUtilsTestCase extends TestCase {
         {
             final Object obj = ConstructorUtils.invokeExactConstructor(TestBean.class, Boolean.TRUE);
             assertNotNull(obj);
-            assertTrue(obj instanceof TestBean);
-            assertTrue( ((TestBean) obj).isBooleanSecond());
+            assertInstanceOf(TestBean.class, obj);
+            assertTrue(((TestBean) obj).isBooleanSecond());
         }
     }
 
+    @Test
     public void testInvokeExactConstructorWithArgArray() throws Exception {
         {
             final Object[] args = { Float.valueOf(17.3f), "TEST" };
@@ -196,26 +203,28 @@ public class ConstructorUtilsTestCase extends TestCase {
             final Object[] args = { Boolean.TRUE, "TEST" };
             final Object obj = ConstructorUtils.invokeExactConstructor(TestBean.class, args);
             assertNotNull(obj);
-            assertTrue(obj instanceof TestBean);
-            assertTrue( ((TestBean) obj).isBooleanSecond());
+            assertInstanceOf(TestBean.class, obj);
+            assertTrue(((TestBean) obj).isBooleanSecond());
             assertEquals("TEST", ((TestBean) obj).getStringProperty());
         }
     }
 
+    @Test
     public void testInvokeExactConstructorWithNull() throws Exception {
         final Object obj = ConstructorUtils.invokeExactConstructor(TestBean.class, (Object) null);
         assertNotNull(obj);
-        assertTrue(obj instanceof TestBean);
+        assertInstanceOf(TestBean.class, obj);
     }
 
+    @Test
     public void testInvokeExactConstructorWithTypeArray() throws Exception {
         {
             final Object[] args = { Boolean.TRUE, "TEST" };
             final Class<?>[] types = { Boolean.TYPE, String.class };
             final Object obj = ConstructorUtils.invokeExactConstructor(TestBean.class, args, types);
             assertNotNull(obj);
-            assertTrue(obj instanceof TestBean);
-            assertTrue( ((TestBean) obj).getBooleanProperty());
+            assertInstanceOf(TestBean.class, obj);
+            assertTrue(((TestBean) obj).getBooleanProperty());
             assertEquals("TEST", ((TestBean) obj).getStringProperty());
         }
         {
@@ -223,8 +232,8 @@ public class ConstructorUtilsTestCase extends TestCase {
             final Class<?>[] types = { Boolean.class, String.class };
             final Object obj = ConstructorUtils.invokeExactConstructor(TestBean.class, args, types);
             assertNotNull(obj);
-            assertTrue(obj instanceof TestBean);
-            assertTrue( ((TestBean) obj).isBooleanSecond());
+            assertInstanceOf(TestBean.class, obj);
+            assertTrue(((TestBean) obj).isBooleanSecond());
             assertEquals("TEST", ((TestBean) obj).getStringProperty());
         }
         {
@@ -232,7 +241,7 @@ public class ConstructorUtilsTestCase extends TestCase {
             final Class<?>[] types = { Float.TYPE, String.class };
             final Object obj = ConstructorUtils.invokeExactConstructor(TestBean.class, args, types);
             assertNotNull(obj);
-            assertTrue(obj instanceof TestBean);
+            assertInstanceOf(TestBean.class, obj);
             assertEquals(17.3f, ((TestBean) obj).getFloatProperty(), 0.0f);
             assertEquals("TEST", ((TestBean) obj).getStringProperty());
         }

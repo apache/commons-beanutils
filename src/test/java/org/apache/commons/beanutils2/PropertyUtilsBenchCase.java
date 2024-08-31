@@ -20,13 +20,14 @@ package org.apache.commons.beanutils2;
 import java.util.HashMap;
 import java.util.Map;
 
-import junit.framework.TestCase;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * JUnit Test Case containing microbenchmarks for PropertyUtils.
  */
-
-public class PropertyUtilsBenchCase extends TestCase {
+public class PropertyUtilsBenchCase {
 
     // Basic loop counter
     private long counter = 100000;
@@ -47,20 +48,9 @@ public class PropertyUtilsBenchCase extends TestCase {
     private PropertyUtilsBean pu;
 
     /**
-     * Constructs a new instance of this test case.
-     *
-     * @param name Name of the test case
-     */
-    public PropertyUtilsBenchCase(final String name) {
-
-        super(name);
-
-    }
-
-    /**
      * Sets up instance variables required by this test case.
      */
-    @Override
+    @BeforeEach
     public void setUp() throws Exception {
 
         // Set up loop counter (if property specified)
@@ -108,7 +98,7 @@ public class PropertyUtilsBenchCase extends TestCase {
     /**
      * Tear down instance variables required by this test case.
      */
-    @Override
+    @AfterEach
     public void tearDown() {
 
         dynaClass = null;
@@ -122,6 +112,7 @@ public class PropertyUtilsBenchCase extends TestCase {
     }
 
     // Time copyProperties() from a bean
+    @Test
     public void testCopyPropertiesBean() throws Exception {
 
         long startMillis;
@@ -152,6 +143,7 @@ public class PropertyUtilsBenchCase extends TestCase {
     }
 
     // Time copyProperties() from a DynaBean
+    @Test
     public void testCopyPropertiesDyna() throws Exception {
 
         long startMillis;
@@ -182,6 +174,7 @@ public class PropertyUtilsBenchCase extends TestCase {
     }
 
     // Time copyProperties() from a Map
+    @Test
     public void testCopyPropertiesMap() throws Exception {
 
         long startMillis;

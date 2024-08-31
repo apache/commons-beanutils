@@ -16,16 +16,17 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import java.util.Date;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.beanutils2.BeanUtils;
+import org.junit.jupiter.api.Test;
 
 /**
  * copyProperties() throws a ConversionException : No value specified for 'Date' when the field is a java.util.Date with a null value
  */
-public class Jira454TestCase extends TestCase {
+public class Jira454TestCase {
     public static class TestBean {
         private Date createdAt;
 
@@ -38,10 +39,11 @@ public class Jira454TestCase extends TestCase {
         }
     }
 
+    @Test
     public void testCopyProperties() throws Exception {
         final TestBean bean = new TestBean();
         final TestBean b2 = new TestBean();
         BeanUtils.copyProperties(b2, bean);
-        assertNull("Got a creation date", b2.getCreatedAt());
+        assertNull(b2.getCreatedAt(), "Got a creation date");
     }
 }

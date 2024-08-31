@@ -24,10 +24,6 @@ import org.apache.commons.beanutils2.locale.converters.ByteLocaleConverter;
  */
 public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase<Byte> {
 
-    public ByteLocaleConverterTestCase(final String name) {
-        super(name);
-    }
-
     /**
      * Sets up instance variables required by this test case.
      */
