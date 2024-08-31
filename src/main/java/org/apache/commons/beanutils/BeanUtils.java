@@ -426,9 +426,13 @@ public class BeanUtils {
      * @param  cause     The cause of the throwable.
      * @return  true if the cause was initialized, otherwise false.
      * @since 1.8.0
+     * @deprecated Use {@link Throwable#initCause(Throwable)}.
+     * @see Throwable#initCause(Throwable)
      */
+    @Deprecated
     public static boolean initCause(final Throwable throwable, final Throwable cause) {
-        return BeanUtilsBean.getInstance().initCause(throwable, cause);
+        throwable.initCause(cause);
+        return true;
     }
 
     /**
