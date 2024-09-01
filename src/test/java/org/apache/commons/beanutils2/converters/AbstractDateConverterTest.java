@@ -17,6 +17,14 @@
 
 package org.apache.commons.beanutils2.converters;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -31,17 +39,16 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.Objects;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
+import org.junit.jupiter.api.Test;
 
 /**
  * Abstract base for &lt;Date&gt;Converter classes.
  *
  * @param <T> type to test
  */
-public abstract class AbstractDateConverterTest<T> extends TestCase {
+public abstract class AbstractDateConverterTest<T> {
 
     /**
      * Gets the expected type
@@ -137,8 +144,8 @@ public abstract class AbstractDateConverterTest<T> extends TestCase {
             final String result = converter.convert(String.class, value);
             final Class<?> resultType = result == null ? null : result.getClass();
             final Class<?> expectType = expected == null ? null : expected.getClass();
-            assertEquals("TYPE " + msg, expectType, resultType);
-            assertEquals("VALUE " + msg, expected, result);
+            assertEquals(expectType, resultType, () -> "TYPE " + msg);
+            assertEquals(expected, result, () -> "VALUE " + msg);
         } catch (final Exception ex) {
             throw new IllegalStateException(msg + " threw " + ex.toString(), ex);
         }
@@ -147,6 +154,7 @@ public abstract class AbstractDateConverterTest<T> extends TestCase {
     /**
      * Assumes convert() returns some non-null instance of getExpectedType().
      */
+    @Test
     public void testConvertDate() {
         final String[] message = { "from Date", "from Calendar", "from SQL Date", "from SQL Time", "from SQL Timestamp", "from LocalDate", "from LocalDateTime",
                 "from ZonedDateTime", "from OffsetDateTime" };
@@ -164,9 +172,10 @@ public abstract class AbstractDateConverterTest<T> extends TestCase {
         ((GregorianCalendar) date[1]).setTime(new Date(nowMillis));
 
         for (int i = 0; i < date.length; i++) {
-            final Object val = makeConverter().convert(getExpectedType(), date[i]);
-            assertNotNull("Convert " + message[i] + " should not be null", val);
-            assertTrue("Convert " + message[i] + " should return a " + getExpectedType().getName(), getExpectedType().isInstance(val));
+            final Class<T> expectedType = getExpectedType();
+            final Object val = makeConverter().convert(expectedType, date[i]);
+            assertNotNull(val, "Convert " + message[i] + " should not be null");
+            assertInstanceOf(expectedType, val, "Convert " + message[i] + " should return a " + expectedType.getName());
 
             long test = nowMillis;
             if (date[i] instanceof LocalDate || val instanceof LocalDate) {
@@ -174,20 +183,18 @@ public abstract class AbstractDateConverterTest<T> extends TestCase {
                         .toEpochMilli();
             }
 
-            assertEquals("Convert " + message[i] + " should return a " + date[0], test, getTimeInMillis(val));
+            assertEquals(test, getTimeInMillis(val), "Convert " + message[i] + " should return a " + date[0]);
         }
     }
 
     /**
      * Assumes ConversionException in response to covert(getExpectedType(), null).
      */
+    @Test
     public void testConvertNull() {
-        try {
-            makeConverter().convert(getExpectedType(), null);
-            fail("Expected ConversionException");
-        } catch (final ConversionException e) {
-            // expected
-        }
+        assertThrows(ConversionException.class,
+                     () -> makeConverter().convert(getExpectedType(), null),
+                     "Expected ConversionException");
     }
 
     /**
@@ -195,23 +202,22 @@ public abstract class AbstractDateConverterTest<T> extends TestCase {
      *
      * N.B. This method is overridden by test case implementations for java.sql.Date/Time/Timestamp
      */
+    @Test
     public void testDefaultStringToTypeConvert() {
 
         // Create & Configure the Converter
         final DateTimeConverter<T> converter = makeConverter();
         converter.setUseLocaleFormat(false);
-        try {
-            converter.convert(getExpectedType(), "2006-10-23");
-            fail("Expected Conversion exception");
-        } catch (final ConversionException e) {
-            // expected result
-        }
+        assertThrows(ConversionException.class,
+                     () -> converter.convert(getExpectedType(), "2006-10-23"),
+                     "Expected Conversion exception");
 
     }
 
     /**
      * Test Default Type conversion (i.e. don't specify target type)
      */
+    @Test
     public void testDefaultType() {
         final String pattern = "yyyy-MM-dd";
 
@@ -225,17 +231,19 @@ public abstract class AbstractDateConverterTest<T> extends TestCase {
         final Object expected = toType(calendar);
 
         final Object result = converter.convert(null, testString);
-        if (getExpectedType().equals(Calendar.class)) {
-            assertTrue("TYPE ", getExpectedType().isAssignableFrom(result.getClass()));
+        final Class<T> expectedType = getExpectedType();
+        if (expectedType.equals(Calendar.class)) {
+            assertTrue(expectedType.isAssignableFrom(result.getClass()), "TYPE ");
         } else {
-            assertEquals("TYPE ", getExpectedType(), result.getClass());
+            assertInstanceOf(expectedType, result, "TYPE ");
         }
-        assertEquals("VALUE ", expected, result);
+        assertEquals(expected, result, "VALUE ");
     }
 
     /**
      * Test Converter with types it can't handle
      */
+    @Test
     public void testInvalidType() {
 
         // Create & Configure the Converter
@@ -243,17 +251,15 @@ public abstract class AbstractDateConverterTest<T> extends TestCase {
         final DateTimeConverter<Character> converter = (DateTimeConverter<Character>) makeConverter();
 
         // Invalid Class Type
-        try {
-            converter.convert(Character.class, new Date());
-            fail("Requested Character.class conversion, expected ConversionException");
-        } catch (final ConversionException e) {
-            // Expected result
-        }
+        assertThrows(ConversionException.class,
+                     ()-> converter.convert(Character.class, new Date()),
+                     "Requested Character.class conversion, expected ConversionException");
     }
 
     /**
      * Test Date Converter with no default value
      */
+    @Test
     public void testLocale() {
 
         // Re-set the default Locale to Locale.US
@@ -287,6 +293,7 @@ public abstract class AbstractDateConverterTest<T> extends TestCase {
     /**
      * Test Converter with multiple patterns
      */
+    @Test
     public void testMultiplePatterns() {
         String testString;
         Object expected;
@@ -315,13 +322,14 @@ public abstract class AbstractDateConverterTest<T> extends TestCase {
     /**
      * Test Converter with no default value
      */
+    @Test
     public void testPatternDefault() {
 
         final String pattern = "yyyy-MM-dd";
 
         // Create & Configure the Converter
         final T defaultValue = toType("2000-01-01", pattern, null);
-        assertNotNull("Check default date", defaultValue);
+        assertNotNull(defaultValue, "Check default date");
         final DateTimeConverter<T> converter = makeConverter(defaultValue);
         converter.setPattern(pattern);
 
@@ -343,6 +351,7 @@ public abstract class AbstractDateConverterTest<T> extends TestCase {
     /**
      * Test Converter with no default value
      */
+    @Test
     public void testPatternNoDefault() {
 
         final String pattern = "yyyy-MM-dd";
@@ -386,6 +395,7 @@ public abstract class AbstractDateConverterTest<T> extends TestCase {
     /**
      * Test Converter with no default value
      */
+    @Test
     public void testPatternNullDefault() {
 
         final String pattern = "yyyy-MM-dd";
@@ -413,6 +423,7 @@ public abstract class AbstractDateConverterTest<T> extends TestCase {
     /**
      * Test Conversion to String
      */
+    @Test
     public void testStringConversion() {
 
         final String pattern = "yyyy-MM-dd";
@@ -552,15 +563,10 @@ public abstract class AbstractDateConverterTest<T> extends TestCase {
     protected void validConversion(final Converter<T> converter, final Object expected, final Object value) {
         final String valueType = value == null ? "null" : value.getClass().getName();
         final String msg = "Converting '" + valueType + "' value '" + value + "'";
-        try {
-            final Object result = converter.convert(getExpectedType(), value);
-            final Class<?> resultType = result == null ? null : result.getClass();
-            final Class<?> expectType = expected == null ? null : expected.getClass();
-            assertEquals("TYPE " + msg, expectType, resultType);
-            assertEquals("VALUE " + msg, expected, result);
-        } catch (final Exception ex) {
-            ex.printStackTrace();
-            fail(msg + " threw " + ex.toString());
-        }
+        final Object result = assertDoesNotThrow(() -> converter.convert(getExpectedType(), value));
+        final Class<?> resultType = result == null ? null : result.getClass();
+        final Class<?> expectType = expected == null ? null : expected.getClass();
+        assertEquals(expectType, resultType, () -> "TYPE " + msg);
+        assertEquals(expected, result, () -> "VALUE " + msg);
     }
 }
