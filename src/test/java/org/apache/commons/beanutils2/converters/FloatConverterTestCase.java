@@ -17,7 +17,14 @@
 
 package org.apache.commons.beanutils2.converters;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test Case for the FloatConverter class.
@@ -41,7 +48,7 @@ public class FloatConverterTestCase extends AbstractNumberConverterTest<Float> {
         return new FloatConverter(defaultValue);
     }
 
-    @Override
+    @BeforeEach
     public void setUp() throws Exception {
         converter = makeConverter();
         numbers[0] = Float.valueOf("-12");
@@ -50,7 +57,7 @@ public class FloatConverterTestCase extends AbstractNumberConverterTest<Float> {
         numbers[3] = Float.valueOf("23");
     }
 
-    @Override
+    @AfterEach
     public void tearDown() throws Exception {
         converter = null;
     }
@@ -58,6 +65,7 @@ public class FloatConverterTestCase extends AbstractNumberConverterTest<Float> {
     /**
      * Test Invalid Amounts (too big/small)
      */
+    @Test
     public void testInvalidAmount() {
         final Converter<Float> converter = makeConverter();
         final Class<?> clazz = Float.class;
@@ -66,17 +74,15 @@ public class FloatConverterTestCase extends AbstractNumberConverterTest<Float> {
         final Double tooBig = Double.valueOf(Double.MAX_VALUE);
 
         // Maximum
-        assertEquals("Maximum", Float.valueOf(Float.MAX_VALUE), converter.convert(clazz, max));
+        assertEquals(Float.valueOf(Float.MAX_VALUE), converter.convert(clazz, max), "Maximum");
 
         // Too Large
-        try {
-            assertEquals("Too Big", null, converter.convert(clazz, tooBig));
-            fail("More than maximum, expected ConversionException");
-        } catch (final Exception e) {
-            // expected result
-        }
+        assertThrows(ConversionException.class,
+                     () -> converter.convert(clazz, tooBig),
+                     "More than maximum, expected ConversionException");
     }
 
+    @Test
     public void testSimpleConversion() {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from Byte",
                 "from Short", "from Integer", "from Long", "from Float", "from Double" };
@@ -89,9 +95,9 @@ public class FloatConverterTestCase extends AbstractNumberConverterTest<Float> {
                 Float.valueOf(10), Float.valueOf((float) 11.1), Float.valueOf((float) 12.2) };
 
         for (int i = 0; i < expected.length; i++) {
-            assertEquals(message[i] + " to Float", expected[i].floatValue(), converter.convert(Float.class, input[i]).floatValue(), 0.00001);
-            assertEquals(message[i] + " to float", expected[i].floatValue(), converter.convert(Float.TYPE, input[i]).floatValue(), 0.00001);
-            assertEquals(message[i] + " to null type", expected[i].floatValue(), converter.convert((Class<Float>) null, input[i]).floatValue(), 0.00001);
+            assertEquals(expected[i].floatValue(), converter.convert(Float.class, input[i]).floatValue(), 0.00001, message[i] + " to Float");
+            assertEquals(expected[i].floatValue(), converter.convert(Float.TYPE, input[i]).floatValue(), 0.00001, message[i] + " to float");
+            assertEquals(expected[i].floatValue(), converter.convert((Class<Float>) null, input[i]).floatValue(), 0.00001, message[i] + " to null type");
         }
     }
 }
