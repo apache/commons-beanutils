@@ -17,11 +17,16 @@
 
 package org.apache.commons.beanutils2.converters;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.util.Locale;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.beanutils2.locale.BaseLocaleConverter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Base Test Case for the DecimalLocaleConverter classes. This class doesn't define any real tests; it just provides useful methods for the real test case
@@ -29,7 +34,7 @@ import org.apache.commons.beanutils2.locale.BaseLocaleConverter;
  *
  * @param <T> The converter type.
  */
-public class BaseLocaleConverterTestCase<T> extends TestCase {
+public abstract class BaseLocaleConverterTestCase<T> {
 
     // Original Default Locale
     protected Locale origLocale;
@@ -82,7 +87,7 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
         }
 
         if (expectedValue != null) {
-            assertEquals("Check invalid conversion is default " + msgId, expectedValue, result);
+            assertEquals(expectedValue, result, () -> "Check invalid conversion is default " + msgId);
         }
     }
 
@@ -98,16 +103,12 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
      */
     protected void convertNull(final BaseLocaleConverter<T> converter, final String msgId, final Object expectedValue) {
         // Convert value with no pattern
-        try {
-            result = converter.convert(null);
-        } catch (final Exception e) {
-            fail("Null conversion " + msgId + " threw " + e);
-        }
+        result = assertDoesNotThrow(() -> converter.convert(null), () -> "Null conversion threw '" + msgId + "'");
 
         if (expectedValue == null) {
-            assertNull("Check null conversion is null '" + msgId + "' result=" + result, result);
+            assertNull(result, () -> "Check null conversion is null '" + msgId + "' result=" + result);
         } else {
-            assertEquals("Check null conversion is default " + msgId, expectedValue, result);
+            assertEquals(expectedValue, result, () -> "Check null conversion is default " + msgId);
         }
     }
 
@@ -123,35 +124,9 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
      */
     protected void convertValueNoPattern(final BaseLocaleConverter<T> converter, final String msgId, final Object value, final Object expectedValue) {
         // Convert value with no pattern
-        try {
-            result = converter.convert(value);
-        } catch (final Exception e) {
-            fail("No Pattern conversion threw '" + msgId + "' threw " + e);
-        }
-        assertEquals("Check conversion value without pattern " + msgId, expectedValue, result);
+        result = assertDoesNotThrow(() -> converter.convert(value), () -> "No Pattern conversion threw '" + msgId + "'");
+        assertEquals(expectedValue, result, () -> "Check conversion value without pattern " + msgId);
 
-    }
-
-    /**
-     * Test Converting Value To a specified Type
-     */
-    protected void convertValueToType(final BaseLocaleConverter<T> converter, final Class<T> clazz, final Object value, final String pattern,
-            final Object expectedValue) {
-        convertValueToType(converter, "", clazz, value, pattern, expectedValue);
-    }
-
-    /**
-     * Test Converting Value To a specified Type
-     */
-    protected void convertValueToType(final BaseLocaleConverter<T> converter, final String msgId, final Class<T> clazz, final Object value,
-            final String pattern, final Object expectedValue) {
-        // Convert value with no pattern
-        try {
-            result = converter.convert(clazz, value, pattern);
-        } catch (final Exception e) {
-            fail("Type  conversion threw '" + msgId + "' threw " + e);
-        }
-        assertEquals("Check conversion value to type " + msgId, expectedValue, result);
     }
 
     /**
@@ -167,18 +142,14 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
     protected void convertValueWithPattern(final BaseLocaleConverter<T> converter, final String msgId, final Object value, final String pattern,
             final Object expectedValue) {
         // Convert value with no pattern
-        try {
-            result = converter.convert(value, pattern);
-        } catch (final Exception e) {
-            fail("Pattern conversion threw '" + msgId + "' threw " + e);
-        }
-        assertEquals("Check conversion value with pattern " + msgId, expectedValue, result);
+        result = assertDoesNotThrow(() -> converter.convert(value, pattern), () -> "Pattern conversion threw '" + msgId + "'");
+        assertEquals(expectedValue, result, () -> "Check conversion value with pattern " + msgId);
     }
 
     /**
      * Sets up instance variables required by this test case.
      */
-    @Override
+    @BeforeEach
     public void setUp() throws Exception {
 
         // Default Locale (Use US)
@@ -219,7 +190,7 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
     /**
      * Tear down instance variables required by this test case.
      */
-    @Override
+    @AfterEach
     public void tearDown() {
         converter = null;
         result = null;
@@ -231,12 +202,5 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
             // System.out.println("Restoring default locale to " + origLocale);
             Locale.setDefault(origLocale);
         }
-    }
-
-    /**
-     * This class isn't intended to perform any real tests; it just provides methods for the real test cases to inherit. However JUnit complains if a class
-     * named ..TestCase contains no test methods, so here we define a dummy one to keep it happy.
-     */
-    public void testNothing() {
     }
 }
