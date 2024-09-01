@@ -16,7 +16,10 @@
  */
 package org.apache.commons.beanutils2;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
@@ -25,12 +28,12 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test class for {@code SuppressPropertiesBeanIntrospector}.
  */
-public class SuppressPropertiesBeanIntrospectorTestCase extends TestCase {
+public class SuppressPropertiesBeanIntrospectorTestCase {
 
     /**
      * A test implementation of IntrospectionContext which collects the properties which have been removed.
@@ -87,6 +90,7 @@ public class SuppressPropertiesBeanIntrospectorTestCase extends TestCase {
     /**
      * Tests that the set with properties to be removed cannot be modified.
      */
+    @Test
     public void testGetSuppressedPropertiesModify() {
         final SuppressPropertiesBeanIntrospector introspector = new SuppressPropertiesBeanIntrospector(Arrays.asList("p1", "p2"));
         final Set<String> properties = introspector.getSuppressedProperties();
@@ -101,6 +105,7 @@ public class SuppressPropertiesBeanIntrospectorTestCase extends TestCase {
     /**
      * Tries to create an instance without properties.
      */
+    @Test
     public void testInitNoPropertyNames() {
         assertThrows(NullPointerException.class, () -> new SuppressPropertiesBeanIntrospector(null));
     }
@@ -108,6 +113,7 @@ public class SuppressPropertiesBeanIntrospectorTestCase extends TestCase {
     /**
      * Tests that a defensive copy is created from the collection with properties to be removed.
      */
+    @Test
     public void testPropertyNamesDefensiveCopy() throws IntrospectionException {
         final Collection<String> properties = new HashSet<>();
         properties.add("prop1");
@@ -116,22 +122,25 @@ public class SuppressPropertiesBeanIntrospectorTestCase extends TestCase {
         final IntrospectionContextTestImpl context = new IntrospectionContextTestImpl();
 
         introspector.introspect(context);
-        assertEquals("Wrong number of removed properties", 1, context.getRemovedProperties().size());
-        assertTrue("Wrong removed property", context.getRemovedProperties().contains("prop1"));
+        assertEquals(1, context.getRemovedProperties().size(), "Wrong number of removed properties");
+        assertTrue(context.getRemovedProperties().contains("prop1"), "Wrong removed property");
     }
 
     /**
      * Tests whether the expected properties have been removed during introspection.
      */
+    @Test
     public void testRemovePropertiesDuringIntrospection() throws IntrospectionException {
         final String[] properties = { "test", "other", "oneMore" };
         final SuppressPropertiesBeanIntrospector introspector = new SuppressPropertiesBeanIntrospector(Arrays.asList(properties));
         final IntrospectionContextTestImpl context = new IntrospectionContextTestImpl();
 
         introspector.introspect(context);
-        assertEquals("Wrong number of removed properties", properties.length, context.getRemovedProperties().size());
+        assertEquals(properties.length, context.getRemovedProperties().size(),
+                                "Wrong number of removed properties");
         for (final String property : properties) {
-            assertTrue("Property not removed: " + property, context.getRemovedProperties().contains(property));
+            assertTrue(context.getRemovedProperties().contains(property),
+                                  "Property not removed: " + property);
         }
     }
 }

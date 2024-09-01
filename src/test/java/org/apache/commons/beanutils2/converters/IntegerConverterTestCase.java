@@ -29,10 +29,6 @@ public class IntegerConverterTestCase extends AbstractNumberConverterTest<Intege
 
     private Converter<Integer> converter;
 
-    public IntegerConverterTestCase(final String name) {
-        super(name);
-    }
-
     @Override
     protected Class<Integer> getExpectedType() {
         return Integer.class;

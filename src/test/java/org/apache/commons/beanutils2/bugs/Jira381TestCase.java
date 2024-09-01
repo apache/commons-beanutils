@@ -16,18 +16,19 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.lang.reflect.Method;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.beanutils2.MethodUtils;
+import org.junit.jupiter.api.Test;
 
 /**
  * MethodUtils's getMatchingAccessibleMethod() does not correctly handle inheritance and method overloading.
  *
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-381">https://issues.apache.org/jira/browse/BEANUTILS-381</a>
  */
-public class Jira381TestCase extends TestCase {
+public class Jira381TestCase {
 
     /**
      * Test object.
@@ -60,19 +61,11 @@ public class Jira381TestCase extends TestCase {
     }
 
     /**
-     * Create a test case with the specified name.
-     *
-     * @param name The name of the test
-     */
-    public Jira381TestCase(final String name) {
-        super(name);
-    }
-
-    /**
      * Test with an private class that overrides a public method of a "grand parent" public class.
      * <p />
      * See Jira issue# BEANUTILS-381.
      */
+    @Test
     public void testIssue_BEANUTILS_381_getMatchingAccessibleMethod() {
 
         final Class<?> target = TestServiceBean.class;

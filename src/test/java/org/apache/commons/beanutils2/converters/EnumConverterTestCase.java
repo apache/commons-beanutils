@@ -17,25 +17,25 @@
 
 package org.apache.commons.beanutils2.converters;
 
-import junit.framework.TestCase;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test Case for the EnumConverter class.
  */
-public class EnumConverterTestCase extends TestCase {
+public class EnumConverterTestCase {
 
     public enum PizzaStatus {
         ORDERED, READY, DELIVERED;
     }
 
     private Converter<Enum<PizzaStatus>> converter;
-
-    public EnumConverterTestCase(final String name) {
-        super(name);
-    }
 
     protected Class<?> getExpectedType() {
         return Enum.class;
@@ -45,16 +45,17 @@ public class EnumConverterTestCase extends TestCase {
         return new EnumConverter<>();
     }
 
-    @Override
+    @BeforeEach
     public void setUp() throws Exception {
         converter = makeConverter();
     }
 
-    @Override
+    @AfterEach
     public void tearDown() throws Exception {
         converter = null;
     }
 
+    @Test
     public void testSimpleConversion() throws Exception {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from String", };
 
@@ -63,17 +64,19 @@ public class EnumConverterTestCase extends TestCase {
         final PizzaStatus[] expected = { PizzaStatus.DELIVERED, PizzaStatus.ORDERED, PizzaStatus.READY };
 
         for (int i = 0; i < expected.length; i++) {
-            assertEquals(message[i] + " to Enum", expected[i], converter.convert(PizzaStatus.class, input[i]));
+            assertEquals(expected[i], converter.convert(PizzaStatus.class, input[i]),
+                                    message[i] + " to Enum");
         }
 
         for (int i = 0; i < expected.length; i++) {
-            assertEquals(input[i] + " to String", input[i], converter.convert(String.class, expected[i]));
+            assertEquals(input[i], converter.convert(String.class, expected[i]), input[i] + " to String");
         }
     }
 
     /**
      * Tests a conversion to an unsupported type.
      */
+    @Test
     public void testUnsupportedType() {
         try {
             converter.convert(Integer.class, "http://www.apache.org");

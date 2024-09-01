@@ -27,15 +27,6 @@ import java.util.Calendar;
 public class OffsetDateTimeConverterTestCase extends AbstractDateConverterTest<OffsetDateTime> {
 
     /**
-     * Constructs a new Date test case.
-     *
-     * @param name Test Name
-     */
-    public OffsetDateTimeConverterTestCase(final String name) {
-        super(name);
-    }
-
-    /**
      * Gets the expected type
      *
      * @return The expected type

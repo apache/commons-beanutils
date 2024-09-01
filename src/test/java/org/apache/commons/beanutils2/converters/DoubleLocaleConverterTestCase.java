@@ -24,10 +24,6 @@ import org.apache.commons.beanutils2.locale.converters.DoubleLocaleConverter;
  */
 public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase<Double> {
 
-    public DoubleLocaleConverterTestCase(final String name) {
-        super(name);
-    }
-
     /**
      * Sets up instance variables required by this test case.
      */

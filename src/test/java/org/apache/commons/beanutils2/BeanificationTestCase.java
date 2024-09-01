@@ -17,23 +17,28 @@
 
 package org.apache.commons.beanutils2;
 
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.logging.LogFactory;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * <p>
  * Test Case for changes made during Beanutils Beanification
  * </p>
  */
-public class BeanificationTestCase extends TestCase {
+public class BeanificationTestCase {
 
     final class Signal {
         private Exception e;
@@ -103,18 +108,9 @@ public class BeanificationTestCase extends TestCase {
     public static final int MAX_GC_ITERATIONS = 50;
 
     /**
-     * Constructs a new instance of this test case.
-     *
-     * @param name Name of the test case
-     */
-    public BeanificationTestCase(final String name) {
-        super(name);
-    }
-
-    /**
      * Sets up instance variables required by this test case.
      */
-    @Override
+    @BeforeEach
     public void setUp() {
         ConvertUtils.deregister();
     }
@@ -122,12 +118,13 @@ public class BeanificationTestCase extends TestCase {
     /**
      * Tear down instance variables required by this test case.
      */
-    @Override
+    @AfterEach
     public void tearDown() {
         // No action required
     }
 
     /** Tests whether different threads can set BeanUtils instances correctly */
+    @Test
     public void testBeanUtilsBeanSetInstance() throws Exception {
 
         final class SetInstanceTesterThread extends Thread {
@@ -163,17 +160,18 @@ public class BeanificationTestCase extends TestCase {
         thread.setContextClassLoader(new TestClassLoader());
 
         BeanUtilsBean.setInstance(beanOne);
-        assertEquals("Start thread gets right instance", beanOne, BeanUtilsBean.getInstance());
+        assertEquals(beanOne, BeanUtilsBean.getInstance(), "Start thread gets right instance");
 
         thread.start();
         thread.join();
 
-        assertEquals("Signal not set by test thread", 21, signal.getSignal());
-        assertEquals("Second thread preserves value", beanOne, BeanUtilsBean.getInstance());
-        assertEquals("Second thread gets value it set", beanTwo, signal.getBean());
+        assertEquals(21, signal.getSignal(), "Signal not set by test thread");
+        assertEquals(beanOne, BeanUtilsBean.getInstance(), "Second thread preserves value");
+        assertEquals(beanTwo, signal.getBean(), "Second thread gets value it set");
     }
 
     /** Tests whether calls are independent for different class loaders */
+    @Test
     public void testContextClassloaderIndependence() throws Exception {
 
         final class TestIndependenceThread extends Thread {
@@ -206,12 +204,12 @@ public class BeanificationTestCase extends TestCase {
 
         final PrimitiveBean bean = new PrimitiveBean();
         BeanUtils.setProperty(bean, "int", new Integer(1));
-        assertEquals("Wrong property value (1)", 1, bean.getInt());
+        assertEquals(1, bean.getInt(), "Wrong property value (1)");
 
         final Converter c = (type, value) -> ConvertUtils.primitiveToWrapper(type).cast(new Integer(5));
         ConvertUtils.register(c, Integer.TYPE);
         BeanUtils.setProperty(bean, "int", new Integer(1));
-        assertEquals("Wrong property value(2)", 5, bean.getInt());
+        assertEquals(5, bean.getInt(), "Wrong property value(2)");
 
         final Signal signal = new Signal();
         signal.setSignal(1);
@@ -221,15 +219,16 @@ public class BeanificationTestCase extends TestCase {
         thread.start();
         thread.join();
 
-        assertNull("Exception thrown by test thread:" + signal.getException(), signal.getException());
-        assertEquals("Signal not set by test thread", 3, signal.getSignal());
-        assertEquals("Wrong property value(3)", 9, bean.getInt());
+        assertNull(signal.getException(), "Exception thrown by test thread:" + signal.getException());
+        assertEquals(3, signal.getSignal(), "Signal not set by test thread");
+        assertEquals(9, bean.getInt(), "Wrong property value(3)");
 
     }
 
     /**
      * Tests whether difference instances are loaded by different context class loaders.
      */
+    @Test
     public void testContextClassLoaderLocal() throws Exception {
 
         final class CCLLTesterThread extends Thread {
@@ -257,7 +256,7 @@ public class BeanificationTestCase extends TestCase {
 
         final ContextClassLoaderLocal<Integer> ccll = new ContextClassLoaderLocal<>();
         ccll.set(new Integer(1776));
-        assertEquals("Start thread sets value", new Integer(1776), ccll.get());
+        assertEquals(new Integer(1776), ccll.get(), "Start thread sets value");
 
         final Signal signal = new Signal();
         signal.setSignal(1);
@@ -268,24 +267,26 @@ public class BeanificationTestCase extends TestCase {
         thread.start();
         thread.join();
 
-        assertEquals("Signal not set by test thread", 2, signal.getSignal());
-        assertEquals("Second thread preserves value", new Integer(1776), ccll.get());
-        assertEquals("Second thread gets value it set", new Integer(1789), signal.getMarkerObject());
+        assertEquals(2, signal.getSignal(), "Signal not set by test thread");
+        assertEquals(new Integer(1776), ccll.get(), "Second thread preserves value");
+        assertEquals(new Integer(1789), signal.getMarkerObject(), "Second thread gets value it set");
     }
 
     /** Tests whether the unset method works */
+    @Test
     public void testContextClassLoaderUnset() throws Exception {
         final BeanUtilsBean beanOne = new BeanUtilsBean();
         final ContextClassLoaderLocal<BeanUtilsBean> ccll = new ContextClassLoaderLocal<>();
         ccll.set(beanOne);
-        assertEquals("Start thread gets right instance", beanOne, ccll.get());
+        assertEquals(beanOne, ccll.get(), "Start thread gets right instance");
         ccll.unset();
-        assertNotEquals("Unset works", beanOne, ccll.get());
+        assertNotEquals(beanOne, ccll.get(), "Unset works");
     }
 
     /**
      * Tests whether difference instances are loaded by different context class loaders.
      */
+    @Test
     public void testGetByContextClassLoader() throws Exception {
 
         final class GetBeanUtilsBeanThread extends Thread {
@@ -319,25 +320,17 @@ public class BeanificationTestCase extends TestCase {
         thread.start();
         thread.join();
 
-        assertEquals("Signal not set by test thread", 2, signal.getSignal());
-        assertNotEquals(
-            "Different BeanUtilsBean instances per context classloader",
-            BeanUtilsBean.getInstance(),
-            signal.getBean()
-        );
-        assertNotEquals(
-            "Different ConvertUtilsBean instances per context classloader",
-            ConvertUtilsBean.getInstance(),
-            signal.getConvertUtils()
-        );
-        assertNotEquals(
-            "Different PropertyUtilsBean instances per context classloader",
-            PropertyUtilsBean.getInstance(),
-            signal.getPropertyUtils()
-        );
+        assertEquals(2, signal.getSignal(), "Signal not set by test thread");
+        assertNotEquals(BeanUtilsBean.getInstance(), signal.getBean(),
+                                   "Different BeanUtilsBean instances per context classloader");
+        assertNotEquals(ConvertUtilsBean.getInstance(), signal.getConvertUtils(),
+                                   "Different ConvertUtilsBean instances per context classloader");
+        assertNotEquals(PropertyUtilsBean.getInstance(), signal.getPropertyUtils(),
+                                   "Different PropertyUtilsBean instances per context classloader");
     }
 
     /** Tests whether class loaders and beans are released from memory */
+    @Test
     public void testMemoryLeak() throws Exception {
         // many thanks to Juozas Baliuka for suggesting this methodology
         TestClassLoader loader = new TestClassLoader();
@@ -380,10 +373,10 @@ public class BeanificationTestCase extends TestCase {
         final WeakReference<PropertyUtilsBean> propertyUtilsReference = new WeakReference<>(thread.propertyUtils);
         final WeakReference<ConvertUtilsBean> convertUtilsReference = new WeakReference<>(thread.convertUtils);
 
-        assertNotNull("Weak reference released early (1)", loaderReference.get());
-        assertNotNull("Weak reference released early (2)", beanUtilsReference.get());
-        assertNotNull("Weak reference released early (3)", propertyUtilsReference.get());
-        assertNotNull("Weak reference released early (4)", convertUtilsReference.get());
+        assertNotNull(loaderReference.get(), "Weak reference released early (1)");
+        assertNotNull(beanUtilsReference.get(), "Weak reference released early (2)");
+        assertNotNull(propertyUtilsReference.get(), "Weak reference released early (3)");
+        assertNotNull(convertUtilsReference.get(), "Weak reference released early (4)");
 
         // dereference strong references
         loader = null;
@@ -412,6 +405,7 @@ public class BeanificationTestCase extends TestCase {
     }
 
     /** Tests whether class loaders and beans are released from memory by the map used by BeanUtils. */
+    @Test
     public void testMemoryLeak2() throws Exception {
         // many thanks to Juozas Baliuka for suggesting this methodology
         TestClassLoader loader = new TestClassLoader();
@@ -424,9 +418,9 @@ public class BeanificationTestCase extends TestCase {
         final Map<Object, Object> map = new WeakHashMap<>();
         map.put(loader, test);
 
-        assertEquals("In map", test, map.get(loader));
-        assertNotNull("Weak reference released early (1)", loaderReference.get());
-        assertNotNull("Weak reference released early (2)", testReference.get());
+        assertEquals(test, map.get(loader), "In map");
+        assertNotNull(loaderReference.get(), "Weak reference released early (1)");
+        assertNotNull(testReference.get(), "Weak reference released early (2)");
 
         // dereference strong references
         loader = null;
@@ -453,6 +447,7 @@ public class BeanificationTestCase extends TestCase {
     }
 
     /** Test of the methodology we'll use for some of the later tests */
+    @Test
     public void testMemoryTestMethodology() throws Exception {
         // test methodology
         // many thanks to Juozas Baliuka for suggesting this method
@@ -462,7 +457,7 @@ public class BeanificationTestCase extends TestCase {
         @SuppressWarnings("unused")
         Class<?> myClass = loader.loadClass("org.apache.commons.beanutils2.BetaBean");
 
-        assertNotNull("Weak reference released early", reference.get());
+        assertNotNull(reference.get(), "Weak reference released early");
 
         // dereference class loader and class:
         loader = null;

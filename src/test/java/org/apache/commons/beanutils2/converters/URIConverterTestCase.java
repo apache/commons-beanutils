@@ -17,23 +17,23 @@
 
 package org.apache.commons.beanutils2.converters;
 
-import java.net.URI;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import junit.framework.TestCase;
+import java.net.URI;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test Case for the URIConverter class.
  */
-public class URIConverterTestCase extends TestCase {
+public class URIConverterTestCase {
 
     private Converter<URI> converter;
-
-    public URIConverterTestCase(final String name) {
-        super(name);
-    }
 
     protected Class<?> getExpectedType() {
         return URI.class;
@@ -43,16 +43,17 @@ public class URIConverterTestCase extends TestCase {
         return new URIConverter();
     }
 
-    @Override
+    @BeforeEach
     public void setUp() throws Exception {
         converter = makeConverter();
     }
 
-    @Override
+    @AfterEach
     public void tearDown() throws Exception {
         converter = null;
     }
 
+    @Test
     public void testSimpleConversion() throws Exception {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from String", };
 
@@ -64,18 +65,19 @@ public class URIConverterTestCase extends TestCase {
                 new URI("http://user:admin@www.apache.org:50/one/two.three"), new URI("http://notreal.apache.org") };
 
         for (int i = 0; i < expected.length; i++) {
-            assertEquals(message[i] + " to URI", expected[i], converter.convert(URI.class, input[i]));
-            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
+            assertEquals(expected[i], converter.convert(URI.class, input[i]), message[i] + " to URI");
+            assertEquals(expected[i], converter.convert(null, input[i]), message[i] + " to null type");
         }
 
         for (int i = 0; i < expected.length; i++) {
-            assertEquals(input[i] + " to String", input[i], converter.convert(String.class, expected[i]));
+            assertEquals(input[i], converter.convert(String.class, expected[i]), input[i] + " to String");
         }
     }
 
     /**
      * Tests a conversion to an unsupported type.
      */
+    @Test
     public void testUnsupportedType() {
         try {
             converter.convert(Integer.class, "http://www.apache.org");

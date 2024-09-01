@@ -29,10 +29,6 @@ import org.apache.commons.beanutils2.locale.converters.FloatLocaleConverter;
  */
 public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase<Float> {
 
-    public FloatLocaleConverterTestCase(final String name) {
-        super(name);
-    }
-
     /**
      * Sets up instance variables required by this test case.
      */

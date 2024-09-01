@@ -39,10 +39,6 @@ public class BigDecimalConverterTestCase extends AbstractNumberConverterTest<Big
 
     private Converter<BigDecimal> converter;
 
-    public BigDecimalConverterTestCase(final String name) {
-        super(name);
-    }
-
     @Override
     protected Class<BigDecimal> getExpectedType() {
         return BigDecimal.class;

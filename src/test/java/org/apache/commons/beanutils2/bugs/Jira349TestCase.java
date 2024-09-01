@@ -16,18 +16,19 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.apache.commons.beanutils2.PropertyUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-349">https://issues.apache.org/jira/browse/BEANUTILS-349</a>
  */
-public class Jira349TestCase extends TestCase {
+public class Jira349TestCase {
 
     /**
      * Test Bean with a Boolean object property.
@@ -62,31 +63,12 @@ public class Jira349TestCase extends TestCase {
     private static final Log LOG = LogFactory.getLog(Jira349TestCase.class);
 
     /**
-     * Create a test suite for this test.
-     *
-     * @return a test suite
-     */
-    public static Test suite() {
-        return new TestSuite(Jira349TestCase.class);
-    }
-
-    /**
-     * Create a test case with the specified name.
-     *
-     * @param name The name of the test
-     */
-    public Jira349TestCase(final String name) {
-        super(name);
-    }
-
-    /**
      * Sets up.
      *
      * @throws Exception
      */
-    @Override
+    @BeforeEach
     protected void setUp() throws Exception {
-        super.setUp();
     }
 
     /**
@@ -94,14 +76,14 @@ public class Jira349TestCase extends TestCase {
      *
      * @throws Exception
      */
-    @Override
+    @AfterEach
     protected void tearDown() throws Exception {
-        super.tearDown();
     }
 
     /**
      * Test {@link PropertyUtils#copyProperties(Object, Object)}
      */
+    @Test
     public void testIssue_BEANUTILS_349_PropertyUtils_copyProperties() {
         final PrimitiveBean dest = new PrimitiveBean();
         final ObjectBean origin = new ObjectBean();

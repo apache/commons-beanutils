@@ -25,15 +25,6 @@ import java.util.Date;
 public class DateConverterTestCase extends AbstractDateConverterTest<Date> {
 
     /**
-     * Constructs a new Date test case.
-     *
-     * @param name Test Name
-     */
-    public DateConverterTestCase(final String name) {
-        super(name);
-    }
-
-    /**
      * Gets the expected type
      *
      * @return The expected type

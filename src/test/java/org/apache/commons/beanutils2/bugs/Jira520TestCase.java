@@ -16,32 +16,37 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
-import junit.framework.TestCase;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.apache.commons.beanutils2.AlphaBean;
 import org.apache.commons.beanutils2.BeanUtilsBean;
 import org.apache.commons.beanutils2.SuppressPropertiesBeanIntrospector;
+import org.junit.jupiter.api.Test;
 
 /**
  * Fix CVE: https://nvd.nist.gov/vuln/detail/CVE-2014-0114
  *
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-520">https://issues.apache.org/jira/browse/BEANUTILS-520</a>
  */
-public class Jira520TestCase extends TestCase {
+public class Jira520TestCase {
     /**
      * Allow opt-out to make your app less secure but allow access to "class".
      */
+    @Test
     public void testAllowAccessToClassProperty() throws Exception {
         final BeanUtilsBean bub = new BeanUtilsBean();
         bub.getPropertyUtils().removeBeanIntrospector(SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
         final AlphaBean bean = new AlphaBean();
         final String result = bub.getProperty(bean, "class");
-        assertEquals("Class property should have been accessed", "class org.apache.commons.beanutils2.AlphaBean", result);
+        assertEquals("class org.apache.commons.beanutils2.AlphaBean", result,
+                                "Class property should have been accessed");
     }
 
     /**
      * By default opt-in to security that does not allow access to "class".
      */
+    @Test
     public void testSuppressClassPropertyByDefault() throws Exception {
         final BeanUtilsBean bub = new BeanUtilsBean();
         final AlphaBean bean = new AlphaBean();

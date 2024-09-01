@@ -44,15 +44,6 @@ import org.apache.commons.beanutils2.Converter;
 public abstract class AbstractDateConverterTest<T> extends TestCase {
 
     /**
-     * Constructs a new test case.
-     *
-     * @param name Name of the test
-     */
-    public AbstractDateConverterTest(final String name) {
-        super(name);
-    }
-
-    /**
      * Gets the expected type
      *
      * @return The expected type

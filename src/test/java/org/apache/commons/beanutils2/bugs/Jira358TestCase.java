@@ -16,33 +16,26 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
-import junit.framework.TestCase;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.apache.commons.beanutils2.PropertyUtils;
 import org.apache.commons.beanutils2.TestBean;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-358">https://issues.apache.org/jira/browse/BEANUTILS-358</a>
  */
-public class Jira358TestCase extends TestCase {
-
-    /**
-     * Create a test case with the specified name.
-     *
-     * @param name The name of the test
-     */
-    public Jira358TestCase(final String name) {
-        super(name);
-    }
+public class Jira358TestCase {
 
     /**
      * Sets up.
      *
      * @throws Exception
      */
-    @Override
+    @BeforeEach
     protected void setUp() throws Exception {
-        super.setUp();
     }
 
     /**
@@ -50,14 +43,14 @@ public class Jira358TestCase extends TestCase {
      *
      * @throws Exception
      */
-    @Override
+    @AfterEach
     protected void tearDown() throws Exception {
-        super.tearDown();
     }
 
     /**
      * Test {@link PropertyUtils#getIndexedProperty(Object, String, int)}
      */
+    @Test
     public void testPropertyUtils_getIndexedProperty_Array() throws Exception {
 
         final TestBean bean = new TestBean();
@@ -72,6 +65,7 @@ public class Jira358TestCase extends TestCase {
     /**
      * Test {@link PropertyUtils#getIndexedProperty(Object, String, int)}
      */
+    @Test
     public void testPropertyUtils_getIndexedProperty_List() throws Exception {
 
         final TestBean bean = new TestBean();

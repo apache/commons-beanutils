@@ -16,14 +16,18 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
-import junit.framework.TestCase;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.apache.commons.beanutils2.BeanUtils;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-369">https://issues.apache.org/jira/browse/BEANUTILS-369</a>
  */
-public class Jira369TestCase extends TestCase {
+public class Jira369TestCase {
 
     /**
      * Test Bean
@@ -50,22 +54,12 @@ public class Jira369TestCase extends TestCase {
     }
 
     /**
-     * Create a test case with the specified name.
-     *
-     * @param name The name of the test
-     */
-    public Jira369TestCase(final String name) {
-        super(name);
-    }
-
-    /**
      * Sets up.
      *
      * @throws Exception
      */
-    @Override
+    @BeforeEach
     protected void setUp() throws Exception {
-        super.setUp();
     }
 
     /**
@@ -73,14 +67,14 @@ public class Jira369TestCase extends TestCase {
      *
      * @throws Exception
      */
-    @Override
+    @AfterEach
     protected void tearDown() throws Exception {
-        super.tearDown();
     }
 
     /**
      * Test {@link BeanUtils} getProperty() for property "aRatedCd".
      */
+    @Test
     public void testBeanUtilsGetProperty_aRatedCd() throws Exception {
         final TestBean bean = new TestBean();
         bean.setARatedCd("foo");
@@ -98,6 +92,7 @@ public class Jira369TestCase extends TestCase {
     /**
      * Test {@link BeanUtils} getProperty() for property "ARatedCd".
      */
+    @Test
     public void testBeanUtilsGetProperty_ARatedCd() throws Exception {
         final TestBean bean = new TestBean();
         bean.setARatedCd("foo");
@@ -111,6 +106,7 @@ public class Jira369TestCase extends TestCase {
     /**
      * Test {@link BeanUtils} getProperty() for property "bRatedCd".
      */
+    @Test
     public void testBeanUtilsGetProperty_bRatedCd() throws Exception {
         final TestBean bean = new TestBean();
         bean.setbRatedCd("foo");

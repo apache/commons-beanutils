@@ -17,23 +17,23 @@
 
 package org.apache.commons.beanutils2.converters;
 
-import java.util.UUID;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import junit.framework.TestCase;
+import java.util.UUID;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test Case for the UUIDConverter class.
  */
-public class UUIDConverterTestCase extends TestCase {
+public class UUIDConverterTestCase {
 
     private Converter<UUID> converter;
-
-    public UUIDConverterTestCase(final String name) {
-        super(name);
-    }
 
     protected Class<?> getExpectedType() {
         return UUID.class;
@@ -43,16 +43,17 @@ public class UUIDConverterTestCase extends TestCase {
         return new UUIDConverter();
     }
 
-    @Override
+    @BeforeEach
     public void setUp() throws Exception {
         converter = makeConverter();
     }
 
-    @Override
+    @AfterEach
     public void tearDown() throws Exception {
         converter = null;
     }
 
+    @Test
     public void testSimpleConversion() throws Exception {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from String", };
 
@@ -61,18 +62,19 @@ public class UUIDConverterTestCase extends TestCase {
         final UUID[] expected = { UUID.fromString("123e4567-e89b-12d3-a456-556642440000"), UUID.fromString("7dc53df5-703e-49b3-8670-b1c468f47f1f") };
 
         for (int i = 0; i < expected.length; i++) {
-            assertEquals(message[i] + " to URI", expected[i], converter.convert(UUID.class, input[i]));
-            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
+            assertEquals(expected[i], converter.convert(UUID.class, input[i]), message[i] + " to URI");
+            assertEquals(expected[i], converter.convert(null, input[i]), message[i] + " to null type");
         }
 
         for (int i = 0; i < expected.length; i++) {
-            assertEquals(input[i] + " to String", input[i], converter.convert(String.class, expected[i]));
+            assertEquals(input[i], converter.convert(String.class, expected[i]), input[i] + " to String");
         }
     }
 
     /**
      * Tests a conversion to an unsupported type.
      */
+    @Test
     public void testUnsupportedType() {
         try {
             converter.convert(Integer.class, "http://www.apache.org");

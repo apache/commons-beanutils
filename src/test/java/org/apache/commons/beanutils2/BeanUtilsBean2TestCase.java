@@ -16,24 +16,23 @@
  */
 package org.apache.commons.beanutils2;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 /**
  * Test Case for the {@link BeanUtilsBean2}.
  */
 public class BeanUtilsBean2TestCase extends BeanUtilsBeanTestCase {
 
     /**
-     * Constructs a new instance of this test case.
-     *
-     * @param name Name of the test case
-     */
-    public BeanUtilsBean2TestCase(final String name) {
-        super(name);
-    }
-
-    /**
      * Sets up instance variables required by this test case.
      */
     @Override
+    @BeforeEach
     public void setUp() {
         ConvertUtils.deregister();
         BeanUtilsBean.setInstance(new BeanUtilsBean2());
@@ -44,6 +43,7 @@ public class BeanUtilsBean2TestCase extends BeanUtilsBeanTestCase {
      * Tear down instance variables required by this test case.
      */
     @Override
+    @AfterEach
     public void tearDown() {
         bean = null;
     }
@@ -52,19 +52,21 @@ public class BeanUtilsBean2TestCase extends BeanUtilsBeanTestCase {
      * Test {@code copyProperty()} converting to a String.
      */
     @Override
+    @Test
     public void testCopyPropertyConvertToString() {
         try {
             BeanUtils.copyProperty(bean, "stringProperty", testUtilDate);
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
-        assertEquals("java.util.Date --> String", testStringDate, bean.getStringProperty());
+        assertEquals(testStringDate, bean.getStringProperty(), "java.util.Date --> String");
     }
 
     /**
      * Test {@code copyProperty()} converting to a String.
      */
     @Override
+    @Test
     public void testCopyPropertyConvertToStringArray() {
         try {
             bean.setStringArray(null);
@@ -72,14 +74,15 @@ public class BeanUtilsBean2TestCase extends BeanUtilsBeanTestCase {
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
-        assertEquals("java.util.Date[] --> String[] length", 1, bean.getStringArray().length);
-        assertEquals("java.util.Date[] --> String[] value ", testStringDate, bean.getStringArray()[0]);
+        assertEquals(1, bean.getStringArray().length, "java.util.Date[] --> String[] length");
+        assertEquals(testStringDate, bean.getStringArray()[0], "java.util.Date[] --> String[] value ");
     }
 
     /**
      * Test {@code copyProperty()} converting to a String on indexed property
      */
     @Override
+    @Test
     public void testCopyPropertyConvertToStringIndexed() {
         try {
             bean.setStringArray(new String[1]);
@@ -87,14 +90,15 @@ public class BeanUtilsBean2TestCase extends BeanUtilsBeanTestCase {
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
-        assertEquals("java.util.Date[] --> String[] length", 1, bean.getStringArray().length);
-        assertEquals("java.util.Date[] --> String[] value ", testStringDate, bean.getStringArray()[0]);
+        assertEquals(1, bean.getStringArray().length, "java.util.Date[] --> String[] length");
+        assertEquals(testStringDate, bean.getStringArray()[0], "java.util.Date[] --> String[] value ");
     }
 
     /**
      * Test {@code getArrayProperty()} converting to a String.
      */
     @Override
+    @Test
     public void testGetArrayPropertyDate() {
         String[] value = null;
         try {
@@ -103,14 +107,15 @@ public class BeanUtilsBean2TestCase extends BeanUtilsBeanTestCase {
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
-        assertEquals("java.util.Date[] --> String[] length", 1, value.length);
-        assertEquals("java.util.Date[] --> String[] value ", testStringDate, value[0]);
+        assertEquals(1, value.length, "java.util.Date[] --> String[] length");
+        assertEquals(testStringDate, value[0], "java.util.Date[] --> String[] value ");
     }
 
     /**
      * Test {@code getArrayProperty()} converting to a String.
      */
     @Override
+    @Test
     public void testGetIndexedPropertyDate() {
         String value = null;
         try {
@@ -119,13 +124,14 @@ public class BeanUtilsBean2TestCase extends BeanUtilsBeanTestCase {
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
-        assertEquals("java.util.Date[0] --> String", testStringDate, value);
+        assertEquals(testStringDate, value, "java.util.Date[0] --> String");
     }
 
     /**
      * Test {@code getSimpleProperty()} converting to a String.
      */
     @Override
+    @Test
     public void testGetSimplePropertyDate() {
         String value = null;
         try {
@@ -134,26 +140,28 @@ public class BeanUtilsBean2TestCase extends BeanUtilsBeanTestCase {
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
-        assertEquals("java.util.Date --> String", testStringDate, value);
+        assertEquals(testStringDate, value, "java.util.Date --> String");
     }
 
     /**
      * Test {@code setProperty()} converting to a String.
      */
     @Override
+    @Test
     public void testSetPropertyConvertToString() {
         try {
             BeanUtils.setProperty(bean, "stringProperty", testUtilDate);
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
-        assertEquals("java.util.Date --> String", testStringDate, bean.getStringProperty());
+        assertEquals(testStringDate, bean.getStringProperty(), "java.util.Date --> String");
     }
 
     /**
      * Test {@code setProperty()} converting to a String array.
      */
     @Override
+    @Test
     public void testSetPropertyConvertToStringArray() {
         try {
             bean.setStringArray(null);
@@ -161,14 +169,15 @@ public class BeanUtilsBean2TestCase extends BeanUtilsBeanTestCase {
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
-        assertEquals("java.util.Date[] --> String[] length", 1, bean.getStringArray().length);
-        assertEquals("java.util.Date[] --> String[] value ", testStringDate, bean.getStringArray()[0]);
+        assertEquals(1, bean.getStringArray().length, "java.util.Date[] --> String[] length");
+        assertEquals(testStringDate, bean.getStringArray()[0], "java.util.Date[] --> String[] value ");
     }
 
     /**
      * Test {@code setProperty()} converting to a String on indexed property
      */
     @Override
+    @Test
     public void testSetPropertyConvertToStringIndexed() {
         try {
             bean.setStringArray(new String[1]);
@@ -176,7 +185,7 @@ public class BeanUtilsBean2TestCase extends BeanUtilsBeanTestCase {
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
-        assertEquals("java.util.Date --> String[]", testStringDate, bean.getStringArray()[0]);
+        assertEquals(testStringDate, bean.getStringArray()[0], "java.util.Date --> String[]");
     }
 
 }

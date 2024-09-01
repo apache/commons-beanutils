@@ -28,10 +28,6 @@ public class BigIntegerConverterTestCase extends AbstractNumberConverterTest<Big
 
     private Converter<BigInteger> converter;
 
-    public BigIntegerConverterTestCase(final String name) {
-        super(name);
-    }
-
     @Override
     protected Class<BigInteger> getExpectedType() {
         return BigInteger.class;

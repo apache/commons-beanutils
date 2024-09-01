@@ -17,7 +17,13 @@
 
 package org.apache.commons.beanutils2;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -25,12 +31,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import junit.framework.TestCase;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test accessing DynaBeans transparently via PropertyUtils.
  */
-public class DynaPropertyUtilsTestCase extends TestCase {
+public class DynaPropertyUtilsTestCase {
 
     /**
      * The basic test bean for each test.
@@ -49,15 +57,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
      * The nested bean pointed at by the "nested" property.
      */
     protected TestBean nested;
-
-    /**
-     * Constructs a new instance of this test case.
-     *
-     * @param name Name of the test case
-     */
-    public DynaPropertyUtilsTestCase(final String name) {
-        super(name);
-    }
 
     /**
      * Create and return a {@code DynaClass} instance for our test {@code DynaBean}.
@@ -80,7 +79,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Sets up instance variables required by this test case.
      */
-    @Override
+    @BeforeEach
     public void setUp() throws Exception {
         // Instantiate a new DynaBean instance
         final DynaClass dynaClass = createDynaClass();
@@ -134,7 +133,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Tear down instance variables required by this test case.
      */
-    @Override
+    @AfterEach
     public void tearDown() {
         bean = null;
         nested = null;
@@ -143,6 +142,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test copyProperties() when the origin is a {@code Map}.
      */
+    @Test
     public void testCopyPropertiesMap() {
         final Map<String, Object> map = new HashMap<>();
         map.put("booleanProperty", Boolean.FALSE);
@@ -161,33 +161,35 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         // Scalar properties
-        assertEquals("booleanProperty", false, ((Boolean) bean.get("booleanProperty")).booleanValue());
-        assertEquals("doubleProperty", 333.0, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005);
-        assertEquals("floatProperty", (float) 222.0, ((Float) bean.get("floatProperty")).floatValue(), (float) 0.005);
-        assertEquals("intProperty", 111, ((Integer) bean.get("intProperty")).intValue());
-        assertEquals("longProperty", 444, ((Long) bean.get("longProperty")).longValue());
-        assertEquals("shortProperty", (short) 555, ((Short) bean.get("shortProperty")).shortValue());
-        assertEquals("stringProperty", "New String Property", (String) bean.get("stringProperty"));
+        assertEquals(false, ((Boolean) bean.get("booleanProperty")).booleanValue(), "booleanProperty");
+        assertEquals(333.0, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005, "doubleProperty");
+        assertEquals((float) 222.0, ((Float) bean.get("floatProperty")).floatValue(), (float) 0.005,
+                                "floatProperty");
+        assertEquals(111, ((Integer) bean.get("intProperty")).intValue(), "intProperty");
+        assertEquals(444, ((Long) bean.get("longProperty")).longValue(), "longProperty");
+        assertEquals((short) 555, ((Short) bean.get("shortProperty")).shortValue(), "shortProperty");
+        assertEquals("New String Property", (String) bean.get("stringProperty"), "stringProperty");
 
         // Indexed Properties
         final String[] dupProperty = (String[]) bean.get("dupProperty");
-        assertNotNull("dupProperty present", dupProperty);
-        assertEquals("dupProperty length", 3, dupProperty.length);
-        assertEquals("dupProperty[0]", "New 0", dupProperty[0]);
-        assertEquals("dupProperty[1]", "New 1", dupProperty[1]);
-        assertEquals("dupProperty[2]", "New 2", dupProperty[2]);
+        assertNotNull(dupProperty, "dupProperty present");
+        assertEquals(3, dupProperty.length, "dupProperty length");
+        assertEquals("New 0", dupProperty[0], "dupProperty[0]");
+        assertEquals("New 1", dupProperty[1], "dupProperty[1]");
+        assertEquals("New 2", dupProperty[2], "dupProperty[2]");
         final int[] intArray = (int[]) bean.get("intArray");
-        assertNotNull("intArray present", intArray);
-        assertEquals("intArray length", 3, intArray.length);
-        assertEquals("intArray[0]", 0, intArray[0]);
-        assertEquals("intArray[1]", 100, intArray[1]);
-        assertEquals("intArray[2]", 200, intArray[2]);
+        assertNotNull(intArray, "intArray present");
+        assertEquals(3, intArray.length, "intArray length");
+        assertEquals(0, intArray[0], "intArray[0]");
+        assertEquals(100, intArray[1], "intArray[1]");
+        assertEquals(200, intArray[2], "intArray[2]");
 
     }
 
     /**
      * Test the describe() method.
      */
+    @Test
     public void testDescribe() {
 
         Map<String, Object> map = null;
@@ -199,24 +201,25 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
         // Verify existence of all the properties that should be present
         for (final String describe : describes) {
-            assertTrue("Property '" + describe + "' is present", map.containsKey(describe));
+            assertTrue(map.containsKey(describe), "Property '" + describe + "' is present");
         }
-        assertTrue("Property 'writeOnlyProperty' is not present", !map.containsKey("writeOnlyProperty"));
+        assertFalse(map.containsKey("writeOnlyProperty"), "Property 'writeOnlyProperty' is not present");
 
         // Verify the values of scalar properties
-        assertEquals("Value of 'booleanProperty'", Boolean.TRUE, map.get("booleanProperty"));
-        assertEquals("Value of 'doubleProperty'", Double.valueOf(321.0), map.get("doubleProperty"));
-        assertEquals("Value of 'floatProperty'", Float.valueOf((float) 123.0), map.get("floatProperty"));
-        assertEquals("Value of 'intProperty'", Integer.valueOf(123), map.get("intProperty"));
-        assertEquals("Value of 'longProperty'", Long.valueOf(321), map.get("longProperty"));
-        assertEquals("Value of 'shortProperty'", Short.valueOf((short) 987), map.get("shortProperty"));
-        assertEquals("Value of 'stringProperty'", "This is a string", (String) map.get("stringProperty"));
+        assertEquals(Boolean.TRUE, map.get("booleanProperty"), "Value of 'booleanProperty'");
+        assertEquals(Double.valueOf(321.0), map.get("doubleProperty"), "Value of 'doubleProperty'");
+        assertEquals(Float.valueOf((float) 123.0), map.get("floatProperty"), "Value of 'floatProperty'");
+        assertEquals(Integer.valueOf(123), map.get("intProperty"), "Value of 'intProperty'");
+        assertEquals(Long.valueOf(321), map.get("longProperty"), "Value of 'longProperty'");
+        assertEquals(Short.valueOf((short) 987), map.get("shortProperty"), "Value of 'shortProperty'");
+        assertEquals("This is a string", (String) map.get("stringProperty"), "Value of 'stringProperty'");
 
     }
 
     /**
      * Corner cases on getIndexedProperty invalid arguments.
      */
+    @Test
     public void testGetIndexedArguments() {
         // Use explicit index argument
         assertThrows(NullPointerException.class, () -> PropertyUtils.getIndexedProperty(null, "intArray", 0));
@@ -237,6 +240,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Positive and negative tests on getIndexedProperty valid arguments.
      */
+    @Test
     public void testGetIndexedValues() {
 
         Object value = null;
@@ -247,45 +251,45 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
             try {
                 value = PropertyUtils.getIndexedProperty(bean, "intArray", i);
-                assertNotNull("intArray returned value " + i, value);
-                assertTrue("intArray returned Integer " + i, value instanceof Integer);
-                assertEquals("intArray returned correct " + i, i * 10, ((Integer) value).intValue());
+                assertNotNull(value, "intArray returned value " + i);
+                assertTrue(value instanceof Integer, "intArray returned Integer " + i);
+                assertEquals(i * 10, ((Integer) value).intValue(), "intArray returned correct " + i);
             } catch (final Throwable t) {
                 fail("intArray " + i + " threw " + t);
             }
 
             try {
                 value = PropertyUtils.getIndexedProperty(bean, "intIndexed", i);
-                assertNotNull("intIndexed returned value " + i, value);
-                assertTrue("intIndexed returned Integer " + i, value instanceof Integer);
-                assertEquals("intIndexed returned correct " + i, i * 10, ((Integer) value).intValue());
+                assertNotNull(value, "intIndexed returned value " + i);
+                assertTrue(value instanceof Integer, "intIndexed returned Integer " + i);
+                assertEquals(i * 10, ((Integer) value).intValue(), "intIndexed returned correct " + i);
             } catch (final Throwable t) {
                 fail("intIndexed " + i + " threw " + t);
             }
 
             try {
                 value = PropertyUtils.getIndexedProperty(bean, "listIndexed", i);
-                assertNotNull("listIndexed returned value " + i, value);
-                assertTrue("list returned String " + i, value instanceof String);
-                assertEquals("listIndexed returned correct " + i, "String " + i, (String) value);
+                assertNotNull(value, "listIndexed returned value " + i);
+                assertTrue(value instanceof String, "list returned String " + i);
+                assertEquals("String " + i, (String) value, "listIndexed returned correct " + i);
             } catch (final Throwable t) {
                 fail("listIndexed " + i + " threw " + t);
             }
 
             try {
                 value = PropertyUtils.getIndexedProperty(bean, "stringArray", i);
-                assertNotNull("stringArray returned value " + i, value);
-                assertTrue("stringArray returned String " + i, value instanceof String);
-                assertEquals("stringArray returned correct " + i, "String " + i, (String) value);
+                assertNotNull(value, "stringArray returned value " + i);
+                assertTrue(value instanceof String, "stringArray returned String " + i);
+                assertEquals("String " + i, (String) value, "stringArray returned correct " + i);
             } catch (final Throwable t) {
                 fail("stringArray " + i + " threw " + t);
             }
 
             try {
                 value = PropertyUtils.getIndexedProperty(bean, "stringIndexed", i);
-                assertNotNull("stringIndexed returned value " + i, value);
-                assertTrue("stringIndexed returned String " + i, value instanceof String);
-                assertEquals("stringIndexed returned correct " + i, "String " + i, (String) value);
+                assertNotNull(value, "stringIndexed returned value " + i);
+                assertTrue(value instanceof String, "stringIndexed returned String " + i);
+                assertEquals("String " + i, (String) value, "stringIndexed returned correct " + i);
             } catch (final Throwable t) {
                 fail("stringIndexed " + i + " threw " + t);
             }
@@ -298,45 +302,45 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
             try {
                 value = PropertyUtils.getIndexedProperty(bean, "intArray[" + i + "]");
-                assertNotNull("intArray returned value " + i, value);
-                assertTrue("intArray returned Integer " + i, value instanceof Integer);
-                assertEquals("intArray returned correct " + i, i * 10, ((Integer) value).intValue());
+                assertNotNull(value, "intArray returned value " + i);
+                assertTrue(value instanceof Integer, "intArray returned Integer " + i);
+                assertEquals(i * 10, ((Integer) value).intValue(), "intArray returned correct " + i);
             } catch (final Throwable t) {
                 fail("intArray " + i + " threw " + t);
             }
 
             try {
                 value = PropertyUtils.getIndexedProperty(bean, "intIndexed[" + i + "]");
-                assertNotNull("intIndexed returned value " + i, value);
-                assertTrue("intIndexed returned Integer " + i, value instanceof Integer);
-                assertEquals("intIndexed returned correct " + i, i * 10, ((Integer) value).intValue());
+                assertNotNull(value, "intIndexed returned value " + i);
+                assertTrue(value instanceof Integer, "intIndexed returned Integer " + i);
+                assertEquals(i * 10, ((Integer) value).intValue(), "intIndexed returned correct " + i);
             } catch (final Throwable t) {
                 fail("intIndexed " + i + " threw " + t);
             }
 
             try {
                 value = PropertyUtils.getIndexedProperty(bean, "listIndexed[" + i + "]");
-                assertNotNull("listIndexed returned value " + i, value);
-                assertTrue("listIndexed returned String " + i, value instanceof String);
-                assertEquals("listIndexed returned correct " + i, "String " + i, (String) value);
+                assertNotNull(value, "listIndexed returned value " + i);
+                assertTrue(value instanceof String, "listIndexed returned String " + i);
+                assertEquals("String " + i, (String) value, "listIndexed returned correct " + i);
             } catch (final Throwable t) {
                 fail("listIndexed " + i + " threw " + t);
             }
 
             try {
                 value = PropertyUtils.getIndexedProperty(bean, "stringArray[" + i + "]");
-                assertNotNull("stringArray returned value " + i, value);
-                assertTrue("stringArray returned String " + i, value instanceof String);
-                assertEquals("stringArray returned correct " + i, "String " + i, (String) value);
+                assertNotNull(value, "stringArray returned value " + i);
+                assertTrue(value instanceof String, "stringArray returned String " + i);
+                assertEquals("String " + i, (String) value, "stringArray returned correct " + i);
             } catch (final Throwable t) {
                 fail("stringArray " + i + " threw " + t);
             }
 
             try {
                 value = PropertyUtils.getIndexedProperty(bean, "stringIndexed[" + i + "]");
-                assertNotNull("stringIndexed returned value " + i, value);
-                assertTrue("stringIndexed returned String " + i, value instanceof String);
-                assertEquals("stringIndexed returned correct " + i, "String " + i, (String) value);
+                assertNotNull(value, "stringIndexed returned value " + i);
+                assertTrue(value instanceof String, "stringIndexed returned String " + i);
+                assertEquals("String " + i, (String) value, "stringIndexed returned correct " + i);
             } catch (final Throwable t) {
                 fail("stringIndexed " + i + " threw " + t);
             }
@@ -440,6 +444,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Corner cases on getMappedProperty invalid arguments.
      */
+    @Test
     public void testGetMappedArguments() {
         // Use explicit key argument
         assertThrows(NullPointerException.class, () -> PropertyUtils.getMappedProperty(null, "mappedProperty", "First Key"));
@@ -455,25 +460,32 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test getting mapped values with periods in the key.
      */
+    @Test
     public void testGetMappedPeriods() {
 
         bean.set("mappedProperty", "key.with.a.dot", "Special Value");
-        assertEquals("Can retrieve directly", "Special Value", (String) bean.get("mappedProperty", "key.with.a.dot"));
+        assertEquals("Special Value", (String) bean.get("mappedProperty", "key.with.a.dot"),
+                                "Can retrieve directly");
         try {
-            assertEquals("Can retrieve via getMappedProperty", "Special Value", PropertyUtils.getMappedProperty(bean, "mappedProperty", "key.with.a.dot"));
+            assertEquals("Special Value",
+                                    PropertyUtils.getMappedProperty(bean, "mappedProperty", "key.with.a.dot"),
+                                    "Can retrieve via getMappedProperty");
         } catch (final Exception e) {
             fail("Thew exception: " + e);
         }
         try {
-            assertEquals("Can retrieve via getNestedProperty", "Special Value", PropertyUtils.getNestedProperty(bean, "mappedProperty(key.with.a.dot)"));
+            assertEquals("Special Value",
+                                    PropertyUtils.getNestedProperty(bean, "mappedProperty(key.with.a.dot)"),
+                                    "Can retrieve via getNestedProperty");
         } catch (final Exception e) {
             fail("Thew exception: " + e);
         }
 
         bean.set("mappedObjects", "nested.property", new TestBean());
-        assertNotNull("Can retrieve directly", bean.get("mappedObjects", "nested.property"));
+        assertNotNull(bean.get("mappedObjects", "nested.property"), "Can retrieve directly");
         try {
-            assertEquals("Can retrieve nested", "This is a string", PropertyUtils.getNestedProperty(bean, "mappedObjects(nested.property).stringProperty"));
+            assertEquals("This is a string", PropertyUtils.getNestedProperty(bean, "mappedObjects(nested.property).stringProperty"),
+                                    "Can retrieve nested");
         } catch (final Exception e) {
             fail("Thew exception: " + e);
         }
@@ -483,25 +495,32 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test getting mapped values with slashes in the key. This is different from periods because slashes are not syntactically significant.
      */
+    @Test
     public void testGetMappedSlashes() {
 
         bean.set("mappedProperty", "key/with/a/slash", "Special Value");
-        assertEquals("Can retrieve directly", "Special Value", bean.get("mappedProperty", "key/with/a/slash"));
+        assertEquals("Special Value", bean.get("mappedProperty", "key/with/a/slash"),
+                                "Can retrieve directly");
         try {
-            assertEquals("Can retrieve via getMappedProperty", "Special Value", PropertyUtils.getMappedProperty(bean, "mappedProperty", "key/with/a/slash"));
+            assertEquals("Special Value",
+                                    PropertyUtils.getMappedProperty(bean, "mappedProperty", "key/with/a/slash"),
+                                    "Can retrieve via getMappedProperty");
         } catch (final Exception e) {
             fail("Thew exception: " + e);
         }
         try {
-            assertEquals("Can retrieve via getNestedProperty", "Special Value", PropertyUtils.getNestedProperty(bean, "mappedProperty(key/with/a/slash)"));
+            assertEquals("Special Value",
+                                    PropertyUtils.getNestedProperty(bean, "mappedProperty(key/with/a/slash)"),
+                                    "Can retrieve via getNestedProperty");
         } catch (final Exception e) {
             fail("Thew exception: " + e);
         }
 
         bean.set("mappedObjects", "nested/property", new TestBean());
-        assertNotNull("Can retrieve directly", bean.get("mappedObjects", "nested/property"));
+        assertNotNull(bean.get("mappedObjects", "nested/property"), "Can retrieve directly");
         try {
-            assertEquals("Can retrieve nested", "This is a string", PropertyUtils.getNestedProperty(bean, "mappedObjects(nested/property).stringProperty"));
+            assertEquals("This is a string", PropertyUtils.getNestedProperty(bean, "mappedObjects(nested/property).stringProperty"),
+                                    "Can retrieve nested");
         } catch (final Exception e) {
             fail("Thew exception: " + e);
         }
@@ -511,6 +530,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Positive and negative tests on getMappedProperty valid arguments.
      */
+    @Test
     public void testGetMappedValues() {
 
         Object value = null;
@@ -519,21 +539,21 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
         try {
             value = PropertyUtils.getMappedProperty(bean, "mappedProperty", "First Key");
-            assertEquals("Can find first value", "First Value", value);
+            assertEquals("First Value", value, "Can find first value");
         } catch (final Throwable t) {
             fail("Finding first value threw " + t);
         }
 
         try {
             value = PropertyUtils.getMappedProperty(bean, "mappedProperty", "Second Key");
-            assertEquals("Can find second value", "Second Value", value);
+            assertEquals("Second Value", value, "Can find second value");
         } catch (final Throwable t) {
             fail("Finding second value threw " + t);
         }
 
         try {
             value = PropertyUtils.getMappedProperty(bean, "mappedProperty", "Third Key");
-            assertNull("Can not find third value", value);
+            assertNull(value, "Can not find third value");
         } catch (final Throwable t) {
             fail("Finding third value threw " + t);
         }
@@ -542,21 +562,21 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
         try {
             value = PropertyUtils.getMappedProperty(bean, "mappedProperty(First Key)");
-            assertEquals("Can find first value", "First Value", value);
+            assertEquals("First Value", value, "Can find first value");
         } catch (final Throwable t) {
             fail("Finding first value threw " + t);
         }
 
         try {
             value = PropertyUtils.getMappedProperty(bean, "mappedProperty(Second Key)");
-            assertEquals("Can find second value", "Second Value", value);
+            assertEquals("Second Value", value, "Can find second value");
         } catch (final Throwable t) {
             fail("Finding second value threw " + t);
         }
 
         try {
             value = PropertyUtils.getMappedProperty(bean, "mappedProperty(Third Key)");
-            assertNull("Can not find third value", value);
+            assertNull(value, "Can not find third value");
         } catch (final Throwable t) {
             fail("Finding third value threw " + t);
         }
@@ -565,21 +585,21 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
         try {
             value = PropertyUtils.getNestedProperty(bean, "mapProperty.First Key");
-            assertEquals("Can find first value", "First Value", value);
+            assertEquals("First Value", value, "Can find first value");
         } catch (final Throwable t) {
             fail("Finding first value threw " + t);
         }
 
         try {
             value = PropertyUtils.getNestedProperty(bean, "mapProperty.Second Key");
-            assertEquals("Can find second value", "Second Value", value);
+            assertEquals("Second Value", value, "Can find second value");
         } catch (final Throwable t) {
             fail("Finding second value threw " + t);
         }
 
         try {
             value = PropertyUtils.getNestedProperty(bean, "mapProperty.Third Key");
-            assertNull("Can not find third value", value);
+            assertNull(value, "Can not find third value");
         } catch (final Throwable t) {
             fail("Finding third value threw " + t);
         }
@@ -589,6 +609,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Corner cases on getNestedProperty invalid arguments.
      */
+    @Test
     public void testGetNestedArguments() {
         assertThrows(NullPointerException.class, () -> PropertyUtils.getNestedProperty(null, "stringProperty"));
         assertThrows(NullPointerException.class, () -> PropertyUtils.getNestedProperty(bean, null));
@@ -597,14 +618,15 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test getNestedProperty on a boolean property.
      */
+    @Test
     public void testGetNestedBoolean() {
 
         try {
             final Object value = PropertyUtils.getNestedProperty(bean, "nested.booleanProperty");
-            assertNotNull("Got a value", value);
-            assertTrue("Got correct type", value instanceof Boolean);
+            assertNotNull(value, "Got a value");
+            assertTrue(value instanceof Boolean, "Got correct type");
             final TestBean nested = (TestBean) bean.get("nested");
-            assertEquals("Got correct value", ((Boolean) value).booleanValue(), nested.getBooleanProperty());
+            assertEquals(((Boolean) value).booleanValue(), nested.getBooleanProperty(), "Got correct value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -620,14 +642,16 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test getNestedProperty on a double property.
      */
+    @Test
     public void testGetNestedDouble() {
 
         try {
             final Object value = PropertyUtils.getNestedProperty(bean, "nested.doubleProperty");
-            assertNotNull("Got a value", value);
-            assertTrue("Got correct type", value instanceof Double);
+            assertNotNull(value, "Got a value");
+            assertTrue(value instanceof Double, "Got correct type");
             final TestBean nested = (TestBean) bean.get("nested");
-            assertEquals("Got correct value", ((Double) value).doubleValue(), nested.getDoubleProperty(), 0.005);
+            assertEquals(((Double) value).doubleValue(), nested.getDoubleProperty(), 0.005,
+                                    "Got correct value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -643,14 +667,16 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test getNestedProperty on a float property.
      */
+    @Test
     public void testGetNestedFloat() {
 
         try {
             final Object value = PropertyUtils.getNestedProperty(bean, "nested.floatProperty");
-            assertNotNull("Got a value", value);
-            assertTrue("Got correct type", value instanceof Float);
+            assertNotNull(value, "Got a value");
+            assertTrue(value instanceof Float, "Got correct type");
             final TestBean nested = (TestBean) bean.get("nested");
-            assertEquals("Got correct value", ((Float) value).floatValue(), nested.getFloatProperty(), (float) 0.005);
+            assertEquals(((Float) value).floatValue(), nested.getFloatProperty(), (float) 0.005,
+                                    "Got correct value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -666,14 +692,15 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test getNestedProperty on an int property.
      */
+    @Test
     public void testGetNestedInt() {
 
         try {
             final Object value = PropertyUtils.getNestedProperty(bean, "nested.intProperty");
-            assertNotNull("Got a value", value);
-            assertTrue("Got correct type", value instanceof Integer);
+            assertNotNull(value, "Got a value");
+            assertTrue(value instanceof Integer, "Got correct type");
             final TestBean nested = (TestBean) bean.get("nested");
-            assertEquals("Got correct value", ((Integer) value).intValue(), nested.getIntProperty());
+            assertEquals(((Integer) value).intValue(), nested.getIntProperty(), "Got correct value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -689,14 +716,15 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test getNestedProperty on a long property.
      */
+    @Test
     public void testGetNestedLong() {
 
         try {
             final Object value = PropertyUtils.getNestedProperty(bean, "nested.longProperty");
-            assertNotNull("Got a value", value);
-            assertTrue("Got correct type", value instanceof Long);
+            assertNotNull(value, "Got a value");
+            assertTrue(value instanceof Long, "Got correct type");
             final TestBean nested = (TestBean) bean.get("nested");
-            assertEquals("Got correct value", ((Long) value).longValue(), nested.getLongProperty());
+            assertEquals(((Long) value).longValue(), nested.getLongProperty(), "Got correct value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -712,14 +740,15 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test getNestedProperty on a read-only String property.
      */
+    @Test
     public void testGetNestedReadOnly() {
 
         try {
             final Object value = PropertyUtils.getNestedProperty(bean, "nested.readOnlyProperty");
-            assertNotNull("Got a value", value);
-            assertTrue("Got correct type", value instanceof String);
+            assertNotNull(value, "Got a value");
+            assertTrue(value instanceof String, "Got correct type");
             final TestBean nested = (TestBean) bean.get("nested");
-            assertEquals("Got correct value", (String) value, nested.getReadOnlyProperty());
+            assertEquals((String) value, nested.getReadOnlyProperty(), "Got correct value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -735,14 +764,15 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test getNestedProperty on a short property.
      */
+    @Test
     public void testGetNestedShort() {
 
         try {
             final Object value = PropertyUtils.getNestedProperty(bean, "nested.shortProperty");
-            assertNotNull("Got a value", value);
-            assertTrue("Got correct type", value instanceof Short);
+            assertNotNull(value, "Got a value");
+            assertTrue(value instanceof Short, "Got correct type");
             final TestBean nested = (TestBean) bean.get("nested");
-            assertEquals("Got correct value", ((Short) value).shortValue(), nested.getShortProperty());
+            assertEquals(((Short) value).shortValue(), nested.getShortProperty(), "Got correct value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -758,14 +788,15 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test getNestedProperty on a String property.
      */
+    @Test
     public void testGetNestedString() {
 
         try {
             final Object value = PropertyUtils.getNestedProperty(bean, "nested.stringProperty");
-            assertNotNull("Got a value", value);
-            assertTrue("Got correct type", value instanceof String);
+            assertNotNull(value, "Got a value");
+            assertTrue(value instanceof String, "Got correct type");
             final TestBean nested = (TestBean) bean.get("nested");
-            assertEquals("Got correct value", (String) value, nested.getStringProperty());
+            assertEquals((String) value, nested.getStringProperty(), "Got correct value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -781,6 +812,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Negative test getNestedProperty on an unknown property.
      */
+    @Test
     public void testGetNestedUnknown() {
 
         try {
@@ -801,6 +833,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Corner cases on getSimpleProperty invalid arguments.
      */
+    @Test
     public void testGetSimpleArguments() {
         assertThrows(NullPointerException.class, () -> PropertyUtils.getSimpleProperty(null, "stringProperty"));
         assertThrows(NullPointerException.class, () -> PropertyUtils.getSimpleProperty(bean, null));
@@ -809,13 +842,14 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test getSimpleProperty on a boolean property.
      */
+    @Test
     public void testGetSimpleBoolean() {
 
         try {
             final Object value = PropertyUtils.getSimpleProperty(bean, "booleanProperty");
-            assertNotNull("Got a value", value);
-            assertTrue("Got correct type", value instanceof Boolean);
-            assertTrue("Got correct value", ((Boolean) value).booleanValue());
+            assertNotNull(value, "Got a value");
+            assertTrue(value instanceof Boolean, "Got correct type");
+            assertTrue(((Boolean) value).booleanValue(), "Got correct value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -831,13 +865,14 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test getSimpleProperty on a double property.
      */
+    @Test
     public void testGetSimpleDouble() {
 
         try {
             final Object value = PropertyUtils.getSimpleProperty(bean, "doubleProperty");
-            assertNotNull("Got a value", value);
-            assertTrue("Got correct type", value instanceof Double);
-            assertEquals("Got correct value", ((Double) value).doubleValue(), 321.0, 0.005);
+            assertNotNull(value, "Got a value");
+            assertTrue(value instanceof Double, "Got correct type");
+            assertEquals(((Double) value).doubleValue(), 321.0, 0.005, "Got correct value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -853,13 +888,14 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test getSimpleProperty on a float property.
      */
+    @Test
     public void testGetSimpleFloat() {
 
         try {
             final Object value = PropertyUtils.getSimpleProperty(bean, "floatProperty");
-            assertNotNull("Got a value", value);
-            assertTrue("Got correct type", value instanceof Float);
-            assertEquals("Got correct value", ((Float) value).floatValue(), (float) 123.0, (float) 0.005);
+            assertNotNull(value, "Got a value");
+            assertTrue(value instanceof Float, "Got correct type");
+            assertEquals(((Float) value).floatValue(), (float) 123.0, (float) 0.005, "Got correct value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -875,6 +911,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Negative test getSimpleProperty on an indexed property.
      */
+    @Test
     public void testGetSimpleIndexed() {
 
         try {
@@ -895,13 +932,14 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test getSimpleProperty on an int property.
      */
+    @Test
     public void testGetSimpleInt() {
 
         try {
             final Object value = PropertyUtils.getSimpleProperty(bean, "intProperty");
-            assertNotNull("Got a value", value);
-            assertTrue("Got correct type", value instanceof Integer);
-            assertEquals("Got correct value", ((Integer) value).intValue(), 123);
+            assertNotNull(value, "Got a value");
+            assertTrue(value instanceof Integer, "Got correct type");
+            assertEquals(((Integer) value).intValue(), 123, "Got correct value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -917,13 +955,14 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test getSimpleProperty on a long property.
      */
+    @Test
     public void testGetSimpleLong() {
 
         try {
             final Object value = PropertyUtils.getSimpleProperty(bean, "longProperty");
-            assertNotNull("Got a value", value);
-            assertTrue("Got correct type", value instanceof Long);
-            assertEquals("Got correct value", ((Long) value).longValue(), 321);
+            assertNotNull(value, "Got a value");
+            assertTrue(value instanceof Long, "Got correct type");
+            assertEquals(((Long) value).longValue(), 321, "Got correct value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -939,6 +978,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Negative test getSimpleProperty on a nested property.
      */
+    @Test
     public void testGetSimpleNested() {
 
         try {
@@ -959,13 +999,14 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test getSimpleProperty on a short property.
      */
+    @Test
     public void testGetSimpleShort() {
 
         try {
             final Object value = PropertyUtils.getSimpleProperty(bean, "shortProperty");
-            assertNotNull("Got a value", value);
-            assertTrue("Got correct type", value instanceof Short);
-            assertEquals("Got correct value", ((Short) value).shortValue(), (short) 987);
+            assertNotNull(value, "Got a value");
+            assertTrue(value instanceof Short, "Got correct type");
+            assertEquals(((Short) value).shortValue(), (short) 987, "Got correct value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -981,13 +1022,14 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test getSimpleProperty on a String property.
      */
+    @Test
     public void testGetSimpleString() {
 
         try {
             final Object value = PropertyUtils.getSimpleProperty(bean, "stringProperty");
-            assertNotNull("Got a value", value);
-            assertTrue("Got correct type", value instanceof String);
-            assertEquals("Got correct value", (String) value, "This is a string");
+            assertNotNull(value, "Got a value");
+            assertTrue(value instanceof String, "Got correct type");
+            assertEquals((String) value, "This is a string", "Got correct value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1003,6 +1045,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Negative test getSimpleProperty on an unknown property.
      */
+    @Test
     public void testGetSimpleUnknown() {
 
         try {
@@ -1016,7 +1059,8 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (final NoSuchMethodException e) {
             // Correct result for this test
-            assertEquals("Unknown property 'unknown' on dynaclass '" + bean.getDynaClass() + "'", e.getMessage());
+            assertEquals("Unknown property 'unknown' on dynaclass '" + bean.getDynaClass() + "'",
+                                    e.getMessage());
         }
 
     }
@@ -1024,6 +1068,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Corner cases on setIndexedProperty invalid arguments.
      */
+    @Test
     public void testSetIndexedArguments() {
         // Use explicit index argument
         assertThrows(NullPointerException.class, () -> PropertyUtils.setIndexedProperty(null, "intArray", 0, Integer.valueOf(1)));
@@ -1044,6 +1089,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Positive and negative tests on setIndexedProperty valid arguments.
      */
+    @Test
     public void testSetIndexedValues() {
 
         Object value = null;
@@ -1053,9 +1099,9 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(bean, "intArray", 0, Integer.valueOf(1));
             value = PropertyUtils.getIndexedProperty(bean, "intArray", 0);
-            assertNotNull("Returned new value 0", value);
-            assertTrue("Returned Integer new value 0", value instanceof Integer);
-            assertEquals("Returned correct new value 0", 1, ((Integer) value).intValue());
+            assertNotNull(value, "Returned new value 0");
+            assertTrue(value instanceof Integer, "Returned Integer new value 0");
+            assertEquals(1, ((Integer) value).intValue(), "Returned correct new value 0");
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
@@ -1063,9 +1109,9 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(bean, "intIndexed", 1, Integer.valueOf(11));
             value = PropertyUtils.getIndexedProperty(bean, "intIndexed", 1);
-            assertNotNull("Returned new value 1", value);
-            assertTrue("Returned Integer new value 1", value instanceof Integer);
-            assertEquals("Returned correct new value 1", 11, ((Integer) value).intValue());
+            assertNotNull(value, "Returned new value 1");
+            assertTrue(value instanceof Integer, "Returned Integer new value 1");
+            assertEquals(11, ((Integer) value).intValue(), "Returned correct new value 1");
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
@@ -1073,9 +1119,9 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(bean, "listIndexed", 2, "New Value 2");
             value = PropertyUtils.getIndexedProperty(bean, "listIndexed", 2);
-            assertNotNull("Returned new value 2", value);
-            assertTrue("Returned String new value 2", value instanceof String);
-            assertEquals("Returned correct new value 2", "New Value 2", (String) value);
+            assertNotNull(value, "Returned new value 2");
+            assertTrue(value instanceof String, "Returned String new value 2");
+            assertEquals("New Value 2", (String) value, "Returned correct new value 2");
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
@@ -1083,9 +1129,9 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(bean, "stringArray", 2, "New Value 2");
             value = PropertyUtils.getIndexedProperty(bean, "stringArray", 2);
-            assertNotNull("Returned new value 2", value);
-            assertTrue("Returned String new value 2", value instanceof String);
-            assertEquals("Returned correct new value 2", "New Value 2", (String) value);
+            assertNotNull(value, "Returned new value 2");
+            assertTrue(value instanceof String, "Returned String new value 2");
+            assertEquals("New Value 2", (String) value, "Returned correct new value 2");
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
@@ -1093,9 +1139,9 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(bean, "stringArray", 3, "New Value 3");
             value = PropertyUtils.getIndexedProperty(bean, "stringArray", 3);
-            assertNotNull("Returned new value 3", value);
-            assertTrue("Returned String new value 3", value instanceof String);
-            assertEquals("Returned correct new value 3", "New Value 3", (String) value);
+            assertNotNull(value, "Returned new value 3");
+            assertTrue(value instanceof String, "Returned String new value 3");
+            assertEquals("New Value 3", (String) value, "Returned correct new value 3");
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
@@ -1105,9 +1151,9 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(bean, "intArray[4]", Integer.valueOf(1));
             value = PropertyUtils.getIndexedProperty(bean, "intArray[4]");
-            assertNotNull("Returned new value 4", value);
-            assertTrue("Returned Integer new value 4", value instanceof Integer);
-            assertEquals("Returned correct new value 4", 1, ((Integer) value).intValue());
+            assertNotNull(value, "Returned new value 4");
+            assertTrue(value instanceof Integer, "Returned Integer new value 4");
+            assertEquals(1, ((Integer) value).intValue(), "Returned correct new value 4");
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
@@ -1115,9 +1161,9 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(bean, "intIndexed[3]", Integer.valueOf(11));
             value = PropertyUtils.getIndexedProperty(bean, "intIndexed[3]");
-            assertNotNull("Returned new value 5", value);
-            assertTrue("Returned Integer new value 5", value instanceof Integer);
-            assertEquals("Returned correct new value 5", 11, ((Integer) value).intValue());
+            assertNotNull(value, "Returned new value 5");
+            assertTrue(value instanceof Integer, "Returned Integer new value 5");
+            assertEquals(11, ((Integer) value).intValue(), "Returned correct new value 5");
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
@@ -1125,9 +1171,9 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(bean, "listIndexed[1]", "New Value 2");
             value = PropertyUtils.getIndexedProperty(bean, "listIndexed[1]");
-            assertNotNull("Returned new value 6", value);
-            assertTrue("Returned String new value 6", value instanceof String);
-            assertEquals("Returned correct new value 6", "New Value 2", (String) value);
+            assertNotNull(value, "Returned new value 6");
+            assertTrue(value instanceof String, "Returned String new value 6");
+            assertEquals("New Value 2", (String) value, "Returned correct new value 6");
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
@@ -1135,9 +1181,9 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(bean, "stringArray[1]", "New Value 2");
             value = PropertyUtils.getIndexedProperty(bean, "stringArray[2]");
-            assertNotNull("Returned new value 6", value);
-            assertTrue("Returned String new value 6", value instanceof String);
-            assertEquals("Returned correct new value 6", "New Value 2", (String) value);
+            assertNotNull(value, "Returned new value 6");
+            assertTrue(value instanceof String, "Returned String new value 6");
+            assertEquals("New Value 2", (String) value, "Returned correct new value 6");
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
@@ -1145,9 +1191,9 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(bean, "stringArray[0]", "New Value 3");
             value = PropertyUtils.getIndexedProperty(bean, "stringArray[0]");
-            assertNotNull("Returned new value 7", value);
-            assertTrue("Returned String new value 7", value instanceof String);
-            assertEquals("Returned correct new value 7", "New Value 3", (String) value);
+            assertNotNull(value, "Returned new value 7");
+            assertTrue(value instanceof String, "Returned String new value 7");
+            assertEquals("New Value 3", (String) value, "Returned correct new value 7");
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
@@ -1249,6 +1295,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Corner cases on getMappedProperty invalid arguments.
      */
+    @Test
     public void testSetMappedArguments() {
         // Use explicit key argument
         assertThrows(NullPointerException.class, () -> PropertyUtils.setMappedProperty(null, "mappedProperty", "First Key", "First Value"));
@@ -1263,6 +1310,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Positive and negative tests on setMappedProperty valid arguments.
      */
+    @Test
     public void testSetMappedValues() {
 
         Object value = null;
@@ -1271,7 +1319,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
         try {
             value = PropertyUtils.getMappedProperty(bean, "mappedProperty", "Fourth Key");
-            assertNull("Can not find fourth value", value);
+            assertNull(value, "Can not find fourth value");
         } catch (final Throwable t) {
             fail("Finding fourth value threw " + t);
         }
@@ -1284,7 +1332,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
         try {
             value = PropertyUtils.getMappedProperty(bean, "mappedProperty", "Fourth Key");
-            assertEquals("Can find fourth value", "Fourth Value", value);
+            assertEquals("Fourth Value", value, "Can find fourth value");
         } catch (final Throwable t) {
             fail("Finding fourth value threw " + t);
         }
@@ -1293,7 +1341,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
         try {
             value = PropertyUtils.getMappedProperty(bean, "mappedProperty(Fifth Key)");
-            assertNull("Can not find fifth value", value);
+            assertNull(value, "Can not find fifth value");
         } catch (final Throwable t) {
             fail("Finding fifth value threw " + t);
         }
@@ -1306,7 +1354,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
         try {
             value = PropertyUtils.getMappedProperty(bean, "mappedProperty(Fifth Key)");
-            assertEquals("Can find fifth value", "Fifth Value", value);
+            assertEquals("Fifth Value", value, "Can find fifth value");
         } catch (final Throwable t) {
             fail("Finding fifth value threw " + t);
         }
@@ -1315,7 +1363,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
         try {
             value = PropertyUtils.getNestedProperty(bean, "mapProperty.Sixth Key");
-            assertNull("Can not find sixth value", value);
+            assertNull(value, "Can not find sixth value");
         } catch (final Throwable t) {
             fail("Finding fifth value threw " + t);
         }
@@ -1328,7 +1376,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
         try {
             value = PropertyUtils.getNestedProperty(bean, "mapProperty.Sixth Key");
-            assertEquals("Can find sixth value", "Sixth Value", value);
+            assertEquals("Sixth Value", value, "Can find sixth value");
         } catch (final Throwable t) {
             fail("Finding sixth value threw " + t);
         }
@@ -1338,6 +1386,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Corner cases on setNestedProperty invalid arguments.
      */
+    @Test
     public void testSetNestedArguments() {
         assertThrows(NullPointerException.class, () -> PropertyUtils.setNestedProperty(null, "stringProperty", ""));
         assertThrows(NullPointerException.class, () -> PropertyUtils.setNestedProperty(bean, null, ""));
@@ -1346,13 +1395,14 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test setNextedProperty on a boolean property.
      */
+    @Test
     public void testSetNestedBoolean() {
 
         try {
             final boolean oldValue = nested.getBooleanProperty();
             final boolean newValue = !oldValue;
             PropertyUtils.setNestedProperty(bean, "nested.booleanProperty", Boolean.valueOf(newValue));
-            assertEquals("Matched new value", newValue, nested.getBooleanProperty());
+            assertEquals(newValue, nested.getBooleanProperty(), "Matched new value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1368,13 +1418,14 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test setNestedProperty on a double property.
      */
+    @Test
     public void testSetNestedDouble() {
 
         try {
             final double oldValue = nested.getDoubleProperty();
             final double newValue = oldValue + 1.0;
             PropertyUtils.setNestedProperty(bean, "nested.doubleProperty", Double.valueOf(newValue));
-            assertEquals("Matched new value", newValue, nested.getDoubleProperty(), 0.005);
+            assertEquals(newValue, nested.getDoubleProperty(), 0.005, "Matched new value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1390,13 +1441,14 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test setNestedProperty on a float property.
      */
+    @Test
     public void testSetNestedFloat() {
 
         try {
             final float oldValue = nested.getFloatProperty();
             final float newValue = oldValue + (float) 1.0;
             PropertyUtils.setNestedProperty(bean, "nested.floatProperty", Float.valueOf(newValue));
-            assertEquals("Matched new value", newValue, nested.getFloatProperty(), (float) 0.005);
+            assertEquals(newValue, nested.getFloatProperty(), (float) 0.005, "Matched new value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1412,13 +1464,14 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test setNestedProperty on a int property.
      */
+    @Test
     public void testSetNestedInt() {
 
         try {
             final int oldValue = nested.getIntProperty();
             final int newValue = oldValue + 1;
             PropertyUtils.setNestedProperty(bean, "nested.intProperty", Integer.valueOf(newValue));
-            assertEquals("Matched new value", newValue, nested.getIntProperty());
+            assertEquals(newValue, nested.getIntProperty(), "Matched new value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1434,13 +1487,14 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test setNestedProperty on a long property.
      */
+    @Test
     public void testSetNestedLong() {
 
         try {
             final long oldValue = nested.getLongProperty();
             final long newValue = oldValue + 1;
             PropertyUtils.setNestedProperty(bean, "nested.longProperty", Long.valueOf(newValue));
-            assertEquals("Matched new value", newValue, nested.getLongProperty());
+            assertEquals(newValue, nested.getLongProperty(), "Matched new value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1456,6 +1510,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test setNestedProperty on a read-only String property.
      */
+    @Test
     public void testSetNestedReadOnly() {
 
         try {
@@ -1478,6 +1533,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test setNestedProperty on a short property.
      */
+    @Test
     public void testSetNestedShort() {
 
         try {
@@ -1485,7 +1541,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             short newValue = oldValue;
             newValue++;
             PropertyUtils.setNestedProperty(bean, "nested.shortProperty", Short.valueOf(newValue));
-            assertEquals("Matched new value", newValue, nested.getShortProperty());
+            assertEquals(newValue, nested.getShortProperty(), "Matched new value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1501,13 +1557,14 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test setNestedProperty on a String property.
      */
+    @Test
     public void testSetNestedString() {
 
         try {
             final String oldValue = nested.getStringProperty();
             final String newValue = oldValue + " Extra Value";
             PropertyUtils.setNestedProperty(bean, "nested.stringProperty", newValue);
-            assertEquals("Matched new value", newValue, nested.getStringProperty());
+            assertEquals(newValue, nested.getStringProperty(), "Matched new value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1523,6 +1580,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test setNestedProperty on an unknown property name.
      */
+    @Test
     public void testSetNestedUnknown() {
 
         try {
@@ -1544,13 +1602,14 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test setNestedProperty on a write-only String property.
      */
+    @Test
     public void testSetNestedWriteOnly() {
 
         try {
             final String oldValue = nested.getWriteOnlyPropertyValue();
             final String newValue = oldValue + " Extra Value";
             PropertyUtils.setNestedProperty(bean, "nested.writeOnlyProperty", newValue);
-            assertEquals("Matched new value", newValue, nested.getWriteOnlyPropertyValue());
+            assertEquals(newValue, nested.getWriteOnlyPropertyValue(), "Matched new value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1566,6 +1625,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Corner cases on setSimpleProperty invalid arguments.
      */
+    @Test
     public void testSetSimpleArguments() {
         assertThrows(NullPointerException.class, () -> PropertyUtils.setSimpleProperty(null, "stringProperty", ""));
         assertThrows(NullPointerException.class, () -> PropertyUtils.setSimpleProperty(bean, null, ""));
@@ -1574,13 +1634,15 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test setSimpleProperty on a boolean property.
      */
+    @Test
     public void testSetSimpleBoolean() {
 
         try {
             final boolean oldValue = ((Boolean) bean.get("booleanProperty")).booleanValue();
             final boolean newValue = !oldValue;
             PropertyUtils.setSimpleProperty(bean, "booleanProperty", Boolean.valueOf(newValue));
-            assertEquals("Matched new value", newValue, ((Boolean) bean.get("booleanProperty")).booleanValue());
+            assertEquals(newValue, ((Boolean) bean.get("booleanProperty")).booleanValue(),
+                                    "Matched new value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1596,13 +1658,15 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test setSimpleProperty on a double property.
      */
+    @Test
     public void testSetSimpleDouble() {
 
         try {
             final double oldValue = ((Double) bean.get("doubleProperty")).doubleValue();
             final double newValue = oldValue + 1.0;
             PropertyUtils.setSimpleProperty(bean, "doubleProperty", Double.valueOf(newValue));
-            assertEquals("Matched new value", newValue, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005);
+            assertEquals(newValue, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005,
+                                    "Matched new value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1618,13 +1682,15 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test setSimpleProperty on a float property.
      */
+    @Test
     public void testSetSimpleFloat() {
 
         try {
             final float oldValue = ((Float) bean.get("floatProperty")).floatValue();
             final float newValue = oldValue + (float) 1.0;
             PropertyUtils.setSimpleProperty(bean, "floatProperty", Float.valueOf(newValue));
-            assertEquals("Matched new value", newValue, ((Float) bean.get("floatProperty")).floatValue(), (float) 0.005);
+            assertEquals(newValue, ((Float) bean.get("floatProperty")).floatValue(), (float) 0.005,
+                                    "Matched new value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1640,6 +1706,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Negative test setSimpleProperty on an indexed property.
      */
+    @Test
     public void testSetSimpleIndexed() {
 
         try {
@@ -1660,13 +1727,14 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test setSimpleProperty on a int property.
      */
+    @Test
     public void testSetSimpleInt() {
 
         try {
             final int oldValue = ((Integer) bean.get("intProperty")).intValue();
             final int newValue = oldValue + 1;
             PropertyUtils.setSimpleProperty(bean, "intProperty", Integer.valueOf(newValue));
-            assertEquals("Matched new value", newValue, ((Integer) bean.get("intProperty")).intValue());
+            assertEquals(newValue, ((Integer) bean.get("intProperty")).intValue(), "Matched new value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1682,13 +1750,14 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test setSimpleProperty on a long property.
      */
+    @Test
     public void testSetSimpleLong() {
 
         try {
             final long oldValue = ((Long) bean.get("longProperty")).longValue();
             final long newValue = oldValue + 1;
             PropertyUtils.setSimpleProperty(bean, "longProperty", Long.valueOf(newValue));
-            assertEquals("Matched new value", newValue, ((Long) bean.get("longProperty")).longValue());
+            assertEquals(newValue, ((Long) bean.get("longProperty")).longValue(), "Matched new value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1704,6 +1773,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Negative test setSimpleProperty on a nested property.
      */
+    @Test
     public void testSetSimpleNested() {
 
         try {
@@ -1724,6 +1794,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test setSimpleProperty on a short property.
      */
+    @Test
     public void testSetSimpleShort() {
 
         try {
@@ -1731,7 +1802,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             short newValue = oldValue;
             newValue++;
             PropertyUtils.setSimpleProperty(bean, "shortProperty", Short.valueOf(newValue));
-            assertEquals("Matched new value", newValue, ((Short) bean.get("shortProperty")).shortValue());
+            assertEquals(newValue, ((Short) bean.get("shortProperty")).shortValue(), "Matched new value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1747,13 +1818,14 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test setSimpleProperty on a String property.
      */
+    @Test
     public void testSetSimpleString() {
 
         try {
             final String oldValue = (String) bean.get("stringProperty");
             final String newValue = oldValue + " Extra Value";
             PropertyUtils.setSimpleProperty(bean, "stringProperty", newValue);
-            assertEquals("Matched new value", newValue, (String) bean.get("stringProperty"));
+            assertEquals(newValue, (String) bean.get("stringProperty"), "Matched new value");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1769,6 +1841,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * Test setSimpleProperty on an unknown property name.
      */
+    @Test
     public void testSetSimpleUnknown() {
 
         try {
@@ -1783,7 +1856,8 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (final NoSuchMethodException e) {
             // Correct result for this test
-            assertEquals("Unknown property 'unknown' on dynaclass '" + bean.getDynaClass() + "'", e.getMessage());
+            assertEquals("Unknown property 'unknown' on dynaclass '" + bean.getDynaClass() + "'",
+                                    e.getMessage());
         }
 
     }

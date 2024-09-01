@@ -36,10 +36,6 @@ public abstract class AbstractNumberConverterTest<T extends Number> extends Test
     /** Test Number values */
     protected Number[] numbers = new Number[4];
 
-    public AbstractNumberConverterTest(final String name) {
-        super(name);
-    }
-
     protected abstract Class<T> getExpectedType();
 
     protected abstract NumberConverter<T> makeConverter();
@@ -263,7 +259,7 @@ public abstract class AbstractNumberConverterTest<T extends Number> extends Test
      */
     public void testStringArrayToInteger() {
         final Integer defaultValue = Integer.valueOf(-1);
-        final NumberConverter<Integer> converter = new IntegerConverterTestCase("test").makeConverter(defaultValue);
+        final NumberConverter<Integer> converter = new IntegerConverterTestCase().makeConverter(defaultValue);
 
         // Default Locale
         assertEquals("Valid First", Integer.valueOf(5), converter.convert(Integer.class, new String[] { "5", "4", "3" }));

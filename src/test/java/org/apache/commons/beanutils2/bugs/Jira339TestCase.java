@@ -16,21 +16,25 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
-
-import junit.framework.TestCase;
 
 import org.apache.commons.beanutils2.BeanUtils;
 import org.apache.commons.beanutils2.PropertyUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-339">https://issues.apache.org/jira/browse/BEANUTILS-339</a>
  */
-public class Jira339TestCase extends TestCase {
+public class Jira339TestCase {
 
     /**
      * Test Bean.
@@ -61,22 +65,12 @@ public class Jira339TestCase extends TestCase {
     private static final Log LOG = LogFactory.getLog(Jira339TestCase.class);
 
     /**
-     * Create a test case with the specified name.
-     *
-     * @param name The name of the test
-     */
-    public Jira339TestCase(final String name) {
-        super(name);
-    }
-
-    /**
      * Sets up.
      *
      * @throws Exception
      */
-    @Override
+    @BeforeEach
     protected void setUp() throws Exception {
-        super.setUp();
     }
 
     /**
@@ -84,14 +78,14 @@ public class Jira339TestCase extends TestCase {
      *
      * @throws Exception
      */
-    @Override
+    @AfterEach
     protected void tearDown() throws Exception {
-        super.tearDown();
     }
 
     /**
      * Test {@link BeanUtils#populate(Object, Map)}
      */
+    @Test
     public void testIssue_BEANUTILS_331_BeanUtilsBean_populate() {
 
         final TestBean bean = new TestBean();
@@ -103,12 +97,13 @@ public class Jira339TestCase extends TestCase {
             LOG.error("Failed: " + t.getMessage(), t);
             fail("Threw exception: " + t);
         }
-        assertNull("TestBean comparator should be null", bean.getComparator());
+        assertNull(bean.getComparator(), "TestBean comparator should be null");
     }
 
     /**
      * Test {@link PropertyUtils#setProperty(Object, String, Object)}
      */
+    @Test
     public void testIssue_BEANUTILS_339_BeanUtilsBean_setProperty() {
 
         final TestBean bean = new TestBean();
@@ -118,6 +113,6 @@ public class Jira339TestCase extends TestCase {
             LOG.error("Failed: " + t.getMessage(), t);
             fail("Threw exception: " + t);
         }
-        assertNull("TestBean comparator should be null", bean.getComparator());
+        assertNull(bean.getComparator(), "TestBean comparator should be null");
     }
 }

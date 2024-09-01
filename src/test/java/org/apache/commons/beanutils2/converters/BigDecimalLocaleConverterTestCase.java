@@ -26,10 +26,6 @@ import org.apache.commons.beanutils2.locale.converters.BigDecimalLocaleConverter
  */
 public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCase<BigDecimal> {
 
-    public BigDecimalLocaleConverterTestCase(final String name) {
-        super(name);
-    }
-
     /**
      * Sets up instance variables required by this test case.
      */

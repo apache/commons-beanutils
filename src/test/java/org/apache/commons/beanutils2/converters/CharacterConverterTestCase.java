@@ -16,56 +16,56 @@
  */
 package org.apache.commons.beanutils2.converters;
 
-import junit.framework.TestCase;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test Case for the CharacterConverter class.
  */
-public class CharacterConverterTestCase extends TestCase {
-
-    /**
-     * Constructs a new Character Converter test case.
-     *
-     * @param name Test Name
-     */
-    public CharacterConverterTestCase(final String name) {
-        super(name);
-    }
+public class CharacterConverterTestCase {
 
     /** Sets Up */
-    @Override
+    @BeforeEach
     public void setUp() throws Exception {
     }
 
     /** Tear Down */
-    @Override
+    @AfterEach
     public void tearDown() throws Exception {
     }
 
     /**
      * Tests whether the primitive char class can be passed as target type.
      */
+    @Test
     public void testConvertToChar() {
         final Converter<Character> converter = new CharacterConverter();
-        assertEquals("Wrong result", Character.valueOf('F'), converter.convert(Character.TYPE, "FOO"));
+        assertEquals(Character.valueOf('F'), converter.convert(Character.TYPE, "FOO"), "Wrong result");
     }
 
     /**
      * Test Conversion to Character
      */
+    @Test
     public void testConvertToCharacter() {
         final Converter<Character> converter = new CharacterConverter();
-        assertEquals("Character Test", Character.valueOf('N'), converter.convert(Character.class, Character.valueOf('N')));
-        assertEquals("String Test", Character.valueOf('F'), converter.convert(Character.class, "FOO"));
-        assertEquals("Integer Test", Character.valueOf('3'), converter.convert(Character.class, Integer.valueOf(321)));
+        assertEquals(Character.valueOf('N'), converter.convert(Character.class, Character.valueOf('N')),
+                                "Character Test");
+        assertEquals(Character.valueOf('F'), converter.convert(Character.class, "FOO"), "String Test");
+        assertEquals(Character.valueOf('3'), converter.convert(Character.class, Integer.valueOf(321)),
+                                "Integer Test");
     }
 
     /**
      * Tests a conversion to character for null input if no default value is provided.
      */
+    @Test
     public void testConvertToCharacterNullNoDefault() {
         final Converter<Character> converter = new CharacterConverter();
         try {
@@ -79,6 +79,7 @@ public class CharacterConverterTestCase extends TestCase {
     /**
      * Test Conversion to String
      */
+    @Test
     @SuppressWarnings("unchecked") // testing raw conversion
     public void testConvertToString() {
 
@@ -86,15 +87,16 @@ public class CharacterConverterTestCase extends TestCase {
         @SuppressWarnings("rawtypes")
         final Converter raw = converter;
 
-        assertEquals("Character Test", "N", raw.convert(String.class, Character.valueOf('N')));
-        assertEquals("String Test", "F", raw.convert(String.class, "FOO"));
-        assertEquals("Integer Test", "3", raw.convert(String.class, Integer.valueOf(321)));
-        assertEquals("Null Test", null, raw.convert(String.class, null));
+        assertEquals("N", raw.convert(String.class, Character.valueOf('N')), "Character Test");
+        assertEquals("F", raw.convert(String.class, "FOO"), "String Test");
+        assertEquals("3", raw.convert(String.class, Integer.valueOf(321)), "Integer Test");
+        assertEquals(null, raw.convert(String.class, null), "Null Test");
     }
 
     /**
      * Tries a conversion to an unsupported type.
      */
+    @Test
     @SuppressWarnings("unchecked") // tests failure so allow mismatch
     public void testConvertToUnsupportedType() {
         @SuppressWarnings("rawtypes") // tests failure so allow mismatch
@@ -110,8 +112,9 @@ public class CharacterConverterTestCase extends TestCase {
     /**
      * Test Conversion to Character (with default)
      */
+    @Test
     public void testDefault() {
         final CharacterConverter converter = new CharacterConverter('C');
-        assertEquals("Default Test", Character.valueOf('C'), converter.convert(Character.class, null));
+        assertEquals(Character.valueOf('C'), converter.convert(Character.class, null), "Default Test");
     }
 }

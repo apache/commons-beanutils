@@ -25,10 +25,6 @@ import org.apache.commons.beanutils2.locale.converters.ShortLocaleConverter;
 
 public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase<Short> {
 
-    public ShortLocaleConverterTestCase(final String name) {
-        super(name);
-    }
-
     /**
      * Sets up instance variables required by this test case.
      */

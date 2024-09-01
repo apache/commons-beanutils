@@ -16,19 +16,20 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
-import java.util.Locale;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-import junit.framework.TestCase;
+import java.util.Locale;
 
 import org.apache.commons.beanutils2.Converter;
 import org.apache.commons.beanutils2.locale.converters.IntegerLocaleConverter;
+import org.junit.jupiter.api.Test;
 
 /**
  * BaseLocaleConverter.checkConversionResult() fails with ConversionException when result is null when it should not.
  *
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-458">https://issues.apache.org/jira/browse/BEANUTILS-458</a>
  */
-public class Jira458TestCase extends TestCase {
+public class Jira458TestCase {
     /**
      * Helper method for testing a conversion with null as default.
      *
@@ -37,12 +38,13 @@ public class Jira458TestCase extends TestCase {
     private void checkConversionWithNullDefault(final String input) {
         // final Converter<Integer> converter = new IntegerLocaleConverter(null, Locale.US);
         final Converter<Integer> converter = IntegerLocaleConverter.builder().setUseDefault(true).setLocale(Locale.US).get();
-        assertNull("Wrong result", converter.convert(Integer.class, input));
+        assertNull(converter.convert(Integer.class, input), "Wrong result");
     }
 
     /**
      * Tests a conversion passing in an empty string.
      */
+    @Test
     public void testConversionWithNullDefaultEmptyString() {
         checkConversionWithNullDefault("");
     }
@@ -50,6 +52,7 @@ public class Jira458TestCase extends TestCase {
     /**
      * Tests a conversion passing in null.
      */
+    @Test
     public void testConversionWithNullDefaultNullInput() {
         checkConversionWithNullDefault(null);
     }

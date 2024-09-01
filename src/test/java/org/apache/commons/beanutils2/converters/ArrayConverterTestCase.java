@@ -16,28 +16,25 @@
  */
 package org.apache.commons.beanutils2.converters;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Locale;
 
-import junit.framework.TestCase;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test Case for the ArrayConverter class.
  */
-public class ArrayConverterTestCase extends TestCase {
-
-    /**
-     * Constructs a new Array Converter test case.
-     *
-     * @param name Test Name
-     */
-    public ArrayConverterTestCase(final String name) {
-        super(name);
-    }
+public class ArrayConverterTestCase {
 
     /**
      * Check that two arrays are the same.
@@ -47,28 +44,28 @@ public class ArrayConverterTestCase extends TestCase {
      * @param result   Result array value
      */
     private void checkArray(final String msg, final Object expected, final Object result) {
-        assertNotNull(msg + " Expected Null", expected);
-        assertNotNull(msg + " Result   Null", result);
-        assertTrue(msg + " Result   not array", result.getClass().isArray());
-        assertTrue(msg + " Expected not array", expected.getClass().isArray());
+        assertNotNull(expected, msg + " Expected Null");
+        assertNotNull(result, msg + " Result   Null");
+        assertTrue(result.getClass().isArray(), msg + " Result   not array");
+        assertTrue(expected.getClass().isArray(), msg + " Expected not array");
         final int resultLth = Array.getLength(result);
-        assertEquals(msg + " Size", Array.getLength(expected), resultLth);
-        assertEquals(msg + " Type", expected.getClass(), result.getClass());
+        assertEquals(Array.getLength(expected), resultLth, msg + " Size");
+        assertEquals(expected.getClass(), result.getClass(), msg + " Type");
         for (int i = 0; i < resultLth; i++) {
             final Object expectElement = Array.get(expected, i);
             final Object resultElement = Array.get(result, i);
-            assertEquals(msg + " Element " + i, expectElement, resultElement);
+            assertEquals(expectElement, resultElement, msg + " Element " + i);
         }
     }
 
     /** Sets Up */
-    @Override
+    @BeforeEach
     public void setUp() throws Exception {
         // empty
     }
 
     /** Tear Down */
-    @Override
+    @AfterEach
     public void tearDown() throws Exception {
         // empty
     }
@@ -76,6 +73,7 @@ public class ArrayConverterTestCase extends TestCase {
     /**
      * Test Converting using the IntegerConverter as the component Converter
      */
+    @Test
     public void testComponentIntegerConverter() {
 
         final IntegerConverter intConverter = new IntegerConverter(Integer.valueOf(0));
@@ -162,7 +160,7 @@ public class ArrayConverterTestCase extends TestCase {
         // Long --> String
         try {
             msg = "Long --> String";
-            assertEquals(msg, LONGArray[0] + "", arrayConverter.convert(String.class, LONGArray[0]));
+            assertEquals(LONGArray[0] + "", arrayConverter.convert(String.class, LONGArray[0]), msg);
         } catch (final Exception e) {
             fail(msg + " failed " + e);
         }
@@ -170,7 +168,7 @@ public class ArrayConverterTestCase extends TestCase {
         // LONG[] --> String (first)
         try {
             msg = "LONG[] --> String (first)";
-            assertEquals(msg, LONGArray[0] + "", arrayConverter.convert(String.class, LONGArray));
+            assertEquals(LONGArray[0] + "", arrayConverter.convert(String.class, LONGArray), msg);
         } catch (final Exception e) {
             fail(msg + " failed " + e);
         }
@@ -179,7 +177,7 @@ public class ArrayConverterTestCase extends TestCase {
         try {
             msg = "LONG[] --> String (all)";
             arrayConverter.setOnlyFirstToString(false);
-            assertEquals(msg, stringB, arrayConverter.convert(String.class, LONGArray));
+            assertEquals(stringB, arrayConverter.convert(String.class, LONGArray), msg);
         } catch (final Exception e) {
             fail(msg + " failed " + e);
         }
@@ -187,7 +185,7 @@ public class ArrayConverterTestCase extends TestCase {
         // Collection of Long --> String
         try {
             msg = "Collection of Long --> String";
-            assertEquals(msg, stringB, arrayConverter.convert(String.class, longList));
+            assertEquals(stringB, arrayConverter.convert(String.class, longList), msg);
         } catch (final Exception e) {
             fail(msg + " failed " + e);
         }
@@ -220,17 +218,20 @@ public class ArrayConverterTestCase extends TestCase {
     /**
      * Test Empty String
      */
+    @Test
     public void testEmptyString() {
         final int[] zeroArray = {};
         final IntegerConverter intConverter = new IntegerConverter();
 
         checkArray("Empty String", zeroArray, new ArrayConverter(int[].class, intConverter, -1).convert(int[].class, ""));
-        assertEquals("Default String", null, new ArrayConverter(int[].class, intConverter).convert(String.class, null));
+        assertEquals(null, new ArrayConverter(int[].class, intConverter).convert(String.class, null),
+                                "Default String");
     }
 
     /**
      * Test Errors creating the converter
      */
+    @Test
     public void testErrors() {
         assertThrows(NullPointerException.class, () -> new ArrayConverter(null, new DateConverter()));
         assertThrows(IllegalArgumentException.class, () -> new ArrayConverter(Boolean.class, new DateConverter()));
@@ -240,12 +241,14 @@ public class ArrayConverterTestCase extends TestCase {
     /**
      * Test Converting using the IntegerConverter as the component Converter
      */
+    @Test
     public void testInvalidWithDefault() {
         final int[] zeroArray = {};
         final int[] oneArray = new int[1];
         final IntegerConverter intConverter = new IntegerConverter();
 
-        assertEquals("Null Default", null, new ArrayConverter(int[].class, intConverter, -1).convert(int[].class, null));
+        assertEquals(null, new ArrayConverter(int[].class, intConverter, -1).convert(int[].class, null),
+                                "Null Default");
         checkArray("Zero Length", zeroArray, new ArrayConverter(int[].class, intConverter, 0).convert(int[].class, null));
         checkArray("One Length", oneArray, new ArrayConverter(Integer[].class, intConverter, 1).convert(int[].class, null));
     }
@@ -253,6 +256,7 @@ public class ArrayConverterTestCase extends TestCase {
     /**
      * Test Converting a String[] to integer array (with leading/trailing whitespace)
      */
+    @Test
     public void testStringArrayToNumber() {
 
         // Configure Converter
@@ -306,6 +310,7 @@ public class ArrayConverterTestCase extends TestCase {
     /**
      * Test the Matrix!!!! (parses a String into a 2 dimensional integer array or matrix)
      */
+    @Test
     public void testTheMatrix() {
 
         // Test Date - create the Matrix!!
@@ -337,14 +342,14 @@ public class ArrayConverterTestCase extends TestCase {
             final Object result = matrixConverter.convert(int[][].class, matrixString);
 
             // Check it actually worked OK
-            assertEquals("Check int[][].class", int[][].class, result.getClass());
+            assertEquals(int[][].class, result.getClass(), "Check int[][].class");
             final int[][] matrix = (int[][]) result;
-            assertEquals("Check int[][] length", expected.length, matrix.length);
+            assertEquals(expected.length, matrix.length, "Check int[][] length");
             for (int i = 0; i < expected.length; i++) {
-                assertEquals("Check int[" + i + "] length", expected[i].length, matrix[i].length);
+                assertEquals(expected[i].length, matrix[i].length, "Check int[" + i + "] length");
                 for (int j = 0; j < expected[i].length; j++) {
                     final String label = "Matrix int[" + i + "," + j + "] element";
-                    assertEquals(label, expected[i][j], matrix[i][j]);
+                    assertEquals(expected[i][j], matrix[i][j], label);
                     // System.out.println(label + " = " + matrix[i][j]);
                 }
             }
@@ -356,27 +361,28 @@ public class ArrayConverterTestCase extends TestCase {
     /**
      * Test for BEANUTILS-302 - throwing a NPE when underscore used
      */
+    @Test
     public void testUnderscore_BEANUTILS_302() {
         final String value = "first_value,second_value";
         final ArrayConverter<String[]> converter = new ArrayConverter(String[].class, new StringConverter());
 
         // test underscore not allowed (the default)
         String[] result = converter.convert(String[].class, value);
-        assertNotNull("result.null", result);
-        assertEquals("result.length", 4, result.length);
-        assertEquals("result[0]", "first", result[0]);
-        assertEquals("result[1]", "value", result[1]);
-        assertEquals("result[2]", "second", result[2]);
-        assertEquals("result[3]", "value", result[3]);
+        assertNotNull(result, "result.null");
+        assertEquals(4, result.length, "result.length");
+        assertEquals("first", result[0], "result[0]");
+        assertEquals("value", result[1], "result[1]");
+        assertEquals("second", result[2], "result[2]");
+        assertEquals("value", result[3], "result[3]");
 
         // configure the converter to allow underscore
         converter.setAllowedChars(new char[] { '.', '-', '_' });
 
         // test underscore allowed
         result = converter.convert(String[].class, value);
-        assertNotNull("result.null", result);
-        assertEquals("result.length", 2, result.length);
-        assertEquals("result[0]", "first_value", result[0]);
-        assertEquals("result[1]", "second_value", result[1]);
+        assertNotNull(result, "result.null");
+        assertEquals(2, result.length, "result.length");
+        assertEquals("first_value", result[0], "result[0]");
+        assertEquals("second_value", result[1], "result[1]");
     }
 }

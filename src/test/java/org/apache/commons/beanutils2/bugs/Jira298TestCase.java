@@ -16,9 +16,10 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
-import java.lang.reflect.Method;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import junit.framework.TestCase;
+import java.lang.reflect.Method;
 
 import org.apache.commons.beanutils2.MethodUtils;
 import org.apache.commons.beanutils2.PropertyUtils;
@@ -26,31 +27,24 @@ import org.apache.commons.beanutils2.bugs.other.Jira298BeanFactory;
 import org.apache.commons.beanutils2.bugs.other.Jira298BeanFactory.IX;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-298">https://issues.apache.org/jira/browse/BEANUTILS-298</a>
  */
-public class Jira298TestCase extends TestCase {
+public class Jira298TestCase {
 
     private static final Log LOG = LogFactory.getLog(Jira298TestCase.class);
-
-    /**
-     * Create a test case with the specified name.
-     *
-     * @param name The name of the test
-     */
-    public Jira298TestCase(final String name) {
-        super(name);
-    }
 
     /**
      * Sets up.
      *
      * @throws Exception
      */
-    @Override
+    @BeforeEach
     protected void setUp() throws Exception {
-        super.setUp();
     }
 
     /**
@@ -58,14 +52,14 @@ public class Jira298TestCase extends TestCase {
      *
      * @throws Exception
      */
-    @Override
+    @AfterEach
     protected void tearDown() throws Exception {
-        super.tearDown();
     }
 
     /**
      * Test {@link MethodUtils#getAccessibleMethod(Class, Method)}
      */
+    @Test
     public void testIssue_BEANUTILS_298_MethodUtils_getAccessibleMethod() {
         final Object bean = Jira298BeanFactory.createImplX();
         Object result = null;
@@ -82,6 +76,7 @@ public class Jira298TestCase extends TestCase {
     /**
      * Test {@link PropertyUtils#getProperty(Object, String)}
      */
+    @Test
     public void testIssue_BEANUTILS_298_PropertyUtils_getProperty() {
         final Object bean = Jira298BeanFactory.createImplX();
         Object result = null;
@@ -97,6 +92,7 @@ public class Jira298TestCase extends TestCase {
     /**
      * Test {@link PropertyUtils#setProperty(Object, String, Object)}
      */
+    @Test
     public void testIssue_BEANUTILS_298_PropertyUtils_setProperty() {
         final Object bean = Jira298BeanFactory.createImplX();
         assertEquals("BaseX name value", ((IX) bean).getName());

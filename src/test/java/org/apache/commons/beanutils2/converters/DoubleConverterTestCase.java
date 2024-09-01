@@ -26,10 +26,6 @@ public class DoubleConverterTestCase extends AbstractNumberConverterTest<Double>
 
     private Converter<Double> converter;
 
-    public DoubleConverterTestCase(final String name) {
-        super(name);
-    }
-
     @Override
     protected Class<Double> getExpectedType() {
         return Double.class;

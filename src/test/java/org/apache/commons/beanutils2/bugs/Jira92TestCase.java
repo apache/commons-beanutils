@@ -16,17 +16,16 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.beanutils2.PropertyUtils;
 import org.apache.commons.beanutils2.TestBean;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for Jira issue# BEANUTILS-92.
  *
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-92">https://issues.apache.org/jira/browse/BEANUTILS-92</a>
  */
-public class Jira92TestCase extends TestCase {
+public class Jira92TestCase {
 
     /**
      * Test bean which has only indexed setter
@@ -49,6 +48,7 @@ public class Jira92TestCase extends TestCase {
     /**
      * Test copy properties where the target bean only has an indexed setter.
      */
+    @Test
     public void testIssue_BEANUTILS_92_copyProperties_indexed_only_setter() throws Exception {
         PropertyUtils.copyProperties(new Jira92TestBean(), new TestBean());
     }
