@@ -442,41 +442,41 @@ public class LocaleConvertUtilsTestCase {
         Object value;
 
         /*
-         * fixme Boolean converters not implemented value = LocaleConvertUtils.convert("true", Boolean.TYPE); assertTrue(value instanceof Boolean);
+         * fixme Boolean converters not implemented value = LocaleConvertUtils.convert("true", Boolean.TYPE); assertInstanceOf(Boolean.class, value);
          * assertEquals(((Boolean) value).booleanValue(), true);
          *
-         * value = LocaleConvertUtils.convert("true", Boolean.class); assertTrue(value instanceof Boolean); assertEquals(((Boolean) value).booleanValue(),
+         * value = LocaleConvertUtils.convert("true", Boolean.class); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(),
          * true);
          *
-         * value = LocaleConvertUtils.convert("yes", Boolean.TYPE); assertTrue(value instanceof Boolean); assertEquals(((Boolean) value).booleanValue(), true);
+         * value = LocaleConvertUtils.convert("yes", Boolean.TYPE); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(), true);
          *
-         * value = LocaleConvertUtils.convert("yes", Boolean.class); assertTrue(value instanceof Boolean); assertEquals(((Boolean) value).booleanValue(), true);
+         * value = LocaleConvertUtils.convert("yes", Boolean.class); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(), true);
          *
-         * value = LocaleConvertUtils.convert("y", Boolean.TYPE); assertTrue(value instanceof Boolean); assertEquals(((Boolean) value).booleanValue(), true);
+         * value = LocaleConvertUtils.convert("y", Boolean.TYPE); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(), true);
          *
-         * value = LocaleConvertUtils.convert("y", Boolean.class); assertTrue(value instanceof Boolean); assertEquals(((Boolean) value).booleanValue(), true);
+         * value = LocaleConvertUtils.convert("y", Boolean.class); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(), true);
          *
-         * value = LocaleConvertUtils.convert("on", Boolean.TYPE); assertTrue(value instanceof Boolean); assertEquals(((Boolean) value).booleanValue(), true);
+         * value = LocaleConvertUtils.convert("on", Boolean.TYPE); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(), true);
          *
-         * value = LocaleConvertUtils.convert("on", Boolean.class); assertTrue(value instanceof Boolean); assertEquals(((Boolean) value).booleanValue(), true);
+         * value = LocaleConvertUtils.convert("on", Boolean.class); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(), true);
          *
-         * value = LocaleConvertUtils.convert("false", Boolean.TYPE); assertTrue(value instanceof Boolean); assertEquals(((Boolean) value).booleanValue(),
+         * value = LocaleConvertUtils.convert("false", Boolean.TYPE); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(),
          * false);
          *
-         * value = LocaleConvertUtils.convert("false", Boolean.class); assertTrue(value instanceof Boolean); assertEquals(((Boolean) value).booleanValue(),
+         * value = LocaleConvertUtils.convert("false", Boolean.class); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(),
          * false);
          *
-         * value = LocaleConvertUtils.convert("no", Boolean.TYPE); assertTrue(value instanceof Boolean); assertEquals(((Boolean) value).booleanValue(), false);
+         * value = LocaleConvertUtils.convert("no", Boolean.TYPE); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(), false);
          *
-         * value = LocaleConvertUtils.convert("no", Boolean.class); assertTrue(value instanceof Boolean); assertEquals(((Boolean) value).booleanValue(), false);
+         * value = LocaleConvertUtils.convert("no", Boolean.class); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(), false);
          *
-         * value = LocaleConvertUtils.convert("n", Boolean.TYPE); assertTrue(value instanceof Boolean); assertEquals(((Boolean) value).booleanValue(), false);
+         * value = LocaleConvertUtils.convert("n", Boolean.TYPE); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(), false);
          *
-         * value = LocaleConvertUtils.convert("n", Boolean.class); assertTrue(value instanceof Boolean); assertEquals(((Boolean) value).booleanValue(), false);
+         * value = LocaleConvertUtils.convert("n", Boolean.class); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(), false);
          *
-         * value = LocaleConvertUtils.convert("off", Boolean.TYPE); assertTrue(value instanceof Boolean); assertEquals(((Boolean) value).booleanValue(), false);
+         * value = LocaleConvertUtils.convert("off", Boolean.TYPE); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(), false);
          *
-         * value = LocaleConvertUtils.convert("off", Boolean.class); assertTrue(value instanceof Boolean); assertEquals(((Boolean) value).booleanValue(),
+         * value = LocaleConvertUtils.convert("off", Boolean.class); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(),
          * false);
          */
 
@@ -489,14 +489,14 @@ public class LocaleConvertUtilsTestCase {
         assertEquals(((Byte) value).byteValue(), (byte) 123);
 
         /*
-         * fixme Character conversion not implemented yet value = LocaleConvertUtils.convert("a", Character.TYPE); assertTrue(value instanceof Character);
+         * fixme Character conversion not implemented yet value = LocaleConvertUtils.convert("a", Character.TYPE); assertInstanceOf(Character.class, value);
          * assertEquals(((Character) value).charValue(), 'a');
          *
-         * value = LocaleConvertUtils.convert("a", Character.class); assertTrue(value instanceof Character); assertEquals(((Character) value).charValue(), 'a');
+         * value = LocaleConvertUtils.convert("a", Character.class); assertInstanceOf(Character.class, value); assertEquals(((Character) value).charValue(), 'a');
          */
         /*
          * fixme - this is a discrepancy with standard converters ( probably not major issue ) value = LocaleConvertUtils.convert("java.lang.String",
-         * Class.class); assertTrue(value instanceof Class); assertEquals(String.class, (Class) value);
+         * Class.class); assertInstanceOf(Class.class, value); assertEquals(String.class, (Class) value);
          */
 
         value = LocaleConvertUtils.convert("123" + decimalSeparator + "456", Double.TYPE);
@@ -532,10 +532,10 @@ public class LocaleConvertUtilsTestCase {
         assertEquals(((Long) value).longValue(), 123456);
 
         /*
-         * fixme - Short conversion not implemented at this point value = LocaleConvertUtils.convert("123", Short.TYPE); assertTrue(value instanceof Short);
+         * fixme - Short conversion not implemented at this point value = LocaleConvertUtils.convert("123", Short.TYPE); assertInstanceOf(Short.class, value);
          * assertEquals(((Short) value).shortValue(), (short) 123);
          *
-         * value = LocaleConvertUtils.convert("123", Short.class); assertTrue(value instanceof Short); assertEquals(((Short) value).shortValue(), (short) 123);
+         * value = LocaleConvertUtils.convert("123", Short.class); assertInstanceOf(Short.class, value); assertEquals(((Short) value).shortValue(), (short) 123);
          */
 
         String input;

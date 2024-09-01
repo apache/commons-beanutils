@@ -18,6 +18,7 @@
 package org.apache.commons.beanutils2;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -1373,7 +1374,7 @@ public class BeanUtilsBeanTestCase {
         BeanUtils.setProperty(bean, "stringArray", null);
         newValue = PropertyUtils.getSimpleProperty(bean, "stringArray");
         assertNotNull(newValue, "stringArray is not null");
-        assertTrue(newValue instanceof String[], "stringArray of correct type");
+        assertInstanceOf(String[].class, newValue, "stringArray of correct type");
         assertEquals(1, ((String[]) newValue).length, "stringArray length");
         PropertyUtils.setProperty(bean, "stringArray", oldValue);
 
@@ -1382,7 +1383,7 @@ public class BeanUtilsBeanTestCase {
         BeanUtils.setProperty(bean, "stringArray[2]", null);
         newValue = PropertyUtils.getSimpleProperty(bean, "stringArray");
         assertNotNull(newValue, "stringArray is not null");
-        assertTrue(newValue instanceof String[], "stringArray of correct type");
+        assertInstanceOf(String[].class, newValue, "stringArray of correct type");
         assertEquals(5, ((String[]) newValue).length, "stringArray length");
         assertNull(((String[]) newValue)[2], "stringArray[2] is null");
         PropertyUtils.setProperty(bean, "stringArray", oldValue);

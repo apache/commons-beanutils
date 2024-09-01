@@ -18,10 +18,10 @@
 package org.apache.commons.beanutils2.sql;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.math.BigDecimal;
@@ -139,13 +139,13 @@ public class DynaResultSetTestCase {
 
         final Object bigDecimalProperty = row.get("bigdecimalproperty");
         assertNotNull(bigDecimalProperty, "bigDecimalProperty exists");
-        assertTrue(bigDecimalProperty instanceof BigDecimal, "bigDecimalProperty type");
+        assertInstanceOf(BigDecimal.class, bigDecimalProperty, "bigDecimalProperty type");
         assertEquals(123.45, ((BigDecimal) bigDecimalProperty).doubleValue(), 0.005,
                                 "bigDecimalProperty value");
 
         final Object intProperty = row.get("intproperty");
         assertNotNull(intProperty, "intProperty exists");
-        assertTrue(intProperty instanceof Integer, "intProperty type");
+        assertInstanceOf(Integer.class, intProperty, "intProperty type");
         assertEquals(103, ((Integer) intProperty).intValue(), "intProperty value");
 
         final Object nullProperty = row.get("nullproperty");
@@ -153,7 +153,7 @@ public class DynaResultSetTestCase {
 
         final Object stringProperty = row.get("stringproperty");
         assertNotNull(stringProperty, "stringProperty exists");
-        assertTrue(stringProperty instanceof String, "stringProperty type");
+        assertInstanceOf(String.class, stringProperty, "stringProperty type");
         assertEquals("This is a string", (String) stringProperty, "stringProperty value");
 
     }
@@ -188,13 +188,13 @@ public class DynaResultSetTestCase {
 
         final Object bigDecimalProperty = row.get("bigDecimalProperty");
         assertNotNull(bigDecimalProperty, "bigDecimalProperty exists");
-        assertTrue(bigDecimalProperty instanceof BigDecimal, "bigDecimalProperty type");
+        assertInstanceOf(BigDecimal.class, bigDecimalProperty, "bigDecimalProperty type");
         assertEquals(123.45, ((BigDecimal) bigDecimalProperty).doubleValue(), 0.005,
                                 "bigDecimalProperty value");
 
         final Object intProperty = row.get("intProperty");
         assertNotNull(intProperty, "intProperty exists");
-        assertTrue(intProperty instanceof Integer, "intProperty type");
+        assertInstanceOf(Integer.class, intProperty, "intProperty type");
         assertEquals(103, ((Integer) intProperty).intValue(), "intProperty value");
 
         final Object nullProperty = row.get("nullProperty");
@@ -202,7 +202,7 @@ public class DynaResultSetTestCase {
 
         final Object stringProperty = row.get("stringProperty");
         assertNotNull(stringProperty, "stringProperty exists");
-        assertTrue(stringProperty instanceof String, "stringProperty type");
+        assertInstanceOf(String.class, stringProperty, "stringProperty type");
         assertEquals("This is a string", (String) stringProperty, "stringProperty value");
 
     }

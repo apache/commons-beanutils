@@ -138,7 +138,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         final AlphaBean alphaBean = new AlphaBean("Now On Air... John Peel");
         final WrapDynaBean dynaBean = new WrapDynaBean(alphaBean);
         final Object wrappedInstance = dynaBean.getInstance();
-        assertTrue(wrappedInstance instanceof AlphaBean, "Object type is AlphaBean");
+        assertInstanceOf(AlphaBean.class, wrappedInstance, "Object type is AlphaBean");
         final AlphaBean wrappedAlphaBean = (AlphaBean) wrappedInstance;
         assertSame(wrappedAlphaBean, alphaBean, "Same Object");
     }

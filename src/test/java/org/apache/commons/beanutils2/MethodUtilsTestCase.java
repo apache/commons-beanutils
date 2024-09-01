@@ -18,6 +18,7 @@ package org.apache.commons.beanutils2;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -370,7 +371,7 @@ public class MethodUtilsTestCase {
             // Return initial value of the counter
             value = MethodUtils.invokeMethod(bean, "currentCounter", new Object[0], new Class[0]);
             assertNotNull(value, "currentCounter exists");
-            assertTrue(value instanceof Integer, "currentCounter type");
+            assertInstanceOf(Integer.class, value, "currentCounter type");
             assertEquals(current, ((Integer) value).intValue(), "currentCounter value");
 
             // Increment via no-arguments version
@@ -380,7 +381,7 @@ public class MethodUtilsTestCase {
             current++;
             value = MethodUtils.invokeMethod(bean, "currentCounter", new Object[0], new Class[0]);
             assertNotNull(value, "currentCounter exists");
-            assertTrue(value instanceof Integer, "currentCounter type");
+            assertInstanceOf(Integer.class, value, "currentCounter type");
             assertEquals(current, ((Integer) value).intValue(), "currentCounter value");
 
             // Increment via specified-argument version
@@ -390,7 +391,7 @@ public class MethodUtilsTestCase {
             current += 5;
             value = MethodUtils.invokeMethod(bean, "currentCounter", new Object[0], new Class[0]);
             assertNotNull(value, "currentCounter exists");
-            assertTrue(value instanceof Integer, "currentCounter type");
+            assertInstanceOf(Integer.class, value, "currentCounter type");
             assertEquals(current, ((Integer) value).intValue(), "currentCounter value");
 
         } catch (final Exception e) {
@@ -414,7 +415,7 @@ public class MethodUtilsTestCase {
             // Return initial value of the counter
             value = MethodUtils.invokeExactMethod(bean, "currentCounter", new Object[0], new Class[0]);
             assertNotNull(value, "currentCounter exists");
-            assertTrue(value instanceof Integer, "currentCounter type");
+            assertInstanceOf(Integer.class, value, "currentCounter type");
             assertEquals(current, ((Integer) value).intValue(), "currentCounter value");
 
             // Increment via no-arguments version
@@ -424,7 +425,7 @@ public class MethodUtilsTestCase {
             current++;
             value = MethodUtils.invokeExactMethod(bean, "currentCounter", new Object[0], new Class[0]);
             assertNotNull(value, "currentCounter exists");
-            assertTrue(value instanceof Integer, "currentCounter type");
+            assertInstanceOf(Integer.class, value, "currentCounter type");
             assertEquals(current, ((Integer) value).intValue(), "currentCounter value");
 
             // Increment via specified-argument version
@@ -434,7 +435,7 @@ public class MethodUtilsTestCase {
             current += 5;
             value = MethodUtils.invokeExactMethod(bean, "currentCounter", new Object[0], new Class[0]);
             assertNotNull(value, "currentCounter exists");
-            assertTrue(value instanceof Integer, "currentCounter type");
+            assertInstanceOf(Integer.class, value, "currentCounter type");
             assertEquals(current, ((Integer) value).intValue(), "currentCounter value");
 
         } catch (final Exception e) {
@@ -487,7 +488,7 @@ public class MethodUtilsTestCase {
             // Return initial value of the counter
             value = currentCounterMethod.invoke(null);
             assertNotNull(value, "currentCounter exists");
-            assertTrue(value instanceof Integer, "currentCounter type");
+            assertInstanceOf(Integer.class, value, "currentCounter type");
             assertEquals(current, ((Integer) value).intValue(), "currentCounter value");
 
             // Increment via no-arguments version
@@ -497,7 +498,7 @@ public class MethodUtilsTestCase {
             current++;
             value = currentCounterMethod.invoke(null);
             assertNotNull(value, "currentCounter exists");
-            assertTrue(value instanceof Integer, "currentCounter type");
+            assertInstanceOf(Integer.class, value, "currentCounter type");
             assertEquals(current, ((Integer) value).intValue(), "currentCounter value");
 
             // Increment via specified-argument version
@@ -507,7 +508,7 @@ public class MethodUtilsTestCase {
             current += 5;
             value = currentCounterMethod.invoke(null);
             assertNotNull(value, "currentCounter exists");
-            assertTrue(value instanceof Integer, "currentCounter type");
+            assertInstanceOf(Integer.class, value, "currentCounter type");
             assertEquals(current, ((Integer) value).intValue(), "currentCounter value");
 
         } catch (final Exception e) {
