@@ -25,7 +25,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -667,333 +666,223 @@ public class DynaBeanUtilsTestCase {
      * tests the string and int arrays of TestBean
      */
     @Test
-    public void testGetArrayProperty() {
-        try {
-            String[] arr = BeanUtils.getArrayProperty(bean, "stringArray");
-            final String[] comp = (String[]) bean.get("stringArray");
+    public void testGetArrayProperty() throws Exception {
+        String[] arr = BeanUtils.getArrayProperty(bean, "stringArray");
+        final String[] comp = (String[]) bean.get("stringArray");
 
-            assertEquals(comp.length, arr.length, "String array length = " + comp.length);
+        assertEquals(comp.length, arr.length, "String array length = " + comp.length);
 
-            arr = BeanUtils.getArrayProperty(bean, "intArray");
-            final int[] iarr = (int[]) bean.get("intArray");
+        arr = BeanUtils.getArrayProperty(bean, "intArray");
+        final int[] iarr = (int[]) bean.get("intArray");
 
-            assertEquals(iarr.length, arr.length, "String array length = " + iarr.length);
-        } catch (final IllegalAccessException e) {
-            fail("IllegalAccessException");
-        } catch (final InvocationTargetException e) {
-            fail("InvocationTargetException");
-        } catch (final NoSuchMethodException e) {
-            fail("NoSuchMethodException");
-        }
-
+        assertEquals(iarr.length, arr.length, "String array length = " + iarr.length);
     }
 
     /**
      * tests getting a 'whatever' property
      */
     @Test
-    public void testGetGeneralProperty() {
-        try {
-            final String val = BeanUtils.getProperty(bean, "nested.intIndexed[2]");
-            final String comp = String.valueOf(bean.get("intIndexed", 2));
+    public void testGetGeneralProperty() throws Exception {
+        final String val = BeanUtils.getProperty(bean, "nested.intIndexed[2]");
+        final String comp = String.valueOf(bean.get("intIndexed", 2));
 
-            assertEquals(val, comp, "nested.intIndexed[2] == " + comp);
-        } catch (final IllegalAccessException e) {
-            fail("IllegalAccessException");
-        } catch (final InvocationTargetException e) {
-            fail("InvocationTargetException");
-        } catch (final NoSuchMethodException e) {
-            fail("NoSuchMethodException");
-        }
+        assertEquals(val, comp, "nested.intIndexed[2] == " + comp);
     }
 
     /**
      * tests getting an indexed property
      */
     @Test
-    public void testGetIndexedProperty1() {
-        try {
-            String val = BeanUtils.getIndexedProperty(bean, "intIndexed[3]");
-            String comp = String.valueOf(bean.get("intIndexed", 3));
-            assertEquals(val, comp, "intIndexed[3] == " + comp);
+    public void testGetIndexedProperty1() throws Exception {
+        String val = BeanUtils.getIndexedProperty(bean, "intIndexed[3]");
+        String comp = String.valueOf(bean.get("intIndexed", 3));
+        assertEquals(val, comp, "intIndexed[3] == " + comp);
 
-            val = BeanUtils.getIndexedProperty(bean, "stringIndexed[3]");
-            comp = (String) bean.get("stringIndexed", 3);
-            assertEquals(val, comp, "stringIndexed[3] == " + comp);
-        } catch (final IllegalAccessException e) {
-            fail("IllegalAccessException");
-        } catch (final InvocationTargetException e) {
-            fail("InvocationTargetException");
-        } catch (final NoSuchMethodException e) {
-            fail("NoSuchMethodException");
-        }
+        val = BeanUtils.getIndexedProperty(bean, "stringIndexed[3]");
+        comp = (String) bean.get("stringIndexed", 3);
+        assertEquals(val, comp, "stringIndexed[3] == " + comp);
     }
 
     /**
      * tests getting an indexed property
      */
     @Test
-    public void testGetIndexedProperty2() {
-        try {
-            String val = BeanUtils.getIndexedProperty(bean, "intIndexed", 3);
-            String comp = String.valueOf(bean.get("intIndexed", 3));
+    public void testGetIndexedProperty2() throws Exception {
+        String val = BeanUtils.getIndexedProperty(bean, "intIndexed", 3);
+        String comp = String.valueOf(bean.get("intIndexed", 3));
 
-            assertEquals(val, comp, "intIndexed,3 == " + comp);
+        assertEquals(val, comp, "intIndexed,3 == " + comp);
 
-            val = BeanUtils.getIndexedProperty(bean, "stringIndexed", 3);
-            comp = (String) bean.get("stringIndexed", 3);
+        val = BeanUtils.getIndexedProperty(bean, "stringIndexed", 3);
+        comp = (String) bean.get("stringIndexed", 3);
 
-            assertEquals(val, comp, "stringIndexed,3 == " + comp);
-
-        } catch (final IllegalAccessException e) {
-            fail("IllegalAccessException");
-        } catch (final InvocationTargetException e) {
-            fail("InvocationTargetException");
-        } catch (final NoSuchMethodException e) {
-            fail("NoSuchMethodException");
-        }
+        assertEquals(val, comp, "stringIndexed,3 == " + comp);
     }
 
     /**
      * tests getting a nested property
      */
     @Test
-    public void testGetNestedProperty() {
-        try {
-            final String val = BeanUtils.getNestedProperty(bean, "nested.stringProperty");
-            final String comp = nested.getStringProperty();
-            assertEquals(val, comp, "nested.StringProperty == " + comp);
-        } catch (final IllegalAccessException e) {
-            fail("IllegalAccessException");
-        } catch (final InvocationTargetException e) {
-            fail("InvocationTargetException");
-        } catch (final NoSuchMethodException e) {
-            fail("NoSuchMethodException");
-        }
+    public void testGetNestedProperty() throws Exception {
+        final String val = BeanUtils.getNestedProperty(bean, "nested.stringProperty");
+        final String comp = nested.getStringProperty();
+        assertEquals(val, comp, "nested.StringProperty == " + comp);
     }
 
     /**
      * tests getting a 'whatever' property
      */
     @Test
-    public void testGetSimpleProperty() {
-        try {
-            final String val = BeanUtils.getSimpleProperty(bean, "shortProperty");
-            final String comp = String.valueOf(bean.get("shortProperty"));
+    public void testGetSimpleProperty() throws Exception {
+        final String val = BeanUtils.getSimpleProperty(bean, "shortProperty");
+        final String comp = String.valueOf(bean.get("shortProperty"));
 
-            assertEquals(val, comp, "shortProperty == " + comp);
-        } catch (final IllegalAccessException e) {
-            fail("IllegalAccessException");
-        } catch (final InvocationTargetException e) {
-            fail("InvocationTargetException");
-        } catch (final NoSuchMethodException e) {
-            fail("NoSuchMethodException");
-        }
+        assertEquals(val, comp, "shortProperty == " + comp);
     }
 
     /**
      * Test populate() method on individual array elements.
      */
     @Test
-    public void testPopulateArrayElements() {
+    public void testPopulateArrayElements() throws Exception {
+        final HashMap<String, Object> map = new HashMap<>();
+        map.put("intIndexed[0]", "100");
+        map.put("intIndexed[2]", "120");
+        map.put("intIndexed[4]", "140");
 
-        try {
+        BeanUtils.populate(bean, map);
+        final Integer intIndexed0 = (Integer) bean.get("intIndexed", 0);
+        assertEquals(100, intIndexed0.intValue(), "intIndexed[0] is 100");
+        final Integer intIndexed1 = (Integer) bean.get("intIndexed", 1);
+        assertEquals(10, intIndexed1.intValue(), "intIndexed[1] is 10");
+        final Integer intIndexed2 = (Integer) bean.get("intIndexed", 2);
+        assertEquals(120, intIndexed2.intValue(), "intIndexed[2] is 120");
+        final Integer intIndexed3 = (Integer) bean.get("intIndexed", 3);
+        assertEquals(30, intIndexed3.intValue(), "intIndexed[3] is 30");
+        final Integer intIndexed4 = (Integer) bean.get("intIndexed", 4);
+        assertEquals(140, intIndexed4.intValue(), "intIndexed[4] is 140");
 
-            final HashMap<String, Object> map = new HashMap<>();
-            map.put("intIndexed[0]", "100");
-            map.put("intIndexed[2]", "120");
-            map.put("intIndexed[4]", "140");
+        map.clear();
+        map.put("stringIndexed[1]", "New String 1");
+        map.put("stringIndexed[3]", "New String 3");
 
-            BeanUtils.populate(bean, map);
-            final Integer intIndexed0 = (Integer) bean.get("intIndexed", 0);
-            assertEquals(100, intIndexed0.intValue(), "intIndexed[0] is 100");
-            final Integer intIndexed1 = (Integer) bean.get("intIndexed", 1);
-            assertEquals(10, intIndexed1.intValue(), "intIndexed[1] is 10");
-            final Integer intIndexed2 = (Integer) bean.get("intIndexed", 2);
-            assertEquals(120, intIndexed2.intValue(), "intIndexed[2] is 120");
-            final Integer intIndexed3 = (Integer) bean.get("intIndexed", 3);
-            assertEquals(30, intIndexed3.intValue(), "intIndexed[3] is 30");
-            final Integer intIndexed4 = (Integer) bean.get("intIndexed", 4);
-            assertEquals(140, intIndexed4.intValue(), "intIndexed[4] is 140");
+        BeanUtils.populate(bean, map);
 
-            map.clear();
-            map.put("stringIndexed[1]", "New String 1");
-            map.put("stringIndexed[3]", "New String 3");
-
-            BeanUtils.populate(bean, map);
-
-            assertEquals("String 0", (String) bean.get("stringIndexed", 0),
-                                    "stringIndexed[0] is \"String 0\"");
-            assertEquals("New String 1", (String) bean.get("stringIndexed", 1),
-                                    "stringIndexed[1] is \"New String 1\"");
-            assertEquals("String 2", (String) bean.get("stringIndexed", 2),
-                                    "stringIndexed[2] is \"String 2\"");
-            assertEquals("New String 3", (String) bean.get("stringIndexed", 3),
-                                    "stringIndexed[3] is \"New String 3\"");
-            assertEquals("String 4", (String) bean.get("stringIndexed", 4),
-                                    "stringIndexed[4] is \"String 4\"");
-
-        } catch (final IllegalAccessException e) {
-            fail("IllegalAccessException");
-        } catch (final InvocationTargetException e) {
-            fail("InvocationTargetException");
-        }
-
+        assertEquals("String 0", (String) bean.get("stringIndexed", 0), "stringIndexed[0] is \"String 0\"");
+        assertEquals("New String 1", (String) bean.get("stringIndexed", 1), "stringIndexed[1] is \"New String 1\"");
+        assertEquals("String 2", (String) bean.get("stringIndexed", 2), "stringIndexed[2] is \"String 2\"");
+        assertEquals("New String 3", (String) bean.get("stringIndexed", 3), "stringIndexed[3] is \"New String 3\"");
+        assertEquals("String 4", (String) bean.get("stringIndexed", 4), "stringIndexed[4] is \"String 4\"");
     }
 
     /**
      * Test populate() method on array properties as a whole.
      */
     @Test
-    public void testPopulateArrayProperties() {
+    public void testPopulateArrayProperties() throws Exception {
+        final HashMap<String, Object> map = new HashMap<>();
+        // int[] intArray = new int[] { 123, 456, 789 };
+        final String[] intArrayIn = { "123", "456", "789" };
+        map.put("intArray", intArrayIn);
+        String[] stringArray = { "New String 0", "New String 1" };
+        map.put("stringArray", stringArray);
 
-        try {
+        BeanUtils.populate(bean, map);
 
-            final HashMap<String, Object> map = new HashMap<>();
-            // int[] intArray = new int[] { 123, 456, 789 };
-            final String[] intArrayIn = { "123", "456", "789" };
-            map.put("intArray", intArrayIn);
-            String[] stringArray = { "New String 0", "New String 1" };
-            map.put("stringArray", stringArray);
-
-            BeanUtils.populate(bean, map);
-
-            final int[] intArray = (int[]) bean.get("intArray");
-            assertNotNull(intArray, "intArray is present");
-            assertEquals(3, intArray.length, "intArray length");
-            assertEquals(123, intArray[0], "intArray[0]");
-            assertEquals(456, intArray[1], "intArray[1]");
-            assertEquals(789, intArray[2], "intArray[2]");
-            stringArray = (String[]) bean.get("stringArray");
-            assertNotNull(stringArray, "stringArray is present");
-            assertEquals(2, stringArray.length, "stringArray length");
-            assertEquals("New String 0", stringArray[0], "stringArray[0]");
-            assertEquals("New String 1", stringArray[1], "stringArray[1]");
-
-        } catch (final IllegalAccessException e) {
-            fail("IllegalAccessException");
-        } catch (final InvocationTargetException e) {
-            fail("InvocationTargetException");
-        }
-
+        final int[] intArray = (int[]) bean.get("intArray");
+        assertNotNull(intArray, "intArray is present");
+        assertEquals(3, intArray.length, "intArray length");
+        assertEquals(123, intArray[0], "intArray[0]");
+        assertEquals(456, intArray[1], "intArray[1]");
+        assertEquals(789, intArray[2], "intArray[2]");
+        stringArray = (String[]) bean.get("stringArray");
+        assertNotNull(stringArray, "stringArray is present");
+        assertEquals(2, stringArray.length, "stringArray length");
+        assertEquals("New String 0", stringArray[0], "stringArray[0]");
+        assertEquals("New String 1", stringArray[1], "stringArray[1]");
     }
 
     /**
      * Test populate() on mapped properties.
      */
     @Test
-    public void testPopulateMapped() {
+    public void testPopulateMapped() throws Exception {
+        final HashMap<String, Object> map = new HashMap<>();
+        map.put("mappedProperty(First Key)", "New First Value");
+        map.put("mappedProperty(Third Key)", "New Third Value");
 
-        try {
+        BeanUtils.populate(bean, map);
 
-            final HashMap<String, Object> map = new HashMap<>();
-            map.put("mappedProperty(First Key)", "New First Value");
-            map.put("mappedProperty(Third Key)", "New Third Value");
-
-            BeanUtils.populate(bean, map);
-
-            assertEquals("New First Value", (String) bean.get("mappedProperty", "First Key"),
-                                    "mappedProperty(First Key)");
-            assertEquals("Second Value", (String) bean.get("mappedProperty", "Second Key"),
-                                    "mappedProperty(Second Key)");
-            assertEquals("New Third Value", (String) bean.get("mappedProperty", "Third Key"),
-                                    "mappedProperty(Third Key)");
-            assertNull(bean.get("mappedProperty", "Fourth Key"), "mappedProperty(Fourth Key");
-
-        } catch (final IllegalAccessException e) {
-            fail("IllegalAccessException");
-        } catch (final InvocationTargetException e) {
-            fail("InvocationTargetException");
-        }
-
+        assertEquals("New First Value", (String) bean.get("mappedProperty", "First Key"), "mappedProperty(First Key)");
+        assertEquals("Second Value", (String) bean.get("mappedProperty", "Second Key"), "mappedProperty(Second Key)");
+        assertEquals("New Third Value", (String) bean.get("mappedProperty", "Third Key"), "mappedProperty(Third Key)");
+        assertNull(bean.get("mappedProperty", "Fourth Key"), "mappedProperty(Fourth Key");
     }
 
     /**
      * Test populate() method on nested properties.
      */
     @Test
-    public void testPopulateNested() {
+    public void testPopulateNested() throws Exception {
+        final HashMap<String, Object> map = new HashMap<>();
+        map.put("nested.booleanProperty", "false");
+        // booleanSecond is left at true
+        map.put("nested.doubleProperty", "432.0");
+        // floatProperty is left at 123.0
+        map.put("nested.intProperty", "543");
+        // longProperty is left at 321
+        map.put("nested.shortProperty", "654");
+        // stringProperty is left at "This is a string"
 
-        try {
+        BeanUtils.populate(bean, map);
 
-            final HashMap<String, Object> map = new HashMap<>();
-            map.put("nested.booleanProperty", "false");
-            // booleanSecond is left at true
-            map.put("nested.doubleProperty", "432.0");
-            // floatProperty is left at 123.0
-            map.put("nested.intProperty", "543");
-            // longProperty is left at 321
-            map.put("nested.shortProperty", "654");
-            // stringProperty is left at "This is a string"
-
-            BeanUtils.populate(bean, map);
-
-            final TestBean nested = (TestBean) bean.get("nested");
-            assertFalse(nested.getBooleanProperty(), "booleanProperty is false");
-            assertTrue(nested.isBooleanSecond(), "booleanSecond is true");
-            assertEquals(432.0, nested.getDoubleProperty(), 0.005, "doubleProperty is 432.0");
-            assertEquals((float) 123.0, nested.getFloatProperty(), (float) 0.005, "floatProperty is 123.0");
-            assertEquals(543, nested.getIntProperty(), "intProperty is 543");
-            assertEquals(321, nested.getLongProperty(), "longProperty is 321");
-            assertEquals((short) 654, nested.getShortProperty(), "shortProperty is 654");
-            assertEquals("This is a string", nested.getStringProperty(),
-                                    "stringProperty is \"This is a string\"");
-
-        } catch (final IllegalAccessException e) {
-            fail("IllegalAccessException");
-        } catch (final InvocationTargetException e) {
-            fail("InvocationTargetException");
-        }
-
+        final TestBean nested = (TestBean) bean.get("nested");
+        assertFalse(nested.getBooleanProperty(), "booleanProperty is false");
+        assertTrue(nested.isBooleanSecond(), "booleanSecond is true");
+        assertEquals(432.0, nested.getDoubleProperty(), 0.005, "doubleProperty is 432.0");
+        assertEquals((float) 123.0, nested.getFloatProperty(), (float) 0.005, "floatProperty is 123.0");
+        assertEquals(543, nested.getIntProperty(), "intProperty is 543");
+        assertEquals(321, nested.getLongProperty(), "longProperty is 321");
+        assertEquals((short) 654, nested.getShortProperty(), "shortProperty is 654");
+        assertEquals("This is a string", nested.getStringProperty(), "stringProperty is \"This is a string\"");
     }
 
     /**
      * Test populate() method on scalar properties.
      */
     @Test
-    public void testPopulateScalar() {
+    public void testPopulateScalar() throws Exception {
+        bean.set("nullProperty", "non-null value");
 
-        try {
+        final HashMap<String, Object> map = new HashMap<>();
+        map.put("booleanProperty", "false");
+        // booleanSecond is left at true
+        map.put("doubleProperty", "432.0");
+        // floatProperty is left at 123.0
+        map.put("intProperty", "543");
+        // longProperty is left at 321
+        map.put("nullProperty", null);
+        map.put("shortProperty", "654");
+        // stringProperty is left at "This is a string"
 
-            bean.set("nullProperty", "non-null value");
+        BeanUtils.populate(bean, map);
 
-            final HashMap<String, Object> map = new HashMap<>();
-            map.put("booleanProperty", "false");
-            // booleanSecond is left at true
-            map.put("doubleProperty", "432.0");
-            // floatProperty is left at 123.0
-            map.put("intProperty", "543");
-            // longProperty is left at 321
-            map.put("nullProperty", null);
-            map.put("shortProperty", "654");
-            // stringProperty is left at "This is a string"
-
-            BeanUtils.populate(bean, map);
-
-            final Boolean booleanProperty = (Boolean) bean.get("booleanProperty");
-            assertFalse(booleanProperty.booleanValue(), "booleanProperty is false");
-            final Boolean booleanSecond = (Boolean) bean.get("booleanSecond");
-            assertTrue(booleanSecond.booleanValue(), "booleanSecond is true");
-            final Double doubleProperty = (Double) bean.get("doubleProperty");
-            assertEquals(432.0, doubleProperty.doubleValue(), 0.005, "doubleProperty is 432.0");
-            final Float floatProperty = (Float) bean.get("floatProperty");
-            assertEquals((float) 123.0, floatProperty.floatValue(), (float) 0.005, "floatProperty is 123.0");
-            final Integer intProperty = (Integer) bean.get("intProperty");
-            assertEquals(543, intProperty.intValue(), "intProperty is 543");
-            final Long longProperty = (Long) bean.get("longProperty");
-            assertEquals(321, longProperty.longValue(), "longProperty is 321");
-            assertNull(bean.get("nullProperty"), "nullProperty is null");
-            final Short shortProperty = (Short) bean.get("shortProperty");
-            assertEquals((short) 654, shortProperty.shortValue(), "shortProperty is 654");
-            assertEquals("This is a string", (String) bean.get("stringProperty"),
-                                    "stringProperty is \"This is a string\"");
-
-        } catch (final IllegalAccessException e) {
-            fail("IllegalAccessException");
-        } catch (final InvocationTargetException e) {
-            fail("InvocationTargetException");
-        }
-
+        final Boolean booleanProperty = (Boolean) bean.get("booleanProperty");
+        assertFalse(booleanProperty.booleanValue(), "booleanProperty is false");
+        final Boolean booleanSecond = (Boolean) bean.get("booleanSecond");
+        assertTrue(booleanSecond.booleanValue(), "booleanSecond is true");
+        final Double doubleProperty = (Double) bean.get("doubleProperty");
+        assertEquals(432.0, doubleProperty.doubleValue(), 0.005, "doubleProperty is 432.0");
+        final Float floatProperty = (Float) bean.get("floatProperty");
+        assertEquals((float) 123.0, floatProperty.floatValue(), (float) 0.005, "floatProperty is 123.0");
+        final Integer intProperty = (Integer) bean.get("intProperty");
+        assertEquals(543, intProperty.intValue(), "intProperty is 543");
+        final Long longProperty = (Long) bean.get("longProperty");
+        assertEquals(321, longProperty.longValue(), "longProperty is 321");
+        assertNull(bean.get("nullProperty"), "nullProperty is null");
+        final Short shortProperty = (Short) bean.get("shortProperty");
+        assertEquals((short) 654, shortProperty.shortValue(), "shortProperty is 654");
+        assertEquals("This is a string", (String) bean.get("stringProperty"), "stringProperty is \"This is a string\"");
     }
 
     /**
