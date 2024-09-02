@@ -19,7 +19,6 @@ package org.apache.commons.beanutils2;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
@@ -94,12 +93,7 @@ public class SuppressPropertiesBeanIntrospectorTestCase {
     public void testGetSuppressedPropertiesModify() {
         final SuppressPropertiesBeanIntrospector introspector = new SuppressPropertiesBeanIntrospector(Arrays.asList("p1", "p2"));
         final Set<String> properties = introspector.getSuppressedProperties();
-        try {
-            properties.add("anotherProperty");
-            fail("Could modify properties");
-        } catch (final UnsupportedOperationException uoex) {
-            // ok
-        }
+        assertThrows(UnsupportedOperationException.class, () -> properties.add("anotherProperty"));
     }
 
     /**
@@ -136,11 +130,9 @@ public class SuppressPropertiesBeanIntrospectorTestCase {
         final IntrospectionContextTestImpl context = new IntrospectionContextTestImpl();
 
         introspector.introspect(context);
-        assertEquals(properties.length, context.getRemovedProperties().size(),
-                                "Wrong number of removed properties");
+        assertEquals(properties.length, context.getRemovedProperties().size(), "Wrong number of removed properties");
         for (final String property : properties) {
-            assertTrue(context.getRemovedProperties().contains(property),
-                                  "Property not removed: " + property);
+            assertTrue(context.getRemovedProperties().contains(property), "Property not removed: " + property);
         }
     }
 }

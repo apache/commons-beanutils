@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -36,7 +36,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 
 public class ConvertUtilsTestCase {
 
@@ -105,8 +104,7 @@ public class ConvertUtilsTestCase {
 
         // Date converter doesn't do String conversion - use String Converter
         utils.register(dummyConverter, java.util.Date.class);
-        assertEquals("Foo-Converter", utils.convert(today, String.class),
-                                "Date Converter doesn't do String conversion");
+        assertEquals("Foo-Converter", utils.convert(today, String.class), "Date Converter doesn't do String conversion");
 
         // No registered Date converter - use String Converter
         utils.deregister(java.util.Date.class);
@@ -114,8 +112,7 @@ public class ConvertUtilsTestCase {
 
         // String Converter doesn't do Strings!!!
         utils.register(dummyConverter, String.class);
-        assertEquals(today.toString(), utils.convert(today, String.class),
-                                "String Converter doesn't do Strings!!!");
+        assertEquals(today.toString(), utils.convert(today, String.class), "String Converter doesn't do Strings!!!");
 
         // No registered Date or String converter - use Object's toString()
         utils.deregister(String.class);
@@ -196,12 +193,7 @@ public class ConvertUtilsTestCase {
         assertInstanceOf(Byte.class, value);
         assertEquals(((Byte) value).byteValue(), (byte) 0);
 
-        try {
-            value = ConvertUtils.convert("org.apache.commons.beanutils2.Undefined", Class.class);
-            fail("Should have thrown conversion exception");
-        } catch (final ConversionException e) {
-            // Expected result
-        }
+        assertThrows(ConversionException.class, () -> ConvertUtils.convert("org.apache.commons.beanutils2.Undefined", Class.class));
 
         value = ConvertUtils.convert("foo", Double.TYPE);
         assertInstanceOf(Double.class, value);
@@ -577,27 +569,13 @@ public class ConvertUtilsTestCase {
         assertEquals(((Boolean) value).booleanValue(), true, "Standard conversion failed (2)");
 
         // now register a test
-
         utilsOne.register(new ThrowExceptionConverter(), Boolean.TYPE);
-        try {
+        assertThrows(PassTestException.class, () -> utilsOne.convert("true", Boolean.TYPE));
 
-            utilsOne.convert("true", Boolean.TYPE);
-            fail("Register converter failed.");
-
-        } catch (final PassTestException e) {
-            /* This shows that the registration has worked */ }
-
-        try {
-            // nothing should have changed
-            value = utilsTwo.convert("true", Boolean.TYPE);
-            assertInstanceOf(Boolean.class, value);
-            assertEquals(((Boolean) value).booleanValue(), true, "Standard conversion failed (3)");
-
-        } catch (final PassTestException e) {
-            // This is a failure since utilsTwo should still have
-            // standard converters registered
-            fail("Registering a converter for an instance should not effect another instance.");
-        }
+        // nothing should have changed
+        value = utilsTwo.convert("true", Boolean.TYPE);
+        assertInstanceOf(Boolean.class, value);
+        assertEquals(((Boolean) value).booleanValue(), true, "Standard conversion failed (3)");
 
         // nothing we'll test deregister
         utilsOne.deregister();

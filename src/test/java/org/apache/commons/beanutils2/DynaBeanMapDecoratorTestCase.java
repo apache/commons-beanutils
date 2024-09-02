@@ -18,8 +18,8 @@ package org.apache.commons.beanutils2;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -69,54 +69,19 @@ public class DynaBeanMapDecoratorTestCase {
      */
     private <E> void checkUnmodifiable(final String desc, final Collection<E> collection, final E addElem) {
         // Check can't add()
-        try {
-            collection.add(addElem);
-            fail(desc + ".add()");
-        } catch (final UnsupportedOperationException ignore) {
-            // expected result
-        }
-
+        assertThrows(UnsupportedOperationException.class, () -> collection.add(addElem));
         // Check can't addAll()
         final List<E> list = new ArrayList<>(1);
         list.add(addElem);
-        try {
-            collection.addAll(list);
-            fail(desc + ".addAll()");
-        } catch (final UnsupportedOperationException ignore) {
-            // expected result
-        }
-
+        assertThrows(UnsupportedOperationException.class, () -> collection.addAll(list));
         // Check can't clear()
-        try {
-            collection.clear();
-            fail(desc + ".clear()");
-        } catch (final UnsupportedOperationException ignore) {
-            // expected result
-        }
-
+        assertThrows(UnsupportedOperationException.class, () -> collection.clear());
         // Check can't remove()
-        try {
-            collection.remove("abc");
-            fail(desc + ".remove()");
-        } catch (final UnsupportedOperationException ignore) {
-            // expected result
-        }
-
+        assertThrows(UnsupportedOperationException.class, () -> collection.remove("abc"));
         // Check can't removeAll()
-        try {
-            collection.removeAll(list);
-            fail(desc + ".removeAll()");
-        } catch (final UnsupportedOperationException ignore) {
-            // expected result
-        }
-
+        assertThrows(UnsupportedOperationException.class, () -> collection.removeAll(list));
         // Check can't retainAll()
-        try {
-            collection.retainAll(list);
-            fail(desc + ".retainAll()");
-        } catch (final UnsupportedOperationException ignore) {
-            // expected result
-        }
+        assertThrows(UnsupportedOperationException.class, () -> collection.retainAll(list));
     }
 
     /**
@@ -156,18 +121,8 @@ public class DynaBeanMapDecoratorTestCase {
      */
     @Test
     public void testClear() {
-        try {
-            decoratedMap.clear();
-            fail("decoratedMap.clear()");
-        } catch (final UnsupportedOperationException ignore) {
-            // expected result
-        }
-        try {
-            modifiableMap.clear();
-            fail("modifiableMap.clear()");
-        } catch (final UnsupportedOperationException ignore) {
-            // expected result
-        }
+        assertThrows(UnsupportedOperationException.class, () -> decoratedMap.clear());
+        assertThrows(UnsupportedOperationException.class, () -> modifiableMap.clear());
     }
 
     /**
@@ -222,17 +177,10 @@ public class DynaBeanMapDecoratorTestCase {
      */
     @Test
     public void testGet() {
-
         // valid property name
         assertEquals(stringVal, decoratedMap.get(stringProp.getName()), "decoratedMap valid");
-
         // invalid property name
-        try {
-            decoratedMap.get("xyz");
-            fail("decoratedMap invalid");
-        } catch (final IllegalArgumentException ignore) {
-            // expected result
-        }
+        assertThrows(IllegalArgumentException.class, () -> decoratedMap.get("xyz"));
     }
 
     /**
@@ -276,17 +224,9 @@ public class DynaBeanMapDecoratorTestCase {
      */
     @Test
     public void testPut() {
-
         final String newValue = "ABC";
-
         // Test read only
-        try {
-            decoratedMap.put(stringProp.getName(), newValue);
-            fail("Not read only");
-        } catch (final UnsupportedOperationException ignore) {
-            // expected result
-        }
-
+        assertThrows(UnsupportedOperationException.class, () -> decoratedMap.put(stringProp.getName(), newValue));
         // Test Writable
         assertEquals(stringVal, modifiableMap.put(stringProp.getName(), newValue), "modifiableMap put");
         assertEquals(newValue, dynaBean.get(stringProp.getName()), "dynaBean get");
@@ -298,19 +238,11 @@ public class DynaBeanMapDecoratorTestCase {
      */
     @Test
     public void testPutAll() {
-
         final String newValue = "ABC";
         final Map<String, Object> newMap = new HashMap<>();
         newMap.put(stringProp.getName(), newValue);
-
         // Test read only
-        try {
-            decoratedMap.putAll(newMap);
-            fail("Not read only");
-        } catch (final UnsupportedOperationException ignore) {
-            // expected result
-        }
-
+        assertThrows(UnsupportedOperationException.class, () -> decoratedMap.putAll(newMap));
         // Test Writable
         assertEquals(stringVal, dynaBean.get(stringProp.getName()), "before putAll");
         modifiableMap.putAll(newMap);
@@ -322,18 +254,8 @@ public class DynaBeanMapDecoratorTestCase {
      */
     @Test
     public void testRemove() {
-        try {
-            decoratedMap.remove(stringProp.getName());
-            fail("decoratedMap.remove()");
-        } catch (final UnsupportedOperationException ignore) {
-            // expected result
-        }
-        try {
-            modifiableMap.remove(stringProp.getName());
-            fail("modifiableMap.remove()");
-        } catch (final UnsupportedOperationException ignore) {
-            // expected result
-        }
+        assertThrows(UnsupportedOperationException.class, () -> decoratedMap.remove(stringProp.getName()));
+        assertThrows(UnsupportedOperationException.class, () -> modifiableMap.remove(stringProp.getName()));
     }
 
     /**

@@ -25,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -58,7 +59,8 @@ public class LazyDynaListTestCase {
     /**
      * Test DynaBean Create
      */
-    private void dynaBeanTest(final LazyDynaList list, final Class<?> testClass, final DynaClass testDynaClass, final Object wrongBean) {
+    private void dynaBeanTest(final LazyDynaList list, final Class<?> testClass, final DynaClass testDynaClass, final Object wrongBean)
+            throws IllegalAccessException, InstantiationException {
 
         // Test get(index) created correct DynaBean - Second
         Object dynaBean = list.get(1);
@@ -97,13 +99,9 @@ public class LazyDynaListTestCase {
 
         // Create Collection
         final List<Object> collection = new ArrayList<>();
-        try {
-            collection.add(testDynaClass.newInstance());
-            collection.add(testDynaClass.newInstance());
-            collection.add(testDynaClass.newInstance());
-        } catch (final Exception ex) {
-            fail("1. FAILED: " + ex);
-        }
+        collection.add(testDynaClass.newInstance());
+        collection.add(testDynaClass.newInstance());
+        collection.add(testDynaClass.newInstance());
         final int expectedSize = dynaArray.length + collection.size();
         final String origValue = (String) ((DynaBean) collection.get(0)).get(testProperty);
         ((DynaBean) collection.get(0)).set(testProperty, origValue + "_updated_" + 0);
@@ -126,18 +124,13 @@ public class LazyDynaListTestCase {
         assertEquals("orig_pos1", dynaArray[4].get(testProperty), "16. Wrong Value");
 
         // Test Insert - add(index, Object)
-        try {
-            final DynaBean extraElement = testDynaClass.newInstance();
-            extraElement.set(testProperty, "extraOne");
-            list.add(2, extraElement);
-            dynaArray = list.toDynaBeanArray();
-            assertEquals(origValue + "_updated_" + 0, dynaArray[1].get(testProperty), "17. Wrong Value");
-            assertEquals("extraOne", dynaArray[2].get(testProperty), "18. Wrong Value");
-            assertEquals(origValue + "_updated_" + 1, dynaArray[3].get(testProperty), "19. Wrong Value");
-        } catch (final Exception ex) {
-            fail("2. FAILED: " + ex);
-        }
-
+        final DynaBean extraElement = testDynaClass.newInstance();
+        extraElement.set(testProperty, "extraOne");
+        list.add(2, extraElement);
+        dynaArray = list.toDynaBeanArray();
+        assertEquals(origValue + "_updated_" + 0, dynaArray[1].get(testProperty), "17. Wrong Value");
+        assertEquals("extraOne", dynaArray[2].get(testProperty), "18. Wrong Value");
+        assertEquals(origValue + "_updated_" + 1, dynaArray[3].get(testProperty), "19. Wrong Value");
     }
 
     /**
@@ -244,31 +237,22 @@ public class LazyDynaListTestCase {
     /**
      * Do serialization and deserialization.
      */
-    private Object serializeDeserialize(final Object target, final String text) {
-
+    private Object serializeDeserialize(final Object target, final String text) throws IOException {
         // Serialize the test object
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        try {
-            final ObjectOutputStream oos = new ObjectOutputStream(baos);
+        try (ObjectOutputStream oos = new ObjectOutputStream(baos)) {
             oos.writeObject(target);
             oos.flush();
-            oos.close();
-        } catch (final Exception e) {
-            fail(text + ": Exception during serialization: " + e);
         }
-
         // Deserialize the test object
         Object result = null;
-        try {
-            final ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-            final ObjectInputStream ois = new ObjectInputStream(bais);
+        try (ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+                ObjectInputStream ois = new ObjectInputStream(bais)) {
             result = ois.readObject();
-            bais.close();
         } catch (final Exception e) {
             fail(text + ": Exception during deserialization: " + e);
         }
         return result;
-
     }
 
     /**
@@ -337,11 +321,9 @@ public class LazyDynaListTestCase {
      * Test DynaBean Create
      */
     @Test
-    public void testDynaBeanDynaClass() {
-
+    public void testDynaBeanDynaClass() throws Exception {
         // Create LazyArrayList for DynaBeans
         final LazyDynaList list = new LazyDynaList(basicDynaClass);
-
         // test
         dynaBeanTest(list, BasicDynaBean.class, basicDynaClass, new BenchBean());
     }
@@ -350,14 +332,11 @@ public class LazyDynaListTestCase {
      * Test DynaBean Create
      */
     @Test
-    public void testDynaBeanType() {
-
+    public void testDynaBeanType() throws Exception {
         // Create LazyArrayList for DynaBeans
         final LazyDynaList list = new LazyDynaList(LazyDynaBean.class);
-
         final LazyDynaBean bean = new LazyDynaBean();
         bean.set("prop1", "val");
-
         // test
         dynaBeanTest(list, LazyDynaBean.class, bean.getDynaClass(), new BenchBean());
     }
@@ -431,7 +410,7 @@ public class LazyDynaListTestCase {
      * Test DynaBean serialization.
      */
     @Test
-    public void testSerializationDynaBean() {
+    public void testSerializationDynaBean() throws IOException {
 
         // Create LazyArrayList for DynaBeans
         LazyDynaList target = new LazyDynaList(basicDynaClass);
@@ -457,7 +436,7 @@ public class LazyDynaListTestCase {
      * Test DynaBean serialization.
      */
     @Test
-    public void testSerializationLazyDynaBean() {
+    public void testSerializationLazyDynaBean() throws IOException {
 
         // Create LazyArrayList for DynaBeans
         LazyDynaList target = new LazyDynaList();
@@ -483,7 +462,7 @@ public class LazyDynaListTestCase {
      * Test Map serialization.
      */
     @Test
-    public void testSerializationMap() {
+    public void testSerializationMap() throws IOException {
 
         // Create LazyArrayList for DynaBeans
         LazyDynaList target = new LazyDynaList(treeMapDynaClass);
@@ -509,7 +488,7 @@ public class LazyDynaListTestCase {
      * Test POJO (WrapDynaBean) serialization.
      */
     @Test
-    public void testSerializationPojo() {
+    public void testSerializationPojo() throws IOException {
 
         // Create LazyArrayList for DynaBeans
         LazyDynaList target = new LazyDynaList(pojoDynaClass);

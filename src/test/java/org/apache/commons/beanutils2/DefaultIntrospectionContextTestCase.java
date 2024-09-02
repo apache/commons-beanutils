@@ -22,7 +22,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
@@ -153,12 +152,7 @@ public class DefaultIntrospectionContextTestCase {
     @Test
     public void testPropertyNamesModify() {
         final Set<String> names = context.propertyNames();
-        try {
-            names.add(PROP);
-            fail("Could modify property names set!");
-        } catch (final UnsupportedOperationException uex) {
-            // ok
-        }
+        assertThrows(UnsupportedOperationException.class, () -> names.add(PROP));
     }
 
     /**

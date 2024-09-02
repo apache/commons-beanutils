@@ -21,8 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
@@ -172,14 +172,7 @@ public class ConstructorUtilsTestCase {
             assertInstanceOf(TestBean.class, obj);
             assertEquals("TEST", ((TestBean) obj).getStringProperty());
         }
-        {
-            try {
-                ConstructorUtils.invokeExactConstructor(TestBean.class, Float.valueOf(17.3f));
-                fail("Expected NoSuchMethodException");
-            } catch (final NoSuchMethodException e) {
-                // expected
-            }
-        }
+        assertThrows(NoSuchMethodException.class, () -> ConstructorUtils.invokeExactConstructor(TestBean.class, Float.valueOf(17.3f)));
         {
             final Object obj = ConstructorUtils.invokeExactConstructor(TestBean.class, Boolean.TRUE);
             assertNotNull(obj);
@@ -192,12 +185,7 @@ public class ConstructorUtilsTestCase {
     public void testInvokeExactConstructorWithArgArray() throws Exception {
         {
             final Object[] args = { Float.valueOf(17.3f), "TEST" };
-            try {
-                ConstructorUtils.invokeExactConstructor(TestBean.class, args);
-                fail("Expected NoSuchMethodException");
-            } catch (final NoSuchMethodException e) {
-                // expected
-            }
+            assertThrows(NoSuchMethodException.class, () -> ConstructorUtils.invokeExactConstructor(TestBean.class, args));
         }
         {
             final Object[] args = { Boolean.TRUE, "TEST" };
@@ -248,12 +236,7 @@ public class ConstructorUtilsTestCase {
         {
             final Object[] args = { Float.valueOf(17.3f), "TEST" };
             final Class<?>[] types = { Float.class, String.class };
-            try {
-                ConstructorUtils.invokeExactConstructor(TestBean.class, args, types);
-                fail("Expected NoSuchMethodException");
-            } catch (final NoSuchMethodException e) {
-                // expected
-            }
+            assertThrows(NoSuchMethodException.class, () -> ConstructorUtils.invokeExactConstructor(TestBean.class, args, types));
         }
     }
 

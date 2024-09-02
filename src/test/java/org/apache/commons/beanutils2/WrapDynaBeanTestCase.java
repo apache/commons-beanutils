@@ -22,11 +22,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
@@ -47,20 +49,10 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
      */
     private void checkSimplePropertyAccess() {
         // Invalid getter
-        try {
-            bean.get("invalidProperty");
-            fail("Invalid get should have thrown IllegalArgumentException");
-        } catch (final IllegalArgumentException t) {
-            // Expected result
-        }
+        assertThrows(IllegalArgumentException.class, () -> bean.get("invalidProperty"));
 
         // Invalid setter
-        try {
-            bean.set("invalidProperty", "XYZ");
-            fail("Invalid set should have thrown IllegalArgumentException");
-        } catch (final IllegalArgumentException t) {
-            // Expected result
-        }
+        assertThrows(IllegalArgumentException.class, () -> bean.set("invalidProperty", "XYZ"));
 
         // Set up initial Value
         String testValue = "Original Value";
@@ -70,44 +62,29 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         assertEquals(testValue, instance.getStringProperty(), "Check String property");
 
         // Test Valid Get & Set
-        try {
-            testValue = "Some new value";
-            bean.set(testProperty, testValue);
-            assertEquals(testValue, instance.getStringProperty(), "Test Set");
-            assertEquals(testValue, bean.get(testProperty), "Test Get");
-        } catch (final IllegalArgumentException t) {
-            fail("Get threw exception: " + t);
-        }
+        testValue = "Some new value";
+        bean.set(testProperty, testValue);
+        assertEquals(testValue, instance.getStringProperty(), "Test Set");
+        assertEquals(testValue, bean.get(testProperty), "Test Get");
     }
 
     /**
      * Do serialization and deserialization.
      */
-    private Object serializeDeserialize(final Object target, final String text) {
-
+    private Object serializeDeserialize(final Object target, final String text) throws IOException, ClassNotFoundException {
         // Serialize the test object
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        try {
-            final ObjectOutputStream oos = new ObjectOutputStream(baos);
+        try (final ObjectOutputStream oos = new ObjectOutputStream(baos)) {
             oos.writeObject(target);
             oos.flush();
-            oos.close();
-        } catch (final Exception e) {
-            fail(text + ": Exception during serialization: " + e);
         }
-
         // Deserialize the test object
         Object result = null;
-        try {
-            final ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-            final ObjectInputStream ois = new ObjectInputStream(bais);
+        try (final ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+                final ObjectInputStream ois = new ObjectInputStream(bais)) {
             result = ois.readObject();
-            bais.close();
-        } catch (final Exception e) {
-            fail(text + ": Exception during deserialization: " + e);
         }
         return result;
-
     }
 
     /**
@@ -116,9 +93,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
     @Override
     @BeforeEach
     public void setUp() throws Exception {
-
         bean = new WrapDynaBean(new TestBean());
-
     }
 
     /**
@@ -127,9 +102,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
     @Override
     @AfterEach
     public void tearDown() {
-
         bean = null;
-
     }
 
     /** Tests getInstance method */
@@ -304,7 +277,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
      */
     @Override
     @Test
-    public void testSerialization() {
+    public void testSerialization() throws Exception {
 
         // Create a bean and set a value
         final WrapDynaBean origBean = new WrapDynaBean(new TestBean());
