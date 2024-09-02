@@ -640,7 +640,6 @@ public class PropertyUtilsBean {
         if (beanClass == null) {
             return null;
         }
-
         // Look up any cached descriptors for this bean class
         return mappedDescriptorsCache.get(beanClass);
     }

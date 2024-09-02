@@ -179,11 +179,8 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
         if (isRestricted()) {
             throw new IllegalStateException("DynaClass is currently restricted. No new properties can be added.");
         }
-        final Object value = values.get(name);
         // Check if the property already exists
-        if (value == null) {
-            values.put(name, type == null ? null : createProperty(name, type));
-        }
+        values.computeIfAbsent(name, k -> type == null ? null : createProperty(name, type));
     }
 
     /**
@@ -402,7 +399,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
             throw new IllegalArgumentException
                     ("Invalid property name '" + name + "' (DynaClass is restricted)");
         }
-
         values.put(name, value);
     }
 

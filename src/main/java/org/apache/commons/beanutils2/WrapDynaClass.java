@@ -285,13 +285,9 @@ public class WrapDynaClass implements DynaClass {
         // Construct corresponding DynaProperty information
         properties = new DynaProperty[regulars.length + mappeds.size()];
         for (int i = 0; i < regulars.length; i++) {
-            descriptorsMap.put(regulars[i].getName(),
-                    regulars[i]);
-            properties[i] =
-                    new DynaProperty(regulars[i].getName(),
-                            regulars[i].getPropertyType());
-            propertiesMap.put(properties[i].getName(),
-                    properties[i]);
+            descriptorsMap.put(regulars[i].getName(), regulars[i]);
+            properties[i] = new DynaProperty(regulars[i].getName(), regulars[i].getPropertyType());
+            propertiesMap.put(properties[i].getName(), properties[i]);
         }
 
         int j = regulars.length;
