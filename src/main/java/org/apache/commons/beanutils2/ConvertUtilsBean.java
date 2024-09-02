@@ -97,6 +97,19 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
+ * TODO DOCS
+ * <p>2.0</p>
+ *
+ * {@link ConvertUtilsBean} implementation that delegates {@code convert()}
+ * methods to the new {@link ConvertUtilsBean#convert(Object, Class)} method.
+ *
+ * <p>
+ * To configure this implementation for the current context ClassLoader invoke
+ * {@code BeanUtilsBean.setInstance(new BeanUtilsBean2());}
+ * </p>
+ *
+ * <p>Pre-2.0</p>
+ *
  * <p>Utility methods for converting String scalar values to objects of the
  * specified Class, String arrays to arrays of the specified Class.  The
  * actual {@link Converter} instance to be used can be registered for each
@@ -220,35 +233,16 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Converts the specified value into a String.  If the specified value
-     * is an array, the first element (converted to a String) will be
-     * returned.  The registered {@link Converter} for the
-     * {@link String} class will be used, which allows
-     * applications to customize Object-&gt;String conversions (the default
-     * implementation simply uses toString()).
+     * Delegates to the new {@link ConvertUtilsBean#convert(Object, Class)}
+     * method.
      *
      * @param value Value to be converted (may be null)
      * @return The converted String value or null if value is null
+     *
+     * @see ConvertUtilsBean#convert(String[], Class)
      */
-    public String convert(Object value) {
-
-        if (value == null) {
-            return null;
-        }
-        if (!value.getClass().isArray()) {
-            final Converter<String> converter = lookup(String.class);
-            return converter.convert(String.class, value);
-        }
-        if (Array.getLength(value) < 1) {
-            return null;
-        }
-        value = Array.get(value, 0);
-        if (value == null) {
-            return null;
-        }
-        final Converter<String> converter = lookup(String.class);
-        return converter.convert(String.class, value);
-
+    public String convert(final Object value) {
+        return (String) convert(value, String.class);
     }
 
     /**
@@ -307,58 +301,31 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Converts the specified value to an object of the specified class (if
-     * possible). Otherwise, return a {@link String} representation of the value.
+     * Delegates to the new {@link ConvertUtilsBean#convert(Object, Class)}
+     * method.
      *
-     * @param <T> The <em>desired</em> return type
      * @param value Value to be converted (may be null)
      * @param clazz Java class to be converted to (must not be null)
-     * @return The converted value
+     * @return The converted value or null if value is null
      *
-     * @throws ConversionException if thrown by an underlying Converter
+     * @see ConvertUtilsBean#convert(String[], Class)
      */
     public <T> Object convert(final String value, final Class<T> clazz) {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Convert string '" + value + "' to class '" + clazz.getName() + "'");
-        }
-        final Converter<T> converter = lookup(clazz);
-        if (converter == null) {
-            final Converter<String> sConverter = lookup(String.class);
-            if (LOG.isTraceEnabled()) {
-                LOG.trace("  Using converter " + converter);
-            }
-            return sConverter.convert(String.class, value);
-        }
-        if (LOG.isTraceEnabled()) {
-            LOG.trace("  Using converter " + converter);
-        }
-        return converter.convert(clazz, value);
+        return convert((Object) value, clazz);
     }
 
     /**
-     * Converts an array of specified values to an array of objects of the
-     * specified class (if possible).  If the specified Java class is itself
-     * an array class, this class will be the type of the returned value.
-     * Otherwise, an array will be constructed whose component type is the
-     * specified class.
+     * Delegates to the new {@link ConvertUtilsBean#convert(Object, Class)}
+     * method.
      *
-     * @param <T> The Class type.
-     * @param values Array of values to be converted
+     * @param value Array of values to be converted
      * @param clazz Java array or element class to be converted to (must not be null)
      * @return The converted value
      *
-     * @throws ConversionException if thrown by an underlying Converter
+     * @see ConvertUtilsBean#convert(String[], Class)
      */
-    public <T> Object convert(final String[] values, final Class<T> clazz) {
-        final Class<?> type = clazz.isArray() ? clazz.getComponentType() : clazz;
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Convert String[" + values.length + "] to class '" + type.getName() + "[]'");
-        }
-        Converter converter = lookup(type);
-        if (converter == null) {
-            converter = lookup(String.class);
-        }
-        return convert(values, type, converter);
+    public <T> Object convert(final String[] value, final Class<T> clazz) {
+        return convert((Object) value, clazz);
     }
 
     private <T> Object convert(final String[] values, final Class<T> type, final Converter<T> converter) {

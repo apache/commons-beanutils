@@ -32,6 +32,42 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
+ * TODO docs
+ *
+ * <p>2.0</p>
+ *
+ * <p>{@link BeanUtilsBean} implementation that creates a
+ * {@link ConvertUtilsBean} and delegates conversion to
+ * {@link ConvertUtilsBean#convert(Object, Class)}.
+ * </p>
+ *
+ * <p>
+ * To configure this implementation for the current context ClassLoader invoke
+ * {@code BeanUtilsBean.setInstance(new BeanUtilsBean2());}
+ * </p>
+ *
+ * <p>
+ * BeanUtils 1.7.0 delegated all conversion to String to the converter
+ * registered for the {@code String.class}. One of the improvements in
+ * BeanUtils 1.8.0 was to upgrade the {@link Converter} implementations so
+ * that they could handle conversion to String for their type (e.g.
+ * IntegerConverter now handles conversion from an Integer to a String as
+ * well as String to Integer).
+ * </p>
+ *
+ * <p>
+ * In order to take advantage of these improvements BeanUtils needs to change
+ * how it gets the appropriate {@link Converter}. This functionality has been
+ * implemented in the new {@link ConvertUtilsBean#lookup(Class, Class)} and
+ * {@link ConvertUtilsBean#convert(Object, Class)} methods. However changing
+ * {@link BeanUtilsBean} to use these methods could create compatibility
+ * issues for existing users. In order to avoid that, this new
+ * {@link BeanUtilsBean} implementation has been created (and the associated
+ * {@link ConvertUtilsBean}).
+ * </p>
+ *
+ * <p>Pre-2.0</p>
+ *
  * <p>JavaBean property population methods.</p>
  *
  * <p>This class provides implementations for the utility methods in
@@ -117,13 +153,13 @@ public class BeanUtilsBean {
      * <p>Constructs an instance using given conversion instances
      * and new {@link PropertyUtilsBean} instance.</p>
      *
-     * @param convertUtilsBean use this {@code ConvertUtilsBean}
+     * @param todoRemove use this {@code ConvertUtilsBean}
      * to perform conversions from one object to another
      *
      * @since 1.8.0
      */
-    public BeanUtilsBean(final ConvertUtilsBean convertUtilsBean) {
-        this(convertUtilsBean, new PropertyUtilsBean());
+    public BeanUtilsBean(final ConvertUtilsBean todoRemove) {
+        this(new ConvertUtilsBean(), new PropertyUtilsBean());
     }
 
     /**
@@ -182,23 +218,12 @@ public class BeanUtilsBean {
      * <p>Converts the value to an object of the specified class (if
      * possible).</p>
      *
-     * @param <R> The desired return type
      * @param value Value to be converted (may be null)
      * @param type Class of the value to be converted to
      * @return The converted value
-     *
-     * @throws ConversionException if thrown by an underlying Converter
-     * @since 1.8.0
      */
     protected <R> Object convert(final Object value, final Class<R> type) {
-        final Converter<R> converter = getConvertUtils().lookup(type);
-        if (converter != null) {
-            if (LOG.isTraceEnabled()) {
-                LOG.trace("        USING CONVERTER " + converter);
-            }
-            return converter.convert(type, value);
-        }
-        return value;
+        return getConvertUtils().convert(value, type);
     }
 
     /**

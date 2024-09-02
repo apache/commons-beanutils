@@ -371,7 +371,7 @@ public class BeanUtilsBeanTestCase {
     @Test
     public void testCopyPropertyConvertToString() throws Exception {
         BeanUtils.copyProperty(bean, "stringProperty", testUtilDate);
-        assertEquals(testUtilDate.toString(), bean.getStringProperty(), "java.util.Date --> String");
+        assertEquals(testStringDate, bean.getStringProperty(), "java.util.Date --> String");
     }
 
     /**
@@ -382,7 +382,7 @@ public class BeanUtilsBeanTestCase {
         bean.setStringArray(null);
         BeanUtils.copyProperty(bean, "stringArray", new java.util.Date[] { testUtilDate });
         assertEquals(1, bean.getStringArray().length, "java.util.Date[] --> String[] length");
-        assertEquals(testUtilDate.toString(), bean.getStringArray()[0], "java.util.Date[] --> String[] value ");
+        assertEquals(testStringDate, bean.getStringArray()[0], "java.util.Date[] --> String[] value ");
     }
 
     /**
@@ -392,7 +392,8 @@ public class BeanUtilsBeanTestCase {
     public void testCopyPropertyConvertToStringIndexed() throws Exception {
         bean.setStringArray(new String[1]);
         BeanUtils.copyProperty(bean, "stringArray[0]", testUtilDate);
-        assertEquals(testUtilDate.toString(), bean.getStringArray()[0], "java.util.Date --> String[]");
+        assertEquals(1, bean.getStringArray().length, "java.util.Date[] --> String[] length");
+        assertEquals(testStringDate, bean.getStringArray()[0], "java.util.Date[] --> String[] value ");
     }
 
     /**
@@ -684,7 +685,7 @@ public class BeanUtilsBeanTestCase {
         bean.setDateArrayProperty(new java.util.Date[] { testUtilDate });
         value = BeanUtils.getArrayProperty(bean, "dateArrayProperty");
         assertEquals(1, value.length, "java.util.Date[] --> String[] length");
-        assertEquals(testUtilDate.toString(), value[0], "java.util.Date[] --> String[] value ");
+        assertEquals(testStringDate, value[0], "java.util.Date[] --> String[] value ");
     }
 
     /**
@@ -736,7 +737,7 @@ public class BeanUtilsBeanTestCase {
         String value = null;
         bean.setDateArrayProperty(new java.util.Date[] { testUtilDate });
         value = BeanUtils.getIndexedProperty(bean, "dateArrayProperty[0]");
-        assertEquals(testUtilDate.toString(), value, "java.util.Date[0] --> String");
+        assertEquals(testStringDate, value, "java.util.Date[0] --> String");
     }
 
     @Test
@@ -782,7 +783,7 @@ public class BeanUtilsBeanTestCase {
         String value = null;
         bean.setDateProperty(testUtilDate);
         value = BeanUtils.getSimpleProperty(bean, "dateProperty");
-        assertEquals(testUtilDate.toString(), value, "java.util.Date --> String");
+        assertEquals(testStringDate, value, "java.util.Date --> String");
     }
 
     @Test
@@ -1030,7 +1031,7 @@ public class BeanUtilsBeanTestCase {
     @Test
     public void testSetPropertyConvertToString() throws Exception {
         BeanUtils.setProperty(bean, "stringProperty", testUtilDate);
-        assertEquals(testUtilDate.toString(), bean.getStringProperty(), "java.util.Date --> String");
+        assertEquals(testStringDate, bean.getStringProperty(), "java.util.Date --> String");
     }
 
     /**
@@ -1041,7 +1042,7 @@ public class BeanUtilsBeanTestCase {
         bean.setStringArray(null);
         BeanUtils.setProperty(bean, "stringArray", new java.util.Date[] { testUtilDate });
         assertEquals(1, bean.getStringArray().length, "java.util.Date[] --> String[] length");
-        assertEquals(testUtilDate.toString(), bean.getStringArray()[0], "java.util.Date[] --> String[] value ");
+        assertEquals(testStringDate, bean.getStringArray()[0], "java.util.Date[] --> String[] value ");
     }
 
     /**
@@ -1051,7 +1052,7 @@ public class BeanUtilsBeanTestCase {
     public void testSetPropertyConvertToStringIndexed() throws Exception {
         bean.setStringArray(new String[1]);
         BeanUtils.setProperty(bean, "stringArray[0]", testUtilDate);
-        assertEquals(testUtilDate.toString(), bean.getStringArray()[0], "java.util.Date --> String[]");
+        assertEquals(testStringDate, bean.getStringArray()[0], "java.util.Date --> String[]");
     }
 
     /**

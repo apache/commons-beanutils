@@ -299,24 +299,27 @@ public class ConvertUtilsTestCase {
      */
     @Test
     public void testPositiveArray() {
-
+        // check 1
         final String[] values1 = { "10", "20", "30" };
-        Object value = ConvertUtils.convert(values1, Integer.TYPE);
         final int[] shape = ArrayUtils.EMPTY_INT_ARRAY;
+        Object value = ConvertUtils.convert(values1, shape.getClass());
         assertEquals(shape.getClass(), value.getClass());
         final int[] results1 = (int[]) value;
-        assertEquals(results1[0], 10);
-        assertEquals(results1[1], 20);
-        assertEquals(results1[2], 30);
-
+        assertEquals(10, results1[0]);
+        assertEquals(20, results1[1]);
+        assertEquals(30, results1[2]);
+        // check 2
         final String[] values2 = { "100", "200", "300" };
         value = ConvertUtils.convert(values2, shape.getClass());
         assertEquals(shape.getClass(), value.getClass());
         final int[] results2 = (int[]) value;
-        assertEquals(results2[0], 100);
-        assertEquals(results2[1], 200);
-        assertEquals(results2[2], 300);
-
+        assertEquals(100, results2[0]);
+        assertEquals(200, results2[1]);
+        assertEquals(300, results2[2]);
+        // check 3
+        value = ConvertUtils.convert(values1, Integer.TYPE);
+        assertEquals(Integer.class, value.getClass());
+        assertEquals(Integer.valueOf(10), value);
     }
 
     /**
@@ -324,35 +327,34 @@ public class ConvertUtilsTestCase {
      */
     @Test
     public void testPositiveIntegerArray() {
-
         Object value;
         final int[] intArray = {};
         final int[] intArray1 = { 0 };
         final int[] intArray2 = { 0, 10 };
 
-        value = ConvertUtils.convert("{  }", intArray.getClass());
+        final Class<? extends int[]> intArrayClass = intArray.getClass();
+        value = ConvertUtils.convert("{  }", intArrayClass);
         checkIntegerArray(value, intArray);
 
-        value = ConvertUtils.convert("0", intArray.getClass());
+        value = ConvertUtils.convert("0", intArrayClass);
         checkIntegerArray(value, intArray1);
-        value = ConvertUtils.convert(" 0 ", intArray.getClass());
+        value = ConvertUtils.convert(" 0 ", intArrayClass);
         checkIntegerArray(value, intArray1);
-        value = ConvertUtils.convert("{ 0 }", intArray.getClass());
+        value = ConvertUtils.convert("{ 0 }", intArrayClass);
         checkIntegerArray(value, intArray1);
 
-        value = ConvertUtils.convert("0,10", intArray.getClass());
+        value = ConvertUtils.convert("0,10", intArrayClass);
         checkIntegerArray(value, intArray2);
-        value = ConvertUtils.convert("0 10", intArray.getClass());
+        value = ConvertUtils.convert("0 10", intArrayClass);
         checkIntegerArray(value, intArray2);
-        value = ConvertUtils.convert("{0,10}", intArray.getClass());
+        value = ConvertUtils.convert("{0,10}", intArrayClass);
         checkIntegerArray(value, intArray2);
-        value = ConvertUtils.convert("{0 10}", intArray.getClass());
+        value = ConvertUtils.convert("{0 10}", intArrayClass);
         checkIntegerArray(value, intArray2);
-        value = ConvertUtils.convert("{ 0, 10 }", intArray.getClass());
+        value = ConvertUtils.convert("{ 0, 10 }", intArrayClass);
         checkIntegerArray(value, intArray2);
-        value = ConvertUtils.convert("{ 0 10 }", intArray.getClass());
+        value = ConvertUtils.convert("{ 0 10 }", intArrayClass);
         checkIntegerArray(value, intArray2);
-
     }
 
     /**
