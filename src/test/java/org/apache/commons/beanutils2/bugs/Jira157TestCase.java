@@ -18,7 +18,6 @@ package org.apache.commons.beanutils2.bugs;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -94,15 +93,10 @@ public class Jira157TestCase {
      * See Jira issue# BEANUTILS-157.
      */
     @Test
-    public void testIssue_BEANUTILS_157_BeanUtils_Describe_Bean() {
+    public void testIssue_BEANUTILS_157_BeanUtils_Describe_Bean() throws Exception {
         final Object bean = new FooBar();
         Map<String, String> result = null;
-        try {
-            result = BeanUtils.describe(bean);
-        } catch (final Throwable t) {
-            LOG.error("Describe Bean: " + t.getMessage(), t);
-            fail("Describe Bean Threw exception: " + t);
-        }
+        result = BeanUtils.describe(bean);
         assertEquals(2, result.size(), "Check Size");
         assertTrue(result.containsKey("class"), "Class");
         assertTrue(result.containsKey("publicFoo"), "publicFoo Key");
@@ -115,7 +109,7 @@ public class Jira157TestCase {
      * See Jira issue# BEANUTILS-157.
      */
     @Test
-    public void testIssue_BEANUTILS_157_BeanUtils_Describe_Interface() {
+    public void testIssue_BEANUTILS_157_BeanUtils_Describe_Interface() throws Exception {
         final Object bean = new XY() {
             @Override
             public String getX() {
@@ -127,13 +121,7 @@ public class Jira157TestCase {
                 return "y-value";
             }
         };
-        Map<String, String> result = null;
-        try {
-            result = BeanUtils.describe(bean);
-        } catch (final Throwable t) {
-            LOG.error("Describe Interface: " + t.getMessage(), t);
-            fail("Describe Interface Threw exception: " + t);
-        }
+        final Map<String, String> result = BeanUtils.describe(bean);
         assertEquals(3, result.size(), "Check Size");
         assertTrue(result.containsKey("class"), "Class");
         assertTrue(result.containsKey("x"), "X Key");
@@ -148,7 +136,7 @@ public class Jira157TestCase {
      * See Jira issue# BEANUTILS-157.
      */
     @Test
-    public void testIssue_BEANUTILS_157_BeanUtils_Describe_Serializable() {
+    public void testIssue_BEANUTILS_157_BeanUtils_Describe_Serializable() throws Exception {
         final Object bean = new Serializable() {
             private static final long serialVersionUID = 1L;
 
@@ -162,13 +150,7 @@ public class Jira157TestCase {
                 return "y-value";
             }
         };
-        Map<String, String> result = null;
-        try {
-            result = BeanUtils.describe(bean);
-        } catch (final Throwable t) {
-            LOG.error("Describe Serializable: " + t.getMessage(), t);
-            fail("Describe Serializable Threw exception: " + t);
-        }
+        final Map<String, String> result = BeanUtils.describe(bean);
         assertEquals(1, result.size(), "Check Size");
         assertTrue(result.containsKey("class"), "Class");
     }

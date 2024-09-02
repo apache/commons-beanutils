@@ -17,7 +17,6 @@
 package org.apache.commons.beanutils2.bugs;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Comparator;
 import java.util.HashMap;
@@ -86,17 +85,11 @@ public class Jira339TestCase {
      * Test {@link BeanUtils#populate(Object, Map)}
      */
     @Test
-    public void testIssue_BEANUTILS_331_BeanUtilsBean_populate() {
-
+    public void testIssue_BEANUTILS_331_BeanUtilsBean_populate() throws Exception {
         final TestBean bean = new TestBean();
-        try {
-            final Map<String, Object> properties = new HashMap<>();
-            properties.put("comparator", null);
-            BeanUtils.populate(bean, properties);
-        } catch (final Throwable t) {
-            LOG.error("Failed: " + t.getMessage(), t);
-            fail("Threw exception: " + t);
-        }
+        final Map<String, Object> properties = new HashMap<>();
+        properties.put("comparator", null);
+        BeanUtils.populate(bean, properties);
         assertNull(bean.getComparator(), "TestBean comparator should be null");
     }
 
@@ -104,15 +97,9 @@ public class Jira339TestCase {
      * Test {@link PropertyUtils#setProperty(Object, String, Object)}
      */
     @Test
-    public void testIssue_BEANUTILS_339_BeanUtilsBean_setProperty() {
-
+    public void testIssue_BEANUTILS_339_BeanUtilsBean_setProperty() throws Exception {
         final TestBean bean = new TestBean();
-        try {
-            BeanUtils.setProperty(bean, "comparator", null);
-        } catch (final Throwable t) {
-            LOG.error("Failed: " + t.getMessage(), t);
-            fail("Threw exception: " + t);
-        }
+        BeanUtils.setProperty(bean, "comparator", null);
         assertNull(bean.getComparator(), "TestBean comparator should be null");
     }
 }

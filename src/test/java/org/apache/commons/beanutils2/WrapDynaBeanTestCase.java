@@ -18,13 +18,10 @@
 package org.apache.commons.beanutils2;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -143,20 +140,10 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
     public void testIndexedProperties() {
 
         // Invalid getter
-        try {
-            bean.get("invalidProperty", 0);
-            fail("Invalid get should have thrown IllegalArgumentException");
-        } catch (final IllegalArgumentException t) {
-            // Expected result
-        }
+        assertThrows(IllegalArgumentException.class, () -> bean.get("invalidProperty", 0));
 
         // Invalid setter
-        try {
-            bean.set("invalidProperty", 0, "XYZ");
-            fail("Invalid set should have thrown IllegalArgumentException");
-        } catch (final IllegalArgumentException t) {
-            // Expected result
-        }
+        assertThrows(IllegalArgumentException.class, () -> bean.set("invalidProperty", 0, "XYZ"));
 
         // Set up initial Value
         String testValue = "Original Value";
@@ -166,15 +153,10 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         assertEquals(testValue, instance.getStringIndexed(0), "Check String property");
 
         // Test Valid Get & Set
-        try {
-            testValue = "Some new value";
-            bean.set(testProperty, 0, testValue);
-            assertEquals(testValue, instance.getStringIndexed(0), "Test Set");
-            assertEquals(testValue, bean.get(testProperty, 0), "Test Get");
-        } catch (final IllegalArgumentException t) {
-            fail("Get threw exception: " + t);
-        }
-
+        testValue = "Some new value";
+        bean.set(testProperty, 0, testValue);
+        assertEquals(testValue, instance.getStringIndexed(0), "Test Set");
+        assertEquals(testValue, bean.get(testProperty, 0), "Test Get");
     }
 
     /**
@@ -208,25 +190,8 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
     @Override
     @Test
     public void testMappedContains() {
-
-        try {
-            assertTrue(bean.contains("mappedProperty", "First Key"), "Can see first key");
-            fail("Should have thrown UnsupportedOperationException");
-        } catch (final UnsupportedOperationException t) {
-            // Expected result
-        } catch (final Throwable t) {
-            fail("Exception: " + t);
-        }
-
-        try {
-            assertFalse(bean.contains("mappedProperty", "Unknown Key"), "Can not see unknown key");
-            fail("Should have thrown UnsupportedOperationException");
-        } catch (final UnsupportedOperationException t) {
-            // Expected result
-        } catch (final Throwable t) {
-            fail("Exception: " + t);
-        }
-
+        assertThrows(UnsupportedOperationException.class, () -> bean.contains("mappedProperty", "First Key"));
+        assertThrows(UnsupportedOperationException.class, () -> bean.contains("mappedProperty", "Unknown Key"));
     }
 
     /**
@@ -236,29 +201,11 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
     @Test
     public void testMappedRemove() {
 
-        try {
-            assertTrue(bean.contains("mappedProperty", "First Key"), "Can see first key");
-            bean.remove("mappedProperty", "First Key");
-            fail("Should have thrown UnsupportedOperationException");
-            // Assert.assertTrue("Can not see first key",
-            // !bean.contains("mappedProperty", "First Key"));
-        } catch (final UnsupportedOperationException t) {
-            // Expected result
-        } catch (final Throwable t) {
-            fail("Exception: " + t);
-        }
+        assertThrows(UnsupportedOperationException.class, () -> bean.contains("mappedProperty", "First Key"));
+        assertThrows(UnsupportedOperationException.class, () -> bean.remove("mappedProperty", "First Key"));
 
-        try {
-            assertFalse(bean.contains("mappedProperty", "Unknown Key"), "Can not see unknown key");
-            bean.remove("mappedProperty", "Unknown Key");
-            fail("Should have thrown UnsupportedOperationException");
-            // Assert.assertTrue("Can not see unknown key",
-            // !bean.contains("mappedProperty", "Unknown Key"));
-        } catch (final UnsupportedOperationException t) {
-            // Expected result
-        } catch (final Throwable t) {
-            fail("Exception: " + t);
-        }
+        assertThrows(UnsupportedOperationException.class, () -> bean.contains("mappedProperty", "Unknown Key"));
+        assertThrows(UnsupportedOperationException.class, () -> bean.remove("mappedProperty", "Unknown Key"));
 
     }
 

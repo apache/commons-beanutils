@@ -17,7 +17,6 @@
 package org.apache.commons.beanutils2.bugs;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.apache.commons.beanutils2.PropertyUtils;
 import org.apache.commons.beanutils2.bugs.other.Jira273BeanFactory;
@@ -58,15 +57,9 @@ public class Jira273TestCase {
      * Test with an anonymous class that inherits a public method of a public class.
      */
     @Test
-    public void testIssue_BEANUTILS_273_AnonymousNotOverridden() {
+    public void testIssue_BEANUTILS_273_AnonymousNotOverridden() throws Exception {
         final Object bean = Jira273BeanFactory.createAnonymousNotOverridden();
-        Object result = null;
-        try {
-            result = PropertyUtils.getProperty(bean, "beanValue");
-        } catch (final Throwable t) {
-            LOG.error("AnonymousNotOverridden: " + t.getMessage(), t);
-            fail("AnonymousNotOverridden Threw exception: " + t);
-        }
+        Object result = PropertyUtils.getProperty(bean, "beanValue");
         assertEquals("PublicBeanWithMethod", result);
     }
 
@@ -74,15 +67,9 @@ public class Jira273TestCase {
      * Test with an anonymous class that overrides a public method of a public class.
      */
     @Test
-    public void testIssue_BEANUTILS_273_AnonymousOverridden() {
+    public void testIssue_BEANUTILS_273_AnonymousOverridden() throws Exception {
         final Object bean = Jira273BeanFactory.createAnonymousOverridden();
-        Object result = null;
-        try {
-            result = PropertyUtils.getProperty(bean, "beanValue");
-        } catch (final Throwable t) {
-            LOG.error("AnonymousOverridden: " + t.getMessage(), t);
-            fail("AnonymousOverridden Threw exception: " + t);
-        }
+        Object result = PropertyUtils.getProperty(bean, "beanValue");
         assertEquals("AnonymousOverridden", result);
     }
 
@@ -90,15 +77,9 @@ public class Jira273TestCase {
      * Test with an private class that inherits a public method of a "grand parent" public class.
      */
     @Test
-    public void testIssue_BEANUTILS_273_PrivatePrivatePublicNotOverridden() {
+    public void testIssue_BEANUTILS_273_PrivatePrivatePublicNotOverridden() throws Exception {
         final Object bean = Jira273BeanFactory.createPrivatePrivatePublicNotOverridden();
-        Object result = null;
-        try {
-            result = PropertyUtils.getProperty(bean, "beanValue");
-        } catch (final Throwable t) {
-            LOG.error("PrivatePrivatePublicNotOverridden: " + t.getMessage(), t);
-            fail("PrivatePrivatePublicNotOverridden Threw exception: " + t);
-        }
+        Object result = PropertyUtils.getProperty(bean, "beanValue");
         assertEquals("PublicBeanWithMethod", result);
     }
 
@@ -106,15 +87,9 @@ public class Jira273TestCase {
      * Test with an private class that overrides a public method of a "grand parent" public class.
      */
     @Test
-    public void testIssue_BEANUTILS_273_PrivatePrivatePublicOverridden() {
+    public void testIssue_BEANUTILS_273_PrivatePrivatePublicOverridden() throws Exception {
         final Object bean = Jira273BeanFactory.createPrivatePrivatePublicOverridden();
-        Object result = null;
-        try {
-            result = PropertyUtils.getProperty(bean, "beanValue");
-        } catch (final Throwable t) {
-            LOG.error("PrivatePrivatePublicOverridden: " + t.getMessage(), t);
-            fail("PrivatePrivatePublicOverridden Threw exception: " + t);
-        }
+        Object result = PropertyUtils.getProperty(bean, "beanValue");
         assertEquals("PrivatePrivatePublicOverridden", result);
     }
 
@@ -122,15 +97,9 @@ public class Jira273TestCase {
      * Test with an private class that inherits a public method of a public class.
      */
     @Test
-    public void testIssue_BEANUTILS_273_PrivatePublicNotOverridden() {
+    public void testIssue_BEANUTILS_273_PrivatePublicNotOverridden() throws Exception {
         final Object bean = Jira273BeanFactory.createPrivatePublicNotOverridden();
-        Object result = null;
-        try {
-            result = PropertyUtils.getProperty(bean, "beanValue");
-        } catch (final Throwable t) {
-            LOG.error("PrivatePublicNotOverridden: " + t.getMessage(), t);
-            fail("PrivatePublicNotOverridden Threw exception: " + t);
-        }
+        Object result = PropertyUtils.getProperty(bean, "beanValue");
         assertEquals("PublicBeanWithMethod", result);
     }
 
@@ -138,15 +107,9 @@ public class Jira273TestCase {
      * Test with an private class that overrides a public method of a public class.
      */
     @Test
-    public void testIssue_BEANUTILS_273_PrivatePublicOverridden() {
+    public void testIssue_BEANUTILS_273_PrivatePublicOverridden() throws Exception {
         final Object bean = Jira273BeanFactory.createPrivatePublicOverridden();
-        Object result = null;
-        try {
-            result = PropertyUtils.getProperty(bean, "beanValue");
-        } catch (final Throwable t) {
-            LOG.error("PrivatePublicOverridden: " + t.getMessage(), t);
-            fail("PrivatePublicOverridden Threw exception: " + t);
-        }
+        Object result = PropertyUtils.getProperty(bean, "beanValue");
         assertEquals("PrivatePublicOverridden", result);
     }
 }
