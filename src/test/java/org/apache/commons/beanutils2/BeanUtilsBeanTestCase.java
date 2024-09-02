@@ -186,16 +186,12 @@ public class BeanUtilsBeanTestCase {
      * Test the copyProperties() method from a DynaBean.
      */
     @Test
-    public void testCopyPropertiesDynaBean() {
+    public void testCopyPropertiesDynaBean() throws Exception {
 
         // Set up an origin bean with customized properties
         final DynaClass dynaClass = DynaBeanUtilsTestCase.createDynaClass();
         DynaBean orig = null;
-        try {
-            orig = dynaClass.newInstance();
-        } catch (final Exception e) {
-            fail("newInstance(): " + e);
-        }
+        orig = dynaClass.newInstance();
         orig.set("booleanProperty", Boolean.FALSE);
         orig.set("byteProperty", Byte.valueOf((byte) 111));
         orig.set("doubleProperty", Double.valueOf(333.33));
@@ -208,11 +204,7 @@ public class BeanUtilsBeanTestCase {
         orig.set("stringProperty", "Custom string");
 
         // Copy the origin bean to our destination test bean
-        try {
-            BeanUtils.copyProperties(bean, orig);
-        } catch (final Exception e) {
-            fail("Threw exception: " + e);
-        }
+        BeanUtils.copyProperties(bean, orig);
 
         // Validate the results for scalar properties
         assertEquals(false, bean.getBooleanProperty(), "Copied boolean property");
@@ -248,7 +240,7 @@ public class BeanUtilsBeanTestCase {
      * Test copyProperties() when the origin is a {@code Map}.
      */
     @Test
-    public void testCopyPropertiesMap() {
+    public void testCopyPropertiesMap() throws Exception {
 
         final Map<String, Object> map = new HashMap<>();
         map.put("booleanProperty", "false");
@@ -262,11 +254,7 @@ public class BeanUtilsBeanTestCase {
         map.put("shortProperty", "555");
         map.put("stringProperty", "New String Property");
 
-        try {
-            BeanUtils.copyProperties(bean, map);
-        } catch (final Throwable t) {
-            fail("Threw " + t.toString());
-        }
+        BeanUtils.copyProperties(bean, map);
 
         // Scalar properties
         assertEquals(false, bean.getBooleanProperty(), "booleanProperty");
@@ -298,7 +286,7 @@ public class BeanUtilsBeanTestCase {
      * Test the copyProperties() method from a standard JavaBean.
      */
     @Test
-    public void testCopyPropertiesStandard() {
+    public void testCopyPropertiesStandard() throws Exception {
 
         // Set up an origin bean with customized properties
         final TestBean orig = new TestBean();
@@ -314,11 +302,7 @@ public class BeanUtilsBeanTestCase {
         orig.setStringProperty("Custom string");
 
         // Copy the origin bean to our destination test bean
-        try {
-            BeanUtils.copyProperties(bean, orig);
-        } catch (final Exception e) {
-            fail("Threw exception: " + e);
-        }
+        BeanUtils.copyProperties(bean, orig);
 
         // Validate the results for scalar properties
         assertEquals(false, bean.getBooleanProperty(), "Copied boolean property");
@@ -375,12 +359,8 @@ public class BeanUtilsBeanTestCase {
      * Test {@code copyProperty()} conversion.
      */
     @Test
-    public void testCopyPropertyConvert() {
-        try {
-            BeanUtils.copyProperty(bean, "dateProperty", testCalendar);
-        } catch (final Throwable t) {
-            fail("Threw " + t);
-        }
+    public void testCopyPropertyConvert() throws Exception {
+        BeanUtils.copyProperty(bean, "dateProperty", testCalendar);
         assertEquals(testUtilDate, bean.getDateProperty(), "Calendar --> java.util.Date");
     }
 
@@ -388,12 +368,8 @@ public class BeanUtilsBeanTestCase {
      * Test {@code copyProperty()} converting from a String.
      */
     @Test
-    public void testCopyPropertyConvertFromString() {
-        try {
-            BeanUtils.copyProperty(bean, "dateProperty", testStringDate);
-        } catch (final Throwable t) {
-            fail("Threw " + t);
-        }
+    public void testCopyPropertyConvertFromString() throws Exception {
+        BeanUtils.copyProperty(bean, "dateProperty", testStringDate);
         assertEquals(testUtilDate, bean.getDateProperty(), "String --> java.util.Date");
     }
 
@@ -401,12 +377,8 @@ public class BeanUtilsBeanTestCase {
      * Test {@code copyProperty()} converting to a String.
      */
     @Test
-    public void testCopyPropertyConvertToString() {
-        try {
-            BeanUtils.copyProperty(bean, "stringProperty", testUtilDate);
-        } catch (final Throwable t) {
-            fail("Threw " + t);
-        }
+    public void testCopyPropertyConvertToString() throws Exception {
+        BeanUtils.copyProperty(bean, "stringProperty", testUtilDate);
         assertEquals(testUtilDate.toString(), bean.getStringProperty(), "java.util.Date --> String");
     }
 
@@ -414,13 +386,9 @@ public class BeanUtilsBeanTestCase {
      * Test {@code copyProperty()} converting to a String.
      */
     @Test
-    public void testCopyPropertyConvertToStringArray() {
-        try {
-            bean.setStringArray(null);
-            BeanUtils.copyProperty(bean, "stringArray", new java.util.Date[] { testUtilDate });
-        } catch (final Throwable t) {
-            fail("Threw " + t);
-        }
+    public void testCopyPropertyConvertToStringArray() throws Exception {
+        bean.setStringArray(null);
+        BeanUtils.copyProperty(bean, "stringArray", new java.util.Date[] { testUtilDate });
         assertEquals(1, bean.getStringArray().length, "java.util.Date[] --> String[] length");
         assertEquals(testUtilDate.toString(), bean.getStringArray()[0], "java.util.Date[] --> String[] value ");
     }
@@ -429,13 +397,9 @@ public class BeanUtilsBeanTestCase {
      * Test {@code copyProperty()} converting to a String on indexed property
      */
     @Test
-    public void testCopyPropertyConvertToStringIndexed() {
-        try {
-            bean.setStringArray(new String[1]);
-            BeanUtils.copyProperty(bean, "stringArray[0]", testUtilDate);
-        } catch (final Throwable t) {
-            fail("Threw " + t);
-        }
+    public void testCopyPropertyConvertToStringIndexed() throws Exception {
+        bean.setStringArray(new String[1]);
+        BeanUtils.copyProperty(bean, "stringArray[0]", testUtilDate);
         assertEquals(testUtilDate.toString(), bean.getStringArray()[0], "java.util.Date --> String[]");
     }
 
@@ -723,14 +687,10 @@ public class BeanUtilsBeanTestCase {
      * Test {@code getArrayProperty()} converting to a String.
      */
     @Test
-    public void testGetArrayPropertyDate() {
+    public void testGetArrayPropertyDate() throws Exception {
         String[] value = null;
-        try {
-            bean.setDateArrayProperty(new java.util.Date[] { testUtilDate });
-            value = BeanUtils.getArrayProperty(bean, "dateArrayProperty");
-        } catch (final Throwable t) {
-            fail("Threw " + t);
-        }
+        bean.setDateArrayProperty(new java.util.Date[] { testUtilDate });
+        value = BeanUtils.getArrayProperty(bean, "dateArrayProperty");
         assertEquals(1, value.length, "java.util.Date[] --> String[] length");
         assertEquals(testUtilDate.toString(), value[0], "java.util.Date[] --> String[] value ");
     }
@@ -780,14 +740,10 @@ public class BeanUtilsBeanTestCase {
      * Test {@code getArrayProperty()} converting to a String.
      */
     @Test
-    public void testGetIndexedPropertyDate() {
+    public void testGetIndexedPropertyDate() throws Exception {
         String value = null;
-        try {
-            bean.setDateArrayProperty(new java.util.Date[] { testUtilDate });
-            value = BeanUtils.getIndexedProperty(bean, "dateArrayProperty[0]");
-        } catch (final Throwable t) {
-            fail("Threw " + t);
-        }
+        bean.setDateArrayProperty(new java.util.Date[] { testUtilDate });
+        value = BeanUtils.getIndexedProperty(bean, "dateArrayProperty[0]");
         assertEquals(testUtilDate.toString(), value, "java.util.Date[0] --> String");
     }
 
@@ -830,23 +786,17 @@ public class BeanUtilsBeanTestCase {
      * Test {@code getSimpleProperty()} converting to a String.
      */
     @Test
-    public void testGetSimplePropertyDate() {
+    public void testGetSimplePropertyDate() throws Exception {
         String value = null;
-        try {
-            bean.setDateProperty(testUtilDate);
-            value = BeanUtils.getSimpleProperty(bean, "dateProperty");
-        } catch (final Throwable t) {
-            fail("Threw " + t);
-        }
+        bean.setDateProperty(testUtilDate);
+        value = BeanUtils.getSimpleProperty(bean, "dateProperty");
         assertEquals(testUtilDate.toString(), value, "java.util.Date --> String");
     }
 
     @Test
     public void testMappedProperty() throws Exception {
         final MappedPropertyTestBean bean = new MappedPropertyTestBean();
-
         BeanUtils.setProperty(bean, "mapproperty(this.that.the-other)", "some.dotty.value");
-
         assertEquals("some.dotty.value", bean.getMapproperty("this.that.the-other"), "Mapped property set correctly");
     }
 
@@ -1027,22 +977,16 @@ public class BeanUtilsBeanTestCase {
             /* Do nothing */ }
 
         // make sure that this conversion has no been registered in the other instance
-        try {
-
-            bean.setBooleanProperty(false);
-            utilsTwo.setProperty(bean, "booleanProperty", "true");
-            assertEquals(bean.getBooleanProperty(), true, "Set property failed (3)");
-
-        } catch (final PassTestException e) {
-            fail("Registered converter is used by other instances");
-        }
+        bean.setBooleanProperty(false);
+        utilsTwo.setProperty(bean, "booleanProperty", "true");
+        assertEquals(bean.getBooleanProperty(), true, "Set property failed (3)");
     }
 
     /**
      * Test setting a value out of a mapped Map
      */
     @Test
-    public void testSetMappedMap() {
+    public void testSetMappedMap() throws Exception {
         final TestBean bean = new TestBean();
         final Map<String, Object> map = new HashMap<>();
         map.put("sub-key-1", "sub-value-1");
@@ -1051,11 +995,7 @@ public class BeanUtilsBeanTestCase {
         bean.getMapProperty().put("mappedMap", map);
 
         assertEquals("sub-value-3", ((Map<?, ?>) bean.getMapProperty().get("mappedMap")).get("sub-key-3"), "BEFORE");
-        try {
-            BeanUtils.setProperty(bean, "mapProperty(mappedMap)(sub-key-3)", "SUB-KEY-3-UPDATED");
-        } catch (final Throwable t) {
-            fail("Threw " + t + "");
-        }
+        BeanUtils.setProperty(bean, "mapProperty(mappedMap)(sub-key-3)", "SUB-KEY-3-UPDATED");
         assertEquals("SUB-KEY-3-UPDATED", ((Map<?, ?>) bean.getMapProperty().get("mappedMap")).get("sub-key-3"), "AFTER");
     }
 
@@ -1084,12 +1024,8 @@ public class BeanUtilsBeanTestCase {
      * Test {@code setProperty()} conversion.
      */
     @Test
-    public void testSetPropertyConvert() {
-        try {
-            BeanUtils.setProperty(bean, "dateProperty", testCalendar);
-        } catch (final Throwable t) {
-            fail("Threw " + t);
-        }
+    public void testSetPropertyConvert() throws Exception {
+        BeanUtils.setProperty(bean, "dateProperty", testCalendar);
         assertEquals(testUtilDate, bean.getDateProperty(), "Calendar --> java.util.Date");
     }
 
@@ -1097,12 +1033,8 @@ public class BeanUtilsBeanTestCase {
      * Test {@code setProperty()} converting from a String.
      */
     @Test
-    public void testSetPropertyConvertFromString() {
-        try {
-            BeanUtils.setProperty(bean, "dateProperty", testStringDate);
-        } catch (final Throwable t) {
-            fail("Threw " + t);
-        }
+    public void testSetPropertyConvertFromString() throws Exception {
+        BeanUtils.setProperty(bean, "dateProperty", testStringDate);
         assertEquals(testUtilDate, bean.getDateProperty(), "String --> java.util.Date");
     }
 
@@ -1110,12 +1042,8 @@ public class BeanUtilsBeanTestCase {
      * Test {@code setProperty()} converting to a String.
      */
     @Test
-    public void testSetPropertyConvertToString() {
-        try {
-            BeanUtils.setProperty(bean, "stringProperty", testUtilDate);
-        } catch (final Throwable t) {
-            fail("Threw " + t);
-        }
+    public void testSetPropertyConvertToString() throws Exception {
+        BeanUtils.setProperty(bean, "stringProperty", testUtilDate);
         assertEquals(testUtilDate.toString(), bean.getStringProperty(), "java.util.Date --> String");
     }
 
@@ -1123,13 +1051,9 @@ public class BeanUtilsBeanTestCase {
      * Test {@code setProperty()} converting to a String array.
      */
     @Test
-    public void testSetPropertyConvertToStringArray() {
-        try {
-            bean.setStringArray(null);
-            BeanUtils.setProperty(bean, "stringArray", new java.util.Date[] { testUtilDate });
-        } catch (final Throwable t) {
-            fail("Threw " + t);
-        }
+    public void testSetPropertyConvertToStringArray() throws Exception {
+        bean.setStringArray(null);
+        BeanUtils.setProperty(bean, "stringArray", new java.util.Date[] { testUtilDate });
         assertEquals(1, bean.getStringArray().length, "java.util.Date[] --> String[] length");
         assertEquals(testUtilDate.toString(), bean.getStringArray()[0], "java.util.Date[] --> String[] value ");
     }
@@ -1138,13 +1062,9 @@ public class BeanUtilsBeanTestCase {
      * Test {@code setProperty()} converting to a String on indexed property
      */
     @Test
-    public void testSetPropertyConvertToStringIndexed() {
-        try {
-            bean.setStringArray(new String[1]);
-            BeanUtils.setProperty(bean, "stringArray[0]", testUtilDate);
-        } catch (final Throwable t) {
-            fail("Threw " + t);
-        }
+    public void testSetPropertyConvertToStringIndexed() throws Exception {
+        bean.setStringArray(new String[1]);
+        BeanUtils.setProperty(bean, "stringArray[0]", testUtilDate);
         assertEquals(testUtilDate.toString(), bean.getStringArray()[0], "java.util.Date --> String[]");
     }
 

@@ -53,12 +53,8 @@ public class BeanUtilsBean2TestCase extends BeanUtilsBeanTestCase {
      */
     @Override
     @Test
-    public void testCopyPropertyConvertToString() {
-        try {
-            BeanUtils.copyProperty(bean, "stringProperty", testUtilDate);
-        } catch (final Throwable t) {
-            fail("Threw " + t);
-        }
+    public void testCopyPropertyConvertToString() throws Exception {
+        BeanUtils.copyProperty(bean, "stringProperty", testUtilDate);
         assertEquals(testStringDate, bean.getStringProperty(), "java.util.Date --> String");
     }
 

@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
@@ -84,12 +85,7 @@ public class LazyDynaListTestCase {
         assertEquals(4, dynaArray.length, "10. Array Size Wrong");
 
         // Test fail if different type added
-        try {
-            list.add(2, wrongBean);
-            fail("Expected IllegalArgumentException");
-        } catch (final IllegalArgumentException ignore) {
-            // expected result
-        }
+        assertThrows(IllegalArgumentException.class, () -> list.add(2, wrongBean));
 
         // find a String property to set
         final String testProperty = findStringProperty(testDynaClass);
@@ -197,12 +193,7 @@ public class LazyDynaListTestCase {
         assertEquals(3, mapArray.length, "14. Array Size Wrong");
 
         // Test fail if different type added
-        try {
-            list.add(2, wrongBean);
-            fail("Expected IllegalArgumentException");
-        } catch (final IllegalArgumentException ignore) {
-            // expected result
-        }
+        assertThrows(IllegalArgumentException.class, () -> list.add(2, wrongBean));
 
     }
 
@@ -246,12 +237,7 @@ public class LazyDynaListTestCase {
         assertEquals(2, pojoArray.length, "14. Array Size Wrong");
 
         // Test fail if different type added
-        try {
-            list.add(2, wrongBean);
-            fail("Expected IllegalArgumentException");
-        } catch (final IllegalArgumentException ignore) {
-            // expected result
-        }
+        assertThrows(IllegalArgumentException.class, () -> list.add(2, wrongBean));
 
     }
 

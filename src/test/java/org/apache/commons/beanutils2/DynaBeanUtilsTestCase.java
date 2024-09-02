@@ -23,7 +23,6 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,7 +46,7 @@ public class DynaBeanUtilsTestCase {
         final int[] intArray = {};
         final String[] stringArray = {};
 
-        final DynaClass dynaClass = new BasicDynaClass("TestDynaClass", null, new DynaProperty[] { new DynaProperty("booleanProperty", Boolean.TYPE),
+        return new BasicDynaClass("TestDynaClass", null, new DynaProperty[] { new DynaProperty("booleanProperty", Boolean.TYPE),
                 new DynaProperty("booleanSecond", Boolean.TYPE), new DynaProperty("byteProperty", Byte.TYPE), new DynaProperty("doubleProperty", Double.TYPE),
                 new DynaProperty("dupProperty", stringArray.getClass()), new DynaProperty("floatProperty", Float.TYPE),
                 new DynaProperty("intArray", intArray.getClass()), new DynaProperty("intIndexed", intArray.getClass()),
@@ -56,7 +55,6 @@ public class DynaBeanUtilsTestCase {
                 new DynaProperty("nested", TestBean.class), new DynaProperty("nullProperty", String.class), new DynaProperty("shortProperty", Short.TYPE),
                 new DynaProperty("stringArray", stringArray.getClass()), new DynaProperty("stringIndexed", stringArray.getClass()),
                 new DynaProperty("stringProperty", String.class), });
-        return dynaClass;
 
     }
 
@@ -168,16 +166,11 @@ public class DynaBeanUtilsTestCase {
      * Test the cloneBean() method from a DynaBean.
      */
     @Test
-    public void testCloneDynaBean() {
+    public void testCloneDynaBean() throws Exception {
 
         // Set up an origin bean with customized properties
         final DynaClass dynaClass = DynaBeanUtilsTestCase.createDynaClass();
-        DynaBean orig = null;
-        try {
-            orig = dynaClass.newInstance();
-        } catch (final Exception e) {
-            fail("newInstance(): " + e);
-        }
+        final DynaBean orig = dynaClass.newInstance();
         orig.set("booleanProperty", Boolean.FALSE);
         orig.set("byteProperty", Byte.valueOf((byte) 111));
         orig.set("doubleProperty", Double.valueOf(333.33));
@@ -190,24 +183,15 @@ public class DynaBeanUtilsTestCase {
         orig.set("stringProperty", "Custom string");
 
         // Copy the origin bean to our destination test bean
-        DynaBean clonedBean = null;
-        try {
-            clonedBean = (DynaBean) BeanUtils.cloneBean(orig);
-        } catch (final Exception e) {
-            fail("Threw exception: " + e);
-        }
+        final DynaBean clonedBean = (DynaBean) BeanUtils.cloneBean(orig);
 
         // Validate the results for scalar properties
-        assertEquals(false, ((Boolean) clonedBean.get("booleanProperty")).booleanValue(),
-                                "Cloned boolean property");
-        assertEquals((byte) 111, ((Byte) clonedBean.get("byteProperty")).byteValue(),
-                                "Cloned byte property");
-        assertEquals(333.33, ((Double) clonedBean.get("doubleProperty")).doubleValue(), 0.005,
-                                "Cloned double property");
+        assertEquals(false, ((Boolean) clonedBean.get("booleanProperty")).booleanValue(), "Cloned boolean property");
+        assertEquals((byte) 111, ((Byte) clonedBean.get("byteProperty")).byteValue(), "Cloned byte property");
+        assertEquals(333.33, ((Double) clonedBean.get("doubleProperty")).doubleValue(), 0.005, "Cloned double property");
         assertEquals(333, ((Integer) clonedBean.get("intProperty")).intValue(), "Cloned int property");
         assertEquals(3333, ((Long) clonedBean.get("longProperty")).longValue(), "Cloned long property");
-        assertEquals((short) 33, ((Short) clonedBean.get("shortProperty")).shortValue(),
-                                "Cloned short property");
+        assertEquals((short) 33, ((Short) clonedBean.get("shortProperty")).shortValue(), "Cloned short property");
         assertEquals("Custom string", (String) clonedBean.get("stringProperty"), "Cloned string property");
 
         // Validate the results for array properties
@@ -235,16 +219,11 @@ public class DynaBeanUtilsTestCase {
      * Test the copyProperties() method from a DynaBean.
      */
     @Test
-    public void testCopyPropertiesDynaBean() {
+    public void testCopyPropertiesDynaBean() throws Exception {
 
         // Set up an origin bean with customized properties
         final DynaClass dynaClass = DynaBeanUtilsTestCase.createDynaClass();
-        DynaBean orig = null;
-        try {
-            orig = dynaClass.newInstance();
-        } catch (final Exception e) {
-            fail("newInstance(): " + e);
-        }
+        final DynaBean orig = dynaClass.newInstance();
         orig.set("booleanProperty", Boolean.FALSE);
         orig.set("byteProperty", Byte.valueOf((byte) 111));
         orig.set("doubleProperty", Double.valueOf(333.33));
@@ -257,18 +236,12 @@ public class DynaBeanUtilsTestCase {
         orig.set("stringProperty", "Custom string");
 
         // Copy the origin bean to our destination test bean
-        try {
-            BeanUtils.copyProperties(bean, orig);
-        } catch (final Exception e) {
-            fail("Threw exception: " + e);
-        }
+        BeanUtils.copyProperties(bean, orig);
 
         // Validate the results for scalar properties
-        assertEquals(false, ((Boolean) bean.get("booleanProperty")).booleanValue(),
-                                "Copied boolean property");
+        assertEquals(false, ((Boolean) bean.get("booleanProperty")).booleanValue(), "Copied boolean property");
         assertEquals((byte) 111, ((Byte) bean.get("byteProperty")).byteValue(), "Copied byte property");
-        assertEquals(333.33, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005,
-                                "Copied double property");
+        assertEquals(333.33, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005, "Copied double property");
         assertEquals(333, ((Integer) bean.get("intProperty")).intValue(), "Copied int property");
         assertEquals(3333, ((Long) bean.get("longProperty")).longValue(), "Copied long property");
         assertEquals((short) 33, ((Short) bean.get("shortProperty")).shortValue(), "Copied short property");
@@ -299,7 +272,7 @@ public class DynaBeanUtilsTestCase {
      * Test copyProperties() when the origin is a {@code Map}.
      */
     @Test
-    public void testCopyPropertiesMap() {
+    public void testCopyPropertiesMap() throws Exception {
 
         final Map<String, Object> map = new HashMap<>();
         map.put("booleanProperty", "false");
@@ -313,18 +286,13 @@ public class DynaBeanUtilsTestCase {
         map.put("shortProperty", "555");
         map.put("stringProperty", "New String Property");
 
-        try {
-            BeanUtils.copyProperties(bean, map);
-        } catch (final Throwable t) {
-            fail("Threw " + t.toString());
-        }
+        BeanUtils.copyProperties(bean, map);
 
         // Scalar properties
         assertEquals(false, ((Boolean) bean.get("booleanProperty")).booleanValue(), "booleanProperty");
         assertEquals((byte) 111, ((Byte) bean.get("byteProperty")).byteValue(), "byteProperty");
         assertEquals(333.0, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005, "doubleProperty");
-        assertEquals((float) 222.0, ((Float) bean.get("floatProperty")).floatValue(), (float) 0.005,
-                                "floatProperty");
+        assertEquals((float) 222.0, ((Float) bean.get("floatProperty")).floatValue(), (float) 0.005, "floatProperty");
         assertEquals(111, ((Integer) bean.get("intProperty")).intValue(), "intProperty");
         assertEquals(444, ((Long) bean.get("longProperty")).longValue(), "longProperty");
         assertEquals((short) 555, ((Short) bean.get("shortProperty")).shortValue(), "shortProperty");
@@ -350,7 +318,7 @@ public class DynaBeanUtilsTestCase {
      * Test the copyProperties() method from a standard JavaBean.
      */
     @Test
-    public void testCopyPropertiesStandard() {
+    public void testCopyPropertiesStandard() throws Exception {
 
         // Set up an origin bean with customized properties
         final TestBean orig = new TestBean();
@@ -366,18 +334,12 @@ public class DynaBeanUtilsTestCase {
         orig.setStringProperty("Custom string");
 
         // Copy the origin bean to our destination test bean
-        try {
-            BeanUtils.copyProperties(bean, orig);
-        } catch (final Exception e) {
-            fail("Threw exception: " + e);
-        }
+        BeanUtils.copyProperties(bean, orig);
 
         // Validate the results for scalar properties
-        assertEquals(false, ((Boolean) bean.get("booleanProperty")).booleanValue(),
-                                "Copied boolean property");
+        assertEquals(false, ((Boolean) bean.get("booleanProperty")).booleanValue(), "Copied boolean property");
         assertEquals((byte) 111, ((Byte) bean.get("byteProperty")).byteValue(), "Copied byte property");
-        assertEquals(333.33, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005,
-                                "Copied double property");
+        assertEquals(333.33, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005, "Copied double property");
         assertEquals(333, ((Integer) bean.get("intProperty")).intValue(), "Copied int property");
         assertEquals(3333, ((Long) bean.get("longProperty")).longValue(), "Copied long property");
         assertEquals((short) 33, ((Short) bean.get("shortProperty")).shortValue(), "Copied short property");
@@ -635,14 +597,9 @@ public class DynaBeanUtilsTestCase {
      * Test the describe() method.
      */
     @Test
-    public void testDescribe() {
+    public void testDescribe() throws Exception {
 
-        Map<String, Object> map = null;
-        try {
-            map = PropertyUtils.describe(bean);
-        } catch (final Exception e) {
-            fail("Threw exception " + e);
-        }
+        final Map<String, Object> map = PropertyUtils.describe(bean);
 
         // Verify existence of all the properties that should be present
         for (final String describe : describes) {

@@ -22,7 +22,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -82,12 +81,7 @@ public class LazyDynaClassTestCase {
      */
     @Test
     public void testAddProperty3() {
-        try {
-            dynaClass.add(testProperty, String.class, true, true);
-            fail("add(name, type, readable, writable) did not throw UnsupportedOperationException");
-        } catch (final UnsupportedOperationException expected) {
-            // expected result
-        }
+        assertThrows(UnsupportedOperationException.class, () -> dynaClass.add(testProperty, String.class, true, true));
     }
 
     /**
@@ -111,12 +105,7 @@ public class LazyDynaClassTestCase {
      */
     @Test
     public void testAddPropertyNullName3() {
-        try {
-            dynaClass.add(null, String.class, true, true);
-            fail("add(name, type, readable, writable) did not throw UnsupportedOperationException");
-        } catch (final UnsupportedOperationException expected) {
-            // expected result
-        }
+        assertThrows(UnsupportedOperationException.class, () -> dynaClass.add(null, String.class, true, true));
     }
 
     /**
@@ -126,12 +115,7 @@ public class LazyDynaClassTestCase {
     public void testAddPropertyRestricted1() {
         dynaClass.setRestricted(true);
         assertTrue(dynaClass.isRestricted(), "MutableDynaClass is restricted");
-        try {
-            dynaClass.add(testProperty);
-            fail("add(name) did not throw IllegalStateException");
-        } catch (final IllegalStateException expected) {
-            // expected result
-        }
+        assertThrows(IllegalStateException.class, () -> dynaClass.add(testProperty));
     }
 
     /**
@@ -141,12 +125,7 @@ public class LazyDynaClassTestCase {
     public void testAddPropertyRestricted2() {
         dynaClass.setRestricted(true);
         assertTrue(dynaClass.isRestricted(), "MutableDynaClass is restricted");
-        try {
-            dynaClass.add(testProperty, String.class);
-            fail("add(name, type) did not throw IllegalStateException");
-        } catch (final IllegalStateException expected) {
-            // expected result
-        }
+        assertThrows(IllegalStateException.class, () -> dynaClass.add(testProperty, String.class));
     }
 
     /**
@@ -156,12 +135,7 @@ public class LazyDynaClassTestCase {
     public void testAddPropertyRestricted3() {
         dynaClass.setRestricted(true);
         assertTrue(dynaClass.isRestricted(), "MutableDynaClass is restricted");
-        try {
-            dynaClass.add(testProperty, String.class, true, true);
-            fail("add(name, type, readable, writable) did not throw UnsupportedOperationException");
-        } catch (final UnsupportedOperationException t) {
-            // expected result
-        }
+        assertThrows(UnsupportedOperationException.class, () -> dynaClass.add(testProperty, String.class, true, true));
     }
 
     /**
@@ -228,11 +202,6 @@ public class LazyDynaClassTestCase {
         assertTrue(dynaClass.isDynaProperty(testProperty), "Property exists");
         dynaClass.setRestricted(true);
         assertTrue(dynaClass.isRestricted(), "MutableDynaClass is restricted");
-        try {
-            dynaClass.remove(testProperty);
-            fail("remove property when MutableDynaClassis restricted did not throw IllegalStateException");
-        } catch (final IllegalStateException expected) {
-            // expected result
-        }
+        assertThrows(IllegalStateException.class, () -> dynaClass.remove(testProperty));
     }
 }
