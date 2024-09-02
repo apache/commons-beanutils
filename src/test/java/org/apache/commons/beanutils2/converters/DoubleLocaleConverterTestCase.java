@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the DoubleLocaleConverter class.
  */
-public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase<Double> {
+public class DoubleLocaleConverterTestCase extends AbstractLocaleConverterTestCase<Double> {
 
     /**
      * Sets up instance variables required by this test case.

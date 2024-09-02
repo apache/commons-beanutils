@@ -38,7 +38,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the DateLocaleConverter class.
  */
-class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase<Date> {
+class DateLocaleConverterTestCase extends AbstractLocaleConverterTestCase<Date> {
 
     /** All logging goes through this logger */
     private static final Log LOG = LogFactory.getLog(DateLocaleConverterTestCase.class);

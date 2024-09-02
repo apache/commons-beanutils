@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests {@link BigDecimalLocaleConverter}.
  */
-public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCase<BigDecimal> {
+public class BigDecimalLocaleConverterTestCase extends AbstractLocaleConverterTestCase<BigDecimal> {
 
     /**
      * Sets up instance variables required by this test case.

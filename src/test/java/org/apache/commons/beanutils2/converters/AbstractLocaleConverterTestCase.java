@@ -34,7 +34,7 @@ import org.junit.jupiter.api.BeforeEach;
  *
  * @param <T> The converter type.
  */
-public abstract class BaseLocaleConverterTestCase<T> {
+public abstract class AbstractLocaleConverterTestCase<T> {
 
     // Original Default Locale
     protected Locale origLocale;
