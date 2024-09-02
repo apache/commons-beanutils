@@ -19,7 +19,7 @@ package org.apache.commons.beanutils2;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -40,20 +40,13 @@ public class BeanToPropertyValueTransformerTestCase {
      */
     @Test
     public void testTransformWithIndexedProperty() {
-        BeanToPropertyValueTransformer<TestBean, Integer> transformer = new BeanToPropertyValueTransformer<>("intIndexed[0]");
+        final BeanToPropertyValueTransformer<TestBean, Integer> transformer = new BeanToPropertyValueTransformer<>("intIndexed[0]");
         final TestBean testBean = new TestBean();
         testBean.setIntIndexed(0, expectedIntegerValue.intValue());
         assertEquals(expectedIntegerValue, transformer.apply(testBean));
-
         // test index out of range
-        transformer = new BeanToPropertyValueTransformer<>("intIndexed[9999]");
-
-        try {
-            transformer.apply(testBean);
-            fail("Should have thrown an ArrayIndexOutOfBoundsException");
-        } catch (final ArrayIndexOutOfBoundsException e) {
-            /* this is what should happen */
-        }
+        final BeanToPropertyValueTransformer<TestBean, Integer> transformer2 = new BeanToPropertyValueTransformer<>("intIndexed[9999]");
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> transformer2.apply(testBean));
     }
 
     /**
@@ -61,11 +54,7 @@ public class BeanToPropertyValueTransformerTestCase {
      */
     @Test
     public void testTransformWithInvalidProperty() {
-        try {
-            new BeanToPropertyValueTransformer<>("bogusProperty").apply(new TestBean());
-        } catch (final IllegalArgumentException e) {
-            /* This is what should happen */
-        }
+        assertThrows(IllegalArgumentException.class, () -> new BeanToPropertyValueTransformer<>("bogusProperty").apply(new TestBean()));
     }
 
     /**
@@ -116,13 +105,7 @@ public class BeanToPropertyValueTransformerTestCase {
     @Test
     public void testTransformWithNullInPath() {
         final BeanToPropertyValueTransformer<TestBean, String> transformer = new BeanToPropertyValueTransformer<>("anotherNested.stringProperty");
-
-        try {
-            transformer.apply(new TestBean());
-            fail("Should have throw IllegalArgumentException");
-        } catch (final IllegalArgumentException e) {
-            /* ignore this is what should happen */
-        }
+        assertThrows(IllegalArgumentException.class, () -> transformer.apply(new TestBean()));
     }
 
     /**

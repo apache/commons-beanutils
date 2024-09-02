@@ -18,8 +18,8 @@
 package org.apache.commons.beanutils2;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
@@ -176,13 +176,7 @@ public class BeanPropertyValueEqualsPredicateTestCase {
     @Test
     public void testEvaluateWithNullInPath() {
         final BeanPropertyValueEqualsPredicate<TestBean, String> predicate = new BeanPropertyValueEqualsPredicate<>("anotherNested.stringProperty", "foo");
-        try {
-            // try to evaluate the predicate
-            predicate.test(new TestBean());
-            fail("Should have throw IllegalArgumentException");
-        } catch (final IllegalArgumentException e) {
-            /* ignore this is what should happen */
-        }
+        assertThrows(IllegalArgumentException.class, () -> predicate.test(new TestBean()));
     }
 
     /**
@@ -192,11 +186,7 @@ public class BeanPropertyValueEqualsPredicateTestCase {
     public void testEvaluateWithNullInPathAndIgnoreTrue() {
         final BeanPropertyValueEqualsPredicate<TestBean, String> predicate = new BeanPropertyValueEqualsPredicate<>("anotherNested.stringProperty", "foo",
                 true);
-        try {
-            assertFalse(predicate.test(new TestBean()));
-        } catch (final IllegalArgumentException e) {
-            fail("Should not have throw IllegalArgumentException");
-        }
+        assertFalse(predicate.test(new TestBean()));
     }
 
     /**
