@@ -16,7 +16,7 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.apache.commons.beanutils2.PropertyUtils;
 import org.apache.commons.logging.Log;
@@ -87,16 +87,6 @@ public class Jira349TestCase {
     public void testIssue_BEANUTILS_349_PropertyUtils_copyProperties() {
         final PrimitiveBean dest = new PrimitiveBean();
         final ObjectBean origin = new ObjectBean();
-        try {
-            PropertyUtils.copyProperties(dest, origin);
-        } catch (final NullPointerException e) {
-            LOG.error("Failed", e);
-            fail("Threw NullPointerException");
-        } catch (final IllegalArgumentException e) {
-            LOG.warn("Expected Result", e);
-        } catch (final Throwable t) {
-            LOG.error("Failed", t);
-            fail("Threw exception: " + t);
-        }
+        assertThrows(IllegalArgumentException.class, () -> PropertyUtils.copyProperties(dest, origin));
     }
 }

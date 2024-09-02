@@ -19,8 +19,8 @@ package org.apache.commons.beanutils2.converters;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.junit.jupiter.api.Test;
@@ -40,18 +40,8 @@ public class BooleanConverterTestCase {
         final AbstractConverter<Boolean> converter = new BooleanConverter(trueStrings, falseStrings);
         testConversionValues(converter, new String[] { "sure", "Sure" }, new String[] { "nope", "nOpE" });
 
-        try {
-            converter.convert(Boolean.class, "true");
-            fail("Converting obsolete true value should have generated an exception");
-        } catch (final ConversionException expected) {
-            // Exception is successful test
-        }
-        try {
-            converter.convert(Boolean.class, "bogus");
-            fail("Converting invalid string should have generated an exception");
-        } catch (final ConversionException expected) {
-            // Exception is successful test
-        }
+        assertThrows(ConversionException.class, () -> converter.convert(Boolean.class, "true"));
+        assertThrows(ConversionException.class, () -> converter.convert(Boolean.class, "bogus"));
     }
 
     @Test
@@ -66,12 +56,7 @@ public class BooleanConverterTestCase {
     @Test
     public void testConversionToOtherType() {
         final AbstractConverter<Boolean> converter = new BooleanConverter();
-        try {
-            converter.convert(Integer.class, STANDARD_TRUES[0]);
-            fail("Could convert to unsupported type!");
-        } catch (final ConversionException cex) {
-            // Expected result
-        }
+        assertThrows(ConversionException.class, () -> converter.convert(Integer.class, STANDARD_TRUES[0]));
     }
 
     protected void testConversionValues(final AbstractConverter<Boolean> converter, final String[] trueValues, final String[] falseValues) {
@@ -96,12 +81,7 @@ public class BooleanConverterTestCase {
     @Test
     public void testInvalidString() {
         final AbstractConverter<Boolean> converter = new BooleanConverter();
-        try {
-            converter.convert(Boolean.class, "bogus");
-            fail("Converting invalid string should have generated an exception");
-        } catch (final ConversionException expected) {
-            // Exception is successful test
-        }
+        assertThrows(ConversionException.class, () -> converter.convert(Boolean.class, "bogus"));
     }
 
     /**

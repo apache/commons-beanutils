@@ -18,8 +18,8 @@
 package org.apache.commons.beanutils2;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -109,13 +109,9 @@ public class BeanComparatorTestCase {
      */
     @Test
     public void testCompareOnMissingProperty() {
-        try {
-            final BeanComparator<AlphaBean, String> beanComparator = new BeanComparator<>("bogusName");
-            beanComparator.compare(alphaBean2, alphaBean1);
-            fail("should not be able to compare");
-        } catch (final Exception e) {
-            assertTrue(e.toString().contains("Unknown property"), () -> "Wrong exception was thrown: " + e);
-        }
+        final BeanComparator<AlphaBean, String> beanComparator = new BeanComparator<>("bogusName");
+        Exception e = assertThrows(RuntimeException.class, () -> beanComparator.compare(alphaBean2, alphaBean1));
+        assertTrue(e.toString().contains("Unknown property"), () -> "Wrong exception was thrown: " + e);
     }
 
     /**
@@ -123,13 +119,8 @@ public class BeanComparatorTestCase {
      */
     @Test
     public void testCompareWithNulls() {
-        try {
-            final BeanComparator<AlphaBean, String> beanComparator = new BeanComparator<>("name");
-            beanComparator.compare(alphaBean2, null);
-            fail("Should not be able to compare a null value.");
-        } catch (final Exception e) {
-            // expected result
-        }
+        final BeanComparator<AlphaBean, String> beanComparator = new BeanComparator<>("name");
+        assertThrows(NullPointerException.class, () -> beanComparator.compare(alphaBean2, null));
     }
 
     /**

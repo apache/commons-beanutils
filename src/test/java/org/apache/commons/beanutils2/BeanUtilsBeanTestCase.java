@@ -23,7 +23,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -59,13 +58,6 @@ import org.junit.jupiter.api.Test;
  * </ul>
  */
 public class BeanUtilsBeanTestCase {
-
-    /**
-     * Test for JDK 1.4
-     */
-    public static boolean isPre14JVM() {
-        return false;
-    }
 
     /**
      * The test bean for each test.
@@ -967,14 +959,8 @@ public class BeanUtilsBeanTestCase {
         // now change the registered conversion
 
         utilsOne.getConvertUtils().register(new ThrowExceptionConverter(), Boolean.TYPE);
-        try {
-
-            bean.setBooleanProperty(false);
-            utilsOne.setProperty(bean, "booleanProperty", "true");
-            fail("Registered conversion not used.");
-
-        } catch (final PassTestException e) {
-            /* Do nothing */ }
+        bean.setBooleanProperty(false);
+        assertThrows(PassTestException.class, () ->        utilsOne.setProperty(bean, "booleanProperty", "true"));
 
         // make sure that this conversion has no been registered in the other instance
         bean.setBooleanProperty(false);

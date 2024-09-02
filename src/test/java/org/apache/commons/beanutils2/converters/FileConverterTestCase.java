@@ -18,7 +18,7 @@
 package org.apache.commons.beanutils2.converters;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
 
@@ -72,11 +72,6 @@ public class FileConverterTestCase {
      */
     @Test
     public void testUnsupportedTargetType() {
-        try {
-            converter.convert(Integer.class, "/tmp");
-            fail("Could convert to unsupported type!");
-        } catch (final ConversionException cex) {
-            // expected result
-        }
+        assertThrows(ConversionException.class, () -> converter.convert(Integer.class, "/tmp"));
     }
 }

@@ -17,7 +17,7 @@
 package org.apache.commons.beanutils2.bugs;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.apache.commons.beanutils2.AlphaBean;
 import org.apache.commons.beanutils2.BeanUtilsBean;
@@ -39,8 +39,7 @@ public class Jira520TestCase {
         bub.getPropertyUtils().removeBeanIntrospector(SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
         final AlphaBean bean = new AlphaBean();
         final String result = bub.getProperty(bean, "class");
-        assertEquals("class org.apache.commons.beanutils2.AlphaBean", result,
-                                "Class property should have been accessed");
+        assertEquals("class org.apache.commons.beanutils2.AlphaBean", result, "Class property should have been accessed");
     }
 
     /**
@@ -50,11 +49,6 @@ public class Jira520TestCase {
     public void testSuppressClassPropertyByDefault() throws Exception {
         final BeanUtilsBean bub = new BeanUtilsBean();
         final AlphaBean bean = new AlphaBean();
-        try {
-            bub.getProperty(bean, "class");
-            fail("Could access class property!");
-        } catch (final NoSuchMethodException ex) {
-            // ok
-        }
+        assertThrows(NoSuchMethodException.class, () -> bub.getProperty(bean, "class"));
     }
 }

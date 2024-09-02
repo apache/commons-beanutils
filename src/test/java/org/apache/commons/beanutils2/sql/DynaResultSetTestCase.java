@@ -18,11 +18,11 @@
 package org.apache.commons.beanutils2.sql;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.math.BigDecimal;
 import java.util.Iterator;
@@ -54,9 +54,7 @@ public class DynaResultSetTestCase {
      */
     @BeforeEach
     public void setUp() throws Exception {
-
         dynaClass = new ResultSetDynaClass(TestResultSet.createProxy());
-
     }
 
     /**
@@ -64,9 +62,7 @@ public class DynaResultSetTestCase {
      */
     @AfterEach
     public void tearDown() {
-
         dynaClass = null;
-
     }
 
     @Test
@@ -97,8 +93,7 @@ public class DynaResultSetTestCase {
 
     @Test
     public void testGetName() {
-        assertEquals("org.apache.commons.beanutils2.sql.ResultSetDynaClass", dynaClass.getName(),
-                                "DynaClass name");
+        assertEquals("org.apache.commons.beanutils2.sql.ResultSetDynaClass", dynaClass.getName(), "DynaClass name");
     }
 
     @Test
@@ -110,9 +105,7 @@ public class DynaResultSetTestCase {
         while (rows.hasNext()) {
             rows.next();
             n++;
-            if (n > 10) {
-                fail("Returned too many rows");
-            }
+            assertFalse(n > 10);
         }
         assertEquals(5, n, "iterator rows");
 
@@ -128,20 +121,14 @@ public class DynaResultSetTestCase {
         final DynaBean row = rows.next();
 
         // Invalid argument test
-        try {
-            row.get("unknownProperty");
-            fail("Did not throw IllegalArgumentException");
-        } catch (final IllegalArgumentException e) {
-            // Expected result
-        }
+        assertThrows(IllegalArgumentException.class, () -> row.get("unknownProperty"));
 
         // Verify property values
 
         final Object bigDecimalProperty = row.get("bigdecimalproperty");
         assertNotNull(bigDecimalProperty, "bigDecimalProperty exists");
         assertInstanceOf(BigDecimal.class, bigDecimalProperty, "bigDecimalProperty type");
-        assertEquals(123.45, ((BigDecimal) bigDecimalProperty).doubleValue(), 0.005,
-                                "bigDecimalProperty value");
+        assertEquals(123.45, ((BigDecimal) bigDecimalProperty).doubleValue(), 0.005, "bigDecimalProperty value");
 
         final Object intProperty = row.get("intproperty");
         assertNotNull(intProperty, "intProperty exists");
@@ -162,13 +149,8 @@ public class DynaResultSetTestCase {
      * Test normal case column names (i.e. not converted to lower case)
      */
     @Test
-    public void testIteratorResultsNormalCase() {
-        ResultSetDynaClass dynaClass = null;
-        try {
-            dynaClass = new ResultSetDynaClass(TestResultSet.createProxy(), false);
-        } catch (final Exception e) {
-            fail("Error creating ResultSetDynaClass: " + e);
-        }
+    public void testIteratorResultsNormalCase() throws Exception {
+        ResultSetDynaClass dynaClass = new ResultSetDynaClass(TestResultSet.createProxy(), false);
 
         // Grab the third row
         final Iterator<DynaBean> rows = dynaClass.iterator();
@@ -177,20 +159,14 @@ public class DynaResultSetTestCase {
         final DynaBean row = rows.next();
 
         // Invalid argument test
-        try {
-            row.get("unknownProperty");
-            fail("Did not throw IllegalArgumentException");
-        } catch (final IllegalArgumentException e) {
-            // Expected result
-        }
+        assertThrows(IllegalArgumentException.class, () -> row.get("unknownProperty"));
 
         // Verify property values
 
         final Object bigDecimalProperty = row.get("bigDecimalProperty");
         assertNotNull(bigDecimalProperty, "bigDecimalProperty exists");
         assertInstanceOf(BigDecimal.class, bigDecimalProperty, "bigDecimalProperty type");
-        assertEquals(123.45, ((BigDecimal) bigDecimalProperty).doubleValue(), 0.005,
-                                "bigDecimalProperty value");
+        assertEquals(123.45, ((BigDecimal) bigDecimalProperty).doubleValue(), 0.005, "bigDecimalProperty value");
 
         final Object intProperty = row.get("intProperty");
         assertNotNull(intProperty, "intProperty exists");
@@ -209,16 +185,7 @@ public class DynaResultSetTestCase {
 
     @Test
     public void testNewInstance() {
-
-        try {
-            dynaClass.newInstance();
-            fail("Did not throw UnsupportedOperationException()");
-        } catch (final UnsupportedOperationException e) {
-            // Expected result
-        } catch (final Exception e) {
-            fail("Threw exception " + e);
-        }
-
+        assertThrows(UnsupportedOperationException.class, () -> dynaClass.newInstance());
     }
 
 }

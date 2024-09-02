@@ -18,10 +18,10 @@
 package org.apache.commons.beanutils2.locale;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
@@ -31,7 +31,6 @@ import java.util.WeakHashMap;
 
 import org.apache.commons.beanutils2.BeanUtilsBean;
 import org.apache.commons.beanutils2.ContextClassLoaderLocal;
-import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.ConvertUtils;
 import org.apache.commons.beanutils2.PrimitiveBean;
 import org.apache.commons.beanutils2.locale.converters.LongLocaleConverter;
@@ -160,6 +159,7 @@ public class LocaleBeanificationTestCase {
     }
 
     /** Tests whether calls are independent for different class loaders */
+    @Test
     public void testContextClassloaderIndependence() throws Exception {
 
         final class TestIndependenceThread extends Thread {
@@ -234,6 +234,7 @@ public class LocaleBeanificationTestCase {
     /**
      * Tests whether difference instances are loaded by different context class loaders.
      */
+    @Test
     public void testContextClassLoaderLocal() throws Exception {
 
         final class CCLLTesterThread extends Thread {
@@ -278,6 +279,7 @@ public class LocaleBeanificationTestCase {
     }
 
     /** Tests whether the unset method works */
+    @Test
     public void testContextClassLoaderUnset() {
         final LocaleBeanUtilsBean beanOne = new LocaleBeanUtilsBean();
         final ContextClassLoaderLocal<LocaleBeanUtilsBean> ccll = new ContextClassLoaderLocal<>();
@@ -290,6 +292,7 @@ public class LocaleBeanificationTestCase {
     /**
      * Tests whether difference instances are loaded by different context class loaders.
      */
+    @Test
     public void testGetByContextClassLoader() throws Exception {
 
         final class GetBeanUtilsBeanThread extends Thread {
@@ -330,48 +333,37 @@ public class LocaleBeanificationTestCase {
     /**
      * Test registering a locale-aware converter with the standard ConvertUtils.
      */
+    @Test
     public void testLocaleAwareConverterInConvertUtils() {
         try {
             // first use the default non-locale-aware converter
-            try {
-                final Long data = (Long) ConvertUtils.convert("777", Long.class);
-                assertEquals(777, data.longValue(), "Standard format long converted ok");
-            } catch (final ConversionException ex) {
-                fail("Unable to convert non-locale-aware number 777");
-            }
+            Long data = (Long) ConvertUtils.convert("777", Long.class);
+            assertEquals(777, data.longValue(), "Standard format long converted ok");
 
             // now try default converter with special delimiters
-            try {
-                // This conversion will cause an error. But the default
-                // Long converter is set up to return a default value of
-                // zero on error.
-                final Long data = (Long) ConvertUtils.convert("1.000.000", Long.class);
-                assertEquals(0, data.longValue(), "Standard format behaved as expected");
-            } catch (final ConversionException ex) {
-                fail("Unexpected exception from standard Long converter.");
-            }
+            // This conversion will cause an error. But the default
+            // Long converter is set up to return a default value of
+            // zero on error.
+            data = (Long) ConvertUtils.convert("1.000.000", Long.class);
+            assertEquals(0, data.longValue(), "Standard format behaved as expected");
 
             // Now try using a locale-aware converter together with
             // locale-specific input string. Note that in the german locale,
             // large numbers can be split up into groups of three digits
             // using a dot character (and comma is the decimal-point indicator).
-            try {
+            final Locale germanLocale = Locale.GERMAN;
+            final LongLocaleConverter longLocaleConverter = LongLocaleConverter.builder().setLocale(germanLocale).get();
+            ConvertUtils.register(longLocaleConverter, Long.class);
 
-                final Locale germanLocale = Locale.GERMAN;
-                final LongLocaleConverter longLocaleConverter = LongLocaleConverter.builder().setLocale(germanLocale).get();
-                ConvertUtils.register(longLocaleConverter, Long.class);
-
-                final Long data = (Long) ConvertUtils.convert("1.000.000", Long.class);
-                assertEquals(1000000, data.longValue(), "German-format long converted ok");
-            } catch (final ConversionException ex) {
-                fail("Unable to convert german-format number");
-            }
+            data = (Long) ConvertUtils.convert("1.000.000", Long.class);
+            assertEquals(1000000, data.longValue(), "German-format long converted ok");
         } finally {
             ConvertUtils.deregister();
         }
     }
 
     /** Tests whether class loaders and beans are released from memory */
+    @Test
     public void testMemoryLeak() throws Exception {
         // many thanks to Juozas Baliuka for suggesting this methodology
         TestClassLoader loader = new TestClassLoader();
@@ -424,9 +416,8 @@ public class LocaleBeanificationTestCase {
         while (true) {
             LocaleBeanUtilsBean.getLocaleBeanUtilsInstance();
             System.gc();
-            if (iterations++ > MAX_GC_ITERATIONS) {
-                fail("Max iterations reached before resource released.");
-            }
+
+            assertFalse(iterations++ > MAX_GC_ITERATIONS, "Max iterations reached before resource released.");
 
             if (loaderReference.get() == null && beanUtilsReference.get() == null && convertUtilsReference.get() == null) {
                 break;
@@ -439,6 +430,7 @@ public class LocaleBeanificationTestCase {
     }
 
     /** Tests whether class loaders and beans are released from memory by the map used by BeanUtils */
+    @Test
     public void testMemoryLeak2() {
         // many thanks to Juozas Baliuka for suggesting this methodology
         TestClassLoader loader = new TestClassLoader();
@@ -463,9 +455,7 @@ public class LocaleBeanificationTestCase {
         int bytz = 2;
         while (true) {
             System.gc();
-            if (iterations++ > MAX_GC_ITERATIONS) {
-                fail("Max iterations reached before resource released.");
-            }
+            assertFalse(iterations++ > MAX_GC_ITERATIONS, "Max iterations reached before resource released.");
             map.isEmpty();
 
             if (loaderReference.get() == null && testReference.get() == null) {
@@ -479,6 +469,7 @@ public class LocaleBeanificationTestCase {
     }
 
     /** Test of the methodology we'll use for some of the later tests */
+    @Test
     public void testMemoryTestMethodology() throws Exception {
         // test methodology
         // many thanks to Juozas Baliuka for suggesting this method
@@ -497,9 +488,7 @@ public class LocaleBeanificationTestCase {
         int bytz = 2;
         while (true) {
             System.gc();
-            if (iterations++ > MAX_GC_ITERATIONS) {
-                fail("Max iterations reached before resource released.");
-            }
+            assertFalse(iterations++ > MAX_GC_ITERATIONS, "Max iterations reached before resource released.");
             if (reference.get() == null) {
                 break;
 

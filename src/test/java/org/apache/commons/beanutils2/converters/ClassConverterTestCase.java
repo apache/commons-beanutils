@@ -17,7 +17,7 @@
 package org.apache.commons.beanutils2.converters;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
@@ -46,11 +46,8 @@ public class ClassConverterTestCase {
     @Test
     public void testArray() {
         final Converter<Class<?>> converter = new ClassConverter();
-
         // Test Array Class to String
-        assertEquals("[Ljava.lang.Boolean;", converter.convert(String.class, Boolean[].class),
-                                "Array to String");
-
+        assertEquals("[Ljava.lang.Boolean;", converter.convert(String.class, Boolean[].class), "Array to String");
         // *** N.B. for some reason the following works on m1, but not m2
         // Test String to Array Class
         // assertEquals("String to Array", Boolean[].class, converter.convert(Class.class, "[Ljava.lang.Boolean;"));
@@ -62,27 +59,13 @@ public class ClassConverterTestCase {
     @Test
     public void testConvertToClass() {
         final Converter<Class<?>> converter = new ClassConverter();
-
         assertEquals(Integer.class, converter.convert(Class.class, Integer.class), "Class Test");
         assertEquals(Integer.class, converter.convert(Class.class, "java.lang.Integer"), "String Test");
-        assertEquals(Integer.class, converter.convert(Class.class, new StringBuilder("java.lang.Integer")),
-                                "StringBuilder Test");
-
+        assertEquals(Integer.class, converter.convert(Class.class, new StringBuilder("java.lang.Integer")), "StringBuilder Test");
         // Invalid Test
-        try {
-            converter.convert(Class.class, Integer.valueOf(6));
-            fail("Expected invalid value to fail");
-        } catch (final ConversionException e) {
-            // expected result
-        }
-
+        assertThrows(ConversionException.class, () -> converter.convert(Class.class, Integer.valueOf(6)));
         // Test Null
-        try {
-            converter.convert(Class.class, null);
-            fail("Expected null value to fail");
-        } catch (final ConversionException e) {
-            // expected result
-        }
+        assertThrows(ConversionException.class, () -> converter.convert(Class.class, null));
     }
 
     /**
@@ -90,9 +73,7 @@ public class ClassConverterTestCase {
      */
     @Test
     public void testConvertToClassDefault() {
-
         final Converter<Class<?>> converter = new ClassConverter(Object.class);
-
         assertEquals(Object.class, converter.convert(Class.class, Integer.valueOf(6)), "Invalid Test");
         assertEquals(Object.class, converter.convert(Class.class, null), "Null Test");
     }
@@ -102,9 +83,7 @@ public class ClassConverterTestCase {
      */
     @Test
     public void testConvertToClassDefaultNull() {
-
         final Converter<Class<?>> converter = new ClassConverter(null);
-
         assertEquals(null, converter.convert(Class.class, Integer.valueOf(6)), "Invalid Test");
         assertEquals(null, converter.convert(Class.class, null), "Null Test");
     }
@@ -115,7 +94,6 @@ public class ClassConverterTestCase {
     @Test
     public void testConvertToString() {
         final Converter<Class<?>> converter = new ClassConverter();
-
         assertEquals("java.lang.Integer", converter.convert(String.class, Integer.class), "Class Test");
         assertEquals("foo", converter.convert(String.class, "foo"), "Value Test");
         assertEquals("bar", converter.convert(String.class, new StringBuilder("bar")), "Value Test");
@@ -128,14 +106,8 @@ public class ClassConverterTestCase {
     @Test
     public void testInvalid() {
         final Converter<Class<?>> converter = new ClassConverter();
-
         // Test invalid class name
-        try {
-            converter.convert(Class.class, "foo.bar");
-            fail("Invalid class name, expected ConversionException");
-        } catch (final ConversionException e) {
-            // expected result
-        }
+        assertThrows(ConversionException.class, () -> converter.convert(Class.class, "foo.bar"));
     }
 
     /**
@@ -144,11 +116,6 @@ public class ClassConverterTestCase {
     @Test
     public void testUnsupportedTargetType() {
         final Converter<Class<?>> converter = new ClassConverter();
-        try {
-            converter.convert(Integer.class, getClass().getName());
-            fail("Invalid target class not detected!");
-        } catch (final ConversionException cex) {
-            // expected result
-        }
+        assertThrows(ConversionException.class, () -> converter.convert(Integer.class, getClass().getName()));
     }
 }

@@ -21,7 +21,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -237,7 +236,7 @@ public class LazyDynaListTestCase {
     /**
      * Do serialization and deserialization.
      */
-    private Object serializeDeserialize(final Object target, final String text) throws IOException {
+    private Object serializeDeserialize(final Object target, final String text) throws IOException, ClassNotFoundException {
         // Serialize the test object
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try (ObjectOutputStream oos = new ObjectOutputStream(baos)) {
@@ -249,8 +248,6 @@ public class LazyDynaListTestCase {
         try (ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
                 ObjectInputStream ois = new ObjectInputStream(bais)) {
             result = ois.readObject();
-        } catch (final Exception e) {
-            fail(text + ": Exception during deserialization: " + e);
         }
         return result;
     }
@@ -410,7 +407,7 @@ public class LazyDynaListTestCase {
      * Test DynaBean serialization.
      */
     @Test
-    public void testSerializationDynaBean() throws IOException {
+    public void testSerializationDynaBean() throws Exception {
 
         // Create LazyArrayList for DynaBeans
         LazyDynaList target = new LazyDynaList(basicDynaClass);
@@ -436,7 +433,7 @@ public class LazyDynaListTestCase {
      * Test DynaBean serialization.
      */
     @Test
-    public void testSerializationLazyDynaBean() throws IOException {
+    public void testSerializationLazyDynaBean() throws Exception {
 
         // Create LazyArrayList for DynaBeans
         LazyDynaList target = new LazyDynaList();
@@ -462,7 +459,7 @@ public class LazyDynaListTestCase {
      * Test Map serialization.
      */
     @Test
-    public void testSerializationMap() throws IOException {
+    public void testSerializationMap() throws Exception {
 
         // Create LazyArrayList for DynaBeans
         LazyDynaList target = new LazyDynaList(treeMapDynaClass);
@@ -488,7 +485,7 @@ public class LazyDynaListTestCase {
      * Test POJO (WrapDynaBean) serialization.
      */
     @Test
-    public void testSerializationPojo() throws IOException {
+    public void testSerializationPojo() throws Exception {
 
         // Create LazyArrayList for DynaBeans
         LazyDynaList target = new LazyDynaList(pojoDynaClass);

@@ -20,7 +20,7 @@ package org.apache.commons.beanutils2.locale;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -30,6 +30,7 @@ import java.text.NumberFormat;
 import org.apache.commons.beanutils2.ConversionException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -68,9 +69,9 @@ public class LocaleConvertUtilsTestCase {
     /**
      * Negative String to primitive integer array tests.
      */
+    @Test
+    @Disabled("Array conversions not implemented yet.")
     public void fixmetestNegativeIntegerArray() {
-
-        fail("Array conversions not implemented yet.");
 
         Object value;
         final int[] intArray = {};
@@ -95,9 +96,9 @@ public class LocaleConvertUtilsTestCase {
     /**
      * Negative String to String array tests.
      */
+    @Test
+    @Disabled("Array conversions not implemented yet.")
     public void fixmetestNegativeStringArray() {
-
-        fail("Array conversions not implemented yet.");
 
         Object value;
         final String[] stringArray = {};
@@ -109,9 +110,10 @@ public class LocaleConvertUtilsTestCase {
     /**
      * Test conversion of object to string for arrays - .
      */
+    @Test
+    @Disabled("Array conversions not implemented yet.")
     public void fixmetestObjectToStringArray() {
 
-        fail("Array conversions not implemented yet.");
         final int[] intArray0 = {};
         final int[] intArray1 = { 123 };
         final int[] intArray2 = { 123, 456 };
@@ -132,9 +134,9 @@ public class LocaleConvertUtilsTestCase {
     /**
      * Positive array conversion tests.
      */
+    @Test
+    @Disabled("Array conversions not implemented yet.")
     public void fixmetestPositiveArray() {
-
-        fail("Array conversions not implemented yet.");
 
         final String[] values1 = { "10", "20", "30" };
         Object value = LocaleConvertUtils.convert(values1, Integer.TYPE);
@@ -157,9 +159,9 @@ public class LocaleConvertUtilsTestCase {
     /**
      * Positive String to primitive integer array tests.
      */
+    @Test
+    @Disabled("Array conversions not implemented yet.")
     public void fixmetestPositiveIntegerArray() {
-
-        fail("Array conversions not implemented yet.");
 
         Object value;
         final int[] intArray = {};
@@ -193,9 +195,9 @@ public class LocaleConvertUtilsTestCase {
     /**
      * Positive String to String array tests.
      */
+    @Test
+    @Disabled("Array conversions not implemented yet.")
     public void fixmetestPositiveStringArray() {
-
-        fail("Array conversions not implemented yet.");
 
         Object value;
         final String[] stringArray = {};
@@ -268,13 +270,7 @@ public class LocaleConvertUtilsTestCase {
      */
     @Test
     public void testConvertStringArrayLocaleNull() {
-        Object result = null;
-        try {
-            result = LocaleConvertUtils.convert(new String[] { "123" }, Integer[].class, null, "#,###");
-        } catch (final Exception e) {
-            e.printStackTrace();
-            fail("Threw: " + e);
-        }
+        final Object result = LocaleConvertUtils.convert(new String[] { "123" }, Integer[].class, null, "#,###");
         assertNotNull(result, "Null Result");
         assertEquals(Integer[].class, result.getClass(), "Integer Array Type");
         assertEquals(1, ((Integer[]) result).length, "Integer Array Length");
@@ -286,13 +282,7 @@ public class LocaleConvertUtilsTestCase {
      */
     @Test
     public void testConvertStringLocaleNull() {
-        Object result = null;
-        try {
-            result = LocaleConvertUtils.convert("123", Integer.class, null, "#,###");
-        } catch (final Exception e) {
-            e.printStackTrace();
-            fail("Threw: " + e);
-        }
+        final Object result = LocaleConvertUtils.convert("123", Integer.class, null, "#,###");
         assertNotNull(result, "Null Result");
         assertEquals(Integer.class, result.getClass(), "Integer Type");
         assertEquals(Integer.valueOf(123), result, "Integer Value");
@@ -305,8 +295,7 @@ public class LocaleConvertUtilsTestCase {
     @Test
     public void testDefaultToStringConversionUnsupportedType() {
         final Integer value = 20131101;
-        assertEquals(value.toString(), LocaleConvertUtils.convert(value.toString(), getClass()),
-                                "Wrong result");
+        assertEquals(value.toString(), LocaleConvertUtils.convert(value.toString(), getClass()), "Wrong result");
     }
 
     /**
@@ -314,102 +303,27 @@ public class LocaleConvertUtilsTestCase {
      */
     @Test
     public void testNegativeScalar() {
-
         /*
          * fixme Boolean converters not implemented at this point value = LocaleConvertUtils.convert("foo", Boolean.TYPE); ...
          *
          * value = LocaleConvertUtils.convert("foo", Boolean.class); ...
          */
-
-        try {
-            LocaleConvertUtils.convert("foo", Byte.TYPE);
-            fail("Should have thrown conversion exception (1)");
-        } catch (final ConversionException e) {
-            // Expected result
-        }
-
-        try {
-            LocaleConvertUtils.convert("foo", Byte.class);
-            fail("Should have thrown conversion exception (2)");
-        } catch (final ConversionException e) {
-            // Expected result
-        }
-
+        assertThrows(ConversionException.class, () -> LocaleConvertUtils.convert("foo", Byte.TYPE));
+        assertThrows(ConversionException.class, () -> LocaleConvertUtils.convert("foo", Byte.class));
         /*
          * fixme - not implemented try { value = LocaleConvertUtils.convert("org.apache.commons.beanutils2.Undefined", Class.class);
          * fail("Should have thrown conversion exception"); } catch (ConversionException e) { ; // Expected result }
          */
-
-        try {
-            LocaleConvertUtils.convert("foo", Double.TYPE);
-            fail("Should have thrown conversion exception (3)");
-        } catch (final ConversionException e) {
-            // Expected result
-        }
-
-        try {
-            LocaleConvertUtils.convert("foo", Double.class);
-            fail("Should have thrown conversion exception (4)");
-        } catch (final ConversionException e) {
-            // Expected result
-        }
-
-        try {
-            LocaleConvertUtils.convert("foo", Float.TYPE);
-            fail("Should have thrown conversion exception (5)");
-        } catch (final ConversionException e) {
-            // Expected result
-        }
-
-        try {
-            LocaleConvertUtils.convert("foo", Float.class);
-            fail("Should have thrown conversion exception (6)");
-        } catch (final ConversionException e) {
-            // Expected result
-        }
-
-        try {
-            LocaleConvertUtils.convert("foo", Integer.TYPE);
-            fail("Should have thrown conversion exception (7)");
-        } catch (final ConversionException e) {
-            // Expected result
-        }
-
-        try {
-            LocaleConvertUtils.convert("foo", Integer.class);
-            fail("Should have thrown conversion exception (8)");
-        } catch (final ConversionException e) {
-            // Expected result
-        }
-
-        try {
-            LocaleConvertUtils.convert("foo", Byte.TYPE);
-            fail("Should have thrown conversion exception (9)");
-        } catch (final ConversionException e) {
-            // Expected result
-        }
-
-        try {
-            LocaleConvertUtils.convert("foo", Long.class);
-            fail("Should have thrown conversion exception (10)");
-        } catch (final ConversionException e) {
-            // Expected result
-        }
-
-        try {
-            LocaleConvertUtils.convert("foo", Short.TYPE);
-            fail("Should have thrown conversion exception (11)");
-        } catch (final ConversionException e) {
-            // Expected result
-        }
-
-        try {
-            LocaleConvertUtils.convert("foo", Short.class);
-            fail("Should have thrown conversion exception (12)");
-        } catch (final ConversionException e) {
-            // Expected result
-        }
-
+        assertThrows(ConversionException.class, () -> LocaleConvertUtils.convert("foo", Double.TYPE));
+        assertThrows(ConversionException.class, () -> LocaleConvertUtils.convert("foo", Double.class));
+        assertThrows(ConversionException.class, () -> LocaleConvertUtils.convert("foo", Float.TYPE));
+        assertThrows(ConversionException.class, () -> LocaleConvertUtils.convert("foo", Float.class));
+        assertThrows(ConversionException.class, () -> LocaleConvertUtils.convert("foo", Integer.TYPE));
+        assertThrows(ConversionException.class, () -> LocaleConvertUtils.convert("foo", Integer.class));
+        assertThrows(ConversionException.class, () -> LocaleConvertUtils.convert("foo", Byte.TYPE));
+        assertThrows(ConversionException.class, () -> LocaleConvertUtils.convert("foo", Long.class));
+        assertThrows(ConversionException.class, () -> LocaleConvertUtils.convert("foo", Short.TYPE));
+        assertThrows(ConversionException.class, () -> LocaleConvertUtils.convert("foo", Short.class));
     }
 
     /**
@@ -422,10 +336,8 @@ public class LocaleConvertUtilsTestCase {
         assertEquals("true", LocaleConvertUtils.convert(Boolean.TRUE), "Boolean->String");
         assertEquals("123", LocaleConvertUtils.convert(Byte.valueOf((byte) 123)), "Byte->String");
         assertEquals("a", LocaleConvertUtils.convert(Character.valueOf('a')), "Character->String");
-        assertEquals("123" + decimalSeparator + "4", LocaleConvertUtils.convert(Double.valueOf(123.4)),
-                                "Double->String");
-        assertEquals("123" + decimalSeparator + "4",
-                                LocaleConvertUtils.convert(Float.valueOf((float) 123.4)), "Float->String");
+        assertEquals("123" + decimalSeparator + "4", LocaleConvertUtils.convert(Double.valueOf(123.4)), "Double->String");
+        assertEquals("123" + decimalSeparator + "4", LocaleConvertUtils.convert(Float.valueOf((float) 123.4)), "Float->String");
         assertEquals("123", LocaleConvertUtils.convert(Integer.valueOf(123)), "Integer->String");
         assertEquals("123", LocaleConvertUtils.convert(Long.valueOf(123)), "Long->String");
         assertEquals("123", LocaleConvertUtils.convert(Short.valueOf((short) 123)), "Short->String");
@@ -448,9 +360,11 @@ public class LocaleConvertUtilsTestCase {
          * value = LocaleConvertUtils.convert("true", Boolean.class); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(),
          * true);
          *
-         * value = LocaleConvertUtils.convert("yes", Boolean.TYPE); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(), true);
+         * value = LocaleConvertUtils.convert("yes", Boolean.TYPE); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(),
+         * true);
          *
-         * value = LocaleConvertUtils.convert("yes", Boolean.class); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(), true);
+         * value = LocaleConvertUtils.convert("yes", Boolean.class); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(),
+         * true);
          *
          * value = LocaleConvertUtils.convert("y", Boolean.TYPE); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(), true);
          *
@@ -458,7 +372,8 @@ public class LocaleConvertUtilsTestCase {
          *
          * value = LocaleConvertUtils.convert("on", Boolean.TYPE); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(), true);
          *
-         * value = LocaleConvertUtils.convert("on", Boolean.class); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(), true);
+         * value = LocaleConvertUtils.convert("on", Boolean.class); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(),
+         * true);
          *
          * value = LocaleConvertUtils.convert("false", Boolean.TYPE); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(),
          * false);
@@ -466,15 +381,19 @@ public class LocaleConvertUtilsTestCase {
          * value = LocaleConvertUtils.convert("false", Boolean.class); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(),
          * false);
          *
-         * value = LocaleConvertUtils.convert("no", Boolean.TYPE); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(), false);
+         * value = LocaleConvertUtils.convert("no", Boolean.TYPE); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(),
+         * false);
          *
-         * value = LocaleConvertUtils.convert("no", Boolean.class); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(), false);
+         * value = LocaleConvertUtils.convert("no", Boolean.class); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(),
+         * false);
          *
          * value = LocaleConvertUtils.convert("n", Boolean.TYPE); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(), false);
          *
-         * value = LocaleConvertUtils.convert("n", Boolean.class); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(), false);
+         * value = LocaleConvertUtils.convert("n", Boolean.class); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(),
+         * false);
          *
-         * value = LocaleConvertUtils.convert("off", Boolean.TYPE); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(), false);
+         * value = LocaleConvertUtils.convert("off", Boolean.TYPE); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(),
+         * false);
          *
          * value = LocaleConvertUtils.convert("off", Boolean.class); assertInstanceOf(Boolean.class, value); assertEquals(((Boolean) value).booleanValue(),
          * false);
@@ -492,7 +411,8 @@ public class LocaleConvertUtilsTestCase {
          * fixme Character conversion not implemented yet value = LocaleConvertUtils.convert("a", Character.TYPE); assertInstanceOf(Character.class, value);
          * assertEquals(((Character) value).charValue(), 'a');
          *
-         * value = LocaleConvertUtils.convert("a", Character.class); assertInstanceOf(Character.class, value); assertEquals(((Character) value).charValue(), 'a');
+         * value = LocaleConvertUtils.convert("a", Character.class); assertInstanceOf(Character.class, value); assertEquals(((Character) value).charValue(),
+         * 'a');
          */
         /*
          * fixme - this is a discrepancy with standard converters ( probably not major issue ) value = LocaleConvertUtils.convert("java.lang.String",
@@ -535,7 +455,8 @@ public class LocaleConvertUtilsTestCase {
          * fixme - Short conversion not implemented at this point value = LocaleConvertUtils.convert("123", Short.TYPE); assertInstanceOf(Short.class, value);
          * assertEquals(((Short) value).shortValue(), (short) 123);
          *
-         * value = LocaleConvertUtils.convert("123", Short.class); assertInstanceOf(Short.class, value); assertEquals(((Short) value).shortValue(), (short) 123);
+         * value = LocaleConvertUtils.convert("123", Short.class); assertInstanceOf(Short.class, value); assertEquals(((Short) value).shortValue(), (short)
+         * 123);
          */
 
         String input;

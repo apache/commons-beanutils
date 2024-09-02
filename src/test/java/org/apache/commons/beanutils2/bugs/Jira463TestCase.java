@@ -16,7 +16,7 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.apache.commons.beanutils2.AlphaBean;
 import org.apache.commons.beanutils2.BeanUtilsBean;
@@ -37,11 +37,6 @@ public class Jira463TestCase {
         final BeanUtilsBean bub = new BeanUtilsBean();
         bub.getPropertyUtils().addBeanIntrospector(SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
         final AlphaBean bean = new AlphaBean();
-        try {
-            bub.getProperty(bean, "class");
-            fail("Could access class property!");
-        } catch (final NoSuchMethodException ex) {
-            // ok
-        }
+        assertThrows(NoSuchMethodException.class, () -> bub.getProperty(bean, "class"));
     }
 }

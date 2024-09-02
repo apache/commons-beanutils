@@ -17,7 +17,6 @@
 package org.apache.commons.beanutils2.bugs;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.apache.commons.beanutils2.PropertyUtils;
 import org.apache.commons.beanutils2.bugs.other.Jira87BeanFactory;
@@ -65,15 +64,10 @@ public class Jira87TestCase {
      * Interface definition with a mapped property
      */
     @Test
-    public void testJira87() {
+    public void testJira87() throws Exception {
 
         final Jira87BeanFactory.PublicMappedInterface bean = Jira87BeanFactory.createMappedPropertyBean();
-        try {
-            // N.B. The test impl. returns the key value
-            assertEquals("foo", PropertyUtils.getMappedProperty(bean, "value(foo)"));
-        } catch (final Throwable t) {
-            LOG.error("ERROR " + t, t);
-            fail("Threw exception: " + t);
-        }
+        // N.B. The test impl. returns the key value
+        assertEquals("foo", PropertyUtils.getMappedProperty(bean, "value(foo)"));
     }
 }

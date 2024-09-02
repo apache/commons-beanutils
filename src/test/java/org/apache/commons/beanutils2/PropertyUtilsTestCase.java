@@ -24,7 +24,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
@@ -498,11 +497,8 @@ public class PropertyUtilsTestCase {
             }
         }
         for (int j = 0; j < properties.length; j++) {
-            if (count[j] < 0) {
-                fail("Missing property " + properties[j]);
-            } else if (count[j] > 1) {
-                fail("Duplicate property " + properties[j]);
-            }
+            assertFalse(count[j] < 0, "Missing property " + properties[j]);
+            assertFalse(count[j] > 1, "Missing property " + properties[j]);
         }
 
     }

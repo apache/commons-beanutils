@@ -17,8 +17,8 @@
 package org.apache.commons.beanutils2.bugs;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -93,38 +93,36 @@ public class Jira465TestCase {
      * Changes the value of the test property.
      *
      * @param bean the bean to be updated
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
      */
-    private static void changeValue(final Object bean) {
-        try {
-            BeanUtils.setProperty(bean, PATH, NEW_VALUE);
-        } catch (final Exception e) {
-            fail("Could not set property: " + e);
-        }
+    private static void changeValue(final Object bean) throws IllegalAccessException, InvocationTargetException {
+        BeanUtils.setProperty(bean, PATH, NEW_VALUE);
     }
 
     @Test
-    public void testArrayIndexedProperty() {
+    public void testArrayIndexedProperty() throws Exception {
         final ArrayIndexedProp bean = new ArrayIndexedProp();
         changeValue(bean);
         assertEquals(NEW_VALUE, bean.getFoo(0), "Wrong value");
     }
 
     @Test
-    public void testArrayProperty() {
+    public void testArrayProperty() throws Exception {
         final ArrayProp bean = new ArrayProp();
         changeValue(bean);
         assertEquals(NEW_VALUE, bean.getFoo()[0], "Wrong value");
     }
 
     @Test
-    public void testListIndexedProperty() {
+    public void testListIndexedProperty() throws Exception {
         final ListIndexedProp bean = new ListIndexedProp();
         changeValue(bean);
         assertEquals(NEW_VALUE, bean.getFoo(0), "Wrong value");
     }
 
     @Test
-    public void testListProperty() {
+    public void testListProperty() throws Exception {
         final ListProp bean = new ListProp();
         changeValue(bean);
         assertEquals(NEW_VALUE, bean.getFoo().get(0), "Wrong value");

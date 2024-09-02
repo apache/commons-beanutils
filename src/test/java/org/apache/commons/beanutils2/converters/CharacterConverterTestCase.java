@@ -17,7 +17,7 @@
 package org.apache.commons.beanutils2.converters;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
@@ -55,11 +55,9 @@ public class CharacterConverterTestCase {
     @Test
     public void testConvertToCharacter() {
         final Converter<Character> converter = new CharacterConverter();
-        assertEquals(Character.valueOf('N'), converter.convert(Character.class, Character.valueOf('N')),
-                                "Character Test");
+        assertEquals(Character.valueOf('N'), converter.convert(Character.class, Character.valueOf('N')), "Character Test");
         assertEquals(Character.valueOf('F'), converter.convert(Character.class, "FOO"), "String Test");
-        assertEquals(Character.valueOf('3'), converter.convert(Character.class, Integer.valueOf(321)),
-                                "Integer Test");
+        assertEquals(Character.valueOf('3'), converter.convert(Character.class, Integer.valueOf(321)), "Integer Test");
     }
 
     /**
@@ -68,12 +66,7 @@ public class CharacterConverterTestCase {
     @Test
     public void testConvertToCharacterNullNoDefault() {
         final Converter<Character> converter = new CharacterConverter();
-        try {
-            converter.convert(Character.class, null);
-            fail("Expected a ConversionException for null value");
-        } catch (final Exception e) {
-            // expected result
-        }
+        assertThrows(ConversionException.class, () -> converter.convert(Character.class, null));
     }
 
     /**
@@ -101,12 +94,7 @@ public class CharacterConverterTestCase {
     public void testConvertToUnsupportedType() {
         @SuppressWarnings("rawtypes") // tests failure so allow mismatch
         final Converter converter = new CharacterConverter();
-        try {
-            converter.convert(Integer.class, "Test");
-            fail("Could convert to unsupported type!");
-        } catch (final ConversionException cex) {
-            // expected result
-        }
+        assertThrows(ConversionException.class, () -> converter.convert(Integer.class, "Test"));
     }
 
     /**

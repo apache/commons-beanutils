@@ -18,7 +18,6 @@ package org.apache.commons.beanutils2.bugs;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.beans.PropertyDescriptor;
 
@@ -106,18 +105,12 @@ public class Jira357TestCase {
     private void checkReadMethod(final String propertyName, final Class<?> expectedDeclaringClass) throws Exception {
 
         PropertyDescriptor[] descriptors = null;
-        try {
-            descriptors = PropertyUtils.getPropertyDescriptors(ConcreteTestBean.class);
-        } catch (final Exception e) {
-            e.printStackTrace();
-            fail("Threw: " + e);
-        }
+        descriptors = PropertyUtils.getPropertyDescriptors(ConcreteTestBean.class);
 
         // Test InnerClassProperty
         final PropertyDescriptor descriptor = findDescriptor(propertyName, descriptors);
         assertNotNull(descriptor, propertyName + "descriptor");
-        assertEquals(expectedDeclaringClass, descriptor.getReadMethod().getDeclaringClass(),
-                                propertyName + " read method declaring class");
+        assertEquals(expectedDeclaringClass, descriptor.getReadMethod().getDeclaringClass(), propertyName + " read method declaring class");
     }
 
     /**

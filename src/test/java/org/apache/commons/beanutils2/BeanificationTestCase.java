@@ -18,10 +18,10 @@
 package org.apache.commons.beanutils2;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
@@ -321,12 +321,9 @@ public class BeanificationTestCase {
         thread.join();
 
         assertEquals(2, signal.getSignal(), "Signal not set by test thread");
-        assertNotEquals(BeanUtilsBean.getInstance(), signal.getBean(),
-                                   "Different BeanUtilsBean instances per context classloader");
-        assertNotEquals(ConvertUtilsBean.getInstance(), signal.getConvertUtils(),
-                                   "Different ConvertUtilsBean instances per context classloader");
-        assertNotEquals(PropertyUtilsBean.getInstance(), signal.getPropertyUtils(),
-                                   "Different PropertyUtilsBean instances per context classloader");
+        assertNotEquals(BeanUtilsBean.getInstance(), signal.getBean(), "Different BeanUtilsBean instances per context classloader");
+        assertNotEquals(ConvertUtilsBean.getInstance(), signal.getConvertUtils(), "Different ConvertUtilsBean instances per context classloader");
+        assertNotEquals(PropertyUtilsBean.getInstance(), signal.getPropertyUtils(), "Different PropertyUtilsBean instances per context classloader");
     }
 
     /** Tests whether class loaders and beans are released from memory */
@@ -388,9 +385,7 @@ public class BeanificationTestCase {
         while (true) {
             BeanUtilsBean.getInstance();
             System.gc();
-            if (iterations++ > MAX_GC_ITERATIONS) {
-                fail("Max iterations reached before resource released.");
-            }
+            assertFalse(iterations++ > MAX_GC_ITERATIONS, "Max iterations reached before resource released.");
 
             if (loaderReference.get() == null && beanUtilsReference.get() == null && propertyUtilsReference.get() == null
                     && convertUtilsReference.get() == null) {
@@ -430,9 +425,8 @@ public class BeanificationTestCase {
         int bytz = 2;
         while (true) {
             System.gc();
-            if (iterations++ > MAX_GC_ITERATIONS) {
-                fail("Max iterations reached before resource released.");
-            }
+            assertFalse(iterations++ > MAX_GC_ITERATIONS, "Max iterations reached before resource released.");
+
             map.isEmpty();
 
             if (loaderReference.get() == null && testReference.get() == null) {
@@ -467,9 +461,7 @@ public class BeanificationTestCase {
         int bytz = 2;
         while (true) {
             System.gc();
-            if (iterations++ > MAX_GC_ITERATIONS) {
-                fail("Max iterations reached before resource released.");
-            }
+            assertFalse(iterations++ > MAX_GC_ITERATIONS, "Max iterations reached before resource released.");
             if (reference.get() == null) {
                 break;
 

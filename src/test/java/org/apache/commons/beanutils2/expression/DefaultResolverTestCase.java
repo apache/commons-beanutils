@@ -18,8 +18,8 @@ package org.apache.commons.beanutils2.expression;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -72,71 +72,39 @@ public class DefaultResolverTestCase {
      * Test getIndex() method.
      */
     @Test
-    public void testGetIndex() {
+    public void testGetIndex() throws Exception {
         String label = null;
 
         // Simple Properties (expect -1)
         for (int i = 0; i < validProperties.length; i++) {
-            try {
-                label = "Simple " + label(validProperties[i], i);
-                assertEquals(-1, resolver.getIndex(validProperties[i]), label);
-            } catch (final Throwable t) {
-                fail(label + " threw " + t);
-            }
+            label = "Simple " + label(validProperties[i], i);
+            assertEquals(-1, resolver.getIndex(validProperties[i]), label);
         }
 
         // Indexed Properties (expect correct index value)
         for (int i = 0; i < validIndexProperties.length; i++) {
-            try {
-                label = "Indexed " + label(validIndexProperties[i], i);
-                assertEquals(validIndexValues[i], resolver.getIndex(validIndexProperties[i]), label);
-            } catch (final Throwable t) {
-                fail(label + " threw " + t);
-            }
+            label = "Indexed " + label(validIndexProperties[i], i);
+            assertEquals(validIndexValues[i], resolver.getIndex(validIndexProperties[i]), label);
         }
 
         // Mapped Properties (expect -1)
         for (int i = 0; i < validMapProperties.length; i++) {
-            try {
-                label = "Mapped " + label(validMapProperties[i], i);
-                assertEquals(-1, resolver.getIndex(validMapProperties[i]), label);
-            } catch (final Throwable t) {
-                fail(label + " threw " + t);
-            }
+            label = "Mapped " + label(validMapProperties[i], i);
+            assertEquals(-1, resolver.getIndex(validMapProperties[i]), label);
         }
 
         // Missing Index Value
         label = "Missing Index";
-        try {
-            final int index = resolver.getIndex("foo[]");
-            fail(label + " expected IllegalArgumentException: " + index);
-        } catch (final IllegalArgumentException e) {
-            assertEquals("No Index Value", e.getMessage(), label + " Error Message");
-        } catch (final Throwable t) {
-            fail(label + " expected IllegalArgumentException: " + t);
-        }
+        assertThrows(IllegalArgumentException.class, () -> resolver.getIndex("foo[]"));
 
         // Malformed
         label = "Malformed";
-        try {
-            final int index = resolver.getIndex("foo[12");
-            fail(label + " expected IllegalArgumentException: " + index);
-        } catch (final IllegalArgumentException e) {
-            assertEquals("Missing End Delimiter", e.getMessage(), label + " Error Message");
-        } catch (final Throwable t) {
-            fail(label + " expected IllegalArgumentException: " + t);
-        }
+        assertThrows(IllegalArgumentException.class, () -> resolver.getIndex("foo[12"));
 
         // Non-numeric
         label = "Malformed";
-        try {
-            final int index = resolver.getIndex("foo[BAR]");
-            fail(label + " expected IllegalArgumentException: " + index);
-        } catch (final IllegalArgumentException e) {
-            assertEquals("Invalid index value 'BAR'", e.getMessage(), label + " Error Message");
-        } catch (final Throwable t) {
-            fail(label + " expected IllegalArgumentException: " + t);
-        }
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> resolver.getIndex("foo[BAR]"));
+        assertEquals("Invalid index value 'BAR'", e.getMessage(), label + " Error Message");
     }
 
     /**
@@ -148,44 +116,26 @@ public class DefaultResolverTestCase {
 
         // Simple Properties (expect null)
         for (int i = 0; i < validProperties.length; i++) {
-            try {
-                label = "Simple " + label(validProperties[i], i);
-                assertEquals(null, resolver.getKey(validProperties[i]), label);
-            } catch (final Throwable t) {
-                fail(label + " threw " + t);
-            }
+            label = "Simple " + label(validProperties[i], i);
+            assertEquals(null, resolver.getKey(validProperties[i]), label);
         }
 
         // Indexed Properties (expect null)
         for (int i = 0; i < validIndexProperties.length; i++) {
-            try {
-                label = "Indexed " + label(validIndexProperties[i], i);
-                assertEquals(null, resolver.getKey(validIndexProperties[i]), label);
-            } catch (final Throwable t) {
-                fail(label + " threw " + t);
-            }
+            label = "Indexed " + label(validIndexProperties[i], i);
+            assertEquals(null, resolver.getKey(validIndexProperties[i]), label);
         }
 
         // Mapped Properties (expect correct map key)
         for (int i = 0; i < validMapProperties.length; i++) {
-            try {
-                label = "Mapped " + label(validMapProperties[i], i);
-                assertEquals(validMapKeys[i], resolver.getKey(validMapProperties[i]), label);
-            } catch (final Throwable t) {
-                fail(label + " threw " + t);
-            }
+            label = "Mapped " + label(validMapProperties[i], i);
+            assertEquals(validMapKeys[i], resolver.getKey(validMapProperties[i]), label);
         }
 
         // Malformed
         label = "Malformed";
-        try {
-            final String key = resolver.getKey("foo(bar");
-            fail(label + " expected IllegalArgumentException: " + key);
-        } catch (final IllegalArgumentException e) {
-            assertEquals("Missing End Delimiter", e.getMessage(), label + " Error Message");
-        } catch (final Throwable t) {
-            fail(label + " expected IllegalArgumentException: " + t);
-        }
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> resolver.getKey("foo(bar"));
+        assertEquals("Missing End Delimiter", e.getMessage(), label + " Error Message");
     }
 
     /**
@@ -197,32 +147,20 @@ public class DefaultResolverTestCase {
 
         // Simple Properties
         for (int i = 0; i < validProperties.length; i++) {
-            try {
-                label = "Simple " + label(validProperties[i], i);
-                assertEquals(validNames[i], resolver.getProperty(validProperties[i]), label);
-            } catch (final Throwable t) {
-                fail(label + " threw " + t);
-            }
+            label = "Simple " + label(validProperties[i], i);
+            assertEquals(validNames[i], resolver.getProperty(validProperties[i]), label);
         }
 
         // Indexed Properties
         for (int i = 0; i < validIndexProperties.length; i++) {
-            try {
-                label = "Indexed " + label(validIndexProperties[i], i);
-                assertEquals(validIndexNames[i], resolver.getProperty(validIndexProperties[i]), label);
-            } catch (final Throwable t) {
-                fail(label + " threw " + t);
-            }
+            label = "Indexed " + label(validIndexProperties[i], i);
+            assertEquals(validIndexNames[i], resolver.getProperty(validIndexProperties[i]), label);
         }
 
         // Mapped Properties
         for (int i = 0; i < validMapProperties.length; i++) {
-            try {
-                label = "Mapped " + label(validMapProperties[i], i);
-                assertEquals(validMapNames[i], resolver.getProperty(validMapProperties[i]), label);
-            } catch (final Throwable t) {
-                fail(label + " threw " + t);
-            }
+            label = "Mapped " + label(validMapProperties[i], i);
+            assertEquals(validMapNames[i], resolver.getProperty(validMapProperties[i]), label);
         }
     }
 
@@ -235,32 +173,20 @@ public class DefaultResolverTestCase {
 
         // Simple Properties (expect -1)
         for (int i = 0; i < validProperties.length; i++) {
-            try {
-                label = "Simple " + label(validProperties[i], i);
-                assertFalse(resolver.isIndexed(validProperties[i]), label);
-            } catch (final Throwable t) {
-                fail(label + " threw " + t);
-            }
+            label = "Simple " + label(validProperties[i], i);
+            assertFalse(resolver.isIndexed(validProperties[i]), label);
         }
 
         // Indexed Properties (expect correct index value)
         for (int i = 0; i < validIndexProperties.length; i++) {
-            try {
-                label = "Indexed " + label(validIndexProperties[i], i);
-                assertTrue(resolver.isIndexed(validIndexProperties[i]), label);
-            } catch (final Throwable t) {
-                fail(label + " threw " + t);
-            }
+            label = "Indexed " + label(validIndexProperties[i], i);
+            assertTrue(resolver.isIndexed(validIndexProperties[i]), label);
         }
 
         // Mapped Properties (expect -1)
         for (int i = 0; i < validMapProperties.length; i++) {
-            try {
-                label = "Mapped " + label(validMapProperties[i], i);
-                assertFalse(resolver.isIndexed(validMapProperties[i]), label);
-            } catch (final Throwable t) {
-                fail(label + " threw " + t);
-            }
+            label = "Mapped " + label(validMapProperties[i], i);
+            assertFalse(resolver.isIndexed(validMapProperties[i]), label);
         }
     }
 
@@ -273,32 +199,20 @@ public class DefaultResolverTestCase {
 
         // Simple Properties (expect null)
         for (int i = 0; i < validProperties.length; i++) {
-            try {
-                label = "Simple " + label(validProperties[i], i);
-                assertFalse(resolver.isMapped(validProperties[i]), label);
-            } catch (final Throwable t) {
-                fail(label + " threw " + t);
-            }
+            label = "Simple " + label(validProperties[i], i);
+            assertFalse(resolver.isMapped(validProperties[i]), label);
         }
 
         // Indexed Properties (expect null)
         for (int i = 0; i < validIndexProperties.length; i++) {
-            try {
-                label = "Indexed " + label(validIndexProperties[i], i);
-                assertFalse(resolver.isMapped(validIndexProperties[i]), label);
-            } catch (final Throwable t) {
-                fail(label + " threw " + t);
-            }
+            label = "Indexed " + label(validIndexProperties[i], i);
+            assertFalse(resolver.isMapped(validIndexProperties[i]), label);
         }
 
         // Mapped Properties (expect correct map key)
         for (int i = 0; i < validMapProperties.length; i++) {
-            try {
-                label = "Mapped " + label(validMapProperties[i], i);
-                assertTrue(resolver.isMapped(validMapProperties[i]), label);
-            } catch (final Throwable t) {
-                fail(label + " threw " + t);
-            }
+            label = "Mapped " + label(validMapProperties[i], i);
+            assertTrue(resolver.isMapped(validMapProperties[i]), label);
         }
     }
 
@@ -309,12 +223,8 @@ public class DefaultResolverTestCase {
     public void testNext() {
         String label = null;
         for (int i = 0; i < nextExpressions.length; i++) {
-            try {
-                label = label(nextExpressions[i], i);
-                assertEquals(nextProperties[i], resolver.next(nextExpressions[i]), label);
-            } catch (final Throwable t) {
-                fail(label + " threw " + t);
-            }
+            label = label(nextExpressions[i], i);
+            assertEquals(nextProperties[i], resolver.next(nextExpressions[i]), label);
         }
     }
 
@@ -325,12 +235,8 @@ public class DefaultResolverTestCase {
     public void testRemove() {
         String label = null;
         for (int i = 0; i < nextExpressions.length; i++) {
-            try {
-                label = label(nextExpressions[i], i);
-                assertEquals(removeProperties[i], resolver.remove(nextExpressions[i]), label);
-            } catch (final Throwable t) {
-                fail(label + " threw " + t);
-            }
+            label = label(nextExpressions[i], i);
+            assertEquals(removeProperties[i], resolver.remove(nextExpressions[i]), label);
         }
     }
 }

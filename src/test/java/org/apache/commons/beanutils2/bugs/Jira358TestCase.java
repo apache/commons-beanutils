@@ -16,7 +16,7 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.apache.commons.beanutils2.PropertyUtils;
 import org.apache.commons.beanutils2.TestBean;
@@ -54,12 +54,7 @@ public class Jira358TestCase {
     public void testPropertyUtils_getIndexedProperty_Array() throws Exception {
 
         final TestBean bean = new TestBean();
-        try {
-            PropertyUtils.getIndexedProperty(bean, "intArray", bean.getIntArray().length);
-            fail("Expected ArrayIndexOutOfBoundsException");
-        } catch (final ArrayIndexOutOfBoundsException e) {
-            // expected result
-        }
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> PropertyUtils.getIndexedProperty(bean, "intArray", bean.getIntArray().length));
     }
 
     /**
@@ -69,11 +64,6 @@ public class Jira358TestCase {
     public void testPropertyUtils_getIndexedProperty_List() throws Exception {
 
         final TestBean bean = new TestBean();
-        try {
-            PropertyUtils.getIndexedProperty(bean, "listIndexed", bean.getListIndexed().size());
-            fail("Expected IndexOutOfBoundsException");
-        } catch (final IndexOutOfBoundsException e) {
-            // expected result
-        }
+        assertThrows(IndexOutOfBoundsException.class, () -> PropertyUtils.getIndexedProperty(bean, "listIndexed", bean.getListIndexed().size()));
     }
 }

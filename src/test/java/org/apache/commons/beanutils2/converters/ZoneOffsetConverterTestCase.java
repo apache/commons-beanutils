@@ -18,7 +18,7 @@
 package org.apache.commons.beanutils2.converters;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.ZoneOffset;
 
@@ -76,11 +76,6 @@ public class ZoneOffsetConverterTestCase {
      */
     @Test
     public void testUnsupportedType() {
-        try {
-            converter.convert(Integer.class, "http://www.apache.org");
-            fail("Unsupported type could be converted!");
-        } catch (final ConversionException cex) {
-            // expected result
-        }
+        assertThrows(ConversionException.class, () -> converter.convert(ConversionException.class, "http://www.apache.org"));
     }
 }

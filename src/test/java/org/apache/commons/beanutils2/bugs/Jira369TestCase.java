@@ -17,7 +17,7 @@
 package org.apache.commons.beanutils2.bugs;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.apache.commons.beanutils2.BeanUtils;
 import org.junit.jupiter.api.AfterEach;
@@ -78,15 +78,7 @@ public class Jira369TestCase {
     public void testBeanUtilsGetProperty_aRatedCd() throws Exception {
         final TestBean bean = new TestBean();
         bean.setARatedCd("foo");
-
-        try {
-            assertEquals("foo", BeanUtils.getProperty(bean, "aRatedCd"));
-            fail("Expected NoSuchMethodException");
-        } catch (final NoSuchMethodException e) {
-            // expected result
-        } catch (final Exception e) {
-            fail("Threw " + e);
-        }
+        assertThrows(NoSuchMethodException.class, () -> assertEquals("foo", BeanUtils.getProperty(bean, "aRatedCd")));
     }
 
     /**
@@ -96,11 +88,7 @@ public class Jira369TestCase {
     public void testBeanUtilsGetProperty_ARatedCd() throws Exception {
         final TestBean bean = new TestBean();
         bean.setARatedCd("foo");
-        try {
-            assertEquals("foo", BeanUtils.getProperty(bean, "ARatedCd"));
-        } catch (final Exception e) {
-            fail("Threw " + e);
-        }
+        assertEquals("foo", BeanUtils.getProperty(bean, "ARatedCd"));
     }
 
     /**
@@ -110,10 +98,6 @@ public class Jira369TestCase {
     public void testBeanUtilsGetProperty_bRatedCd() throws Exception {
         final TestBean bean = new TestBean();
         bean.setbRatedCd("foo");
-        try {
-            assertEquals("foo", BeanUtils.getProperty(bean, "bRatedCd"));
-        } catch (final Exception e) {
-            fail("Threw " + e);
-        }
+        assertEquals("foo", BeanUtils.getProperty(bean, "bRatedCd"));
     }
 }

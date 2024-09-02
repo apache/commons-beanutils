@@ -17,7 +17,6 @@
 package org.apache.commons.beanutils2.locale;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.apache.commons.beanutils2.TestBean;
 import org.apache.commons.logging.Log;
@@ -35,16 +34,11 @@ public class LocaleBeanUtilsTestCase {
      * Test setting a nested indexed property
      */
     @Test
-    public void testSetNestedPropertyIndexed() {
+    public void testSetNestedPropertyIndexed() throws Exception {
         final TestBean bean = new TestBean();
         bean.getNested().setIntIndexed(1, 51);
         assertEquals(51, bean.getNested().getIntIndexed(1), "Initial value[1] 51");
-        try {
-            LocaleBeanUtils.setProperty(bean, "nested.intIndexed[1]", "123", null);
-        } catch (final Throwable t) {
-            LOG.error(t);
-            fail("Threw " + t);
-        }
+        LocaleBeanUtils.setProperty(bean, "nested.intIndexed[1]", "123", null);
         assertEquals(123, bean.getNested().getIntIndexed(1), "Check Set Value");
     }
 
@@ -52,16 +46,11 @@ public class LocaleBeanUtilsTestCase {
      * Test setting a nested simple property
      */
     @Test
-    public void testSetNestedPropertySimple() {
+    public void testSetNestedPropertySimple() throws Exception {
         final TestBean bean = new TestBean();
         bean.getNested().setIntProperty(5);
         assertEquals(5, bean.getNested().getIntProperty(), "Initial value 5");
-        try {
-            LocaleBeanUtils.setProperty(bean, "nested.intProperty", "123", null);
-        } catch (final Throwable t) {
-            LOG.error(t);
-            fail("Threw " + t);
-        }
+        LocaleBeanUtils.setProperty(bean, "nested.intProperty", "123", null);
         assertEquals(123, bean.getNested().getIntProperty(), "Check Set Value");
     }
 }
