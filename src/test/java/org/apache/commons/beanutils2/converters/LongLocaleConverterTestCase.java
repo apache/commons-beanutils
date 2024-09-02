@@ -18,6 +18,8 @@
 package org.apache.commons.beanutils2.converters;
 
 import org.apache.commons.beanutils2.locale.converters.LongLocaleConverter;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test Case for the LongLocaleConverter class.
@@ -28,6 +30,7 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase<Lon
      * Sets up instance variables required by this test case.
      */
     @Override
+    @BeforeEach
     public void setUp() throws Exception {
 
         super.setUp();
@@ -38,18 +41,11 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase<Lon
     }
 
     /**
-     * Tear down instance variables required by this test case.
-     */
-    @Override
-    public void tearDown() {
-        super.tearDown();
-    }
-
-    /**
      * Test Converter() constructor
      *
      * Uses the default locale, no default value
      */
+    @Test
     public void testConstructor_2() {
 
         // Construct using default locale
@@ -68,6 +64,7 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase<Lon
      *
      * Uses the default locale, no default value
      */
+    @Test
     public void testConstructor_3() {
 
         // Construct using localized pattern (default locale)
@@ -84,6 +81,7 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase<Lon
     /**
      * Test Converter(Locale) constructor
      */
+    @Test
     public void testConstructor_4() {
 
         // Construct using specified Locale
@@ -100,6 +98,7 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase<Lon
     /**
      * Test Converter(Locale, locPattern) constructor
      */
+    @Test
     public void testConstructor_5() {
 
         // Construct using specified Locale
@@ -116,6 +115,7 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase<Lon
     /**
      * Test Converter(Locale, pattern) constructor
      */
+    @Test
     public void testConstructor_6() {
 
         // Construct using specified Locale
@@ -132,6 +132,7 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase<Lon
     /**
      * Test Converter(Locale, pattern, locPattern) constructor
      */
+    @Test
     public void testConstructor_7() {
 
         // Construct using specified Locale
@@ -148,6 +149,7 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase<Lon
     /**
      * Test Converter(defaultValue) constructor
      */
+    @Test
     public void testConstructor_8() {
 
         // Construct using specified Locale
@@ -164,6 +166,7 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase<Lon
     /**
      * Test Converter(defaultValue, locPattern) constructor
      */
+    @Test
     public void testConstructor_9() {
 
         // Construct using specified Locale
@@ -180,6 +183,7 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase<Lon
     /**
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
      */
+    @Test
     public void testConstructorMain() {
 
         // Construct with localized pattern

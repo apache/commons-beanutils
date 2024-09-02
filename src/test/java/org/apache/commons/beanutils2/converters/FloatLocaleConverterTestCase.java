@@ -17,12 +17,17 @@
 
 package org.apache.commons.beanutils2.converters;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.text.DecimalFormat;
 import java.util.Locale;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.locale.LocaleConvertUtils;
 import org.apache.commons.beanutils2.locale.converters.FloatLocaleConverter;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test Case for the FloatLocaleConverter class.
@@ -33,6 +38,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase<Fl
      * Sets up instance variables required by this test case.
      */
     @Override
+    @BeforeEach
     public void setUp() throws Exception {
 
         super.setUp();
@@ -43,18 +49,11 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase<Fl
     }
 
     /**
-     * Tear down instance variables required by this test case.
-     */
-    @Override
-    public void tearDown() {
-        super.tearDown();
-    }
-
-    /**
      * Test Converter() constructor
      *
      * Uses the default locale, no default value
      */
+    @Test
     public void testConstructor_2() {
 
         // Construct using default locale
@@ -73,6 +72,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase<Fl
      *
      * Uses the default locale, no default value
      */
+    @Test
     public void testConstructor_3() {
 
         // Construct using localized pattern (default locale)
@@ -89,6 +89,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase<Fl
     /**
      * Test Converter(Locale) constructor
      */
+    @Test
     public void testConstructor_4() {
 
         // Construct using specified Locale
@@ -105,6 +106,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase<Fl
     /**
      * Test Converter(Locale, locPattern) constructor
      */
+    @Test
     public void testConstructor_5() {
 
         // Construct using specified Locale
@@ -121,6 +123,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase<Fl
     /**
      * Test Converter(Locale, pattern) constructor
      */
+    @Test
     public void testConstructor_6() {
 
         // Construct using specified Locale
@@ -137,6 +140,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase<Fl
     /**
      * Test Converter(Locale, pattern, locPattern) constructor
      */
+    @Test
     public void testConstructor_7() {
 
         // Construct using specified Locale
@@ -153,6 +157,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase<Fl
     /**
      * Test Converter(defaultValue) constructor
      */
+    @Test
     public void testConstructor_8() {
 
         // Construct using specified Locale
@@ -169,6 +174,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase<Fl
     /**
      * Test Converter(defaultValue, locPattern) constructor
      */
+    @Test
     public void testConstructor_9() {
 
         // Construct using specified Locale
@@ -185,6 +191,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase<Fl
     /**
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
      */
+    @Test
     public void testConstructorMain() {
 
         // Construct with localized pattern
@@ -236,17 +243,22 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase<Fl
     /**
      * Test Float limits
      */
+    @Test
     public void testFloatLimits() {
 
         converter = FloatLocaleConverter.builder().setLocale(defaultLocale).setPattern(defaultDecimalPattern).get();
         final DecimalFormat fmt = new DecimalFormat("#.#############################################################");
 
         assertEquals(Float.valueOf((float) -0.12), converter.convert("-0.12"));
-        assertEquals("Positive Float.MAX_VALUE", Float.valueOf(Float.MAX_VALUE), converter.convert(fmt.format(Float.MAX_VALUE)));
-        assertEquals("Positive Float.MIN_VALUE", Float.valueOf(Float.MIN_VALUE), converter.convert(fmt.format(Float.MIN_VALUE)));
+        assertEquals(Float.valueOf(Float.MAX_VALUE), converter.convert(fmt.format(Float.MAX_VALUE)),
+                                "Positive Float.MAX_VALUE");
+        assertEquals(Float.valueOf(Float.MIN_VALUE), converter.convert(fmt.format(Float.MIN_VALUE)),
+                                "Positive Float.MIN_VALUE");
 
-        assertEquals("Negative Float.MAX_VALUE", Float.valueOf(Float.MAX_VALUE * -1), converter.convert(fmt.format(Float.MAX_VALUE * -1)));
-        assertEquals("Negative Float.MIN_VALUE", Float.valueOf(Float.MIN_VALUE * -1), converter.convert(fmt.format(Float.MIN_VALUE * -1)));
+        assertEquals(Float.valueOf(Float.MAX_VALUE * -1),
+                                converter.convert(fmt.format(Float.MAX_VALUE * -1)), "Negative Float.MAX_VALUE");
+        assertEquals(Float.valueOf(Float.MIN_VALUE * -1),
+                                converter.convert(fmt.format(Float.MIN_VALUE * -1)), "Negative Float.MIN_VALUE");
 
         try {
             converter.convert(fmt.format((double) Float.MAX_VALUE * (double) 10));
@@ -278,6 +290,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase<Fl
     /**
      * Test parsing zero - see BEANUTILS-351
      */
+    @Test
     public void testParseZero() {
         try {
             final Object result = LocaleConvertUtils.convert("0", Float.class, Locale.US, null);
