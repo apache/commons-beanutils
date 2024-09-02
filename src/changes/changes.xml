@@ -75,7 +75,7 @@
         Refactor logger usage #72.
       </action>
       <action dev="ggregory" type="fix" due-to="SethFalco, Steve Bosman, Gary Gregory">
-        Migrate to JUnit 5 #93, #283.
+        Migrate to JUnit 5 #93, #283, #284.
       </action>
       <action dev="ggregory" type="fix" due-to="Gary Gregory">
         Fix SpotBugs [ERROR] Medium: org.apache.commons.beanutils2.BasicDynaClass.constructorTypes should be both final and package protected [org.apache.commons.beanutils2.BasicDynaClass] At BasicDynaClass.java:[line 95] MS_FINAL_PKGPROTECT.
