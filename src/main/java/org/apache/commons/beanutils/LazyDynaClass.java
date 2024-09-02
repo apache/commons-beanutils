@@ -199,7 +199,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      */
     @Override
     public void add(final String name, final Class<?> type, final boolean readable, final boolean writeable) {
-        throw new java.lang.UnsupportedOperationException("readable/writable properties not supported");
+        throw new UnsupportedOperationException("readable/writable properties not supported");
     }
 
     /**
