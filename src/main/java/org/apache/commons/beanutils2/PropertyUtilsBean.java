@@ -1632,67 +1632,51 @@ public class PropertyUtilsBean {
      * @throws NoSuchMethodException if an accessor method for this
      *  property cannot be found
      */
-    public void setMappedProperty(final Object bean, final String name,
-                                         final String key, final Object value)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+    public void setMappedProperty(final Object bean, final String name, final String key, final Object value)
+            throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
         Objects.requireNonNull(bean, "bean");
         Objects.requireNonNull(name, "name");
         Objects.requireNonNull(key, "key");
         // Handle DynaBean instances specially
         if (bean instanceof DynaBean) {
-            final DynaProperty descriptor =
-                    ((DynaBean) bean).getDynaClass().getDynaProperty(name);
+            final DynaProperty descriptor = ((DynaBean) bean).getDynaClass().getDynaProperty(name);
             if (descriptor == null) {
-                throw new NoSuchMethodException("Unknown property '" +
-                        name + "' on bean class '" + bean.getClass() + "'");
+                throw new NoSuchMethodException("Unknown property '" + name + "' on bean class '" + bean.getClass() + "'");
             }
             ((DynaBean) bean).set(name, key, value);
             return;
         }
 
         // Retrieve the property descriptor for the specified property
-        final PropertyDescriptor descriptor =
-                getPropertyDescriptor(bean, name);
+        final PropertyDescriptor descriptor = getPropertyDescriptor(bean, name);
         if (descriptor == null) {
-            throw new NoSuchMethodException("Unknown property '" +
-                    name + "' on bean class '" + bean.getClass() + "'");
+            throw new NoSuchMethodException("Unknown property '" + name + "' on bean class '" + bean.getClass() + "'");
         }
 
         if (descriptor instanceof MappedPropertyDescriptor) {
             // Call the keyed setter method if there is one
-            Method mappedWriteMethod =
-                    ((MappedPropertyDescriptor) descriptor).
-                    getMappedWriteMethod();
+            Method mappedWriteMethod = ((MappedPropertyDescriptor) descriptor).getMappedWriteMethod();
             mappedWriteMethod = MethodUtils.getAccessibleMethod(bean.getClass(), mappedWriteMethod);
             if (mappedWriteMethod == null) {
-                throw new NoSuchMethodException
-                    ("Property '" + name + "' has no mapped setter method" +
-                     "on bean class '" + bean.getClass() + "'");
+                throw new NoSuchMethodException("Property '" + name + "' has no mapped setter method" + "on bean class '" + bean.getClass() + "'");
             }
             if (LOG.isTraceEnabled()) {
-                final String valueClassName =
-                    value == null ? "<null>" : value.getClass().getName();
-                LOG.trace("setSimpleProperty: Invoking method "
-                          + mappedWriteMethod + " with key=" + key
-                          + ", value=" + value
-                          + " (class " + valueClassName +")");
+                final String valueClassName = value == null ? "<null>" : value.getClass().getName();
+                LOG.trace("setSimpleProperty: Invoking method " + mappedWriteMethod + " with key=" + key + ", value=" + value + " (class " + valueClassName
+                        + ")");
             }
             invokeMethod(mappedWriteMethod, bean, key, value);
         } else {
-          /* means that the result has to be retrieved from a map */
-          final Method readMethod = getReadMethod(bean.getClass(), descriptor);
-          if (readMethod == null) {
-            throw new NoSuchMethodException("Property '" + name +
-                    "' has no mapped getter method on bean class '" +
-                    bean.getClass() + "'");
-          }
-        final Object invokeResult = invokeMethod(readMethod, bean, BeanUtils.EMPTY_OBJECT_ARRAY);
-        /* test and fetch from the map */
-        if (invokeResult instanceof Map) {
-          final Map<String, Object> map = toPropertyMap(invokeResult);
-          map.put(key, value);
-        }
+            /* means that the result has to be retrieved from a map */
+            final Method readMethod = getReadMethod(bean.getClass(), descriptor);
+            if (readMethod == null) {
+                throw new NoSuchMethodException("Property '" + name + "' has no mapped getter method on bean class '" + bean.getClass() + "'");
+            }
+            final Object invokeResult = invokeMethod(readMethod, bean, BeanUtils.EMPTY_OBJECT_ARRAY);
+            /* test and fetch from the map */
+            if (invokeResult instanceof Map) {
+                toPropertyMap(invokeResult).put(key, value);
+            }
         }
     }
 

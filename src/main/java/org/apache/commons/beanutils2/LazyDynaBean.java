@@ -847,29 +847,23 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @throws IllegalArgumentException if the specified property
      *  exists, but is not mapped
      */
+    @SuppressWarnings("unchecked")
     @Override
     public void set(final String name, final String key, final Object value) {
         // If the 'mapped' property doesn't exist, then add it
         if (!isDynaProperty(name)) {
             set(name, defaultMappedProperty(name));
         }
-
         // Get the mapped property
         final Object mappedProperty = get(name);
 
         // Check that the property is mapped
         if (!dynaClass.getDynaProperty(name).isMapped()) {
-            throw new IllegalArgumentException
-                ("Non-mapped property for '" + name + "(" + key + ")'"
-                            + dynaClass.getDynaProperty(name).getType().getName());
+            throw new IllegalArgumentException("Non-mapped property for '" + name + "(" + key + ")'" + dynaClass.getDynaProperty(name).getType().getName());
         }
-
         // Set the value in the Map
-        @SuppressWarnings("unchecked")
-        final
         // mapped properties are stored in a Map<String, Object>
-        Map<String, Object> valuesMap = (Map<String, Object>) mappedProperty;
-        valuesMap.put(key, value);
+        ((Map<String, Object>) mappedProperty).put(key, value);
     }
 
     /**

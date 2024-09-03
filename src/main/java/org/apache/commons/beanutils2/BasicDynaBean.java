@@ -407,21 +407,17 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * @throws IllegalArgumentException if the specified property
      *  exists, but is not mapped
      */
+    @SuppressWarnings("unchecked")
     @Override
     public void set(final String name, final String key, final Object value) {
-
         final Object prop = values.get(name);
         requireMappedValue(name, key, prop);
         if (!(prop instanceof Map)) {
-            throw new IllegalArgumentException
-                    ("Non-mapped property for '" + name + "(" + key + ")'");
+            throw new IllegalArgumentException("Non-mapped property for '" + name + "(" + key + ")'");
         }
-        @SuppressWarnings("unchecked")
-        final
         // This is safe to cast because mapped properties are always
         // maps of types String -> Object
-        Map<String, Object> map = (Map<String, Object>) prop;
-        map.put(key, value);
+        ((Map<String, Object>) prop).put(key, value);
 
     }
 
