@@ -17,9 +17,14 @@
 
 package org.apache.commons.beanutils2.converters;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.math.BigInteger;
 
 import org.apache.commons.beanutils2.Converter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test Case for the BigInteger class.
@@ -43,7 +48,7 @@ public class BigIntegerConverterTestCase extends AbstractNumberConverterTest<Big
         return new BigIntegerConverter(defaultValue);
     }
 
-    @Override
+    @BeforeEach
     public void setUp() throws Exception {
         converter = makeConverter();
         numbers[0] = new BigInteger("-12");
@@ -52,11 +57,12 @@ public class BigIntegerConverterTestCase extends AbstractNumberConverterTest<Big
         numbers[3] = new BigInteger("23");
     }
 
-    @Override
+    @AfterEach
     public void tearDown() throws Exception {
         converter = null;
     }
 
+    @Test
     public void testSimpleConversion() throws Exception {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from Byte",
                 "from Short", "from Integer", "from Long", "from Float", "from Double" };
@@ -69,8 +75,8 @@ public class BigIntegerConverterTestCase extends AbstractNumberConverterTest<Big
                 BigInteger.valueOf(9), BigInteger.valueOf(10), BigInteger.valueOf(11), BigInteger.valueOf(12) };
 
         for (int i = 0; i < expected.length; i++) {
-            assertEquals(message[i] + " to BigInteger", expected[i], converter.convert(BigInteger.class, input[i]));
-            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
+            assertEquals(expected[i], converter.convert(BigInteger.class, input[i]), message[i] + " to BigInteger");
+            assertEquals(expected[i], converter.convert(null, input[i]), message[i] + " to null type");
         }
     }
 

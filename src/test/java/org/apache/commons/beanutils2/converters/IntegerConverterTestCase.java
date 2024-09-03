@@ -17,10 +17,14 @@
 
 package org.apache.commons.beanutils2.converters;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test Case for the IntegerConverter class.
@@ -44,7 +48,7 @@ public class IntegerConverterTestCase extends AbstractNumberConverterTest<Intege
         return new IntegerConverter(defaultValue);
     }
 
-    @Override
+    @BeforeEach
     public void setUp() throws Exception {
         converter = makeConverter();
         numbers[0] = Integer.valueOf("-12");
@@ -53,7 +57,7 @@ public class IntegerConverterTestCase extends AbstractNumberConverterTest<Intege
         numbers[3] = Integer.valueOf("23");
     }
 
-    @Override
+    @AfterEach
     public void tearDown() throws Exception {
         converter = null;
     }
@@ -61,6 +65,7 @@ public class IntegerConverterTestCase extends AbstractNumberConverterTest<Intege
     /**
      * Test Invalid Amounts (too big/small)
      */
+    @Test
     public void testInvalidAmount() {
         final Converter<Integer> converter = makeConverter();
         final Class<?> clazz = Integer.class;
@@ -71,31 +76,26 @@ public class IntegerConverterTestCase extends AbstractNumberConverterTest<Intege
         final Long maxPlusOne = Long.valueOf(max.longValue() + 1);
 
         // Minimum
-        assertEquals("Minimum", Integer.valueOf(Integer.MIN_VALUE), converter.convert(clazz, min));
+        assertEquals(Integer.valueOf(Integer.MIN_VALUE), converter.convert(clazz, min), "Minimum");
 
         // Maximum
-        assertEquals("Maximum", Integer.valueOf(Integer.MAX_VALUE), converter.convert(clazz, max));
+        assertEquals(Integer.valueOf(Integer.MAX_VALUE), converter.convert(clazz, max), "Maximum");
 
         // Too Small
-        try {
-            assertEquals("Minimum - 1", null, converter.convert(clazz, minMinusOne));
-            fail("Less than minimum, expected ConversionException");
-        } catch (final Exception e) {
-            // expected result
-        }
+        assertThrows(ConversionException.class,
+                     () -> converter.convert(clazz, minMinusOne),
+                     "Less than minimum, expected ConversionException");
 
         // Too Large
-        try {
-            assertEquals("Maximum + 1", null, converter.convert(clazz, maxPlusOne));
-            fail("More than maximum, expected ConversionException");
-        } catch (final Exception e) {
-            // expected result
-        }
+        assertThrows(ConversionException.class,
+                     () -> converter.convert(clazz, maxPlusOne),
+                     "More than maximum, expected ConversionException");
     }
 
     /**
      * Tests whether an invalid default object causes an exception.
      */
+    @Test
     @SuppressWarnings("unchecked") // raw to test throwing
     public void testInvalidDefaultObject() {
         @SuppressWarnings("rawtypes") // raw to test throwing
@@ -103,6 +103,7 @@ public class IntegerConverterTestCase extends AbstractNumberConverterTest<Intege
         assertThrows(ConversionException.class, () -> converter.setDefaultValue("notANumber"), "Invalid default value not detected!");
     }
 
+    @Test
     public void testSimpleConversion() throws Exception {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from Byte",
                 "from Short", "from Integer", "from Long", "from Float", "from Double" };
@@ -115,9 +116,9 @@ public class IntegerConverterTestCase extends AbstractNumberConverterTest<Intege
                 Integer.valueOf(11), Integer.valueOf(12) };
 
         for (int i = 0; i < expected.length; i++) {
-            assertEquals(message[i] + " to Integer", expected[i], converter.convert(Integer.class, input[i]));
-            assertEquals(message[i] + " to int", expected[i], converter.convert(Integer.TYPE, input[i]));
-            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
+            assertEquals(expected[i], converter.convert(Integer.class, input[i]), message[i] + " to Integer");
+            assertEquals(expected[i], converter.convert(Integer.TYPE, input[i]), message[i] + " to int");
+            assertEquals(expected[i], converter.convert(null, input[i]), message[i] + " to null type");
         }
     }
 }

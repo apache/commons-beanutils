@@ -17,7 +17,14 @@
 
 package org.apache.commons.beanutils2.converters;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test Case for the ByteConverter class.
@@ -41,7 +48,7 @@ public class ByteConverterTestCase extends AbstractNumberConverterTest<Byte> {
         return new ByteConverter(defaultValue);
     }
 
-    @Override
+    @BeforeEach
     public void setUp() throws Exception {
         converter = makeConverter();
         numbers[0] = Byte.valueOf("-12");
@@ -50,7 +57,7 @@ public class ByteConverterTestCase extends AbstractNumberConverterTest<Byte> {
         numbers[3] = Byte.valueOf("23");
     }
 
-    @Override
+    @AfterEach
     public void tearDown() throws Exception {
         converter = null;
     }
@@ -58,6 +65,7 @@ public class ByteConverterTestCase extends AbstractNumberConverterTest<Byte> {
     /**
      * Test Invalid Amounts (too big/small)
      */
+    @Test
     public void testInvalidAmount() {
         final Converter<Byte> converter = makeConverter();
         final Class<Byte> clazz = Byte.class;
@@ -68,28 +76,23 @@ public class ByteConverterTestCase extends AbstractNumberConverterTest<Byte> {
         final Long maxPlusOne = Long.valueOf(max.longValue() + 1);
 
         // Minimum
-        assertEquals("Minimum", Byte.valueOf(Byte.MIN_VALUE), converter.convert(clazz, min));
+        assertEquals(Byte.valueOf(Byte.MIN_VALUE), converter.convert(clazz, min), "Minimum");
 
         // Maximum
-        assertEquals("Maximum", Byte.valueOf(Byte.MAX_VALUE), converter.convert(clazz, max));
+        assertEquals(Byte.valueOf(Byte.MAX_VALUE), converter.convert(clazz, max), "Maximum");
 
         // Too Small
-        try {
-            assertEquals("Minimum - 1", null, converter.convert(clazz, minMinusOne));
-            fail("Less than minimum, expected ConversionException");
-        } catch (final Exception e) {
-            // expected result
-        }
+        assertThrows(ConversionException.class,
+                     () -> converter.convert(clazz, minMinusOne),
+                     "Less than minimum, expected ConversionException");
 
         // Too Large
-        try {
-            assertEquals("Maximum + 1", null, converter.convert(clazz, maxPlusOne));
-            fail("More than maximum, expected ConversionException");
-        } catch (final Exception e) {
-            // expected result
-        }
+        assertThrows(ConversionException.class,
+                     () -> converter.convert(clazz, maxPlusOne),
+                     "More than maximum, expected ConversionException");
     }
 
+    @Test
     public void testSimpleConversion() throws Exception {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from Byte",
                 "from Short", "from Integer", "from Long", "from Float", "from Double" };
@@ -102,9 +105,9 @@ public class ByteConverterTestCase extends AbstractNumberConverterTest<Byte> {
                 Byte.valueOf((byte) 9), Byte.valueOf((byte) 10), Byte.valueOf((byte) 11), Byte.valueOf((byte) 12) };
 
         for (int i = 0; i < expected.length; i++) {
-            assertEquals(message[i] + " to Byte", expected[i], converter.convert(Byte.class, input[i]));
-            assertEquals(message[i] + " to byte", expected[i], converter.convert(Byte.TYPE, input[i]));
-            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
+            assertEquals(expected[i], converter.convert(Byte.class, input[i]), message[i] + " to Byte");
+            assertEquals(expected[i], converter.convert(Byte.TYPE, input[i]), message[i] + " to byte");
+            assertEquals(expected[i], converter.convert(null, input[i]), message[i] + " to null type");
         }
     }
 

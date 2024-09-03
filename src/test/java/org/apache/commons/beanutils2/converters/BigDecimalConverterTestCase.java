@@ -17,9 +17,14 @@
 
 package org.apache.commons.beanutils2.converters;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.math.BigDecimal;
 
 import org.apache.commons.beanutils2.Converter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test Case for the DoubleConverter class.
@@ -54,7 +59,7 @@ public class BigDecimalConverterTestCase extends AbstractNumberConverterTest<Big
         return new BigDecimalConverter(defaultValue);
     }
 
-    @Override
+    @BeforeEach
     public void setUp() throws Exception {
         converter = makeConverter();
         numbers[0] = new BigDecimal("-12");
@@ -63,11 +68,12 @@ public class BigDecimalConverterTestCase extends AbstractNumberConverterTest<Big
         numbers[3] = new BigDecimal("23");
     }
 
-    @Override
+    @AfterEach
     public void tearDown() throws Exception {
         converter = null;
     }
 
+    @Test
     public void testSimpleConversion() throws Exception {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from Byte", "from Short", "from Integer",
                 "from Long", "from Float", "from Double", "from BigDecimal", "from BigDecimal extension" };
@@ -80,8 +86,8 @@ public class BigDecimalConverterTestCase extends AbstractNumberConverterTest<Big
                 new BigDecimal("3200.11"), new BigDecimal("3200.11") };
 
         for (int i = 0; i < expected.length; i++) {
-            assertEquals(message[i] + " to BigDecimal", expected[i], converter.convert(BigDecimal.class, input[i]));
-            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
+            assertEquals(expected[i], converter.convert(BigDecimal.class, input[i]), message[i] + " to BigDecimal");
+            assertEquals(expected[i], converter.convert(null, input[i]), message[i] + " to null type");
         }
     }
 }
