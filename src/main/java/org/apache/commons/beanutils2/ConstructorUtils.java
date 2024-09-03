@@ -185,12 +185,9 @@ public class ConstructorUtils {
                              * TODO: Why?
                              */
                         }
-                        @SuppressWarnings("unchecked")
-                        final
                         // Class.getConstructors() actually returns constructors
                         // of type T, so it is safe to cast.
-                        Constructor<T> typedCtor = (Constructor<T>) ctor;
-                        return typedCtor;
+                        return (Constructor<T>) ctor;
                     }
                 }
             }
