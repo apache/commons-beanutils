@@ -109,12 +109,10 @@ public class PropertyUtilsBean {
      * @param obj the object to be converted
      * @return the resulting list of objects
      */
+    @SuppressWarnings("unchecked")
     private static List<Object> toObjectList(final Object obj) {
-        @SuppressWarnings("unchecked")
-        final
         // indexed properties are stored in lists of objects
-        List<Object> list = (List<Object>) obj;
-        return list;
+        return (List<Object>) obj;
     }
     /**
      * Converts an object to a map with property values. This method is used
@@ -124,12 +122,10 @@ public class PropertyUtilsBean {
      * @param obj the object to be converted
      * @return the resulting properties map
      */
+    @SuppressWarnings("unchecked")
     private static Map<String, Object> toPropertyMap(final Object obj) {
-        @SuppressWarnings("unchecked")
-        final
         // mapped properties are stores in maps of type <String, Object>
-        Map<String, Object> map = (Map<String, Object>) obj;
-        return map;
+        return (Map<String, Object>) obj;
     }
 
     private Resolver resolver = new DefaultResolver();
