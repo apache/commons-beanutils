@@ -321,9 +321,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
             }
 
             return new Object[] { value };
-        } catch (final InvocationTargetException e) {
-            throw new IllegalArgumentException(e.getMessage(), e);
-        } catch (final InstantiationException e) {
+        } catch (final InvocationTargetException | InstantiationException e) {
             throw new IllegalArgumentException(e.getMessage(), e);
         }
     }
