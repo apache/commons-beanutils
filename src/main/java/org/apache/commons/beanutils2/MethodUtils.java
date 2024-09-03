@@ -67,7 +67,7 @@ public class MethodUtils {
          * @param paramTypes the array of classes representing the parameter types
          * @param exact whether the match has to be exact.
          */
-        public MethodDescriptor(final Class<?> cls, final String methodName, Class<?>[] paramTypes,
+        public MethodDescriptor(final Class<?> cls, final String methodName, final Class<?>[] paramTypes,
                 final boolean exact) {
             this.cls = Objects.requireNonNull(cls, "cls");
             this.methodName = Objects.requireNonNull(methodName, "methodName");
