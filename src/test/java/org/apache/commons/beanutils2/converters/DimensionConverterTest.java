@@ -18,12 +18,12 @@
  */
 package org.apache.commons.beanutils2.converters;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.awt.Dimension;
 
 import org.apache.commons.beanutils2.ConversionException;
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -46,7 +46,7 @@ public class DimensionConverterTest {
         final Dimension expected = new Dimension(1920, 1080);
         final Dimension actual = converter.convert(Dimension.class, "1920x1080");
 
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -54,7 +54,7 @@ public class DimensionConverterTest {
         final Dimension expected = new Dimension(512, 512);
         final Dimension actual = converter.convert(Dimension.class, "512");
 
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test

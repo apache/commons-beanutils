@@ -136,13 +136,13 @@
           -->
           <argLine>${surefire.argLine} ${argLine}</argLine>
           <includes>
-            <include>**/*TestCase.java</include>
+            <include>**/*Test.java</include>
           </includes>
           <excludes>
             <!-- This test case is known to fail, and there isn't any proposed fix
               -  so we will just exclude it until someone comes up with a solution.
             -->
-            <exclude>**/*MemoryTestCase.java</exclude>
+            <exclude>**/*MemoryTest.java</exclude>
           </excludes>
           <!-- Configure Logging -->
           <redirectTestOutputToFile>true</redirectTestOutputToFile>

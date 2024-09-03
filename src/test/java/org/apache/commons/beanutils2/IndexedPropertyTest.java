@@ -17,9 +17,9 @@
 
 package org.apache.commons.beanutils2;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assume.assumeTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import java.beans.IndexedPropertyDescriptor;
 import java.beans.PropertyDescriptor;
@@ -101,9 +101,9 @@ public class IndexedPropertyTest {
     @Test
     public void testArrayIndexedPropertyDescriptor() throws Exception {
         final PropertyDescriptor descriptor = propertyUtilsBean.getPropertyDescriptor(bean, "stringArray");
-        assertNotNull("No Array Descriptor", descriptor);
-        assertEquals("Not IndexedPropertyDescriptor", IndexedPropertyDescriptor.class, descriptor.getClass());
-        assertEquals("PropertyDescriptor Type invalid", testArray.getClass(), descriptor.getPropertyType());
+        assertNotNull(descriptor, "No Array Descriptor");
+        assertEquals(IndexedPropertyDescriptor.class, descriptor.getClass(), "Not IndexedPropertyDescriptor");
+        assertEquals(testArray.getClass(), descriptor.getPropertyType(), "PropertyDescriptor Type invalid");
     }
 
     /**
@@ -112,7 +112,7 @@ public class IndexedPropertyTest {
     @Test
     public void testArrayIndexedReadMethod() throws Exception {
         final IndexedPropertyDescriptor descriptor = (IndexedPropertyDescriptor) propertyUtilsBean.getPropertyDescriptor(bean, "stringArray");
-        assertNotNull("No Array Indexed Read Method", descriptor.getIndexedReadMethod());
+        assertNotNull(descriptor.getIndexedReadMethod(), "No Array Indexed Read Method");
     }
 
     /**
@@ -121,7 +121,7 @@ public class IndexedPropertyTest {
     @Test
     public void testArrayIndexedWriteMethod() throws Exception {
         final IndexedPropertyDescriptor descriptor = (IndexedPropertyDescriptor) propertyUtilsBean.getPropertyDescriptor(bean, "stringArray");
-        assertNotNull("No Array Indexed Write Method", descriptor.getIndexedWriteMethod());
+        assertNotNull(descriptor.getIndexedWriteMethod(), "No Array Indexed Write Method");
     }
 
     /**
@@ -130,11 +130,11 @@ public class IndexedPropertyTest {
     @Test
     public void testArrayListIndexedPropertyDescriptor() throws Exception {
         final PropertyDescriptor descriptor = propertyUtilsBean.getPropertyDescriptor(bean, "arrayList");
-        assertNotNull("No ArrayList Descriptor", descriptor);
+        assertNotNull(descriptor, "No ArrayList Descriptor");
         if (Jira492IndexedListsSupport.supportsIndexedLists()) {
-            assertEquals("Not IndexedPropertyDescriptor", IndexedPropertyDescriptor.class, descriptor.getClass());
+            assertEquals(IndexedPropertyDescriptor.class, descriptor.getClass(), "Not IndexedPropertyDescriptor");
         }
-        assertEquals("PropertyDescriptor Type invalid", ArrayList.class, descriptor.getPropertyType());
+        assertEquals(ArrayList.class, descriptor.getPropertyType(), "PropertyDescriptor Type invalid");
     }
 
     /**
@@ -143,7 +143,7 @@ public class IndexedPropertyTest {
     @Test
     public void testArrayListReadMethod() throws Exception {
         final PropertyDescriptor descriptor = propertyUtilsBean.getPropertyDescriptor(bean, "arrayList");
-        assertNotNull("No ArrayList Read Method", descriptor.getReadMethod());
+        assertNotNull(descriptor.getReadMethod(), "No ArrayList Read Method");
     }
 
     /**
@@ -152,7 +152,7 @@ public class IndexedPropertyTest {
     @Test
     public void testArrayListWriteMethod() throws Exception {
         final PropertyDescriptor descriptor = propertyUtilsBean.getPropertyDescriptor(bean, "arrayList");
-        assertNotNull("No ArrayList Write Method", descriptor.getWriteMethod());
+        assertNotNull(descriptor.getWriteMethod(), "No ArrayList Write Method");
     }
 
     /**
@@ -161,7 +161,7 @@ public class IndexedPropertyTest {
     @Test
     public void testArrayReadMethod() throws Exception {
         final PropertyDescriptor descriptor = propertyUtilsBean.getPropertyDescriptor(bean, "stringArray");
-        assertNotNull("No Array Read Method", descriptor.getReadMethod());
+        assertNotNull(descriptor.getReadMethod(), "No Array Read Method");
     }
 
     /**
@@ -170,7 +170,7 @@ public class IndexedPropertyTest {
     @Test
     public void testArrayWriteMethod() throws Exception {
         final PropertyDescriptor descriptor = propertyUtilsBean.getPropertyDescriptor(bean, "stringArray");
-        assertNotNull("No Array Write Method", descriptor.getWriteMethod());
+        assertNotNull(descriptor.getWriteMethod(), "No Array Write Method");
     }
 
     /**
@@ -257,12 +257,12 @@ public class IndexedPropertyTest {
     @Test
     public void testListIndexedPropertyDescriptor() throws Exception {
         final PropertyDescriptor descriptor = propertyUtilsBean.getPropertyDescriptor(bean, "stringList");
-        assertNotNull("No List Descriptor", descriptor);
+        assertNotNull(descriptor, "No List Descriptor");
         if (Jira492IndexedListsSupport.supportsIndexedLists()) {
             // BEANUTILS-492 - can't assume lists are handled as arrays in Java 8+
-            assertEquals("Not IndexedPropertyDescriptor", IndexedPropertyDescriptor.class, descriptor.getClass());
+            assertEquals(IndexedPropertyDescriptor.class, descriptor.getClass(), "Not IndexedPropertyDescriptor");
         }
-        assertEquals("PropertyDescriptor Type invalid", List.class, descriptor.getPropertyType());
+        assertEquals(List.class, descriptor.getPropertyType(), "PropertyDescriptor Type invalid");
     }
 
     /**
@@ -271,9 +271,9 @@ public class IndexedPropertyTest {
     @Test
     public void testListIndexedReadMethod() throws Exception {
         final PropertyDescriptor descriptor = propertyUtilsBean.getPropertyDescriptor(bean, "stringList");
-        assertNotNull("stringList descriptor not found", descriptor);
-        assumeTrue("JDK does not support index bean properties on java.util.List", Jira492IndexedListsSupport.supportsIndexedLists());
-        assertNotNull("No List Indexed Read Method", ((IndexedPropertyDescriptor) descriptor).getIndexedReadMethod());
+        assertNotNull(descriptor, "stringList descriptor not found");
+        assumeTrue(Jira492IndexedListsSupport.supportsIndexedLists(), "JDK does not support index bean properties on java.util.List");
+        assertNotNull(((IndexedPropertyDescriptor) descriptor).getIndexedReadMethod(), "No List Indexed Read Method");
     }
 
     /**
@@ -282,9 +282,9 @@ public class IndexedPropertyTest {
     @Test
     public void testListIndexedWriteMethod() throws Exception {
         final PropertyDescriptor descriptor = propertyUtilsBean.getPropertyDescriptor(bean, "stringList");
-        assertNotNull("stringList descriptor not found", descriptor);
-        assumeTrue("JDK does not support index bean properties on java.util.List", Jira492IndexedListsSupport.supportsIndexedLists());
-        assertNotNull("No List Indexed Write Method", ((IndexedPropertyDescriptor) descriptor).getIndexedWriteMethod());
+        assertNotNull(descriptor, "stringList descriptor not found");
+        assumeTrue(Jira492IndexedListsSupport.supportsIndexedLists(), "JDK does not support index bean properties on java.util.List");
+        assertNotNull(((IndexedPropertyDescriptor) descriptor).getIndexedWriteMethod(), "No List Indexed Write Method");
     }
 
     /**
@@ -295,7 +295,7 @@ public class IndexedPropertyTest {
     @Test
     public void testListReadMethod() throws Exception {
         final PropertyDescriptor descriptor = propertyUtilsBean.getPropertyDescriptor(bean, "stringList");
-        assertNotNull("No List Read Method", descriptor.getReadMethod());
+        assertNotNull(descriptor.getReadMethod(), "No List Read Method");
     }
 
     /**
@@ -306,7 +306,7 @@ public class IndexedPropertyTest {
     @Test
     public void testListWriteMethod() throws Exception {
         final PropertyDescriptor descriptor = propertyUtilsBean.getPropertyDescriptor(bean, "stringList");
-        assertNotNull("No List Write Method", descriptor.getWriteMethod());
+        assertNotNull(descriptor.getWriteMethod(), "No List Write Method");
     }
 
     /**
@@ -322,11 +322,11 @@ public class IndexedPropertyTest {
     public void testSetArray() throws Exception {
         beanUtilsBean.setProperty(bean, "stringArray", newArray);
         final Object value = bean.getStringArray();
-        assertEquals("Type is different", newArray.getClass(), value.getClass());
+        assertEquals(newArray.getClass(), value.getClass(), "Type is different");
         final String[] array = (String[]) value;
-        assertEquals("Array Length is different", newArray.length, array.length);
+        assertEquals(newArray.length, array.length, "Array Length is different");
         for (int i = 0; i < array.length; i++) {
-            assertEquals("Element " + i + " is different", newArray[i], array[i]);
+            assertEquals(newArray[i], array[i], "Element " + i + " is different");
         }
     }
 
@@ -355,11 +355,11 @@ public class IndexedPropertyTest {
     public void testSetArrayList() throws Exception {
         beanUtilsBean.setProperty(bean, "arrayList", newList);
         final Object value = bean.getArrayList();
-        assertEquals("Type is different", newList.getClass(), value.getClass());
+        assertEquals(newList.getClass(), value.getClass(), "Type is different");
         final List<?> list = (List<?>) value;
-        assertEquals("List size is different", newList.size(), list.size());
+        assertEquals(newList.size(), list.size(), "List size is different");
         for (int i = 0; i < list.size(); i++) {
-            assertEquals("Element " + i + " is different", newList.get(i), list.get(i));
+            assertEquals(newList.get(i), list.get(i), "Element " + i + " is different");
         }
     }
 
@@ -373,11 +373,11 @@ public class IndexedPropertyTest {
     public void testSetList() throws Exception {
         beanUtilsBean.setProperty(bean, "stringList", newList);
         final Object value = bean.getStringList();
-        assertEquals("Type is different", newList.getClass(), value.getClass());
+        assertEquals(newList.getClass(), value.getClass(), "Type is different");
         final List<?> list = (List<?>) value;
-        assertEquals("List size is different", newList.size(), list.size());
+        assertEquals(newList.size(), list.size(), "List size is different");
         for (int i = 0; i < list.size(); i++) {
-            assertEquals("Element " + i + " is different", newList.get(i), list.get(i));
+            assertEquals(newList.get(i), list.get(i), "Element " + i + " is different");
         }
     }
 

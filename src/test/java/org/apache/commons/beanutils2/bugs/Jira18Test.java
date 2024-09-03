@@ -16,7 +16,7 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.apache.commons.beanutils2.PropertyUtils;

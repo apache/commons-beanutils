@@ -16,10 +16,10 @@
  */
 package org.apache.commons.beanutils2;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -285,7 +285,7 @@ public class BeanMapTest extends AbstractMapTest<String, Object> {
             // ok, and the read methods were properly initialized
             final Object[] keys = getSampleKeys();
             for (final Object key : keys) {
-                assertTrue("Cloned BeanMap should contain the same keys", map2.containsKey(key));
+                assertTrue(map2.containsKey(key), "Cloned BeanMap should contain the same keys");
             }
         } catch (final CloneNotSupportedException exception) {
             fail("BeanMap.clone() should not throw a " + "CloneNotSupportedException when clone should succeed.");
@@ -316,8 +316,8 @@ public class BeanMapTest extends AbstractMapTest<String, Object> {
             } catch (final Exception e2) {
                 fail("Retrieving the cause threw " + e2);
             }
-            assertNotNull("Cause null", cause);
-            assertEquals("Cause", IllegalAccessException.class, cause.getClass());
+            assertNotNull(cause, "Cause null");
+            assertEquals(IllegalAccessException.class, cause.getClass(),"Cause");
         }
     }
 
@@ -338,8 +338,8 @@ public class BeanMapTest extends AbstractMapTest<String, Object> {
             } catch (final Exception e2) {
                 fail("Non-public bean - retrieving the cause threw " + e2);
             }
-            assertNotNull("Non-public bean cause null", cause);
-            assertEquals("Non-public bean cause", IllegalAccessException.class, cause.getClass());
+            assertNotNull(cause, "Non-public bean cause null");
+            assertEquals(IllegalAccessException.class, cause.getClass(),"Non-public bean cause");
         }
 
         // Test cloning a bean that throws exception
@@ -354,8 +354,8 @@ public class BeanMapTest extends AbstractMapTest<String, Object> {
             } catch (final Exception e2) {
                 fail("Setter Exception - retrieving the cause threw " + e2);
             }
-            assertNotNull("Setter Exception cause null", cause);
-            assertEquals("Setter Exception cause", IllegalArgumentException.class, cause.getClass());
+            assertNotNull(cause, "Setter Exception cause null");
+            assertEquals(IllegalArgumentException.class, cause.getClass(),"Setter Exception cause");
         }
     }
 
@@ -376,10 +376,10 @@ public class BeanMapTest extends AbstractMapTest<String, Object> {
             } catch (final Exception e2) {
                 fail("Setter exception - retrieving the cause threw " + e2);
             }
-            assertNotNull("Setter exception cause 1 null", cause1);
-            assertEquals("Setter exception cause 1", InvocationTargetException.class, cause1.getClass());
-            assertNotNull("Setter exception cause 2 null", cause2);
-            assertEquals("Setter exception cause 2", TestException.class, cause2.getClass());
+            assertNotNull(cause1, "Setter exception cause 1 null");
+            assertEquals(InvocationTargetException.class, cause1.getClass(),"Setter exception cause 1");
+            assertNotNull(cause2, "Setter exception cause 2 null");
+            assertEquals(TestException.class, cause2.getClass(),"Setter exception cause 2");
         }
     }
 
@@ -388,14 +388,14 @@ public class BeanMapTest extends AbstractMapTest<String, Object> {
      */
     public void testGetTypeTransformerMethod() {
         final BeanMap beanMap = new BeanMap();
-        assertEquals("Boolean.TYPE", Boolean.TRUE, beanMap.getTypeTransformer(Boolean.TYPE).apply("true"));
-        assertEquals("Character.TYPE", Character.valueOf('B'), beanMap.getTypeTransformer(Character.TYPE).apply("BCD"));
-        assertEquals("Byte.TYPE", Byte.valueOf((byte) 1), beanMap.getTypeTransformer(Byte.TYPE).apply("1"));
-        assertEquals("Short.TYPE", Short.valueOf((short) 2), beanMap.getTypeTransformer(Short.TYPE).apply("2"));
-        assertEquals("Integer.TYPE", Integer.valueOf(3), beanMap.getTypeTransformer(Integer.TYPE).apply("3"));
-        assertEquals("Long.TYPE", Long.valueOf(4), beanMap.getTypeTransformer(Long.TYPE).apply("4"));
-        assertEquals("Float.TYPE", Float.valueOf("5"), beanMap.getTypeTransformer(Float.TYPE).apply("5"));
-        assertEquals("Double.TYPE", Double.valueOf("6"), beanMap.getTypeTransformer(Double.TYPE).apply("6"));
+        assertEquals(Boolean.TRUE, beanMap.getTypeTransformer(Boolean.TYPE).apply("true"),"Boolean.TYPE");
+        assertEquals(Character.valueOf('B'), beanMap.getTypeTransformer(Character.TYPE).apply("BCD"),"Character.TYPE");
+        assertEquals(Byte.valueOf((byte) 1), beanMap.getTypeTransformer(Byte.TYPE).apply("1"),"Byte.TYPE");
+        assertEquals(Short.valueOf((short) 2), beanMap.getTypeTransformer(Short.TYPE).apply("2"),"Short.TYPE");
+        assertEquals(Integer.valueOf(3), beanMap.getTypeTransformer(Integer.TYPE).apply("3"),"Integer.TYPE");
+        assertEquals(Long.valueOf(4), beanMap.getTypeTransformer(Long.TYPE).apply("4"),"Long.TYPE");
+        assertEquals(Float.valueOf("5"), beanMap.getTypeTransformer(Float.TYPE).apply("5"),"Float.TYPE");
+        assertEquals(Double.valueOf("6"), beanMap.getTypeTransformer(Double.TYPE).apply("6"),"Double.TYPE");
     }
 
     /**

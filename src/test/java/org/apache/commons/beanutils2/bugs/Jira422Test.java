@@ -16,7 +16,9 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import java.beans.BeanInfo;
 import java.beans.IndexedPropertyDescriptor;
@@ -26,8 +28,6 @@ import java.beans.PropertyDescriptor;
 import java.util.List;
 
 import org.apache.commons.beanutils2.PropertyUtils;
-import org.junit.Assert;
-import org.junit.Assume;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -54,11 +54,11 @@ public class Jira422Test {
         final BeanInfo beanInfo = Introspector.getBeanInfo(RootBean.class);
         for (final PropertyDescriptor pd : beanInfo.getPropertyDescriptors()) {
             if (pd.getName().equals("file")) {
-                Assume.assumeTrue("BEANUTILS-492: IndexedPropertyDescriptor no longer supported for java.util.List", pd instanceof IndexedPropertyDescriptor);
+                assumeTrue(pd instanceof IndexedPropertyDescriptor, "BEANUTILS-492: IndexedPropertyDescriptor no longer supported for java.util.List");
                 return;
             }
         }
-        Assert.fail("Could not find PropertyDescriptor for 'file'");
+        fail("Could not find PropertyDescriptor for 'file'");
     }
 
     @Test

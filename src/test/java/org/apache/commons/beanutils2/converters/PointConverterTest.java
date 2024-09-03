@@ -18,9 +18,10 @@
  */
 package org.apache.commons.beanutils2.converters;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.awt.Point;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -43,7 +44,7 @@ public class PointConverterTest {
         final Point expected = new Point(100, 200);
         final Point actual = converter.convert(Point.class, "(100,200)");
 
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -51,6 +52,6 @@ public class PointConverterTest {
         final Point expected = new Point(100, 200);
         final Point actual = converter.convert(Point.class, "(100, 200)");
 
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 }

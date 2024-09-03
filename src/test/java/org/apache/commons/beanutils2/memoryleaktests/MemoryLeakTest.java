@@ -16,11 +16,12 @@
  */
 package org.apache.commons.beanutils2.memoryleaktests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
@@ -40,7 +41,6 @@ import org.apache.commons.beanutils2.converters.IntegerConverter;
 import org.apache.commons.beanutils2.locale.LocaleBeanUtilsBean;
 import org.apache.commons.beanutils2.locale.LocaleConvertUtils;
 import org.apache.commons.beanutils2.locale.converters.IntegerLocaleConverter;
-import org.junit.Assume;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -134,7 +134,7 @@ public class MemoryLeakTest {
         final boolean isNotNull = ref.get() != null;
         System.out.println("Count " + count + " " + isNotNull); // debug for Continuum failure
         final String message = "Your JVM is not releasing SoftReference, try running the test with less memory (-Xmx)";
-        Assume.assumeFalse(message, isNotNull);
+        assumeFalse(isNotNull, message);
     }
 
     /**
@@ -187,10 +187,10 @@ public class MemoryLeakTest {
         final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
         // Sanity checks only
-        assertNotNull("ClassLoader is null", loader);
-        assertNotNull("BeanClass is null", beanClass);
-        assertNotSame("ClassLoaders should be different..", getClass().getClassLoader(), beanClass.getClassLoader());
-        assertSame("BeanClass ClassLoader incorrect", beanClass.getClassLoader(), loader);
+        assertNotNull(loader, "ClassLoader is null");
+        assertNotNull(beanClass, "BeanClass is null");
+        assertNotSame(getClass().getClassLoader(), beanClass.getClassLoader(), "ClassLoaders should be different..");
+        assertSame(beanClass.getClassLoader(), loader, "BeanClass ClassLoader incorrect");
 
         // if you comment the following two lines, the test will work, and the ClassLoader will be released.
         // That proves that nothing is wrong with the test, and ConvertUtilsBean is holding a reference
@@ -209,7 +209,7 @@ public class MemoryLeakTest {
         }
 
         // if everything is fine, this will be null
-        assertNull("ConvertUtilsBean is holding a reference to the classLoader", someRef.get());
+        assertNull(someRef.get(), "ConvertUtilsBean is holding a reference to the classLoader");
 
         // Clear All BeanUtils caches after the test
         clearAllBeanUtilsCaches();
@@ -234,10 +234,10 @@ public class MemoryLeakTest {
         final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
         // Sanity checks only
-        assertNotNull("ClassLoader is null", loader);
-        assertNotNull("BeanClass is null", beanClass);
-        assertNotSame("ClassLoaders should be different..", getClass().getClassLoader(), beanClass.getClassLoader());
-        assertSame("BeanClass ClassLoader incorrect", beanClass.getClassLoader(), loader);
+        assertNotNull(loader, "ClassLoader is null");
+        assertNotNull(beanClass, "BeanClass is null");
+        assertNotSame(getClass().getClassLoader(), beanClass.getClassLoader(), "ClassLoaders should be different..");
+        assertSame(beanClass.getClassLoader(), loader, "BeanClass ClassLoader incorrect");
 
         // if you comment the following two lines, the test will work, and the ClassLoader will be released.
         // That proves that nothing is wrong with the test, and LocaleConvertUtilsBean is holding a reference
@@ -257,7 +257,7 @@ public class MemoryLeakTest {
         }
 
         // if everything is fine, this will be null
-        assertNull("LocaleConvertUtilsBean is holding a reference to the classLoader", someRef.get());
+        assertNull(someRef.get(), "LocaleConvertUtilsBean is holding a reference to the classLoader");
 
         // Clear All BeanUtils caches after the test
         clearAllBeanUtilsCaches();
@@ -278,17 +278,17 @@ public class MemoryLeakTest {
         final Object bean = beanClass.newInstance();
 
         // Sanity checks only
-        assertNotNull("ClassLoader is null", loader);
-        assertNotNull("BeanClass is null", beanClass);
-        assertNotNull("Bean is null", bean);
-        assertNotSame("ClassLoaders should be different..", getClass().getClassLoader(), beanClass.getClassLoader());
-        assertSame("BeanClass ClassLoader incorrect", beanClass.getClassLoader(), loader);
+        assertNotNull(loader, "ClassLoader is null");
+        assertNotNull(beanClass, "BeanClass is null");
+        assertNotNull(bean, "Bean is null");
+        assertNotSame(getClass().getClassLoader(), beanClass.getClassLoader(), "ClassLoaders should be different..");
+        assertSame(beanClass.getClassLoader(), loader, "BeanClass ClassLoader incorrect");
 
         final MappedPropertyDescriptor descriptor = new MappedPropertyDescriptor("mappedProperty", beanClass);
-        assertNotNull("1-Read Method null", descriptor.getMappedReadMethod());
-        assertNotNull("1-Write Method null", descriptor.getMappedWriteMethod());
-        assertEquals("1-Read Method name", "getMappedProperty", descriptor.getMappedReadMethod().getName());
-        assertEquals("1-Read Write name", "setMappedProperty", descriptor.getMappedWriteMethod().getName());
+        assertNotNull(descriptor.getMappedReadMethod(), "1-Read Method null");
+        assertNotNull(descriptor.getMappedWriteMethod(), "1-Write Method null");
+        assertEquals("getMappedProperty", descriptor.getMappedReadMethod().getName(), "1-Read Method name");
+        assertEquals("setMappedProperty", descriptor.getMappedWriteMethod().getName(), "1-Read Write name");
 
         forceGarbageCollection(); /* Try to force the garbage collector to run by filling up memory */
 
@@ -298,10 +298,10 @@ public class MemoryLeakTest {
         // un-commeting the System.out statement in MappedPropertyDescriptor's MappedMethodReference's
         // get() method.
 
-        assertNotNull("1-Read Method null", descriptor.getMappedReadMethod());
-        assertNotNull("1-Write Method null", descriptor.getMappedWriteMethod());
-        assertEquals("1-Read Method name", "getMappedProperty", descriptor.getMappedReadMethod().getName());
-        assertEquals("1-Read Write name", "setMappedProperty", descriptor.getMappedWriteMethod().getName());
+        assertNotNull(descriptor.getMappedReadMethod(), "1-Read Method null");
+        assertNotNull(descriptor.getMappedWriteMethod(), "1-Write Method null");
+        assertEquals("getMappedProperty", descriptor.getMappedReadMethod().getName(), "1-Read Method name");
+        assertEquals("setMappedProperty", descriptor.getMappedWriteMethod().getName(), "1-Read Write name");
 
         // Clear All BeanUtils caches after the test
         clearAllBeanUtilsCaches();
@@ -322,17 +322,17 @@ public class MemoryLeakTest {
         Object bean = beanClass.newInstance();
 
         // Sanity checks only
-        assertNotNull("ClassLoader is null", loader);
-        assertNotNull("BeanClass is null", beanClass);
-        assertNotNull("Bean is null", bean);
-        assertNotSame("ClassLoaders should be different..", getClass().getClassLoader(), beanClass.getClassLoader());
-        assertSame("BeanClass ClassLoader incorrect", beanClass.getClassLoader(), loader);
+        assertNotNull(loader, "ClassLoader is null");
+        assertNotNull(beanClass, "BeanClass is null");
+        assertNotNull(bean, "Bean is null");
+        assertNotSame(getClass().getClassLoader(), beanClass.getClassLoader(), "ClassLoaders should be different..");
+        assertSame(beanClass.getClassLoader(), loader, "BeanClass ClassLoader incorrect");
 
         final MappedPropertyDescriptor descriptor = new MappedPropertyDescriptor("mappedProperty", beanClass);
-        assertNotNull("1-Read Method null", descriptor.getMappedReadMethod());
-        assertNotNull("1-Write Method null", descriptor.getMappedWriteMethod());
-        assertEquals("1-Read Method name", "getMappedProperty", descriptor.getMappedReadMethod().getName());
-        assertEquals("1-Read Write name", "setMappedProperty", descriptor.getMappedWriteMethod().getName());
+        assertNotNull(descriptor.getMappedReadMethod(), "1-Read Method null");
+        assertNotNull(descriptor.getMappedWriteMethod(), "1-Write Method null");
+        assertEquals("getMappedProperty", descriptor.getMappedReadMethod().getName(), "1-Read Method name");
+        assertEquals("setMappedProperty", descriptor.getMappedWriteMethod().getName(), "1-Read Write name");
 
         // this should make the reference go away.
         loader = null;
@@ -347,10 +347,10 @@ public class MemoryLeakTest {
         // un-commeting the System.out statement in MappedPropertyDescriptor's MappedMethodReference's
         // get() method.
 
-        assertNotNull("1-Read Method null", descriptor.getMappedReadMethod());
-        assertNotNull("1-Write Method null", descriptor.getMappedWriteMethod());
-        assertEquals("1-Read Method name", "getMappedProperty", descriptor.getMappedReadMethod().getName());
-        assertEquals("1-Read Write name", "setMappedProperty", descriptor.getMappedWriteMethod().getName());
+        assertNotNull(descriptor.getMappedReadMethod(), "1-Read Method null");
+        assertNotNull(descriptor.getMappedWriteMethod(), "1-Write Method null");
+        assertEquals("getMappedProperty", descriptor.getMappedReadMethod().getName(), "1-Read Method name");
+        assertEquals("setMappedProperty", descriptor.getMappedWriteMethod().getName(), "1-Read Write name");
 
         // Clear All BeanUtils caches after the test
         clearAllBeanUtilsCaches();
@@ -375,10 +375,10 @@ public class MemoryLeakTest {
         final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
         // Sanity checks only
-        assertNotNull("ClassLoader is null", loader);
-        assertNotNull("BeanClass is null", beanClass);
-        assertNotSame("ClassLoaders should be different..", getClass().getClassLoader(), beanClass.getClassLoader());
-        assertSame("BeanClass ClassLoader incorrect", beanClass.getClassLoader(), loader);
+        assertNotNull(loader, "ClassLoader is null");
+        assertNotNull(beanClass, "BeanClass is null");
+        assertNotSame(getClass().getClassLoader(), beanClass.getClassLoader(), "ClassLoaders should be different..");
+        assertSame(beanClass.getClassLoader(), loader, "BeanClass ClassLoader incorrect");
 
         // if you comment the following line, the test will work, and the ClassLoader will be released.
         // That proves that nothing is wrong with the test, and MethodUtils is holding a reference
@@ -396,7 +396,7 @@ public class MemoryLeakTest {
         }
 
         // if everything is fine, this will be null
-        assertNull("MethodUtils is holding a reference to the classLoader", someRef.get());
+        assertNull(someRef.get(), "MethodUtils is holding a reference to the classLoader");
 
         // Clear All BeanUtils caches after the test
         clearAllBeanUtilsCaches();
@@ -421,10 +421,10 @@ public class MemoryLeakTest {
         final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
         // Sanity checks only
-        assertNotNull("ClassLoader is null", loader);
-        assertNotNull("BeanClass is null", beanClass);
-        assertNotSame("ClassLoaders should be different..", getClass().getClassLoader(), beanClass.getClassLoader());
-        assertSame("BeanClass ClassLoader incorrect", beanClass.getClassLoader(), loader);
+        assertNotNull(loader, "ClassLoader is null");
+        assertNotNull(beanClass, "BeanClass is null");
+        assertNotSame(getClass().getClassLoader(), beanClass.getClassLoader(), "ClassLoaders should be different..");
+        assertSame(beanClass.getClassLoader(), loader, "BeanClass ClassLoader incorrect");
 
         // if you comment the following line, the test will work, and the ClassLoader will be released.
         // That proves that nothing is wrong with the test, and PropertyUtils is holding a reference
@@ -442,7 +442,7 @@ public class MemoryLeakTest {
         }
 
         // if everything is fine, this will be null
-        assertNull("PropertyUtilsBean is holding a reference to the classLoader", someRef.get());
+        assertNull(someRef.get(), "PropertyUtilsBean is holding a reference to the classLoader");
 
         // Clear All BeanUtils caches after the test
         clearAllBeanUtilsCaches();
@@ -467,10 +467,10 @@ public class MemoryLeakTest {
         final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
         // Sanity checks only
-        assertNotNull("ClassLoader is null", loader);
-        assertNotNull("BeanClass is null", beanClass);
-        assertNotSame("ClassLoaders should be different..", getClass().getClassLoader(), beanClass.getClassLoader());
-        assertSame("BeanClass ClassLoader incorrect", beanClass.getClassLoader(), loader);
+        assertNotNull(loader, "ClassLoader is null");
+        assertNotNull(beanClass, "BeanClass is null");
+        assertNotSame(getClass().getClassLoader(), beanClass.getClassLoader(), "ClassLoaders should be different..");
+        assertSame(beanClass.getClassLoader(), loader, "BeanClass ClassLoader incorrect");
 
         // if you comment the following three lines, the test will work, and the ClassLoader will be released.
         // That proves that nothing is wrong with the test, and PropertyUtils is holding a reference
@@ -494,7 +494,7 @@ public class MemoryLeakTest {
         }
 
         // if everything is fine, this will be null
-        assertNull("PropertyUtilsBean is holding a reference to the classLoader", someRef.get());
+        assertNull(someRef.get(), "PropertyUtilsBean is holding a reference to the classLoader");
 
         // Clear All BeanUtils caches after the test
         clearAllBeanUtilsCaches();
@@ -520,10 +520,10 @@ public class MemoryLeakTest {
         final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
         // Sanity checks only
-        assertNotNull("ClassLoader is null", loader);
-        assertNotNull("BeanClass is null", beanClass);
-        assertNotSame("ClassLoaders should be different..", getClass().getClassLoader(), beanClass.getClassLoader());
-        assertSame("BeanClass ClassLoader incorrect", beanClass.getClassLoader(), loader);
+        assertNotNull(loader, "ClassLoader is null");
+        assertNotNull(beanClass, "BeanClass is null");
+        assertNotSame(getClass().getClassLoader(), beanClass.getClassLoader(), "ClassLoaders should be different..");
+        assertSame(beanClass.getClassLoader(), loader, "BeanClass ClassLoader incorrect");
 
         // if you comment the following line, the test will work, and the ClassLoader will be released.
         // That proves that nothing is wrong with the test, and WrapDynaClass is holding a reference
@@ -546,7 +546,7 @@ public class MemoryLeakTest {
         }
 
         // if everything is fine, this will be null
-        assertNull("WrapDynaClass is holding a reference to the classLoader", someRef.get());
+        assertNull(someRef.get(), "WrapDynaClass is holding a reference to the classLoader");
 
         // Clear All BeanUtils caches after the test
         clearAllBeanUtilsCaches();

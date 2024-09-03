@@ -17,7 +17,7 @@
 
 package org.apache.commons.beanutils2.converters;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.net.URL;
 
@@ -44,8 +44,8 @@ public class URLConverterTest {
                 "http://notreal.apache.org/test/file.xml#%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6" };
 
         for (final String urlString : input) {
-            assertEquals("from String to URL", urlString, converter.convert(URL.class, urlString).toString());
-            assertEquals("from String to null type", urlString, converter.convert(null, urlString).toString());
+            assertEquals(urlString, converter.convert(URL.class, urlString).toString(), "from String to URL");
+            assertEquals(urlString, converter.convert(null, urlString).toString(),"from String to null type");
         }
     }
 

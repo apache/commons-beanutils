@@ -17,8 +17,8 @@
 package org.apache.commons.beanutils2.bugs;
 
 import static org.apache.commons.beanutils2.bugs.other.Jira492IndexedListsSupport.supportsIndexedLists;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.beans.IndexedPropertyDescriptor;
 import java.beans.PropertyDescriptor;
@@ -100,7 +100,7 @@ public class Jira492Test {
     @Test
     public void getPropertyUnconverted() throws Exception {
         final Object someList = propertyUtils.getProperty(bean, "someList");
-        assertTrue("Did not retrieve list", someList instanceof List);
+        assertTrue(someList instanceof List, "Did not retrieve list");
     }
 
     @BeforeEach
