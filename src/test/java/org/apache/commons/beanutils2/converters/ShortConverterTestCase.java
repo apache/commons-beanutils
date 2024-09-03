@@ -17,7 +17,14 @@
 
 package org.apache.commons.beanutils2.converters;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test Case for the ShortConverter class.
@@ -41,7 +48,7 @@ public class ShortConverterTestCase extends AbstractNumberConverterTest<Short> {
         return new ShortConverter(defaultValue);
     }
 
-    @Override
+    @BeforeEach
     public void setUp() throws Exception {
         converter = makeConverter();
         numbers[0] = Short.valueOf("-12");
@@ -50,7 +57,7 @@ public class ShortConverterTestCase extends AbstractNumberConverterTest<Short> {
         numbers[3] = Short.valueOf("23");
     }
 
-    @Override
+    @AfterEach
     public void tearDown() throws Exception {
         converter = null;
     }
@@ -58,6 +65,7 @@ public class ShortConverterTestCase extends AbstractNumberConverterTest<Short> {
     /**
      * Test Invalid Amounts (too big/small)
      */
+    @Test
     public void testInvalidAmount() {
         final Converter<Short> converter = makeConverter();
         final Class<?> clazz = Short.class;
@@ -68,28 +76,23 @@ public class ShortConverterTestCase extends AbstractNumberConverterTest<Short> {
         final Long maxPlusOne = Long.valueOf(max.longValue() + 1);
 
         // Minimum
-        assertEquals("Minimum", Short.valueOf(Short.MIN_VALUE), converter.convert(clazz, min));
+        assertEquals(Short.valueOf(Short.MIN_VALUE), converter.convert(clazz, min), "Minimum");
 
         // Maximum
-        assertEquals("Maximum", Short.valueOf(Short.MAX_VALUE), converter.convert(clazz, max));
+        assertEquals(Short.valueOf(Short.MAX_VALUE), converter.convert(clazz, max), "Maximum");
 
         // Too Small
-        try {
-            assertEquals("Minimum - 1", null, converter.convert(clazz, minMinusOne));
-            fail("Less than minimum, expected ConversionException");
-        } catch (final Exception e) {
-            // expected result
-        }
+        assertThrows(ConversionException.class,
+                     () -> converter.convert(clazz, minMinusOne),
+                     "Less than minimum, expected ConversionException");
 
         // Too Large
-        try {
-            assertEquals("Maximum + 1", null, converter.convert(clazz, maxPlusOne));
-            fail("More than maximum, expected ConversionException");
-        } catch (final Exception e) {
-            // expected result
-        }
+        assertThrows(ConversionException.class,
+                     () -> converter.convert(clazz, maxPlusOne),
+                     "More than maximum, expected ConversionException");
     }
 
+    @Test
     public void testSimpleConversion() throws Exception {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from Byte",
                 "from Short", "from Integer", "from Long", "from Float", "from Double" };
@@ -102,9 +105,9 @@ public class ShortConverterTestCase extends AbstractNumberConverterTest<Short> {
                 Short.valueOf((short) 9), Short.valueOf((short) 10), Short.valueOf((short) 11), Short.valueOf((short) 12) };
 
         for (int i = 0; i < expected.length; i++) {
-            assertEquals(message[i] + " to Short", expected[i], converter.convert(Short.class, input[i]));
-            assertEquals(message[i] + " to short", expected[i], converter.convert(Short.TYPE, input[i]));
-            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
+            assertEquals(expected[i], converter.convert(Short.class, input[i]), message[i] + " to Short");
+            assertEquals(expected[i], converter.convert(Short.TYPE, input[i]), message[i] + " to short");
+            assertEquals(expected[i], converter.convert(null, input[i]), message[i] + " to null type");
         }
     }
 }

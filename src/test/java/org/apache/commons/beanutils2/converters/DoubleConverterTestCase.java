@@ -17,7 +17,12 @@
 
 package org.apache.commons.beanutils2.converters;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.apache.commons.beanutils2.Converter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test Case for the DoubleConverter class.
@@ -41,7 +46,7 @@ public class DoubleConverterTestCase extends AbstractNumberConverterTest<Double>
         return new DoubleConverter(defaultValue);
     }
 
-    @Override
+    @BeforeEach
     public void setUp() throws Exception {
         converter = makeConverter();
         numbers[0] = Double.valueOf("-12");
@@ -50,11 +55,12 @@ public class DoubleConverterTestCase extends AbstractNumberConverterTest<Double>
         numbers[3] = Double.valueOf("23");
     }
 
-    @Override
+    @AfterEach
     public void tearDown() throws Exception {
         converter = null;
     }
 
+    @Test
     public void testSimpleConversion() {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from Byte",
                 "from Short", "from Integer", "from Long", "from Float", "from Double" };
@@ -67,9 +73,9 @@ public class DoubleConverterTestCase extends AbstractNumberConverterTest<Double>
                 Double.valueOf(11.1), Double.valueOf(12.2) };
 
         for (int i = 0; i < expected.length; i++) {
-            assertEquals(message[i] + " to Double", expected[i].doubleValue(), converter.convert(Double.class, input[i]).doubleValue(), 0.00001D);
-            assertEquals(message[i] + " to double", expected[i].doubleValue(), converter.convert(Double.TYPE, input[i]).doubleValue(), 0.00001D);
-            assertEquals(message[i] + " to null type", expected[i].doubleValue(), converter.convert((Class<Double>) null, input[i]).doubleValue(), 0.00001D);
+            assertEquals(expected[i].doubleValue(), converter.convert(Double.class, input[i]).doubleValue(), 0.00001D, message[i] + " to Double");
+            assertEquals(expected[i].doubleValue(), converter.convert(Double.TYPE, input[i]).doubleValue(), 0.00001D, message[i] + " to double");
+            assertEquals(expected[i].doubleValue(), converter.convert((Class<Double>) null, input[i]).doubleValue(), 0.00001D, message[i] + " to null type");
         }
     }
 
