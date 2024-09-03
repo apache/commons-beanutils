@@ -306,13 +306,9 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
             element = elementConverter.convert(componentType, element);
             Array.set(newArray, i, element);
         }
-
-        @SuppressWarnings("unchecked")
-        final
         // This is safe because T is an array type and newArray is an array of
         // T's component type
-        T result = (T) newArray;
-        return result;
+        return (T) newArray;
     }
 
     /**
