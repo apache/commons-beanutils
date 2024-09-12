@@ -220,6 +220,9 @@
         Removed ConvertUtilsBean2, use ConvertUtilsBean. ConvertUtilsBean2 functionality is now in ConvertUtilsBean.
         Previous ConvertUtilsBean functionality for those methods is no longer supported.
       </action>
+      <action dev="ggregory" type="remove" due-to="Gary Gregory">
+        Do not implement Serializable.
+      </action>
     </release>
 
     <release version="1.9.4" date="2019-08-13" description="The primary reason for this release is a bugfix for

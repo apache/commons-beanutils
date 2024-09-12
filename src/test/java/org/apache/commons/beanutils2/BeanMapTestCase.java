@@ -21,7 +21,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -35,7 +34,6 @@ import org.apache.commons.collections4.map.AbstractMapTest;
 public class BeanMapTestCase extends AbstractMapTest<String, Object> {
 
     public static class BeanThrowingExceptions extends BeanWithProperties {
-        private static final long serialVersionUID = 1L;
 
         public String getValueThrowingException() {
             throw new TestException();
@@ -46,7 +44,7 @@ public class BeanMapTestCase extends AbstractMapTest<String, Object> {
         }
     }
 
-    public static class BeanWithProperties implements Serializable {
+    public static class BeanWithProperties {
         private int someInt;
         private long someLong;
         private double someDouble;

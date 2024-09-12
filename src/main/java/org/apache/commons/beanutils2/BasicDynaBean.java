@@ -17,7 +17,6 @@
 
 package org.apache.commons.beanutils2;
 
-import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.List;
@@ -35,7 +34,7 @@ import java.util.Objects;
  * successfully serialized and deserialized <strong>ONLY</strong> if all
  * property values are {@code Serializable}.</p>
  */
-public class BasicDynaBean implements DynaBean, Serializable {
+public class BasicDynaBean implements DynaBean {
 
     private static final Short SHORT_ZERO = Short.valueOf((short) 0);
 

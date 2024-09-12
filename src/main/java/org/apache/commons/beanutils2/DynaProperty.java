@@ -20,7 +20,6 @@ package org.apache.commons.beanutils2;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.io.StreamCorruptedException;
 import java.util.List;
 import java.util.Map;
@@ -36,9 +35,7 @@ import java.util.Objects;
  * Alternatively, an implementation may choose to ignore this property.
  * All keys for maps must be of type String so no meta data is needed for map keys.</p>
  */
-public class DynaProperty implements Serializable {
-
-    private static final long serialVersionUID = -3084907613499830175L;
+public class DynaProperty {
 
     /*
      * There are issues with serializing primitive class types on certain JVM versions

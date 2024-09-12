@@ -17,7 +17,6 @@
 
 package org.apache.commons.beanutils2.sql;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -39,9 +38,7 @@ import org.apache.commons.beanutils2.DynaProperty;
  * Provides common logic for JDBC implementations of {@link DynaClass}.
  * </p>
  */
-abstract class AbstractJdbcDynaClass implements DynaClass, Serializable {
-
-    private static final long serialVersionUID = 1L;
+abstract class AbstractJdbcDynaClass implements DynaClass {
 
     /**
      * Cross Reference for column name --> dyna property name (needed when lowerCase option is true)

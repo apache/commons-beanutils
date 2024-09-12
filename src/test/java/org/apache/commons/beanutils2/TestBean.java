@@ -17,7 +17,6 @@
 
 package org.apache.commons.beanutils2;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +26,7 @@ import java.util.Map;
  * General purpose test bean for JUnit tests for the "beanutils" component.
  */
 
-public class TestBean implements Serializable {
+public class TestBean {
 
     /*
      * Another nested reference to a bean containing mapp properties

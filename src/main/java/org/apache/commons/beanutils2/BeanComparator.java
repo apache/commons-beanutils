@@ -17,7 +17,6 @@
 
 package org.apache.commons.beanutils2;
 
-import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Comparator;
 
@@ -41,7 +40,7 @@ import java.util.Comparator;
  * @param <T> the type of beans to be compared by this {@code Comparator}
  * @param <V> the type of property to compare
  */
-public class BeanComparator<T, V> implements Comparator<T>, Serializable {
+public class BeanComparator<T, V> implements Comparator<T> {
 
     /**
      * A {@link Comparator Comparator} that compares {@link Comparable Comparable} objects.
@@ -54,10 +53,7 @@ public class BeanComparator<T, V> implements Comparator<T>, Serializable {
      * @see java.util.Collections#reverseOrder()
      */
     private static final class NaturalOrderComparator<E extends Comparable<? super E>>
-            implements Comparator<E>, Serializable {
-
-        /** Serialization version. */
-        private static final long serialVersionUID = -291439688585137865L;
+            implements Comparator<E> {
 
         /** The singleton instance. */
         @SuppressWarnings("rawtypes")

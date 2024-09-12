@@ -224,7 +224,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
      */
     @Override
     @Test
-    public void testSerialization() throws Exception {
+    public void testNotSerializableException() throws Exception {
 
         // Create a bean and set a value
         final WrapDynaBean origBean = new WrapDynaBean(new TestBean());

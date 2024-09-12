@@ -16,7 +16,6 @@
  */
 package org.apache.commons.beanutils2;
 
-import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -121,7 +120,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @see LazyDynaClass
  */
-public class LazyDynaBean implements DynaBean, Serializable {
+public class LazyDynaBean implements DynaBean {
 
     private static final long serialVersionUID = 1L;
 

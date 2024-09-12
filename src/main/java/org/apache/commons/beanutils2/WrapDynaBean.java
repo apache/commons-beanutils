@@ -17,7 +17,6 @@
 
 package org.apache.commons.beanutils2;
 
-import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 
 /**
@@ -40,7 +39,7 @@ import java.lang.reflect.InvocationTargetException;
  * support the {@code contains()</code> and <code>remove()} methods.</p>
  */
 
-public class WrapDynaBean implements DynaBean, Serializable {
+public class WrapDynaBean implements DynaBean {
 
     private static final long serialVersionUID = 1L;
 

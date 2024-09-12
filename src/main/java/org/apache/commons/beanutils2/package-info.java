@@ -602,14 +602,6 @@
  * environments (particularly in web applications), this tradeoff is usually
  * quite beneficial.</p>
  *
- * <p>As an additional benefit, the {@code RowSetDynaClass} class is defined
- * to implement {@link java.io.Serializable}, so that it (and the
- * DynaBeans that correspond to each row of the result) can be conveniently
- * serialized and deserialized (as long as the underlying column values are
- * also Serializable).  Thus, {@code RowSetDynaClass} represents a very
- * convenient way to transmit the results of an SQL query to a remote Java-based
- * client application (such as an applet).</p>
- *
  * <p>The normal usage pattern for a {@code RowSetDynaClass} will look
  * something like this:</p>
  * <pre>

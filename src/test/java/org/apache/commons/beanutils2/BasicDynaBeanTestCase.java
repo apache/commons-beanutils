@@ -28,9 +28,10 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import java.io.NotSerializableException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.WriteAbortedException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -410,63 +411,22 @@ public class BasicDynaBeanTestCase {
 
     /**
      * Test serialization and deserialization.
-     *
-     * @throws InstantiationException
-     * @throws IllegalAccessException
-     * @throws IOException
      */
     @Test
-    public void testSerialization() throws Exception {
+    public void testNotSerializableException() throws Exception {
         // Serialize the test bean
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final ObjectOutputStream oos = new ObjectOutputStream(baos);
-        oos.writeObject(bean);
-        oos.flush();
-        oos.close();
+        try (ObjectOutputStream oos = new ObjectOutputStream(baos)) {
+            assertThrows(NotSerializableException.class, () -> oos.writeObject(bean));
+            oos.flush();
+        }
         // Deserialize the test bean
         bean = null;
-        final ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-        final ObjectInputStream ois = new ObjectInputStream(bais);
-        bean = (DynaBean) ois.readObject();
-        bais.close();
-        // Confirm property values
-        testGetDescriptorArguments();
-        testGetDescriptorBoolean();
-        testGetDescriptorDouble();
-        testGetDescriptorFloat();
-        testGetDescriptorInt();
-        testGetDescriptorLong();
-        testGetDescriptorSecond();
-        testGetDescriptorShort();
-        testGetDescriptorString();
-        testGetDescriptors();
-        testGetIndexedArguments();
-        testGetIndexedValues();
-        testGetMappedArguments();
-        testGetMappedValues();
-        testGetSimpleArguments();
-        testGetSimpleBoolean();
-        testGetSimpleDouble();
-        testGetSimpleFloat();
-        testGetSimpleInt();
-        testGetSimpleLong();
-        testGetSimpleShort();
-        testGetSimpleString();
-        testMappedContains();
-        testMappedRemove();
-        // Ensure that we can create a new instance of the same DynaClass
-        bean = bean.getDynaClass().newInstance();
-        testGetDescriptorArguments();
-        testGetDescriptorBoolean();
-        testGetDescriptorDouble();
-        testGetDescriptorFloat();
-        testGetDescriptorInt();
-        testGetDescriptorLong();
-        testGetDescriptorSecond();
-        testGetDescriptorShort();
-        testGetDescriptorString();
-        testGetDescriptors();
-
+        try (ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray())) {
+            final ObjectInputStream ois = new ObjectInputStream(bais);
+            assertThrows(WriteAbortedException.class, () -> bean = (DynaBean) ois.readObject());
+        }
+        assertNull(bean);
     }
 
     /**
@@ -516,8 +476,7 @@ public class BasicDynaBeanTestCase {
     @Test
     public void testSetMappedValues() {
         bean.set("mappedProperty", "First Key", "New First Value");
-        assertEquals("New First Value", (String) bean.get("mappedProperty", "First Key"),
-                                "Can replace old value");
+        assertEquals("New First Value", (String) bean.get("mappedProperty", "First Key"), "Can replace old value");
         bean.set("mappedProperty", "Fourth Key", "Fourth Value");
         assertEquals("Fourth Value", (String) bean.get("mappedProperty", "Fourth Key"), "Can set new value");
     }
@@ -541,8 +500,7 @@ public class BasicDynaBeanTestCase {
         final double oldValue = ((Double) bean.get("doubleProperty")).doubleValue();
         final double newValue = oldValue + 1.0;
         bean.set("doubleProperty", Double.valueOf(newValue));
-        assertEquals(newValue, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005,
-                                "Matched new value");
+        assertEquals(newValue, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005, "Matched new value");
     }
 
     /**
@@ -553,8 +511,7 @@ public class BasicDynaBeanTestCase {
         final float oldValue = ((Float) bean.get("floatProperty")).floatValue();
         final float newValue = oldValue + (float) 1.0;
         bean.set("floatProperty", Float.valueOf(newValue));
-        assertEquals(newValue, ((Float) bean.get("floatProperty")).floatValue(), (float) 0.005,
-                                "Matched new value");
+        assertEquals(newValue, ((Float) bean.get("floatProperty")).floatValue(), (float) 0.005, "Matched new value");
     }
 
     /**

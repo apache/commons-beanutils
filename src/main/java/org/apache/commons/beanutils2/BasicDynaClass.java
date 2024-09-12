@@ -17,7 +17,6 @@
 
 package org.apache.commons.beanutils2;
 
-import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -31,7 +30,7 @@ import java.util.Objects;
  * constructor of its own that accepts a {@code DynaClass}.  This is
  * used to associate the DynaBean instance with this DynaClass.</p>
  */
-public class BasicDynaClass implements DynaClass, Serializable {
+public class BasicDynaClass implements DynaClass {
 
     private static final long serialVersionUID = 1L;
 

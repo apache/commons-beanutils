@@ -65,8 +65,6 @@ import org.apache.commons.beanutils2.DynaProperty;
  */
 public class RowSetDynaClass extends AbstractJdbcDynaClass {
 
-    private static final long serialVersionUID = 1L;
-
     /**
      * <p>
      * Limits the size of the returned list. The call to {@code getRows()} will return at most limit number of rows. If less than or equal to 0, does not limit
