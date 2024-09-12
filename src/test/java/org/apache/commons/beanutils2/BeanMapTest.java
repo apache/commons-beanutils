@@ -29,7 +29,7 @@ import org.apache.commons.beanutils2.bugs.other.Jira87BeanFactory;
 import org.apache.commons.collections4.map.AbstractMapTest;
 
 /**
- * Test cases for BeanMap
+ * Tests {@link BeanMap}.
  */
 public class BeanMapTest extends AbstractMapTest<String, Object> {
 
