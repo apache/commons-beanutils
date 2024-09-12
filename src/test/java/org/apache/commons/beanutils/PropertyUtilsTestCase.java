@@ -2006,14 +2006,15 @@ public class PropertyUtilsTestCase extends TestCase {
         for (final String propertie : properties) {
 
             // Identify the property descriptor for this property
-            if (propertie.equals("intIndexed")) {
+            switch (propertie) {
+            case "intIndexed":
                 continue;
-            }
-            if (propertie.equals("stringIndexed")) {
+            case "stringIndexed":
                 continue;
-            }
-            if (propertie.equals("writeOnlyProperty")) {
+            case "writeOnlyProperty":
                 continue;
+            default:
+                break;
             }
             int n = -1;
             for (int j = 0; j < pd.length; j++) {
@@ -2517,21 +2518,19 @@ public class PropertyUtilsTestCase extends TestCase {
         for (final String propertie : properties) {
 
             // Identify the property descriptor for this property
-            if (propertie.equals("intIndexed")) {
+            switch (propertie) {
+            case "intIndexed":
                 continue;
-            }
-            if (propertie.equals("listIndexed")) {
+            case "listIndexed":
                 continue;
-            }
-            if (propertie.equals("nested"))
-             {
+            case "nested":
                 continue; // This property is read only
-            }
-            if (propertie.equals("readOnlyProperty")) {
+            case "readOnlyProperty":
                 continue;
-            }
-            if (propertie.equals("stringIndexed")) {
+            case "stringIndexed":
                 continue;
+            default:
+                break;
             }
             int n = -1;
             for (int j = 0; j < pd.length; j++) {
