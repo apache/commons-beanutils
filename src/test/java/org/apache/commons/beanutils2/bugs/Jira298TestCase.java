@@ -73,7 +73,7 @@ public class Jira298TestCase {
     @Test
     public void testIssue_BEANUTILS_298_PropertyUtils_getProperty() throws Exception {
         final Object bean = Jira298BeanFactory.createImplX();
-        Object result = PropertyUtils.getProperty(bean, "name");
+        final Object result = PropertyUtils.getProperty(bean, "name");
         assertEquals("BaseX name value", result);
     }
 

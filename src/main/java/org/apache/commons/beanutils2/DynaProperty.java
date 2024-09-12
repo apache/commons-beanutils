@@ -17,10 +17,6 @@
 
 package org.apache.commons.beanutils2;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.StreamCorruptedException;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -215,58 +211,6 @@ public class DynaProperty {
     }
 
     /**
-     * Reads a class using safe encoding to workaround Java 1.3 serialization bug.
-     */
-    private Class<?> readAnyClass(final ObjectInputStream in) throws IOException, ClassNotFoundException {
-        // read back type class safely
-        if (in.readBoolean()) {
-            // it's a type constant
-            switch (in.readInt()) {
-
-                case BOOLEAN_TYPE: return   Boolean.TYPE;
-                case BYTE_TYPE:    return      Byte.TYPE;
-                case CHAR_TYPE:    return Character.TYPE;
-                case DOUBLE_TYPE:  return    Double.TYPE;
-                case FLOAT_TYPE:   return     Float.TYPE;
-                case INT_TYPE:     return   Integer.TYPE;
-                case LONG_TYPE:    return      Long.TYPE;
-                case SHORT_TYPE:   return     Short.TYPE;
-                default:
-                    // something's gone wrong
-                    throw new StreamCorruptedException(
-                        "Invalid primitive type. "
-                        + "Check version of beanutils used to serialize is compatible.");
-
-            }
-
-        }
-        // it's another class
-        return (Class<?>) in.readObject();
-    }
-
-    /**
-     * Deserializes field values for this object safely.
-     * There are issues with serializing primitive class types on certain JVM versions
-     * (including Java 1.3).
-     * This method provides a workaround.
-     *
-     * @param in {@link ObjectInputStream} to read object from
-     * @throws StreamCorruptedException when the stream data values are outside expected range
-     * @throws IOException if the input stream can't be read
-     * @throws ClassNotFoundException When trying to read an object of class that is not on the classpath
-     */
-    private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
-        this.type = readAnyClass(in);
-
-        if (isMapped() || isIndexed()) {
-            this.contentType = readAnyClass(in);
-        }
-
-        // read other values
-        in.defaultReadObject();
-    }
-
-    /**
      * Gets a String representation of this Object.
      * @return a String representation of the dyna property
      */
@@ -283,55 +227,4 @@ public class DynaProperty {
         return sb.toString();
     }
 
-    /**
-     * Write a class using safe encoding to workaround Java 1.3 serialization bug.
-     */
-    private void writeAnyClass(final Class<?> clazz, final ObjectOutputStream out) throws IOException {
-        // safely write out any class
-        int primitiveType = 0;
-        if (Boolean.TYPE.equals(clazz)) {
-            primitiveType = BOOLEAN_TYPE;
-        } else if (Byte.TYPE.equals(clazz)) {
-            primitiveType = BYTE_TYPE;
-        } else if (Character.TYPE.equals(clazz)) {
-            primitiveType = CHAR_TYPE;
-        } else if (Double.TYPE.equals(clazz)) {
-            primitiveType = DOUBLE_TYPE;
-        } else if (Float.TYPE.equals(clazz)) {
-            primitiveType = FLOAT_TYPE;
-        } else if (Integer.TYPE.equals(clazz)) {
-            primitiveType = INT_TYPE;
-        } else if (Long.TYPE.equals(clazz)) {
-            primitiveType = LONG_TYPE;
-        } else if (Short.TYPE.equals(clazz)) {
-            primitiveType = SHORT_TYPE;
-        }
-
-        if (primitiveType == 0) {
-            // then it's not a primitive type
-            out.writeBoolean(false);
-            out.writeObject(clazz);
-        } else {
-            // we'll write out a constant instead
-            out.writeBoolean(true);
-            out.writeInt(primitiveType);
-        }
-    }
-
-    /**
-     * Serializes this object to an ObjectOutputStream.
-     *
-     * @param out the target ObjectOutputStream.
-     * @throws IOException thrown when an I/O errors occur writing to the target stream.
-     */
-    private void writeObject(final ObjectOutputStream out) throws IOException {
-        writeAnyClass(this.type, out);
-
-        if (isMapped() || isIndexed()) {
-            writeAnyClass(this.contentType, out);
-        }
-
-        // write out other values
-        out.defaultWriteObject();
-    }
 }

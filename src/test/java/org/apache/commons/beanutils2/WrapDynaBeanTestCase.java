@@ -26,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.NotSerializableException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
@@ -225,18 +226,14 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
     @Override
     @Test
     public void testNotSerializableException() throws Exception {
-
         // Create a bean and set a value
         final WrapDynaBean origBean = new WrapDynaBean(new TestBean());
         final Integer newValue = Integer.valueOf(789);
         assertEquals(Integer.valueOf(123), origBean.get("intProperty"), "origBean default");
         origBean.set("intProperty", newValue);
         assertEquals(newValue, origBean.get("intProperty"), "origBean new value");
-
         // Serialize/Deserialize & test value
-        final WrapDynaBean bean = (WrapDynaBean) serializeDeserialize(origBean, "First Test");
-        assertEquals(newValue, bean.get("intProperty"), "bean value");
-
+        assertThrows(NotSerializableException.class, () -> serializeDeserialize(origBean, "First Test"));
     }
 
     /**

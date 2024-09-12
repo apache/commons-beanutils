@@ -103,7 +103,7 @@ public class DefaultResolverTestCase {
 
         // Non-numeric
         label = "Malformed";
-        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> resolver.getIndex("foo[BAR]"));
+        final IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> resolver.getIndex("foo[BAR]"));
         assertEquals("Invalid index value 'BAR'", e.getMessage(), label + " Error Message");
     }
 
@@ -134,7 +134,7 @@ public class DefaultResolverTestCase {
 
         // Malformed
         label = "Malformed";
-        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> resolver.getKey("foo(bar"));
+        final IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> resolver.getKey("foo(bar"));
         assertEquals("Missing End Delimiter", e.getMessage(), label + " Error Message");
     }
 

@@ -110,7 +110,7 @@ public class BeanComparatorTestCase {
     @Test
     public void testCompareOnMissingProperty() {
         final BeanComparator<AlphaBean, String> beanComparator = new BeanComparator<>("bogusName");
-        Exception e = assertThrows(RuntimeException.class, () -> beanComparator.compare(alphaBean2, alphaBean1));
+        final Exception e = assertThrows(RuntimeException.class, () -> beanComparator.compare(alphaBean2, alphaBean1));
         assertTrue(e.toString().contains("Unknown property"), () -> "Wrong exception was thrown: " + e);
     }
 

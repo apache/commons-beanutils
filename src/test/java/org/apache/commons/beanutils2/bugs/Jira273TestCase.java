@@ -59,7 +59,7 @@ public class Jira273TestCase {
     @Test
     public void testIssue_BEANUTILS_273_AnonymousNotOverridden() throws Exception {
         final Object bean = Jira273BeanFactory.createAnonymousNotOverridden();
-        Object result = PropertyUtils.getProperty(bean, "beanValue");
+        final Object result = PropertyUtils.getProperty(bean, "beanValue");
         assertEquals("PublicBeanWithMethod", result);
     }
 
@@ -69,7 +69,7 @@ public class Jira273TestCase {
     @Test
     public void testIssue_BEANUTILS_273_AnonymousOverridden() throws Exception {
         final Object bean = Jira273BeanFactory.createAnonymousOverridden();
-        Object result = PropertyUtils.getProperty(bean, "beanValue");
+        final Object result = PropertyUtils.getProperty(bean, "beanValue");
         assertEquals("AnonymousOverridden", result);
     }
 
@@ -79,7 +79,7 @@ public class Jira273TestCase {
     @Test
     public void testIssue_BEANUTILS_273_PrivatePrivatePublicNotOverridden() throws Exception {
         final Object bean = Jira273BeanFactory.createPrivatePrivatePublicNotOverridden();
-        Object result = PropertyUtils.getProperty(bean, "beanValue");
+        final Object result = PropertyUtils.getProperty(bean, "beanValue");
         assertEquals("PublicBeanWithMethod", result);
     }
 
@@ -89,7 +89,7 @@ public class Jira273TestCase {
     @Test
     public void testIssue_BEANUTILS_273_PrivatePrivatePublicOverridden() throws Exception {
         final Object bean = Jira273BeanFactory.createPrivatePrivatePublicOverridden();
-        Object result = PropertyUtils.getProperty(bean, "beanValue");
+        final Object result = PropertyUtils.getProperty(bean, "beanValue");
         assertEquals("PrivatePrivatePublicOverridden", result);
     }
 
@@ -99,7 +99,7 @@ public class Jira273TestCase {
     @Test
     public void testIssue_BEANUTILS_273_PrivatePublicNotOverridden() throws Exception {
         final Object bean = Jira273BeanFactory.createPrivatePublicNotOverridden();
-        Object result = PropertyUtils.getProperty(bean, "beanValue");
+        final Object result = PropertyUtils.getProperty(bean, "beanValue");
         assertEquals("PublicBeanWithMethod", result);
     }
 
@@ -109,7 +109,7 @@ public class Jira273TestCase {
     @Test
     public void testIssue_BEANUTILS_273_PrivatePublicOverridden() throws Exception {
         final Object bean = Jira273BeanFactory.createPrivatePublicOverridden();
-        Object result = PropertyUtils.getProperty(bean, "beanValue");
+        final Object result = PropertyUtils.getProperty(bean, "beanValue");
         assertEquals("PrivatePublicOverridden", result);
     }
 }

@@ -150,7 +150,7 @@ public class DynaResultSetTestCase {
      */
     @Test
     public void testIteratorResultsNormalCase() throws Exception {
-        ResultSetDynaClass dynaClass = new ResultSetDynaClass(TestResultSet.createProxy(), false);
+        final ResultSetDynaClass dynaClass = new ResultSetDynaClass(TestResultSet.createProxy(), false);
 
         // Grab the third row
         final Iterator<DynaBean> rows = dynaClass.iterator();

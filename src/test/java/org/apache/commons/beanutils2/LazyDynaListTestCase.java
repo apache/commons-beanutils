@@ -25,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.NotSerializableException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -38,9 +39,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * <p>
- * Test Case for the {@code LazyDynaList}class.
- * </p>
+ * Tests {@link LazyDynaList}.
  */
 public class LazyDynaListTestCase {
 
@@ -419,13 +418,7 @@ public class LazyDynaListTestCase {
         assertEquals("value1", bean.get(BASIC_PROP1), "post-set check");
 
         // Serialize/Deserialize
-        final LazyDynaList result = (LazyDynaList) serializeDeserialize(target, "DynaBean");
-        target = null;
-        bean = null;
-
-        // Confirm property value
-        bean = (BasicDynaBean) result.get(0);
-        assertEquals("value1", bean.get(BASIC_PROP1), "post-serialize check");
+        assertThrows(NotSerializableException.class, () -> serializeDeserialize(target, "DynaBean"));
 
     }
 
@@ -445,13 +438,7 @@ public class LazyDynaListTestCase {
         assertEquals("value1", bean.get(BASIC_PROP1), "post-set check");
 
         // Serialize/Deserialize
-        final LazyDynaList result = (LazyDynaList) serializeDeserialize(target, "DynaBean");
-        target = null;
-        bean = null;
-
-        // Confirm property value
-        bean = (LazyDynaBean) result.get(0);
-        assertEquals("value1", bean.get(BASIC_PROP1), "post-serialize check");
+        assertThrows(NotSerializableException.class, () -> serializeDeserialize(target, "DynaBean"));
 
     }
 
@@ -471,14 +458,7 @@ public class LazyDynaListTestCase {
         assertEquals("value1", bean.get(BASIC_PROP1), "post-set check");
 
         // Serialize/Deserialize
-        final LazyDynaList result = (LazyDynaList) serializeDeserialize(target, "Map");
-        target = null;
-        bean = null;
-
-        // Confirm property value
-        bean = (LazyDynaMap) result.get(0);
-        assertEquals("value1", bean.get(BASIC_PROP1), "post-serialize check");
-
+        assertThrows(NotSerializableException.class, () -> serializeDeserialize(target, "Map"));
     }
 
     /**
@@ -486,7 +466,6 @@ public class LazyDynaListTestCase {
      */
     @Test
     public void testSerializationPojo() throws Exception {
-
         // Create LazyArrayList for DynaBeans
         LazyDynaList target = new LazyDynaList(pojoDynaClass);
         WrapDynaBean bean = (WrapDynaBean) target.get(0);
@@ -497,17 +476,7 @@ public class LazyDynaListTestCase {
         assertEquals("value1", bean.get("stringProperty"), "post-set check");
 
         // Serialize/Deserialize
-        final LazyDynaList result = (LazyDynaList) serializeDeserialize(target, "POJO");
-        target = null;
-        bean = null;
-
-        // Test BEANUTILS-300
-        result.add(null);
-
-        // Confirm property value
-        bean = (WrapDynaBean) result.get(0);
-        assertEquals("value1", bean.get("stringProperty"), "post-serialize check");
-
+        assertThrows(NotSerializableException.class, () -> serializeDeserialize(target, "POJO"));
     }
 
     /**
