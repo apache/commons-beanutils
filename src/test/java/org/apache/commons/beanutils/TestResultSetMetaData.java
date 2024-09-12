@@ -114,35 +114,49 @@ public class TestResultSetMetaData implements InvocationHandler {
     public Integer getColumnType(final int columnIndex) throws SQLException {
         final String columnName = getColumnName(columnIndex);
         int sqlType = Types.OTHER;
-        if (columnName.equals("bigDecimalProperty")) {
+        switch (columnName) {
+        case "bigDecimalProperty":
             sqlType = Types.DECIMAL;
 // Types.BOOLEAN only introduced in JDK 1.4
 //        } else if (columnName.equals("booleanProperty")) {
 //            sqlType = Types.BOOLEAN;
-        } else if (columnName.equals("byteProperty")) {
+            break;
+        case "byteProperty":
             sqlType = Types.TINYINT;
-        } else if (columnName.equals("dateProperty")) {
+            break;
+        case "dateProperty":
             sqlType = Types.DATE;
-        } else if (columnName.equals("doubleProperty")) {
+            break;
+        case "doubleProperty":
             sqlType = Types.DOUBLE;
-        } else if (columnName.equals("floatProperty")) {
+            break;
+        case "floatProperty":
             sqlType = Types.FLOAT;
-        } else if (columnName.equals("intProperty")) {
+            break;
+        case "intProperty":
             sqlType = Types.INTEGER;
-        } else if (columnName.equals("longProperty")) {
+            break;
+        case "longProperty":
             sqlType = Types.BIGINT;
-        } else if (columnName.equals("nullProperty")) {
+            break;
+        case "nullProperty":
             sqlType = Types.VARCHAR;
-        } else if (columnName.equals("shortProperty")) {
+            break;
+        case "shortProperty":
             sqlType = Types.SMALLINT;
-        } else if (columnName.equals("stringProperty")) {
+            break;
+        case "stringProperty":
             sqlType = Types.VARCHAR;
-        } else if (columnName.equals("timeProperty")) {
+            break;
+        case "timeProperty":
             sqlType = Types.TIME;
-        } else if (columnName.equals("timestampProperty")) {
+            break;
+        case "timestampProperty":
             sqlType = Types.TIMESTAMP;
-        } else {
+            break;
+        default:
             sqlType = Types.OTHER;
+            break;
         }
         return Integer.valueOf(sqlType);
     }
@@ -185,14 +199,17 @@ public class TestResultSetMetaData implements InvocationHandler {
     @Override
     public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
         final String methodName = method.getName();
-        if ("getColumnClassName".equals(methodName)) {
+        switch (methodName) {
+        case "getColumnClassName":
             return getColumnClassName(((Integer)args[0]).intValue());
-        } if ("getColumnCount".equals(methodName)) {
+        case "getColumnCount":
             return Integer.valueOf(getColumnCount());
-        } if ("getColumnName".equals(methodName)) {
+        case "getColumnName":
             return getColumnName(((Integer)args[0]).intValue());
-        } if ("getColumnType".equals(methodName)) {
+        case "getColumnType":
             return getColumnType(((Integer)args[0]).intValue());
+        default:
+            break;
         }
 
         throw new UnsupportedOperationException(methodName + " not implemented");
