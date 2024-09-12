@@ -263,7 +263,7 @@ abstract class AbstractNumberConverterTest<T extends Number> {
     @Test
     public void testStringArrayToInteger() {
         final Integer defaultValue = Integer.valueOf(-1);
-        final NumberConverter<Integer> converter = new IntegerConverterTestCase().makeConverter(defaultValue);
+        final NumberConverter<Integer> converter = new IntegerConverterTest().makeConverter(defaultValue);
 
         // Default Locale
         assertEquals(Integer.valueOf(5), converter.convert(Integer.class, new String[] { "5", "4", "3" }),

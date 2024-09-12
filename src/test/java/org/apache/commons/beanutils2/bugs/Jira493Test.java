@@ -14,42 +14,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.beanutils2.bugs.other;
+package org.apache.commons.beanutils2.bugs;
 
-import org.apache.commons.beanutils2.bugs.Jira298Test;
+import static org.junit.Assert.assertEquals;
+
+import org.apache.commons.beanutils2.BeanUtilsBean;
+import org.apache.commons.beanutils2.LazyDynaBean;
+import org.junit.jupiter.api.Test;
 
 /**
- * Factory which creates beans for {@link Jira298Test}.
+ * Test setting indexed properties on dynabeans
+ *
+ * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-493">BEANUTILS-493</a>
  */
-public class Jira298BeanFactory {
 
-    static class BaseX {
-        private String name = "BaseX name value";
+public class Jira493Test {
 
-        public String getName() {
-            return name;
-        }
-
-        public void setName(final String name) {
-            this.name = name;
-        }
+    @Test
+    public void testIndexedProperties() throws Exception {
+        final LazyDynaBean lazyDynaBean = new LazyDynaBean();
+        final BeanUtilsBean beanUtilsBean = BeanUtilsBean.getInstance();
+        beanUtilsBean.setProperty(lazyDynaBean, "x[0]", "x1");
+        beanUtilsBean.setProperty(lazyDynaBean, "x[1]", "x2");
+        final Object x = lazyDynaBean.get("x");
+        assertEquals("[x1, x2]", x.toString());
     }
 
-    static class ImplX extends BaseX implements IX {
-    }
-
-    public interface IX {
-        String getName();
-
-        void setName(String name);
-    }
-
-    /**
-     * Factory method which creates ImplX.
-     *
-     * @return a new ImplX.
-     */
-    public static IX createImplX() {
-        return new ImplX();
-    }
 }

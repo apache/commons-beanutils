@@ -19,10 +19,10 @@ package org.apache.commons.beanutils2.bugs.other;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.beanutils2.bugs.Jira18TestCase;
+import org.apache.commons.beanutils2.bugs.Jira18Test;
 
 /**
- * Factory which creates <em>package</em> scope beans with public methods for {@link Jira18TestCase}.
+ * Factory which creates <em>package</em> scope beans with public methods for {@link Jira18Test}.
  */
 public class Jira18BeanFactory {
 
