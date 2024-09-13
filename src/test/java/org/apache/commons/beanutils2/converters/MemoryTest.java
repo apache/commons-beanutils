@@ -19,9 +19,9 @@ package org.apache.commons.beanutils2.converters;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.lang.ref.WeakReference;
 
@@ -116,7 +116,7 @@ public class MemoryTest {
                 // verify that this new object does implement the Converter type
                 // despite being loaded via a classloader different from the one
                 // that loaded the Converter class.
-                assertTrue(newFloatConverter instanceof Converter, "Converter loader via child does not implement parent type");
+                assertInstanceOf(Converter.class, newFloatConverter, "Converter loader via child does not implement parent type");
 
                 // this converter registration will only apply to the
                 // componentLoader classloader...
