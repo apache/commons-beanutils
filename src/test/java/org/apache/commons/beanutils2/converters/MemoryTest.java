@@ -17,11 +17,11 @@
 
 package org.apache.commons.beanutils2.converters;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.lang.ref.WeakReference;
 
@@ -116,7 +116,7 @@ public class MemoryTest {
                 // verify that this new object does implement the Converter type
                 // despite being loaded via a classloader different from the one
                 // that loaded the Converter class.
-                assertTrue("Converter loader via child does not implement parent type", newFloatConverter instanceof Converter);
+                assertTrue(newFloatConverter instanceof Converter, "Converter loader via child does not implement parent type");
 
                 // this converter registration will only apply to the
                 // componentLoader classloader...
@@ -152,7 +152,7 @@ public class MemoryTest {
             // force garbage collection and verify that the componentLoader
             // has been garbage-collected
             forceGarbageCollection(weakRefToComponent);
-            assertNull("Component classloader did not release properly; memory leak present", weakRefToComponent.get());
+            assertNull(weakRefToComponent.get(), "Component classloader did not release properly; memory leak present");
         } finally {
             // Restore context classloader that was present before this
             // test started. It is expected to be the same as the system
@@ -237,7 +237,7 @@ public class MemoryTest {
             // force garbage collection and verify that the componentLoader
             // has been garbage-collected
             forceGarbageCollection(weakRefToComponent1);
-            assertNull("Component classloader did not release properly; memory leak present", weakRefToComponent1.get());
+            assertNull(weakRefToComponent1.get(), "Component classloader did not release properly; memory leak present");
         } finally {
             // Restore context classloader that was present before this
             // test started, so that in case of a test failure we don't stuff

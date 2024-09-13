@@ -18,13 +18,13 @@
  */
 package org.apache.commons.beanutils2.converters;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import org.apache.commons.beanutils2.ConversionException;
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -47,7 +47,7 @@ public class InetAddressConverterTest {
         final InetAddress expected = InetAddress.getByName("192.168.0.1");
         final InetAddress actual = converter.convert(InetAddress.class, "192.168.0.1");
 
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -55,7 +55,7 @@ public class InetAddressConverterTest {
         final InetAddress expected = InetAddress.getByName("2001:db8:0:1234:0:567:8:1");
         final InetAddress actual = converter.convert(InetAddress.class, "2001:db8:0:1234:0:567:8:1");
 
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -63,7 +63,7 @@ public class InetAddressConverterTest {
         final InetAddress expected = InetAddress.getByName("127.0.0.1");
         final InetAddress actual = converter.convert(InetAddress.class, "localhost");
 
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test

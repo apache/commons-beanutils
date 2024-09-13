@@ -18,12 +18,12 @@
  */
 package org.apache.commons.beanutils2.converters;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.awt.Color;
 
 import org.apache.commons.beanutils2.ConversionException;
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -56,7 +56,7 @@ public class ColorConverterTest {
         final Color expected = Color.WHITE;
         final Color actual = converter.convert(Color.class, "white");
 
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -64,7 +64,7 @@ public class ColorConverterTest {
         final Color expected = Color.LIGHT_GRAY;
         final Color actual = converter.convert(Color.class, "LIGHTGRAY");
 
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -72,7 +72,7 @@ public class ColorConverterTest {
         final Color expected = Color.WHITE;
         final Color actual = converter.convert(Color.class, "java.awt.Color[r=255,g=255,b=255]");
 
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -80,7 +80,7 @@ public class ColorConverterTest {
         final Color expected = Color.DARK_GRAY;
         final Color actual = converter.convert(Color.class, "r=64,g=64,b=64");
 
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -88,7 +88,7 @@ public class ColorConverterTest {
         final Color expected = Color.PINK;
         final Color actual = converter.convert(Color.class, "255,175,175");
 
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -96,7 +96,7 @@ public class ColorConverterTest {
         final Color expected = Color.GREEN;
         final Color actual = converter.convert(Color.class, "[r=0,g=255,b=0]");
 
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     /**
@@ -108,7 +108,7 @@ public class ColorConverterTest {
         final Color expected = Color.MAGENTA;
         final Color actual = converter.convert(Color.class, "org.apache.ExtendedColor[r=255,g=0,b=255]");
 
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -116,7 +116,7 @@ public class ColorConverterTest {
         final Color expected = Color.BLUE;
         final Color actual = converter.convert(Color.class, "0x0000FF");
 
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -124,7 +124,7 @@ public class ColorConverterTest {
         final Color expected = Color.BLACK;
         final Color actual = converter.convert(Color.class, "#000000");
 
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -132,7 +132,7 @@ public class ColorConverterTest {
         final Color expected = Color.WHITE;
         final Color actual = converter.convert(Color.class, "#FFF");
 
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -140,7 +140,7 @@ public class ColorConverterTest {
         final Color expected = Color.YELLOW;
         final Color actual = converter.convert(Color.class, "#FF0F");
 
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -148,7 +148,7 @@ public class ColorConverterTest {
         final Color expected = Color.LIGHT_GRAY;
         final Color actual = converter.convert(Color.class, "#C0C0C0FF");
 
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test

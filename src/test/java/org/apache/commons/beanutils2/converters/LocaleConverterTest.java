@@ -18,9 +18,10 @@
  */
 package org.apache.commons.beanutils2.converters;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.Locale;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -43,7 +44,7 @@ public class LocaleConverterTest {
         final Locale expected = Locale.forLanguageTag("en-owo");
         final Locale actual = converter.convert(Locale.class, "en-owo");
 
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -51,6 +52,6 @@ public class LocaleConverterTest {
         final Locale expected = Locale.ENGLISH;
         final Locale actual = converter.convert(Locale.class, "en");
 
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 }

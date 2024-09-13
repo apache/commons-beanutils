@@ -18,9 +18,10 @@
  */
 package org.apache.commons.beanutils2.converters;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.regex.Pattern;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -43,6 +44,6 @@ public class PatternConverterTest {
         final String expected = "(?i)Ow.+O";
         final String actual = converter.convert(Pattern.class, "(?i)Ow.+O").toString();
 
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 }
