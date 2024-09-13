@@ -409,8 +409,8 @@ public class LazyDynaListTest {
     public void testSerializationDynaBean() throws Exception {
 
         // Create LazyArrayList for DynaBeans
-        LazyDynaList target = new LazyDynaList(basicDynaClass);
-        BasicDynaBean bean = (BasicDynaBean) target.get(0);
+        final LazyDynaList target = new LazyDynaList(basicDynaClass);
+        final BasicDynaBean bean = (BasicDynaBean) target.get(0);
 
         // Set a Property
         assertNull(bean.get(BASIC_PROP1), "pre-set check");
@@ -429,8 +429,8 @@ public class LazyDynaListTest {
     public void testSerializationLazyDynaBean() throws Exception {
 
         // Create LazyArrayList for DynaBeans
-        LazyDynaList target = new LazyDynaList();
-        LazyDynaBean bean = (LazyDynaBean) target.get(0);
+        final LazyDynaList target = new LazyDynaList();
+        final LazyDynaBean bean = (LazyDynaBean) target.get(0);
 
         // Set a Property
         assertNull(bean.get(BASIC_PROP1), "pre-set check");
@@ -449,8 +449,8 @@ public class LazyDynaListTest {
     public void testSerializationMap() throws Exception {
 
         // Create LazyArrayList for DynaBeans
-        LazyDynaList target = new LazyDynaList(treeMapDynaClass);
-        LazyDynaMap bean = (LazyDynaMap) target.get(0);
+        final LazyDynaList target = new LazyDynaList(treeMapDynaClass);
+        final LazyDynaMap bean = (LazyDynaMap) target.get(0);
 
         // Set a Property
         assertNull(bean.get(BASIC_PROP1), "pre-set check");
@@ -467,8 +467,8 @@ public class LazyDynaListTest {
     @Test
     public void testSerializationPojo() throws Exception {
         // Create LazyArrayList for DynaBeans
-        LazyDynaList target = new LazyDynaList(pojoDynaClass);
-        WrapDynaBean bean = (WrapDynaBean) target.get(0);
+        final LazyDynaList target = new LazyDynaList(pojoDynaClass);
+        final WrapDynaBean bean = (WrapDynaBean) target.get(0);
 
         // Set a Property
         assertEquals("This is a string", bean.get("stringProperty"), "pre-set check");
