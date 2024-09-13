@@ -38,12 +38,9 @@ public class PointConverter extends AbstractConverter<Point> {
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils2.Converter} that will return the specified default value if a
-     * conversion error occurs.
+     * Constructs a {@link org.apache.commons.beanutils2.Converter} that will return the specified default value if a conversion error occurs.
      *
-     * @param defaultValue The default value to be returned
-     * if the value to be converted is missing or an error
-     * occurs converting the value.
+     * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
      */
     public PointConverter(final Point defaultValue) {
         super(defaultValue);
@@ -52,12 +49,12 @@ public class PointConverter extends AbstractConverter<Point> {
     /**
      * Converts the specified input object into an output object of the specified type.
      *
-     * @param type Data type to which this value should be converted.
+     * @param type  Data type to which this value should be converted.
      * @param value The {@link String} property value to convert.
      * @return A {@link Point} represented by the x and y coordinate of the input.
-     * @throws NullPointerException If the value is null.
+     * @throws NullPointerException     If the value is null.
      * @throws IllegalArgumentException If the configuration value is an invalid representation of a {@link Point}.
-     * @throws NumberFormatException If a one of coordinates can not be parsed to an {@link Integer}.
+     * @throws NumberFormatException    If a one of coordinates can not be parsed to an {@link Integer}.
      */
     @Override
     protected <T> T convertToType(final Class<T> type, final Object value) throws Throwable {
@@ -78,8 +75,7 @@ public class PointConverter extends AbstractConverter<Point> {
             final String[] xy = POINT_SPLIT.split(coordinates);
 
             if (xy.length != 2) {
-                throw new IllegalArgumentException("Point must have an x coordinate, and y coordinate only, " +
-                    "expecting the following format: (40, 200)");
+                throw new IllegalArgumentException("Point must have an x coordinate, and y coordinate only, " + "expecting the following format: (40, 200)");
             }
 
             final int x = Integer.parseInt(xy[0]);

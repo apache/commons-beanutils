@@ -61,7 +61,7 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter<Double> {
      * @return The converted value
      *
      * @throws ConversionException if conversion cannot be performed successfully
-     * @throws ParseException                                    if an error occurs parsing a String to a Number
+     * @throws ParseException      if an error occurs parsing a String to a Number
      */
     @Override
     protected Double parse(final Object value, final String pattern) throws ParseException {

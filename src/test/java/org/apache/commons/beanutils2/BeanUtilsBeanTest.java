@@ -961,7 +961,7 @@ public class BeanUtilsBeanTest {
 
         utilsOne.getConvertUtils().register(new ThrowExceptionConverter(), Boolean.TYPE);
         bean.setBooleanProperty(false);
-        assertThrows(PassTestException.class, () ->        utilsOne.setProperty(bean, "booleanProperty", "true"));
+        assertThrows(PassTestException.class, () -> utilsOne.setProperty(bean, "booleanProperty", "true"));
 
         // make sure that this conversion has no been registered in the other instance
         bean.setBooleanProperty(false);

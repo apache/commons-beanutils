@@ -16,9 +16,7 @@
  */
 
 /**
- * Standard implementations of the
- * {@link org.apache.commons.beanutils2.Converter} interface that are
- * pre-registered with {@link org.apache.commons.beanutils2.ConvertUtils} at
- * startup time.
+ * Standard implementations of the {@link org.apache.commons.beanutils2.Converter} interface that are pre-registered with
+ * {@link org.apache.commons.beanutils2.ConvertUtils} at startup time.
  */
 package org.apache.commons.beanutils2.converters;

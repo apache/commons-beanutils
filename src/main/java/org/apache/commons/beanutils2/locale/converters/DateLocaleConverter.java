@@ -124,11 +124,11 @@ public class DateLocaleConverter<D extends Date> extends BaseLocaleConverter<D> 
      * Constructs a new instance.
      *
      * @param defaultValue default value.
-     * @param locale locale.
-     * @param pattern pattern.
-     * @param useDefault use the default.
-     * @param locPattern localized pattern.
-     * @param lenient leniency policy.
+     * @param locale       locale.
+     * @param pattern      pattern.
+     * @param useDefault   use the default.
+     * @param locPattern   localized pattern.
+     * @param lenient      leniency policy.
      */
     protected DateLocaleConverter(final D defaultValue, final Locale locale, final String pattern, final boolean useDefault, final boolean locPattern,
             final boolean lenient) {
@@ -221,7 +221,7 @@ public class DateLocaleConverter<D extends Date> extends BaseLocaleConverter<D> 
      * @param pattern The pattern is used for the conversion
      * @return the converted Date value
      * @throws ConversionException if conversion cannot be performed successfully
-     * @throws ParseException                                    if an error occurs parsing
+     * @throws ParseException      if an error occurs parsing
      */
     @Override
     protected D parse(final Object value, String pattern) throws ParseException {

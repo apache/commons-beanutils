@@ -39,6 +39,7 @@ public class Jira411Test {
             this.imgLink = imgLink;
         }
     }
+
     private BeanUtilsBean instance;
 
     private DummyBean testBean;

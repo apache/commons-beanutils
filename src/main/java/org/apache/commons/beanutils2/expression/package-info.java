@@ -16,7 +16,6 @@
  */
 
 /**
- * Contains the {@link org.apache.commons.beanutils2.expression.Resolver}
- * interface and implementations.
+ * Contains the {@link org.apache.commons.beanutils2.expression.Resolver} interface and implementations.
  */
 package org.apache.commons.beanutils2.expression;

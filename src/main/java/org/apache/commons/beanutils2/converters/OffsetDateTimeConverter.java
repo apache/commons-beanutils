@@ -19,17 +19,13 @@ package org.apache.commons.beanutils2.converters;
 import java.time.OffsetDateTime;
 
 /**
- * {@link DateTimeConverter} implementation that handles conversion to
- * and from <b>java.time.OffsetDateTime</b> objects.
+ * {@link DateTimeConverter} implementation that handles conversion to and from <b>java.time.OffsetDateTime</b> objects.
  * <p>
- * This implementation can be configured to handle conversion either
- * by using a Locale's default format or by specifying a set of format
- * patterns (note, there is no default String conversion for Calendar).
- * See the {@link DateTimeConverter} documentation for further details.
+ * This implementation can be configured to handle conversion either by using a Locale's default format or by specifying a set of format patterns (note, there
+ * is no default String conversion for Calendar). See the {@link DateTimeConverter} documentation for further details.
  * </p>
  * <p>
- * Can be configured to either return a <em>default value</em> or throw a
- * {@code ConversionException} if a conversion error occurs.
+ * Can be configured to either return a <em>default value</em> or throw a {@code ConversionException} if a conversion error occurs.
  * </p>
  *
  * @since 2.0
@@ -38,19 +34,15 @@ import java.time.OffsetDateTime;
 public final class OffsetDateTimeConverter extends DateTimeConverter<OffsetDateTime> {
 
     /**
-     * Constructs a <b>java.time.OffsetDateTime</b> <em>Converter</em> that throws
-     * a {@code ConversionException} if an error occurs.
+     * Constructs a <b>java.time.OffsetDateTime</b> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
      */
     public OffsetDateTimeConverter() {
     }
 
     /**
-     * Constructs a <b>java.time.OffsetDateTime</b> <em>Converter</em> that returns
-     * a default value if an error occurs.
+     * Constructs a <b>java.time.OffsetDateTime</b> <em>Converter</em> that returns a default value if an error occurs.
      *
-     * @param defaultValue The default value to be returned
-     * if the value to be converted is missing or an error
-     * occurs converting the value.
+     * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
      */
     public OffsetDateTimeConverter(final OffsetDateTime defaultValue) {
         super(defaultValue);

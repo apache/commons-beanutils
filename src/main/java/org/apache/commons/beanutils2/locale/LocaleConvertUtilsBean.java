@@ -41,17 +41,19 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <p>Utility methods for converting locale-sensitive String scalar values to objects of the
- * specified Class, String arrays to arrays of the specified Class and
- * object to locale-sensitive String scalar value.</p>
+ * <p>
+ * Utility methods for converting locale-sensitive String scalar values to objects of the specified Class, String arrays to arrays of the specified Class and
+ * object to locale-sensitive String scalar value.
+ * </p>
  *
- * <p>This class provides the implementations used by the static utility methods in
- * {@link LocaleConvertUtils}.</p>
+ * <p>
+ * This class provides the implementations used by the static utility methods in {@link LocaleConvertUtils}.
+ * </p>
  *
- * <p>The actual {@link LocaleConverter} instance to be used
- * can be registered for each possible destination Class. Unless you override them, standard
- * {@link LocaleConverter} instances are provided for all of the following
- * destination Classes:</p>
+ * <p>
+ * The actual {@link LocaleConverter} instance to be used can be registered for each possible destination Class. Unless you override them, standard
+ * {@link LocaleConverter} instances are provided for all of the following destination Classes:
+ * </p>
  * <ul>
  * <li>java.lang.BigDecimal</li>
  * <li>java.lang.BigInteger</li>
@@ -67,15 +69,13 @@ import org.apache.commons.logging.LogFactory;
  * <li>java.sql.Timestamp</li>
  * </ul>
  *
- * <p>For backwards compatibility, the standard locale converters
- * for primitive types (and the corresponding wrapper classes).
+ * <p>
+ * For backwards compatibility, the standard locale converters for primitive types (and the corresponding wrapper classes).
  *
- * If you prefer to have another {@link LocaleConverter}
- * thrown instead, replace the standard {@link LocaleConverter} instances
- * with ones created with the one of the appropriate constructors.
+ * If you prefer to have another {@link LocaleConverter} thrown instead, replace the standard {@link LocaleConverter} instances with ones created with the one
+ * of the appropriate constructors.
  *
- * It's important that {@link LocaleConverter} should be registered for
- * the specified locale and Class (or primitive type).
+ * It's important that {@link LocaleConverter} should be registered for the specified locale and Class (or primitive type).
  *
  * @since 1.7
  */
@@ -85,8 +85,8 @@ public class LocaleConvertUtilsBean {
     private static final Log LOG = LogFactory.getLog(LocaleConvertUtilsBean.class);
 
     /**
-     * Gets singleton instance.
-     * This is the same as the instance used by the default {@link LocaleBeanUtilsBean} singleton.
+     * Gets singleton instance. This is the same as the instance used by the default {@link LocaleBeanUtilsBean} singleton.
+     *
      * @return the singleton instance
      */
     public static LocaleConvertUtilsBean getInstance() {
@@ -109,8 +109,7 @@ public class LocaleConvertUtilsBean {
     private final WeakFastHashMap<Locale, Map<Class<?>, LocaleConverter<?>>> mapConverters = new WeakFastHashMap<>();
 
     /**
-     *  Makes the state by default (deregisters all converters for all locales)
-     *  and then registers default locale converters.
+     * Makes the state by default (deregisters all converters for all locales) and then registers default locale converters.
      */
     public LocaleConvertUtilsBean() {
         mapConverters.setFast(false);
@@ -124,24 +123,21 @@ public class LocaleConvertUtilsBean {
      * @param value The Value to be converted
      * @return the converted value
      *
-     * @throws ConversionException if thrown by an
-     * underlying Converter
+     * @throws ConversionException if thrown by an underlying Converter
      */
     public String convert(final Object value) {
         return convert(value, defaultLocale, null);
     }
 
     /**
-     * Convert the specified locale-sensitive value into a String
-     * using the particular conversion pattern.
+     * Convert the specified locale-sensitive value into a String using the particular conversion pattern.
      *
-     * @param value The Value to be converted
-     * @param locale The locale
+     * @param value   The Value to be converted
+     * @param locale  The locale
      * @param pattern The conversion pattern
      * @return the converted value
      *
-     * @throws ConversionException if thrown by an
-     * underlying Converter
+     * @throws ConversionException if thrown by an underlying Converter
      */
     public String convert(final Object value, final Locale locale, final String pattern) {
         final LocaleConverter<String> converter = lookup(String.class, locale);
@@ -149,54 +145,46 @@ public class LocaleConvertUtilsBean {
     }
 
     /**
-     * Convert the specified locale-sensitive value into a String
-     * using the conversion pattern.
+     * Convert the specified locale-sensitive value into a String using the conversion pattern.
      *
-     * @param value The Value to be converted
-     * @param pattern       The conversion pattern
+     * @param value   The Value to be converted
+     * @param pattern The conversion pattern
      * @return the converted value
      *
-     * @throws ConversionException if thrown by an
-     * underlying Converter
+     * @throws ConversionException if thrown by an underlying Converter
      */
     public String convert(final Object value, final String pattern) {
         return convert(value, defaultLocale, pattern);
     }
 
     /**
-     * Convert the specified value to an object of the specified class (if
-     * possible).  Otherwise, return a String representation of the value.
+     * Convert the specified value to an object of the specified class (if possible). Otherwise, return a String representation of the value.
      *
      * @param value The String scalar value to be converted
      * @param clazz The Data type to which this value should be converted.
      * @return the converted value
      *
-     * @throws ConversionException if thrown by an
-     * underlying Converter
+     * @throws ConversionException if thrown by an underlying Converter
      */
     public Object convert(final String value, final Class<?> clazz) {
         return convert(value, clazz, defaultLocale, null);
     }
 
     /**
-     * Convert the specified value to an object of the specified class (if
-     * possible) using the conversion pattern. Otherwise, return a String
-     * representation of the value.
+     * Convert the specified value to an object of the specified class (if possible) using the conversion pattern. Otherwise, return a String representation of
+     * the value.
      *
-     * @param value The String scalar value to be converted
-     * @param clazz The Data type to which this value should be converted.
-     * @param locale The locale
+     * @param value   The String scalar value to be converted
+     * @param clazz   The Data type to which this value should be converted.
+     * @param locale  The locale
      * @param pattern The conversion pattern
      * @return the converted value
      *
-     * @throws ConversionException if thrown by an
-     * underlying Converter
+     * @throws ConversionException if thrown by an underlying Converter
      */
     public Object convert(final String value, final Class<?> clazz, final Locale locale, final String pattern) {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("Convert string " + value + " to class " +
-                    clazz.getName() + " using " + locale +
-                    " locale and " + pattern + " pattern");
+            LOG.debug("Convert string " + value + " to class " + clazz.getName() + " using " + locale + " locale and " + pattern + " pattern");
         }
 
         Class<?> targetClass = clazz;
@@ -214,50 +202,44 @@ public class LocaleConvertUtilsBean {
     }
 
     /**
-     * Convert the specified value to an object of the specified class (if
-     * possible) using the conversion pattern. Otherwise, return a String
-     * representation of the value.
+     * Convert the specified value to an object of the specified class (if possible) using the conversion pattern. Otherwise, return a String representation of
+     * the value.
      *
-     * @param value The String scalar value to be converted
-     * @param clazz The Data type to which this value should be converted.
+     * @param value   The String scalar value to be converted
+     * @param clazz   The Data type to which this value should be converted.
      * @param pattern The conversion pattern
      * @return the converted value
      *
-     * @throws ConversionException if thrown by an
-     * underlying Converter
+     * @throws ConversionException if thrown by an underlying Converter
      */
     public Object convert(final String value, final Class<?> clazz, final String pattern) {
         return convert(value, clazz, defaultLocale, pattern);
     }
 
     /**
-        * Convert an array of specified values to an array of objects of the
-        * specified class (if possible) .
-        *
-        * @param values Value to be converted (may be null)
-        * @param clazz Java array or element class to be converted to
-        * @return the converted value
-        *
-         * @throws ConversionException if thrown by an
-         * underlying Converter
-        */
-       public Object convert(final String[] values, final Class<?> clazz) {
-           return convert(values, clazz, getDefaultLocale(), null);
-       }
+     * Convert an array of specified values to an array of objects of the specified class (if possible) .
+     *
+     * @param values Value to be converted (may be null)
+     * @param clazz  Java array or element class to be converted to
+     * @return the converted value
+     *
+     * @throws ConversionException if thrown by an underlying Converter
+     */
+    public Object convert(final String[] values, final Class<?> clazz) {
+        return convert(values, clazz, getDefaultLocale(), null);
+    }
 
     /**
-     * Convert an array of specified values to an array of objects of the
-     * specified class (if possible) using the conversion pattern.
+     * Convert an array of specified values to an array of objects of the specified class (if possible) using the conversion pattern.
      *
-     * @param <T> The result component type
-     * @param values Value to be converted (may be null)
-     * @param clazz Java array or element class to be converted to
-     * @param locale The locale
+     * @param <T>     The result component type
+     * @param values  Value to be converted (may be null)
+     * @param clazz   Java array or element class to be converted to
+     * @param locale  The locale
      * @param pattern The conversion pattern
      * @return the converted value
      *
-     * @throws ConversionException if thrown by an
-     * underlying Converter
+     * @throws ConversionException if thrown by an underlying Converter
      */
     public <T> T[] convert(final String[] values, final Class<T> clazz, final Locale locale, final String pattern) {
         Class<?> type = clazz;
@@ -265,9 +247,7 @@ public class LocaleConvertUtilsBean {
             type = clazz.getComponentType();
         }
         if (LOG.isDebugEnabled()) {
-            LOG.debug("Convert String[" + values.length + "] to class " +
-                    type.getName() + "[] using " + locale +
-                    " locale and " + pattern + " pattern");
+            LOG.debug("Convert String[" + values.length + "] to class " + type.getName() + "[] using " + locale + " locale and " + pattern + " pattern");
         }
 
         final T[] array = (T[]) Array.newInstance(type, values.length);
@@ -278,17 +258,15 @@ public class LocaleConvertUtilsBean {
     }
 
     /**
-     * Convert an array of specified values to an array of objects of the
-     * specified class (if possible) using the conversion pattern.
+     * Convert an array of specified values to an array of objects of the specified class (if possible) using the conversion pattern.
      *
-     * @param <T> The array component type
-     * @param values Value to be converted (may be null)
-     * @param clazz Java array or element class to be converted to
+     * @param <T>     The array component type
+     * @param values  Value to be converted (may be null)
+     * @param clazz   Java array or element class to be converted to
      * @param pattern The conversion pattern
      * @return the converted value
      *
-     * @throws ConversionException if thrown by an
-     * underlying Converter
+     * @throws ConversionException if thrown by an underlying Converter
      */
     public <T> T[] convert(final String[] values, final Class<T> clazz, final String pattern) {
         return convert(values, clazz, getDefaultLocale(), pattern);
@@ -298,8 +276,7 @@ public class LocaleConvertUtilsBean {
      * Create all {@link LocaleConverter} types for specified locale.
      *
      * @param locale The Locale
-     * @return The map instance contains the all {@link LocaleConverter} types
-     *  for the specified locale.
+     * @return The map instance contains the all {@link LocaleConverter} types for the specified locale.
      */
     protected Map<Class<?>, LocaleConverter<?>> create(final Locale locale) {
         final WeakFastHashMap<Class<?>, LocaleConverter<?>> converter = new WeakFastHashMap<>();
@@ -355,7 +332,7 @@ public class LocaleConvertUtilsBean {
     /**
      * Remove any registered {@link LocaleConverter} for the specified locale and Class.
      *
-     * @param clazz Class for which to remove a registered Converter
+     * @param clazz  Class for which to remove a registered Converter
      * @param locale The locale
      */
     public void deregister(final Class<?> clazz, final Locale locale) {
@@ -374,8 +351,7 @@ public class LocaleConvertUtilsBean {
     /**
      * getter for applyLocalized
      *
-     * @return {@code true} if pattern is localized,
-     * otherwise {@code false}
+     * @return {@code true} if pattern is localized, otherwise {@code false}
      */
     public boolean getApplyLocalized() {
         return applyLocalized;
@@ -383,6 +359,7 @@ public class LocaleConvertUtilsBean {
 
     /**
      * getter for defaultLocale.
+     *
      * @return the default locale
      */
     public Locale getDefaultLocale() {
@@ -390,12 +367,11 @@ public class LocaleConvertUtilsBean {
     }
 
     /**
-     * Look up and return any registered {@link LocaleConverter} for the specified
-     * destination class and locale; if there is no registered Converter, return
+     * Look up and return any registered {@link LocaleConverter} for the specified destination class and locale; if there is no registered Converter, return
      * {@code null}.
      *
-     * @param <T> The converter type.
-     * @param clazz Class for which to return a registered Converter
+     * @param <T>    The converter type.
+     * @param clazz  Class for which to return a registered Converter
      * @param locale The Locale
      * @return The registered locale Converter, if any
      */
@@ -410,26 +386,22 @@ public class LocaleConvertUtilsBean {
     }
 
     /**
-     * Look up and return any registered map instance for the specified locale;
-     * if there is no registered one, return {@code null}.
+     * Look up and return any registered map instance for the specified locale; if there is no registered one, return {@code null}.
      *
      * @param locale The Locale
-     * @return The map instance contains the all {@link LocaleConverter} types for
-     *  the specified locale.
+     * @return The map instance contains the all {@link LocaleConverter} types for the specified locale.
      */
     protected Map<Class<?>, LocaleConverter<?>> lookup(final Locale locale) {
         return mapConverters.computeIfAbsent(locale == null ? defaultLocale : locale, this::create);
     }
 
     /**
-     * Register a custom {@link LocaleConverter} for the specified destination
-     * {@code Class}, replacing any previously registered converter.
+     * Register a custom {@link LocaleConverter} for the specified destination {@code Class}, replacing any previously registered converter.
      *
-     * @param <T> The converter type.
+     * @param <T>       The converter type.
      * @param converter The LocaleConverter to be registered
-     * @param clazz The Destination class for conversions performed by this
-     *  Converter
-     * @param locale The locale
+     * @param clazz     The Destination class for conversions performed by this Converter
+     * @param locale    The locale
      */
     public <T> void register(final LocaleConverter<T> converter, final Class<T> clazz, final Locale locale) {
         lookup(locale).put(clazz, converter);
@@ -438,8 +410,7 @@ public class LocaleConvertUtilsBean {
     /**
      * setter for applyLocalized
      *
-     * @param newApplyLocalized {@code true} if pattern is localized,
-     * otherwise {@code false}
+     * @param newApplyLocalized {@code true} if pattern is localized, otherwise {@code false}
      */
     public void setApplyLocalized(final boolean newApplyLocalized) {
         applyLocalized = newApplyLocalized;
@@ -447,13 +418,13 @@ public class LocaleConvertUtilsBean {
 
     /**
      * setter for defaultLocale.
+     *
      * @param locale the default locale
      */
     public void setDefaultLocale(final Locale locale) {
         if (locale == null) {
             defaultLocale = Locale.getDefault();
-        }
-        else {
+        } else {
             defaultLocale = locale;
         }
     }

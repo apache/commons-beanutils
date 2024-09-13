@@ -24,8 +24,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <p>Predicate implementation that applies the given {@code Predicate}
- * to the result of calling the given property getter.
+ * <p>
+ * Predicate implementation that applies the given {@code Predicate} to the result of calling the given property getter.
  * </p>
  *
  * @param <T> the type of the input to the predicate
@@ -41,12 +41,10 @@ public class BeanPredicate<T> implements Predicate<T> {
     private Predicate<T> predicate;
 
     /**
-     * Constructs a {@code BeanPredicate} that applies the given
-     * {@code Predicate} to the named property value.
-     * @param propertyName the name of the property whose value is to be predicated,
-     * not null
-     * @param predicate the {@code Predicate} to be applied,
-     * not null
+     * Constructs a {@code BeanPredicate} that applies the given {@code Predicate} to the named property value.
+     *
+     * @param propertyName the name of the property whose value is to be predicated, not null
+     * @param predicate    the {@code Predicate} to be applied, not null
      */
     public BeanPredicate(final String propertyName, final Predicate<T> predicate) {
         this.propertyName = propertyName;
@@ -54,8 +52,8 @@ public class BeanPredicate<T> implements Predicate<T> {
     }
 
     /**
-     * Gets the {@code Predicate} to be applied to the value of the named property
-     * during {@link #test(Object)}.
+     * Gets the {@code Predicate} to be applied to the value of the named property during {@link #test(Object)}.
+     *
      * @return {@code Predicate}, not null
      */
     public Predicate<T> getPredicate() {
@@ -63,8 +61,8 @@ public class BeanPredicate<T> implements Predicate<T> {
     }
 
     /**
-     * Gets the name of the property whose value is to be predicated.
-     * in the evaluation.
+     * Gets the name of the property whose value is to be predicated. in the evaluation.
+     *
      * @return the property name, not null
      */
     public String getPropertyName() {
@@ -72,8 +70,8 @@ public class BeanPredicate<T> implements Predicate<T> {
     }
 
     /**
-     * Sets the {@code Predicate} to be applied to the value of the named property
-     * during {@link #test(Object)}.
+     * Sets the {@code Predicate} to be applied to the value of the named property during {@link #test(Object)}.
+     *
      * @param predicate {@code Predicate}, not null
      */
     public void setPredicate(final Predicate<T> predicate) {
@@ -82,16 +80,15 @@ public class BeanPredicate<T> implements Predicate<T> {
 
     /**
      * Sets the name of the property whose value is to be predicated.
-     * @param propertyName the name of the property whose value is to be predicated,
-     * not null
+     *
+     * @param propertyName the name of the property whose value is to be predicated, not null
      */
     public void setPropertyName(final String propertyName) {
         this.propertyName = propertyName;
     }
 
     /**
-     * Evaluates the given object by applying the {@link #getPredicate()}
-     * to a property value named by {@link #getPropertyName()}.
+     * Evaluates the given object by applying the {@link #getPredicate()} to a property value named by {@link #getPropertyName()}.
      *
      * @param object The object to test
      * @return the result of the predicate evaluation

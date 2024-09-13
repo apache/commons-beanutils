@@ -17,11 +17,9 @@
 package org.apache.commons.beanutils2.converters;
 
 /**
- * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion
- * to and from <b>java.lang.Enum</b> objects.
+ * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion to and from <b>java.lang.Enum</b> objects.
  * <p>
- * Can be configured to either return a <em>default value</em> or throw a
- * {@code ConversionException} if a conversion error occurs.
+ * Can be configured to either return a <em>default value</em> or throw a {@code ConversionException} if a conversion error occurs.
  * </p>
  *
  * @param <E> The enum type subclass
@@ -31,35 +29,33 @@ package org.apache.commons.beanutils2.converters;
 public final class EnumConverter<E extends Enum<E>> extends AbstractConverter<Enum<E>> {
 
     /**
-     * Constructs a <b>java.lang.Enum</b> <em>Converter</em> that throws
-     * a {@code ConversionException} if an error occurs.
+     * Constructs a <b>java.lang.Enum</b> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
      */
     public EnumConverter() {
     }
 
     /**
-     * Constructs a <b>java.lang.Enum</b> <em>Converter</em> that returns
-     * a default value if an error occurs.
+     * Constructs a <b>java.lang.Enum</b> <em>Converter</em> that returns a default value if an error occurs.
      *
-     * @param defaultValue The default value to be returned
-     * if the value to be converted is missing or an error
-     * occurs converting the value.
+     * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
      */
     public EnumConverter(final Enum<E> defaultValue) {
         super(defaultValue);
     }
 
     /**
-     * <p>Converts a java.lang.Enum or object into a String.</p>
+     * <p>
+     * Converts a java.lang.Enum or object into a String.
+     * </p>
      *
-     * @param <R> Target type of the conversion.
-     * @param type Data type to which this value should be converted.
+     * @param <R>   Target type of the conversion.
+     * @param type  Data type to which this value should be converted.
      * @param value The input value to be converted.
      * @return The converted value.
      * @throws Throwable if an error occurs converting to the specified type
      * @since 2.0
      */
-    @SuppressWarnings({"rawtypes"})
+    @SuppressWarnings({ "rawtypes" })
     @Override
     protected <R> R convertToType(final Class<R> type, final Object value) throws Throwable {
         if (Enum.class.isAssignableFrom(type)) {
@@ -69,7 +65,7 @@ public final class EnumConverter<E extends Enum<E>> extends AbstractConverter<En
                 throw conversionException(type, value);
             }
             for (final R candidate : constants) {
-                if (((Enum)candidate).name().equalsIgnoreCase(enumValue)) {
+                if (((Enum) candidate).name().equalsIgnoreCase(enumValue)) {
                     return candidate;
                 }
             }
@@ -84,7 +80,7 @@ public final class EnumConverter<E extends Enum<E>> extends AbstractConverter<En
      * @return The default type this {@code Converter} handles.
      * @since 2.0
      */
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     protected Class<Enum<E>> getDefaultType() {
         return (Class) Enum.class;

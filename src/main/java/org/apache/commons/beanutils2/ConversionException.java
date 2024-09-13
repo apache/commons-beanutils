@@ -18,8 +18,7 @@
 package org.apache.commons.beanutils2;
 
 /**
- * A <strong>ConversionException</strong> indicates that a call to
- * {@code Converter.convert()} has failed to complete successfully.
+ * A <strong>ConversionException</strong> indicates that a call to {@code Converter.convert()} has failed to complete successfully.
  *
  * @since 1.3
  */
@@ -52,7 +51,7 @@ public class ConversionException extends RuntimeException {
      * Constructs a new exception with the specified message and root cause.
      *
      * @param message The message describing this exception
-     * @param cause The root cause of this exception
+     * @param cause   The root cause of this exception
      */
     public ConversionException(final String message, final Throwable cause) {
         super(message, cause);

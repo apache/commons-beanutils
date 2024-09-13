@@ -77,9 +77,7 @@ public class FloatConverterTest extends AbstractNumberConverterTest<Float> {
         assertEquals(Float.valueOf(Float.MAX_VALUE), converter.convert(clazz, max), "Maximum");
 
         // Too Large
-        assertThrows(ConversionException.class,
-                     () -> converter.convert(clazz, tooBig),
-                     "More than maximum, expected ConversionException");
+        assertThrows(ConversionException.class, () -> converter.convert(clazz, tooBig), "More than maximum, expected ConversionException");
     }
 
     @Test

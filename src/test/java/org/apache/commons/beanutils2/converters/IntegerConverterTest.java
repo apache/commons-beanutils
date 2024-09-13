@@ -82,14 +82,10 @@ public class IntegerConverterTest extends AbstractNumberConverterTest<Integer> {
         assertEquals(Integer.valueOf(Integer.MAX_VALUE), converter.convert(clazz, max), "Maximum");
 
         // Too Small
-        assertThrows(ConversionException.class,
-                     () -> converter.convert(clazz, minMinusOne),
-                     "Less than minimum, expected ConversionException");
+        assertThrows(ConversionException.class, () -> converter.convert(clazz, minMinusOne), "Less than minimum, expected ConversionException");
 
         // Too Large
-        assertThrows(ConversionException.class,
-                     () -> converter.convert(clazz, maxPlusOne),
-                     "More than maximum, expected ConversionException");
+        assertThrows(ConversionException.class, () -> converter.convert(clazz, maxPlusOne), "More than maximum, expected ConversionException");
     }
 
     /**

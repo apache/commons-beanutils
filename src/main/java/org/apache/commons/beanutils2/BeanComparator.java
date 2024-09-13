@@ -22,19 +22,16 @@ import java.util.Comparator;
 
 /**
  * <p>
- * This comparator compares two beans by the specified bean property. It is also possible to compare beans based on
- * nested, indexed, combined, mapped bean properties. Please see the {@link PropertyUtilsBean} documentation for all
- * property name possibilities.
+ * This comparator compares two beans by the specified bean property. It is also possible to compare beans based on nested, indexed, combined, mapped bean
+ * properties. Please see the {@link PropertyUtilsBean} documentation for all property name possibilities.
  *
  * </p>
  * <p>
- * <strong>Note:</strong> The BeanComparator passes the values of the specified bean property to an internal natural
- * order {@link Comparator}, if no comparator is specified in the constructor. If you are comparing two beans based on a
- * property that could contain "null" values, a suitable {@code Comparator} or Apache Commons Collection
- * {@code ComparatorChain} should be supplied in the constructor. Note that the passed in {@code Comparator} must
- * be able to handle the passed in objects. Because the type of the property to be compared is not known at compile time
- * no type checks can be performed by the compiler. Thus {@code ClassCastException} exceptions can be thrown if
- * unexpected property values occur.
+ * <strong>Note:</strong> The BeanComparator passes the values of the specified bean property to an internal natural order {@link Comparator}, if no comparator
+ * is specified in the constructor. If you are comparing two beans based on a property that could contain "null" values, a suitable {@code Comparator} or Apache
+ * Commons Collection {@code ComparatorChain} should be supplied in the constructor. Note that the passed in {@code Comparator} must be able to handle the
+ * passed in objects. Because the type of the property to be compared is not known at compile time no type checks can be performed by the compiler. Thus
+ * {@code ClassCastException} exceptions can be thrown if unexpected property values occur.
  * </p>
  *
  * @param <T> the type of beans to be compared by this {@code Comparator}
@@ -45,15 +42,14 @@ public class BeanComparator<T, V> implements Comparator<T> {
     /**
      * A {@link Comparator Comparator} that compares {@link Comparable Comparable} objects.
      * <p>
-     * This Comparator is useful, for example, for enforcing the natural order in custom implementations of
-     * {@link java.util.SortedSet SortedSet} and {@link java.util.SortedMap SortedMap}.
+     * This Comparator is useful, for example, for enforcing the natural order in custom implementations of {@link java.util.SortedSet SortedSet} and
+     * {@link java.util.SortedMap SortedMap}.
      * </p>
      *
      * @param <E> the type of objects compared by this comparator
      * @see java.util.Collections#reverseOrder()
      */
-    private static final class NaturalOrderComparator<E extends Comparable<? super E>>
-            implements Comparator<E> {
+    private static final class NaturalOrderComparator<E extends Comparable<? super E>> implements Comparator<E> {
 
         /** The singleton instance. */
         @SuppressWarnings("rawtypes")
@@ -87,6 +83,7 @@ public class BeanComparator<T, V> implements Comparator<T> {
             return "NaturalOrderComparator".hashCode();
         }
     }
+
     private static final long serialVersionUID = 1L;
 
     /** Property. */
@@ -112,33 +109,29 @@ public class BeanComparator<T, V> implements Comparator<T> {
 
     /**
      * <p>
-     * Constructs a property-based comparator for beans. This compares two beans by the property specified in the
-     * property parameter. This constructor creates a {@code BeanComparator} that uses a
-     * {@code ComparableComparator} to compare the property values.
+     * Constructs a property-based comparator for beans. This compares two beans by the property specified in the property parameter. This constructor creates a
+     * {@code BeanComparator} that uses a {@code ComparableComparator} to compare the property values.
      * </p>
      *
      * <p>
-     * Passing "null" to this constructor will cause the BeanComparator to compare objects based on natural order, that
-     * is {@link Comparable}.
+     * Passing "null" to this constructor will cause the BeanComparator to compare objects based on natural order, that is {@link Comparable}.
      * </p>
      *
-     * @param property String Name of a bean property, which may contain the name of a simple, nested, indexed, mapped,
-     *        or combined property. See {@link PropertyUtilsBean} for property query language syntax. If the property
-     *        passed in is null then the actual objects will be compared
+     * @param property String Name of a bean property, which may contain the name of a simple, nested, indexed, mapped, or combined property. See
+     *                 {@link PropertyUtilsBean} for property query language syntax. If the property passed in is null then the actual objects will be compared
      */
     public BeanComparator(final String property) {
         this(property, NaturalOrderComparator.INSTANCE);
     }
 
     /**
-     * Constructs a property-based comparator for beans. This constructor creates a BeanComparator that uses the
-     * supplied Comparator to compare the property values.
+     * Constructs a property-based comparator for beans. This constructor creates a BeanComparator that uses the supplied Comparator to compare the property
+     * values.
      *
-     * @param property Name of a bean property, can contain the name of a simple, nested, indexed, mapped, or combined
-     *        property. See {@link PropertyUtilsBean} for property query language syntax.
-     * @param comparator BeanComparator will pass the values of the specified bean property to this Comparator. If your
-     *        bean property is not a comparable or contains null values, a suitable comparator may be supplied in this
-     *        constructor.
+     * @param property   Name of a bean property, can contain the name of a simple, nested, indexed, mapped, or combined property. See {@link PropertyUtilsBean}
+     *                   for property query language syntax.
+     * @param comparator BeanComparator will pass the values of the specified bean property to this Comparator. If your bean property is not a comparable or
+     *                   contains null values, a suitable comparator may be supplied in this constructor.
      */
     public BeanComparator(final String property, final Comparator<V> comparator) {
         setProperty(property);
@@ -146,8 +139,7 @@ public class BeanComparator<T, V> implements Comparator<T> {
     }
 
     /**
-     * Compare two JavaBeans by their shared property. If {@link #getProperty} is null then the actual objects will be
-     * compared.
+     * Compare two JavaBeans by their shared property. If {@link #getProperty} is null then the actual objects will be compared.
      *
      * @param o1 Object The first bean to get data from to compare against
      * @param o2 Object The second bean to get data from to compare
@@ -166,13 +158,12 @@ public class BeanComparator<T, V> implements Comparator<T> {
             final Object value2 = PropertyUtils.getProperty(o2, property);
             return internalCompare(value1, value2);
         } catch (final NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            throw new RuntimeException(e.getClass().getSimpleName()+": " + e.toString());
+            throw new RuntimeException(e.getClass().getSimpleName() + ": " + e.toString());
         }
     }
 
     /**
-     * Two {@code BeanComparator}'s are equals if and only if the wrapped comparators and the property names to be
-     * compared are equal.
+     * Two {@code BeanComparator}'s are equals if and only if the wrapped comparators and the property names to be compared are equal.
      *
      * @param o Comparator to compare to
      * @return whether the comparators are equal or not
@@ -227,8 +218,8 @@ public class BeanComparator<T, V> implements Comparator<T> {
     }
 
     /**
-     * Compares the given values using the internal {@code Comparator}. <em>Note</em>: This comparison cannot be
-     * performed in a type-safe way; so {@code ClassCastException} exceptions may be thrown.
+     * Compares the given values using the internal {@code Comparator}. <em>Note</em>: This comparison cannot be performed in a type-safe way; so
+     * {@code ClassCastException} exceptions may be thrown.
      *
      * @param val1 the first value to be compared
      * @param val2 the second value to be compared
@@ -242,8 +233,7 @@ public class BeanComparator<T, V> implements Comparator<T> {
     /**
      * Sets the method to be called to compare two JavaBeans
      *
-     * @param property String method name to call to compare If the property passed in is null then the actual objects
-     *        will be compared
+     * @param property String method name to call to compare If the property passed in is null then the actual objects will be compared
      */
     public void setProperty(final String property) {
         this.property = property;

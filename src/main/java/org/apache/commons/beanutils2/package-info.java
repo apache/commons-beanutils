@@ -16,62 +16,63 @@
  */
 
 /**
- * <p>The <em>Bean Introspection Utilities</em> component of the Apache Commons
- * subproject offers low-level utility classes that assist in getting and setting
- * property values on Java classes that follow the naming design patterns outlined
- * in the JavaBeans Specification, as well as mechanisms for dynamically defining
- * and accessing bean properties.</p>
+ * <p>
+ * The <em>Bean Introspection Utilities</em> component of the Apache Commons subproject offers low-level utility classes that assist in getting and setting
+ * property values on Java classes that follow the naming design patterns outlined in the JavaBeans Specification, as well as mechanisms for dynamically
+ * defining and accessing bean properties.
+ * </p>
  *
  * <h2>Table of Contents</h2>
  *
  * <ul>
  * <li>1. <a href="#overview">Overview</a>
- *     <ul>
- *     <li>1.1 <a href="#overview.background">Background</a></li>
- *     <li>1.2 <a href="#overview.dependencies">External Dependencies</a></li>
- *     </ul>
+ * <ul>
+ * <li>1.1 <a href="#overview.background">Background</a></li>
+ * <li>1.2 <a href="#overview.dependencies">External Dependencies</a></li>
+ * </ul>
  * </li>
  * <li>2. <a href="#standard">Standard JavaBeans</a>
- *     <ul>
- *     <li>2.1 <a href="#standard.background">Background</a></li>
- *     <li>2.2 <a href="#standard.basic">Basic Property Access</a></li>
- *     <li>2.3 <a href="#standard.nested">Nested Property Access</a></li>
- *     <li>2.4 <a href="#standard.customize">Customizing Introspection</a></li>
- *     <li>2.5 <a href="#standard.suppress">Suppressing Properties</a></li>
- *     </ul>
+ * <ul>
+ * <li>2.1 <a href="#standard.background">Background</a></li>
+ * <li>2.2 <a href="#standard.basic">Basic Property Access</a></li>
+ * <li>2.3 <a href="#standard.nested">Nested Property Access</a></li>
+ * <li>2.4 <a href="#standard.customize">Customizing Introspection</a></li>
+ * <li>2.5 <a href="#standard.suppress">Suppressing Properties</a></li>
+ * </ul>
  * </li>
  * <li>3. <a href="#dynamic">Dynamic Beans (DynaBeans)</a>
- *     <ul>
- *     <li>3.1 <a href="#dynamic.background">Background</a></li>
- *     <li>3.2 <a href="#dynamic.basic">BasicDynaBean and BasicDynaClass</a></li>
- *     <li>3.3 <a href="#dynamic.resultSet">ResultSetDynaClass (Wraps ResultSet in DynaBeans)</a></li>
- *     <li>3.4 <a href="#dynamic.rowSet">RowSetDynaClass (Disconnected ResultSet as DynaBeans)</a></li>
- *     <li>3.5 <a href="#dynamic.wrap">WrapDynaBean and WrapDynaClass</a></li>
- *     <li>3.6 <a href="#dynamic.lazy"><em>Lazy</em> DynaBeans</a></li>
- *     </ul>
+ * <ul>
+ * <li>3.1 <a href="#dynamic.background">Background</a></li>
+ * <li>3.2 <a href="#dynamic.basic">BasicDynaBean and BasicDynaClass</a></li>
+ * <li>3.3 <a href="#dynamic.resultSet">ResultSetDynaClass (Wraps ResultSet in DynaBeans)</a></li>
+ * <li>3.4 <a href="#dynamic.rowSet">RowSetDynaClass (Disconnected ResultSet as DynaBeans)</a></li>
+ * <li>3.5 <a href="#dynamic.wrap">WrapDynaBean and WrapDynaClass</a></li>
+ * <li>3.6 <a href="#dynamic.lazy"><em>Lazy</em> DynaBeans</a></li>
+ * </ul>
  * </li>
  * <li>4. <a href="#conversion">Data Type Conversions</a>
- *     <ul>
- *     <li>4.1 <a href="#conversion.background">Background</a></li>
- *     <li>4.2 <a href="#conversion.beanutils">BeanUtils and ConvertUtils
- *         Conversions</a></li>
- *     <li>4.3 <a href="#conversion.defining">Defining Your Own Converters</a></li>
- *     <li>4.4 <a href="#conversion.i18n">Locale Aware Conversions</a></li>
- *     </ul>
+ * <ul>
+ * <li>4.1 <a href="#conversion.background">Background</a></li>
+ * <li>4.2 <a href="#conversion.beanutils">BeanUtils and ConvertUtils Conversions</a></li>
+ * <li>4.3 <a href="#conversion.defining">Defining Your Own Converters</a></li>
+ * <li>4.4 <a href="#conversion.i18n">Locale Aware Conversions</a></li>
+ * </ul>
  * </li>
  * <li>5. <a href="#instances">Utility Objects And Static Utility Classes</a></li>
  * <li>6. <a href="#collections">Collections</a>
- *     <ul>
- *     <li>6.1 <a href="#bean-comparator">Comparing Beans</a></li>
- *     <li>6.2 <a href="#bean-property-closure">Operating On Collections Of Beans</a></li>
- *     <li>6.3 <a href="#bean-property-predicate">Querying Or Filtering Collections Of Beans</a></li>
- *     <li>6.4 <a href="#bean-property-transformer">Transforming Collections Of Beans</a></li>
- *     </ul></li>
+ * <ul>
+ * <li>6.1 <a href="#bean-comparator">Comparing Beans</a></li>
+ * <li>6.2 <a href="#bean-property-closure">Operating On Collections Of Beans</a></li>
+ * <li>6.3 <a href="#bean-property-predicate">Querying Or Filtering Collections Of Beans</a></li>
+ * <li>6.4 <a href="#bean-property-transformer">Transforming Collections Of Beans</a></li>
+ * </ul>
+ * </li>
  * <li>7. <a href="#FAQ">Frequently Asked Questions</a>
- *     <ul>
- *     <li><a href="#FAQ.property">Why Can't BeanUtils Find My Method?</a></li>
- *     <li><a href="#FAQ.bc.order">How Do I Set The BeanComparator Order To Be Ascending/Descending?</a></li>
- *     </ul></li>
+ * <ul>
+ * <li><a href="#FAQ.property">Why Can't BeanUtils Find My Method?</a></li>
+ * <li><a href="#FAQ.bc.order">How Do I Set The BeanComparator Order To Be Ascending/Descending?</a></li>
+ * </ul>
+ * </li>
  * </ul>
  *
  * <a id="overview"></a>
@@ -80,43 +81,35 @@
  * <a id="overview.background"></a>
  * <h3>1.1 Background</h3>
  *
- * <p>The <em>JavaBeans</em> name comes from a
- * <a href="https://java.sun.com/products/javabeans/">Java API</a>
- * for a component architecture for the Java language.  Writing Java classes that
- * conform to the JavaBeans design patterns makes it easier for Java developers
- * to understand the functionality provided by your class, as well as allowing
- * JavaBeans-aware tools to use Java's <em>introspection</em> capabilities to
- * learn about the properties and operations provided by your class, and present
- * them in a visually appealing manner in development tools.</p>
+ * <p>
+ * The <em>JavaBeans</em> name comes from a <a href="https://java.sun.com/products/javabeans/">Java API</a> for a component architecture for the Java language.
+ * Writing Java classes that conform to the JavaBeans design patterns makes it easier for Java developers to understand the functionality provided by your
+ * class, as well as allowing JavaBeans-aware tools to use Java's <em>introspection</em> capabilities to learn about the properties and operations provided by
+ * your class, and present them in a visually appealing manner in development tools.
+ * </p>
  *
- * <p>The <a href="https://java.sun.com/products/javabeans/docs/spec.html">JavaBeans
- * Specification</a> describes the complete set of characteristics that makes
- * an arbitrary Java class a JavaBean or not -- and you should consider reading
- * this document to be an important part of developing your Java programming
- * skills.  However, the required characteristics of JavaBeans that are
- * important for most development scenarios are listed here:</p>
+ * <p>
+ * The <a href="https://java.sun.com/products/javabeans/docs/spec.html">JavaBeans Specification</a> describes the complete set of characteristics that makes an
+ * arbitrary Java class a JavaBean or not -- and you should consider reading this document to be an important part of developing your Java programming skills.
+ * However, the required characteristics of JavaBeans that are important for most development scenarios are listed here:
+ * </p>
  * <ul>
- * <li>The class must be <strong>public</strong>, and provide a
- *     <strong>public</strong> constructor that accepts no arguments.  This allows
- *     tools and applications to dynamically create new instances of your bean,
- *     without necessarily knowing what Java class name will be used ahead of
- *     time, like this:
+ * <li>The class must be <strong>public</strong>, and provide a <strong>public</strong> constructor that accepts no arguments. This allows tools and
+ * applications to dynamically create new instances of your bean, without necessarily knowing what Java class name will be used ahead of time, like this:
+ *
  * <pre>
  *         String className = ...;
  *         Class beanClass = Class.forName(className);
  *         Object beanInstance = beanClass.newInstance();
- * </pre></li>
- * <li>As a necessary consequence of having a no-arguments constructor,
- *     configuration of your bean's behavior must be accomplished separately
- *     from its instantiation.  This is typically done by defining a set of
- *     <em>properties</em> of your bean, which can be used to modify its behavior
- *     or the data that the bean represents.  The normal convention for
- *     property names is that they start with a lower case letter, and be
- *     comprised only of characters that are legal in a Java identifier.</li>
- * <li>Typically, each bean property will have a public <em>getter</em> and
- *     <em>setter</em> method that are used to retrieve or define the property's
- *     value, respectively.  The JavaBeans Specification defines a design
- *     pattern for these names, using {@code get</code> or <code>set} as the
+ * </pre>
+ *
+ * </li>
+ * <li>As a necessary consequence of having a no-arguments constructor, configuration of your bean's behavior must be accomplished separately from its
+ * instantiation. This is typically done by defining a set of <em>properties</em> of your bean, which can be used to modify its behavior or the data that the
+ * bean represents. The normal convention for property names is that they start with a lower case letter, and be comprised only of characters that are legal in
+ * a Java identifier.</li>
+ * <li>Typically, each bean property will have a public <em>getter</em> and <em>setter</em> method that are used to retrieve or define the property's value,
+ * respectively. The JavaBeans Specification defines a design pattern for these names, using {@code get</code> or <code>set} as the
  *     prefix for the property name with it's first character capitalized.  Thus,
  *     you a JavaBean representing an employee might have
  *     (among others) properties named {@code firstName},
@@ -971,52 +964,49 @@
  * documentation.
  * </p>
  * <p>
- * {@code BeanToPropertyTransformer</code> is a <code>Transformer} implementation
- * that transforms a bean into it's property value.
+ * {@code BeanToPropertyTransformer</code> is a <code>Transformer} implementation that transforms a bean into it's property value.
  * </p>
  * <p>
- * For example, to find all cities that are contained in the address of each person property of each bean in
- * a collection:
+ * For example, to find all cities that are contained in the address of each person property of each bean in a collection:
  * </p>
- *     <pre>{@code
- *     // create the transformer
- *     BeanToPropertyValueTransformer transformer = new BeanToPropertyValueTransformer( "person.address.city" );
  *
- *     // transform the Collection
- *     Collection peoplesCities = CollectionUtils.collect( peopleCollection, transformer );
- *     }</pre>
+ * <pre>{@code
+ * // create the transformer
+ * BeanToPropertyValueTransformer transformer = new BeanToPropertyValueTransformer("person.address.city");
+ *
+ * // transform the Collection
+ * Collection peoplesCities = CollectionUtils.collect(peopleCollection, transformer);
+ * }</pre>
  *
  * <a id="FAQ"></a>
  * <h2>7. Frequently Asked Questions</h2>
  *
  * <a id="FAQ.property"></a>
  * <h3>Why Can't BeanUtils Find My Method?</h3>
- * <p>The <em>BeanUtils</em> package relies on <em>introspection</em> rather than
- * <em>reflection</em>. This means that it will find only
- * <a href='https://java.sun.com/products/javabeans'><em>JavaBean</em>
- * compliant</a> properties.</p>
- * <p>There are some subtleties  of this specification that can catch out the unwary:</p>
+ * <p>
+ * The <em>BeanUtils</em> package relies on <em>introspection</em> rather than <em>reflection</em>. This means that it will find only
+ * <a href='https://java.sun.com/products/javabeans'><em>JavaBean</em> compliant</a> properties.
+ * </p>
+ * <p>
+ * There are some subtleties of this specification that can catch out the unwary:
+ * </p>
  * <ul>
  * <li>A property can have only one set and one get method. Overloading is not allowed.</li>
- * <li>The {@link java.beans.Introspector} searches widely for a custom <em>BeanInfo</em>
- * class. If your class has the same name as another with a custom <em>BeanInfo</em>
- * (typically a Java API class) then the {@code Introspector} may use that instead of
- * creating via reflection based on your class. If this happens, the only solution is to
- * create your own <em>BeanInfo</em>.</li>
+ * <li>The {@link java.beans.Introspector} searches widely for a custom <em>BeanInfo</em> class. If your class has the same name as another with a custom
+ * <em>BeanInfo</em> (typically a Java API class) then the {@code Introspector} may use that instead of creating via reflection based on your class. If this
+ * happens, the only solution is to create your own <em>BeanInfo</em>.</li>
  * </ul>
  *
  * <a id="FAQ.bc.order"></a>
  * <h3>How Do I Set The BeanComparator Order To Be Ascending/Descending?</h3>
  * <p>
- * BeanComparator relies on an internal Comparator to perform the actual
- * comparisions. By default, a natural ordering comparator
- * is used which imposes a natural order. If you want to change the order,
- * then a custom Comparator should be created and passed into the
- * appropriate constructor.
+ * BeanComparator relies on an internal Comparator to perform the actual comparisions. By default, a natural ordering comparator is used which imposes a natural
+ * order. If you want to change the order, then a custom Comparator should be created and passed into the appropriate constructor.
  * </p>
  * <p>
  * For example:
  * </p>
+ *
  * <pre>{@code
  *     import org.apache.commons.collections4.comparators.ComparableComparator;
  *     import org.apache.commons.collections4.comparators.ReverseComparator;

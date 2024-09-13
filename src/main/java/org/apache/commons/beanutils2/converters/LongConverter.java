@@ -17,48 +17,37 @@
 package org.apache.commons.beanutils2.converters;
 
 /**
- * {@link NumberConverter} implementation that handles conversion to
- * and from <b>java.lang.Long</b> objects.
+ * {@link NumberConverter} implementation that handles conversion to and from <b>java.lang.Long</b> objects.
  * <p>
- * This implementation can be configured to handle conversion either
- * by using Long's default String conversion, or by using a Locale's pattern
- * or by specifying a format pattern. See the {@link NumberConverter}
- * documentation for further details.
+ * This implementation can be configured to handle conversion either by using Long's default String conversion, or by using a Locale's pattern or by specifying
+ * a format pattern. See the {@link NumberConverter} documentation for further details.
  * <p>
- * Can be configured to either return a <em>default value</em> or throw a
- * {@code ConversionException} if a conversion error occurs.
+ * Can be configured to either return a <em>default value</em> or throw a {@code ConversionException} if a conversion error occurs.
  *
  * @since 1.3
  */
 public final class LongConverter extends NumberConverter<Long> {
 
     /**
-     * Constructs a <b>java.lang.Long</b> <em>Converter</em> that throws
-     * a {@code ConversionException} if an error occurs.
+     * Constructs a <b>java.lang.Long</b> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
      */
     public LongConverter() {
         super(false);
     }
 
     /**
-     * Constructs a <b>java.lang.Long</b> <em>Converter</em> that returns
-     * a default value if an error occurs.
+     * Constructs a <b>java.lang.Long</b> <em>Converter</em> that returns a default value if an error occurs.
      *
-     * @param defaultValue The default value to be returned
-     * if the value to be converted is missing or an error
-     * occurs converting the value.
+     * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
      */
     public LongConverter(final Long defaultValue) {
         super(false, defaultValue);
     }
 
     /**
-     * Constructs a <b>java.lang.Long</b> <em>Converter</em> that returns
-     * a default value if an error occurs.
+     * Constructs a <b>java.lang.Long</b> <em>Converter</em> that returns a default value if an error occurs.
      *
-     * @param defaultValue The default value to be returned
-     * if the value to be converted is missing or an error
-     * occurs converting the value.
+     * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
      */
     public LongConverter(final Number defaultValue) {
         this(defaultValue.longValue());

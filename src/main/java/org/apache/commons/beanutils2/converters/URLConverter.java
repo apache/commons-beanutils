@@ -19,40 +19,36 @@ package org.apache.commons.beanutils2.converters;
 import java.net.URL;
 
 /**
- * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion
- * to and from <b>java.net.URL</b> objects.
+ * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion to and from <b>java.net.URL</b> objects.
  * <p>
- * Can be configured to either return a <em>default value</em> or throw a
- * {@code ConversionException} if a conversion error occurs.
+ * Can be configured to either return a <em>default value</em> or throw a {@code ConversionException} if a conversion error occurs.
  *
  * @since 1.3
  */
 public final class URLConverter extends AbstractConverter<URL> {
 
     /**
-     * Constructs a <b>java.net.URL</b> <em>Converter</em> that throws
-     * a {@code ConversionException} if an error occurs.
+     * Constructs a <b>java.net.URL</b> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
      */
     public URLConverter() {
     }
 
     /**
-     * Constructs a <b>java.net.URL</b> <em>Converter</em> that returns
-     * a default value if an error occurs.
+     * Constructs a <b>java.net.URL</b> <em>Converter</em> that returns a default value if an error occurs.
      *
-     * @param defaultValue The default value to be returned
-     * if the value to be converted is missing or an error
-     * occurs converting the value.
+     * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
      */
     public URLConverter(final URL defaultValue) {
         super(defaultValue);
     }
 
     /**
-     * <p>Converts a java.net.URL or object into a String.</p>
+     * <p>
+     * Converts a java.net.URL or object into a String.
+     * </p>
      *
-     * @param <T> Target type of the conversion.
-     * @param type Data type to which this value should be converted.
+     * @param <T>   Target type of the conversion.
+     * @param type  Data type to which this value should be converted.
      * @param value The input value to be converted.
      * @return The converted value.
      * @throws Throwable if an error occurs converting to the specified type

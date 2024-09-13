@@ -30,9 +30,9 @@ import org.apache.commons.beanutils2.DynaProperty;
 
 /**
  * <p>
- * Implements {@link DynaClass} to create an in-memory collection of {@link DynaBean}s representing the results of an SQL query. Once the
- * {@link DynaClass} instance has been created, the JDBC {@code ResultSet} and {@code Statement} on which it is based can be closed, and the underlying
- * {@code Connection} can be returned to its connection pool (if you are using one).
+ * Implements {@link DynaClass} to create an in-memory collection of {@link DynaBean}s representing the results of an SQL query. Once the {@link DynaClass}
+ * instance has been created, the JDBC {@code ResultSet} and {@code Statement} on which it is based can be closed, and the underlying {@code Connection} can be
+ * returned to its connection pool (if you are using one).
  * </p>
  *
  * <p>

@@ -250,15 +250,11 @@ public class FloatLocaleConverterTest extends AbstractLocaleConverterTest<Float>
         final DecimalFormat fmt = new DecimalFormat("#.#############################################################");
 
         assertEquals(Float.valueOf((float) -0.12), converter.convert("-0.12"));
-        assertEquals(Float.valueOf(Float.MAX_VALUE), converter.convert(fmt.format(Float.MAX_VALUE)),
-                                "Positive Float.MAX_VALUE");
-        assertEquals(Float.valueOf(Float.MIN_VALUE), converter.convert(fmt.format(Float.MIN_VALUE)),
-                                "Positive Float.MIN_VALUE");
+        assertEquals(Float.valueOf(Float.MAX_VALUE), converter.convert(fmt.format(Float.MAX_VALUE)), "Positive Float.MAX_VALUE");
+        assertEquals(Float.valueOf(Float.MIN_VALUE), converter.convert(fmt.format(Float.MIN_VALUE)), "Positive Float.MIN_VALUE");
 
-        assertEquals(Float.valueOf(Float.MAX_VALUE * -1),
-                                converter.convert(fmt.format(Float.MAX_VALUE * -1)), "Negative Float.MAX_VALUE");
-        assertEquals(Float.valueOf(Float.MIN_VALUE * -1),
-                                converter.convert(fmt.format(Float.MIN_VALUE * -1)), "Negative Float.MIN_VALUE");
+        assertEquals(Float.valueOf(Float.MAX_VALUE * -1), converter.convert(fmt.format(Float.MAX_VALUE * -1)), "Negative Float.MAX_VALUE");
+        assertEquals(Float.valueOf(Float.MIN_VALUE * -1), converter.convert(fmt.format(Float.MIN_VALUE * -1)), "Negative Float.MIN_VALUE");
 
         try {
             converter.convert(fmt.format((double) Float.MAX_VALUE * (double) 10));

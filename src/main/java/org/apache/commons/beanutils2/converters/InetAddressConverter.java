@@ -22,7 +22,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
-{@link org.apache.commons.beanutils2.Converter} implementation that handles conversion to and from {@link InetAddress}.
+ * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion to and from {@link InetAddress}.
  *
  * @since 2.0.0
  * @see <a href="https://en.wikipedia.org/wiki/Inet_address">IP Address on Wikipedia</a>
@@ -30,18 +30,15 @@ import java.net.UnknownHostException;
 public class InetAddressConverter extends AbstractConverter<InetAddress> {
 
     /**
-     * Construct a <b>{@link InetAddress}</b> <em>Converter</em> that throws a {@code ConversionException} if an error
-     * occurs.
+     * Construct a <b>{@link InetAddress}</b> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
      */
     public InetAddressConverter() {
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils2.Converter} that will return the specified default value if a
-     * conversion error occurs.
+     * Constructs a {@link org.apache.commons.beanutils2.Converter} that will return the specified default value if a conversion error occurs.
      *
-     * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs
-     * converting the value.
+     * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
      */
     public InetAddressConverter(final InetAddress defaultValue) {
         super(defaultValue);
@@ -50,10 +47,10 @@ public class InetAddressConverter extends AbstractConverter<InetAddress> {
     /**
      * Converts the specified input object into an output object of the specified type.
      *
-     * @param type Data type to which this value should be converted.
+     * @param type  Data type to which this value should be converted.
      * @param value The String property value to convert.
      * @return An {@link InetAddress} which represents the configuration property value.
-     * @throws NullPointerException If the value is null.
+     * @throws NullPointerException     If the value is null.
      * @throws IllegalArgumentException If a host name was specified and the IP address couldn't be obtained.
      */
     @Override

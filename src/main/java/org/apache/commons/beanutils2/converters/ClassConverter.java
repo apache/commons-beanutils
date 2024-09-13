@@ -17,15 +17,11 @@
 package org.apache.commons.beanutils2.converters;
 
 /**
- * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion
- * to and from <b>java.lang.Class</b> objects.
+ * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion to and from <b>java.lang.Class</b> objects.
  * <p>
- * The class will be loaded from the thread context class
- * loader (if it exists); otherwise the class loader that loaded this class
- * will be used.
+ * The class will be loaded from the thread context class loader (if it exists); otherwise the class loader that loaded this class will be used.
  * <p>
- * Can be configured to either return a <em>default value</em> or throw a
- * {@code ConversionException} if a conversion error occurs.
+ * Can be configured to either return a <em>default value</em> or throw a {@code ConversionException} if a conversion error occurs.
  *
  * @param <T> the type of the class.
  * @since 1.4
@@ -33,26 +29,24 @@ package org.apache.commons.beanutils2.converters;
 public final class ClassConverter<T> extends AbstractConverter<Class<T>> {
 
     /**
-     * Constructs a <b>java.lang.Class</b> <em>Converter</em> that throws
-     * a {@code ConversionException} if an error occurs.
+     * Constructs a <b>java.lang.Class</b> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
      */
     public ClassConverter() {
     }
 
     /**
-     * Constructs a <b>java.lang.Class</b> <em>Converter</em> that returns
-     * a default value if an error occurs.
+     * Constructs a <b>java.lang.Class</b> <em>Converter</em> that returns a default value if an error occurs.
      *
-     * @param defaultValue The default value to be returned
-     * if the value to be converted is missing or an error
-     * occurs converting the value.
+     * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
      */
     public ClassConverter(final Class<T> defaultValue) {
         super(defaultValue);
     }
 
     /**
-     * <p>Converts a java.lang.Class or object into a String.</p>
+     * <p>
+     * Converts a java.lang.Class or object into a String.
+     * </p>
      *
      * @param value The input value to be converted
      * @return the converted String value.
@@ -64,10 +58,12 @@ public final class ClassConverter<T> extends AbstractConverter<Class<T>> {
     }
 
     /**
-     * <p>Converts the input object into a java.lang.Class.</p>
+     * <p>
+     * Converts the input object into a java.lang.Class.
+     * </p>
      *
-     * @param <R> Target type of the conversion.
-     * @param type Data type to which this value should be converted.
+     * @param <R>   Target type of the conversion.
+     * @param type  Data type to which this value should be converted.
      * @param value The input value to be converted.
      * @return The converted value.
      * @throws Throwable if an error occurs converting to the specified type
@@ -76,8 +72,7 @@ public final class ClassConverter<T> extends AbstractConverter<Class<T>> {
     @Override
     protected <R> R convertToType(final Class<R> type, final Object value) throws Throwable {
         if (Class.class.equals(type)) {
-            ClassLoader classLoader = Thread.currentThread()
-                    .getContextClassLoader();
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
             if (classLoader != null) {
                 try {
                     return type.cast(classLoader.loadClass(value.toString()));
@@ -101,7 +96,7 @@ public final class ClassConverter<T> extends AbstractConverter<Class<T>> {
      * @return The default type this {@code Converter} handles.
      * @since 1.8.0
      */
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     protected Class<Class<T>> getDefaultType() {
         return (Class) Class.class;

@@ -34,11 +34,9 @@ public class LocaleConverter extends AbstractConverter<Locale> {
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils2.Converter} that will return the specified default value if a
-     * conversion error occurs.
+     * Constructs a {@link org.apache.commons.beanutils2.Converter} that will return the specified default value if a conversion error occurs.
      *
-     * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs
-     * converting the value.
+     * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
      */
     public LocaleConverter(final Locale defaultValue) {
         super(defaultValue);
@@ -47,7 +45,7 @@ public class LocaleConverter extends AbstractConverter<Locale> {
     /**
      * Converts the specified input object into an output object of the specified type.
      *
-     * @param type Data type to which this value should be converted.
+     * @param type  Data type to which this value should be converted.
      * @param value The String property value to convert.
      * @return A {@link Locale} which represents the configuration property value.
      * @throws NullPointerException If the value is null.

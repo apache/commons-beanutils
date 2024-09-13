@@ -48,6 +48,7 @@ public class Jira541Test {
             return this;
         }
     }
+
     public static class SubTypeA extends BaseType {
 
         @Override

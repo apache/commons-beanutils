@@ -21,16 +21,12 @@ import java.util.Set;
 
 /**
  * <p>
- * A context interface used during introspection for querying and setting
- * property descriptors.
+ * A context interface used during introspection for querying and setting property descriptors.
  * </p>
  * <p>
- * An implementation of this interface is passed to {@link BeanIntrospector}
- * objects during processing of a bean class. It allows the
- * {@code BeanIntrospector} to deliver descriptors for properties it has
- * detected. It is also possible to find out which properties have already been
- * found by another {@code BeanIntrospector}; this allows multiple
- * {@code BeanIntrospector} instances to collaborate.
+ * An implementation of this interface is passed to {@link BeanIntrospector} objects during processing of a bean class. It allows the {@code BeanIntrospector}
+ * to deliver descriptors for properties it has detected. It is also possible to find out which properties have already been found by another
+ * {@code BeanIntrospector}; this allows multiple {@code BeanIntrospector} instances to collaborate.
  * </p>
  *
  * @since 1.9
@@ -38,30 +34,25 @@ import java.util.Set;
 public interface IntrospectionContext {
 
     /**
-     * Adds the given property descriptor to this context. This method is called
-     * by a {@code BeanIntrospector} during introspection for each detected
-     * property. If this context already contains a descriptor for the affected
-     * property, it is overridden.
+     * Adds the given property descriptor to this context. This method is called by a {@code BeanIntrospector} during introspection for each detected property.
+     * If this context already contains a descriptor for the affected property, it is overridden.
      *
      * @param desc the property descriptor
      */
     void addPropertyDescriptor(PropertyDescriptor desc);
 
     /**
-     * Adds an array of property descriptors to this context. Using this method
-     * multiple descriptors can be added at once.
+     * Adds an array of property descriptors to this context. Using this method multiple descriptors can be added at once.
      *
      * @param descriptors the array of descriptors to be added
      */
     void addPropertyDescriptors(PropertyDescriptor[] descriptors);
 
     /**
-     * Returns the descriptor for the property with the given name or
-     * <b>null</b> if this property is unknown.
+     * Returns the descriptor for the property with the given name or <b>null</b> if this property is unknown.
      *
      * @param name the name of the property in question
-     * @return the descriptor for this property or <b>null</b> if this property
-     *         is unknown
+     * @return the descriptor for this property or <b>null</b> if this property is unknown
      */
     PropertyDescriptor getPropertyDescriptor(String name);
 
@@ -73,13 +64,11 @@ public interface IntrospectionContext {
     Class<?> getTargetClass();
 
     /**
-     * Tests whether a descriptor for the property with the given name is
-     * already contained in this context. This method can be used for instance
-     * to prevent that an already existing property descriptor is overridden.
+     * Tests whether a descriptor for the property with the given name is already contained in this context. This method can be used for instance to prevent
+     * that an already existing property descriptor is overridden.
      *
      * @param name the name of the property in question
-     * @return <b>true</b> if a descriptor for this property has already been
-     *         added, <b>false</b> otherwise
+     * @return <b>true</b> if a descriptor for this property has already been added, <b>false</b> otherwise
      */
     boolean hasProperty(String name);
 

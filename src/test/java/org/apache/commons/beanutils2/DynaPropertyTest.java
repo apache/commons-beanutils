@@ -88,8 +88,7 @@ public class DynaPropertyTest {
         final int initialHashCode = testPropertyWithNameAndTypeAndContentType.hashCode();
         assertEquals(testPropertyWithName.hashCode(), testProperty1Duplicate.hashCode());
         assertEquals(testPropertyWithNameAndType.hashCode(), testProperty2Duplicate.hashCode());
-        assertEquals(testPropertyWithNameAndTypeAndContentType.hashCode(),
-                                testProperty3Duplicate.hashCode());
+        assertEquals(testPropertyWithNameAndTypeAndContentType.hashCode(), testProperty3Duplicate.hashCode());
         assertEquals(initialHashCode, testPropertyWithNameAndTypeAndContentType.hashCode());
     }
 

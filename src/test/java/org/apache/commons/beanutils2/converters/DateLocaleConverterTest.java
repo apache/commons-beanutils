@@ -369,8 +369,7 @@ class DateLocaleConverterTest extends AbstractLocaleConverterTest<Date> {
         try {
             converter.convert("01-10-2004X", "dd-MM-yyyy");
         } catch (final ConversionException e) {
-            assertEquals("Date '01-10-2004X' contains unparsed characters from position = 10",
-                                    e.getMessage(), "Parse Length");
+            assertEquals("Date '01-10-2004X' contains unparsed characters from position = 10", e.getMessage(), "Parse Length");
         }
 
     }

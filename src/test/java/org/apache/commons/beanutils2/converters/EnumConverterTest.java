@@ -64,8 +64,7 @@ public class EnumConverterTest {
         final PizzaStatus[] expected = { PizzaStatus.DELIVERED, PizzaStatus.ORDERED, PizzaStatus.READY };
 
         for (int i = 0; i < expected.length; i++) {
-            assertEquals(expected[i], converter.convert(PizzaStatus.class, input[i]),
-                                    message[i] + " to Enum");
+            assertEquals(expected[i], converter.convert(PizzaStatus.class, input[i]), message[i] + " to Enum");
         }
 
         for (int i = 0; i < expected.length; i++) {

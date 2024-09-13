@@ -18,8 +18,7 @@
 package org.apache.commons.beanutils2;
 
 /**
- * Thrown to indicate that the <em>Bean Access Language</em> cannot execute query
- * against given bean since a nested bean referenced is null.
+ * Thrown to indicate that the <em>Bean Access Language</em> cannot execute query against given bean since a nested bean referenced is null.
  *
  * @since 1.7
  */

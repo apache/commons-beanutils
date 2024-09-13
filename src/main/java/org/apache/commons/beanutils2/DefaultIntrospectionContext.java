@@ -24,13 +24,11 @@ import java.util.Set;
 
 /**
  * <p>
- * An implementation of the {@code IntrospectionContext} interface used by
- * {@link PropertyUtilsBean} when doing introspection of a bean class.
+ * An implementation of the {@code IntrospectionContext} interface used by {@link PropertyUtilsBean} when doing introspection of a bean class.
  * </p>
  * <p>
- * This class implements the methods required by the
- * {@code IntrospectionContext} interface in a straight-forward manner
- * based on a map. It is used internally only. It is not thread-safe.
+ * This class implements the methods required by the {@code IntrospectionContext} interface in a straight-forward manner based on a map. It is used internally
+ * only. It is not thread-safe.
  * </p>
  *
  * @since 1.9
@@ -44,8 +42,7 @@ final class DefaultIntrospectionContext implements IntrospectionContext {
 
     /**
      *
-     * Creates a new instance of {@code DefaultIntrospectionContext} and sets
-     * the current class for introspection.
+     * Creates a new instance of {@code DefaultIntrospectionContext} and sets the current class for introspection.
      *
      * @param cls the current class
      */
@@ -74,8 +71,7 @@ final class DefaultIntrospectionContext implements IntrospectionContext {
     }
 
     /**
-     * Returns an array with all descriptors added to this context. This method
-     * is used to obtain the results of introspection.
+     * Returns an array with all descriptors added to this context. This method is used to obtain the results of introspection.
      *
      * @return an array with all known property descriptors
      */

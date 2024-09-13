@@ -27,8 +27,8 @@ import org.apache.commons.beanutils2.DynaClass;
 
 /**
  * <p>
- * Implements {@link Iterator} returned by the {@code iterator()} method of {@link ResultSetDynaClass}. Each object returned by this iterator
- * will be a {@link DynaBean} that represents a single row from the result set being wrapped.
+ * Implements {@link Iterator} returned by the {@code iterator()} method of {@link ResultSetDynaClass}. Each object returned by this iterator will be a
+ * {@link DynaBean} that represents a single row from the result set being wrapped.
  * </p>
  */
 public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {

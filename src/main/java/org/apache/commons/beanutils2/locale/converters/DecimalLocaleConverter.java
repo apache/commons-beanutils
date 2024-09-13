@@ -29,8 +29,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Standard {@link LocaleConverter} implementation that converts an incoming locale-sensitive String into a {@link Number} object, optionally using a
- * default value or throwing a {@link ConversionException} if a conversion error occurs.
+ * Standard {@link LocaleConverter} implementation that converts an incoming locale-sensitive String into a {@link Number} object, optionally using a default
+ * value or throwing a {@link ConversionException} if a conversion error occurs.
  *
  * @param <T> The converter type.
  * @since 1.7
@@ -80,10 +80,10 @@ public class DecimalLocaleConverter<T extends Number> extends BaseLocaleConverte
      * Constructs a new instance.
      *
      * @param defaultValue default value.
-     * @param locale locale.
-     * @param pattern pattern.
-     * @param useDefault use the default.
-     * @param locPattern localized pattern.
+     * @param locale       locale.
+     * @param pattern      pattern.
+     * @param useDefault   use the default.
+     * @param locPattern   localized pattern.
      */
     protected DecimalLocaleConverter(final T defaultValue, final Locale locale, final String pattern, final boolean useDefault, final boolean locPattern) {
         super(defaultValue, locale, pattern, useDefault, locPattern);
@@ -96,7 +96,7 @@ public class DecimalLocaleConverter<T extends Number> extends BaseLocaleConverte
      * @param pattern The pattern is used for the conversion
      * @return The converted value
      * @throws ConversionException if conversion cannot be performed successfully
-     * @throws ParseException                                    if an error occurs parsing a String to a Number
+     * @throws ParseException      if an error occurs parsing a String to a Number
      */
     @Override
     protected T parse(final Object value, final String pattern) throws ParseException {

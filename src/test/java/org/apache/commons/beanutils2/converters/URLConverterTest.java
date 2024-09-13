@@ -45,7 +45,7 @@ public class URLConverterTest {
 
         for (final String urlString : input) {
             assertEquals(urlString, converter.convert(URL.class, urlString).toString(), "from String to URL");
-            assertEquals(urlString, converter.convert(null, urlString).toString(),"from String to null type");
+            assertEquals(urlString, converter.convert(null, urlString).toString(), "from String to null type");
         }
     }
 

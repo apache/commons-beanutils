@@ -165,19 +165,8 @@ public class BeanMapTest extends AbstractMapTest<String, Object> {
 
     @Override
     public Object[] getNewSampleValues() {
-        final Object[] values = {
-            Integer.valueOf(223),
-            Long.valueOf(23341928234L),
-            Double.valueOf(23423.34),
-            Float.valueOf(213332.12f),
-            Short.valueOf((short)234),
-            Byte.valueOf((byte)20),
-            Character.valueOf('b'),
-            Integer.valueOf(232),
-            "SomeNewStringValue",
-            new Object(),
-            null,
-        };
+        final Object[] values = { Integer.valueOf(223), Long.valueOf(23341928234L), Double.valueOf(23423.34), Float.valueOf(213332.12f),
+                Short.valueOf((short) 234), Byte.valueOf((byte) 20), Character.valueOf('b'), Integer.valueOf(232), "SomeNewStringValue", new Object(), null, };
         return values;
     }
 
@@ -193,19 +182,8 @@ public class BeanMapTest extends AbstractMapTest<String, Object> {
     // all beans (and all objects for that matter.
     @Override
     public String[] getSampleKeys() {
-        final String[] keys = {
-            "someIntValue",
-            "someLongValue",
-            "someDoubleValue",
-            "someFloatValue",
-            "someShortValue",
-            "someByteValue",
-            "someCharValue",
-            "someIntegerValue",
-            "someStringValue",
-            "someObjectValue",
-            "class",
-        };
+        final String[] keys = { "someIntValue", "someLongValue", "someDoubleValue", "someFloatValue", "someShortValue", "someByteValue", "someCharValue",
+                "someIntegerValue", "someStringValue", "someObjectValue", "class", };
         return keys;
     }
 
@@ -221,18 +199,12 @@ public class BeanMapTest extends AbstractMapTest<String, Object> {
     @Override
     public String[] ignoredTests() {
         // Ignore the serialization tests on collection views.
-        return new String[] {
-         "TestBeanMap.bulkTestMapEntrySet.testCanonicalEmptyCollectionExists",
-         "TestBeanMap.bulkTestMapEntrySet.testCanonicalFullCollectionExists",
-         "TestBeanMap.bulkTestMapKeySet.testCanonicalEmptyCollectionExists",
-         "TestBeanMap.bulkTestMapKeySet.testCanonicalFullCollectionExists",
-         "TestBeanMap.bulkTestMapValues.testCanonicalEmptyCollectionExists",
-         "TestBeanMap.bulkTestMapValues.testCanonicalFullCollectionExists",
-         "TestBeanMap.bulkTestMapEntrySet.testSimpleSerialization",
-         "TestBeanMap.bulkTestMapKeySet.testSimpleSerialization",
-         "TestBeanMap.bulkTestMapEntrySet.testSerializeDeserializeThenCompare",
-         "TestBeanMap.bulkTestMapKeySet.testSerializeDeserializeThenCompare"
-        };
+        return new String[] { "TestBeanMap.bulkTestMapEntrySet.testCanonicalEmptyCollectionExists",
+                "TestBeanMap.bulkTestMapEntrySet.testCanonicalFullCollectionExists", "TestBeanMap.bulkTestMapKeySet.testCanonicalEmptyCollectionExists",
+                "TestBeanMap.bulkTestMapKeySet.testCanonicalFullCollectionExists", "TestBeanMap.bulkTestMapValues.testCanonicalEmptyCollectionExists",
+                "TestBeanMap.bulkTestMapValues.testCanonicalFullCollectionExists", "TestBeanMap.bulkTestMapEntrySet.testSimpleSerialization",
+                "TestBeanMap.bulkTestMapKeySet.testSimpleSerialization", "TestBeanMap.bulkTestMapEntrySet.testSerializeDeserializeThenCompare",
+                "TestBeanMap.bulkTestMapKeySet.testSerializeDeserializeThenCompare" };
     }
 
     /**
@@ -317,7 +289,7 @@ public class BeanMapTest extends AbstractMapTest<String, Object> {
                 fail("Retrieving the cause threw " + e2);
             }
             assertNotNull(cause, "Cause null");
-            assertEquals(IllegalAccessException.class, cause.getClass(),"Cause");
+            assertEquals(IllegalAccessException.class, cause.getClass(), "Cause");
         }
     }
 
@@ -339,7 +311,7 @@ public class BeanMapTest extends AbstractMapTest<String, Object> {
                 fail("Non-public bean - retrieving the cause threw " + e2);
             }
             assertNotNull(cause, "Non-public bean cause null");
-            assertEquals(IllegalAccessException.class, cause.getClass(),"Non-public bean cause");
+            assertEquals(IllegalAccessException.class, cause.getClass(), "Non-public bean cause");
         }
 
         // Test cloning a bean that throws exception
@@ -355,7 +327,7 @@ public class BeanMapTest extends AbstractMapTest<String, Object> {
                 fail("Setter Exception - retrieving the cause threw " + e2);
             }
             assertNotNull(cause, "Setter Exception cause null");
-            assertEquals(IllegalArgumentException.class, cause.getClass(),"Setter Exception cause");
+            assertEquals(IllegalArgumentException.class, cause.getClass(), "Setter Exception cause");
         }
     }
 
@@ -377,9 +349,9 @@ public class BeanMapTest extends AbstractMapTest<String, Object> {
                 fail("Setter exception - retrieving the cause threw " + e2);
             }
             assertNotNull(cause1, "Setter exception cause 1 null");
-            assertEquals(InvocationTargetException.class, cause1.getClass(),"Setter exception cause 1");
+            assertEquals(InvocationTargetException.class, cause1.getClass(), "Setter exception cause 1");
             assertNotNull(cause2, "Setter exception cause 2 null");
-            assertEquals(TestException.class, cause2.getClass(),"Setter exception cause 2");
+            assertEquals(TestException.class, cause2.getClass(), "Setter exception cause 2");
         }
     }
 
@@ -388,33 +360,29 @@ public class BeanMapTest extends AbstractMapTest<String, Object> {
      */
     public void testGetTypeTransformerMethod() {
         final BeanMap beanMap = new BeanMap();
-        assertEquals(Boolean.TRUE, beanMap.getTypeTransformer(Boolean.TYPE).apply("true"),"Boolean.TYPE");
-        assertEquals(Character.valueOf('B'), beanMap.getTypeTransformer(Character.TYPE).apply("BCD"),"Character.TYPE");
-        assertEquals(Byte.valueOf((byte) 1), beanMap.getTypeTransformer(Byte.TYPE).apply("1"),"Byte.TYPE");
-        assertEquals(Short.valueOf((short) 2), beanMap.getTypeTransformer(Short.TYPE).apply("2"),"Short.TYPE");
-        assertEquals(Integer.valueOf(3), beanMap.getTypeTransformer(Integer.TYPE).apply("3"),"Integer.TYPE");
-        assertEquals(Long.valueOf(4), beanMap.getTypeTransformer(Long.TYPE).apply("4"),"Long.TYPE");
-        assertEquals(Float.valueOf("5"), beanMap.getTypeTransformer(Float.TYPE).apply("5"),"Float.TYPE");
-        assertEquals(Double.valueOf("6"), beanMap.getTypeTransformer(Double.TYPE).apply("6"),"Double.TYPE");
+        assertEquals(Boolean.TRUE, beanMap.getTypeTransformer(Boolean.TYPE).apply("true"), "Boolean.TYPE");
+        assertEquals(Character.valueOf('B'), beanMap.getTypeTransformer(Character.TYPE).apply("BCD"), "Character.TYPE");
+        assertEquals(Byte.valueOf((byte) 1), beanMap.getTypeTransformer(Byte.TYPE).apply("1"), "Byte.TYPE");
+        assertEquals(Short.valueOf((short) 2), beanMap.getTypeTransformer(Short.TYPE).apply("2"), "Short.TYPE");
+        assertEquals(Integer.valueOf(3), beanMap.getTypeTransformer(Integer.TYPE).apply("3"), "Integer.TYPE");
+        assertEquals(Long.valueOf(4), beanMap.getTypeTransformer(Long.TYPE).apply("4"), "Long.TYPE");
+        assertEquals(Float.valueOf("5"), beanMap.getTypeTransformer(Float.TYPE).apply("5"), "Float.TYPE");
+        assertEquals(Double.valueOf("6"), beanMap.getTypeTransformer(Double.TYPE).apply("6"), "Double.TYPE");
     }
 
     /**
-     * Need to override this method because the "clear()" method on the bean
-     * map just returns the bean properties to their default states.  It does
-     * not actually remove the mappings as per the map contract.  The default
-     * testClear() methods checks that the clear method throws an
-     * UnsupportedOperationException since this class is not add/remove
-     * modifiable.  In our case though, we do not always throw that exception.
+     * Need to override this method because the "clear()" method on the bean map just returns the bean properties to their default states. It does not actually
+     * remove the mappings as per the map contract. The default testClear() methods checks that the clear method throws an UnsupportedOperationException since
+     * this class is not add/remove modifiable. In our case though, we do not always throw that exception.
      */
     @Override
     public void testMapClear() {
-        //TODO: make sure a call to BeanMap.clear returns the bean to its
-        //default initialization values.
+        // TODO: make sure a call to BeanMap.clear returns the bean to its
+        // default initialization values.
     }
 
     /**
-     * Need to override this method because the "put()" method on the bean
-     * doesn't work for this type of Map.
+     * Need to override this method because the "put()" method on the bean doesn't work for this type of Map.
      */
     @Override
     public void testMapPut() {

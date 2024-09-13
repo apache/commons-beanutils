@@ -34,11 +34,9 @@ public class PatternConverter extends AbstractConverter<Pattern> {
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils2.Converter} that will return the specified default value if a
-     * conversion error occurs.
+     * Constructs a {@link org.apache.commons.beanutils2.Converter} that will return the specified default value if a conversion error occurs.
      *
-     * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs
-     * converting the value.
+     * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
      */
     public PatternConverter(final Pattern defaultValue) {
         super(defaultValue);
@@ -47,10 +45,10 @@ public class PatternConverter extends AbstractConverter<Pattern> {
     /**
      * Converts the specified input object into an output object of the specified type.
      *
-     * @param type Data type to which this value should be converted.
+     * @param type  Data type to which this value should be converted.
      * @param value The String property value to convert.
      * @return A {@link Pattern} which represents the compiled configuration property.
-     * @throws NullPointerException If the value is null.
+     * @throws NullPointerException                   If the value is null.
      * @throws java.util.regex.PatternSyntaxException If the regular expression {@link String} provided is malformed.
      */
     @Override

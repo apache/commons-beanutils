@@ -108,7 +108,7 @@ public class StringLocaleConverter extends BaseLocaleConverter<String> {
      * @param pattern The pattern is used for the conversion
      * @return The converted value
      * @throws ConversionException if conversion cannot be performed successfully
-     * @throws ParseException                                    if an error occurs
+     * @throws ParseException      if an error occurs
      */
     @Override
     protected String parse(final Object value, final String pattern) throws ParseException {

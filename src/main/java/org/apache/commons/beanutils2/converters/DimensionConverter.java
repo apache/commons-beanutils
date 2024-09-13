@@ -26,31 +26,30 @@ import java.util.regex.Pattern;
  * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion to and from {@link Dimension}.
  *
  * <p>
- *     Accepts a single {@link Integer} value, or two {@link Integer} values separated by the character {@code x}.
+ * Accepts a single {@link Integer} value, or two {@link Integer} values separated by the character {@code x}.
  * </p>
  *
- * <p>The dimensions must consist of non-negative {@link Integer} values only.</p>
+ * <p>
+ * The dimensions must consist of non-negative {@link Integer} values only.
+ * </p>
  *
  * @since 2.0.0
  */
 public class DimensionConverter extends AbstractConverter<Dimension> {
 
-    /** Pattern used to validate and tokenizer the {@link String}.  */
+    /** Pattern used to validate and tokenizer the {@link String}. */
     private static final Pattern DIMENSION_PATTERN = Pattern.compile("(\\d+)(?:x(\\d+))?");
 
     /**
-     * Construct a <b>{@link Dimension}</b> <em>Converter</em> that throws a {@code ConversionException} if an error
-     * occurs.
+     * Construct a <b>{@link Dimension}</b> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
      */
     public DimensionConverter() {
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils2.Converter} that will return the specified default value if a
-     * conversion error occurs.
+     * Constructs a {@link org.apache.commons.beanutils2.Converter} that will return the specified default value if a conversion error occurs.
      *
-     * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs
-     * converting the value.
+     * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
      */
     public DimensionConverter(final Dimension defaultValue) {
         super(defaultValue);
@@ -59,10 +58,10 @@ public class DimensionConverter extends AbstractConverter<Dimension> {
     /**
      * Converts the input object into an output object of the specified type.
      *
-     * @param type Data type to which this value should be converted.
+     * @param type  Data type to which this value should be converted.
      * @param value String property value to convert.
      * @return A {@link Dimension} which represents the configuration property value.
-     * @throws NullPointerException If the value is null.
+     * @throws NullPointerException  If the value is null.
      * @throws NumberFormatException If the {@link Dimension} width or height is bigger than {@link Integer#MAX_VALUE}.
      */
     @Override
@@ -77,8 +76,7 @@ public class DimensionConverter extends AbstractConverter<Dimension> {
             final Matcher matcher = DIMENSION_PATTERN.matcher(stringValue);
 
             if (!matcher.matches()) {
-                throw new IllegalArgumentException(
-                    "Dimension doesn't match format: {width/height} or {width}x{height}");
+                throw new IllegalArgumentException("Dimension doesn't match format: {width/height} or {width}x{height}");
             }
 
             final String x = matcher.group(1);

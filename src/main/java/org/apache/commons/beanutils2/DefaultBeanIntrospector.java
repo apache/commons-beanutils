@@ -32,15 +32,12 @@ import org.apache.commons.logging.LogFactory;
  * The default {@link BeanIntrospector} implementation.
  * </p>
  * <p>
- * This class implements a default bean introspection algorithm based on the JDK
- * classes in the {@link java.beans} package. It discovers properties
- * conforming to the Java Beans specification.
+ * This class implements a default bean introspection algorithm based on the JDK classes in the {@link java.beans} package. It discovers properties conforming
+ * to the Java Beans specification.
  * </p>
  * <p>
- * This class is a singleton. The single instance can be obtained using the
- * {@code INSTANCE} field. It does not define any state and thus can be
- * shared by arbitrary clients. {@link PropertyUtils} per default uses this
- * instance as its only {@code BeanIntrospector} object.
+ * This class is a singleton. The single instance can be obtained using the {@code INSTANCE} field. It does not define any state and thus can be shared by
+ * arbitrary clients. {@link PropertyUtils} per default uses this instance as its only {@code BeanIntrospector} object.
  * </p>
  *
  * @since 1.9
@@ -63,11 +60,9 @@ public class DefaultBeanIntrospector implements BeanIntrospector {
     }
 
     /**
-     * This method fixes an issue where IndexedPropertyDescriptor behaves
-     * differently in different versions of the JDK for 'indexed' properties
-     * which use java.util.List (rather than an array). It implements a
-     * workaround for Bug 28358. If you have a Bean with the following
-     * getters/setters for an indexed property:
+     * This method fixes an issue where IndexedPropertyDescriptor behaves differently in different versions of the JDK for 'indexed' properties which use
+     * java.util.List (rather than an array). It implements a workaround for Bug 28358. If you have a Bean with the following getters/setters for an indexed
+     * property:
      *
      * <pre>
      * public List getFoo()
@@ -76,56 +71,40 @@ public class DefaultBeanIntrospector implements BeanIntrospector {
      * public void setFoo(int index, Object foo)
      * </pre>
      *
-     * then the IndexedPropertyDescriptor's getReadMethod() and getWriteMethod()
-     * behave as follows:
+     * then the IndexedPropertyDescriptor's getReadMethod() and getWriteMethod() behave as follows:
      * <ul>
      * <li>JDK 1.3.1_04: returns valid Method objects from these methods.</li>
      * <li>JDK 1.4.2_05: returns null from these methods.</li>
      * </ul>
      *
-     * @param beanClass the current class to be inspected
+     * @param beanClass   the current class to be inspected
      * @param descriptors the array with property descriptors
      */
-    private void handleIndexedPropertyDescriptors(final Class<?> beanClass,
-            final PropertyDescriptor[] descriptors) {
+    private void handleIndexedPropertyDescriptors(final Class<?> beanClass, final PropertyDescriptor[] descriptors) {
         for (final PropertyDescriptor pd : descriptors) {
             if (pd instanceof IndexedPropertyDescriptor) {
                 final IndexedPropertyDescriptor descriptor = (IndexedPropertyDescriptor) pd;
-                final String propName = descriptor.getName().substring(0, 1)
-                        .toUpperCase()
-                        + descriptor.getName().substring(1);
+                final String propName = descriptor.getName().substring(0, 1).toUpperCase() + descriptor.getName().substring(1);
 
                 if (descriptor.getReadMethod() == null) {
-                    final String methodName = descriptor.getIndexedReadMethod() != null ? descriptor
-                            .getIndexedReadMethod().getName() : "get"
-                            + propName;
-                    final Method readMethod = MethodUtils
-                            .getMatchingAccessibleMethod(beanClass, methodName,
-                                    BeanUtils.EMPTY_CLASS_ARRAY);
+                    final String methodName = descriptor.getIndexedReadMethod() != null ? descriptor.getIndexedReadMethod().getName() : "get" + propName;
+                    final Method readMethod = MethodUtils.getMatchingAccessibleMethod(beanClass, methodName, BeanUtils.EMPTY_CLASS_ARRAY);
                     if (readMethod != null) {
                         try {
                             descriptor.setReadMethod(readMethod);
                         } catch (final Exception e) {
-                            log.error(
-                                    "Error setting indexed property read method",
-                                    e);
+                            log.error("Error setting indexed property read method", e);
                         }
                     }
                 }
                 if (descriptor.getWriteMethod() == null) {
-                    final String methodName = descriptor.getIndexedWriteMethod() != null ? descriptor
-                            .getIndexedWriteMethod().getName() : "set"
-                            + propName;
-                    Method writeMethod = MethodUtils
-                            .getMatchingAccessibleMethod(beanClass, methodName,
-                                    LIST_CLASS_PARAMETER);
+                    final String methodName = descriptor.getIndexedWriteMethod() != null ? descriptor.getIndexedWriteMethod().getName() : "set" + propName;
+                    Method writeMethod = MethodUtils.getMatchingAccessibleMethod(beanClass, methodName, LIST_CLASS_PARAMETER);
                     if (writeMethod == null) {
                         for (final Method m : beanClass.getMethods()) {
                             if (m.getName().equals(methodName)) {
                                 final Class<?>[] parameterTypes = m.getParameterTypes();
-                                if (parameterTypes.length == 1
-                                        && List.class
-                                                .isAssignableFrom(parameterTypes[0])) {
+                                if (parameterTypes.length == 1 && List.class.isAssignableFrom(parameterTypes[0])) {
                                     writeMethod = m;
                                     break;
                                 }
@@ -136,9 +115,7 @@ public class DefaultBeanIntrospector implements BeanIntrospector {
                         try {
                             descriptor.setWriteMethod(writeMethod);
                         } catch (final Exception e) {
-                            log.error(
-                                    "Error setting indexed property write method",
-                                    e);
+                            log.error("Error setting indexed property write method", e);
                         }
                     }
                 }
@@ -147,10 +124,8 @@ public class DefaultBeanIntrospector implements BeanIntrospector {
     }
 
     /**
-     * Performs introspection of a specific Java class. This implementation uses
-     * the {@code java.beans.Introspector.getBeanInfo()} method to obtain
-     * all property descriptors for the current class and adds them to the
-     * passed in introspection context.
+     * Performs introspection of a specific Java class. This implementation uses the {@code java.beans.Introspector.getBeanInfo()} method to obtain all property
+     * descriptors for the current class and adds them to the passed in introspection context.
      *
      * @param icontext the introspection context
      */
@@ -161,9 +136,7 @@ public class DefaultBeanIntrospector implements BeanIntrospector {
             beanInfo = Introspector.getBeanInfo(icontext.getTargetClass());
         } catch (final IntrospectionException e) {
             // no descriptors are added to the context
-            log.error(
-                    "Error when inspecting class " + icontext.getTargetClass(),
-                    e);
+            log.error("Error when inspecting class " + icontext.getTargetClass(), e);
             return;
         }
 
@@ -172,8 +145,7 @@ public class DefaultBeanIntrospector implements BeanIntrospector {
             descriptors = PropertyDescriptors.EMPTY_ARRAY;
         }
 
-        handleIndexedPropertyDescriptors(icontext.getTargetClass(),
-                descriptors);
+        handleIndexedPropertyDescriptors(icontext.getTargetClass(), descriptors);
         icontext.addPropertyDescriptors(descriptors);
     }
 }

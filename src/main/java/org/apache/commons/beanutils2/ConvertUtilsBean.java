@@ -98,24 +98,25 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * TODO DOCS
- * <p>2.0</p>
- *
- * {@link ConvertUtilsBean} implementation that delegates {@code convert()}
- * methods to the new {@link ConvertUtilsBean#convert(Object, Class)} method.
- *
  * <p>
- * To configure this implementation for the current context ClassLoader invoke
- * {@code BeanUtilsBean.setInstance(new BeanUtilsBean2());}
+ * 2.0
  * </p>
  *
- * <p>Pre-2.0</p>
+ * {@link ConvertUtilsBean} implementation that delegates {@code convert()} methods to the new {@link ConvertUtilsBean#convert(Object, Class)} method.
  *
- * <p>Utility methods for converting String scalar values to objects of the
- * specified Class, String arrays to arrays of the specified Class.  The
- * actual {@link Converter} instance to be used can be registered for each
- * possible destination Class.  Unless you override them, standard
- * {@link Converter} instances are provided for all of the following
- * destination Classes:</p>
+ * <p>
+ * To configure this implementation for the current context ClassLoader invoke {@code BeanUtilsBean.setInstance(new BeanUtilsBean2());}
+ * </p>
+ *
+ * <p>
+ * Pre-2.0
+ * </p>
+ *
+ * <p>
+ * Utility methods for converting String scalar values to objects of the specified Class, String arrays to arrays of the specified Class. The actual
+ * {@link Converter} instance to be used can be registered for each possible destination Class. Unless you override them, standard {@link Converter} instances
+ * are provided for all of the following destination Classes:
+ * </p>
  * <ul>
  * <li>java.lang.BigDecimal (no default value)</li>
  * <li>java.lang.BigInteger (no default value)</li>
@@ -159,44 +160,35 @@ import org.apache.commons.logging.LogFactory;
  * <li>java.time.ZoneOffset (no default value)</li>
  * </ul>
  *
- * <p>For backwards compatibility, the standard Converters for primitive
- * types (and the corresponding wrapper classes) return a defined
- * default value when a conversion error occurs.  If you prefer to have a
- * {@link ConversionException} thrown instead, replace the standard Converter
- * instances with instances created with the zero-arguments constructor.  For
- * example, to cause the Converters for integers to throw an exception on
- * conversion errors, you could do this:</p>
+ * <p>
+ * For backwards compatibility, the standard Converters for primitive types (and the corresponding wrapper classes) return a defined default value when a
+ * conversion error occurs. If you prefer to have a {@link ConversionException} thrown instead, replace the standard Converter instances with instances created
+ * with the zero-arguments constructor. For example, to cause the Converters for integers to throw an exception on conversion errors, you could do this:
+ * </p>
+ *
  * <pre>
- *   // No-args constructor gets the version that throws exceptions
- *   Converter myConverter =
- *    new org.apache.commons.beanutils2.converter.IntegerConverter();
- *   ConvertUtils.register(myConverter, Integer.TYPE);    // Native type
- *   ConvertUtils.register(myConverter, Integer.class);   // Wrapper class
+ * // No-args constructor gets the version that throws exceptions
+ * Converter myConverter = new org.apache.commons.beanutils2.converter.IntegerConverter();
+ * ConvertUtils.register(myConverter, Integer.TYPE); // Native type
+ * ConvertUtils.register(myConverter, Integer.class); // Wrapper class
  * </pre>
  *
  * <p>
- * Converters generally treat null input as if it were invalid
- * input, that is, they return their default value if one was specified when the
- * converter was constructed, and throw an exception otherwise. If you prefer
- * nulls to be preserved for converters that are converting to objects (not
- * primitives) then register a converter as above, passing a default value of
- * null to the converter constructor (and of course registering that converter
- * only for the .class target).
+ * Converters generally treat null input as if it were invalid input, that is, they return their default value if one was specified when the converter was
+ * constructed, and throw an exception otherwise. If you prefer nulls to be preserved for converters that are converting to objects (not primitives) then
+ * register a converter as above, passing a default value of null to the converter constructor (and of course registering that converter only for the .class
+ * target).
  * </p>
  *
  * <p>
- * When a converter is listed above as having no default value, then that
- * converter will throw an exception when passed null or an invalid value
- * as its input. In particular, by default the BigInteger and BigDecimal
- * converters have no default (and are therefore somewhat inconsistent
- * with the other numerical converters which all have zero as their default).
+ * When a converter is listed above as having no default value, then that converter will throw an exception when passed null or an invalid value as its input.
+ * In particular, by default the BigInteger and BigDecimal converters have no default (and are therefore somewhat inconsistent with the other numerical
+ * converters which all have zero as their default).
  * </p>
  *
  * <p>
- * Converters that generate <em>arrays</em> of each of the primitive types are
- * also automatically configured (including String[]). When passed null
- * or invalid input, these return an empty array (not null). See class
- * AbstractArrayConverter for the supported input formats for these converters.
+ * Converters that generate <em>arrays</em> of each of the primitive types are also automatically configured (including String[]). When passed null or invalid
+ * input, these return an empty array (not null). See class AbstractArrayConverter for the supported input formats for these converters.
  * </p>
  *
  * @since 1.7
@@ -213,6 +205,7 @@ public class ConvertUtilsBean {
 
     /**
      * Gets singleton instance
+     *
      * @return The singleton instance
      */
     protected static ConvertUtilsBean getInstance() {
@@ -220,8 +213,7 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * The set of {@link Converter}s that can be used to convert Strings
-     * into objects of a specified Class, keyed by the destination Class.
+     * The set of {@link Converter}s that can be used to convert Strings into objects of a specified Class, keyed by the destination Class.
      */
     private final WeakFastHashMap<Class<?>, Converter<?>> converters = new WeakFastHashMap<>();
 
@@ -233,8 +225,7 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Delegates to the new {@link ConvertUtilsBean#convert(Object, Class)}
-     * method.
+     * Delegates to the new {@link ConvertUtilsBean#convert(Object, Class)} method.
      *
      * @param value Value to be converted (may be null)
      * @return The converted String value or null if value is null
@@ -246,12 +237,11 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Converts the value to an object of the specified class (if
-     * possible). If no converter for the desired target type is registered,
-     * the passed in object is returned unchanged.
+     * Converts the value to an object of the specified class (if possible). If no converter for the desired target type is registered, the passed in object is
+     * returned unchanged.
      *
-     * @param <T> The Class type.
-     * @param value Value to be converted (may be null)
+     * @param <T>        The Class type.
+     * @param value      Value to be converted (may be null)
      * @param targetType Class of the value to be converted to (must not be null)
      * @return The converted value
      *
@@ -265,8 +255,7 @@ public class ConvertUtilsBean {
             if (nullValue) {
                 LOG.debug("Convert null value to type '" + targetType.getName() + "'");
             } else {
-                LOG.debug("Convert type '" + sourceType.getName() + "' value '" + value + "' to type '"
-                    + targetType.getName() + "'");
+                LOG.debug("Convert type '" + sourceType.getName() + "' value '" + value + "' to type '" + targetType.getName() + "'");
             }
         }
 
@@ -301,8 +290,7 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Delegates to the new {@link ConvertUtilsBean#convert(Object, Class)}
-     * method.
+     * Delegates to the new {@link ConvertUtilsBean#convert(Object, Class)} method.
      *
      * @param value Value to be converted (may be null)
      * @param clazz Java class to be converted to (must not be null)
@@ -315,8 +303,7 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Delegates to the new {@link ConvertUtilsBean#convert(Object, Class)}
-     * method.
+     * Delegates to the new {@link ConvertUtilsBean#convert(Object, Class)} method.
      *
      * @param value Array of values to be converted
      * @param clazz Java array or element class to be converted to (must not be null)
@@ -340,8 +327,7 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Deregisters all registered {@link Converter}s, and re-establish the
-     * standard Converters.
+     * Deregisters all registered {@link Converter}s, and re-establish the standard Converters.
      */
     public void deregister() {
 
@@ -356,8 +342,7 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Remove any registered {@link Converter} for the specified destination
-     * {@code Class}.
+     * Remove any registered {@link Converter} for the specified destination {@code Class}.
      *
      * @param clazz Class for which to remove a registered Converter
      */
@@ -366,11 +351,10 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Looks up and return any registered {@link Converter} for the specified
-     * source and destination class; if there is no registered Converter,
-     * return {@code null}.
+     * Looks up and return any registered {@link Converter} for the specified source and destination class; if there is no registered Converter, return
+     * {@code null}.
      *
-     * @param <T> The converter type.
+     * @param <T>        The converter type.
      * @param sourceType Class of the value being converted
      * @param targetType Class of the value to be converted to
      * @return The registered {@link Converter} or {@code null} if not found
@@ -384,8 +368,7 @@ public class ConvertUtilsBean {
         // Convert --> String
         if (targetType == String.class) {
             converter = lookup(sourceType);
-            if (converter == null && (sourceType.isArray() ||
-                        Collection.class.isAssignableFrom(sourceType))) {
+            if (converter == null && (sourceType.isArray() || Collection.class.isAssignableFrom(sourceType))) {
                 converter = lookup(String[].class);
             }
             if (converter == null) {
@@ -410,11 +393,9 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Looks up and return any registered {@link Converter} for the specified
-     * destination class; if there is no registered Converter, return
-     * {@code null}.
+     * Looks up and return any registered {@link Converter} for the specified destination class; if there is no registered Converter, return {@code null}.
      *
-     * @param <T> The converter type.
+     * @param <T>   The converter type.
      * @param clazz Class for which to return a registered Converter
      * @return The registered {@link Converter} or {@code null} if not found
      */
@@ -426,17 +407,14 @@ public class ConvertUtilsBean {
     /**
      * Registers the provided converters with the specified defaults.
      *
-     * @param throwException {@code true} if the converters should
-     * throw an exception when a conversion error occurs, otherwise
-     * {@code false} if a default value should be used.
-     * @param defaultNull {@code true}if the <em>standard</em> converters
-     * (see {@link ConvertUtilsBean#registerStandard(boolean, boolean)})
-     * should use a default value of {@code null</code>, otherwise <code>false}.
+     * @param throwException   {@code true} if the converters should throw an exception when a conversion error occurs, otherwise {@code false} if a default
+     *                         value should be used.
+     * @param defaultNull      {@code true}if the <em>standard</em> converters (see {@link ConvertUtilsBean#registerStandard(boolean, boolean)}) should use a
+     *                         default value of {@code null</code>, otherwise <code>false}.
      * N.B. This values is ignored if {@code throwException</code> is <code>true}
      * @param defaultArraySize The size of the default array value for array converters
-     * (N.B. This values is ignored if {@code throwException</code> is <code>true}).
-     * Specifying a value less than zero causes a {@code null} value to be used for
-     * the default.
+     * (N.B. This values is ignored if {@code throwException</code> is <code>true}). Specifying a value less than zero causes a {@code null} value to be used
+     * for the default.
      */
     public void register(final boolean throwException, final boolean defaultNull, final int defaultArraySize) {
         registerPrimitives(throwException);
@@ -451,29 +429,26 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Registers a custom {@link Converter} for the specified destination
-     * {@code Class}, replacing any previously registered Converter.
+     * Registers a custom {@link Converter} for the specified destination {@code Class}, replacing any previously registered Converter.
      *
      * @param converter Converter to be registered
-     * @param clazz Destination class for conversions performed by this
-     *  Converter
+     * @param clazz     Destination class for conversions performed by this Converter
      */
     public void register(final Converter converter, final Class<?> clazz) {
         converters.put(clazz, converter);
     }
 
     /**
-     * Registers a new ArrayConverter with the specified element delegate converter
-     * that returns a default array of the specified size in the event of conversion errors.
+     * Registers a new ArrayConverter with the specified element delegate converter that returns a default array of the specified size in the event of
+     * conversion errors.
      *
-     * @param componentType The component type of the array
+     * @param componentType      The component type of the array
      * @param componentConverter The converter to delegate to for the array elements
-     * @param throwException Whether a conversion exception should be thrown or a default
-     * value used in the event of a conversion error
-     * @param defaultArraySize The size of the default array
+     * @param throwException     Whether a conversion exception should be thrown or a default value used in the event of a conversion error
+     * @param defaultArraySize   The size of the default array
      */
-    private <T> void registerArrayConverter(final Class<T> componentType, final Converter<T> componentConverter,
-            final boolean throwException, final int defaultArraySize) {
+    private <T> void registerArrayConverter(final Class<T> componentType, final Converter<T> componentConverter, final boolean throwException,
+            final int defaultArraySize) {
         final Class<T[]> arrayType = (Class<T[]>) Array.newInstance(componentType, 0).getClass();
         final Converter<T[]> arrayConverter;
         if (throwException) {
@@ -487,13 +462,11 @@ public class ConvertUtilsBean {
     /**
      * Registers array converters.
      *
-     * @param throwException {@code true} if the converters should
-     * throw an exception when a conversion error occurs, otherwise
-     * {@code false} if a default value should be used.
-     * @param defaultArraySize The size of the default array value for array converters
-     * (N.B. This values is ignored if {@code throwException</code> is <code>true}).
-     * Specifying a value less than zero causes a {@code null} value to be used for
-     * the default.
+     * @param throwException   {@code true} if the converters should throw an exception when a conversion error occurs, otherwise {@code false} if a default
+     *                         value should be used.
+     * @param defaultArraySize The size of the default array value for array converters (N.B. This values is ignored if
+     *                         {@code throwException</code> is <code>true}). Specifying a value less than zero causes a {@code null} value to be used for the
+     *                         default.
      */
     private void registerArrays(final boolean throwException, final int defaultArraySize) {
         // @formatter:off
@@ -561,35 +534,35 @@ public class ConvertUtilsBean {
      * </p>
      * This method registers the following converters:
      * <ul>
-     *     <li>{@code Class.class} - {@link ClassConverter}</li>
-     *     <li>{@code Enum.class} - {@link EnumConverter}</li>
-     *     <li>{@code java.util.Date.class} - {@link DateConverter}</li>
-     *     <li>{@code java.util.Calendar.class} - {@link CalendarConverter}</li>
-     *     <li>{@code File.class} - {@link FileConverter}</li>
-     *     <li>{@code Path.class} - {@link PathConverter}</li>
-     *     <li>{@code java.sql.Date.class} - {@link SqlDateConverter}</li>
-     *     <li>{@code java.sql.Time.class} - {@link SqlTimeConverter}</li>
-     *     <li>{@code java.sql.Timestamp.class} - {@link SqlTimestampConverter}</li>
-     *     <li>{@code URL.class} - {@link URLConverter}</li>
-     *     <li>{@code URI.class} - {@link URIConverter}</li>
-     *     <li>{@code UUID.class} - {@link UUIDConverter}</li>
-     *     <li>{@code LocalDate.class} - {@link LocalDateConverter}</li>
-     *     <li>{@code LocalDateTime.class} - {@link LocalDateTimeConverter}</li>
-     *     <li>{@code LocalTime.class} - {@link LocalTimeConverter}</li>
-     *     <li>{@code OffsetDateTime.class} - {@link OffsetDateTimeConverter}</li>
-     *     <li>{@code OffsetTime.class} - {@link OffsetTimeConverter}</li>
-     *     <li>{@code ZonedDateTime.class} - {@link ZonedDateTimeConverter}</li>
-     *     <li>{@code Duration.class} - {@link DurationConverter}</li>
-     *     <li>{@code MonthDay.class} - {@link MonthDayConverter}</li>
-     *     <li>{@code Period.class} - {@link PeriodConverter}</li>
-     *     <li>{@code Year.class} - {@link YearConverter}</li>
-     *     <li>{@code YearMonth.class} - {@link YearMonthConverter}</li>
-     *     <li>{@code ZoneId.class} - {@link ZoneIdConverter}</li>
-     *     <li>{@code ZoneOffset.class} - {@link ZoneOffsetConverter}</li>
+     * <li>{@code Class.class} - {@link ClassConverter}</li>
+     * <li>{@code Enum.class} - {@link EnumConverter}</li>
+     * <li>{@code java.util.Date.class} - {@link DateConverter}</li>
+     * <li>{@code java.util.Calendar.class} - {@link CalendarConverter}</li>
+     * <li>{@code File.class} - {@link FileConverter}</li>
+     * <li>{@code Path.class} - {@link PathConverter}</li>
+     * <li>{@code java.sql.Date.class} - {@link SqlDateConverter}</li>
+     * <li>{@code java.sql.Time.class} - {@link SqlTimeConverter}</li>
+     * <li>{@code java.sql.Timestamp.class} - {@link SqlTimestampConverter}</li>
+     * <li>{@code URL.class} - {@link URLConverter}</li>
+     * <li>{@code URI.class} - {@link URIConverter}</li>
+     * <li>{@code UUID.class} - {@link UUIDConverter}</li>
+     * <li>{@code LocalDate.class} - {@link LocalDateConverter}</li>
+     * <li>{@code LocalDateTime.class} - {@link LocalDateTimeConverter}</li>
+     * <li>{@code LocalTime.class} - {@link LocalTimeConverter}</li>
+     * <li>{@code OffsetDateTime.class} - {@link OffsetDateTimeConverter}</li>
+     * <li>{@code OffsetTime.class} - {@link OffsetTimeConverter}</li>
+     * <li>{@code ZonedDateTime.class} - {@link ZonedDateTimeConverter}</li>
+     * <li>{@code Duration.class} - {@link DurationConverter}</li>
+     * <li>{@code MonthDay.class} - {@link MonthDayConverter}</li>
+     * <li>{@code Period.class} - {@link PeriodConverter}</li>
+     * <li>{@code Year.class} - {@link YearConverter}</li>
+     * <li>{@code YearMonth.class} - {@link YearMonthConverter}</li>
+     * <li>{@code ZoneId.class} - {@link ZoneIdConverter}</li>
+     * <li>{@code ZoneOffset.class} - {@link ZoneOffsetConverter}</li>
      * </ul>
-     * @param throwException {@code true} if the converters should
-     * throw an exception when a conversion error occurs, otherwise <code>
-     * {@code false} if a default value should be used.
+     *
+     * @param throwException {@code true} if the converters should throw an exception when a conversion error occurs, otherwise <code> {@code false} if a
+     *                       default value should be used.
      */
     private void registerOther(final boolean throwException) {
         // @formatter:off
@@ -632,28 +605,28 @@ public class ConvertUtilsBean {
      * </p>
      * This method registers the following converters:
      * <ul>
-     *     <li>{@code Boolean.TYPE} - {@link BooleanConverter}</li>
-     *     <li>{@code Byte.TYPE} - {@link ByteConverter}</li>
-     *     <li>{@code Character.TYPE} - {@link CharacterConverter}</li>
-     *     <li>{@code Double.TYPE} - {@link DoubleConverter}</li>
-     *     <li>{@code Float.TYPE} - {@link FloatConverter}</li>
-     *     <li>{@code Integer.TYPE} - {@link IntegerConverter}</li>
-     *     <li>{@code Long.TYPE} - {@link LongConverter}</li>
-     *     <li>{@code Short.TYPE} - {@link ShortConverter}</li>
+     * <li>{@code Boolean.TYPE} - {@link BooleanConverter}</li>
+     * <li>{@code Byte.TYPE} - {@link ByteConverter}</li>
+     * <li>{@code Character.TYPE} - {@link CharacterConverter}</li>
+     * <li>{@code Double.TYPE} - {@link DoubleConverter}</li>
+     * <li>{@code Float.TYPE} - {@link FloatConverter}</li>
+     * <li>{@code Integer.TYPE} - {@link IntegerConverter}</li>
+     * <li>{@code Long.TYPE} - {@link LongConverter}</li>
+     * <li>{@code Short.TYPE} - {@link ShortConverter}</li>
      * </ul>
-     * @param throwException {@code true} if the converters should
-     * throw an exception when a conversion error occurs, otherwise <code>
-     * {@code false} if a default value should be used.
+     *
+     * @param throwException {@code true} if the converters should throw an exception when a conversion error occurs, otherwise <code> {@code false} if a
+     *                       default value should be used.
      */
     private void registerPrimitives(final boolean throwException) {
-        register(Boolean.TYPE,   throwException ? new BooleanConverter()    : new BooleanConverter(Boolean.FALSE));
-        register(Byte.TYPE,      throwException ? new ByteConverter()       : new ByteConverter(ZERO));
-        register(Character.TYPE, throwException ? new CharacterConverter()  : new CharacterConverter(SPACE));
-        register(Double.TYPE,    throwException ? new DoubleConverter()     : new DoubleConverter(ZERO));
-        register(Float.TYPE,     throwException ? new FloatConverter()      : new FloatConverter(ZERO));
-        register(Integer.TYPE,   throwException ? new IntegerConverter()    : new IntegerConverter(ZERO));
-        register(Long.TYPE,      throwException ? new LongConverter()       : new LongConverter(ZERO));
-        register(Short.TYPE,     throwException ? new ShortConverter()      : new ShortConverter(ZERO));
+        register(Boolean.TYPE, throwException ? new BooleanConverter() : new BooleanConverter(Boolean.FALSE));
+        register(Byte.TYPE, throwException ? new ByteConverter() : new ByteConverter(ZERO));
+        register(Character.TYPE, throwException ? new CharacterConverter() : new CharacterConverter(SPACE));
+        register(Double.TYPE, throwException ? new DoubleConverter() : new DoubleConverter(ZERO));
+        register(Float.TYPE, throwException ? new FloatConverter() : new FloatConverter(ZERO));
+        register(Integer.TYPE, throwException ? new IntegerConverter() : new IntegerConverter(ZERO));
+        register(Long.TYPE, throwException ? new LongConverter() : new LongConverter(ZERO));
+        register(Short.TYPE, throwException ? new ShortConverter() : new ShortConverter(ZERO));
     }
 
     /**
@@ -661,21 +634,21 @@ public class ConvertUtilsBean {
      * </p>
      * This method registers the following converters:
      * <ul>
-     *     <li>{@code BigDecimal.class} - {@link BigDecimalConverter}</li>
-     *     <li>{@code BigInteger.class} - {@link BigIntegerConverter}</li>
-     *     <li>{@code Boolean.class} - {@link BooleanConverter}</li>
-     *     <li>{@code Byte.class} - {@link ByteConverter}</li>
-     *     <li>{@code Character.class} - {@link CharacterConverter}</li>
-     *     <li>{@code Double.class} - {@link DoubleConverter}</li>
-     *     <li>{@code Float.class} - {@link FloatConverter}</li>
-     *     <li>{@code Integer.class} - {@link IntegerConverter}</li>
-     *     <li>{@code Long.class} - {@link LongConverter}</li>
-     *     <li>{@code Short.class} - {@link ShortConverter}</li>
-     *     <li>{@code String.class} - {@link StringConverter}</li>
+     * <li>{@code BigDecimal.class} - {@link BigDecimalConverter}</li>
+     * <li>{@code BigInteger.class} - {@link BigIntegerConverter}</li>
+     * <li>{@code Boolean.class} - {@link BooleanConverter}</li>
+     * <li>{@code Byte.class} - {@link ByteConverter}</li>
+     * <li>{@code Character.class} - {@link CharacterConverter}</li>
+     * <li>{@code Double.class} - {@link DoubleConverter}</li>
+     * <li>{@code Float.class} - {@link FloatConverter}</li>
+     * <li>{@code Integer.class} - {@link IntegerConverter}</li>
+     * <li>{@code Long.class} - {@link LongConverter}</li>
+     * <li>{@code Short.class} - {@link ShortConverter}</li>
+     * <li>{@code String.class} - {@link StringConverter}</li>
      * </ul>
-     * @param throwException {@code true} if the converters should
-     * throw an exception when a conversion error occurs, otherwise <code>
-     * {@code false} if a default value should be used.
+     *
+     * @param throwException {@code true} if the converters should throw an exception when a conversion error occurs, otherwise <code>
+     *                       {@code false} if a default value should be used.
      * @param defaultNull {@code true}if the <em>standard</em> converters
      * (see {@link ConvertUtilsBean#registerStandard(boolean, boolean)})
      * should use a default value of {@code null</code>, otherwise <code>false}.
@@ -683,24 +656,24 @@ public class ConvertUtilsBean {
      */
     private void registerStandard(final boolean throwException, final boolean defaultNull) {
 
-        final Number     defaultNumber     = defaultNull ? null : ZERO;
-        final BigDecimal bigDecDeflt       = defaultNull ? null : new BigDecimal("0.0");
-        final BigInteger bigIntDeflt       = defaultNull ? null : new BigInteger("0");
-        final Boolean    booleanDefault    = defaultNull ? null : Boolean.FALSE;
-        final Character  charDefault       = defaultNull ? null : SPACE;
-        final String     stringDefault     = defaultNull ? null : "";
+        final Number defaultNumber = defaultNull ? null : ZERO;
+        final BigDecimal bigDecDeflt = defaultNull ? null : new BigDecimal("0.0");
+        final BigInteger bigIntDeflt = defaultNull ? null : new BigInteger("0");
+        final Boolean booleanDefault = defaultNull ? null : Boolean.FALSE;
+        final Character charDefault = defaultNull ? null : SPACE;
+        final String stringDefault = defaultNull ? null : "";
 
         register(BigDecimal.class, throwException ? new BigDecimalConverter() : new BigDecimalConverter(bigDecDeflt));
         register(BigInteger.class, throwException ? new BigIntegerConverter() : new BigIntegerConverter(bigIntDeflt));
-        register(Boolean.class,    throwException ? new BooleanConverter()    : new BooleanConverter(booleanDefault));
-        register(Byte.class,       throwException ? new ByteConverter()       : new ByteConverter(defaultNumber));
-        register(Character.class,  throwException ? new CharacterConverter()  : new CharacterConverter(charDefault));
-        register(Double.class,     throwException ? new DoubleConverter()     : new DoubleConverter(defaultNumber));
-        register(Float.class,      throwException ? new FloatConverter()      : new FloatConverter(defaultNumber));
-        register(Integer.class,    throwException ? new IntegerConverter()    : new IntegerConverter(defaultNumber));
-        register(Long.class,       throwException ? new LongConverter()       : new LongConverter(defaultNumber));
-        register(Short.class,      throwException ? new ShortConverter()      : new ShortConverter(defaultNumber));
-        register(String.class,     throwException ? new StringConverter()     : new StringConverter(stringDefault));
+        register(Boolean.class, throwException ? new BooleanConverter() : new BooleanConverter(booleanDefault));
+        register(Byte.class, throwException ? new ByteConverter() : new ByteConverter(defaultNumber));
+        register(Character.class, throwException ? new CharacterConverter() : new CharacterConverter(charDefault));
+        register(Double.class, throwException ? new DoubleConverter() : new DoubleConverter(defaultNumber));
+        register(Float.class, throwException ? new FloatConverter() : new FloatConverter(defaultNumber));
+        register(Integer.class, throwException ? new IntegerConverter() : new IntegerConverter(defaultNumber));
+        register(Long.class, throwException ? new LongConverter() : new LongConverter(defaultNumber));
+        register(Short.class, throwException ? new ShortConverter() : new ShortConverter(defaultNumber));
+        register(String.class, throwException ? new StringConverter() : new StringConverter(stringDefault));
 
     }
 }

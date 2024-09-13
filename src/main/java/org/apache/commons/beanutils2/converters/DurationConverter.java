@@ -19,11 +19,9 @@ package org.apache.commons.beanutils2.converters;
 import java.time.Duration;
 
 /**
- * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion
- * to and from <b>java.time.Duration</b> objects.
+ * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion to and from <b>java.time.Duration</b> objects.
  * <p>
- * Can be configured to either return a <em>default value</em> or throw a
- * {@code ConversionException} if a conversion error occurs.
+ * Can be configured to either return a <em>default value</em> or throw a {@code ConversionException} if a conversion error occurs.
  * </p>
  *
  * @since 2.0
@@ -32,29 +30,27 @@ import java.time.Duration;
 public final class DurationConverter extends AbstractConverter<Duration> {
 
     /**
-     * Constructs a <b>java.time.Duration</b> <em>Converter</em> that throws
-     * a {@code ConversionException} if an error occurs.
+     * Constructs a <b>java.time.Duration</b> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
      */
     public DurationConverter() {
     }
 
     /**
-     * Constructs a <b>java.time.Duration</b> <em>Converter</em> that returns
-     * a default value if an error occurs.
+     * Constructs a <b>java.time.Duration</b> <em>Converter</em> that returns a default value if an error occurs.
      *
-     * @param defaultValue The default value to be returned
-     * if the value to be converted is missing or an error
-     * occurs converting the value.
+     * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
      */
     public DurationConverter(final Duration defaultValue) {
         super(defaultValue);
     }
 
     /**
-     * <p>Converts a java.time.Duration or object into a String.</p>
+     * <p>
+     * Converts a java.time.Duration or object into a String.
+     * </p>
      *
-     * @param <T> Target type of the conversion.
-     * @param type Data type to which this value should be converted.
+     * @param <T>   Target type of the conversion.
+     * @param type  Data type to which this value should be converted.
      * @param value The input value to be converted.
      * @return The converted value.
      * @throws Throwable if an error occurs converting to the specified type

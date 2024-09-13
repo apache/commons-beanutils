@@ -100,8 +100,8 @@ public class ColorConverterTest {
     }
 
     /**
-     * Color can be extended without the {@link Override overriding} the {@link Color#toString()} method.
-     * This tests that it can continue to parse the {@link String} from an inherited class.
+     * Color can be extended without the {@link Override overriding} the {@link Color#toString()} method. This tests that it can continue to parse the
+     * {@link String} from an inherited class.
      */
     @Test
     public void testConvertingJavaExtendsColorString() {

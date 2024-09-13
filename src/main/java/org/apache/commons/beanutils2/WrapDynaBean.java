@@ -20,14 +20,15 @@ package org.apache.commons.beanutils2;
 import java.lang.reflect.InvocationTargetException;
 
 /**
- * <p>Implements {@code DynaBean} to wrap a standard JavaBean
- * instance, so that DynaBean APIs can be used to access its properties.</p>
+ * <p>
+ * Implements {@code DynaBean} to wrap a standard JavaBean instance, so that DynaBean APIs can be used to access its properties.
+ * </p>
  *
  * <p>
- * The most common use cases for this class involve wrapping an existing Java bean.
- * (This makes it different from the typical use cases for other {@code DynaBean}'s.)
- * For example:
+ * The most common use cases for this class involve wrapping an existing Java bean. (This makes it different from the typical use cases for other
+ * {@code DynaBean}'s.) For example:
  * </p>
+ *
  * <pre>{@code
  *  Object aJavaBean = ...;
  *  ...
@@ -35,8 +36,9 @@ import java.lang.reflect.InvocationTargetException;
  *  ...
  * }</pre>
  *
- * <p><strong>IMPLEMENTATION NOTE</strong> - This implementation does not
- * support the {@code contains()</code> and <code>remove()} methods.</p>
+ * <p>
+ * <strong>IMPLEMENTATION NOTE</strong> - This implementation does not support the {@code contains()</code> and <code>remove()} methods.
+ * </p>
  */
 
 public class WrapDynaBean implements DynaBean {
@@ -44,8 +46,7 @@ public class WrapDynaBean implements DynaBean {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The {@code DynaClass} "base class" that this DynaBean
-     * is associated with.
+     * The {@code DynaClass} "base class" that this DynaBean is associated with.
      */
     protected transient WrapDynaClass dynaClass;
 
@@ -55,8 +56,7 @@ public class WrapDynaBean implements DynaBean {
     protected Object instance;
 
     /**
-     * Constructs a new {@code DynaBean} associated with the specified
-     * JavaBean instance.
+     * Constructs a new {@code DynaBean} associated with the specified JavaBean instance.
      *
      * @param instance JavaBean instance to be wrapped
      */
@@ -65,14 +65,12 @@ public class WrapDynaBean implements DynaBean {
     }
 
     /**
-     * Creates a new instance of {@code WrapDynaBean}, associates it with the specified
-     * JavaBean instance, and initializes the bean's {@code DynaClass}. Using this
-     * constructor this {@code WrapDynaBean} instance can be assigned a class which has
-     * been configured externally. If no {@code WrapDynaClass} is provided, a new one is
-     * created using a standard mechanism.
+     * Creates a new instance of {@code WrapDynaBean}, associates it with the specified JavaBean instance, and initializes the bean's {@code DynaClass}. Using
+     * this constructor this {@code WrapDynaBean} instance can be assigned a class which has been configured externally. If no {@code WrapDynaClass} is
+     * provided, a new one is created using a standard mechanism.
      *
      * @param instance JavaBean instance to be wrapped
-     * @param cls the optional {@code WrapDynaClass} to be used for this bean
+     * @param cls      the optional {@code WrapDynaClass} to be used for this bean
      * @since 1.9
      */
     public WrapDynaBean(final Object instance, final WrapDynaClass cls) {
@@ -81,21 +79,17 @@ public class WrapDynaBean implements DynaBean {
     }
 
     /**
-     * Does the specified mapped property contain a value for the specified
-     * key value?
+     * Does the specified mapped property contain a value for the specified key value?
      *
      * @param name Name of the property to check
-     * @param key Name of the key to check
-     * @return {@code true} if the mapped property contains a value for
-     * the specified key, otherwise {@code false}
+     * @param key  Name of the key to check
+     * @return {@code true} if the mapped property contains a value for the specified key, otherwise {@code false}
      *
-     * @throws IllegalArgumentException if there is no property
-     *  of the specified name
+     * @throws IllegalArgumentException if there is no property of the specified name
      */
     @Override
     public boolean contains(final String name, final String key) {
-        throw new UnsupportedOperationException
-                ("WrapDynaBean does not support contains()");
+        throw new UnsupportedOperationException("WrapDynaBean does not support contains()");
     }
 
     /**
@@ -104,9 +98,8 @@ public class WrapDynaBean implements DynaBean {
      * @param name Name of the property whose value is to be retrieved
      * @return The property's value
      *
-     * @throws IllegalArgumentException if there is no property
-     *  of the specified name
-     * @throws NullPointerException for null input.
+     * @throws IllegalArgumentException if there is no property of the specified name
+     * @throws NullPointerException     for null input.
      */
     @Override
     public Object get(final String name) {
@@ -127,18 +120,14 @@ public class WrapDynaBean implements DynaBean {
     /**
      * Gets the value of an indexed property with the specified name.
      *
-     * @param name Name of the property whose value is to be retrieved
+     * @param name  Name of the property whose value is to be retrieved
      * @param index Index of the value to be retrieved
      * @return The indexed property's value
      *
-     * @throws IllegalArgumentException if there is no property
-     *  of the specified name
-     * @throws IllegalArgumentException if the specified property
-     *  exists, but is not indexed
-     * @throws IndexOutOfBoundsException if the specified index
-     *  is outside the range of the underlying property
-     * @throws NullPointerException if no array or List has been
-     *  initialized for this property
+     * @throws IllegalArgumentException  if there is no property of the specified name
+     * @throws IllegalArgumentException  if the specified property exists, but is not indexed
+     * @throws IndexOutOfBoundsException if the specified index is outside the range of the underlying property
+     * @throws NullPointerException      if no array or List has been initialized for this property
      */
     @Override
     public Object get(final String name, final int index) {
@@ -149,29 +138,22 @@ public class WrapDynaBean implements DynaBean {
             throw e;
         } catch (final InvocationTargetException ite) {
             final Throwable cause = ite.getTargetException();
-            throw new IllegalArgumentException
-                    ("Error reading indexed property '" + name +
-                              "' nested exception - " + cause);
+            throw new IllegalArgumentException("Error reading indexed property '" + name + "' nested exception - " + cause);
         } catch (final Throwable t) {
-            throw new IllegalArgumentException
-                    ("Error reading indexed property '" + name +
-                              "', exception - " + t);
+            throw new IllegalArgumentException("Error reading indexed property '" + name + "', exception - " + t);
         }
         return value;
     }
 
     /**
-     * Gets the value of a mapped property with the specified name,
-     * or {@code null} if there is no value for the specified key.
+     * Gets the value of a mapped property with the specified name, or {@code null} if there is no value for the specified key.
      *
      * @param name Name of the property whose value is to be retrieved
-     * @param key Key of the value to be retrieved
+     * @param key  Key of the value to be retrieved
      * @return The mapped property's value
      *
-     * @throws IllegalArgumentException if there is no property
-     *  of the specified name
-     * @throws IllegalArgumentException if the specified property
-     *  exists, but is not mapped
+     * @throws IllegalArgumentException if there is no property of the specified name
+     * @throws IllegalArgumentException if the specified property exists, but is not mapped
      */
     @Override
     public Object get(final String name, final String key) {
@@ -180,20 +162,16 @@ public class WrapDynaBean implements DynaBean {
             value = getPropertyUtils().getMappedProperty(instance, name, key);
         } catch (final InvocationTargetException ite) {
             final Throwable cause = ite.getTargetException();
-            throw new IllegalArgumentException
-                    ("Error reading mapped property '" + name +
-                              "' nested exception - " + cause);
+            throw new IllegalArgumentException("Error reading mapped property '" + name + "' nested exception - " + cause);
         } catch (final Throwable t) {
-            throw new IllegalArgumentException
-                    ("Error reading mapped property '" + name +
-                              "', exception - " + t);
+            throw new IllegalArgumentException("Error reading mapped property '" + name + "', exception - " + t);
         }
         return value;
     }
 
     /**
-     * Gets the {@code DynaClass} instance that describes the set of
-     * properties available for this DynaBean.
+     * Gets the {@code DynaClass} instance that describes the set of properties available for this DynaBean.
+     *
      * @return The associated DynaClass
      */
     @Override
@@ -211,25 +189,19 @@ public class WrapDynaBean implements DynaBean {
      * @param name Name of the property for which to retrieve the descriptor
      * @return The descriptor for the specified property
      *
-     * @throws IllegalArgumentException if this is not a valid property
-     *  name for our DynaClass
+     * @throws IllegalArgumentException if this is not a valid property name for our DynaClass
      */
     protected DynaProperty getDynaProperty(final String name) {
         final DynaProperty descriptor = getDynaClass().getDynaProperty(name);
         if (descriptor == null) {
-            throw new IllegalArgumentException
-                    ("Invalid property name '" + name + "'");
+            throw new IllegalArgumentException("Invalid property name '" + name + "'");
         }
         return descriptor;
     }
 
     /**
-     * Gets the bean instance wrapped by this DynaBean.
-     * For most common use cases,
-     * this object should already be known
-     * and this method safely be ignored.
-     * But some creators of frameworks using {@code DynaBean}'s may
-     * find this useful.
+     * Gets the bean instance wrapped by this DynaBean. For most common use cases, this object should already be known and this method safely be ignored. But
+     * some creators of frameworks using {@code DynaBean}'s may find this useful.
      *
      * @return the Java bean Object wrapped by this {@code DynaBean}
      */
@@ -238,8 +210,8 @@ public class WrapDynaBean implements DynaBean {
     }
 
     /**
-     * Returns the {@code PropertyUtilsBean} instance to be used for accessing properties.
-     * If available, this object is obtained from the associated {@code WrapDynaClass}.
+     * Returns the {@code PropertyUtilsBean} instance to be used for accessing properties. If available, this object is obtained from the associated
+     * {@code WrapDynaClass}.
      *
      * @return the associated {@code PropertyUtilsBean}
      */
@@ -252,37 +224,29 @@ public class WrapDynaBean implements DynaBean {
     }
 
     /**
-     * Remove any existing value for the specified key on the
-     * specified mapped property.
+     * Remove any existing value for the specified key on the specified mapped property.
      *
-     * @param name Name of the property for which a value is to
-     *  be removed
-     * @param key Key of the value to be removed
+     * @param name Name of the property for which a value is to be removed
+     * @param key  Key of the value to be removed
      *
-     * @throws IllegalArgumentException if there is no property
-     *  of the specified name
+     * @throws IllegalArgumentException if there is no property of the specified name
      */
     @Override
     public void remove(final String name, final String key) {
-        throw new UnsupportedOperationException
-                ("WrapDynaBean does not support remove()");
+        throw new UnsupportedOperationException("WrapDynaBean does not support remove()");
     }
 
     /**
      * Sets the value of an indexed property with the specified name.
      *
-     * @param name Name of the property whose value is to be set
+     * @param name  Name of the property whose value is to be set
      * @param index Index of the property to be set
      * @param value Value to which this property is to be set
      *
-     * @throws ConversionException if the specified value cannot be
-     *  converted to the type required for this property
-     * @throws IllegalArgumentException if there is no property
-     *  of the specified name
-     * @throws IllegalArgumentException if the specified property
-     *  exists, but is not indexed
-     * @throws IndexOutOfBoundsException if the specified index
-     *  is outside the range of the underlying property
+     * @throws ConversionException       if the specified value cannot be converted to the type required for this property
+     * @throws IllegalArgumentException  if there is no property of the specified name
+     * @throws IllegalArgumentException  if the specified property exists, but is not indexed
+     * @throws IndexOutOfBoundsException if the specified index is outside the range of the underlying property
      */
     @Override
     public void set(final String name, final int index, final Object value) {
@@ -292,28 +256,21 @@ public class WrapDynaBean implements DynaBean {
             throw e;
         } catch (final InvocationTargetException ite) {
             final Throwable cause = ite.getTargetException();
-            throw new IllegalArgumentException
-                    ("Error setting indexed property '" + name +
-                              "' nested exception - " + cause);
+            throw new IllegalArgumentException("Error setting indexed property '" + name + "' nested exception - " + cause);
         } catch (final Throwable t) {
-            throw new IllegalArgumentException
-                    ("Error setting indexed property '" + name +
-                              "', exception - " + t);
+            throw new IllegalArgumentException("Error setting indexed property '" + name + "', exception - " + t);
         }
     }
 
     /**
      * Sets the value of a simple property with the specified name.
      *
-     * @param name Name of the property whose value is to be set
+     * @param name  Name of the property whose value is to be set
      * @param value Value to which this property is to be set
      *
-     * @throws ConversionException if the specified value cannot be
-     *  converted to the type required for this property
-     * @throws IllegalArgumentException if there is no property
-     *  of the specified name
-     * @throws NullPointerException if an attempt is made to set a
-     *  primitive property to null
+     * @throws ConversionException      if the specified value cannot be converted to the type required for this property
+     * @throws IllegalArgumentException if there is no property of the specified name
+     * @throws NullPointerException     if an attempt is made to set a primitive property to null
      */
     @Override
     public void set(final String name, final Object value) {
@@ -321,29 +278,22 @@ public class WrapDynaBean implements DynaBean {
             getPropertyUtils().setSimpleProperty(instance, name, value);
         } catch (final InvocationTargetException ite) {
             final Throwable cause = ite.getTargetException();
-            throw new IllegalArgumentException
-                    ("Error setting property '" + name +
-                              "' nested exception -" + cause);
+            throw new IllegalArgumentException("Error setting property '" + name + "' nested exception -" + cause);
         } catch (final Throwable t) {
-            throw new IllegalArgumentException
-                    ("Error setting property '" + name +
-                              "', exception - " + t);
+            throw new IllegalArgumentException("Error setting property '" + name + "', exception - " + t);
         }
     }
 
     /**
      * Sets the value of a mapped property with the specified name.
      *
-     * @param name Name of the property whose value is to be set
-     * @param key Key of the property to be set
+     * @param name  Name of the property whose value is to be set
+     * @param key   Key of the property to be set
      * @param value Value to which this property is to be set
      *
-     * @throws ConversionException if the specified value cannot be
-     *  converted to the type required for this property
-     * @throws IllegalArgumentException if there is no property
-     *  of the specified name
-     * @throws IllegalArgumentException if the specified property
-     *  exists, but is not mapped
+     * @throws ConversionException      if the specified value cannot be converted to the type required for this property
+     * @throws IllegalArgumentException if there is no property of the specified name
+     * @throws IllegalArgumentException if the specified property exists, but is not mapped
      */
     @Override
     public void set(final String name, final String key, final Object value) {
@@ -351,13 +301,9 @@ public class WrapDynaBean implements DynaBean {
             getPropertyUtils().setMappedProperty(instance, name, key, value);
         } catch (final InvocationTargetException ite) {
             final Throwable cause = ite.getTargetException();
-            throw new IllegalArgumentException
-                    ("Error setting mapped property '" + name +
-                              "' nested exception - " + cause);
+            throw new IllegalArgumentException("Error setting mapped property '" + name + "' nested exception - " + cause);
         } catch (final Throwable t) {
-            throw new IllegalArgumentException
-                    ("Error setting mapped property '" + name +
-                              "', exception - " + t);
+            throw new IllegalArgumentException("Error setting mapped property '" + name + "', exception - " + t);
         }
     }
 }

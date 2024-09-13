@@ -33,6 +33,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Abstract base for &lt;Number&gt;Converter classes.
+ *
  * @param <T> Number type.
  */
 abstract class AbstractNumberConverterTest<T extends Number> {
@@ -54,10 +55,8 @@ abstract class AbstractNumberConverterTest<T extends Number> {
         final NumberConverter<T> converter = makeConverter();
 
         // Other type --> String conversion
-        assertEquals(0, ((Number) converter.convert(getExpectedType(), Boolean.FALSE)).intValue(),
-                                "Boolean.FALSE to Number ");
-        assertEquals(1, ((Number) converter.convert(getExpectedType(), Boolean.TRUE)).intValue(),
-                                "Boolean.TRUE to Number ");
+        assertEquals(0, ((Number) converter.convert(getExpectedType(), Boolean.FALSE)).intValue(), "Boolean.FALSE to Number ");
+        assertEquals(1, ((Number) converter.convert(getExpectedType(), Boolean.TRUE)).intValue(), "Boolean.TRUE to Number ");
     }
 
     /**
@@ -71,13 +70,10 @@ abstract class AbstractNumberConverterTest<T extends Number> {
         final long longValue = calendarValue.getTime().getTime();
 
         // Calendar --> Long conversion
-        assertEquals(Long.valueOf(longValue), converter.convert(Long.class, calendarValue),
-                                "Calendar to Long");
+        assertEquals(Long.valueOf(longValue), converter.convert(Long.class, calendarValue), "Calendar to Long");
 
         // Calendar --> Integer
-        assertThrows(ConversionException.class,
-                     ()-> converter.convert(Integer.class, calendarValue),
-                     "Calendar to Integer - expected a ConversionException");
+        assertThrows(ConversionException.class, () -> converter.convert(Integer.class, calendarValue), "Calendar to Integer - expected a ConversionException");
     }
 
     /**
@@ -85,9 +81,7 @@ abstract class AbstractNumberConverterTest<T extends Number> {
      */
     @Test
     public void testConvertNull() {
-        assertThrows(ConversionException.class,
-                     ()-> makeConverter().convert(getExpectedType(), null),
-                     "Expected ConversionException");
+        assertThrows(ConversionException.class, () -> makeConverter().convert(getExpectedType(), null), "Expected ConversionException");
     }
 
     /**
@@ -105,8 +99,7 @@ abstract class AbstractNumberConverterTest<T extends Number> {
         for (int i = 0; i < number.length; i++) {
             final Object val = makeConverter().convert(getExpectedType(), number[i]);
             assertNotNull(val, "Convert " + message[i] + " should not be null");
-            assertTrue(getExpectedType().isInstance(val),
-                                  "Convert " + message[i] + " should return a " + getExpectedType().getName());
+            assertTrue(getExpectedType().isInstance(val), "Convert " + message[i] + " should return a " + getExpectedType().getName());
         }
     }
 
@@ -124,9 +117,7 @@ abstract class AbstractNumberConverterTest<T extends Number> {
         assertEquals(Long.valueOf(longValue), converter.convert(Long.class, dateValue), "Date to Long");
 
         // Date --> Integer
-        assertThrows(ConversionException.class,
-                     () -> converter.convert(Integer.class, dateValue),
-                     "Date to Integer - expected a ConversionException");
+        assertThrows(ConversionException.class, () -> converter.convert(Integer.class, dateValue), "Date to Integer - expected a ConversionException");
     }
 
     /**
@@ -149,13 +140,9 @@ abstract class AbstractNumberConverterTest<T extends Number> {
     public void testInvalidException() {
         final NumberConverter<T> converter = makeConverter();
 
-        assertThrows(ConversionException.class,
-                     () -> converter.convert(getExpectedType(), null),
-                     "Null test, expected ConversionException");
+        assertThrows(ConversionException.class, () -> converter.convert(getExpectedType(), null), "Null test, expected ConversionException");
 
-        assertThrows(ConversionException.class,
-                     () -> converter.convert(getExpectedType(), "XXXX"),
-                     "Invalid test, expected ConversionException");
+        assertThrows(ConversionException.class, () -> converter.convert(getExpectedType(), "XXXX"), "Invalid test, expected ConversionException");
     }
 
     /**
@@ -165,9 +152,7 @@ abstract class AbstractNumberConverterTest<T extends Number> {
     public void testInvalidType() {
         final NumberConverter<T> converter = makeConverter();
 
-        assertThrows(ConversionException.class,
-                     () -> converter.convert(Object.class, numbers[0]),
-                     "Invalid type test, expected ConversionException");
+        assertThrows(ConversionException.class, () -> converter.convert(Object.class, numbers[0]), "Invalid type test, expected ConversionException");
     }
 
     /**
@@ -177,9 +162,8 @@ abstract class AbstractNumberConverterTest<T extends Number> {
     public void testInvalidTypeWithDefault() {
         final NumberConverter<T> converter = makeConverter((T) numbers[0]);
 
-        assertThrows(ConversionException.class,
-                     () -> converter.convert(Object.class, numbers[0]),
-                     "Invalid type with default test, expected ConversionException");
+        assertThrows(ConversionException.class, () -> converter.convert(Object.class, numbers[0]),
+                "Invalid type with default test, expected ConversionException");
     }
 
     /**
@@ -190,10 +174,8 @@ abstract class AbstractNumberConverterTest<T extends Number> {
         final NumberConverter<T> converter = makeConverter();
 
         // Default Number --> String conversion
-        assertEquals(numbers[0].toString(), converter.convert(String.class, numbers[0]),
-                     () -> "Default Convert " + numbers[0]);
-        assertEquals(numbers[1].toString(), converter.convert(String.class, numbers[1]),
-                     () -> "Default Convert " + numbers[1]);
+        assertEquals(numbers[0].toString(), converter.convert(String.class, numbers[0]), () -> "Default Convert " + numbers[0]);
+        assertEquals(numbers[1].toString(), converter.convert(String.class, numbers[1]), () -> "Default Convert " + numbers[1]);
     }
 
     /**
@@ -266,14 +248,10 @@ abstract class AbstractNumberConverterTest<T extends Number> {
         final NumberConverter<Integer> converter = new IntegerConverterTest().makeConverter(defaultValue);
 
         // Default Locale
-        assertEquals(Integer.valueOf(5), converter.convert(Integer.class, new String[] { "5", "4", "3" }),
-                                "Valid First");
-        assertEquals(defaultValue, converter.convert(Integer.class, new String[] { "FOO", "1", "2" }),
-                                "Invalid First");
-        assertEquals(defaultValue, converter.convert(Integer.class, new String[] { null, "1", "2" }),
-                                "Null First");
-        assertEquals(Integer.valueOf(9), converter.convert(Integer.class, new long[] { 9, 2, 6 }),
-                                "Long Array");
+        assertEquals(Integer.valueOf(5), converter.convert(Integer.class, new String[] { "5", "4", "3" }), "Valid First");
+        assertEquals(defaultValue, converter.convert(Integer.class, new String[] { "FOO", "1", "2" }), "Invalid First");
+        assertEquals(defaultValue, converter.convert(Integer.class, new String[] { null, "1", "2" }), "Null First");
+        assertEquals(Integer.valueOf(9), converter.convert(Integer.class, new long[] { 9, 2, 6 }), "Long Array");
     }
 
     /**
@@ -285,13 +263,10 @@ abstract class AbstractNumberConverterTest<T extends Number> {
         converter.setUseLocaleFormat(false);
 
         // Default String --> Number conversion
-        assertEquals(numbers[0], converter.convert(getExpectedType(), numbers[0].toString()),
-                     () -> "Default Convert " + numbers[0]);
+        assertEquals(numbers[0], converter.convert(getExpectedType(), numbers[0].toString()), () -> "Default Convert " + numbers[0]);
 
         // Invalid
-        assertThrows(ConversionException.class,
-                     () -> converter.convert(getExpectedType(), "12x"),
-                     "Expected invalid value to cause ConversionException");
+        assertThrows(ConversionException.class, () -> converter.convert(getExpectedType(), "12x"), "Expected invalid value to cause ConversionException");
     }
 
     /**
@@ -302,8 +277,7 @@ abstract class AbstractNumberConverterTest<T extends Number> {
         final NumberConverter<T> converter = makeConverter();
         converter.setUseLocaleFormat(false);
 
-        assertEquals(numbers[0], converter.convert(null, numbers[0].toString()),
-                     () -> "Default Convert " + numbers[0]);
+        assertEquals(numbers[0], converter.convert(null, numbers[0].toString()), () -> "Default Convert " + numbers[0]);
     }
 
     /**
@@ -319,27 +293,19 @@ abstract class AbstractNumberConverterTest<T extends Number> {
         converter.setUseLocaleFormat(true);
 
         // Default Locale
-        assertEquals(numbers[0], converter.convert(getExpectedType(), "-0,012"),
-                     () -> "Default Locale " + numbers[0]);
-        assertEquals(numbers[1], converter.convert(getExpectedType(), "0,013"),
-                     () -> "Default Locale " + numbers[1]);
+        assertEquals(numbers[0], converter.convert(getExpectedType(), "-0,012"), () -> "Default Locale " + numbers[0]);
+        assertEquals(numbers[1], converter.convert(getExpectedType(), "0,013"), () -> "Default Locale " + numbers[1]);
 
         // Invalid Value
-        assertThrows(ConversionException.class,
-                     () -> converter.convert(getExpectedType(), "0,02x"),
-                     "Expected invalid value to cause ConversionException");
+        assertThrows(ConversionException.class, () -> converter.convert(getExpectedType(), "0,02x"), "Expected invalid value to cause ConversionException");
 
         // Locale.GERMAN
         converter.setLocale(Locale.GERMAN);
-        assertEquals(numbers[2], converter.convert(getExpectedType(), "-0.022"),
-                     () -> "Locale.GERMAN " + numbers[2]);
-        assertEquals(numbers[3], converter.convert(getExpectedType(), "0.023"),
-                     () -> "Locale.GERMAN " + numbers[3]);
+        assertEquals(numbers[2], converter.convert(getExpectedType(), "-0.022"), () -> "Locale.GERMAN " + numbers[2]);
+        assertEquals(numbers[3], converter.convert(getExpectedType(), "0.023"), () -> "Locale.GERMAN " + numbers[3]);
 
         // Invalid Value
-        assertThrows(ConversionException.class,
-                     () -> converter.convert(getExpectedType(), "0.02x"),
-                     "Expected invalid value to cause ConversionException");
+        assertThrows(ConversionException.class, () -> converter.convert(getExpectedType(), "0.02x"), "Expected invalid value to cause ConversionException");
 
         // Restore the default Locale
         Locale.setDefault(defaultLocale);
@@ -359,22 +325,16 @@ abstract class AbstractNumberConverterTest<T extends Number> {
         converter.setPattern("[0,0];(0,0)");
 
         // Default Locale
-        assertEquals(numbers[0], converter.convert(getExpectedType(), "(1,2)"),
-                     () -> "Default Locale " + numbers[0]);
-        assertEquals(numbers[1], converter.convert(getExpectedType(), "[1,3]"),
-                     () -> "Default Locale " + numbers[1]);
+        assertEquals(numbers[0], converter.convert(getExpectedType(), "(1,2)"), () -> "Default Locale " + numbers[0]);
+        assertEquals(numbers[1], converter.convert(getExpectedType(), "[1,3]"), () -> "Default Locale " + numbers[1]);
 
         // Locale.GERMAN
         converter.setLocale(Locale.GERMAN);
-        assertEquals(numbers[2], converter.convert(getExpectedType(), "(2.2)"),
-                     () -> "Locale.GERMAN " + numbers[2]);
-        assertEquals(numbers[3], converter.convert(getExpectedType(), "[2.3]"),
-                     () -> "Locale.GERMAN " + numbers[3]);
+        assertEquals(numbers[2], converter.convert(getExpectedType(), "(2.2)"), () -> "Locale.GERMAN " + numbers[2]);
+        assertEquals(numbers[3], converter.convert(getExpectedType(), "[2.3]"), () -> "Locale.GERMAN " + numbers[3]);
 
         // Invalid Value
-        assertThrows(ConversionException.class,
-                     () -> converter.convert(getExpectedType(), "1,2"),
-                     "Expected invalid value to cause ConversionException");
+        assertThrows(ConversionException.class, () -> converter.convert(getExpectedType(), "1,2"), "Expected invalid value to cause ConversionException");
 
         // Invalid Type (will try via String)
         final Object obj = new Object() {
@@ -383,9 +343,7 @@ abstract class AbstractNumberConverterTest<T extends Number> {
                 return "dsdgsdsdg";
             }
         };
-        assertThrows(ConversionException.class,
-                     () -> converter.convert(getExpectedType(), obj),
-                     "Expected invalid value to cause ConversionException");
+        assertThrows(ConversionException.class, () -> converter.convert(getExpectedType(), obj), "Expected invalid value to cause ConversionException");
 
         // Restore the default Locale
         Locale.setDefault(defaultLocale);

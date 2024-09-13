@@ -70,7 +70,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
             if (!(obj instanceof Map.Entry)) {
                 return false;
             }
-            final Map.Entry<? ,?> other = (Map.Entry<? ,?>) obj;
+            final Map.Entry<?, ?> other = (Map.Entry<?, ?>) obj;
             return Objects.equals(key, other.getKey()) && Objects.equals(value, other.getValue());
         }
 
@@ -94,6 +94,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
             throw new UnsupportedOperationException();
         }
     }
+
     private final DynaBean dynaBean;
     private final boolean readOnly;
 

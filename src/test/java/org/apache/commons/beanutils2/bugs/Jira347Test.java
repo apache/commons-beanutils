@@ -129,8 +129,7 @@ public class Jira347Test {
             // Sanity checks only
             assertNotNull(loader, "ClassLoader is null");
             assertNotNull(beanClass, "BeanClass is null");
-            assertNotSame(getClass().getClassLoader(), beanClass.getClassLoader(),
-                                     "ClassLoaders should be different..");
+            assertNotSame(getClass().getClassLoader(), beanClass.getClassLoader(), "ClassLoaders should be different..");
             assertSame(beanClass.getClassLoader(), loader, "BeanClass ClassLoader incorrect");
 
             // now start the test
@@ -146,8 +145,7 @@ public class Jira347Test {
                 forceGarbageCollection();
                 try {
                     final String m2 = getMappedWriteMethod(descriptor);
-                    assertEquals(m1, m2,
-                                            "Method returned post garbage collection differs from Method returned prior to gc");
+                    assertEquals(m1, m2, "Method returned post garbage collection differs from Method returned prior to gc");
                 } catch (final RuntimeException e) {
                     fail("getMappedWriteMethod threw an exception after garbage collection " + e);
                 }
