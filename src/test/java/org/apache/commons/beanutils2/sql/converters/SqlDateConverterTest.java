@@ -17,11 +17,14 @@
 
 package org.apache.commons.beanutils2.sql.converters;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.sql.Date;
 import java.util.Calendar;
 
 import org.apache.commons.beanutils2.converters.AbstractDateConverterTest;
 import org.apache.commons.beanutils2.converters.DateTimeConverter;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test Case for the {@link SqlDateConverter} class.
@@ -63,6 +66,7 @@ public class SqlDateConverterTest extends AbstractDateConverterTest<Date> {
      * Test default String to java.sql.Date conversion
      */
     @Override
+    @Test
     public void testDefaultStringToTypeConvert() {
 
         // Create & Configure the Converter
@@ -81,6 +85,7 @@ public class SqlDateConverterTest extends AbstractDateConverterTest<Date> {
     /**
      * Test default java.sql.Date to String conversion
      */
+    @Test
     public void testDefaultTypeToStringConvert() {
 
         // Create & Configure the Converter
@@ -93,7 +98,7 @@ public class SqlDateConverterTest extends AbstractDateConverterTest<Date> {
         stringConversion(converter, expected, testVal);
 
         final Object result = converter.convert(String.class, Integer.valueOf(2));
-        assertEquals("Default toString()", "2", result);
+        assertEquals("2", result, "Default toString()");
     }
 
     /**

@@ -22,6 +22,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import org.apache.commons.beanutils2.converters.AbstractDateConverterTest;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test Case for the {@link SqlTimeConverter} class.
@@ -63,6 +64,7 @@ public class SqlTimeConverterTest extends AbstractDateConverterTest<Time> {
      * Test default String to java.sql.Time conversion
      */
     @Override
+    @Test
     public void testDefaultStringToTypeConvert() {
         // Create & Configure the Converter
         final SqlTimeConverter converter = makeConverter();
@@ -81,6 +83,7 @@ public class SqlTimeConverterTest extends AbstractDateConverterTest<Time> {
      * Test Date Converter with no default value
      */
     @Override
+    @Test
     public void testLocale() {
         // Re-set the default Locale to Locale.US
         final Locale defaultLocale = Locale.getDefault();

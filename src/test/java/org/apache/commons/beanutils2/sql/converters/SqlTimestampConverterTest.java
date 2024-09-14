@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import org.apache.commons.beanutils2.converters.AbstractDateConverterTest;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test Case for the {@link SqlTimestampConverter} class.
@@ -72,6 +73,7 @@ public class SqlTimestampConverterTest extends AbstractDateConverterTest<Timesta
      * Test default String to java.sql.Timestamp conversion
      */
     @Override
+    @Test
     public void testDefaultStringToTypeConvert() {
         // Create & Configure the Converter
         final SqlTimestampConverter converter = makeConverter();
@@ -92,6 +94,7 @@ public class SqlTimestampConverterTest extends AbstractDateConverterTest<Timesta
      * Test Date Converter with no default value
      */
     @Override
+    @Test
     public void testLocale() {
         // Re-set the default Locale to Locale.US
         final Locale defaultLocale = Locale.getDefault();
