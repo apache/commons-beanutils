@@ -352,29 +352,12 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
         this.map = createMap();
     }
 
-    /**
-     * Constructs an empty map with the specified capacity.
-     *
-     * @param capacity the initial capacity of the empty map
-     */
-    public WeakFastHashMap(final int capacity) {
-        this.map = createMap(capacity);
-    }
+
 
     // Map access
 
     // These methods can forward straight to the wrapped Map in 'fast' mode.
     // (because they are query methods)
-
-    /**
-     * Constructs an empty map with the specified capacity and load factor.
-     *
-     * @param capacity the initial capacity of the empty map
-     * @param factor   the load factor of the new map
-     */
-    public WeakFastHashMap(final int capacity, final float factor) {
-        this.map = createMap(capacity, factor);
-    }
 
     /**
      * Constructs a new map with the same mappings as the specified map.
