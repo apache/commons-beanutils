@@ -280,7 +280,6 @@ public class LocaleConvertUtilsBean {
      */
     protected Map<Class<?>, LocaleConverter<?>> create(final Locale locale) {
         final WeakFastHashMap<Class<?>, LocaleConverter<?>> converter = new WeakFastHashMap<>();
-        converter.setFast(false);
 
         converter.put(BigDecimal.class, BigDecimalLocaleConverter.builder().setLocale(locale).setLocalizedPattern(applyLocalized).get());
         converter.put(BigInteger.class, BigIntegerLocaleConverter.builder().setLocale(locale).setLocalizedPattern(applyLocalized).get());
