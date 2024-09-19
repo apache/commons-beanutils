@@ -36,7 +36,7 @@ jobs:
         include:
           - java: 21
             experimental: true
-          - java: 23-ea
+          - java: 23
             experimental: true
         
     steps:
