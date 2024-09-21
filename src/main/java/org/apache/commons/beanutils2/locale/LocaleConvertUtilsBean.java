@@ -106,13 +106,13 @@ public class LocaleConvertUtilsBean {
      * <li>value = map of converters for the certain locale.</li>
      * <ul>
      */
-    private final WeakFastHashMap<Locale, Map<Class<?>, LocaleConverter<?>>> mapConverters = new WeakFastHashMap<>();
+    private final WeakFastHashMap<Locale, Map<Class<?>, LocaleConverter<?>>> mapConverters;
 
     /**
      * Makes the state by default (deregisters all converters for all locales) and then registers default locale converters.
      */
     public LocaleConvertUtilsBean() {
-        mapConverters.setFast(false);
+        mapConverters = new WeakFastHashMap<>();
         deregister();
         mapConverters.setFast(true);
     }
