@@ -233,8 +233,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
      */
     @Override
     public boolean containsKey(final Object name) {
-        final Method method = getReadMethod(name);
-        return method != null;
+        return getReadMethod(name) != null;
     }
 
     /**
