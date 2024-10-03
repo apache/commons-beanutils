@@ -237,18 +237,6 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
     }
 
     /**
-     * Returns true if the bean defines a property whose current value is the given object.
-     *
-     * @param value the value to check
-     * @return false true if the bean has at least one property whose current value is that object, false otherwise
-     */
-    @Override
-    public boolean containsValue(final Object value) {
-        // use default implementation
-        return super.containsValue(value);
-    }
-
-    /**
      * Converts the given value to the given type. First, reflection is used to find a public constructor declared by the given class that takes one argument,
      * which must be the precise type of the given value. If such a constructor is found, a new object is created by passing the given value to that
      * constructor, and the newly constructed object is returned.
