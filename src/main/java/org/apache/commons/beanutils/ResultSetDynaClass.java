@@ -79,7 +79,7 @@ import java.util.Iterator;
  *
  */
 
-public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
+public class ResultSetDynaClass extends JDBCDynaClass {
 
 
 
