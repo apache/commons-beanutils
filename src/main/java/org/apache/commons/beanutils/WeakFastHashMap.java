@@ -217,10 +217,9 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
                     map = temp;
                     return r;
                 }
-            } else {
-                synchronized (map) {
-                    return get(map).remove(o);
-                }
+            }
+            synchronized (map) {
+                return get(map).remove(o);
             }
         }
 
@@ -233,10 +232,9 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
                     map = temp;
                     return r;
                 }
-            } else {
-                synchronized (map) {
-                    return get(map).removeAll(o);
-                }
+            }
+            synchronized (map) {
+                return get(map).removeAll(o);
             }
         }
 
@@ -249,10 +247,9 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
                     map = temp;
                     return r;
                 }
-            } else {
-                synchronized (map) {
-                    return get(map).retainAll(o);
-                }
+            }
+            synchronized (map) {
+                return get(map).retainAll(o);
             }
         }
 
@@ -665,10 +662,9 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
                 map = temp;
                 return result;
             }
-        } else {
-            synchronized (map) {
-                return map.put(key, value);
-            }
+        }
+        synchronized (map) {
+            return map.put(key, value);
         }
     }
 
@@ -712,10 +708,9 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
                 map = temp;
                 return result;
             }
-        } else {
-            synchronized (map) {
-                return map.remove(key);
-            }
+        }
+        synchronized (map) {
+            return map.remove(key);
         }
     }
 
