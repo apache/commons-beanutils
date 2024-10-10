@@ -45,46 +45,9 @@ public class BeanComparator<T, V> implements Comparator<T> {
      * This Comparator is useful, for example, for enforcing the natural order in custom implementations of {@link java.util.SortedSet SortedSet} and
      * {@link java.util.SortedMap SortedMap}.
      * </p>
-     *
-     * @param <E> the type of objects compared by this comparator
-     * @see java.util.Collections#reverseOrder()
      */
-    private static final class NaturalOrderComparator<E extends Comparable<? super E>> implements Comparator<E> {
-
-        /** The singleton instance. */
-        @SuppressWarnings("rawtypes")
-        public static final NaturalOrderComparator INSTANCE = new NaturalOrderComparator();
-
-        /**
-         * Private constructor to prevent instantiation. Only use INSTANCE.
-         */
-        private NaturalOrderComparator() {
-        }
-
-        /**
-         * Compare the two {@link Comparable Comparable} arguments. This method is equivalent to:
-         *
-         * <pre>
-         * ((Comparable) obj1).compareTo(obj2)
-         * </pre>
-         */
-        @Override
-        public int compare(final E obj1, final E obj2) {
-            return obj1.compareTo(obj2);
-        }
-
-        @Override
-        public boolean equals(final Object object) {
-            return this == object || null != object && object.getClass().equals(this.getClass());
-        }
-
-        @Override
-        public int hashCode() {
-            return "NaturalOrderComparator".hashCode();
-        }
-    }
-
-    private static final long serialVersionUID = 1L;
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    private static final Comparator NATURAL_ORDER_COMPARATOR = (obj1, obj2) -> ((Comparable) obj1).compareTo(obj2);
 
     /** Property. */
     private String property;
@@ -120,8 +83,9 @@ public class BeanComparator<T, V> implements Comparator<T> {
      * @param property String Name of a bean property, which may contain the name of a simple, nested, indexed, mapped, or combined property. See
      *                 {@link PropertyUtilsBean} for property query language syntax. If the property passed in is null then the actual objects will be compared
      */
+    @SuppressWarnings("unchecked")
     public BeanComparator(final String property) {
-        this(property, NaturalOrderComparator.INSTANCE);
+        this(property, NATURAL_ORDER_COMPARATOR);
     }
 
     /**
@@ -135,7 +99,7 @@ public class BeanComparator<T, V> implements Comparator<T> {
      */
     public BeanComparator(final String property, final Comparator<V> comparator) {
         setProperty(property);
-        this.comparator = comparator != null ? comparator : NaturalOrderComparator.INSTANCE;
+        this.comparator = comparator != null ? comparator : NATURAL_ORDER_COMPARATOR;
     }
 
     /**
@@ -158,7 +122,7 @@ public class BeanComparator<T, V> implements Comparator<T> {
             final Object value2 = PropertyUtils.getProperty(o2, property);
             return internalCompare(value1, value2);
         } catch (final NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            throw new RuntimeException(e.getClass().getSimpleName() + ": " + e.toString());
+            throw new RuntimeException(e.getClass().getSimpleName() + ": " + e);
         }
     }
 
