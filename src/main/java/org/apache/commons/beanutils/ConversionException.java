@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils;
-
 
 /**
  * <p>A <strong>ConversionException</strong> indicates that a call to
@@ -25,11 +23,7 @@ package org.apache.commons.beanutils;
  *
  * @since 1.3
  */
-
 public class ConversionException extends RuntimeException {
-
-
-
 
     private static final long serialVersionUID = 1L;
 
@@ -39,18 +33,14 @@ public class ConversionException extends RuntimeException {
      */
     protected Throwable cause = null;
 
-
     /**
      * Construct a new exception with the specified message.
      *
      * @param message The message describing this exception
      */
     public ConversionException(final String message) {
-
         super(message);
-
     }
-
 
     /**
      * Construct a new exception with the specified message and root cause.
@@ -59,14 +49,9 @@ public class ConversionException extends RuntimeException {
      * @param cause The root cause of this exception
      */
     public ConversionException(final String message, final Throwable cause) {
-
         super(message);
         this.cause = cause;
-
     }
-
-
-
 
     /**
      * Construct a new exception with the specified root cause.
@@ -74,7 +59,6 @@ public class ConversionException extends RuntimeException {
      * @param cause The root cause of this exception
      */
     public ConversionException(final Throwable cause) {
-
         super(cause.getMessage());
         this.cause = cause;
 
@@ -88,6 +72,5 @@ public class ConversionException extends RuntimeException {
     public Throwable getCause() {
         return this.cause;
     }
-
 
 }
