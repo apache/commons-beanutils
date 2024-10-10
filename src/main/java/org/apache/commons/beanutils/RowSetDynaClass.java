@@ -64,7 +64,7 @@ import java.util.List;
  *
  */
 
-public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Serializable {
+public class RowSetDynaClass extends JDBCDynaClass implements Serializable {
 
 
 
