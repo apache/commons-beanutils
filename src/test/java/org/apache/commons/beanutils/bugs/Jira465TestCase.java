@@ -107,7 +107,7 @@ public class Jira465TestCase extends TestCase {
         assertEquals("Wrong value", NEW_VALUE, bean.getFoo(0));
     }
 
-    public void testArrayProperty() throws IllegalAccessException {
+    public void testArrayProperty() {
         final ArrayProp bean = new ArrayProp();
         changeValue(bean);
         assertEquals("Wrong value", NEW_VALUE, bean.getFoo()[0]);
