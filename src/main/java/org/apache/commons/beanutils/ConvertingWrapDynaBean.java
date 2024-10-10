@@ -64,21 +64,13 @@ public class ConvertingWrapDynaBean extends WrapDynaBean {
      */
     @Override
     public void set(final String name, final Object value) {
-
         try {
             BeanUtils.copyProperty(instance, name, value);
         } catch (final InvocationTargetException ite) {
             final Throwable cause = ite.getTargetException();
-            throw new IllegalArgumentException
-                    ("Error setting property '" + name +
-                              "' nested exception - " + cause);
+            throw new IllegalArgumentException("Error setting property '" + name + "' nested exception - " + cause);
         } catch (final Throwable t) {
-            final IllegalArgumentException iae = new IllegalArgumentException
-                    ("Error setting property '" + name +
-                              "', exception - " + t);
-            BeanUtils.initCause(iae, t);
-            throw iae;
+            throw new IllegalArgumentException("Error setting property '" + name + "', exception - " + t, t);
         }
-
     }
 }

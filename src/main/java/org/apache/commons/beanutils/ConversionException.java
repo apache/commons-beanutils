@@ -28,13 +28,7 @@ public class ConversionException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The root cause of this <code>ConversionException</code>, compatible with
-     * JDK 1.4's extensions to <code>java.lang.Throwable</code>.
-     */
-    protected Throwable cause = null;
-
-    /**
-     * Construct a new exception with the specified message.
+     * Constructs a new exception with the specified message.
      *
      * @param message The message describing this exception
      */
@@ -43,34 +37,22 @@ public class ConversionException extends RuntimeException {
     }
 
     /**
-     * Construct a new exception with the specified message and root cause.
+     * Constructs a new exception with the specified message and root cause.
      *
      * @param message The message describing this exception
      * @param cause The root cause of this exception
      */
     public ConversionException(final String message, final Throwable cause) {
-        super(message);
-        this.cause = cause;
+        super(message, cause);
     }
 
     /**
-     * Construct a new exception with the specified root cause.
+     * Constructs a new exception with the specified root cause.
      *
      * @param cause The root cause of this exception
      */
     public ConversionException(final Throwable cause) {
-        super(cause.getMessage());
-        this.cause = cause;
-
-    }
-
-    /**
-     * Return the root cause of this conversion exception.
-     * @return the root cause of this conversion exception
-     */
-    @Override
-    public Throwable getCause() {
-        return this.cause;
+        super(cause);
     }
 
 }

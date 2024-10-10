@@ -33,6 +33,7 @@
       <action type="fix" issue="BEANUTILS-541" dev="ggregory" due-to="Sergey Chernov">FluentPropertyBeanIntrospector caches corrupted writeMethod (1.x backport) #69.</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Replace internal use of Locale.ENGLISH with Locale.ROOT.</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Replace Maven CLIRR plugin with JApiCmp.</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">Port to Java 1.4 Throwable APIs (!).</action>
       <!-- UPDATE -->
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 47 to 73.</action>
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump Java requirement from Java 6 to 8.</action>

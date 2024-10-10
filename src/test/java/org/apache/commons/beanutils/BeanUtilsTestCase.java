@@ -149,7 +149,7 @@ public class BeanUtilsTestCase extends TestCase {
      * Use reflection to get the cause
      */
     private Throwable getCause(final Throwable t) throws Throwable {
-        return (Throwable)PropertyUtils.getProperty(t, "cause");
+        return (Throwable) PropertyUtils.getProperty(t, "cause");
     }
 
 
@@ -160,9 +160,7 @@ public class BeanUtilsTestCase extends TestCase {
         try {
             throwException(cause);
         } catch (final Throwable e) {
-            final Throwable t = new Exception(parent);
-            BeanUtils.initCause(t, e);
-            throw t;
+            throw new Exception(parent, e);
         }
     }
 

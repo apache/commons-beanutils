@@ -165,26 +165,19 @@ public class BeanPropertyValueChangeClosure implements Closure {
             final String errorMsg = "Unable to execute Closure. Null value encountered in property path...";
 
             if (!ignoreNull) {
-                final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
-                BeanUtils.initCause(iae, e);
+                final IllegalArgumentException iae = new IllegalArgumentException(errorMsg, e);
                 throw iae;
             }
             log.warn("WARNING: " + errorMsg + e);
         } catch (final IllegalAccessException e) {
             final String errorMsg = "Unable to access the property provided.";
-            final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
-            BeanUtils.initCause(iae, e);
-            throw iae;
+            throw new IllegalArgumentException(errorMsg, e);
         } catch (final InvocationTargetException e) {
             final String errorMsg = "Exception occurred in property's getter";
-            final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
-            BeanUtils.initCause(iae, e);
-            throw iae;
+            throw new IllegalArgumentException(errorMsg, e);
         } catch (final NoSuchMethodException e) {
             final String errorMsg = "Property not found";
-            final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
-            BeanUtils.initCause(iae, e);
-            throw iae;
+            throw new IllegalArgumentException(errorMsg, e);
         }
     }
 

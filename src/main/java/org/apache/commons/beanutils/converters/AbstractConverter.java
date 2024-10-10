@@ -317,7 +317,6 @@ public abstract class AbstractConverter implements Converter {
                 log().debug("    Throwing ConversionException: " + msg);
                 log().debug("    " + DEFAULT_CONFIG_MSG);
             }
-            BeanUtils.initCause(cex, cause);
         }
 
         throw cex;
