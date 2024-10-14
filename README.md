@@ -44,7 +44,7 @@ Apache Commons BeanUtils
 ===================
 
 [![Java CI](https://github.com/apache/commons-beanutils/actions/workflows/maven.yml/badge.svg)](https://github.com/apache/commons-beanutils/actions/workflows/maven.yml)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-beanutils2/badge.svg?gav=true)](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-beanutils2/?gav=true)
+[![Maven Central](https://img.shields.io/maven-central/v/org.apache.commons/commons-beanutils2?label=Maven%20Central)](https://search.maven.org/artifact/org.apache.commons/commons-beanutils2)
 [![Javadocs](https://javadoc.io/badge/org.apache.commons/commons-beanutils2/2.0.0.svg)](https://javadoc.io/doc/org.apache.commons/commons-beanutils2/2.0.0)
 
 Apache Commons BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.
