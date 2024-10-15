@@ -760,7 +760,7 @@ public class BeanUtilsBean {
     public void setProperty(final Object bean, String name, final Object value) throws IllegalAccessException, InvocationTargetException {
         // Trace logging (if enabled)
         if (LOG.isTraceEnabled()) {
-            final String logStart = "  copyProperty(";
+            final String logStart = "  setProperty(";
             LOG.trace(traceLogRecord(bean, name, value, logStart).toString());
         }
 
