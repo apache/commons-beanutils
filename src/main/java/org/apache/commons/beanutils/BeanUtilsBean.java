@@ -438,8 +438,7 @@ public class BeanUtilsBean {
             if (type == null) {
                 // Most likely an indexed setter on a POJB only
                 if (log.isTraceEnabled()) {
-                    log.trace("    target type for property '" +
-                              propName + "' is null, so skipping ths setter");
+                    log.trace("    target type for property '" + propName + "' is null, so skipping the setter");
                 }
                 return;
             }
