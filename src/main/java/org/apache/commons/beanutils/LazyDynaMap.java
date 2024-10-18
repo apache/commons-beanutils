@@ -67,10 +67,8 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      */
     protected boolean returnNull = false;
 
-
-
     /**
-     * Default Constructor.
+     * Constructs a new instance.
      */
     public LazyDynaMap() {
         this(null, (Map<String, Object>)null);

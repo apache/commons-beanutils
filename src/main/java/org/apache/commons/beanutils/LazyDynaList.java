@@ -186,10 +186,8 @@ public class LazyDynaList extends ArrayList<Object> {
      */
     private Class<?> elementDynaBeanType;
 
-
-
     /**
-     * Default Constructor.
+     * Constructs a new instance.
      */
     public LazyDynaList() {
     }
