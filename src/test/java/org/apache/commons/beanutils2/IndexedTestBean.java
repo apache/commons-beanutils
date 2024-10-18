@@ -30,7 +30,7 @@ public class IndexedTestBean {
     private ArrayList<Object> arrayList;
 
     /**
-     * Default Constructor.
+     * Constructs a new instance.
      */
     public IndexedTestBean() {
     }

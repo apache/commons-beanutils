@@ -47,7 +47,7 @@ public class DefaultResolver implements Resolver {
     private static final char INDEXED_END = ']';
 
     /**
-     * Default Constructor.
+     * Constructs a new instance.
      */
     public DefaultResolver() {
     }
