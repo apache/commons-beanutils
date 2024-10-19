@@ -677,7 +677,7 @@
  *              a property which doesn't exist to the DynaClass when
  *              the <code>set(name, value)</code> method is called.</li>
  *          <li><strong><em>Lazy</em> List/Array growth</strong> - If an <em>indexed</em> property is not large
- *              enough to accomodate the <code>index</code> being set then the <code>List</code> or
+ *              enough to accommodate the <code>index</code> being set then the <code>List</code> or
  *              <code>Array</code> is automatically <em>grown</em> so that it is.</li>
  *          <li><strong><em>Lazy</em> List/Array instantiation</strong> - if an <em>indexed</em>
  *              property doesn't exist then calling the {@link org.apache.commons.beanutils.DynaBean DynaBean's}
