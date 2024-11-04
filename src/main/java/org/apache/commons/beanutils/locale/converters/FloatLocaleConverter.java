@@ -202,7 +202,7 @@ public class FloatLocaleConverter extends DecimalLocaleConverter {
    /**
     * Convert the specified locale-sensitive input object into an output object of the
     * specified type.  This method will return Float value or throw exception if value
-    * can not be stored in the Float.
+    * cannot be stored in the Float.
     *
     * @param value The input object to be converted
     * @param pattern The pattern is used for the convertion
