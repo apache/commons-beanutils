@@ -70,7 +70,7 @@ public class DimensionConverter extends AbstractConverter<Dimension> {
             final String stringValue = toString(value);
 
             if (stringValue.isEmpty()) {
-                throw new IllegalArgumentException("Dimensions can not be empty.");
+                throw new IllegalArgumentException("Dimensions cannot be empty.");
             }
 
             final Matcher matcher = DIMENSION_PATTERN.matcher(stringValue);

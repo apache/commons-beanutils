@@ -54,7 +54,7 @@ public class PointConverter extends AbstractConverter<Point> {
      * @return A {@link Point} represented by the x and y coordinate of the input.
      * @throws NullPointerException     If the value is null.
      * @throws IllegalArgumentException If the configuration value is an invalid representation of a {@link Point}.
-     * @throws NumberFormatException    If a one of coordinates can not be parsed to an {@link Integer}.
+     * @throws NumberFormatException    If a one of coordinates cannot be parsed to an {@link Integer}.
      */
     @Override
     protected <T> T convertToType(final Class<T> type, final Object value) throws Throwable {
@@ -62,7 +62,7 @@ public class PointConverter extends AbstractConverter<Point> {
             final String stringValue = toString(value);
 
             if (stringValue.isEmpty()) {
-                throw new IllegalArgumentException("A point can not be empty.");
+                throw new IllegalArgumentException("A point cannot be empty.");
             }
 
             final int lastCharIndex = stringValue.length() - 1;

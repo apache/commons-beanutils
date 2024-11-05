@@ -48,7 +48,7 @@ public class ConstructorUtils {
      * @param <T>           the type of the constructor
      * @param klass         the class to be constructed
      * @param parameterType The constructor parameter type
-     * @return null if matching accessible constructor can not be found.
+     * @return null if matching accessible constructor cannot be found.
      * @see Class#getConstructor
      * @see #getAccessibleConstructor(java.lang.reflect.Constructor)
      */
@@ -64,7 +64,7 @@ public class ConstructorUtils {
      * @param <T>            the type to be constructed
      * @param klass          the class to be constructed
      * @param parameterTypes the parameter array
-     * @return null if matching accessible constructor can not be found
+     * @return null if matching accessible constructor cannot be found
      * @see Class#getConstructor
      * @see #getAccessibleConstructor(java.lang.reflect.Constructor)
      */
@@ -82,7 +82,7 @@ public class ConstructorUtils {
      *
      * @param <T>  the type of the constructor
      * @param ctor prototype constructor object.
-     * @return {@code null} if accessible constructor can not be found.
+     * @return {@code null} if accessible constructor cannot be found.
      * @see SecurityManager
      */
     public static <T> Constructor<T> getAccessibleConstructor(final Constructor<T> ctor) {
