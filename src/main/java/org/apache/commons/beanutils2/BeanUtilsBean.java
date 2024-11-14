@@ -921,4 +921,28 @@ public class BeanUtilsBean {
             throw new InvocationTargetException(e, "Cannot set " + propName);
         }
     }
+
+
+    public void copyNonNullProperties(Object dest, Object orig) {
+        Objects.requireNonNull(dest, "dest");
+        Objects.requireNonNull(orig, "orig");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("BeanUtils.copyNonNullProperties(" + dest + ", " + orig + ")");
+        }
+        try {
+            final PropertyDescriptor[] origDescriptors = getPropertyUtils().getPropertyDescriptors(orig);
+            for (PropertyDescriptor origDescriptor : origDescriptors) {
+                final String name = origDescriptor.getName();
+                if ("class".equals(name)) continue;
+
+                if (getPropertyUtils().isReadable(orig, name) && getPropertyUtils().isWriteable(dest, name)) {
+                    final Object value = getPropertyUtils().getSimpleProperty(orig, name);
+                    if (null == value) continue;
+                    setProperty(dest, name, value);
+                }
+            }
+        } catch (final IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            // NoSuchMethodException occurs because the property is primitive and doesn't have a getter
+        }
+    }
 }
