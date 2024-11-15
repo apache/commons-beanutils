@@ -20,7 +20,7 @@ import java.net.URL;
 
 /**
  * {@link org.apache.commons.beanutils.Converter} implementaion that handles conversion
- * to and from <b>java.net.URL</b> objects.
+ * to and from <strong>java.net.URL</strong> objects.
  * <p>
  * Can be configured to either return a <em>default value</em> or throw a
  * <code>ConversionException</code> if a conversion error occurs.
@@ -30,14 +30,14 @@ import java.net.URL;
 public final class URLConverter extends AbstractConverter {
 
     /**
-     * Construct a <b>java.net.URL</b> <em>Converter</em> that throws
+     * Construct a <strong>java.net.URL</strong> <em>Converter</em> that throws
      * a <code>ConversionException</code> if an error occurs.
      */
     public URLConverter() {
     }
 
     /**
-     * Construct a <b>java.net.URL</b> <em>Converter</em> that returns
+     * Construct a <strong>java.net.URL</strong> <em>Converter</em> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned

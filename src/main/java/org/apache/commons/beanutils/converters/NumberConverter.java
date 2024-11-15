@@ -30,7 +30,7 @@ import org.apache.commons.beanutils.ConversionException;
 
 /**
  * {@link org.apache.commons.beanutils.Converter} implementaion that handles conversion
- * to and from <b>java.lang.Number</b> objects.
+ * to and from <strong>java.lang.Number</strong> objects.
  * <p>
  * This implementation handles conversion for the following
  * <code>java.lang.Number</code> types.
@@ -93,7 +93,7 @@ public abstract class NumberConverter extends AbstractConverter {
 
 
     /**
-     * Construct a <b>java.lang.Number</b> <em>Converter</em>
+     * Construct a <strong>java.lang.Number</strong> <em>Converter</em>
      * that throws a <code>ConversionException</code> if a error occurs.
      *
      * @param allowDecimals Indicates whether decimals are allowed

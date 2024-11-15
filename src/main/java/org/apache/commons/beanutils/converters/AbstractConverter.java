@@ -28,7 +28,7 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * Base {@link Converter} implementation that provides the structure
- * for handling conversion <b>to</b> and <b>from</b> a specified type.
+ * for handling conversion <strong>to</strong> and <strong>from</strong> a specified type.
  * <p>
  * This implementation provides the basic structure for
  * converting to/from a specified type optionally using a default
@@ -227,7 +227,7 @@ public abstract class AbstractConverter implements Converter {
     /**
      * Convert the input object into a String.
      * <p>
-     * <b>N.B.</b>This implementation simply uses the value's
+     * <strong>N.B.</strong>This implementation simply uses the value's
      * <code>toString()</code> method and should be overriden if a
      * more sophisticated mechanism for <em>conversion to a String</em>
      * is required.

@@ -18,7 +18,7 @@ package org.apache.commons.beanutils.converters;
 
 /**
  * {@link NumberConverter} implementation that handles conversion to
- * and from <b>java.lang.Short</b> objects.
+ * and from <strong>java.lang.Short</strong> objects.
  * <p>
  * This implementation can be configured to handle conversion either
  * by using Short's default String conversion, or by using a Locale's pattern
@@ -33,7 +33,7 @@ package org.apache.commons.beanutils.converters;
 public final class ShortConverter extends NumberConverter {
 
     /**
-     * Construct a <b>java.lang.Short</b> <em>Converter</em> that throws
+     * Construct a <strong>java.lang.Short</strong> <em>Converter</em> that throws
      * a <code>ConversionException</code> if an error occurs.
      */
     public ShortConverter() {
@@ -41,7 +41,7 @@ public final class ShortConverter extends NumberConverter {
     }
 
     /**
-     * Construct a <b>java.lang.Short</b> <em>Converter</em> that returns
+     * Construct a <strong>java.lang.Short</strong> <em>Converter</em> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned

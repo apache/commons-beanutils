@@ -18,9 +18,9 @@ package org.apache.commons.beanutils.converters;
 
 /**
  * {@link org.apache.commons.beanutils.Converter} implementation that handles conversion
- * to and from <b>Boolean</b> objects.
+ * to and from <strong>Boolean</strong> objects.
  * {@link org.apache.commons.beanutils.Converter} implementation that
- * handles conversion to and from <b>java.lang.Boolean</b> objects.
+ * handles conversion to and from <strong>java.lang.Boolean</strong> objects.
  * <p>
  * Can be configured to either return a <em>default value</em> or throw a
  * <code>ConversionException</code> if a conversion error occurs.

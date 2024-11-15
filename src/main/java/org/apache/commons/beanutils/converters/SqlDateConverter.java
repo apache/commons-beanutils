@@ -20,7 +20,7 @@ import java.sql.Date;
 
 /**
  * {@link DateTimeConverter} implementation that handles conversion to
- * and from <b>java.sql.Date</b> objects.
+ * and from <strong>java.sql.Date</strong> objects.
  * <p>
  * This implementation can be configured to handle conversion either
  * by using java.sql.Date's default String conversion, or by using a
@@ -35,14 +35,14 @@ import java.sql.Date;
 public final class SqlDateConverter extends DateTimeConverter {
 
     /**
-     * Construct a <b>java.sql.Date</b> <em>Converter</em> that throws
+     * Construct a <strong>java.sql.Date</strong> <em>Converter</em> that throws
      * a <code>ConversionException</code> if an error occurs.
      */
     public SqlDateConverter() {
     }
 
     /**
-     * Construct a <b>java.sql.Date</b> <em>Converter</em> that returns
+     * Construct a <strong>java.sql.Date</strong> <em>Converter</em> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned

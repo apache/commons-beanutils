@@ -36,7 +36,7 @@ import java.util.Map;
  *       <li>Mapped properties are automatically instantiated.</li>
  *    </ul>
  *
- * <p><b><u><em>Restricted</em> DynaClass</u></b></p>
+ * <p><strong><u><em>Restricted</em> DynaClass</u></strong></p>
  *    <p>This class implements the <code>MutableDynaClass</code> interface.
  *       <code>MutableDynaClass</code> have a facility to <em>restrict</em> the <code>DynaClass</code>
  *       so that its properties cannot be modified. If the <code>MutableDynaClass</code> is

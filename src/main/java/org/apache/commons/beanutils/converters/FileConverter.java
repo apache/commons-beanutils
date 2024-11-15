@@ -20,7 +20,7 @@ import java.io.File;
 
 /**
  * {@link org.apache.commons.beanutils.Converter} implementaion that handles conversion
- * to and from <b>java.io.File</b> objects.
+ * to and from <strong>java.io.File</strong> objects.
  * <p>
  * Can be configured to either return a <em>default value</em> or throw a
  * <code>ConversionException</code> if a conversion error occurs.
@@ -30,14 +30,14 @@ import java.io.File;
 public final class FileConverter extends AbstractConverter {
 
     /**
-     * Construct a <b>java.io.File</b> <em>Converter</em> that throws
+     * Construct a <strong>java.io.File</strong> <em>Converter</em> that throws
      * a <code>ConversionException</code> if an error occurs.
      */
     public FileConverter() {
     }
 
     /**
-     * Construct a <b>java.io.File</b> <em>Converter</em> that returns
+     * Construct a <strong>java.io.File</strong> <em>Converter</em> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned

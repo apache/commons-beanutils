@@ -33,7 +33,7 @@ import org.apache.commons.logging.LogFactory;
  * <p>
  * A <em>fluent API</em> allows setting multiple properties using a single
  * statement by supporting so-called <em>method chaining</em>: Methods for
- * setting a property value do not return <b>void</b>, but an object which can
+ * setting a property value do not return <strong>void</strong>, but an object which can
  * be called for setting another property. An example of such a fluent API could
  * look as follows:
  *
@@ -52,7 +52,7 @@ import org.apache.commons.logging.LogFactory;
  * </pre>
  *
  * Per default, <code>PropertyUtils</code> does not detect methods like this
- * because, having a non-<b>void</b> return type, they violate the Java Beans
+ * because, having a non-<strong>void</strong> return type, they violate the Java Beans
  * specification.
  * </p>
  * <p>
@@ -68,7 +68,7 @@ import org.apache.commons.logging.LogFactory;
  * adding this instance as custom {@code BeanIntrospector} after the
  * <code>DefaultBeanIntrospector</code> object. Then default introspection finds
  * read-only properties because it does not detect the write methods with a
- * non-<b>void</b> return type. {@code FluentPropertyBeanIntrospector}
+ * non-<strong>void</strong> return type. {@code FluentPropertyBeanIntrospector}
  * completes the descriptors for these properties by setting the correct write
  * method.
  * </p>
@@ -107,8 +107,8 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
      * initializes it with the prefix for write methods used by the classes to
      * be inspected.
      *
-     * @param writePrefix the prefix for write methods (must not be <b>null</b>)
-     * @throws IllegalArgumentException if the prefix is <b>null</b>
+     * @param writePrefix the prefix for write methods (must not be <strong>null</strong>)
+     * @throws IllegalArgumentException if the prefix is <strong>null</strong>
      */
     public FluentPropertyBeanIntrospector(final String writePrefix) {
         if (writePrefix == null) {

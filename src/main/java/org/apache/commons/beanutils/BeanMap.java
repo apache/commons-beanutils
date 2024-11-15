@@ -667,7 +667,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     /**
      * Get the keys for this BeanMap.
      * <p>
-     * Write-only properties are <b>not</b> included in the returned set of
+     * Write-only properties are <strong>not</strong> included in the returned set of
      * property names, although it is possible to set their value and to get
      * their type.
      *

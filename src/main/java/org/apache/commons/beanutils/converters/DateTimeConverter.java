@@ -28,7 +28,7 @@ import org.apache.commons.beanutils.ConversionException;
 
 /**
  * {@link org.apache.commons.beanutils.Converter} implementaion
- * that handles conversion to and from <b>date/time</b> objects.
+ * that handles conversion to and from <strong>date/time</strong> objects.
  * <p>
  * This implementation handles conversion for the following
  * <em>date/time</em> types.
@@ -71,7 +71,7 @@ import org.apache.commons.beanutils.ConversionException;
  * </ul>
  *
  * <p>
- * The <b>Time Zone</b> to use with the date format can be specified
+ * The <strong>Time Zone</strong> to use with the date format can be specified
  * using the <code>setTimeZone()</code> method.
  *
  * @since 1.8.0
@@ -110,7 +110,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
     /**
      * Convert an input Date/Calendar object into a String.
      * <p>
-     * <b>N.B.</b>If the converter has been configured to with
+     * <strong>N.B.</strong>If the converter has been configured to with
      * one or more patterns (using <code>setPatterns()</code>), then
      * the first pattern will be used to format the date into a String.
      * Otherwise the default <code>DateFormat</code> for the default locale

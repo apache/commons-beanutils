@@ -56,10 +56,10 @@ public interface IntrospectionContext {
 
     /**
      * Returns the descriptor for the property with the given name or
-     * <b>null</b> if this property is unknown.
+     * <strong>null</strong> if this property is unknown.
      *
      * @param name the name of the property in question
-     * @return the descriptor for this property or <b>null</b> if this property
+     * @return the descriptor for this property or <strong>null</strong> if this property
      *         is unknown
      */
     PropertyDescriptor getPropertyDescriptor(String name);
@@ -77,8 +77,8 @@ public interface IntrospectionContext {
      * to prevent that an already existing property descriptor is overridden.
      *
      * @param name the name of the property in question
-     * @return <b>true</b> if a descriptor for this property has already been
-     *         added, <b>false</b> otherwise
+     * @return <strong>true</strong> if a descriptor for this property has already been
+     *         added, <strong>false</strong> otherwise
      */
     boolean hasProperty(String name);
 

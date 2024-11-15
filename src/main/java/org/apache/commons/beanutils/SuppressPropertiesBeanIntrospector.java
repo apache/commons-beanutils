@@ -55,9 +55,9 @@ public class SuppressPropertiesBeanIntrospector implements BeanIntrospector {
      * names of the properties to be suppressed.
      *
      * @param propertiesToSuppress the names of the properties to be suppressed (must not
-     * be <b>null</b>)
+     * be <strong>null</strong>)
      * @throws IllegalArgumentException if the collection with property names is
-     * <b>null</b>
+     * <strong>null</strong>
      */
     public SuppressPropertiesBeanIntrospector(final Collection<String> propertiesToSuppress) {
         if (propertiesToSuppress == null) {

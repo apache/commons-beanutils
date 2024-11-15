@@ -20,7 +20,7 @@ import java.math.BigInteger;
 
 /**
  * {@link NumberConverter} implementation that handles conversion to
- * and from <b>java.math.BigInteger</b> objects.
+ * and from <strong>java.math.BigInteger</strong> objects.
  * <p>
  * This implementation can be configured to handle conversion either
  * by using BigInteger's default String conversion, or by using a Locale's pattern
@@ -35,7 +35,7 @@ import java.math.BigInteger;
 public final class BigIntegerConverter extends NumberConverter {
 
     /**
-     * Construct a <b>java.math.BigInteger</b> <em>Converter</em> that throws
+     * Construct a <strong>java.math.BigInteger</strong> <em>Converter</em> that throws
      * a <code>ConversionException</code> if an error occurs.
      */
     public BigIntegerConverter() {
@@ -43,7 +43,7 @@ public final class BigIntegerConverter extends NumberConverter {
     }
 
     /**
-     * Construct a <b>java.math.BigInteger</b> <em>Converter</em> that returns
+     * Construct a <strong>java.math.BigInteger</strong> <em>Converter</em> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned

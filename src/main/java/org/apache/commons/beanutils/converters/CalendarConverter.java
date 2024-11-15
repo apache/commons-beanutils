@@ -20,7 +20,7 @@ import java.util.Calendar;
 
 /**
  * {@link DateTimeConverter} implementation that handles conversion to
- * and from <b>java.util.Calendar</b> objects.
+ * and from <strong>java.util.Calendar</strong> objects.
  * <p>
  * This implementation can be configured to handle conversion either
  * by using a Locale's default format or by specifying a set of format
@@ -35,14 +35,14 @@ import java.util.Calendar;
 public final class CalendarConverter extends DateTimeConverter {
 
     /**
-     * Construct a <b>java.util.Calendar</b> <em>Converter</em> that throws
+     * Construct a <strong>java.util.Calendar</strong> <em>Converter</em> that throws
      * a <code>ConversionException</code> if an error occurs.
      */
     public CalendarConverter() {
     }
 
     /**
-     * Construct a <b>java.util.Calendar</b> <em>Converter</em> that returns
+     * Construct a <strong>java.util.Calendar</strong> <em>Converter</em> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned

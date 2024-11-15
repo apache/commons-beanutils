@@ -165,8 +165,8 @@ public class PropertyUtilsBean {
      * property descriptors of a class need to be obtained.
      *
      * @param introspector the <code>BeanIntrospector</code> to be added (must
-     *        not be <b>null</b>
-     * @throws IllegalArgumentException if the argument is <b>null</b>
+     *        not be <strong>null</strong>
+     * @throws IllegalArgumentException if the argument is <strong>null</strong>
      * @since 1.9
      */
     public void addBeanIntrospector(final BeanIntrospector introspector) {
@@ -545,7 +545,7 @@ public class PropertyUtilsBean {
      *
      * @param beanClass the bean class in question
      * @return the {@code BeanIntrospectionData} object for this class
-     * @throws IllegalArgumentException if the bean class is <b>null</b>
+     * @throws IllegalArgumentException if the bean class is <strong>null</strong>
      */
     private BeanIntrospectionData getIntrospectionData(final Class<?> beanClass) {
         if (beanClass == null) {
@@ -1524,7 +1524,7 @@ public class PropertyUtilsBean {
      * Removes the specified <code>BeanIntrospector</code>.
      *
      * @param introspector the <code>BeanIntrospector</code> to be removed
-     * @return <b>true</b> if the <code>BeanIntrospector</code> existed and could be removed, <b>false</b> otherwise
+     * @return <strong>true</strong> if the <code>BeanIntrospector</code> existed and could be removed, <strong>false</strong> otherwise
      * @since 1.9
      */
     public boolean removeBeanIntrospector(final BeanIntrospector introspector) {

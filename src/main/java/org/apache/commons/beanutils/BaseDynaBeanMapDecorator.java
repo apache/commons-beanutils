@@ -263,7 +263,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
      * <p>Returns the Set of the property
      * names in the decorated {@link DynaBean}.</p>
      *
-     * <p><b>N.B.</b>For {@link DynaBean}s whose associated {@link DynaClass}
+     * <p><strong>N.B.</strong>For {@link DynaBean}s whose associated {@link DynaClass}
      * is a {@link MutableDynaClass} a new Set is created every
      * time, otherwise the Set is created only once and cached.</p>
      *

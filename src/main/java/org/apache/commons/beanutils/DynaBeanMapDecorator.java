@@ -36,7 +36,7 @@ package org.apache.commons.beanutils;
  *
  * <p>This, for example, could be used in JSTL in the following way to access
  *    a DynaBean's <code>fooProperty</code>:
- *    <ul><li><code>${myDynaBean.<b>map</b>.fooProperty}</code></li></ul>
+ *    <ul><li><code>${myDynaBean.<strong>map</strong>.fooProperty}</code></li></ul>
  * </p>
  *
  * <h3>Usage</h3>
@@ -46,16 +46,16 @@ package org.apache.commons.beanutils;
  *
  * <ul><li><code>Map fooMap = new DynaBeanMapDecorator(fooDynaBean);</code></li></ul>
  *
- * <p>The above example creates a <b><em>read only</em></b> <code>Map</code>.
+ * <p>The above example creates a <strong><em>read only</em></strong> <code>Map</code>.
  *    To create  a <code>Map</code> which can be modified, construct a
- *    <code>DynaBeanMapDecorator</code> with the <b><em>read only</em></b>
+ *    <code>DynaBeanMapDecorator</code> with the <strong><em>read only</em></strong>
  *    attribute set to <code>false</code>:</p>
  *
  * <ul><li><code>Map fooMap = new DynaBeanMapDecorator(fooDynaBean, false);</code></li></ul>
  *
  * <h3>Limitations</h3>
  * <p>In this implementation the <code>entrySet()</code>, <code>keySet()</code>
- *    and <code>values()</code> methods create an <b><em>unmodifiable</em></b>
+ *    and <code>values()</code> methods create an <strong><em>unmodifiable</em></strong>
  *    <code>Set</code> and it does not support the Map's <code>clear()</code>
  *    and <code>remove()</code> operations.</p>
  * <p>For reasons of backwards compatibility, the generic types of this

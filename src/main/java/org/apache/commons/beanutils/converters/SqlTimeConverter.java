@@ -23,7 +23,7 @@ import java.util.TimeZone;
 
 /**
  * {@link DateTimeConverter} implementation that handles conversion to
- * and from <b>java.sql.Time</b> objects.
+ * and from <strong>java.sql.Time</strong> objects.
  * <p>
  * This implementation can be configured to handle conversion either
  * by using java.sql.Time's default String conversion, or by using a
@@ -38,14 +38,14 @@ import java.util.TimeZone;
 public final class SqlTimeConverter extends DateTimeConverter {
 
     /**
-     * Construct a <b>java.sql.Time</b> <em>Converter</em> that throws
+     * Construct a <strong>java.sql.Time</strong> <em>Converter</em> that throws
      * a <code>ConversionException</code> if an error occurs.
      */
     public SqlTimeConverter() {
     }
 
     /**
-     * Construct a <b>java.sql.Time</b> <em>Converter</em> that returns
+     * Construct a <strong>java.sql.Time</strong> <em>Converter</em> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned
