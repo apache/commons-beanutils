@@ -53,7 +53,7 @@ import org.apache.commons.beanutils2.Converter;
  * <li><b><em>No Default</em></b> - use the {@link ArrayConverter#ArrayConverter(Class, Converter)} constructor to create a converter which throws a
  * {@link ConversionException} if the value is missing or invalid.</li>
  * <li><b><em>Default values</em></b> - use the {@link ArrayConverter#ArrayConverter(Class, Converter, int)} constructor to create a converter which returns a
- * <i>default value</i>. The <em>defaultSize</em> parameter controls the <em>default value</em> in the following way:
+ * <em>default value</em>. The <em>defaultSize</em> parameter controls the <em>default value</em> in the following way:
  * <ul>
  * <li><em>defaultSize &lt; 0</em> - default is {@code null}</li>
  * <li><em>defaultSize = 0</em> - default is an array of length zero</li>
