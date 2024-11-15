@@ -38,7 +38,7 @@ import java.util.Objects;
  *       <li>Mapped properties are automatically instantiated.</li>
  *    </ul>
  *
- * <p><b><u><em>Restricted</em> DynaClass</u></b></p>
+ * <p><strong><u><em>Restricted</em> DynaClass</u></strong></p>
  *    <p>This class implements the {@code MutableDynaClass} interface.
  *       {@code MutableDynaClass</code> have a facility to <em>restrict</em> the <code>DynaClass} so that its properties cannot be modified. If the
  * {@code MutableDynaClass} is restricted then calling any of the {@code set()} methods for a property which doesn't exist will result in a

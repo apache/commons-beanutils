@@ -47,11 +47,11 @@ import org.apache.commons.logging.LogFactory;
  *                          {@code set(name, key, value)}</li>
  *    </ul>
  *
- * <p><b><u>Getting Property Values</u></b></p>
+ * <p><strong><u>Getting Property Values</u></strong></p>
  * <p>Calling any of the {@code get()} methods, for a property which
  *    doesn't exist, returns {@code null} in this implementation.</p>
  *
- * <p><b><u>Setting Simple Properties</u></b></p>
+ * <p><strong><u>Setting Simple Properties</u></strong></p>
  *    <p>The {@code LazyDynaBean</code> will automatically add a property to the <code>DynaClass}
  *       if it doesn't exist when the {@code set(name, value)} method is called.</p>
  *
@@ -60,8 +60,8 @@ import org.apache.commons.logging.LogFactory;
  *         myBean.set("myProperty", "myValue");
  *     }</pre>
  *
- * <p><b><u>Setting Indexed Properties</u></b></p>
- *    <p>If the property <b>doesn't</b> exist, the {@code LazyDynaBean} will automatically add
+ * <p><strong><u>Setting Indexed Properties</u></strong></p>
+ *    <p>If the property <strong>doesn't</strong> exist, the {@code LazyDynaBean} will automatically add
  *       a property with an {@code ArrayList</code> type to the <code>DynaClass} when
  *       the {@code set(name, index, value)} method is called.
  *       It will also instantiate a new {@code ArrayList} and automatically <em>grow</em>
@@ -76,7 +76,7 @@ import org.apache.commons.logging.LogFactory;
  *         myBean.set("myIndexedProperty", 1, "myValue2");
  *     }</pre>
  *
- *    <p>If the indexed property <b>does</b> exist in the {@code DynaClass} but is set to
+ *    <p>If the indexed property <strong>does</strong> exist in the {@code DynaClass} but is set to
  *      {@code null</code> in the <code>LazyDynaBean}, then it will instantiate a
  *      new {@code List</code> or <code>Array} as specified by the property's type
  *      in the {@code DynaClass</code> and automatically <em>grow</em> the <code>List}
@@ -90,8 +90,8 @@ import org.apache.commons.logging.LogFactory;
  *         myBean.set("myIndexedProperty", 1, Integer.valueOf(20));
  *     }</pre>
  *
- * <p><b><u>Setting Mapped Properties</u></b></p>
- *    <p>If the property <b>doesn't</b> exist, the {@code LazyDynaBean} will automatically add
+ * <p><strong><u>Setting Mapped Properties</u></strong></p>
+ *    <p>If the property <strong>doesn't</strong> exist, the {@code LazyDynaBean} will automatically add
  *       a property with a {@code HashMap</code> type to the <code>DynaClass} and
  *       instantiate a new {@code HashMap} in the DynaBean when the
  *       {@code set(name, key, value)</code> method is called. <code>HashMap} is the default
@@ -103,7 +103,7 @@ import org.apache.commons.logging.LogFactory;
  *         myBean.set("myMappedProperty", "myKey", "myValue");
  *     }</pre>
  *
- *    <p>If the mapped property <b>does</b> exist in the {@code DynaClass} but is set to
+ *    <p>If the mapped property <strong>does</strong> exist in the {@code DynaClass} but is set to
  *      {@code null</code> in the <code>LazyDynaBean}, then it will instantiate a
  *      new {@code Map</code> as specified by the property's type in the <code>DynaClass}.</p>
  *
@@ -114,7 +114,7 @@ import org.apache.commons.logging.LogFactory;
  *         myBean.set("myMappedProperty", "myKey", "myValue");
  *     }</pre>
  *
- * <p><b><u><em>Restricted</em> DynaClass</u></b></p>
+ * <p><strong><u><em>Restricted</em> DynaClass</u></strong></p>
  *    <p>{@code MutableDynaClass</code> have a facility to <em>restrict</em> the <code>DynaClass} so that its properties cannot be modified. If the
  * {@code MutableDynaClass} is restricted then calling any of the {@code set()} methods for a property which doesn't exist will result in a
  * {@code IllegalArgumentException} being thrown.
@@ -577,7 +577,7 @@ public class LazyDynaBean implements DynaBean {
      * </p>
      * This, for example, could be used in JSTL in the following way to access a DynaBean's {@code fooProperty}:
      * <ul>
-     * <li>{@code ${myDynaBean.<b>map</b>.fooProperty}}</li>
+     * <li>{@code ${myDynaBean.<strong>map</strong>.fooProperty}}</li>
      * </ul>
      *
      * @return a Map representation of this DynaBean

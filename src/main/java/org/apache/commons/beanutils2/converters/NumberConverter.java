@@ -29,7 +29,7 @@ import java.util.Locale;
 import org.apache.commons.beanutils2.ConversionException;
 
 /**
- * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion to and from <b>java.lang.Number</b> objects.
+ * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion to and from <strong>java.lang.Number</strong> objects.
  * <p>
  * This implementation handles conversion for the following {@link Number} types.
  * <ul>
@@ -89,7 +89,7 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
     private Locale locale;
 
     /**
-     * Constructs a <b>java.lang.Number</b> <em>Converter</em> that throws a {@code ConversionException} if a error occurs.
+     * Constructs a <strong>java.lang.Number</strong> <em>Converter</em> that throws a {@code ConversionException} if a error occurs.
      *
      * @param allowDecimals Indicates whether decimals are allowed
      */

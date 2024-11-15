@@ -19,7 +19,7 @@ package org.apache.commons.beanutils2.converters;
 import java.time.ZoneId;
 
 /**
- * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion to and from <b>java.time.ZoneId</b> objects.
+ * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion to and from <strong>java.time.ZoneId</strong> objects.
  * <p>
  * Can be configured to either return a <em>default value</em> or throw a {@code ConversionException} if a conversion error occurs.
  * </p>
@@ -30,13 +30,13 @@ import java.time.ZoneId;
 public final class ZoneIdConverter extends AbstractConverter<ZoneId> {
 
     /**
-     * Constructs a <b>java.time.ZoneId</b> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
+     * Constructs a <strong>java.time.ZoneId</strong> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
      */
     public ZoneIdConverter() {
     }
 
     /**
-     * Constructs a <b>java.time.ZoneId</b> <em>Converter</em> that returns a default value if an error occurs.
+     * Constructs a <strong>java.time.ZoneId</strong> <em>Converter</em> that returns a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
      */

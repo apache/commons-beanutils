@@ -17,7 +17,7 @@
 package org.apache.commons.beanutils2.converters;
 
 /**
- * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion to and from <b>java.lang.Character</b> objects.
+ * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion to and from <strong>java.lang.Character</strong> objects.
  * <p>
  * Can be configured to either return a <em>default value</em> or throw a {@code ConversionException} if a conversion error occurs.
  *
@@ -26,13 +26,13 @@ package org.apache.commons.beanutils2.converters;
 public final class CharacterConverter extends AbstractConverter<Character> {
 
     /**
-     * Constructs a <b>java.lang.Character</b> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
+     * Constructs a <strong>java.lang.Character</strong> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
      */
     public CharacterConverter() {
     }
 
     /**
-     * Constructs a <b>java.lang.Character</b> <em>Converter</em> that returns a default value if an error occurs.
+     * Constructs a <strong>java.lang.Character</strong> <em>Converter</em> that returns a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
      */
@@ -41,7 +41,7 @@ public final class CharacterConverter extends AbstractConverter<Character> {
     }
 
     /**
-     * Constructs a <b>java.lang.Character</b> <em>Converter</em> that returns a default value if an error occurs.
+     * Constructs a <strong>java.lang.Character</strong> <em>Converter</em> that returns a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
      */

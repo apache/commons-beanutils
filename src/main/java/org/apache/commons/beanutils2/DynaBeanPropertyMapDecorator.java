@@ -42,7 +42,7 @@ package org.apache.commons.beanutils2;
  * This, for example, could be used in JSTL in the following way to access a DynaBean's {@code fooProperty}:
  * </p>
  * <ul>
- * <li>{@code ${myDynaBean.<b>map</b>.fooProperty}}</li>
+ * <li>{@code ${myDynaBean.<strong>map</strong>.fooProperty}}</li>
  * </ul>
  *
  * <h2>Usage</h2>
@@ -56,8 +56,8 @@ package org.apache.commons.beanutils2;
  * </ul>
  *
  * <p>
- * The above example creates a <b><em>read only</em></b> {@code Map}. To create a {@code Map} which can be modified, construct a
- * {@code DynaBeanPropertyMapDecorator} with the <b><em>read only</em></b> attribute set to {@code false}:
+ * The above example creates a <strong><em>read only</em></strong> {@code Map}. To create a {@code Map} which can be modified, construct a
+ * {@code DynaBeanPropertyMapDecorator} with the <strong><em>read only</em></strong> attribute set to {@code false}:
  * </p>
  *
  * <ul>
@@ -68,7 +68,7 @@ package org.apache.commons.beanutils2;
  * <h2>Limitations</h2>
  * <p>
  * In this implementation the {@code entrySet()</code>, <code>keySet()}
- *    and {@code values()} methods create an <b><em>unmodifiable</em></b>
+ *    and {@code values()} methods create an <strong><em>unmodifiable</em></strong>
  *    {@code Set</code> and it does not support the Map's <code>clear()} and {@code remove()} operations.
  * </p>
  *

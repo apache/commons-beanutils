@@ -32,8 +32,8 @@ import org.apache.commons.logging.LogFactory;
  * </p>
  * <p>
  * A <em>fluent API</em> allows setting multiple properties using a single statement by supporting so-called <em>method chaining</em>: Methods for setting a
- * property value do not return <b>void</b>, but an object which can be called for setting another property. An example of such a fluent API could look as
- * follows:
+ * property value do not return <strong>void</strong>, but an object which can be called for setting another property. An example of such a fluent API could
+ * look as follows:
  * </p>
  *
  * <pre>
@@ -51,7 +51,7 @@ import org.apache.commons.logging.LogFactory;
  * </pre>
  *
  * <p>
- * Per default, {@code PropertyUtils} does not detect methods like this because, having a non-<b>void</b> return type, they violate the Java Beans
+ * Per default, {@code PropertyUtils} does not detect methods like this because, having a non-<strong>void</strong> return type, they violate the Java Beans
  * specification.
  * </p>
  * <p>
@@ -62,8 +62,8 @@ import org.apache.commons.logging.LogFactory;
  * <p>
  * An instance of this class is intended to collaborate with a {@link DefaultBeanIntrospector} object. So best results are achieved by adding this instance as
  * custom {@code BeanIntrospector} after the {@code DefaultBeanIntrospector} object. Then default introspection finds read-only properties because it does not
- * detect the write methods with a non-<b>void</b> return type. {@code FluentPropertyBeanIntrospector} completes the descriptors for these properties by setting
- * the correct write method.
+ * detect the write methods with a non-<strong>void</strong> return type. {@code FluentPropertyBeanIntrospector} completes the descriptors for these properties
+ * by setting the correct write method.
  * </p>
  *
  * @since 1.9
@@ -91,8 +91,8 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
      * Creates a new instance of {@code FluentPropertyBeanIntrospector} and initializes it with the prefix for write methods used by the classes to be
      * inspected.
      *
-     * @param writePrefix the prefix for write methods (must not be <b>null</b>)
-     * @throws IllegalArgumentException if the prefix is <b>null</b>
+     * @param writePrefix the prefix for write methods (must not be <strong>null</strong>)
+     * @throws IllegalArgumentException if the prefix is <strong>null</strong>
      */
     public FluentPropertyBeanIntrospector(final String writePrefix) {
         writeMethodPrefix = Objects.requireNonNull(writePrefix, "writePrefix");

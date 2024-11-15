@@ -19,7 +19,7 @@ package org.apache.commons.beanutils2.converters;
 import java.math.BigDecimal;
 
 /**
- * {@link NumberConverter} implementation that handles conversion to and from <b>java.math.BigDecimal</b> objects.
+ * {@link NumberConverter} implementation that handles conversion to and from <strong>java.math.BigDecimal</strong> objects.
  * <p>
  * This implementation can be configured to handle conversion either by using BigDecimal's default String conversion, or by using a Locale's pattern or by
  * specifying a format pattern. See the {@link NumberConverter} documentation for further details.
@@ -31,14 +31,14 @@ import java.math.BigDecimal;
 public final class BigDecimalConverter extends NumberConverter<BigDecimal> {
 
     /**
-     * Constructs a <b>java.math.BigDecimal</b> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
+     * Constructs a <strong>java.math.BigDecimal</strong> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
      */
     public BigDecimalConverter() {
         super(true);
     }
 
     /**
-     * Constructs a <b>java.math.BigDecimal</b> <em>Converter</em> that returns a default value if an error occurs.
+     * Constructs a <strong>java.math.BigDecimal</strong> <em>Converter</em> that returns a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
      */
@@ -47,7 +47,7 @@ public final class BigDecimalConverter extends NumberConverter<BigDecimal> {
     }
 
     /**
-     * Constructs a <b>java.math.BigDecimal</b> <em>Converter</em> that returns a default value if an error occurs.
+     * Constructs a <strong>java.math.BigDecimal</strong> <em>Converter</em> that returns a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
      */

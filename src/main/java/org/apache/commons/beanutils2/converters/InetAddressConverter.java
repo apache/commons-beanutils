@@ -30,7 +30,7 @@ import java.net.UnknownHostException;
 public class InetAddressConverter extends AbstractConverter<InetAddress> {
 
     /**
-     * Construct a <b>{@link InetAddress}</b> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
+     * Construct a <strong>{@link InetAddress}</strong> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
      */
     public InetAddressConverter() {
     }

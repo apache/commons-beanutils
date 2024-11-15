@@ -34,7 +34,7 @@ import java.util.TimeZone;
 import org.apache.commons.beanutils2.ConversionException;
 
 /**
- * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion to and from <b>date/time</b> objects.
+ * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion to and from <strong>date/time</strong> objects.
  * <p>
  * This implementation handles conversion for the following <em>date/time</em> types.
  * <ul>
@@ -77,7 +77,7 @@ import org.apache.commons.beanutils2.ConversionException;
  * </ul>
  *
  * <p>
- * The <b>Time Zone</b> to use with the date format can be specified using the {@link #setTimeZone(TimeZone)} method.
+ * The <strong>Time Zone</strong> to use with the date format can be specified using the {@link #setTimeZone(TimeZone)} method.
  *
  * @param <D> The default value type.
  * @since 1.8.0
@@ -108,8 +108,8 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
     /**
      * Convert an input Date/Calendar object into a String.
      * <p>
-     * <b>N.B.</b>If the converter has been configured to with one or more patterns (using {@code setPatterns()}), then the first pattern will be used to format
-     * the date into a String. Otherwise the default {@code DateFormat} for the default locale (and <em>style</em> if configured) will be used.
+     * <strong>N.B.</strong>If the converter has been configured to with one or more patterns (using {@code setPatterns()}), then the first pattern will be used
+     * to format the date into a String. Otherwise the default {@code DateFormat} for the default locale (and <em>style</em> if configured) will be used.
      *
      * @param value The input value to be converted
      * @return the converted String value.

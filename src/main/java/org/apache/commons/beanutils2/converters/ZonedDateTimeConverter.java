@@ -19,7 +19,7 @@ package org.apache.commons.beanutils2.converters;
 import java.time.ZonedDateTime;
 
 /**
- * {@link DateTimeConverter} implementation that handles conversion to and from <b>java.time.ZonedDateTime</b> objects.
+ * {@link DateTimeConverter} implementation that handles conversion to and from <strong>java.time.ZonedDateTime</strong> objects.
  * <p>
  * This implementation can be configured to handle conversion either by using a Locale's default format or by specifying a set of format patterns (note, there
  * is no default String conversion for Calendar). See the {@link DateTimeConverter} documentation for further details.
@@ -34,13 +34,13 @@ import java.time.ZonedDateTime;
 public final class ZonedDateTimeConverter extends DateTimeConverter<ZonedDateTime> {
 
     /**
-     * Constructs a <b>java.time.ZonedDateTime</b> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
+     * Constructs a <strong>java.time.ZonedDateTime</strong> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
      */
     public ZonedDateTimeConverter() {
     }
 
     /**
-     * Constructs a <b>java.time.ZonedDateTime</b> <em>Converter</em> that returns a default value if an error occurs.
+     * Constructs a <strong>java.time.ZonedDateTime</strong> <em>Converter</em> that returns a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
      */

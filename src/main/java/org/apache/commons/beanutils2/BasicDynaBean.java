@@ -223,7 +223,7 @@ public class BasicDynaBean implements DynaBean {
      * <p>
      * This, for example, could be used in JSTL in the following way to access a DynaBean's {@code fooProperty}:
      * <ul>
-     * <li>{@code ${myDynaBean.<b>map</b>.fooProperty}}</li>
+     * <li>{@code ${myDynaBean.<strong>map</strong>.fooProperty}}</li>
      * </ul>
      *
      * @return a Map representation of this DynaBean

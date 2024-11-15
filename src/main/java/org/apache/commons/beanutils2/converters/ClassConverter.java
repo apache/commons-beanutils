@@ -17,7 +17,7 @@
 package org.apache.commons.beanutils2.converters;
 
 /**
- * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion to and from <b>java.lang.Class</b> objects.
+ * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion to and from <strong>java.lang.Class</strong> objects.
  * <p>
  * The class will be loaded from the thread context class loader (if it exists); otherwise the class loader that loaded this class will be used.
  * <p>
@@ -29,13 +29,13 @@ package org.apache.commons.beanutils2.converters;
 public final class ClassConverter<T> extends AbstractConverter<Class<T>> {
 
     /**
-     * Constructs a <b>java.lang.Class</b> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
+     * Constructs a <strong>java.lang.Class</strong> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
      */
     public ClassConverter() {
     }
 
     /**
-     * Constructs a <b>java.lang.Class</b> <em>Converter</em> that returns a default value if an error occurs.
+     * Constructs a <strong>java.lang.Class</strong> <em>Converter</em> that returns a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
      */

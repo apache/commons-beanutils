@@ -19,7 +19,7 @@ package org.apache.commons.beanutils2.converters;
 import java.net.URL;
 
 /**
- * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion to and from <b>java.net.URL</b> objects.
+ * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion to and from <strong>java.net.URL</strong> objects.
  * <p>
  * Can be configured to either return a <em>default value</em> or throw a {@code ConversionException} if a conversion error occurs.
  *
@@ -28,13 +28,13 @@ import java.net.URL;
 public final class URLConverter extends AbstractConverter<URL> {
 
     /**
-     * Constructs a <b>java.net.URL</b> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
+     * Constructs a <strong>java.net.URL</strong> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
      */
     public URLConverter() {
     }
 
     /**
-     * Constructs a <b>java.net.URL</b> <em>Converter</em> that returns a default value if an error occurs.
+     * Constructs a <strong>java.net.URL</strong> <em>Converter</em> that returns a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
      */

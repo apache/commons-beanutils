@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 public class PatternConverter extends AbstractConverter<Pattern> {
 
     /**
-     * Construct a <b>{@link Pattern}</b> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
+     * Construct a <strong>{@link Pattern}</strong> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
      */
     public PatternConverter() {
     }

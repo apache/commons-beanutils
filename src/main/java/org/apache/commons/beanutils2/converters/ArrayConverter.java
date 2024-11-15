@@ -32,28 +32,28 @@ import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
 
 /**
- * Generic {@link Converter} implementation that handles conversion to and from <b>array</b> objects.
+ * Generic {@link Converter} implementation that handles conversion to and from <strong>array</strong> objects.
  * <p>
  * Can be configured to either return a <em>default value</em> or throw a {@code ConversionException} if a conversion error occurs.
  * <p>
  * The main features of this implementation are:
  * <ul>
- * <li><b>Element Conversion</b> - delegates to a {@link Converter}, appropriate for the type, to convert individual elements of the array. This leverages the
- * power of existing converters without having to replicate their functionality for converting to the element type and removes the need to create a specific
- * array type converters.</li>
- * <li><b>Arrays or Collections</b> - can convert from either arrays or Collections to an array, limited only by the capability of the delegate
+ * <li><strong>Element Conversion</strong> - delegates to a {@link Converter}, appropriate for the type, to convert individual elements of the array. This
+ * leverages the power of existing converters without having to replicate their functionality for converting to the element type and removes the need to create
+ * a specific array type converters.</li>
+ * <li><strong>Arrays or Collections</strong> - can convert from either arrays or Collections to an array, limited only by the capability of the delegate
  * {@link Converter}.</li>
- * <li><b>Delimited Lists</b> - can Convert <b>to</b> and <b>from</b> a delimited list in String format.</li>
- * <li><b>Conversion to String</b> - converts an array to a {@code String} in one of two ways: as a <em>delimited list</em> or by converting the first element
- * in the array to a String - this is controlled by the {@link ArrayConverter#setOnlyFirstToString(boolean)} parameter.</li>
- * <li><b>Multi Dimensional Arrays</b> - it is possible to convert a {@code String} to a multi-dimensional arrays, by embedding {@link ArrayConverter} within
- * each other - see example below.</li>
- * <li><b>Default Value</b>
+ * <li><strong>Delimited Lists</strong> - can Convert <strong>to</strong> and <strong>from</strong> a delimited list in String format.</li>
+ * <li><strong>Conversion to String</strong> - converts an array to a {@code String} in one of two ways: as a <em>delimited list</em> or by converting the first
+ * element in the array to a String - this is controlled by the {@link ArrayConverter#setOnlyFirstToString(boolean)} parameter.</li>
+ * <li><strong>Multi Dimensional Arrays</strong> - it is possible to convert a {@code String} to a multi-dimensional arrays, by embedding {@link ArrayConverter}
+ * within each other - see example below.</li>
+ * <li><strong>Default Value</strong>
  * <ul>
- * <li><b><em>No Default</em></b> - use the {@link ArrayConverter#ArrayConverter(Class, Converter)} constructor to create a converter which throws a
+ * <li><strong><em>No Default</em></strong> - use the {@link ArrayConverter#ArrayConverter(Class, Converter)} constructor to create a converter which throws a
  * {@link ConversionException} if the value is missing or invalid.</li>
- * <li><b><em>Default values</em></b> - use the {@link ArrayConverter#ArrayConverter(Class, Converter, int)} constructor to create a converter which returns a
- * <em>default value</em>. The <em>defaultSize</em> parameter controls the <em>default value</em> in the following way:
+ * <li><strong><em>Default values</em></strong> - use the {@link ArrayConverter#ArrayConverter(Class, Converter, int)} constructor to create a converter which
+ * returns a <em>default value</em>. The <em>defaultSize</em> parameter controls the <em>default value</em> in the following way:
  * <ul>
  * <li><em>defaultSize &lt; 0</em> - default is {@code null}</li>
  * <li><em>defaultSize = 0</em> - default is an array of length zero</li>
@@ -113,8 +113,8 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
     private boolean onlyFirstToString = true;
 
     /**
-     * Constructs an <b>array</b> {@code Converter} with the specified <b>component</b> {@code Converter} that throws a {@code ConversionException} if an error
-     * occurs.
+     * Constructs an <strong>array</strong> {@code Converter} with the specified <strong>component</strong> {@code Converter} that throws a
+     * {@code ConversionException} if an error occurs.
      *
      * @param defaultType      The default array type this {@code Converter} handles
      * @param elementConverter Converter used to convert individual array elements.
@@ -129,8 +129,8 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
     }
 
     /**
-     * Constructs an <b>array</b> {@code Converter} with the specified <b>component</b> {@code Converter} that returns a default array of the specified size (or
-     * {@code null}) if an error occurs.
+     * Constructs an <strong>array</strong> {@code Converter} with the specified <strong>component</strong> {@code Converter} that returns a default array of
+     * the specified size (or {@code null}) if an error occurs.
      *
      * @param defaultType      The default array type this {@code Converter} handles
      * @param elementConverter Converter used to convert individual array elements.

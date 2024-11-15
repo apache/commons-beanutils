@@ -21,7 +21,7 @@ import java.sql.Date;
 import org.apache.commons.beanutils2.converters.DateTimeConverter;
 
 /**
- * {@link DateTimeConverter} implementation that handles conversion to and from <b>java.sql.Date</b> objects.
+ * {@link DateTimeConverter} implementation that handles conversion to and from <strong>java.sql.Date</strong> objects.
  * <p>
  * This implementation can be configured to handle conversion either by using java.sql.Date's default String conversion, or by using a Locale's default format
  * or by specifying a set of format patterns. See the {@link DateTimeConverter} documentation for further details.
@@ -33,13 +33,13 @@ import org.apache.commons.beanutils2.converters.DateTimeConverter;
 public final class SqlDateConverter extends DateTimeConverter<Date> {
 
     /**
-     * Constructs a <b>java.sql.Date</b> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
+     * Constructs a <strong>java.sql.Date</strong> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
      */
     public SqlDateConverter() {
     }
 
     /**
-     * Constructs a <b>java.sql.Date</b> <em>Converter</em> that returns a default value if an error occurs.
+     * Constructs a <strong>java.sql.Date</strong> <em>Converter</em> that returns a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
      */

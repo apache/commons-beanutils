@@ -19,7 +19,7 @@ package org.apache.commons.beanutils2.converters;
 import java.time.YearMonth;
 
 /**
- * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion to and from <b>java.time.YearMonth</b> objects.
+ * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion to and from <strong>java.time.YearMonth</strong> objects.
  * <p>
  * Can be configured to either return a <em>default value</em> or throw a {@code ConversionException} if a conversion error occurs.
  * </p>
@@ -30,13 +30,13 @@ import java.time.YearMonth;
 public final class YearMonthConverter extends AbstractConverter<YearMonth> {
 
     /**
-     * Constructs a <b>java.time.YearMonth</b> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
+     * Constructs a <strong>java.time.YearMonth</strong> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
      */
     public YearMonthConverter() {
     }
 
     /**
-     * Constructs a <b>java.time.YearMonth</b> <em>Converter</em> that returns a default value if an error occurs.
+     * Constructs a <strong>java.time.YearMonth</strong> <em>Converter</em> that returns a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
      */

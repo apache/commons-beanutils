@@ -17,7 +17,7 @@
 package org.apache.commons.beanutils2.converters;
 
 /**
- * {@link NumberConverter} implementation that handles conversion to and from <b>java.lang.Double</b> objects.
+ * {@link NumberConverter} implementation that handles conversion to and from <strong>java.lang.Double</strong> objects.
  * <p>
  * This implementation can be configured to handle conversion either by using Double's default String conversion, or by using a Locale's pattern or by
  * specifying a format pattern. See the {@link NumberConverter} documentation for further details.
@@ -29,14 +29,14 @@ package org.apache.commons.beanutils2.converters;
 public final class DoubleConverter extends NumberConverter<Double> {
 
     /**
-     * Constructs a <b>java.lang.Double</b> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
+     * Constructs a <strong>java.lang.Double</strong> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
      */
     public DoubleConverter() {
         super(true);
     }
 
     /**
-     * Constructs a <b>java.lang.Double</b> <em>Converter</em> that returns a default value if an error occurs.
+     * Constructs a <strong>java.lang.Double</strong> <em>Converter</em> that returns a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
      */
@@ -45,7 +45,7 @@ public final class DoubleConverter extends NumberConverter<Double> {
     }
 
     /**
-     * Constructs a <b>java.lang.Double</b> <em>Converter</em> that returns a default value if an error occurs.
+     * Constructs a <strong>java.lang.Double</strong> <em>Converter</em> that returns a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
      */

@@ -20,7 +20,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion to and from <b>java.nio.file.Path</b> objects.
+ * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion to and from <strong>java.nio.file.Path</strong> objects.
  * <p>
  * Can be configured to either return a <em>default value</em> or throw a {@code ConversionException} if a conversion error occurs.
  *
@@ -29,13 +29,13 @@ import java.nio.file.Paths;
 public final class PathConverter extends AbstractConverter<Path> {
 
     /**
-     * Constructs a <b>java.nio.file.Path</b> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
+     * Constructs a <strong>java.nio.file.Path</strong> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
      */
     public PathConverter() {
     }
 
     /**
-     * Constructs a <b>java.nio.file.Path</b> <em>Converter</em> that returns a default value if an error occurs.
+     * Constructs a <strong>java.nio.file.Path</strong> <em>Converter</em> that returns a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
      */
