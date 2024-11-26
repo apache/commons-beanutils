@@ -19,6 +19,7 @@ package org.apache.commons.beanutils.converters;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -27,9 +28,7 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the {@link SqlTimestampConverter} class.
- *
  */
-
 public class SqlTimestampConverterTestCase extends DateConverterTestBase {
 
     /**
@@ -66,6 +65,12 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
         // the format is set to lenient
         final DateFormat loc = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.US);
         return loc.format(new Date()).contains(",");
+    }
+
+    private boolean isUSTimeFormatWithNarrowNoBreakSpace() {
+        // Fix tests on Java 20 onwards. See https://bugs.openjdk.org/browse/JDK-8324308 for background.
+        DateFormat usDateFormat = DateFormat.getTimeInstance(DateFormat.SHORT, Locale.US);
+        return ((SimpleDateFormat) usDateFormat).toPattern().contains("\u202F");
     }
 
     /**
@@ -135,6 +140,10 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
             pattern = "M/d/yy h:mm a";
             testString = "3/21/06 3:06 PM";
         }
+        if (isUSTimeFormatWithNarrowNoBreakSpace()) {
+            pattern = pattern.replace(" a", "\u202Fa");
+            testString = testString.replace(" PM", "\u202FPM");
+        }
 
 
         // Valid String --> Type Conversion
@@ -144,9 +153,15 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
         // Invalid Conversions
         invalidConversion(converter, null);
         invalidConversion(converter, "");
+        // Normal space
         invalidConversion(converter, "13:05 pm");
         invalidConversion(converter, "11:05 p");
         invalidConversion(converter, "11.05 pm");
+        // Narrow no-break space (Java 20 onwards)
+        invalidConversion(converter, "13:05\u202Fpm");
+        invalidConversion(converter, "11:05\\u202Fp");
+        invalidConversion(converter, "11.05\\u202Fpm");
+
         invalidConversion(converter, Integer.valueOf(2));
 
         // Restore the default Locale

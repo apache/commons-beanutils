@@ -18,6 +18,8 @@
 package org.apache.commons.beanutils.converters;
 
 import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -57,6 +59,12 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
     @Override
     protected Class<?> getExpectedType() {
         return Time.class;
+    }
+
+    private boolean isUSTimeFormatWithNarrowNoBreakSpace() {
+        // Fix tests on Java 20 onwards. See https://bugs.openjdk.org/browse/JDK-8324308 for background.
+        DateFormat usDateFormat = DateFormat.getTimeInstance(DateFormat.SHORT, Locale.US);
+        return ((SimpleDateFormat) usDateFormat).toPattern().contains("\u202F");
     }
 
     /**
@@ -108,14 +116,22 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
         final Locale defaultLocale = Locale.getDefault();
         Locale.setDefault(Locale.US);
 
-        final String pattern = "h:mm a"; // SHORT style time format for US Locale
+        // SHORT style time format for US Locale
+        final String pattern;
+        // Valid String --> Type Conversion
+        final String testString;
+        if (isUSTimeFormatWithNarrowNoBreakSpace()) {
+            pattern = "h:mm\u202Fa";
+            testString = "3:06\u202Fpm";
+        } else {
+            pattern = "h:mm a";
+            testString = "3:06 pm";
+        }
 
         // Create & Configure the Converter
         final DateTimeConverter converter = makeConverter();
         converter.setUseLocaleFormat(true);
 
-        // Valid String --> Type Conversion
-        final String testString = "3:06 pm";
         final Object expected = toType(testString, pattern, null);
         validConversion(converter, expected, testString);
 
@@ -123,8 +139,12 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
         invalidConversion(converter, null);
         invalidConversion(converter, "");
         invalidConversion(converter, "13:05");
+        // Normal space
         invalidConversion(converter, "11:05 p");
         invalidConversion(converter, "11.05 pm");
+        // Narrow no-break space (Java 20 onwards)
+        invalidConversion(converter, "11:05\u202Fp");
+        invalidConversion(converter, "11.05\\u202Fpm");
         invalidConversion(converter, Integer.valueOf(2));
 
         // Test specified Locale
