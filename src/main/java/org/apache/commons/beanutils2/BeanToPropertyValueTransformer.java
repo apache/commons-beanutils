@@ -58,7 +58,6 @@ import org.apache.commons.logging.LogFactory;
  *
  * @param <T> the type of the input to the function
  * @param <R> the type of the result of the function
- *
  * @see org.apache.commons.beanutils2.PropertyUtils
  * @see java.util.function.Function
  */

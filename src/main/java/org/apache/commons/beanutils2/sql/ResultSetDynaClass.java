@@ -95,7 +95,6 @@ public class ResultSetDynaClass extends AbstractJdbcDynaClass {
      * </p>
      *
      * @param resultSet The result set to be wrapped
-     *
      * @throws NullPointerException if {@code resultSet} is {@code null}
      * @throws SQLException         if the metadata for this result set cannot be introspected
      */
@@ -117,7 +116,6 @@ public class ResultSetDynaClass extends AbstractJdbcDynaClass {
      *
      * @param resultSet The result set to be wrapped
      * @param lowerCase Should property names be lower cased?
-     *
      * @throws NullPointerException if {@code resultSet} is {@code null}
      * @throws SQLException         if the metadata for this result set cannot be introspected
      */
@@ -140,7 +138,6 @@ public class ResultSetDynaClass extends AbstractJdbcDynaClass {
      * @param resultSet      The result set to be wrapped
      * @param lowerCase      Should property names be lower cased?
      * @param useColumnLabel true if the column label should be used, otherwise false
-     *
      * @throws NullPointerException if {@code resultSet} is {@code null}
      * @throws SQLException         if the metadata for this result set cannot be introspected
      * @since 1.8.3

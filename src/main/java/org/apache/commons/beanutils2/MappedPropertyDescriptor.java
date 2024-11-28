@@ -268,7 +268,6 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      *
      * @param propertyName The programmatic name of the property.
      * @param beanClass    The Class object for the target bean. For example sun.beans.OurButton.class.
-     *
      * @throws IntrospectionException if an exception occurs during introspection.
      */
     public MappedPropertyDescriptor(final String propertyName, final Class<?> beanClass) throws IntrospectionException {
@@ -319,7 +318,6 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      * @param beanClass        The Class object for the target bean. For example sun.beans.OurButton.class.
      * @param mappedGetterName The name of the method used for reading one of the property values. May be null if the property is write-only.
      * @param mappedSetterName The name of the method used for writing one of the property values. May be null if the property is read-only.
-     *
      * @throws IntrospectionException if an exception occurs during introspection.
      */
     public MappedPropertyDescriptor(final String propertyName, final Class<?> beanClass, final String mappedGetterName, final String mappedSetterName)
@@ -354,7 +352,6 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      * @param propertyName The programmatic name of the property.
      * @param mappedGetter The method used for reading one of the property values. May be null if the property is write-only.
      * @param mappedSetter The method used for writing one the property values. May be null if the property is read-only.
-     *
      * @throws IntrospectionException if an exception occurs during introspection.
      */
     public MappedPropertyDescriptor(final String propertyName, final Method mappedGetter, final Method mappedSetter) throws IntrospectionException {

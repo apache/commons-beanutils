@@ -94,7 +94,6 @@ import org.apache.commons.logging.LogFactory;
  *
  * @param <T> The type of the input to the predicate.
  * @param <V> The property value type.
- *
  * @see org.apache.commons.beanutils2.PropertyUtils
  * @see java.util.function.Predicate
  */

@@ -169,7 +169,6 @@ public class PropertyUtilsBean {
      *
      * @param dest Destination bean whose properties are modified
      * @param orig Origin bean whose properties are retrieved
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws IllegalArgumentException  if the {@code dest} or {@code orig} argument is null
      * @throws InvocationTargetException if the property accessor method throws an exception
@@ -252,7 +251,6 @@ public class PropertyUtilsBean {
      *
      * @param bean Bean whose properties are to be extracted
      * @return The set of properties for the bean
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws IllegalArgumentException  if {@code bean} is null
      * @throws InvocationTargetException if the property accessor method throws an exception
@@ -307,7 +305,6 @@ public class PropertyUtilsBean {
      * @param bean Bean whose property is to be extracted
      * @param name {@code propertyname[index]} of the property value to be extracted
      * @return the indexed property value
-     *
      * @throws IndexOutOfBoundsException if the specified index is outside the valid range for the underlying array or List
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws IllegalArgumentException  if {@code bean} or {@code name} is null
@@ -343,7 +340,6 @@ public class PropertyUtilsBean {
      * @param name  Simple property name of the property value to be extracted
      * @param index Index of the property value to be extracted
      * @return the indexed property value
-     *
      * @throws IndexOutOfBoundsException if the specified index is outside the valid range for the underlying property
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws IllegalArgumentException  if {@code bean} or {@code name} is null
@@ -442,7 +438,6 @@ public class PropertyUtilsBean {
      * @param bean Bean whose property is to be extracted
      * @param name {@code propertyname(key)} of the property value to be extracted
      * @return the mapped property value
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws InvocationTargetException if the property accessor method throws an exception
      * @throws NoSuchMethodException     if an accessor method for this property cannot be found
@@ -475,7 +470,6 @@ public class PropertyUtilsBean {
      * @param name Mapped property name of the property value to be extracted
      * @param key  Key of the property value to be extracted
      * @return the mapped property value
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws InvocationTargetException if the property accessor method throws an exception
      * @throws NoSuchMethodException     if an accessor method for this property cannot be found
@@ -570,7 +564,6 @@ public class PropertyUtilsBean {
      * @param bean Bean whose property is to be extracted
      * @param name Possibly nested name of the property to be extracted
      * @return the nested property value
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws IllegalArgumentException  if {@code bean} or {@code name} is null
      * @throws NestedNullException       if a nested reference to a property returns null
@@ -618,7 +611,6 @@ public class PropertyUtilsBean {
      * @param bean Bean whose property is to be extracted
      * @param name Possibly indexed and/or nested name of the property to be extracted
      * @return the property value
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws IllegalArgumentException  if {@code bean} or {@code name} is null
      * @throws InvocationTargetException if the property accessor method throws an exception
@@ -646,7 +638,6 @@ public class PropertyUtilsBean {
      * @param bean Bean for which a property descriptor is requested
      * @param name Possibly indexed and/or nested name of the property for which a property descriptor is requested
      * @return the property descriptor
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws IllegalArgumentException  if {@code bean} or {@code name} is null
      * @throws IllegalArgumentException  if a nested reference to a property returns null
@@ -716,7 +707,6 @@ public class PropertyUtilsBean {
      *
      * @param beanClass Bean class for which property descriptors are requested
      * @return the property descriptors
-     *
      * @throws IllegalArgumentException if {@code beanClass} is null
      */
     public PropertyDescriptor[] getPropertyDescriptors(final Class<?> beanClass) {
@@ -734,7 +724,6 @@ public class PropertyUtilsBean {
      *
      * @param bean Bean for which property descriptors are requested
      * @return the property descriptors
-     *
      * @throws IllegalArgumentException if {@code bean} is null
      */
     public PropertyDescriptor[] getPropertyDescriptors(final Object bean) {
@@ -761,7 +750,6 @@ public class PropertyUtilsBean {
      * @param bean Bean for which a property descriptor is requested
      * @param name Possibly indexed and/or nested name of the property for which a property descriptor is requested
      * @return the property editor class
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws IllegalArgumentException  if {@code bean} or {@code name} is null
      * @throws IllegalArgumentException  if a nested reference to a property returns null
@@ -786,11 +774,8 @@ public class PropertyUtilsBean {
      * @param bean         Map bean
      * @param propertyName The property name
      * @return the property value
-     *
      * @throws IllegalArgumentException  when the propertyName is regarded as being invalid.
-     *
      * @throws IllegalAccessException    just in case subclasses override this method to try to access real getter methods and find permission is denied.
-     *
      * @throws InvocationTargetException just in case subclasses override this method to try to access real getter methods, and find it throws an exception when
      *                                   invoked.
      *
@@ -827,7 +812,6 @@ public class PropertyUtilsBean {
      * @param bean Bean for which a property descriptor is requested
      * @param name Possibly indexed and/or nested name of the property for which a property descriptor is requested
      * @return The property type
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws IllegalArgumentException  if {@code bean} or {@code name} is null
      * @throws IllegalArgumentException  if a nested reference to a property returns null
@@ -940,7 +924,6 @@ public class PropertyUtilsBean {
      * @param bean Bean whose property is to be extracted
      * @param name Name of the property to be extracted
      * @return The property value
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws IllegalArgumentException  if {@code bean} or {@code name} is null
      * @throws IllegalArgumentException  if the property name is nested or indexed
@@ -1076,9 +1059,7 @@ public class PropertyUtilsBean {
      * @param bean Bean to be examined (may be a {@link DynaBean}
      * @param name Property name to be evaluated
      * @return {@code true} if the property is readable, otherwise {@code false}
-     *
      * @throws IllegalArgumentException if {@code bean} or {@code name</code> is <code>null}
-     *
      * @since 1.6
      */
     public boolean isReadable(Object bean, String name) {
@@ -1141,9 +1122,7 @@ public class PropertyUtilsBean {
      * @param bean Bean to be examined (may be a {@link DynaBean}
      * @param name Property name to be evaluated
      * @return {@code true} if the property is writable, otherwise {@code false}
-     *
      * @throws IllegalArgumentException if {@code bean} or {@code name</code> is <code>null}
-     *
      * @since 1.6
      */
     public boolean isWriteable(Object bean, String name) {
@@ -1231,7 +1210,6 @@ public class PropertyUtilsBean {
      * @param name  Simple property name of the property value to be set
      * @param index Index of the property value to be set
      * @param value Value to which the indexed property element is to be set
-     *
      * @throws IndexOutOfBoundsException if the specified index is outside the valid range for the underlying property
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws IllegalArgumentException  if {@code bean} or {@code name} is null
@@ -1320,7 +1298,6 @@ public class PropertyUtilsBean {
      * @param bean  Bean whose property is to be modified
      * @param name  {@code propertyname[index]} of the property value to be modified
      * @param value Value to which the specified property element should be set
-     *
      * @throws IndexOutOfBoundsException if the specified index is outside the valid range for the underlying property
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws IllegalArgumentException  if {@code bean} or {@code name} is null
@@ -1356,7 +1333,6 @@ public class PropertyUtilsBean {
      * @param bean  Bean whose property is to be set
      * @param name  {@code propertyname(key)} of the property value to be set
      * @param value The property value to be set
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws InvocationTargetException if the property accessor method throws an exception
      * @throws NoSuchMethodException     if an accessor method for this property cannot be found
@@ -1391,7 +1367,6 @@ public class PropertyUtilsBean {
      * @param name  Mapped property name of the property value to be set
      * @param key   Key of the property value to be set
      * @param value The property value to be set
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws InvocationTargetException if the property accessor method throws an exception
      * @throws NoSuchMethodException     if an accessor method for this property cannot be found
@@ -1458,7 +1433,6 @@ public class PropertyUtilsBean {
      * @param bean  Bean whose property is to be modified
      * @param name  Possibly nested name of the property to be modified
      * @param value Value to which the property is to be set
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws IllegalArgumentException  if {@code bean} or {@code name} is null
      * @throws IllegalArgumentException  if a nested reference to a property returns null
@@ -1506,7 +1480,6 @@ public class PropertyUtilsBean {
      * @param bean  Bean whose property is to be modified
      * @param name  Possibly indexed and/or nested name of the property to be modified
      * @param value Value to which this property is to be set
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws IllegalArgumentException  if {@code bean} or {@code name} is null
      * @throws InvocationTargetException if the property accessor method throws an exception
@@ -1543,11 +1516,8 @@ public class PropertyUtilsBean {
      * @param bean         Map bean
      * @param propertyName The property name
      * @param value        the property value
-     *
      * @throws IllegalArgumentException  when the propertyName is regarded as being invalid.
-     *
      * @throws IllegalAccessException    just in case subclasses override this method to try to access real setter methods and find permission is denied.
-     *
      * @throws InvocationTargetException just in case subclasses override this method to try to access real setter methods, and find it throws an exception when
      *                                   invoked.
      *
@@ -1596,7 +1566,6 @@ public class PropertyUtilsBean {
      * @param bean  Bean whose property is to be modified
      * @param name  Name of the property to be modified
      * @param value Value to which the property should be set
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws IllegalArgumentException  if {@code bean} or {@code name} is null
      * @throws IllegalArgumentException  if the property name is nested or indexed

@@ -229,7 +229,6 @@ public class ConvertUtilsBean {
      *
      * @param value Value to be converted (may be null)
      * @return The converted String value or null if value is null
-     *
      * @see ConvertUtilsBean#convert(String[], Class)
      */
     public String convert(final Object value) {
@@ -244,7 +243,6 @@ public class ConvertUtilsBean {
      * @param value      Value to be converted (may be null)
      * @param targetType Class of the value to be converted to (must not be null)
      * @return The converted value
-     *
      * @throws ConversionException if thrown by an underlying Converter
      */
     public <T> Object convert(final Object value, final Class<T> targetType) {
@@ -295,7 +293,6 @@ public class ConvertUtilsBean {
      * @param value Value to be converted (may be null)
      * @param clazz Java class to be converted to (must not be null)
      * @return The converted value or null if value is null
-     *
      * @see ConvertUtilsBean#convert(String[], Class)
      */
     public <T> Object convert(final String value, final Class<T> clazz) {
@@ -308,7 +305,6 @@ public class ConvertUtilsBean {
      * @param value Array of values to be converted
      * @param clazz Java array or element class to be converted to (must not be null)
      * @return The converted value
-     *
      * @see ConvertUtilsBean#convert(String[], Class)
      */
     public <T> Object convert(final String[] value, final Class<T> clazz) {

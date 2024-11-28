@@ -86,7 +86,6 @@ public class RowSetDynaClass extends AbstractJdbcDynaClass {
      * </p>
      *
      * @param resultSet The result set to be wrapped
-     *
      * @throws NullPointerException if {@code resultSet} is {@code null}
      * @throws SQLException         if the metadata for this result set cannot be introspected
      */
@@ -105,7 +104,6 @@ public class RowSetDynaClass extends AbstractJdbcDynaClass {
      *
      * @param resultSet The result set to be wrapped
      * @param lowerCase Should property names be lower cased?
-     *
      * @throws NullPointerException if {@code resultSet} is {@code null}
      * @throws SQLException         if the metadata for this result set cannot be introspected
      */
@@ -128,7 +126,6 @@ public class RowSetDynaClass extends AbstractJdbcDynaClass {
      * @param resultSet      The result set to be wrapped
      * @param lowerCase      Should property names be lower cased?
      * @param useColumnLabel true if the column label should be used, otherwise false
-     *
      * @throws NullPointerException if {@code resultSet} is {@code null}
      * @throws SQLException         if the metadata for this result set cannot be introspected
      * @since 1.8.3
@@ -152,7 +149,6 @@ public class RowSetDynaClass extends AbstractJdbcDynaClass {
      * @param resultSet The result set to be wrapped
      * @param lowerCase Should property names be lower cased?
      * @param limit     Maximum limit for the {@code List} of {@link DynaBean}
-     *
      * @throws NullPointerException if {@code resultSet} is {@code null}
      * @throws SQLException         if the metadata for this result set cannot be introspected
      */
@@ -176,7 +172,6 @@ public class RowSetDynaClass extends AbstractJdbcDynaClass {
      * @param lowerCase      Should property names be lower cased?
      * @param limit          Maximum limit for the {@code List} of {@link DynaBean}
      * @param useColumnLabel true if the column label should be used, otherwise false
-     *
      * @throws NullPointerException if {@code resultSet} is {@code null}
      * @throws SQLException         if the metadata for this result set cannot be introspected
      * @since 1.8.3
@@ -201,7 +196,6 @@ public class RowSetDynaClass extends AbstractJdbcDynaClass {
      *
      * @param resultSet The result set to be wrapped
      * @param limit     The maximum for the size of the result.
-     *
      * @throws NullPointerException if {@code resultSet} is {@code null}
      * @throws SQLException         if the metadata for this result set cannot be introspected
      */
@@ -216,7 +210,6 @@ public class RowSetDynaClass extends AbstractJdbcDynaClass {
      * </p>
      *
      * @param resultSet The {@code ResultSet} whose data is to be copied
-     *
      * @throws SQLException if an error is encountered copying the data
      */
     protected void copy(final ResultSet resultSet) throws SQLException {

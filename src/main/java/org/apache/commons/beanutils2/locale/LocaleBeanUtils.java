@@ -85,10 +85,8 @@ public class LocaleBeanUtils extends BeanUtils {
      * @param name     The property name
      * @param propName The Simple name of target property
      * @return The property's type
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws InvocationTargetException if the property accessor method throws an exception
-     *
      * @see LocaleBeanUtilsBean#definePropertyType(Object, String, String)
      */
     protected static Class<?> definePropertyType(final Object target, final String name, final String propName)
@@ -139,11 +137,9 @@ public class LocaleBeanUtils extends BeanUtils {
      * @param bean Bean whose property is to be extracted
      * @param name {@code propertyname[index]} of the property value to be extracted
      * @return The indexed property's value, converted to a String
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws InvocationTargetException if the property accessor method throws an exception
      * @throws NoSuchMethodException     if an accessor method for this property cannot be found
-     *
      * @see LocaleBeanUtilsBean#getIndexedProperty(Object, String)
      */
     public static String getIndexedProperty(final Object bean, final String name)
@@ -165,11 +161,9 @@ public class LocaleBeanUtils extends BeanUtils {
      * @param name  Simple property name of the property value to be extracted
      * @param index Index of the property value to be extracted
      * @return The indexed property's value, converted to a String
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws InvocationTargetException if the property accessor method throws an exception
      * @throws NoSuchMethodException     if an accessor method for this property cannot be found
-     *
      * @see LocaleBeanUtilsBean#getIndexedProperty(Object, String, int)
      */
     public static String getIndexedProperty(final Object bean, final String name, final int index)
@@ -191,11 +185,9 @@ public class LocaleBeanUtils extends BeanUtils {
      * @param index   Index of the property value to be extracted
      * @param pattern The conversion pattern
      * @return The indexed property's value, converted to a String
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws InvocationTargetException if the property accessor method throws an exception
      * @throws NoSuchMethodException     if an accessor method for this property cannot be found
-     *
      * @see LocaleBeanUtilsBean#getIndexedProperty(Object, String, int, String)
      */
     public static String getIndexedProperty(final Object bean, final String name, final int index, final String pattern)
@@ -216,11 +208,9 @@ public class LocaleBeanUtils extends BeanUtils {
      * @param name    {@code propertyname[index]} of the property value to be extracted
      * @param pattern The conversion pattern
      * @return The indexed property's value, converted to a String
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws InvocationTargetException if the property accessor method throws an exception
      * @throws NoSuchMethodException     if an accessor method for this property cannot be found
-     *
      * @see LocaleBeanUtilsBean#getIndexedProperty(Object, String, String)
      */
     public static String getIndexedProperty(final Object bean, final String name, final String pattern)
@@ -241,11 +231,9 @@ public class LocaleBeanUtils extends BeanUtils {
      * @param bean Bean whose property is to be extracted
      * @param name {@code propertyname(index)} of the property value to be extracted
      * @return The mapped property's value, converted to a String
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws InvocationTargetException if the property accessor method throws an exception
      * @throws NoSuchMethodException     if an accessor method for this property cannot be found
-     *
      * @see LocaleBeanUtilsBean#getMappedProperty(Object, String)
      */
     public static String getMappedProperty(final Object bean, final String name)
@@ -267,11 +255,9 @@ public class LocaleBeanUtils extends BeanUtils {
      * @param name Simple property name of the property value to be extracted
      * @param key  Lookup key of the property value to be extracted
      * @return The mapped property's value, converted to a String
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws InvocationTargetException if the property accessor method throws an exception
      * @throws NoSuchMethodException     if an accessor method for this property cannot be found
-     *
      * @see LocaleBeanUtilsBean#getMappedProperty(Object, String, String)
      */
     public static String getMappedProperty(final Object bean, final String name, final String key)
@@ -293,11 +279,9 @@ public class LocaleBeanUtils extends BeanUtils {
      * @param key     Lookup key of the property value to be extracted
      * @param pattern The conversion pattern
      * @return The mapped property's value, converted to a String
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws InvocationTargetException if the property accessor method throws an exception
      * @throws NoSuchMethodException     if an accessor method for this property cannot be found
-     *
      * @see LocaleBeanUtilsBean#getMappedProperty(Object, String, String, String)
      */
     public static String getMappedProperty(final Object bean, final String name, final String key, final String pattern)
@@ -318,11 +302,9 @@ public class LocaleBeanUtils extends BeanUtils {
      * @param name    {@code propertyname(index)} of the property value to be extracted
      * @param pattern The conversion pattern
      * @return The mapped property's value, converted to a String
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws InvocationTargetException if the property accessor method throws an exception
      * @throws NoSuchMethodException     if an accessor method for this property cannot be found
-     *
      * @see LocaleBeanUtilsBean#getMappedPropertyLocale(Object, String, String)
      */
     public static String getMappedPropertyLocale(final Object bean, final String name, final String pattern)
@@ -342,11 +324,9 @@ public class LocaleBeanUtils extends BeanUtils {
      * @param bean Bean whose property is to be extracted
      * @param name Possibly nested name of the property to be extracted
      * @return The nested property's value, converted to a String
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws InvocationTargetException if the property accessor method throws an exception
      * @throws NoSuchMethodException     if an accessor method for this property cannot be found
-     *
      * @see LocaleBeanUtilsBean#getNestedProperty(Object, String)
      */
     public static String getNestedProperty(final Object bean, final String name)
@@ -368,11 +348,9 @@ public class LocaleBeanUtils extends BeanUtils {
      * @param name    Possibly nested name of the property to be extracted
      * @param pattern The conversion pattern
      * @return The nested property's value, converted to a String
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws InvocationTargetException if the property accessor method throws an exception
      * @throws NoSuchMethodException     if an accessor method for this property cannot be found
-     *
      * @see LocaleBeanUtilsBean#getNestedProperty(Object, String, String)
      */
     public static String getNestedProperty(final Object bean, final String name, final String pattern)
@@ -392,11 +370,9 @@ public class LocaleBeanUtils extends BeanUtils {
      * @param bean Bean whose property is to be extracted
      * @param name Possibly indexed and/or nested name of the property to be extracted
      * @return The property's value, converted to a String
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws InvocationTargetException if the property accessor method throws an exception
      * @throws NoSuchMethodException     if an accessor method for this property cannot be found
-     *
      * @see LocaleBeanUtilsBean#getProperty(Object, String)
      */
     public static String getProperty(final Object bean, final String name) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
@@ -416,11 +392,9 @@ public class LocaleBeanUtils extends BeanUtils {
      * @param name    Possibly indexed and/or nested name of the property to be extracted
      * @param pattern The conversion pattern
      * @return The nested property's value, converted to a String
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws InvocationTargetException if the property accessor method throws an exception
      * @throws NoSuchMethodException     if an accessor method for this property cannot be found
-     *
      * @see LocaleBeanUtilsBean#getProperty(Object, String, String)
      */
     public static String getProperty(final Object bean, final String name, final String pattern)
@@ -441,11 +415,9 @@ public class LocaleBeanUtils extends BeanUtils {
      * @param bean Bean whose property is to be extracted
      * @param name Name of the property to be extracted
      * @return The property's value, converted to a String
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws InvocationTargetException if the property accessor method throws an exception
      * @throws NoSuchMethodException     if an accessor method for this property cannot be found
-     *
      * @see LocaleBeanUtilsBean#getSimpleProperty(Object, String)
      */
     public static String getSimpleProperty(final Object bean, final String name)
@@ -466,11 +438,9 @@ public class LocaleBeanUtils extends BeanUtils {
      * @param name    Name of the property to be extracted
      * @param pattern The conversion pattern
      * @return The property's value, converted to a String
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws InvocationTargetException if the property accessor method throws an exception
      * @throws NoSuchMethodException     if an accessor method for this property cannot be found
-     *
      * @see LocaleBeanUtilsBean#getSimpleProperty(Object, String, String)
      */
     public static String getSimpleProperty(final Object bean, final String name, final String pattern)
@@ -492,10 +462,8 @@ public class LocaleBeanUtils extends BeanUtils {
      * @param key      The Mapped key value (if any)
      * @param index    The indexed subscript value (if any)
      * @param newValue The value to be set
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws InvocationTargetException if the property accessor method throws an exception
-     *
      * @see LocaleBeanUtilsBean#invokeSetter(Object, String, String, int, Object)
      */
     protected static void invokeSetter(final Object target, final String propName, final String key, final int index, final Object newValue)
@@ -548,10 +516,8 @@ public class LocaleBeanUtils extends BeanUtils {
      * @param bean  Bean on which setting is to be performed
      * @param name  Property name (can be nested/indexed/mapped/combo)
      * @param value Value to be set
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws InvocationTargetException if the property accessor method throws an exception
-     *
      * @see LocaleBeanUtilsBean#setProperty(Object, String, Object)
      */
     public static void setProperty(final Object bean, final String name, final Object value) throws IllegalAccessException, InvocationTargetException {
@@ -572,10 +538,8 @@ public class LocaleBeanUtils extends BeanUtils {
      * @param name    Property name (can be nested/indexed/mapped/combo)
      * @param value   Value to be set
      * @param pattern The conversion pattern
-     *
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws InvocationTargetException if the property accessor method throws an exception
-     *
      * @see LocaleBeanUtilsBean#setProperty(Object, String, Object, String)
      */
     public static void setProperty(final Object bean, final String name, final Object value, final String pattern)

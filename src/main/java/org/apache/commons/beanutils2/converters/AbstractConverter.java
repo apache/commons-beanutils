@@ -220,7 +220,6 @@ public abstract class AbstractConverter<D> implements Converter<D> {
      * it (which is required to fulfill the contract of the method signature).
      *
      * @param value the value to be converted
-     *
      * @param <T>   the type of the result object
      * @return the converted value
      */

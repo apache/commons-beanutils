@@ -203,7 +203,6 @@ public class LazyDynaBean implements DynaBean {
      * @param name Name of the property to check
      * @param key  Name of the key to check
      * @return {@code true} if the mapped property contains a value for the specified key, otherwise {@code false}
-     *
      * @throws IllegalArgumentException if no property name is specified
      */
     @Override
@@ -492,7 +491,6 @@ public class LazyDynaBean implements DynaBean {
      * @param name  Name of the property whose value is to be retrieved
      * @param index Index of the value to be retrieved
      * @return The indexed property's value
-     *
      * @throws IllegalArgumentException  if the specified property exists, but is not indexed
      * @throws IndexOutOfBoundsException if the specified index is outside the range of the underlying property
      */
@@ -536,7 +534,6 @@ public class LazyDynaBean implements DynaBean {
      * @param name Name of the property whose value is to be retrieved
      * @param key  Key of the value to be retrieved
      * @return The mapped property's value
-     *
      * @throws IllegalArgumentException if the specified property exists, but is not mapped
      */
     @Override
@@ -698,7 +695,6 @@ public class LazyDynaBean implements DynaBean {
      *
      * @param name Name of the property for which a value is to be removed
      * @param key  Key of the value to be removed
-     *
      * @throws IllegalArgumentException if there is no property of the specified name
      */
     @Override
@@ -724,7 +720,6 @@ public class LazyDynaBean implements DynaBean {
      * @param name  Name of the property whose value is to be set
      * @param index Index of the property to be set
      * @param value Value to which this property is to be set
-     *
      * @throws ConversionException       if the specified value cannot be converted to the type required for this property
      * @throws IllegalArgumentException  if there is no property of the specified name
      * @throws IllegalArgumentException  if the specified property exists, but is not indexed
@@ -767,7 +762,6 @@ public class LazyDynaBean implements DynaBean {
      *
      * @param name  Name of the property whose value is to be set
      * @param value Value to which this property is to be set
-     *
      * @throws IllegalArgumentException if this is not an existing property name for our DynaClass and the MutableDynaClass is restricted
      * @throws ConversionException      if the specified value cannot be converted to the type required for this property
      * @throws NullPointerException     if an attempt is made to set a primitive property to null
@@ -809,7 +803,6 @@ public class LazyDynaBean implements DynaBean {
      * @param name  Name of the property whose value is to be set
      * @param key   Key of the property to be set
      * @param value Value to which this property is to be set
-     *
      * @throws ConversionException      if the specified value cannot be converted to the type required for this property
      * @throws IllegalArgumentException if there is no property of the specified name
      * @throws IllegalArgumentException if the specified property exists, but is not mapped

@@ -34,7 +34,6 @@ public interface MutableDynaClass extends DynaClass {
      * Add a new dynamic property with no restrictions on data type, readability, or writeability.
      *
      * @param name Name of the new dynamic property
-     *
      * @throws IllegalArgumentException if name is null
      * @throws IllegalStateException    if this DynaClass is currently restricted, so no new properties can be added
      */
@@ -45,7 +44,6 @@ public interface MutableDynaClass extends DynaClass {
      *
      * @param name Name of the new dynamic property
      * @param type Data type of the new dynamic property (null for no restrictions)
-     *
      * @throws IllegalArgumentException if name is null
      * @throws IllegalStateException    if this DynaClass is currently restricted, so no new properties can be added
      */
@@ -58,7 +56,6 @@ public interface MutableDynaClass extends DynaClass {
      * @param type     Data type of the new dynamic property (null for no restrictions)
      * @param readable Set to {@code true} if this property value should be readable
      * @param writable Set to {@code true} if this property value should be writable
-     *
      * @throws IllegalArgumentException if name is null
      * @throws IllegalStateException    if this DynaClass is currently restricted, so no new properties can be added
      */
@@ -77,7 +74,6 @@ public interface MutableDynaClass extends DynaClass {
      * does <strong>NOT</strong> cause any corresponding property values to be removed from DynaBean instances associated with this DynaClass.
      *
      * @param name Name of the dynamic property to remove
-     *
      * @throws IllegalArgumentException if name is null
      * @throws IllegalStateException    if this DynaClass is currently restricted, so no properties can be removed
      */

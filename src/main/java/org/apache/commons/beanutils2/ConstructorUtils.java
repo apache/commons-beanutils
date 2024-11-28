@@ -206,12 +206,10 @@ public class ConstructorUtils {
      * @param klass the class to be constructed.
      * @param arg   the actual argument. May be null (this will result in calling the default constructor).
      * @return new instance of {@code klazz}
-     *
      * @throws NoSuchMethodException     If the constructor cannot be found
      * @throws IllegalAccessException    If an error occurs accessing the constructor
      * @throws InvocationTargetException If an error occurs invoking the constructor
      * @throws InstantiationException    If an error occurs instantiating the class
-     *
      * @see #invokeConstructor(Class, Object[], Class[])
      */
     public static <T> T invokeConstructor(final Class<T> klass, final Object arg)
@@ -235,12 +233,10 @@ public class ConstructorUtils {
      * @param klass the class to be constructed.
      * @param args  actual argument array. May be null (this will result in calling the default constructor).
      * @return new instance of {@code klazz}
-     *
      * @throws NoSuchMethodException     If the constructor cannot be found
      * @throws IllegalAccessException    If an error occurs accessing the constructor
      * @throws InvocationTargetException If an error occurs invoking the constructor
      * @throws InstantiationException    If an error occurs instantiating the class
-     *
      * @see #invokeConstructor(Class, Object[], Class[])
      */
     public static <T> T invokeConstructor(final Class<T> klass, Object[] args)
@@ -271,7 +267,6 @@ public class ConstructorUtils {
      * @param args           actual argument array. May be null (this will result in calling the default constructor).
      * @param parameterTypes parameter types array
      * @return new instance of {@code klazz}
-     *
      * @throws NoSuchMethodException     if matching constructor cannot be found
      * @throws IllegalAccessException    thrown on the constructor's invocation
      * @throws InvocationTargetException thrown on the constructor's invocation
@@ -309,12 +304,10 @@ public class ConstructorUtils {
      * @param klass the class to be constructed.
      * @param arg   the actual argument. May be null (this will result in calling the default constructor).
      * @return new instance of {@code klazz}
-     *
      * @throws NoSuchMethodException     If the constructor cannot be found
      * @throws IllegalAccessException    If an error occurs accessing the constructor
      * @throws InvocationTargetException If an error occurs invoking the constructor
      * @throws InstantiationException    If an error occurs instantiating the class
-     *
      * @see #invokeExactConstructor(Class, Object[], Class[])
      */
     public static <T> T invokeExactConstructor(final Class<T> klass, final Object arg)
@@ -338,12 +331,10 @@ public class ConstructorUtils {
      * @param klass the class to be constructed.
      * @param args  actual argument array. May be null (this will result in calling the default constructor).
      * @return new instance of {@code klazz}
-     *
      * @throws NoSuchMethodException     If the constructor cannot be found
      * @throws IllegalAccessException    If an error occurs accessing the constructor
      * @throws InvocationTargetException If an error occurs invoking the constructor
      * @throws InstantiationException    If an error occurs instantiating the class
-     *
      * @see #invokeExactConstructor(Class, Object[], Class[])
      */
     public static <T> T invokeExactConstructor(final Class<T> klass, Object[] args)
@@ -374,7 +365,6 @@ public class ConstructorUtils {
      * @param args           actual argument array. May be null (this will result in calling the default constructor).
      * @param parameterTypes parameter types array
      * @return new instance of {@code klazz}
-     *
      * @throws NoSuchMethodException     if matching constructor cannot be found
      * @throws IllegalAccessException    thrown on the constructor's invocation
      * @throws InvocationTargetException thrown on the constructor's invocation
@@ -403,7 +393,6 @@ public class ConstructorUtils {
      * Delegates to {@link Array#newInstance(Class, int)}.
      *
      * @param <T>           Component type.
-     *
      * @param componentType See {@link Array#newInstance(Class, int)}.
      * @param length        See {@link Array#newInstance(Class, int)}.
      * @return See {@link Array#newInstance(Class, int)}.

@@ -197,7 +197,6 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
      * @param type  Data type to which this value should be converted
      * @param value The input object to be converted
      * @return The converted value
-     *
      * @throws ConversionException if conversion cannot be performed successfully
      */
     @Override
@@ -212,7 +211,6 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
      * @param value   is the input object to be converted
      * @param pattern is the pattern is used for the conversion; if null is passed then the default pattern associated with the converter object will be used.
      * @return The converted value
-     *
      * @throws ConversionException if conversion cannot be performed successfully
      */
     @Override
@@ -249,7 +247,6 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
      *
      * @param value The input object to be converted
      * @return The converted value
-     *
      * @throws ConversionException if conversion cannot be performed successfully
      */
     public Object convert(final Object value) {
@@ -262,7 +259,6 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
      * @param value   The input object to be converted
      * @param pattern The pattern is used for the conversion
      * @return The converted value
-     *
      * @throws ConversionException if conversion cannot be performed successfully
      */
     public T convert(final Object value, final String pattern) {
@@ -287,7 +283,6 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
      * @param value   The input object to be converted
      * @param pattern The pattern is used for the conversion
      * @return The converted value
-     *
      * @throws ParseException if conversion cannot be performed successfully
      */
     abstract protected T parse(Object value, String pattern) throws ParseException;

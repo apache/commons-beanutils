@@ -93,7 +93,6 @@ public final class BooleanConverter extends AbstractConverter<Boolean> {
      * The provided string arrays are copied, so that changes to the elements of the array after this call is made do not affect this object.
      *
      * @param trueStrings  is the set of strings which should convert to the value Boolean.TRUE. The value null must not be present. Case is ignored.
-     *
      * @param falseStrings is the set of strings which should convert to the value Boolean.TRUE. The value null must not be present. Case is ignored.
      * @since 1.8.0
      */
@@ -108,9 +107,7 @@ public final class BooleanConverter extends AbstractConverter<Boolean> {
      * The provided string arrays are copied, so that changes to the elements of the array after this call is made do not affect this object.
      *
      * @param trueStrings  is the set of strings which should convert to the value Boolean.TRUE. The value null must not be present. Case is ignored.
-     *
      * @param falseStrings is the set of strings which should convert to the value Boolean.TRUE. The value null must not be present. Case is ignored.
-     *
      * @param defaultValue The default value to be returned if the value being converted is not recognized. This value may be null, in which case null will be
      *                     returned on conversion failure. When non-null, it is expected that this value will be either Boolean.TRUE or Boolean.FALSE. The
      *                     special value BooleanConverter.NO_DEFAULT can also be passed here, in which case an exception will be thrown on conversion failure.
@@ -127,7 +124,6 @@ public final class BooleanConverter extends AbstractConverter<Boolean> {
      *
      * @param <T>   Target type of the conversion.
      * @param type  is the type to which this value should be converted. In the case of this BooleanConverter class, this value is ignored.
-     *
      * @param value is the input value to be converted. The toString method shall be invoked on this object, and the result compared (ignoring case) against the
      *              known "true" and "false" string values.
      *

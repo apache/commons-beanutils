@@ -155,7 +155,6 @@ abstract class AbstractJdbcDynaClass implements DynaClass {
      * </p>
      *
      * @param name Name of the dynamic property for which a descriptor is requested
-     *
      * @throws IllegalArgumentException if no property name is specified
      */
     @Override
@@ -216,7 +215,6 @@ abstract class AbstractJdbcDynaClass implements DynaClass {
      * </p>
      *
      * @param resultSet The {@code resultSet} whose metadata is to be introspected
-     *
      * @throws SQLException if an error is encountered processing the result set metadata
      */
     protected void introspect(final ResultSet resultSet) throws SQLException {

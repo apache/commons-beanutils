@@ -638,7 +638,6 @@ public class MethodUtils {
      * @param methodName get method with this name
      * @param arg        use this argument. May be null (this will result in calling the parameterless method with name {@code methodName}).
      * @return The value returned by the invoked method
-     *
      * @throws NoSuchMethodException     if there is no such accessible method
      * @throws InvocationTargetException wraps an exception thrown by the method invoked
      * @throws IllegalAccessException    if the requested method is not accessible via reflection
@@ -663,7 +662,6 @@ public class MethodUtils {
      * @param args       use these arguments - treat null as empty array (passing null will result in calling the parameterless method with name
      *                   {@code methodName}).
      * @return The value returned by the invoked method
-     *
      * @throws NoSuchMethodException     if there is no such accessible method
      * @throws InvocationTargetException wraps an exception thrown by the method invoked
      * @throws IllegalAccessException    if the requested method is not accessible via reflection
@@ -696,7 +694,6 @@ public class MethodUtils {
      *                       {@code methodName}).
      * @param parameterTypes match these parameters - treat null as empty array
      * @return The value returned by the invoked method
-     *
      * @throws NoSuchMethodException     if there is no such accessible method
      * @throws InvocationTargetException wraps an exception thrown by the method invoked
      * @throws IllegalAccessException    if the requested method is not accessible via reflection
@@ -731,7 +728,6 @@ public class MethodUtils {
      * @param methodName  get method with this name
      * @param arg         use this argument. May be null (this will result in calling the parameterless method with name {@code methodName}).
      * @return The value returned by the invoked method
-     *
      * @throws NoSuchMethodException     if there is no such accessible method
      * @throws InvocationTargetException wraps an exception thrown by the method invoked
      * @throws IllegalAccessException    if the requested method is not accessible via reflection
@@ -757,7 +753,6 @@ public class MethodUtils {
      * @param args        use these arguments - treat null as empty array (passing null will result in calling the parameterless method with name
      *                    {@code methodName}).
      * @return The value returned by the invoked method
-     *
      * @throws NoSuchMethodException     if there is no such accessible method
      * @throws InvocationTargetException wraps an exception thrown by the method invoked
      * @throws IllegalAccessException    if the requested method is not accessible via reflection
@@ -791,7 +786,6 @@ public class MethodUtils {
      *                       {@code methodName}).
      * @param parameterTypes match these parameters - treat null as empty array
      * @return The value returned by the invoked method
-     *
      * @throws NoSuchMethodException     if there is no such accessible method
      * @throws InvocationTargetException wraps an exception thrown by the method invoked
      * @throws IllegalAccessException    if the requested method is not accessible via reflection
@@ -837,7 +831,6 @@ public class MethodUtils {
      * @param methodName get method with this name
      * @param arg        use this argument. May be null (this will result in calling the parameterless method with name {@code methodName}).
      * @return The value returned by the invoked method
-     *
      * @throws NoSuchMethodException     if there is no such accessible method
      * @throws InvocationTargetException wraps an exception thrown by the method invoked
      * @throws IllegalAccessException    if the requested method is not accessible via reflection
@@ -872,7 +865,6 @@ public class MethodUtils {
      * @param args       use these arguments - treat null as empty array (passing null will result in calling the parameterless method with name
      *                   {@code methodName}).
      * @return The value returned by the invoked method
-     *
      * @throws NoSuchMethodException     if there is no such accessible method
      * @throws InvocationTargetException wraps an exception thrown by the method invoked
      * @throws IllegalAccessException    if the requested method is not accessible via reflection
@@ -913,7 +905,6 @@ public class MethodUtils {
      *                       {@code methodName}).
      * @param parameterTypes match these parameters - treat null as empty array
      * @return The value returned by the invoked method
-     *
      * @throws NoSuchMethodException     if there is no such accessible method
      * @throws InvocationTargetException wraps an exception thrown by the method invoked
      * @throws IllegalAccessException    if the requested method is not accessible via reflection
@@ -957,7 +948,6 @@ public class MethodUtils {
      * @param methodName  get method with this name
      * @param arg         use this argument. May be null (this will result in calling the parameterless method with name {@code methodName}).
      * @return The value returned by the invoked method
-     *
      * @throws NoSuchMethodException     if there is no such accessible method
      * @throws InvocationTargetException wraps an exception thrown by the method invoked
      * @throws IllegalAccessException    if the requested method is not accessible via reflection
@@ -993,7 +983,6 @@ public class MethodUtils {
      * @param args        use these arguments - treat null as empty array (passing null will result in calling the parameterless method with name
      *                    {@code methodName}).
      * @return The value returned by the invoked method
-     *
      * @throws NoSuchMethodException     if there is no such accessible method
      * @throws InvocationTargetException wraps an exception thrown by the method invoked
      * @throws IllegalAccessException    if the requested method is not accessible via reflection
@@ -1035,7 +1024,6 @@ public class MethodUtils {
      *                       {@code methodName}).
      * @param parameterTypes match these parameters - treat null as empty array
      * @return The value returned by the invoked method
-     *
      * @throws NoSuchMethodException     if there is no such accessible method
      * @throws InvocationTargetException wraps an exception thrown by the method invoked
      * @throws IllegalAccessException    if the requested method is not accessible via reflection
@@ -1074,7 +1062,6 @@ public class MethodUtils {
      *
      * @param parameterType    the type of parameter accepted by the method
      * @param parameterization the type of parameter being tested
-     *
      * @return true if the assignment is compatible.
      */
     public static final boolean isAssignmentCompatible(final Class<?> parameterType, final Class<?> parameterization) {

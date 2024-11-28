@@ -211,7 +211,6 @@ public class WrapDynaClass implements DynaClass {
      *
      * @param name Name of the dynamic property for which a descriptor is requested
      * @return The descriptor for the specified property
-     *
      * @throws IllegalArgumentException if no property name is specified
      */
     @Override

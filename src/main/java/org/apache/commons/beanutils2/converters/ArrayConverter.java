@@ -169,7 +169,6 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
      * {@link ArrayConverter#convertToString(Object)} methods for <em>non-array</em> types.
      *
      * @param value value to be converted
-     *
      * @return Collection elements.
      */
     protected Collection<?> convertToCollection(final Object value) {
@@ -318,9 +317,7 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
      * </ul>
      *
      * @param value String value to be parsed
-     *
      * @return List of parsed elements.
-     *
      * @throws ConversionException  if the syntax of {@code value} is not syntactically valid
      * @throws NullPointerException if {@code value} is {@code null}
      */
