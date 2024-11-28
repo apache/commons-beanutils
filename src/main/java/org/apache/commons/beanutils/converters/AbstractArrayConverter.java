@@ -123,7 +123,6 @@ public abstract class AbstractArrayConverter implements Converter {
      * @param type Data type to which this value should be converted
      * @param value The input value to be converted
      * @return The converted value
-     *
      * @throws ConversionException if conversion cannot be performed
      *  successfully
      */
@@ -148,7 +147,6 @@ public abstract class AbstractArrayConverter implements Converter {
      *
      * @param svalue String value to be parsed
      * @return The parsed list of String values
-     *
      * @throws ConversionException if the syntax of <code>svalue</code>
      *  is not syntactically valid
      * @throws NullPointerException if <code>svalue</code>

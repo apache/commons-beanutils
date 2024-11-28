@@ -39,7 +39,6 @@ public interface MutableDynaClass extends DynaClass {
      * readability, or writeability.
      *
      * @param name Name of the new dynamic property
-     *
      * @throws IllegalArgumentException if name is null
      * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
@@ -101,7 +100,6 @@ public interface MutableDynaClass extends DynaClass {
      * associated with this DynaClass.
      *
      * @param name Name of the dynamic property to remove
-     *
      * @throws IllegalArgumentException if name is null
      * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no properties can be removed

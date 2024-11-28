@@ -509,7 +509,6 @@ protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
      * @param name Name of the property whose value is to be retrieved
      * @param index Index of the value to be retrieved
      * @return The indexed property's value
-     *
      * @throws IllegalArgumentException if the specified property
      *  exists, but is not indexed
      * @throws IndexOutOfBoundsException if the specified index
@@ -558,7 +557,6 @@ protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
      * @param name Name of the property whose value is to be retrieved
      * @param key Key of the value to be retrieved
      * @return The mapped property's value
-     *
      * @throws IllegalArgumentException if the specified property
      *  exists, but is not mapped
      */
@@ -739,7 +737,6 @@ protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
      * @param name Name of the property for which a value is to
      *  be removed
      * @param key Key of the value to be removed
-     *
      * @throws IllegalArgumentException if there is no property
      *  of the specified name
      */
@@ -770,7 +767,6 @@ protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
      * @param name Name of the property whose value is to be set
      * @param index Index of the property to be set
      * @param value Value to which this property is to be set
-     *
      * @throws ConversionException if the specified value cannot be
      *  converted to the type required for this property
      * @throws IllegalArgumentException if there is no property
@@ -823,7 +819,6 @@ protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
      *
      * @param name Name of the property whose value is to be set
      * @param value Value to which this property is to be set
-     *
      * @throws IllegalArgumentException if this is not an existing property
      *  name for our DynaClass and the MutableDynaClass is restricted
      * @throws ConversionException if the specified value cannot be
@@ -875,7 +870,6 @@ protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
      * @param name Name of the property whose value is to be set
      * @param key Key of the property to be set
      * @param value Value to which this property is to be set
-     *
      * @throws ConversionException if the specified value cannot be
      *  converted to the type required for this property
      * @throws IllegalArgumentException if there is no property

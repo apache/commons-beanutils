@@ -99,7 +99,6 @@ public class ResultSetDynaClass extends JDBCDynaClass {
      * to column names in the result set will be lower cased.</p>
      *
      * @param resultSet The result set to be wrapped
-     *
      * @throws NullPointerException if <code>resultSet</code>
      *  is <code>null</code>
      * @throws SQLException if the metadata for this result set
@@ -127,7 +126,6 @@ public class ResultSetDynaClass extends JDBCDynaClass {
      *
      * @param resultSet The result set to be wrapped
      * @param lowerCase Should property names be lower cased?
-     *
      * @throws NullPointerException if <code>resultSet</code>
      *  is <code>null</code>
      * @throws SQLException if the metadata for this result set
@@ -159,7 +157,6 @@ public class ResultSetDynaClass extends JDBCDynaClass {
      * @param resultSet The result set to be wrapped
      * @param lowerCase Should property names be lower cased?
      * @param useColumnLabel true if the column label should be used, otherwise false
-     *
      * @throws NullPointerException if <code>resultSet</code>
      *  is <code>null</code>
      * @throws SQLException if the metadata for this result set

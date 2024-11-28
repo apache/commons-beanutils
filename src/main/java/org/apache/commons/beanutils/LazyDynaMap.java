@@ -142,7 +142,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * Add a new dynamic property.
      *
      * @param property Property the new dynamic property to add.
-     *
      * @throws IllegalArgumentException if name is null
      */
     protected void add(final DynaProperty property) {
@@ -154,7 +153,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * readability, or writeability.
      *
      * @param name Name of the new dynamic property
-     *
      * @throws IllegalArgumentException if name is null
      */
     @Override
@@ -268,7 +266,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * @param name Name of the dynamic property for which a descriptor
      *  is requested
      * @return The descriptor for the specified property
-     *
      * @throws IllegalArgumentException if no property name is specified
      */
     @Override
@@ -405,7 +402,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * associated with this DynaClass.
      *
      * @param name Name of the dynamic property to remove
-     *
      * @throws IllegalArgumentException if name is null
      * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no properties can be removed

@@ -162,7 +162,6 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
      *  case of this BooleanArrayConverter class, this value is ignored.
      *
      * @param value is the input value to be converted.
-     *
      * @return an object of type boolean[], or the default value if there was
      *  any sort of error during conversion and the constructor
      *  was provided with a default value.

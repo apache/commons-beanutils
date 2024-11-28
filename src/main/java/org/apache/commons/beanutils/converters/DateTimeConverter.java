@@ -249,7 +249,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
      * Return a <code>DateFormat<code> for the Locale.
      * @param locale The Locale to create the Format with (may be null)
      * @param timeZone The Time Zone create the Format with (may be null)
-     *
      * @return A Date Format.
      */
     protected DateFormat getFormat(final Locale locale, final TimeZone timeZone) {
@@ -351,7 +350,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
      * @param sourceType The type of the value being converted
      * @param targetType The type to convert the value to.
      * @param value The String date value.
-     *
      * @return The converted Date object.
      * @throws Exception if an error occurs parsing the date.
      */
@@ -382,7 +380,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
      * @param targetType The type to convert the value to
      * @param value The String date value.
      * @param format The DateFormat to parse the String value.
-     *
      * @return The converted Calendar object.
      * @throws ConversionException if the String cannot be converted.
      */

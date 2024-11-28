@@ -182,7 +182,6 @@ public class BasicDynaClass implements DynaClass, Serializable {
      * @param name Name of the dynamic property for which a descriptor
      *  is requested
      * @return The descriptor for the specified property
-     *
      * @throws IllegalArgumentException if no property name is specified
      */
     @Override
@@ -253,7 +252,6 @@ public class BasicDynaClass implements DynaClass, Serializable {
      * implement the <code>DynaBean</code> interface.
      *
      * @param dynaBeanClass The new Class object
-     *
      * @throws IllegalArgumentException if the specified Class does not
      *  implement the <code>DynaBean</code> interface
      */

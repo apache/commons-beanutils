@@ -374,7 +374,6 @@ public class ArrayConverter extends AbstractConverter {
      * @param type The type to convert the value to
      * @param value String value to be parsed
      * @return List of parsed elements.
-     *
      * @throws ConversionException if the syntax of <code>svalue</code>
      *  is not syntactically valid
      * @throws NullPointerException if <code>svalue</code>

@@ -279,7 +279,6 @@ public abstract class NumberConverter extends AbstractConverter {
      * @param targetType The type to convert the value to
      * @param value The String date value.
      * @param format The NumberFormat to parse the String value.
-     *
      * @return The converted Number object.
      * @throws ConversionException if the String cannot be converted.
      */
@@ -354,7 +353,6 @@ public abstract class NumberConverter extends AbstractConverter {
      * @param sourceType The type being converted from
      * @param targetType The Number type to convert to
      * @param value The String value to convert.
-     *
      * @return The converted Number value.
      */
     private Number toNumber(final Class<?> sourceType, final Class<?> targetType, final String value) {
@@ -425,7 +423,6 @@ public abstract class NumberConverter extends AbstractConverter {
      * @param sourceType The type being converted from
      * @param targetType The Number type to convert to
      * @param value The Number to convert.
-     *
      * @return The converted value.
      */
     private <T> T toNumber(final Class<?> sourceType, final Class<T> targetType, final Number value) {

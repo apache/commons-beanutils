@@ -36,7 +36,6 @@ public class ConvertUtilsBean2 extends ConvertUtilsBean {
      *
      * @param value Value to be converted (may be null)
      * @return The converted String value or null if value is null
-     *
      * @see ConvertUtilsBean#convert(String[], Class)
      */
     @Override
@@ -51,7 +50,6 @@ public class ConvertUtilsBean2 extends ConvertUtilsBean {
      * @param value Value to be converted (may be null)
      * @param clazz Java class to be converted to (must not be null)
      * @return The converted value or null if value is null
-     *
      * @see ConvertUtilsBean#convert(String[], Class)
      */
     @Override
@@ -66,7 +64,6 @@ public class ConvertUtilsBean2 extends ConvertUtilsBean {
      * @param value Array of values to be converted
      * @param clazz Java array or element class to be converted to (must not be null)
      * @return The converted value
-     *
      * @see ConvertUtilsBean#convert(String[], Class)
      */
     @Override

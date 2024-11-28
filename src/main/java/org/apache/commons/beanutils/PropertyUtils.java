@@ -154,7 +154,6 @@ public class PropertyUtils {
      *
      * @param dest Destination bean whose properties are modified
      * @param orig Origin bean whose properties are retrieved
-     *
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @throws IllegalArgumentException if the <code>dest</code> or
@@ -180,7 +179,6 @@ public class PropertyUtils {
      *
      * @param bean Bean whose properties are to be extracted
      * @return The set of properties for the bean
-     *
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @throws IllegalArgumentException if <code>bean</code> is null
@@ -218,7 +216,6 @@ public class PropertyUtils {
      * @param name <code>propertyname[index]</code> of the property value
      *  to be extracted
      * @return the indexed property value
-     *
      * @throws IndexOutOfBoundsException if the specified index
      *  is outside the valid range for the underlying property
      * @throws IllegalAccessException if the caller does not have
@@ -249,7 +246,6 @@ public class PropertyUtils {
      * @param name Simple property name of the property value to be extracted
      * @param index Index of the property value to be extracted
      * @return the indexed property value
-     *
      * @throws IndexOutOfBoundsException if the specified index
      *  is outside the valid range for the underlying property
      * @throws IllegalAccessException if the caller does not have
@@ -281,7 +277,6 @@ public class PropertyUtils {
      * @param name <code>propertyname(key)</code> of the property value
      *  to be extracted
      * @return the mapped property value
-     *
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @throws InvocationTargetException if the property accessor method
@@ -309,7 +304,6 @@ public class PropertyUtils {
      * @param name Mapped property name of the property value to be extracted
      * @param key Key of the property value to be extracted
      * @return the mapped property value
-     *
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @throws InvocationTargetException if the property accessor method
@@ -373,7 +367,6 @@ public class PropertyUtils {
      * @param bean Bean whose property is to be extracted
      * @param name Possibly nested name of the property to be extracted
      * @return the nested property value
-     *
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @throws IllegalArgumentException if <code>bean</code> or
@@ -406,7 +399,6 @@ public class PropertyUtils {
      * @param name Possibly indexed and/or nested name of the property
      *  to be extracted
      * @return the property value
-     *
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @throws IllegalArgumentException if <code>bean</code> or
@@ -437,7 +429,6 @@ public class PropertyUtils {
      * @param name Possibly indexed and/or nested name of the property for
      *  which a property descriptor is requested
      * @return the property descriptor
-     *
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @throws IllegalArgumentException if <code>bean</code> or
@@ -509,7 +500,6 @@ public class PropertyUtils {
      * @param name Possibly indexed and/or nested name of the property for
      *  which a property descriptor is requested
      * @return the property editor class
-     *
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @throws IllegalArgumentException if <code>bean</code> or
@@ -542,7 +532,6 @@ public class PropertyUtils {
      * @param name Possibly indexed and/or nested name of the property for
      *  which a property descriptor is requested
      * @return The property type
-     *
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @throws IllegalArgumentException if <code>bean</code> or
@@ -589,7 +578,6 @@ public class PropertyUtils {
      * @param bean Bean whose property is to be extracted
      * @param name Name of the property to be extracted
      * @return The property value
-     *
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @throws IllegalArgumentException if <code>bean</code> or
@@ -720,7 +708,6 @@ public class PropertyUtils {
      * @param name Simple property name of the property value to be set
      * @param index Index of the property value to be set
      * @param value Value to which the indexed property element is to be set
-     *
      * @throws IndexOutOfBoundsException if the specified index
      *  is outside the valid range for the underlying property
      * @throws IllegalAccessException if the caller does not have
@@ -786,7 +773,6 @@ public class PropertyUtils {
      * @param name <code>propertyname(key)</code> of the property value
      *  to be set
      * @param value The property value to be set
-     *
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @throws InvocationTargetException if the property accessor method
@@ -814,7 +800,6 @@ public class PropertyUtils {
      * @param name Mapped property name of the property value to be set
      * @param key Key of the property value to be set
      * @param value The property value to be set
-     *
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @throws InvocationTargetException if the property accessor method
@@ -841,7 +826,6 @@ public class PropertyUtils {
      * @param bean Bean whose property is to be modified
      * @param name Possibly nested name of the property to be modified
      * @param value Value to which the property is to be set
-     *
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @throws IllegalArgumentException if <code>bean</code> or
@@ -874,7 +858,6 @@ public class PropertyUtils {
      * @param name Possibly indexed and/or nested name of the property
      *  to be modified
      * @param value Value to which this property is to be set
-     *
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @throws IllegalArgumentException if <code>bean</code> or
@@ -903,7 +886,6 @@ public class PropertyUtils {
      * @param bean Bean whose property is to be modified
      * @param name Name of the property to be modified
      * @param value Value to which the property should be set
-     *
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @throws IllegalArgumentException if <code>bean</code> or

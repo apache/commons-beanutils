@@ -39,7 +39,6 @@ public interface LocaleConverter extends Converter {
      * @param value The input value to be converted
      * @param pattern The user-defined pattern is used for the input object formatting.
      * @return The converted value
-     *
      * @throws org.apache.commons.beanutils.ConversionException if conversion
      * cannot be performed successfully or if the target type is not supported
      */

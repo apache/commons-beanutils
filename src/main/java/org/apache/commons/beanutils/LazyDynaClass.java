@@ -109,7 +109,6 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * Add a new dynamic property.
      *
      * @param property Property the new dynamic property to add.
-     *
      * @throws IllegalArgumentException if name is null
      * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
@@ -145,7 +144,6 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * readability, or writeability.
      *
      * @param name Name of the new dynamic property
-     *
      * @throws IllegalArgumentException if name is null
      * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
@@ -222,7 +220,6 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @param name Name of the dynamic property for which a descriptor
      *  is requested
      * @return The dyna property for the specified name
-     *
      * @throws IllegalArgumentException if no property name is specified
      */
     @Override
@@ -300,7 +297,6 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * associated with this DynaClass.
      *
      * @param name Name of the dynamic property to remove
-     *
      * @throws IllegalArgumentException if name is null
      * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no properties can be removed

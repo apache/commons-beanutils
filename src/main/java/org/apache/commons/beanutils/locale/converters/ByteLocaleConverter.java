@@ -206,7 +206,6 @@ public class ByteLocaleConverter extends DecimalLocaleConverter {
      * @param value The input object to be converted
      * @param pattern The pattern is used for the convertion
      * @return The converted value
-     *
      * @throws org.apache.commons.beanutils.ConversionException if conversion cannot be performed
      *  successfully
      * @throws ParseException if an error occurs parsing a String to a Number
