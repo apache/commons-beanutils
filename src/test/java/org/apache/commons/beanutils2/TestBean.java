@@ -17,10 +17,7 @@
 
 package org.apache.commons.beanutils2;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * General purpose test bean for JUnit tests for the "beanutils" component.
@@ -574,4 +571,39 @@ public class TestBean {
         this.writeOnlyProperty = writeOnlyProperty;
     }
 
+    @Override
+    public String toString() {
+        return "TestBean{" +
+                "booleanProperty=" + booleanProperty +
+                ", booleanSecond=" + booleanSecond +
+                ", byteProperty=" + byteProperty +
+                ", dateProperty=" + dateProperty +
+                ", dateArrayProperty=" + Arrays.toString(dateArrayProperty) +
+                ", doubleProperty=" + doubleProperty +
+                ", dupProperty=" + Arrays.toString(dupProperty) +
+                ", floatProperty=" + floatProperty +
+                ", intArray=" + Arrays.toString(intArray) +
+                ", intIndexed=" + Arrays.toString(intIndexed) +
+                ", intProperty=" + intProperty +
+                ", listIndexed=" + listIndexed +
+                ", longProperty=" + longProperty +
+                ", mapProperty=" + mapProperty +
+                ", mappedObjects=" + mappedObjects +
+                ", mappedProperty=" + mappedProperty +
+                ", mappedIntProperty=" + mappedIntProperty +
+                ", nested=" + nested +
+                ", anotherNested=" + anotherNested +
+                ", nestedDynaBean=" + nestedDynaBean +
+                ", mappedNested=" + mappedNested +
+                ", nullProperty='" + nullProperty + '\'' +
+                ", readOnlyProperty='" + readOnlyProperty + '\'' +
+                ", shortProperty=" + shortProperty +
+                ", stringArray=" + Arrays.toString(stringArray) +
+                ", stringIndexed=" + Arrays.toString(stringIndexed) +
+                ", string2dArray=" + Arrays.toString(string2dArray) +
+                ", stringProperty='" + stringProperty + '\'' +
+                ", writeOnlyProperty='" + writeOnlyProperty + '\'' +
+                ", invalidBoolean=" + invalidBoolean +
+                '}';
+    }
 }

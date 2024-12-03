@@ -108,6 +108,23 @@ public class BeanUtils {
     }
 
     /**
+     * <p>
+     *     Copy non-null property values from the origin bean to the destination bean for all cases where the property names are the same.
+     * </p>
+     * <p>
+     *     For more details see {@code BeanUtilsBean}.
+     * </p>
+     * @param dest destination bean whose properties are modified
+     * @param orig origin bean whose properties are retrieved
+     * @throws IllegalAccessException if the caller does not have access to the property accessor method
+     * @throws InvocationTargetException if the property accessor method throws an exception
+     * @see BeanUtilsBean#copyNonNullProperties
+     */
+    public static void copyNonNullProperties(final Object dest, final Object orig) throws IllegalAccessException, InvocationTargetException {
+        BeanUtilsBean.getInstance().copyNonNullProperties(dest, orig);
+    }
+
+    /**
      * Create a cache.
      *
      * @param <K> the key type of the cache

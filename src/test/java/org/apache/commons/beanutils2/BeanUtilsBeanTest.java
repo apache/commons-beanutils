@@ -17,6 +17,7 @@
 
 package org.apache.commons.beanutils2;
 
+import static org.apache.commons.beanutils2.BeanUtils.copyNonNullProperties;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -24,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
@@ -291,7 +293,7 @@ public class BeanUtilsBeanTest {
         orig.setLongProperty(3333);
         orig.setShortProperty((short) 33);
         orig.setStringArray(new String[] { "New 0", "New 1" });
-        orig.setStringProperty("Custom string");
+        orig.setStringProperty(null);
 
         // Copy the origin bean to our destination test bean
         BeanUtils.copyProperties(bean, orig);
@@ -324,6 +326,29 @@ public class BeanUtilsBeanTest {
         assertEquals("New 0", stringArray[0], "stringArray[0]");
         assertEquals("New 1", stringArray[1], "stringArray[1]");
 
+    }
+
+    /**
+     *  Test the copyNonNullProperties from a standard JavaBean.
+     */
+    @Test
+    public void testNonNullPropertiesStandard() throws InvocationTargetException, IllegalAccessException {
+        final TestBean orig = new TestBean();
+        orig.setBooleanProperty(false);
+        orig.setByteProperty((byte) 111);
+        orig.setDoubleProperty(333.33);
+        orig.setDupProperty(new String[] { "New 0", "New 1", "New 2" });
+        orig.setIntArray(new int[] { 100, 200, 300 });
+        orig.setIntProperty(333);
+        orig.setLongProperty(3333);
+        orig.setShortProperty((short) 33);
+        orig.setStringArray(new String[] { "New 0", "New 1" });
+        orig.setStringProperty(null);
+
+        copyNonNullProperties(bean, orig);
+
+        final String stringProperty=bean.getStringProperty();
+        assertNotNull(stringProperty, "copy without null properties");
     }
 
     /**
