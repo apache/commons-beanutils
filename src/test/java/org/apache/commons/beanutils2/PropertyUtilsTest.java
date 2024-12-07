@@ -36,10 +36,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.apache.commons.beanutils2.priv.PrivateBeanFactory;
 import org.apache.commons.beanutils2.priv.PrivateDirect;
 import org.apache.commons.beanutils2.priv.PublicSubBean;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -156,17 +158,8 @@ public class PropertyUtilsTest {
      * <p>
      * If there are no keys, an empty string is returned.
      */
-    private String keysToString(final Map<?, ?> map) {
-        final Object[] mapKeys = map.keySet().toArray();
-        Arrays.sort(mapKeys);
-        final StringBuilder buf = new StringBuilder();
-        for (int i = 0; i < mapKeys.length; ++i) {
-            if (i != 0) {
-                buf.append(", ");
-            }
-            buf.append(mapKeys[i]);
-        }
-        return buf.toString();
+    private String keysToString(final Map<String, ?> map) {
+        return StringUtils.join(new TreeSet<>(map.keySet()), ", ");
     }
 
     /**
