@@ -36,7 +36,7 @@ import org.apache.commons.logging.LogFactory;
  * setting a property value do not return <strong>void</strong>, but an object which can
  * be called for setting another property. An example of such a fluent API could
  * look as follows:
- *
+ * </p>
  * <pre>
  * public class FooBuilder {
  *     public FooBuilder setFooProperty1(String value) {
@@ -50,7 +50,7 @@ import org.apache.commons.logging.LogFactory;
  *    }
  * }
  * </pre>
- *
+ * <p>
  * Per default, <code>PropertyUtils</code> does not detect methods like this
  * because, having a non-<strong>void</strong> return type, they violate the Java Beans
  * specification.
@@ -76,6 +76,7 @@ import org.apache.commons.logging.LogFactory;
  * @since 1.9
  */
 public class FluentPropertyBeanIntrospector implements BeanIntrospector {
+
     /** The default prefix for write methods. */
     public static final String DEFAULT_WRITE_METHOD_PREFIX = "set";
 

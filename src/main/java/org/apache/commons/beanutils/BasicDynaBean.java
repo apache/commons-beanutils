@@ -258,9 +258,10 @@ public class BasicDynaBean implements DynaBean, Serializable {
 
     /**
      * Return a Map representation of this DynaBean.
-     * </p>
+     * <p>
      * This, for example, could be used in JSTL in the following way to access
      * a DynaBean's <code>fooProperty</code>:
+     * </p>
      * <ul><li><code>${myDynaBean.<strong>map</strong>.fooProperty}</code></li></ul>
      *
      * @return a Map representation of this DynaBean

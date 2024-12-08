@@ -35,21 +35,20 @@ import org.apache.commons.logging.LogFactory;
  * object in the property path specified by <code>propertyName</code> is <code>null</code> then the
  * outcome is based on the value of the <code>ignoreNull</code> attribute.
  * </p>
- *
  * <p>
  * A typical usage might look like:
- * <code><pre>
+ * </p>
+ * <pre>
  * // create the transformer
  * BeanToPropertyValueTransformer transformer = new BeanToPropertyValueTransformer( "person.address.city" );
  *
  * // transform the Collection
  * Collection peoplesCities = CollectionUtils.collect( peopleCollection, transformer );
- * </pre></code>
- * </p>
- *
+ * </pre>
  * <p>
  * This would take a <code>Collection</code> of person objects and return a <code>Collection</code>
  * of objects which represents the cities in which each person lived. Assuming...
+ * </p>
  * <ul>
  *    <li>
  *       The top level object in the <code>peeopleCollection</code> is an object which represents a

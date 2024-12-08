@@ -32,6 +32,7 @@ import org.apache.commons.beanutils.ConversionException;
  * <p>
  * This implementation handles conversion for the following
  * <em>date/time</em> types.
+ * </p>
  * <ul>
  *     <li><code>java.util.Date</code></li>
  *     <li><code>java.util.Calendar</code></li>
@@ -40,39 +41,43 @@ import org.apache.commons.beanutils.ConversionException;
  *     <li><code>java.sql.Timestamp</code></li>
  * </ul>
  *
- * <h3>String Conversions (to and from)</h3>
+ * <h2>String Conversions (to and from)</h2>
  * This class provides a number of ways in which date/time
  * conversions to/from Strings can be achieved:
  * <ul>
- *    <li>Using the SHORT date format for the default Locale, configure using:</li>
+ *    <li>Using the SHORT date format for the default Locale, configure using:
  *        <ul>
  *           <li><code>setUseLocaleFormat(true)</code></li>
  *        </ul>
- *    <li>Using the SHORT date format for a specified Locale, configure using:</li>
+ *    </li>
+ *    <li>Using the SHORT date format for a specified Locale, configure using:
  *        <ul>
  *           <li><code>setLocale(Locale)</code></li>
  *        </ul>
- *    <li>Using the specified date pattern(s) for the default Locale, configure using:</li>
+ *    </li>
+ *    <li>Using the specified date pattern(s) for the default Locale, configure using:
  *        <ul>
  *           <li>Either <code>setPattern(String)</code> or
  *                      <code>setPatterns(String[])</code></li>
  *        </ul>
- *    <li>Using the specified date pattern(s) for a specified Locale, configure using:</li>
+ *    </li>
+ *    <li>Using the specified date pattern(s) for a specified Locale, configure using:
  *        <ul>
  *           <li><code>setPattern(String)</code> or
  *                    <code>setPatterns(String[]) and...</code></li>
  *           <li><code>setLocale(Locale)</code></li>
  *        </ul>
+ *    </li>
  *    <li>If none of the above are configured the
  *        <code>toDate(String)</code> method is used to convert
  *        from String to Date and the Dates's
  *        <code>toString()</code> method used to convert from
  *        Date to String.</li>
  * </ul>
- *
  * <p>
  * The <strong>Time Zone</strong> to use with the date format can be specified
  * using the <code>setTimeZone()</code> method.
+ * </p>
  *
  * @since 1.8.0
  */
@@ -246,7 +251,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
     }
 
     /**
-     * Return a <code>DateFormat<code> for the Locale.
+     * Return a <code>DateFormat</code> for the Locale.
      * @param locale The Locale to create the Format with (may be null)
      * @param timeZone The Time Zone create the Format with (may be null)
      * @return A Date Format.

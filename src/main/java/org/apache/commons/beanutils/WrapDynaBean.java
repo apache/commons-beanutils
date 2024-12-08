@@ -31,25 +31,20 @@ import java.lang.reflect.InvocationTargetException;
  * (This makes it different from the typical use cases for other <code>DynaBean</code>'s.)
  * For example:
  * </p>
- * <code><pre>
+ * <pre>
  *  Object aJavaBean = ...;
  *  ...
  *  DynaBean db = new WrapDynaBean(aJavaBean);
  *  ...
- * </pre></code>
+ * </pre>
  *
  * <p><strong>IMPLEMENTATION NOTE</strong> - This implementation does not
  * support the <code>contains()</code> and <code>remove()</code> methods.</p>
  *
  */
-
 public class WrapDynaBean implements DynaBean, Serializable {
 
-
-
-
     private static final long serialVersionUID = 1L;
-
 
     /**
      * The <code>DynaClass</code> "base class" that this DynaBean
@@ -62,8 +57,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
      */
     protected Object instance = null;
 
-
-
     /**
      * Construct a new <code>DynaBean</code> associated with the specified
      * JavaBean instance.
@@ -71,11 +64,8 @@ public class WrapDynaBean implements DynaBean, Serializable {
      * @param instance JavaBean instance to be wrapped
      */
     public WrapDynaBean(final Object instance) {
-
         this(instance, null);
-
     }
-
 
     /**
      * Creates a new instance of {@code WrapDynaBean}, associates it with the specified
@@ -89,14 +79,9 @@ public class WrapDynaBean implements DynaBean, Serializable {
      * @since 1.9
      */
     public WrapDynaBean(final Object instance, final WrapDynaClass cls) {
-
         this.instance = instance;
         this.dynaClass = cls != null ? cls : (WrapDynaClass) getDynaClass();
-
     }
-
-
-
 
     /**
      * Does the specified mapped property contain a value for the specified
@@ -104,7 +89,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
      *
      * @param name Name of the property to check
      * @param key Name of the key to check
-     * @return <code>true<code> if the mapped property contains a value for
+     * @return <code>true</code> if the mapped property contains a value for
      * the specified key, otherwise <code>false</code>
      *
      * @throws IllegalArgumentException if there is no property
@@ -112,12 +97,9 @@ public class WrapDynaBean implements DynaBean, Serializable {
      */
     @Override
     public boolean contains(final String name, final String key) {
-
         throw new UnsupportedOperationException
                 ("WrapDynaBean does not support contains()");
-
     }
-
 
     /**
      * Return the value of a simple property with the specified name.
@@ -129,7 +111,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
      */
     @Override
     public Object get(final String name) {
-
         Object value = null;
         try {
             value = getPropertyUtils().getSimpleProperty(instance, name);
@@ -144,9 +125,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
                               "', exception - " + t);
         }
         return value;
-
     }
-
 
     /**
      * Return the value of an indexed property with the specified name.
@@ -185,7 +164,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
 
     }
 
-
     /**
      * Return the value of a mapped property with the specified name,
      * or <code>null</code> if there is no value for the specified key.
@@ -218,7 +196,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
 
     }
 
-
     /**
      * Return the <code>DynaClass</code> instance that describes the set of
      * properties available for this DynaBean.
@@ -234,7 +211,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
         return this.dynaClass;
 
     }
-
 
     /**
      * Return the property descriptor for the specified property name.
@@ -255,7 +231,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
 
     }
 
-
     /**
      * Gets the bean instance wrapped by this DynaBean.
      * For most common use cases,
@@ -269,7 +244,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
     public Object getInstance() {
         return instance;
     }
-
 
     /**
      * Returns the {@code PropertyUtilsBean} instance to be used for accessing properties.
@@ -287,7 +261,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
 
     }
 
-
     /**
      * Remove any existing value for the specified key on the
      * specified mapped property.
@@ -300,11 +273,8 @@ public class WrapDynaBean implements DynaBean, Serializable {
      */
     @Override
     public void remove(final String name, final String key) {
-
-
         throw new UnsupportedOperationException
                 ("WrapDynaBean does not support remove()");
-
     }
 
     /**
@@ -324,7 +294,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
      */
     @Override
     public void set(final String name, final int index, final Object value) {
-
         try {
             getPropertyUtils().setIndexedProperty(instance, name, index, value);
         } catch (final IndexOutOfBoundsException e) {
@@ -339,11 +308,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
                     ("Error setting indexed property '" + name +
                               "', exception - " + t);
         }
-
     }
-
-
-
 
     /**
      * Set the value of a simple property with the specified name.

@@ -230,7 +230,7 @@ public class ConvertUtilsBean {
      * is an array, the first element (converted to a String) will be
      * returned.  The registered {@link Converter} for the
      * <code>java.lang.String</code> class will be used, which allows
-     * applications to customize Object->String conversions (the default
+     * applications to customize Object to String conversions (the default
      * implementation simply uses toString()).
      *
      * @param value Value to be converted (may be null)

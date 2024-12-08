@@ -32,10 +32,9 @@ import org.apache.commons.logging.LogFactory;
 
 
 /**
- * <p> Utility reflection methods focused on methods in general rather than properties in particular. </p>
+ * <p>Utility reflection methods focused on methods in general rather than properties in particular.</p>
  *
- * <h3>Known Limitations</h3>
- * <h4>Accessing Public Methods In A Default Access Superclass</h4>
+ * <strong>Known Limitations: Accessing Public Methods In A Default Access Superclass</strong>
  * <p>There is an issue when invoking public methods contained in a default access superclass.
  * Reflection locates these methods fine and correctly assigns them as public.
  * However, an <code>IllegalAccessException</code> is thrown if the method is invoked.</p>
@@ -47,9 +46,7 @@ import org.apache.commons.logging.LogFactory;
  * If this call fails then a warning will be logged and the method may fail.</p>
  *
  */
-
 public class MethodUtils {
-
 
     /**
      * Represents the key to looking up a Method by reflection.
@@ -137,6 +134,7 @@ public class MethodUtils {
      * a container, this will affect all webapps. However making this
      * configurable per webapp would mean having a map keyed by context classloader
      * which may introduce memory-leak problems.
+     * </p>
      */
     private static boolean CACHE_METHODS = true;
     /** An empty class array */
@@ -147,7 +145,7 @@ public class MethodUtils {
 
 
     /**
-     * Stores a cache of MethodDescriptor -> Method in a WeakHashMap.
+     * Stores a cache of MethodDescriptor to Method in a WeakHashMap.
      * <p>
      * The keys into this map only ever exist as temporary variables within
      * methods of this class, and are never exposed to users of this class.
@@ -158,6 +156,7 @@ public class MethodUtils {
      * this problem is doubtful; something like the commons-collections
      * LRUMap may be more appropriate (though of course selecting an
      * appropriate size is an issue).
+     * </p>
      * <p>
      * This static variable is safe even when this code is deployed via a
      * shared classloader because it is keyed via a MethodDescriptor object
@@ -165,6 +164,7 @@ public class MethodUtils {
      * the MethodDescriptor.equals method. So two components that load the same
      * class via different classloaders will generate non-equal MethodDescriptor
      * objects and hence end up with different entries in the map.
+     * </p>
      */
     private static final Map<MethodDescriptor, Reference<Method>> cache = Collections
             .synchronizedMap(new WeakHashMap<MethodDescriptor, Reference<Method>>());
@@ -439,18 +439,18 @@ public class MethodUtils {
      * Compatible parameters mean that every method parameter is assignable from
      * the given parameters.
      * In other words, it finds a method with the given name
-     * that will take the parameters given.<p>
-     *
+     * that will take the parameters given.
+     * </p>
      * <p>This method is slightly undeterministic since it loops
      * through methods names and return the first matching method.</p>
-     *
      * <p>This method is used by
      * {@link
      * #invokeMethod(Object object,String methodName,Object [] args,Class[] parameterTypes)}.
-     *
+     * </p>
      * <p>This method can match primitive parameter by passing in wrapper classes.
      * For example, a <code>Boolean</code> will match a primitive <code>boolean</code>
      * parameter.
+     * </p>
      *
      * @param clazz find method in this class
      * @param methodName find method with this name

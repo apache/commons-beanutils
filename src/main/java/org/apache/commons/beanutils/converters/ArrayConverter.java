@@ -36,8 +36,10 @@ import org.apache.commons.beanutils.Converter;
  * <p>
  * Can be configured to either return a <em>default value</em> or throw a
  * <code>ConversionException</code> if a conversion error occurs.
+ * </p>
  * <p>
  * The main features of this implementation are:
+ * </p>
  * <ul>
  *     <li><strong>Element Conversion</strong> - delegates to a {@link Converter},
  *         appropriate for the type, to convert individual elements
@@ -58,18 +60,18 @@ import org.apache.commons.beanutils.Converter;
  *     <li><strong>Multi Dimensional Arrays</strong> - it is possible to convert a <code>String</code>
  *         to a multi-dimensional arrays, by embedding {@link ArrayConverter}
  *         within each other - see example below.</li>
- *     <li><strong>Default Value</strong></li>
+ *     <li><strong>Default Value</strong>
  *         <ul>
- *             <li><strong><em>No Default</strong></em> - use the
+ *             <li><strong><em>No Default</em></strong> - use the
  *                 {@link ArrayConverter#ArrayConverter(Class, Converter)}
  *                 constructor to create a converter which throws a
  *                 {@link ConversionException} if the value is missing or
  *                 invalid.</li>
- *             <li><strong><em>Default values</strong></em> - use the
+ *             <li><strong><em>Default values</em></strong> - use the
  *                 {@link ArrayConverter#ArrayConverter(Class, Converter, int)}
  *                 constructor to create a converter which returns a <i>default
  *                 value</i>. The <em>defaultSize</em> parameter controls the
- *                 <em>default value</em> in the following way:</li>
+ *                 <em>default value</em> in the following way:
  *                 <ul>
  *                    <li><em>defaultSize &lt; 0</em> - default is <code>null</code></li>
  *                    <li><em>defaultSize = 0</em> - default is an array of length zero</li>
@@ -77,10 +79,12 @@ import org.apache.commons.beanutils.Converter;
  *                        length specified by <code>defaultSize</code> (N.B. elements
  *                        in the array will be <code>null</code>)</li>
  *                 </ul>
+ *             </li>
  *         </ul>
+ *     </li>
  * </ul>
  *
- * <h3>Parsing Delimited Lists</h3>
+ * <h2>Parsing Delimited Lists</h2>
  * This implementation can convert a delimited list in <code>String</code> format
  * into an array of the appropriate type. By default, it uses a comma as the delimiter
  * but the following methods can be used to configure parsing:
@@ -92,14 +96,14 @@ import org.apache.commons.beanutils.Converter;
  *         valid token characters.
  * </ul>
  *
- * <h3>Multi Dimensional Arrays</h3>
+ * <h2>Multi Dimensional Arrays</h2>
  * It is possible to convert a <code>String</code> to mulit-dimensional arrays by using
  * {@link ArrayConverter} as the element {@link Converter}
  * within another {@link ArrayConverter}.
  * <p>
  * For example, the following code demonstrates how to construct a {@link Converter}
  * to convert a delimited <code>String</code> into a two dimensional integer array:
- * <p>
+ * </p>
  * <pre>
  *    // Construct an Integer Converter
  *    IntegerConverter integerConverter = new IntegerConverter();
@@ -195,7 +199,6 @@ public class ArrayConverter extends AbstractConverter {
     /**
      * Converts non-array values to a Collection prior
      * to being converted either to an array or a String.
-     * </p>
      * <ul>
      *   <li>{@link Collection} values are returned unchanged</li>
      *   <li>{@link Number}, {@link Boolean}  and {@link java.util.Date}
@@ -203,11 +206,12 @@ public class ArrayConverter extends AbstractConverter {
      *   <li>All other types are converted to a String and parsed
      *       as a delimited list.</li>
      * </ul>
-     *
+     * <p>
      * <strong>N.B.</strong> The method is called by both the
      * {@link ArrayConverter#convertToType(Class, Object)} and
      * {@link ArrayConverter#convertToString(Object)} methods for
      * <em>non-array</em> types.
+     * </p>
      *
      * @param type The type to convert the value to
      * @param value value to be converted

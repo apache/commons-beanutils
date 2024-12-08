@@ -22,10 +22,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 
 /**
- * <p> Utility reflection methods focussed on constructors, modelled after {@link MethodUtils}. </p>
+ * <p>Utility reflection methods focussed on constructors, modelled after {@link MethodUtils}.</p>
  *
- * <h3>Known Limitations</h3>
- * <h4>Accessing Public Constructors In A Default Access Superclass</h4>
+ * <strong>Known Limitations: Accessing Public Constructors In A Default Access Superclass</strong>
  * <p>There is an issue when invoking public constructors contained in a default access superclass.
  * Reflection locates these constructors fine and correctly assigns them as public.
  * However, an <code>IllegalAccessException</code> is thrown if the constructors is invoked.</p>
@@ -35,7 +34,6 @@ import java.lang.reflect.Modifier;
  * If this call succeeds, then the method can be invoked as normal.
  * This call will only succeed when the application has sufficient security privilages.
  * If this call fails then a warning will be logged and the method may fail.</p>
- *
  */
 public class ConstructorUtils {
 
@@ -43,7 +41,6 @@ public class ConstructorUtils {
     private static final Class<?>[] EMPTY_CLASS_PARAMETERS = {};
     /** An empty object array */
     private static final Object[] EMPTY_OBJECT_ARRAY = {};
-
 
     /**
      * Returns a constructor with single argument.

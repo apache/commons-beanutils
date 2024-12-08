@@ -24,11 +24,13 @@ package org.apache.commons.beanutils.converters;
  * <p>
  * Can be configured to either return a <em>default value</em> or throw a
  * <code>ConversionException</code> if a conversion error occurs.
+ * </p>
  * <p>
  * By default any object whose string representation is one of the values
  * {"yes", "y", "true", "on", "1"} is converted to Boolean.TRUE, and
  * string representations {"no", "n", "false", "off", "0"} are converted
  * to Boolean.FALSE. The recognized true/false strings can be changed by:
+ * </p>
  * <pre>
  *  String[] trueStrings = {"oui", "o", "1"};
  *  String[] falseStrings = {"non", "n", "0"};
@@ -36,22 +38,19 @@ package org.apache.commons.beanutils.converters;
  *  ConvertUtils.register(bc, Boolean.class);
  *  ConvertUtils.register(bc, Boolean.TYPE);
  * </pre>
+ * <p>
  * In addition, it is recommended that the BooleanArrayConverter also be
  * modified to recognise the same set of values:
+ * </p>
  * <pre>
  *   Converter bac = new BooleanArrayConverter(bc, BooleanArrayConverter.NO_DEFAULT);
  *   ConvertUtils.register(bac, bac.MODEL);
  * </pre>
- * </p>
- *
  * <p>Case is ignored when converting values to true or false.</p>
  *
  * @since 1.3
  */
 public final class BooleanConverter extends AbstractConverter {
-
-
-
 
     /**
      * This is a special reference that can be passed as the "default object"
@@ -62,7 +61,6 @@ public final class BooleanConverter extends AbstractConverter {
      */
     @Deprecated
     public static final Object NO_DEFAULT = new Object();
-
 
     /**
      * This method creates a copy of the provided array, and ensures that
@@ -90,9 +88,6 @@ public final class BooleanConverter extends AbstractConverter {
      */
     private String[] falseStrings = {"false", "no", "n", "off", "0"};
 
-
-
-
     /**
      * Create a {@link org.apache.commons.beanutils.Converter} that will throw a
      * {@link org.apache.commons.beanutils.ConversionException}
@@ -101,8 +96,6 @@ public final class BooleanConverter extends AbstractConverter {
      */
     public BooleanConverter() {
     }
-
-
 
     /**
      * Create a {@link org.apache.commons.beanutils.Converter} that will return the specified default value
@@ -144,7 +137,6 @@ public final class BooleanConverter extends AbstractConverter {
         this.trueStrings = copyStrings(trueStrings);
         this.falseStrings = copyStrings(falseStrings);
     }
-
 
     /**
      * Create a {@link org.apache.commons.beanutils.Converter} that will return

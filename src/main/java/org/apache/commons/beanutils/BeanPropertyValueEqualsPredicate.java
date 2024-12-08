@@ -33,10 +33,11 @@ import org.apache.commons.logging.LogFactory;
  * The <code>BeanPropertyValueEqualsPredicate</code> constructor takes two parameters which
  * determine what property will be evaluated on the target object and what its expected value should
  * be.
+ * </p>
  * <dl>
  *    <dt>
  *       <strong><code>
- *           <pre>public BeanPropertyValueEqualsPredicate( String propertyName, Object propertyValue )</pre>
+ *           public BeanPropertyValueEqualsPredicate(String propertyName, Object propertyValue)
  *       </code></strong>
  *    </dt>
  *    <dd>
@@ -46,7 +47,6 @@ import org.apache.commons.logging.LogFactory;
  *       <code>false</code> otherwise.
  *    </dd>
  * </dl>
- * </p>
  * <p>
  * <strong>Note:</strong> Property names can be a simple, nested, indexed, or mapped property as defined by
  * <code>org.apache.commons.beanutils.PropertyUtils</code>.  If any object in the property path
@@ -55,18 +55,19 @@ import org.apache.commons.logging.LogFactory;
  * </p>
  * <p>
  * A typical usage might look like:
- * <code><pre>
+ * </p>
+ * <pre>
  * // create the closure
  * BeanPropertyValueEqualsPredicate predicate =
  *    new BeanPropertyValueEqualsPredicate( "activeEmployee", Boolean.FALSE );
  *
  * // filter the Collection
  * CollectionUtils.filter( peopleCollection, predicate );
- * </pre></code>
- * </p>
+ * </pre>
  * <p>
  * This would take a <code>Collection</code> of person objects and filter out any people whose
  * <code>activeEmployee</code> property is <code>false</code>. Assuming...
+ * </p>
  * <ul>
  *    <li>
  *       The top level object in the <code>peeopleCollection</code> is an object which represents a
@@ -77,20 +78,20 @@ import org.apache.commons.logging.LogFactory;
  *       the boolean value for the object's <code>activeEmployee</code> property.
  *    </li>
  * </ul>
- * </p>
  * <p>
  * Another typical usage might look like:
- * <code><pre>
+ * </p>
+ * <pre>
  * // create the closure
  * BeanPropertyValueEqualsPredicate predicate =
  *    new BeanPropertyValueEqualsPredicate( "personId", "456-12-1234" );
  *
  * // search the Collection
  * CollectionUtils.find( peopleCollection, predicate );
- * </pre></code>
- * </p>
+ * </pre>
  * <p>
  * This would search a <code>Collection</code> of person objects and return the first object whose
+ * </p>
  * <code>personId</code> property value equals <code>456-12-1234</code>. Assuming...
  * <ul>
  *    <li>
@@ -102,7 +103,6 @@ import org.apache.commons.logging.LogFactory;
  *       the value for the object's <code>personId</code> property.
  *    </li>
  * </ul>
- * </p>
  *
  * @see org.apache.commons.beanutils.PropertyUtils
  * @see org.apache.commons.collections.Predicate

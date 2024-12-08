@@ -62,8 +62,6 @@ import java.util.WeakHashMap;
  *      buf.set("New Value");
  *    }
  * </pre>
- * </p>
- *
  * <p><strong>Note:</strong> This class takes some care to ensure that when
  * a component which uses this class is "undeployed" by a container the
  * component-specific classloader and all its associated classes (and their
@@ -73,6 +71,7 @@ import java.util.WeakHashMap;
  * component (or its container) calls the "unset" method on this class for
  * each instance of this class when the component is undeployed. The problem
  * occurs if:
+ * </p>
  * <ul>
  * <li>the class containing a static instance of this class was loaded via
  * a shared classloader, and</li>
@@ -80,6 +79,7 @@ import java.util.WeakHashMap;
  * via the component-specific classloader (or any of the objects it refers
  * to were loaded via that classloader).</li>
  * </ul>
+ * <p>
  * The result is that the map managed by this object still contains a strong
  * reference to the stored object, which contains a strong reference to the
  * classloader that loaded it, meaning that although the container has

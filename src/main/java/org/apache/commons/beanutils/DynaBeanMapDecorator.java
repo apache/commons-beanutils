@@ -27,33 +27,32 @@ package org.apache.commons.beanutils;
  * <p>This can be achieved either by wrapping the {@link DynaBean} prior to
  *    providing it to the technolody to process or by providing a <code>Map</code>
  *    accessor method on the DynaBean implementation:
- *    <pre><code>
+ * </p>
+ *    <pre>
  *         public Map getMap() {
  *             return new DynaBeanMapDecorator(this);
- *         }</code></pre>
- *   </ul>
- * </p>
+ *         }</pre>
  *
  * <p>This, for example, could be used in JSTL in the following way to access
  *    a DynaBean's <code>fooProperty</code>:
- *    <ul><li><code>${myDynaBean.<strong>map</strong>.fooProperty}</code></li></ul>
  * </p>
+ *    <code>${myDynaBean.<strong>map</strong>.fooProperty}</code>
  *
- * <h3>Usage</h3>
+ * <strong>Usage</strong>
  *
  * <p>To decorate a {@link DynaBean} simply instantiate this class with the
  *    target {@link DynaBean}:</p>
  *
- * <ul><li><code>Map fooMap = new DynaBeanMapDecorator(fooDynaBean);</code></li></ul>
+ * <code>Map fooMap = new DynaBeanMapDecorator(fooDynaBean);</code>
  *
  * <p>The above example creates a <strong><em>read only</em></strong> <code>Map</code>.
  *    To create  a <code>Map</code> which can be modified, construct a
  *    <code>DynaBeanMapDecorator</code> with the <strong><em>read only</em></strong>
  *    attribute set to <code>false</code>:</p>
  *
- * <ul><li><code>Map fooMap = new DynaBeanMapDecorator(fooDynaBean, false);</code></li></ul>
+ * <code>Map fooMap = new DynaBeanMapDecorator(fooDynaBean, false);</code>
  *
- * <h3>Limitations</h3>
+ * <strong>Limitations</strong>
  * <p>In this implementation the <code>entrySet()</code>, <code>keySet()</code>
  *    and <code>values()</code> methods create an <strong><em>unmodifiable</em></strong>
  *    <code>Set</code> and it does not support the Map's <code>clear()</code>

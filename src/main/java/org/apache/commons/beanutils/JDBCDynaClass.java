@@ -64,7 +64,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
     protected Map<String, DynaProperty> propertiesMap = new HashMap<>();
 
     /**
-     * Cross Reference for column name --> dyna property name
+     * Cross Reference for column name to dyna property name
      * (needed when lowerCase option is true)
      */
     private Map<String, String> columnNameXref;
@@ -173,7 +173,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
 
     /**
      * <p>Return the name of this DynaClass (analogous to the
-     * <code>getName()</code> method of <code>java.lang.Class</code), which
+     * <code>getName()</code> method of <code>java.lang.Class</code>), which
      * allows the same <code>DynaClass</code> implementation class to support
      * different dynamic classes, with different sets of properties.</p>
      */

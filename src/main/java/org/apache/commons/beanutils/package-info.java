@@ -22,7 +22,7 @@
  * in the JavaBeans Specification, as well as mechanisms for dynamically defining
  * and accessing bean properties.</p>
  *
- * <h1>Table of Contents</h1>
+ * <h2>Table of Contents</h2>
  *
  * <ul>
  * <li>1. <a href="#overview">Overview</a>
@@ -74,10 +74,8 @@
  *     </ul></li>
  * </ul>
  *
- * <a name="overview"></a>
- * <h1>1. Overview</h1>
+ * <h2>1. Overview</h2>
  *
- * <a name="overview.background"></a>
  * <h2>1.1 Background</h2>
  *
  * <p>The <em>JavaBeans</em> name comes from a
@@ -170,7 +168,6 @@
  *         System.out.println("Hello " + employee.getFirstName() + "!");
  * </pre>
  *
- * <a name="overview.dependencies"></a>
  * <h2>1.2 External Dependencies</h2>
  *
  * <p>The <em>commons-beanutils</em> package requires that the following
@@ -183,10 +180,8 @@
  * Collections Package (Apache Commons)</a>, version 1.0 or later</li>
  * </ul>
  *
- * <a name="standard"></a>
- * <h1>2. Standard JavaBeans</h1>
+ * <h2>2. Standard JavaBeans</h2>
  *
- * <a name="standard.background"></a>
  * <h2>2.1 Background</h2>
  *
  * <p>As described above, the standard facilities of the Java programming language
@@ -254,7 +249,6 @@
  *     }
  * </pre>
  *
- * <a name="standard.basic"></a>
  * <h2>2.2 Basic Property Access</h2>
  *
  * <p>Getting and setting <strong>simple</strong> property values is, well,
@@ -333,7 +327,6 @@
  *     PropertyUtils.setMappedProperty(employee, "address", "home", address);
  * </pre>
  *
- * <a name="standard.nested"></a>
  * <h2>2.3 Nested Property Access</h2>
  *
  * <p>In all of the examples above, we have assumed that you wished to retrieve
@@ -384,7 +377,6 @@
  *       "subordinate[3].address(home).city");
  * </pre>
  *
- * <a name="standard.customize"></a>
  * <h2>2.4 Customizing Introspection</h2>
  *
  * <p>As was pointed out, BeanUtils relies on conventions defined by the
@@ -418,7 +410,6 @@
  * non-void return type - thus enabling support for typical properties in a
  * fluent API.</p>
  *
- * <a name="standard.suppress"></a>
  * <h2>2.5 Suppressing Properties</h2>
  * <p>The mechanism of customizing bean introspection described in the previous
  * section can also be used to suppress specific properties. There is a
@@ -444,10 +435,8 @@
  * <code>SUPPRESS_CLASS</code> constant of
  * <code>SuppressPropertiesBeanIntrospector</code>.</p>
  *
- * <a name="dynamic"></a>
- * <h1>3. Dynamic Beans (DynaBeans)</h1>
+ * <h2>3. Dynamic Beans (DynaBeans)</h2>
  *
- * <a name="dynamic.background"></a>
  * <h2>3.1 Background</h2>
  *
  * <p>The {@link org.apache.commons.beanutils.PropertyUtils} class described in the
@@ -498,7 +487,6 @@
  * provide your own custom implementations for cases where the standard
  * implementations are not sufficient.</p>
  *
- * <a name="dynamic.basic"></a>
  * <h2>3.2 <code>BasicDynaBean</code> and <code>BasicDynaClass</code></h2>
  *
  * <p>The {@link org.apache.commons.beanutils.BasicDynaBean} and
@@ -550,7 +538,6 @@
  * will be retrieved or modified, instead of underlying properties on the
  * actual BasicDynaBean implementation class.</p>
  *
- * <a name="dynamic.resultSet"></a>
  * <h2>3.3 <code>ResultSetDynaClass</code> (Wraps ResultSet in DynaBeans)</h2>
  *
  * <p>A very common use case for DynaBean APIs is to wrap other collections of
@@ -577,7 +564,6 @@
  * </pre>
  *
  *
- * <a name="dynamic.rowSet"></a>
  * <h2>3.4 <code>RowSetDynaClass</code> (Disconnected ResultSet as DynaBeans)</h2>
  * <p>Although <a href="#dynamic.resultSet"><code>ResultSetDynaClass</code></a> is
  * a very useful technique for representing the results of an SQL query as a
@@ -625,7 +611,6 @@
  * </pre>
  *
  *
- * <a name="dynamic.wrap"></a>
  * <h2>3.5 <code>WrapDynaBean</code> and <code>WrapDynaClass</code></h2>
  *
  * <p>OK, you've tried the DynaBeans APIs and they are cool -- very simple
@@ -649,7 +634,6 @@
  * <p>Note that, although appropriate <code>WrapDynaClass</code> instances are
  * created internally, you never need to deal with them.</p>
  *
- * <a name="dynamic.lazy"></a>
  * <h2>3.6 <em>Lazy</em> DynaBeans</h2>
  *
  * <ul>
@@ -793,10 +777,8 @@
  *    will add properties automatically if the <code>DynaClass</code> is <em>restricted</em>.</p>
  *
  *
- * <a name="conversion"></a>
- * <h1>4. Data Type Conversions</h1>
+ * <h2>4. Data Type Conversions</h2>
  *
- * <a name="conversion.background"></a>
  * <h3>4.1 Background</h3>
  *
  * <p>So far, we've only considered the cases where the data types of the
@@ -806,7 +788,6 @@
  * <em>BeanUtils</em> package provides a variety of APIs and design patterns
  * for performing this task as well.</p>
  *
- * <a name="conversion.beanutils"></a>
  * <h3>4.2 <code>BeanUtils</code> and <code>ConvertUtils</code> Conversions</h3>
  *
  * <p>A very common use case (and the situation that caused the initial creation
@@ -853,11 +834,10 @@
  * of the {@link org.apache.commons.beanutils.Converter} interface instead.  Therefore,
  * new code should not be written with reliance on ConvertUtils.</p>
  *
- * <a name="conversion.defining"></a>
  * <h3>4.3 Defining Your Own Converters</h3>
  *
  * <p>The <code>ConvertUtils</code> class supports the ability to define and
- * register your own String --> Object conversions for any given Java class.
+ * register your own String to Object conversions for any given Java class.
  * Once registered, such converters will be used transparently by all of the
  * <code>BeanUtils</code> methods (including <code>populate()</code>).  To
  * create and register your own converter, follow these steps:</p>
@@ -871,7 +851,6 @@
  *     by calling the <code>ConvertUtils.register()</code> method.</li>
  * </ul>
  *
- * <a name="conversion.i18n"></a>
  * <h3>4.4 Locale Aware Conversions</h3>
  * <p>The standard classes in <code>org.apache.commons.beanutils</code> are not
  * locale aware. This gives them a cleaner interface and makes then easier to use
@@ -882,9 +861,7 @@
  * lines as the basic classes but support localization.</p>
  *
  *
- * <a name="instances"></a>
- * <h1>5. Utility Objects And Static Utility Classes</h1>
- * <a name="instances.background"></a>
+ * <h2>5. Utility Objects And Static Utility Classes</h2>
  * <h3>Background</h3>
  * <p>
  * So far, the examples have covered the static utility classes (<code>BeanUtils</code>,
@@ -896,28 +873,24 @@
  * class use worker instances of these classes). For each static utility class, there is a corresponding
  * class with the same functionality that can be instantiated:
  * </p>
- * <p>
- * <table cols='2' width='60%'>
+ * <table>
+ * <caption>Utility classes</caption>
  * <tr><th>Static Utility Class</th><th>Utility Object</th></tr>
  * <tr><td>BeanUtils</td><td>BeanUtilsBean</td></tr>
  * <tr><td>ConvertUtils</td><td>ConvertUtilsBean</td></tr>
  * <tr><td>PropertyUtils</td><td>PropertyUtilsBean</td></tr>
  * </table>
- * </p>
  * <p>
  * Creating an instances allow gives guarenteed control of the caching and registration
  * to the code that creates it.
  * </p>
  *
- * <a name="collections"></a>
- * <h1>6. Collections</h1>
- * <a name="bean-comparator"></a>
+ * <h2>6. Collections</h2>
  * <h3>6.1 Comparing Beans</h3>
  * <p>
  * <code>org.apache.commons.beanutils.BeanComparator</code> is a <code>Comparator</code> implementation
  * that compares beans based on a shared property value.
  * </p>
- * <a name="bean-property-closure"></a>
  * <h3>6.2 Operating On Collections Of Beans</h3>
  * <p>
  * The <code>Closure</code> interface in <code>commons-collections</code> encapsulates a block of code that
@@ -933,17 +906,16 @@
  * </p>
  * <p>
  * For example, set the activeEmployee property to TRUE for an entire collection:
- *  <code><pre>
+ * </p>
+ *  <pre>
  *     // create the closure
  *     BeanPropertyValueChangeClosure closure =
  *         new BeanPropertyValueChangeClosure( "activeEmployee", Boolean.TRUE );
  *
  *     // update the Collection
  *     CollectionUtils.forAllDo( peopleCollection, closure );
- *   </pre></code>
- * </p>
+ *   </pre>
  *
- * <a name="bean-property-predicate"></a>
  * <h3>6.3 Querying Or Filtering Collections Of Beans</h3>
  * <p>
  * The <code>Predicate</code> interface in <code>commons-collections</code> encapsulates an evaluation
@@ -961,14 +933,14 @@
  * </p>
  * <p>
  * For example, to filter a collection to find all beans where active employee is false use:
- * <code><pre>
+ * </p>
+ * <pre>
  *     BeanPropertyValueEqualsPredicate predicate =
  *         new BeanPropertyValueEqualsPredicate( "activeEmployee", Boolean.FALSE );
  *
  *     // filter the Collection
  *     CollectionUtils.filter( peopleCollection, predicate );
- * </pre></code>
- * </p>
+ * </pre>
  *
  * <a href="bean-property-transformer"></a>
  * <h3>6.4 Transforming Collections Of Beans</h3>
@@ -988,25 +960,25 @@
  * <p>
  * For example, to find all cities that are contained in the address of each person property of each bean in
  * a collection:
- *     <code><pre>
+ * </p>
+ *     <pre>
  *     // create the transformer
  *     BeanToPropertyValueTransformer transformer = new BeanToPropertyValueTransformer( "person.address.city" );
  *
  *     // transform the Collection
  *     Collection peoplesCities = CollectionUtils.collect( peopleCollection, transformer );
- *     </pre></code>
- * </p>
+ *     </pre>
  *
- * <a name="FAQ"></a>
- * <h1>7. Frequently Asked Questions</h1>
+ * <h2>7. Frequently Asked Questions</h2>
  *
- * <a name="FAQ.property"></a>
  * <h3>Why Can't BeanUtils Find My Method?</h3>
  * <p>The <em>BeanUtils</em> package relies on <em>introspection</em> rather than
  * <em>reflection</em>. This means that it will find only
  * <a href='http://java.sun.com/products/javabeans'><em>JavaBean</em>
  * compliant</a> properties.</p>
- * <p>There are some subtleties  of this specification that can catch out the unwary:
+ * <p>
+ * There are some subtleties  of this specification that can catch out the unwary:
+ * </p>
  * <ul>
  * <li>A property can have only one set and one get method. Overloading is not allowed.</li>
  * <li>The <code>java.beans.Introspector</code> searches widely for a custom <em>BeanInfo</em>
@@ -1015,8 +987,6 @@
  * creating via reflection based on your class. If this happens, the only solution is to
  * create your own <em>BeanInfo</em>.</li>
  * </ul>
- * </p>
- * <a name="FAQ.bc.order"></a>
  * <h3>How Do I Set The BeanComparator Order To Be Ascending/Descending?</h3>
  * <p>
  * BeanComparator relies on an internal Comparator to perform the actual
@@ -1029,7 +999,7 @@
  * <p>
  * For example:
  * </p>
- * <code><pre>
+ * <pre>
  *     import org.apache.commons.collections.comparators.ComparableComparator;
  *     import org.apache.commons.collections.comparators.ReverseComparator;
  *     import org.apache.commons.beanutils.BeanComparator;
@@ -1038,6 +1008,6 @@
  *         = new BeanComparator("propertyName", new ReverseComparator(new ComparableComparator()));
  *     Collections.sort(myList, reversedNaturalOrderBeanComparator);
  *     ...
- * </pre></code>
+ * </pre>
  */
 package org.apache.commons.beanutils;

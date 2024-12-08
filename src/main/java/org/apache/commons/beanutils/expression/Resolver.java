@@ -24,7 +24,7 @@ package org.apache.commons.beanutils.expression;
  * expression and resolve <em>nested</em>, <em>indexed</em> and <em>mapped</em>
  * property names. The following code provides an example usage
  * demonstrating all the methods:
- *
+ * </p>
  * <pre>
  *      // Iterate through a nested property expression
  *      while (resolver.hasNested(name)) {
@@ -54,12 +54,13 @@ package org.apache.commons.beanutils.expression;
  *          name = resolver.remove(name);
  *      }
  * </pre>
- *
+ * <p>
  * In order to create an implementation, it is important to understand how
  * BeanUtils/PropertyUtils uses the <code>resolver</code>. The following are
  * the main methods that use it:
+ * </p>
  * <ul>
- *   <li>{@link org.apache.commons.beanutils.PropertyUtilsBean}</li>
+ *   <li>{@link org.apache.commons.beanutils.PropertyUtilsBean}
  *   <ul>
  *       <li>{@link org.apache.commons.beanutils.PropertyUtilsBean#getIndexedProperty(Object, String)}</li>
  *       <li>{@link org.apache.commons.beanutils.PropertyUtilsBean#getMappedProperty(Object, String)}</li>
@@ -71,16 +72,19 @@ package org.apache.commons.beanutils.expression;
  *       <li>{@link org.apache.commons.beanutils.PropertyUtilsBean#setNestedProperty(Object, String, Object)}</li>
  *       <li>{@link org.apache.commons.beanutils.PropertyUtilsBean#setSimpleProperty(Object, String, Object)}</li>
  *   </ul>
- *   <li>{@link org.apache.commons.beanutils.BeanUtilsBean}</li>
+ *   </li>
+ *   <li>{@link org.apache.commons.beanutils.BeanUtilsBean}
  *   <ul>
  *       <li>{@link org.apache.commons.beanutils.BeanUtilsBean#copyProperty(Object, String, Object)}</li>
  *       <li>{@link org.apache.commons.beanutils.BeanUtilsBean#setProperty(Object, String, Object)}</li>
  *   </ul>
- *   <li>{@link org.apache.commons.beanutils.locale.LocaleBeanUtilsBean}</li>
+ *   </li>
+ *   <li>{@link org.apache.commons.beanutils.locale.LocaleBeanUtilsBean}
  *   <ul>
  *       <li>{@link org.apache.commons.beanutils.locale.LocaleBeanUtilsBean#setProperty(Object,
  *        String, Object, String)}</li>
  *   </ul>
+ *   </li>
  * </ul>
  *
  * @see org.apache.commons.beanutils.PropertyUtilsBean#setResolver(Resolver)

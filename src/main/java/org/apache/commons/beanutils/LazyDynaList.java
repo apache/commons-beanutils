@@ -37,12 +37,12 @@ import java.util.Map;
  *
  * <p>All elements added to the List are stored as <code>DynaBean</code>'s:</p>
  * <ul>
- *    <li><code>java.util.Map</code> elements are "wrapped" in a <code>LazyDynaMap</code>.</i>
- *    <li>POJO Bean elements are "wrapped" in a <code>WrapDynaBean.</code></i>
- *    <li><code>DynaBean</code>'s are stored un-changed.</i>
+ *    <li><code>java.util.Map</code> elements are "wrapped" in a <code>LazyDynaMap</code>.</li>
+ *    <li>POJO Bean elements are "wrapped" in a <code>WrapDynaBean.</code></li>
+ *    <li><code>DynaBean</code>'s are stored un-changed.</li>
  * </ul>
  *
- * <h4><code>toArray()</code></h4>
+ * <h3><code>toArray()</code></h3>
  * <p>The <code>toArray()</code> method returns an array of the
  *    elements of the appropriate type. If the <code>LazyDynaList</code>
  *    is populated with <code>java.util.Map</code> objects a
@@ -52,7 +52,7 @@ import java.util.Map;
  *    array is returned.
  * </p>
  *
- * <h4><code>toDynaBeanArray()</code></h4>
+ * <h3><code>toDynaBeanArray()</code></h3>
  * <p>The <code>toDynaBeanArray()</code> method returns a
  *    <code>DynaBean[]</code> array of the elements in the List.
  * </p>
@@ -540,6 +540,7 @@ public class LazyDynaList extends ArrayList<Object> {
      *        "wrapped" DynaBeans then an Object[] of the most
      *        suitable type will be created.</li>
      *    <li>...otherwise a DynaBean[] will be created.</li>
+     * </ul>
      *
      * @return An Array of the elements in this List.
      */

@@ -245,7 +245,7 @@ public abstract class AbstractConverter implements Converter {
      * specified type.
      * <p>
      * Typical implementations will provide a minimum of
-     * <code>String --> type</code> conversion.
+     * <code>String to type</code> conversion.
      *
      * @param <T> Target type of the conversion.
      * @param type Data type to which this value should be converted.

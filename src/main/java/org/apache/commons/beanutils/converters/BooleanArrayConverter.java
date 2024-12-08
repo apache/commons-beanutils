@@ -55,7 +55,7 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
 
     /**
      * The converter that all instances of this class will use to
-     * do individual string->boolean conversions, unless overridden
+     * do individual string to boolean conversions, unless overridden
      * in the constructor.
      */
     private static final BooleanConverter DEFAULT_CONVERTER

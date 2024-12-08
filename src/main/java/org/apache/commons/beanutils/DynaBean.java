@@ -27,9 +27,7 @@ package org.apache.commons.beanutils;
  * purpose of retrieving and setting property values.</p>
  *
  */
-
 public interface DynaBean {
-
 
     /**
      * Does the specified mapped property contain a value for the specified
@@ -37,14 +35,13 @@ public interface DynaBean {
      *
      * @param name Name of the property to check
      * @param key Name of the key to check
-     * @return <code>true<code> if the mapped property contains a value for
+     * @return <code>true</code> if the mapped property contains a value for
      * the specified key, otherwise <code>false</code>
      *
      * @throws IllegalArgumentException if there is no property
      *  of the specified name
      */
     boolean contains(String name, String key);
-
 
     /**
      * Return the value of a simple property with the specified name.
@@ -55,7 +52,6 @@ public interface DynaBean {
      *  of the specified name
      */
     Object get(String name);
-
 
     /**
      * Return the value of an indexed property with the specified name.
@@ -74,7 +70,6 @@ public interface DynaBean {
      */
     Object get(String name, int index);
 
-
     /**
      * Return the value of a mapped property with the specified name,
      * or <code>null</code> if there is no value for the specified key.
@@ -89,7 +84,6 @@ public interface DynaBean {
      */
     Object get(String name, String key);
 
-
     /**
      * Return the <code>DynaClass</code> instance that describes the set of
      * properties available for this DynaBean.
@@ -97,7 +91,6 @@ public interface DynaBean {
      * @return The associated DynaClass
      */
     DynaClass getDynaClass();
-
 
     /**
      * Remove any existing value for the specified key on the
@@ -110,7 +103,6 @@ public interface DynaBean {
      *  of the specified name
      */
     void remove(String name, String key);
-
 
     /**
      * Set the value of an indexed property with the specified name.
@@ -129,7 +121,6 @@ public interface DynaBean {
      */
     void set(String name, int index, Object value);
 
-
     /**
      * Set the value of a simple property with the specified name.
      *
@@ -143,7 +134,6 @@ public interface DynaBean {
      *  primitive property to null
      */
     void set(String name, Object value);
-
 
     /**
      * Set the value of a mapped property with the specified name.
@@ -159,6 +149,5 @@ public interface DynaBean {
      *  exists, but is not mapped
      */
     void set(String name, String key, Object value);
-
 
 }

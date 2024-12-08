@@ -45,27 +45,31 @@ import org.apache.commons.beanutils.ConversionException;
  *     <li><code>java.math.BigInteger</code></li>
  * </ul>
  *
- * <h3>String Conversions (to and from)</h3>
+ * <h2>String Conversions (to and from)</h2>
  * This class provides a number of ways in which number
  * conversions to/from Strings can be achieved:
  * <ul>
- *    <li>Using the default format for the default Locale, configure using:</li>
+ *    <li>Using the default format for the default Locale, configure using:
  *        <ul>
  *           <li><code>setUseLocaleFormat(true)</code></li>
  *        </ul>
- *    <li>Using the default format for a specified Locale, configure using:</li>
+ *    </li>
+ *    <li>Using the default format for a specified Locale, configure using:
  *        <ul>
  *           <li><code>setLocale(Locale)</code></li>
  *        </ul>
- *    <li>Using a specified pattern for the default Locale, configure using:</li>
+ *    </li>
+ *    <li>Using a specified pattern for the default Locale, configure using:
  *        <ul>
  *           <li><code>setPattern(String)</code></li>
  *        </ul>
- *    <li>Using a specified pattern for a specified Locale, configure using:</li>
+ *    </li>
+ *    <li>Using a specified pattern for a specified Locale, configure using:
  *        <ul>
  *           <li><code>setPattern(String)</code></li>
  *           <li><code>setLocale(Locale)</code></li>
  *        </ul>
+ *    </li>
  *    <li>If none of the above are configured the
  *        <code>toNumber(String)</code> method is used to convert
  *        from String to Number and the Number's
@@ -78,6 +82,7 @@ import org.apache.commons.beanutils.ConversionException;
  * pattern characters and NOT in <em>localized</em> form (see <code>java.text.DecimalFormat</code>).
  * For example to cater for number styles used in Germany such as <code>0.000,00</code> the pattern
  * is specified in the normal form <code>0,000.00</code> and the locale set to <code>Locale.GERMANY</code>.
+ * </p>
  *
  * @since 1.8.0
  */

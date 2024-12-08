@@ -26,19 +26,18 @@ package org.apache.commons.beanutils;
  * <p>This can be achieved either by wrapping the {@link DynaBean} prior to
  *    providing it to the technology to process or by providing a <code>Map</code>
  *    accessor method on the DynaBean implementation:
- *    <pre><code>
+ * </p>
+ *    <pre>
  *         public Map&lt;String, Object&gt; getMap() {
  *             return new DynaBeanPropertyMapDecorator(this);
- *         }</code></pre>
- *   </ul>
- * </p>
+ *         }</pre>
  *
  * <p>This, for example, could be used in JSTL in the following way to access
  *    a DynaBean's <code>fooProperty</code>:
- *    <ul><li><code>${myDynaBean.<strong>map</strong>.fooProperty}</code></li></ul>
  * </p>
+ *    <ul><li><code>${myDynaBean.<strong>map</strong>.fooProperty}</code></li></ul>
  *
- * <h3>Usage</h3>
+ * <strong>Usage</strong>
  *
  * <p>To decorate a {@link DynaBean} simply instantiate this class with the
  *    target {@link DynaBean}:</p>
@@ -53,7 +52,7 @@ package org.apache.commons.beanutils;
  * <ul><li><code>Map&lt;String, Object&gt; fooMap =
  *   new DynaBeanPropertyMapDecorator(fooDynaBean, false);</code></li></ul>
  *
- * <h3>Limitations</h3>
+ * <strong>Limitations</strong>
  * <p>In this implementation the <code>entrySet()</code>, <code>keySet()</code>
  *    and <code>values()</code> methods create an <strong><em>unmodifiable</em></strong>
  *    <code>Set</code> and it does not support the Map's <code>clear()</code>
@@ -62,6 +61,7 @@ package org.apache.commons.beanutils;
  * @since BeanUtils 1.9.0
  */
 public class DynaBeanPropertyMapDecorator extends BaseDynaBeanMapDecorator<String> {
+
     /**
      * Constructs a read only Map for the specified
      * {@link DynaBean}.

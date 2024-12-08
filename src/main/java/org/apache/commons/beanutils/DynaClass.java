@@ -24,9 +24,7 @@ package org.apache.commons.beanutils;
  * associated data types, read-only states, and write-only states.</p>
  *
  */
-
 public interface DynaClass {
-
 
     /**
      * <p>Return an array of <code>ProperyDescriptors</code> for the properties
@@ -41,7 +39,6 @@ public interface DynaClass {
      */
     DynaProperty[] getDynaProperties();
 
-
     /**
      * Return a property descriptor for the specified property, if it exists;
      * otherwise, return <code>null</code>.
@@ -53,17 +50,15 @@ public interface DynaClass {
      */
     DynaProperty getDynaProperty(String name);
 
-
     /**
      * Return the name of this DynaClass (analogous to the
-     * <code>getName()</code> method of <code>java.lang.Class</code), which
+     * <code>getName()</code> method of <code>java.lang.Class</code>), which
      * allows the same <code>DynaClass</code> implementation class to support
      * different dynamic classes, with different sets of properties.
      *
      * @return the name of the DynaClass
      */
     String getName();
-
 
     /**
      * Instantiate and return a new DynaBean instance, associated
@@ -76,8 +71,6 @@ public interface DynaClass {
      *  class, an array class, a primitive type, or void; or if instantiation
      *  fails for some other reason
      */
-    DynaBean newInstance()
-            throws IllegalAccessException, InstantiationException;
-
+    DynaBean newInstance() throws IllegalAccessException, InstantiationException;
 
 }
