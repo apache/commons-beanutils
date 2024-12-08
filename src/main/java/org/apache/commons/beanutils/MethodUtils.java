@@ -42,7 +42,7 @@ import org.apache.commons.logging.LogFactory;
  * <p><code>MethodUtils</code> contains a workaround for this situation.
  * It will attempt to call <code>setAccessible</code> on this method.
  * If this call succeeds, then the method can be invoked as normal.
- * This call will only succeed when the application has sufficient security privilages.
+ * This call will only succeed when the application has sufficient security privileges.
  * If this call fails then a warning will be logged and the method may fail.</p>
  *
  */
@@ -1293,7 +1293,7 @@ public class MethodUtils {
             // modifer is public.
             //
             // The following workaround solves the problem but will only
-            // work from sufficiently privilages code.
+            // work from sufficiently privileges code.
             //
             // Better workarounds would be greatfully accepted.
             //

@@ -32,7 +32,7 @@ import java.lang.reflect.Modifier;
  * <p><code>ConstructorUtils</code> contains a workaround for this situation.
  * It will attempt to call <code>setAccessible</code> on this constructor.
  * If this call succeeds, then the method can be invoked as normal.
- * This call will only succeed when the application has sufficient security privilages.
+ * This call will only succeed when the application has sufficient security privileges.
  * If this call fails then a warning will be logged and the method may fail.</p>
  */
 public class ConstructorUtils {
@@ -146,7 +146,7 @@ public class ConstructorUtils {
                 // modifer is public.
                 //
                 // The following workaround solves the problem but will only
-                // work from sufficiently privilages code.
+                // work from sufficiently privileges code.
                 //
                 // Better workarounds would be greatfully accepted.
                 //
