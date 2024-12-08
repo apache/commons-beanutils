@@ -27,7 +27,7 @@ import java.util.TimeZone;
 import org.apache.commons.beanutils.ConversionException;
 
 /**
- * {@link org.apache.commons.beanutils.Converter} implementaion
+ * {@link org.apache.commons.beanutils.Converter} implementation
  * that handles conversion to and from <strong>date/time</strong> objects.
  * <p>
  * This implementation handles conversion for the following

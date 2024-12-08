@@ -19,7 +19,7 @@ package org.apache.commons.beanutils.converters;
 import java.io.File;
 
 /**
- * {@link org.apache.commons.beanutils.Converter} implementaion that handles conversion
+ * {@link org.apache.commons.beanutils.Converter} implementation that handles conversion
  * to and from <strong>java.io.File</strong> objects.
  * <p>
  * Can be configured to either return a <em>default value</em> or throw a
