@@ -827,7 +827,7 @@
  *
  * <p>The <code>BeanUtils</code> class relies on conversion methods defined in
  * the {@link org.apache.commons.beanutils.ConvertUtils} class to perform the actual
- * conversions, and these methods are availablve for direct use as well.
+ * conversions, and these methods are available for direct use as well.
  * <strong>WARNING</strong> - It is likely that the hard coded use of
  * <code>ConvertUtils</code> methods will be deprecated in the future, and
  * replaced with a mechanism that allows you to plug in your own implementations
