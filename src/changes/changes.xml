@@ -35,7 +35,7 @@
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Replace Maven CLIRR plugin with JApiCmp.</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Port to Java 1.4 Throwable APIs (!).</action>
       <!-- UPDATE -->
-      <action dev="ggregory" type="update" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 47 to 73.</action>
+      <action dev="ggregory" type="update" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 47 to 78.</action>
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump Java requirement from Java 6 to 8.</action>
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump junit:junit from 4.12 to 4.13.2.</action>
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump JUnit from 4.x to 5.x "vintage".</action>
