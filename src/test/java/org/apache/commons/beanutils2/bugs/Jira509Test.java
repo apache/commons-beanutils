@@ -32,6 +32,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.beanutils2.WrapDynaClass;
+import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
@@ -54,15 +55,11 @@ public class Jira509Test {
      */
     @Timeout(value = 60, unit = TimeUnit.SECONDS)
     @Test
-    public void test_concurrent() throws InterruptedException {
+    public void testConcurrent() throws InterruptedException {
         final List<Class<?>> classList = Arrays.asList(Map.class, HashMap.class, Collections.class, Arrays.class, Collection.class, Set.class, ArrayList.class,
                 List.class, HashSet.class);
         // All daemon threads.
-        final ExecutorService executor = Executors.newFixedThreadPool(100, r -> {
-            final Thread thread = new Thread(r);
-            thread.setDaemon(true);
-            return thread;
-        });
+        final ExecutorService executor = Executors.newFixedThreadPool(100, new BasicThreadFactory.Builder().daemon(true).build());
         try {
             // Loop _may_ hang without fix.
             for (int i = 1; i < 10_000_000; i++) {
