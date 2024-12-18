@@ -112,19 +112,17 @@ public class PropertyUtilsBean {
     /**
      * The cache of PropertyDescriptor arrays for beans we have already introspected, keyed by the java.lang.Class of this object.
      */
-    private final WeakFastHashMap<Class<?>, BeanIntrospectionData> descriptorsCache;
+    private final Map<Class<?>, BeanIntrospectionData> descriptorsCache;
 
-    private final WeakFastHashMap<Class<?>, Map> mappedDescriptorsCache;
+    private final Map<Class<?>, Map> mappedDescriptorsCache;
 
     /** The list with BeanIntrospector objects. */
     private final List<BeanIntrospector> introspectors;
 
     /** Base constructor */
     public PropertyUtilsBean() {
-        descriptorsCache = new WeakFastHashMap<>();
-        descriptorsCache.setFast(true);
-        mappedDescriptorsCache = new WeakFastHashMap<>();
-        mappedDescriptorsCache.setFast(true);
+        descriptorsCache = BeanUtils.createCache();
+        mappedDescriptorsCache = BeanUtils.createCache();
         introspectors = new CopyOnWriteArrayList<>();
         resetBeanIntrospectors();
     }

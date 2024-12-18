@@ -23,8 +23,8 @@ import java.math.BigInteger;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.commons.beanutils2.BeanUtils;
 import org.apache.commons.beanutils2.ConversionException;
-import org.apache.commons.beanutils2.WeakFastHashMap;
 import org.apache.commons.beanutils2.locale.converters.BigDecimalLocaleConverter;
 import org.apache.commons.beanutils2.locale.converters.BigIntegerLocaleConverter;
 import org.apache.commons.beanutils2.locale.converters.ByteLocaleConverter;
@@ -106,15 +106,14 @@ public class LocaleConvertUtilsBean {
      * <li>value = map of converters for the certain locale.</li>
      * <ul>
      */
-    private final WeakFastHashMap<Locale, Map<Class<?>, LocaleConverter<?>>> mapConverters;
+    private final Map<Locale, Map<Class<?>, LocaleConverter<?>>> mapConverters;
 
     /**
      * Makes the state by default (deregisters all converters for all locales) and then registers default locale converters.
      */
     public LocaleConvertUtilsBean() {
-        mapConverters = new WeakFastHashMap<>();
+        mapConverters = BeanUtils.createCache();
         deregister();
-        mapConverters.setFast(true);
     }
 
     /**
@@ -270,7 +269,7 @@ public class LocaleConvertUtilsBean {
      * @return The map instance contains the all {@link LocaleConverter} types for the specified locale.
      */
     protected Map<Class<?>, LocaleConverter<?>> create(final Locale locale) {
-        final WeakFastHashMap<Class<?>, LocaleConverter<?>> converter = new WeakFastHashMap<>();
+        final Map<Class<?>, LocaleConverter<?>> converter = BeanUtils.createCache();
 
         converter.put(BigDecimal.class, BigDecimalLocaleConverter.builder().setLocale(locale).setLocalizedPattern(applyLocalized).get());
         converter.put(BigInteger.class, BigIntegerLocaleConverter.builder().setLocale(locale).setLocalizedPattern(applyLocalized).get());
@@ -301,8 +300,6 @@ public class LocaleConvertUtilsBean {
         converter.put(java.sql.Time.class, SqlTimeLocaleConverter.builder().setLocale(locale).setPattern("HH:mm:ss").get());
         converter.put(java.sql.Timestamp.class, SqlTimestampLocaleConverter.builder().setLocale(locale).setPattern("yyyy-MM-dd HH:mm:ss.S").get());
 
-        converter.setFast(true);
-
         return converter;
     }
 
@@ -311,12 +308,8 @@ public class LocaleConvertUtilsBean {
      */
     public void deregister() {
         final Map<Class<?>, LocaleConverter<?>> defaultConverter = lookup(defaultLocale);
-        mapConverters.setFast(false);
-
         mapConverters.clear();
         mapConverters.put(defaultLocale, defaultConverter);
-
-        mapConverters.setFast(true);
     }
 
     /**

@@ -65,7 +65,7 @@
     <commons.jacoco.complexityRatio>0.61</commons.jacoco.complexityRatio>
     <commons.jacoco.lineRatio>0.72</commons.jacoco.lineRatio>
     <!-- Dependencies -->
-    <commons.collections.version>4.5.0-M2</commons.collections.version>
+    <commons.collections.version>4.5.0-M3-SNAPSHOT</commons.collections.version>
   </properties>
 
   <issueManagement>
@@ -102,7 +102,6 @@
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-collections4</artifactId>
       <version>${commons.collections.version}</version>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>

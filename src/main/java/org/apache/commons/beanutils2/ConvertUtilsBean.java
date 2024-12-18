@@ -45,6 +45,7 @@ import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.regex.Pattern;
@@ -215,13 +216,11 @@ public class ConvertUtilsBean {
     /**
      * The set of {@link Converter}s that can be used to convert Strings into objects of a specified Class, keyed by the destination Class.
      */
-    private final WeakFastHashMap<Class<?>, Converter<?>> converters = new WeakFastHashMap<>();
+    private final Map<Class<?>, Converter<?>> converters = BeanUtils.createCache();
 
     /** Constructs a bean with standard converters registered */
     public ConvertUtilsBean() {
-        converters.setFast(false);
         deregister();
-        converters.setFast(true);
     }
 
     /**

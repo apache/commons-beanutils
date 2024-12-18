@@ -20,6 +20,8 @@ package org.apache.commons.beanutils2;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
+import org.apache.commons.collections4.map.ConcurrentReferenceHashMap;
+
 /**
  * <p>
  * Utility methods for populating JavaBeans properties via reflection.
@@ -32,7 +34,6 @@ import java.util.Map;
  *
  * @see BeanUtilsBean
  */
-
 public class BeanUtils {
 
     /** An empty class array */
@@ -43,7 +44,7 @@ public class BeanUtils {
 
     /**
      * <p>
-     * Clone a bean based on the available property getters and setters, even if the bean class itself does not implement Cloneable.
+     * Clones a bean based on the available property getters and setters, even if the bean class itself does not implement Cloneable.
      * </p>
      *
      * <p>
@@ -59,14 +60,12 @@ public class BeanUtils {
      * @see BeanUtilsBean#cloneBean
      */
     public static Object cloneBean(final Object bean) throws IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
-
         return BeanUtilsBean.getInstance().cloneBean(bean);
-
     }
 
     /**
      * <p>
-     * Copy property values from the origin bean to the destination bean for all cases where the property names are the same.
+     * Copies property values from the origin bean to the destination bean for all cases where the property names are the same.
      * </p>
      *
      * <p>
@@ -82,7 +81,6 @@ public class BeanUtils {
      * @see BeanUtilsBean#copyProperties
      */
     public static void copyProperties(final Object dest, final Object orig) throws IllegalAccessException, InvocationTargetException {
-
         BeanUtilsBean.getInstance().copyProperties(dest, orig);
     }
 
@@ -103,12 +101,11 @@ public class BeanUtils {
      * @see BeanUtilsBean#copyProperty
      */
     public static void copyProperty(final Object bean, final String name, final Object value) throws IllegalAccessException, InvocationTargetException {
-
         BeanUtilsBean.getInstance().copyProperty(bean, name, value);
     }
 
     /**
-     * Create a cache.
+     * Creates a cache.
      *
      * @param <K> the key type of the cache
      * @param <V> the value type of the cache
@@ -116,7 +113,8 @@ public class BeanUtils {
      * @since 1.8.0
      */
     public static <K, V> Map<K, V> createCache() {
-        return new WeakFastHashMap<>();
+        return ConcurrentReferenceHashMap.<K, V>builder().get();
+        // return new ConcurrentHashMap<>();
     }
 
     /**
@@ -136,7 +134,6 @@ public class BeanUtils {
      * @see BeanUtilsBean#describe
      */
     public static Map<String, String> describe(final Object bean) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-
         return BeanUtilsBean.getInstance().describe(bean);
     }
 
@@ -159,7 +156,6 @@ public class BeanUtils {
      */
     public static String[] getArrayProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-
         return BeanUtilsBean.getInstance().getArrayProperty(bean, name);
     }
 
@@ -182,7 +178,6 @@ public class BeanUtils {
      */
     public static String getIndexedProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-
         return BeanUtilsBean.getInstance().getIndexedProperty(bean, name);
 
     }
@@ -206,7 +201,6 @@ public class BeanUtils {
      */
     public static String getIndexedProperty(final Object bean, final String name, final int index)
             throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-
         return BeanUtilsBean.getInstance().getIndexedProperty(bean, name, index);
 
     }
@@ -230,7 +224,6 @@ public class BeanUtils {
      */
     public static String getMappedProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-
         return BeanUtilsBean.getInstance().getMappedProperty(bean, name);
 
     }
@@ -255,7 +248,6 @@ public class BeanUtils {
      */
     public static String getMappedProperty(final Object bean, final String name, final String key)
             throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-
         return BeanUtilsBean.getInstance().getMappedProperty(bean, name, key);
 
     }
@@ -280,7 +272,6 @@ public class BeanUtils {
      */
     public static String getNestedProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-
         return BeanUtilsBean.getInstance().getNestedProperty(bean, name);
 
     }
@@ -303,7 +294,6 @@ public class BeanUtils {
      * @see BeanUtilsBean#getProperty
      */
     public static String getProperty(final Object bean, final String name) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-
         return BeanUtilsBean.getInstance().getProperty(bean, name);
 
     }
@@ -327,7 +317,6 @@ public class BeanUtils {
      */
     public static String getSimpleProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-
         return BeanUtilsBean.getInstance().getSimpleProperty(bean, name);
 
     }
@@ -348,7 +337,6 @@ public class BeanUtils {
      * @see BeanUtilsBean#populate
      */
     public static void populate(final Object bean, final Map<String, ? extends Object> properties) throws IllegalAccessException, InvocationTargetException {
-
         BeanUtilsBean.getInstance().populate(bean, properties);
     }
 
@@ -369,7 +357,6 @@ public class BeanUtils {
      * @see BeanUtilsBean#setProperty
      */
     public static void setProperty(final Object bean, final String name, final Object value) throws IllegalAccessException, InvocationTargetException {
-
         BeanUtilsBean.getInstance().setProperty(bean, name, value);
     }
 }
