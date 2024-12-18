@@ -289,18 +289,20 @@ public class ConvertUtilsBean {
     /**
      * Delegates to the new {@link ConvertUtilsBean#convert(Object, Class)} method.
      *
+     * @param <R> the type of the class for the return value.
      * @param value Value to be converted (may be null)
      * @param clazz Java class to be converted to (must not be null)
      * @return The converted value or null if value is null
      * @see ConvertUtilsBean#convert(String[], Class)
      */
-    public <T> Object convert(final String value, final Class<T> clazz) {
+    public <R> Object convert(final String value, final Class<R> clazz) {
         return convert((Object) value, clazz);
     }
 
     /**
      * Delegates to the new {@link ConvertUtilsBean#convert(Object, Class)} method.
      *
+     * @param <T> the type of the class for the return value.
      * @param value Array of values to be converted
      * @param clazz Java array or element class to be converted to (must not be null)
      * @return The converted value

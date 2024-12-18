@@ -203,6 +203,7 @@ public class BeanUtilsBean {
      * Converts the value to an object of the specified class (if possible).
      * </p>
      *
+     * @param <R> the type of the class for the return value.
      * @param value Value to be converted (may be null)
      * @param type  Class of the value to be converted to
      * @return The converted value
