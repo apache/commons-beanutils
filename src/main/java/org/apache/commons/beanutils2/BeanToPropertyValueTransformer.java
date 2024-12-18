@@ -89,7 +89,7 @@ public class BeanToPropertyValueTransformer<T, R> implements Function<T, R> {
      * Constructs a Transformer which does not ignore nulls. Constructor which takes the name of the property that will be used in the transformation and
      * assumes {@code ignoreNull</code> to be <code>false}.
      *
-     * &#64;param propertyName The name of the property that will be used in the transformation.
+     * @param propertyName The name of the property that will be used in the transformation.
      * @throws IllegalArgumentException If the {@code propertyName</code> is <code>null} or empty.
      */
     public BeanToPropertyValueTransformer(final String propertyName) {
