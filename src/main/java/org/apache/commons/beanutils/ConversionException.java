@@ -28,6 +28,13 @@ public class ConversionException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
     /**
+     * The cause, deprecated.
+     *
+     * @deprecated Use {@link Throwable#getCause()}}.
+     */
+    protected Throwable cause;
+    
+    /**
      * Constructs a new exception with the specified message.
      *
      * @param message The message describing this exception
@@ -44,6 +51,7 @@ public class ConversionException extends RuntimeException {
      */
     public ConversionException(final String message, final Throwable cause) {
         super(message, cause);
+        this.cause = cause;
     }
 
     /**
@@ -53,6 +61,7 @@ public class ConversionException extends RuntimeException {
      */
     public ConversionException(final Throwable cause) {
         super(cause);
+        this.cause = cause;
     }
 
 }

@@ -139,13 +139,6 @@
                 <tarLongFileMode>gnu</tarLongFileMode>
             </configuration>
         </plugin>
-	<!-- Disabled as it is not Java 6 compatible
-      <plugin>
-        <groupId>com.github.siom79.japicmp</groupId>
-        <artifactId>japicmp-maven-plugin</artifactId>
-        <version>${commons.japicmp.version}</version>
-      </plugin>
-      -->
       </plugins>
       <pluginManagement>
         <plugins>
