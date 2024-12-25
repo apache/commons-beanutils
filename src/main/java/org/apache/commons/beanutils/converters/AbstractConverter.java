@@ -72,7 +72,7 @@ public abstract class AbstractConverter implements Converter {
     /**
      * Should we return the default value on conversion errors?
      */
-    private boolean useDefault = false;
+    private boolean useDefault;
 
     /**
      * The default value specified to our Constructor, if any.

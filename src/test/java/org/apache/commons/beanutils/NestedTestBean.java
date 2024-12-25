@@ -34,7 +34,7 @@ public class NestedTestBean {
 
     private String testString = "NOT SET";
 
-    private boolean testBoolean = false;
+    private boolean testBoolean;
 
     private NestedTestBean indexedBeans[];
 

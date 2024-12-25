@@ -75,7 +75,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
     private Object defaultValue;
 
     /** Should we return the default value on conversion errors? */
-    protected boolean useDefault = false;
+    protected boolean useDefault;
 
     /** The locale specified to our Constructor, by default - system locale. */
     protected Locale locale = Locale.getDefault();
@@ -85,7 +85,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
 
 
     /** The flag indicating whether the given pattern string is localized or not. */
-    protected boolean locPattern = false;
+    protected boolean locPattern;
 
     /**
      * Create a {@link LocaleConverter} that will throw a {@link ConversionException}

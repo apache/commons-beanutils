@@ -244,7 +244,7 @@ private java.util.Date dateProperty;
      * rules described in the JavaBeans Specification, this will be considered
      * a read-only boolean property, using isInvalidBoolean() as the getter.</p>
      */
-    private boolean invalidBoolean = false;
+    private boolean invalidBoolean;
 
     public TestBean() {
         listIndexed.add("String 0");

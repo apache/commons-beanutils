@@ -56,7 +56,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      *
      * <p>Default is <code>false</code>.
      */
-    protected boolean returnNull = false;
+    protected boolean returnNull;
 
     /**
      * Construct a new LazyDynaClass with default parameters.

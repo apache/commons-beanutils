@@ -182,7 +182,7 @@ public class LocaleConvertUtilsBean {
     private Locale defaultLocale = Locale.getDefault();
 
     /** Indicate whether the pattern is localized or not */
-    private boolean applyLocalized = false;
+    private boolean applyLocalized;
 
     /** The <code>Log</code> instance for this class. */
     private final Log log = LogFactory.getLog(LocaleConvertUtils.class);
