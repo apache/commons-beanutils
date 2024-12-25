@@ -40,7 +40,7 @@ public class LazyDynaClassTestCase extends TestCase {
     }
 
 
-    protected LazyDynaClass dynaClass = null;
+    protected LazyDynaClass dynaClass;
 
 
     protected String testProperty     = "myProperty";

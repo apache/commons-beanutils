@@ -123,7 +123,7 @@ public class DynaRowSetTestCase extends TestCase {
     /**
      * The mock result set DynaClass to be tested.
      */
-    protected RowSetDynaClass dynaClass = null;
+    protected RowSetDynaClass dynaClass;
 
 
     /**

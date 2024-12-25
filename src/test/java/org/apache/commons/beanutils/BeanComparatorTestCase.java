@@ -41,12 +41,12 @@ public class BeanComparatorTestCase extends TestCase {
     /**
      * The test beans for each test.
      */
-    protected TestBean bean = null;
-    protected AlphaBean alphaBean1 = null;
+    protected TestBean bean;
+    protected AlphaBean alphaBean1;
 
 
 
-    protected AlphaBean alphaBean2 = null;
+    protected AlphaBean alphaBean2;
 
 
 

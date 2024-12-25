@@ -89,7 +89,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
     /**
      * The basic test bean for each test.
      */
-    protected DynaBean bean = null;
+    protected DynaBean bean;
 
 
 
@@ -97,7 +97,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
     /**
      * The nested bean pointed at by the "nested" property.
      */
-    protected TestBean nested = null;
+    protected TestBean nested;
 
 
 

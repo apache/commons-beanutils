@@ -55,7 +55,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
     /**
      * The JavaBean instance wrapped by this WrapDynaBean.
      */
-    protected Object instance = null;
+    protected Object instance;
 
     /**
      * Construct a new <code>DynaBean</code> associated with the specified

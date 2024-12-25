@@ -81,7 +81,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
     protected Locale locale = Locale.getDefault();
 
     /** The default pattern specified to our Constructor, if any. */
-    protected String pattern = null;
+    protected String pattern;
 
 
     /** The flag indicating whether the given pattern string is localized or not. */

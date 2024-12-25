@@ -50,7 +50,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * The <code>DynaClass</code> "base class" that this DynaBean
      * is associated with.
      */
-    protected DynaClass dynaClass = null;
+    protected DynaClass dynaClass;
 
 
 

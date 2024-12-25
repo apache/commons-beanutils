@@ -65,7 +65,7 @@ public class DynaProperty implements Serializable {
 
 
     /** Property name */
-    protected String name = null;
+    protected String name;
 
 
     /** Property type */

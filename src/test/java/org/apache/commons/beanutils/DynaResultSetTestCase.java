@@ -50,7 +50,7 @@ public class DynaResultSetTestCase extends TestCase {
     /**
      * The mock result set DynaClass to be tested.
      */
-    protected ResultSetDynaClass dynaClass = null;
+    protected ResultSetDynaClass dynaClass;
 
 
 

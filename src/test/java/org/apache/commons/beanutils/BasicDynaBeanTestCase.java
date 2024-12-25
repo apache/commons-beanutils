@@ -85,7 +85,7 @@ public class BasicDynaBeanTestCase extends TestCase {
     /**
      * The basic test bean for each test.
      */
-    protected DynaBean bean = null;
+    protected DynaBean bean;
 
 
 

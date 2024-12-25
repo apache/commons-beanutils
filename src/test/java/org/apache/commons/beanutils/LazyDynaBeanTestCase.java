@@ -45,7 +45,7 @@ public class LazyDynaBeanTestCase extends TestCase {
         return new TestSuite(LazyDynaBeanTestCase.class);
     }
     protected LazyDynaBean  bean      = null;
-    protected LazyDynaClass dynaClass = null;
+    protected LazyDynaClass dynaClass;
     protected String testProperty     = "myProperty";
     protected String testPropertyA    = "myProperty-A";
     protected String testPropertyB    = "myProperty-B";

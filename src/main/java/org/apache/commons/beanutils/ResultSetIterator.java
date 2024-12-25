@@ -39,7 +39,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
     /**
      * <p>The {@link ResultSetDynaClass} we are associated with.</p>
      */
-    protected ResultSetDynaClass dynaClass = null;
+    protected ResultSetDynaClass dynaClass;
 
     /**
      * <p>Flag indicating whether the result set has indicated that there are

@@ -72,7 +72,7 @@ public abstract class AbstractArrayConverter implements Converter {
     /**
      * The default value specified to our Constructor, if any.
      */
-    protected Object defaultValue = null;
+    protected Object defaultValue;
 
 
 
