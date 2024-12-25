@@ -27,17 +27,16 @@ import org.junit.Test;
  *
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-493">BEANUTILS-493</a>
  */
-
 public class Jira493TestCase {
 
-	@Test
-	public void testIndexedProperties() throws Exception {
-		final LazyDynaBean lazyDynaBean = new LazyDynaBean();
-		final BeanUtilsBean beanUtilsBean = BeanUtilsBean.getInstance();
-		beanUtilsBean.setProperty(lazyDynaBean, "x[0]", "x1");
-		beanUtilsBean.setProperty(lazyDynaBean, "x[1]", "x2");
-		final Object x = lazyDynaBean.get("x");
-		assertEquals("[x1, x2]", x.toString());
-	}
+    @Test
+    public void testIndexedProperties() throws Exception {
+        final LazyDynaBean lazyDynaBean = new LazyDynaBean();
+        final BeanUtilsBean beanUtilsBean = BeanUtilsBean.getInstance();
+        beanUtilsBean.setProperty(lazyDynaBean, "x[0]", "x1");
+        beanUtilsBean.setProperty(lazyDynaBean, "x[1]", "x2");
+        final Object x = lazyDynaBean.get("x");
+        assertEquals("[x1, x2]", x.toString());
+    }
 
 }
