@@ -98,7 +98,7 @@
   </dependencies>
 
   <build>
-      <defaultGoal>clean apache-rat:check verify japicmp:cmp javadoc:javadoc</defaultGoal>
+      <defaultGoal>clean apache-rat:check verify japicmp:cmp javadoc:javadoc checkstyle:check</defaultGoal>
       <plugins>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -136,6 +136,16 @@
                 </descriptors>
                 <tarLongFileMode>gnu</tarLongFileMode>
             </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <configuration>
+            <configLocation>${basedir}/src/conf/checkstyle.xml</configLocation>
+            <suppressionsLocation>${basedir}/src/conf/checkstyle-suppressions.xml</suppressionsLocation>
+            <includeTestSourceDirectory>true</includeTestSourceDirectory>
+            <enableRulesSummary>false</enableRulesSummary>
+            <resourceExcludes>NOTICE.txt,LICENSE.txt,**/pom.properties,target/**.properties,</resourceExcludes>
+          </configuration>
         </plugin>
       </plugins>
       <pluginManagement>
