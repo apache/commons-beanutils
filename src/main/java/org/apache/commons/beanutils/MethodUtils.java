@@ -206,12 +206,8 @@ public class MethodUtils {
     public static Method getAccessibleMethod(Class<?> clazz, Method method) {
 
         // Make sure we have a method to check
-        if (method == null) {
-            return null;
-        }
-
         // If the requested method is not public we cannot call it
-        if (!Modifier.isPublic(method.getModifiers())) {
+        if (method == null || !Modifier.isPublic(method.getModifiers())) {
             return null;
         }
 

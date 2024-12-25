@@ -32,6 +32,7 @@ public class ConversionException extends RuntimeException {
      *
      * @deprecated Use {@link Throwable#getCause()}}.
      */
+    @Deprecated
     protected Throwable cause;
 
     /**

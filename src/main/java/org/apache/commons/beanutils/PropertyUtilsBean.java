@@ -136,9 +136,9 @@ public class PropertyUtilsBean {
      * The cache of PropertyDescriptor arrays for beans we have already
      * introspected, keyed by the java.lang.Class of this object.
      */
-    private WeakFastHashMap<Class<?>, BeanIntrospectionData> descriptorsCache;
+    private final WeakFastHashMap<Class<?>, BeanIntrospectionData> descriptorsCache;
 
-    private WeakFastHashMap<Class<?>, FastHashMap> mappedDescriptorsCache;
+    private final WeakFastHashMap<Class<?>, FastHashMap> mappedDescriptorsCache;
 
 
     /** Log instance */

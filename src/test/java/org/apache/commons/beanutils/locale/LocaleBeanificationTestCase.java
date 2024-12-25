@@ -23,6 +23,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.ContextClassLoaderLocal;
 import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.ConvertUtils;
@@ -361,7 +362,7 @@ public class LocaleBeanificationTestCase extends TestCase {
         assertEquals("Signal not set by test thread", 2, signal.getSignal());
         assertTrue(
                     "Different LocaleBeanUtilsBean instances per context classloader",
-                    LocaleBeanUtilsBean.getInstance() != signal.getBean());
+                    BeanUtilsBean.getInstance() != signal.getBean());
         assertTrue(
                     "Different LocaleConvertUtilsBean instances per context classloader",
                     LocaleConvertUtilsBean.getInstance() != signal.getConvertUtils());

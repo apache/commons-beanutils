@@ -90,12 +90,8 @@ public class ConstructorUtils {
     public static <T> Constructor<T> getAccessibleConstructor(final Constructor<T> ctor) {
 
         // Make sure we have a method to check
-        if (ctor == null) {
-            return null;
-        }
-
         // If the requested method is not public we cannot call it
-        if (!Modifier.isPublic(ctor.getModifiers())) {
+        if (ctor == null || !Modifier.isPublic(ctor.getModifiers())) {
             return null;
         }
 

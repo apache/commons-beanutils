@@ -69,7 +69,7 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
 
     private boolean isUSTimeFormatWithNarrowNoBreakSpace() {
         // Fix tests on Java 20 onwards. See https://bugs.openjdk.org/browse/JDK-8324308 for background.
-        DateFormat usDateFormat = DateFormat.getTimeInstance(DateFormat.SHORT, Locale.US);
+        final DateFormat usDateFormat = DateFormat.getTimeInstance(DateFormat.SHORT, Locale.US);
         return ((SimpleDateFormat) usDateFormat).toPattern().contains("\u202F");
     }
 
