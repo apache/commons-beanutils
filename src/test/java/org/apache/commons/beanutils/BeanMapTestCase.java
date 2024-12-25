@@ -22,13 +22,13 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-import junit.framework.Test;
-import junit.textui.TestRunner;
-
 import org.apache.commons.beanutils.bugs.other.Jira87BeanFactory;
 import org.apache.commons.collections.BulkTest;
 import org.apache.commons.collections.Transformer;
 import org.apache.commons.collections.map.AbstractTestMap;
+
+import junit.framework.Test;
+import junit.textui.TestRunner;
 
 /**
  * Test cases for BeanMap

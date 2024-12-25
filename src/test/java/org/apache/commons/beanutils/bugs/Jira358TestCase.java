@@ -16,12 +16,12 @@
  */
 package org.apache.commons.beanutils.bugs;
 
+import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.beanutils.TestBean;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.commons.beanutils.TestBean;
 
 /**
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-358">https://issues.apache.org/jira/browse/BEANUTILS-358</a>

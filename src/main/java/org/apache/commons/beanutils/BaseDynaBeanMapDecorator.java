@@ -125,9 +125,9 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
 
 
     /**
-     * clear() operation is not supported.
+     * Always throws UnsupportedOperationException because this operation is unsupported.
      *
-     * @throws UnsupportedOperationException
+     * @throws UnsupportedOperationException Always thrown.
      */
     @Override
     public void clear() {
@@ -334,11 +334,11 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     }
 
     /**
-     * remove() operation is not supported.
+     * Always throws UnsupportedOperationException because this operation is unsupported.
      *
-     * @param key The {@link DynaBean}'s property name
-     * @return the value removed
-     * @throws UnsupportedOperationException
+     * @param key The {@link DynaBean}'s property name.
+     * @return the value removed.
+     * @throws UnsupportedOperationException Always thrown.
      */
     @Override
     public Object remove(final Object key) {

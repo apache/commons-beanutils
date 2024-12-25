@@ -19,10 +19,6 @@ package org.apache.commons.beanutils.bugs;
 import java.util.HashMap;
 import java.util.Map;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.beanutils.WrapDynaBean;
@@ -30,6 +26,10 @@ import org.apache.commons.beanutils.bugs.other.Jira61BeanFactory;
 import org.apache.commons.beanutils.bugs.other.Jira61BeanFactory.TestBean;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  * Test case for Jira issue# BEANUTILS-61.

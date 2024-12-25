@@ -25,11 +25,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+import org.apache.commons.beanutils.converters.DateConverter;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.apache.commons.beanutils.converters.DateConverter;
 
 
 /**

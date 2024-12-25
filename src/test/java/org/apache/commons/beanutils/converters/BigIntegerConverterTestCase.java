@@ -19,9 +19,9 @@ package org.apache.commons.beanutils.converters;
 
 import java.math.BigInteger;
 
-import junit.framework.TestSuite;
-
 import org.apache.commons.beanutils.Converter;
+
+import junit.framework.TestSuite;
 
 
 /**

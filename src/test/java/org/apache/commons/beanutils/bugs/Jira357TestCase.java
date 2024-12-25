@@ -18,11 +18,11 @@ package org.apache.commons.beanutils.bugs;
 
 import java.beans.PropertyDescriptor;
 
+import org.apache.commons.beanutils.PropertyUtils;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.apache.commons.beanutils.PropertyUtils;
 
 /**
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-357">https://issues.apache.org/jira/browse/BEANUTILS-357</a>

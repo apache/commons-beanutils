@@ -31,13 +31,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import org.apache.commons.beanutils.priv.PrivateBeanFactory;
 import org.apache.commons.beanutils.priv.PrivateDirect;
 import org.apache.commons.beanutils.priv.PublicSubBean;
+
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 
 /**

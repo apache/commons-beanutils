@@ -16,14 +16,14 @@
  */
 package org.apache.commons.beanutils.bugs;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.converters.ArrayConverter;
 import org.apache.commons.beanutils.converters.StringConverter;
+
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-359">https://issues.apache.org/jira/browse/BEANUTILS-359</a>

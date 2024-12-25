@@ -18,10 +18,10 @@ package org.apache.commons.beanutils.bugs;
 
 import java.util.Locale;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.beanutils.Converter;
 import org.apache.commons.beanutils.locale.converters.IntegerLocaleConverter;
+
+import junit.framework.TestCase;
 
 /**
  * BaseLocaleConverter.checkConversionResult() fails with ConversionException when result

@@ -17,9 +17,6 @@
 
 package org.apache.commons.beanutils.locale;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
-
 import org.apache.commons.beanutils.locale.converters.BigDecimalLocaleConverterTestCase;
 import org.apache.commons.beanutils.locale.converters.BigIntegerLocaleConverterTestCase;
 import org.apache.commons.beanutils.locale.converters.ByteLocaleConverterTestCase;
@@ -29,6 +26,9 @@ import org.apache.commons.beanutils.locale.converters.FloatLocaleConverterTestCa
 import org.apache.commons.beanutils.locale.converters.IntegerLocaleConverterTestCase;
 import org.apache.commons.beanutils.locale.converters.LongLocaleConverterTestCase;
 import org.apache.commons.beanutils.locale.converters.ShortLocaleConverterTestCase;
+
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
 /**
  * <p>

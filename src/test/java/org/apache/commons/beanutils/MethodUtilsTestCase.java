@@ -21,12 +21,12 @@ import java.io.PrintStream;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
+import org.apache.commons.beanutils.priv.PrivateBeanFactory;
+import org.apache.commons.beanutils.priv.PublicSubBean;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.apache.commons.beanutils.priv.PrivateBeanFactory;
-import org.apache.commons.beanutils.priv.PublicSubBean;
 
 /**
  * <p> Test case for <code>MethodUtils</code> </p>

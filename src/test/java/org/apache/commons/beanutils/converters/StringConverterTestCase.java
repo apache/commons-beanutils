@@ -16,9 +16,9 @@
  */
 package org.apache.commons.beanutils.converters;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.beanutils.ConversionException;
+
+import junit.framework.TestCase;
 
 /**
  * Test case for {@code StringConverter}.

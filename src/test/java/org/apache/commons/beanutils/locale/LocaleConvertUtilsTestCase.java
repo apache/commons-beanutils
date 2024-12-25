@@ -25,11 +25,11 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+import org.apache.commons.beanutils.ConversionException;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.apache.commons.beanutils.ConversionException;
 
 
 /**

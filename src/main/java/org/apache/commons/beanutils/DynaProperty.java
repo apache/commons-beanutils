@@ -263,32 +263,29 @@ public class DynaProperty implements Serializable {
 
 
     /**
-     * Reads field values for this object safely.
-     * There are issues with serializing primitive class types on certain JVM versions
-     * (including java 1.3).
-     * This method provides a workaround.
+     * Reads field values for this object safely. There are issues with serializing primitive class types on certain JVM versions (including java 1.3). This
+     * method provides a workaround.
      *
-     * @throws StreamCorruptedException when the stream data values are outside expected range
+     * @param in the content source.
+     * @throws IOException            when the stream data values are outside expected range
+     * @throws ClassNotFoundException Class of a serialized object cannot be found.
      */
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
-
         this.type = readAnyClass(in);
-
         if (isMapped() || isIndexed()) {
             this.contentType = readAnyClass(in);
         }
-
         // read other values
         in.defaultReadObject();
     }
 
     /**
      * Return a String representation of this Object.
+     *
      * @return a String representation of the dyna property
      */
     @Override
     public String toString() {
-
         final StringBuilder sb = new StringBuilder("DynaProperty[name=");
         sb.append(this.name);
         sb.append(",type=");
@@ -302,7 +299,9 @@ public class DynaProperty implements Serializable {
     }
 
     /**
-     * Write a class using safe encoding to workaround java 1.3 serialization bug.
+     * Writes a class using safe encoding to workaround java 1.3 serialization bug.
+     *
+     * @throws IOException if I/O errors occur while writing to the underlying stream.
      */
     private void writeAnyClass(final Class<?> clazz, final ObjectOutputStream out) throws IOException {
         // safely write out any class
@@ -324,7 +323,6 @@ public class DynaProperty implements Serializable {
         } else if (Short.TYPE.equals(clazz)) {
             primitiveType = SHORT_TYPE;
         }
-
         if (primitiveType == 0) {
             // then it's not a primitive type
             out.writeBoolean(false);
@@ -338,19 +336,17 @@ public class DynaProperty implements Serializable {
 
 
     /**
-     * Writes this object safely.
-     * There are issues with serializing primitive class types on certain JVM versions
-     * (including java 1.3).
-     * This method provides a workaround.
+     * Writes this object safely. There are issues with serializing primitive class types on certain JVM versions (including java 1.3). This method provides a
+     * workaround.
+     * 
+     * @param out Where to write.
+     * @throws IOException if I/O errors occur while writing to the underlying stream.
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {
-
         writeAnyClass(this.type,out);
-
         if (isMapped() || isIndexed()) {
             writeAnyClass(this.contentType,out);
         }
-
         // write out other values
         out.defaultWriteObject();
     }

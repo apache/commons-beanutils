@@ -18,11 +18,11 @@ package org.apache.commons.beanutils.bugs;
 
 import java.beans.PropertyDescriptor;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.beanutils.FluentIntrospectionTestBean;
 import org.apache.commons.beanutils.FluentPropertyBeanIntrospector;
 import org.apache.commons.beanutils.PropertyUtilsBean;
+
+import junit.framework.TestCase;
 
 /**
  * Write methods for PropertyDescriptors created during custom introspection are lost. See

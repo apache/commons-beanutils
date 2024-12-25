@@ -19,7 +19,6 @@ package org.apache.commons.beanutils.converters;
 import java.lang.reflect.Array;
 import java.util.Collection;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;

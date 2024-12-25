@@ -16,11 +16,11 @@
  */
 package org.apache.commons.beanutils.bugs;
 
+import org.apache.commons.beanutils.BeanUtils;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.apache.commons.beanutils.BeanUtils;
 
 /**
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-369">https://issues.apache.org/jira/browse/BEANUTILS-369</a>

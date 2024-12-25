@@ -19,11 +19,11 @@ package org.apache.commons.beanutils.converters;
 
 import java.net.URL;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.Converter;
+
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 
 /**

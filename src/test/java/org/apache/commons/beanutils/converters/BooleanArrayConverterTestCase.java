@@ -17,10 +17,10 @@
 
 package org.apache.commons.beanutils.converters;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.ConvertUtils;
+
+import junit.framework.TestCase;
 
 /**
  * Test conversions of String[]->boolean[] and String->boolean[].

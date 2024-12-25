@@ -17,10 +17,10 @@
 
 package org.apache.commons.beanutils.converters;
 
-import junit.framework.TestSuite;
-
 import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.Converter;
+
+import junit.framework.TestSuite;
 
 
 /**

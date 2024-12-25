@@ -16,10 +16,10 @@
  */
 package org.apache.commons.beanutils.bugs;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.beanutils.TestBean;
+
+import junit.framework.TestCase;
 
 /**
  * Test case for Jira issue# BEANUTILS-92.

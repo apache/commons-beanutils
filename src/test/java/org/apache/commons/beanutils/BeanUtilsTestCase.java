@@ -24,12 +24,12 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.commons.beanutils.converters.ArrayConverter;
+import org.apache.commons.beanutils.converters.DateConverter;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.apache.commons.beanutils.converters.ArrayConverter;
-import org.apache.commons.beanutils.converters.DateConverter;
 
 
 /**

@@ -18,9 +18,9 @@ package org.apache.commons.beanutils.bugs;
 
 import java.lang.reflect.Method;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.beanutils.MethodUtils;
+
+import junit.framework.TestCase;
 
 /**
  * MethodUtils's getMatchingAccessibleMethod() does not correctly

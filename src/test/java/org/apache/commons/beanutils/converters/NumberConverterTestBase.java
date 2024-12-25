@@ -23,9 +23,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.beanutils.ConversionException;
+
+import junit.framework.TestCase;
 
 
 /**

@@ -23,16 +23,16 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import org.apache.commons.beanutils.ContextClassLoaderLocal;
 import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.PrimitiveBean;
 import org.apache.commons.beanutils.locale.converters.LongLocaleConverter;
 import org.apache.commons.logging.LogFactory;
+
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  * <p>

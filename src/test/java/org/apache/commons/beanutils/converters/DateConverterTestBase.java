@@ -24,10 +24,10 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.Converter;
+
+import junit.framework.TestCase;
 
 /**
  * Abstract base for &lt;Date&gt;Converter classes.

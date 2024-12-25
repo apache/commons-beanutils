@@ -16,9 +16,9 @@
  */
 package org.apache.commons.beanutils.bugs;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.beanutils.BeanUtilsBean;
+
+import junit.framework.TestCase;
 
 /**
  * BeanUtilsBean.setProperty throws IllegalArgumentException if getter of nested
