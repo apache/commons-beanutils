@@ -27,7 +27,7 @@
     <title>Apache Commons BeanUtils Release Notes</title>
   </properties>
   <body>
-    <release version="2.0.0" date="20YY-MM-DD" description="Update to Java 8.">
+    <release version="2.0.0-M1" date="20YY-MM-DD" description="Update to Java 8.">
       <action issue="BEANUTILS-503" dev="ggregory" type="update" due-to="Gary Gregory">
         Change packaging from org.apache.commons.beanutils to org.apache.commons.beanutils2.
       </action>
