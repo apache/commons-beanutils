@@ -39,7 +39,7 @@ public class FileConverterTestCase extends TestCase {
 
     // ------------------------------------------------------------------------
 
-    private Converter converter = null;
+    private Converter converter;
 
     // ------------------------------------------------------------------------
 

@@ -51,7 +51,7 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase {
 
     // ------------------------------------------------------------------------
 
-    private Converter converter = null;
+    private Converter converter;
 
     public BigDecimalConverterTestCase(final String name) {
         super(name);

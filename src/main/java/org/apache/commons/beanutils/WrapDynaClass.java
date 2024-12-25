@@ -269,7 +269,7 @@ public class WrapDynaClass implements DynaClass {
     /**
      * Name of the JavaBean class represented by this WrapDynaClass.
      */
-    private String beanClassName = null;
+    private String beanClassName;
 
     /**
      * Reference to the JavaBean class represented by this WrapDynaClass.

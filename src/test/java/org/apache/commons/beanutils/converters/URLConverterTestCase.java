@@ -39,7 +39,7 @@ public class URLConverterTestCase extends TestCase {
 
     // ------------------------------------------------------------------------
 
-    private Converter converter = null;
+    private Converter converter;
 
     // ------------------------------------------------------------------------
 

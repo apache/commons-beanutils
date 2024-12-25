@@ -35,7 +35,7 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
 
     // ------------------------------------------------------------------------
 
-    private Converter converter = null;
+    private Converter converter;
 
     // ------------------------------------------------------------------------
 

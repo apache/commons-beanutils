@@ -72,7 +72,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
     private final Log log = LogFactory.getLog(BaseLocaleConverter.class);
 
     /** The default value specified to our Constructor, if any. */
-    private Object defaultValue = null;
+    private Object defaultValue;
 
     /** Should we return the default value on conversion errors? */
     protected boolean useDefault = false;

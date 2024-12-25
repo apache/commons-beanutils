@@ -77,7 +77,7 @@ public abstract class AbstractConverter implements Converter {
     /**
      * The default value specified to our Constructor, if any.
      */
-    private Object defaultValue = null;
+    private Object defaultValue;
 
 
     /**

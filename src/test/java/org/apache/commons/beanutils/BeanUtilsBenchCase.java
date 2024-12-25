@@ -54,20 +54,20 @@ public class BeanUtilsBenchCase extends TestCase {
     private long counter = 100000;
 
     // DynaClass for inDyna and outDyna
-    private DynaClass dynaClass = null;
+    private DynaClass dynaClass;
 
     // Input objects that have identical sets of properties and values.
-    private BenchBean inBean = null;
-    private DynaBean inDyna = null;
+    private BenchBean inBean;
+    private DynaBean inDyna;
     private Map<String, Object> inMap = null;  // Map of Objects requiring no conversion
     private Map<String, String> inStrs = null; // Map of Strings requiring conversion
 
     // Output objects that have identical sets of properties.
-    private BenchBean outBean = null;
-    private DynaBean outDyna = null;
+    private BenchBean outBean;
+    private DynaBean outDyna;
 
     // BeanUtilsBean instance to be used
-    private BeanUtilsBean bu = null;
+    private BeanUtilsBean bu;
 
 
 

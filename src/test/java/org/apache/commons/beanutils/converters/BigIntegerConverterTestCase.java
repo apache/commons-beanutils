@@ -36,7 +36,7 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase {
 
     // ------------------------------------------------------------------------
 
-    private Converter converter = null;
+    private Converter converter;
 
     // ------------------------------------------------------------------------
 

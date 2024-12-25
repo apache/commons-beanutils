@@ -36,7 +36,7 @@ public class IntegerConverterTestCase extends NumberConverterTestBase {
 
     // ------------------------------------------------------------------------
 
-    private Converter converter = null;
+    private Converter converter;
 
     // ------------------------------------------------------------------------
 

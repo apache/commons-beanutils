@@ -35,7 +35,7 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
 
     // ------------------------------------------------------------------------
 
-    private Converter converter = null;
+    private Converter converter;
 
     // ------------------------------------------------------------------------
 

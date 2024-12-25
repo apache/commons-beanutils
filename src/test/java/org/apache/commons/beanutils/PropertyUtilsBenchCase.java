@@ -53,19 +53,19 @@ public class PropertyUtilsBenchCase extends TestCase {
     private long counter = 100000;
 
     // DynaClass for inDyna and outDyna
-    private DynaClass dynaClass = null;
+    private DynaClass dynaClass;
 
     // Input objects that have identical sets of properties and values.
-    private BenchBean inBean = null;
-    private DynaBean inDyna = null;
+    private BenchBean inBean;
+    private DynaBean inDyna;
     private Map<String, Object> inMap = null;
 
     // Output objects that have identical sets of properties.
-    private BenchBean outBean = null;
-    private DynaBean outDyna = null;
+    private BenchBean outBean;
+    private DynaBean outDyna;
 
     // PropertyUtilsBean instance to be used
-    private PropertyUtilsBean pu = null;
+    private PropertyUtilsBean pu;
 
 
 
