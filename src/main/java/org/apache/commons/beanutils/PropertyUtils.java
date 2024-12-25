@@ -112,7 +112,7 @@ public class PropertyUtils {
      * @deprecated The <code>debug</code> static property is no longer used
      */
     @Deprecated
-    private static int debug = 0;
+    private static int debug;
 
     /**
      * Adds a <code>BeanIntrospector</code>. This object is invoked when the

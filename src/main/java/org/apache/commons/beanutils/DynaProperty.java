@@ -338,7 +338,7 @@ public class DynaProperty implements Serializable {
     /**
      * Writes this object safely. There are issues with serializing primitive class types on certain JVM versions (including java 1.3). This method provides a
      * workaround.
-     * 
+     *
      * @param out Where to write.
      * @throws IOException if I/O errors occur while writing to the underlying stream.
      */

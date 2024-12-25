@@ -66,7 +66,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
 
 
     /** Should the date conversion be lenient? */
-    boolean isLenient = false;
+    boolean isLenient;
 
     /**
      * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}

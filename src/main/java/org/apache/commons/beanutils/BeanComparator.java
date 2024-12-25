@@ -48,12 +48,12 @@ import org.apache.commons.collections.comparators.ComparableComparator;
 public class BeanComparator<T> implements Comparator<T>, Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     /**
      * Method name to call to compare.
      */
     private String property;
-    
+
     /**
      * BeanComparator will pass the values of the specified bean property to this Comparator. If your bean property is not a comparable or contains null values,
      * a suitable comparator may be supplied in this constructor.

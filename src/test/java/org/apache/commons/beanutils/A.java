@@ -26,7 +26,7 @@ import java.io.OutputStream;
  */
 public class A {
 
-    boolean called = false;
+    boolean called;
 
     public void foo(final OutputStream os)
     {

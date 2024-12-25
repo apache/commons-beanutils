@@ -40,7 +40,7 @@ public class BeanificationTestCase extends TestCase {
 
     class Signal {
         private Exception e;
-        private int signal = 0;
+        private int signal;
         private BeanUtilsBean bean;
         private PropertyUtilsBean propertyUtils;
         private ConvertUtilsBean convertUtils;

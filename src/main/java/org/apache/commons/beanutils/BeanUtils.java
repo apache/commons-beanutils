@@ -44,7 +44,7 @@ public class BeanUtils {
      *             this class.
      */
     @Deprecated
-    private static int debug = 0;
+    private static int debug;
 
     /**
      * <p>Clone a bean based on the available property getters and setters,
