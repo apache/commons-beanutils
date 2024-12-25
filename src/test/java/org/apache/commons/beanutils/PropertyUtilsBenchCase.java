@@ -58,7 +58,7 @@ public class PropertyUtilsBenchCase extends TestCase {
     // Input objects that have identical sets of properties and values.
     private BenchBean inBean;
     private DynaBean inDyna;
-    private Map<String, Object> inMap = null;
+    private Map<String, Object> inMap;
 
     // Output objects that have identical sets of properties.
     private BenchBean outBean;

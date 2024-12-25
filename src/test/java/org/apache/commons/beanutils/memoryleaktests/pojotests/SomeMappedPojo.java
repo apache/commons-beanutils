@@ -25,7 +25,7 @@ import java.util.HashMap;
 public class SomeMappedPojo {
 
 
-    private HashMap<String, String> mappedProperty = null;
+    private HashMap<String, String> mappedProperty;
 
     public String getMappedProperty(final String key) {
         // Create the map the very first time

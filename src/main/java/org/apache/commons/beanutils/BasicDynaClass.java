@@ -45,7 +45,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
      * The constructor of the <code>dynaBeanClass</code> that we will use
      * for creating new instances.
      */
-    protected transient Constructor<?> constructor = null;
+    protected transient Constructor<?> constructor;
 
     /**
      * The argument values to be passed to the constructore we will use

@@ -274,7 +274,7 @@ public class WrapDynaClass implements DynaClass {
     /**
      * Reference to the JavaBean class represented by this WrapDynaClass.
      */
-    private Reference<Class<?>> beanClassRef = null;
+    private Reference<Class<?>> beanClassRef;
 
     /** Stores the associated {@code PropertyUtilsBean} instance. */
     private final PropertyUtilsBean propertyUtilsBean;
@@ -286,12 +286,12 @@ public class WrapDynaClass implements DynaClass {
      * @deprecated No longer initialized, use getBeanClass() method instead
      */
     @Deprecated
-    protected Class<?> beanClass = null;
+    protected Class<?> beanClass;
 
     /**
      * The set of PropertyDescriptors for this bean class.
      */
-    protected PropertyDescriptor[] descriptors = null;
+    protected PropertyDescriptor[] descriptors;
 
     /**
      * The set of PropertyDescriptors for this bean class, keyed by the
@@ -303,7 +303,7 @@ public class WrapDynaClass implements DynaClass {
     /**
      * The set of dynamic properties that are part of this DynaClass.
      */
-    protected DynaProperty[] properties = null;
+    protected DynaProperty[] properties;
 
     /**
      * The set of dynamic properties that are part of this DynaClass,

@@ -46,7 +46,7 @@ public class LazyDynaMapTestCase extends TestCase {
     public static Test suite() {
         return new TestSuite(LazyDynaMapTestCase.class);
     }
-    protected LazyDynaMap  dynaMap    = null;
+    protected LazyDynaMap  dynaMap;
     protected String testProperty     = "myProperty";
     protected String testPropertyA    = "myProperty-A";
     protected String testPropertyB    = "myProperty-B";

@@ -69,7 +69,7 @@ public class DynaProperty implements Serializable {
 
 
     /** Property type */
-    protected transient Class<?> type = null;
+    protected transient Class<?> type;
 
     /** The <em>(optional)</em> type of content elements for indexed <code>DynaProperty</code> */
     protected transient Class<?> contentType;
