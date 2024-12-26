@@ -29,7 +29,7 @@
 
   <inceptionYear>2000</inceptionYear>
   <description>Apache Commons BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.</description>
-  <url>https://commons.apache.org/proper/commons-beanutils/</url>
+  <url>https://commons.apache.org/proper/commons-beanutils</url>
 
   <properties>
       <maven.compiler.source>1.8</maven.compiler.source>
@@ -37,6 +37,7 @@
       <commons.module.name>org.apache.commons.beanutils</commons.module.name>
       <commons.componentid>beanutils</commons.componentid>
       <commons.release.version>1.10.0</commons.release.version>
+      <commons.release.next>1.10.1</commons.release.next>
       <commons.jira.id>BEANUTILS</commons.jira.id>
       <commons.jira.pid>12310460</commons.jira.pid>
       <!-- Limit memory size see BEANUTILS-291; allow command-line override -->
