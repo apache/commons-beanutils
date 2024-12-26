@@ -17,7 +17,6 @@
 
 package org.apache.commons.beanutils.locale.converters;
 
-
 /**
  * Test Case for the DoubleLocaleConverter class.
  *
@@ -25,13 +24,9 @@ package org.apache.commons.beanutils.locale.converters;
 
 public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
-
-
-
     public DoubleLocaleConverterTestCase(final String name) {
         super(name);
     }
-
 
     /**
      * Set up instance variables required by this test case.
@@ -53,7 +48,6 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase {
     public void tearDown() {
         super.tearDown();
     }
-
 
     // ------------------------------------------------------------------------
 
@@ -91,7 +85,6 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertInvalid(converter, null);
         convertNull(converter, null);
 
-
     }
 
     /**
@@ -106,7 +99,6 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, localizedDecimalValue, defaultDecimalPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
 
     }
 
@@ -123,9 +115,7 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertInvalid(converter, null);
         convertNull(converter, null);
 
-
     }
-
 
     /**
      * Test Converter(Locale, pattern) constructor
@@ -197,12 +187,10 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase {
                                                   localizedDecimalPattern,
                                                   true);
 
-
         convertValueNoPattern(converter, "(A)", localizedDecimalValue, expectedValue);
         convertValueWithPattern(converter, "(A)", localizedDecimalValue, localizedDecimalPattern, expectedValue);
         convertInvalid(converter, "(A)", defaultValue);
         convertNull(converter, "(A)", defaultValue);
-
 
         // **************************************************************************
         // Convert value in the wrong format - maybe you would expect it to throw an
@@ -211,7 +199,6 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         // I guess this is one of the limitations of DecimalFormat
         // **************************************************************************
         convertValueNoPattern(converter, "(B)", defaultDecimalValue, Double.valueOf("1.234"));
-
 
         // **************************************************************************
         // Convert with non-localized pattern - this causes an exception in parse()
@@ -222,7 +209,6 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         // **************************************************************************
         convertValueWithPattern(converter, "(B)", localizedDecimalValue, defaultDecimalPattern, defaultValue);
 
-
         // **************************************************************************
         // Convert with specified type
         //
@@ -232,12 +218,10 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         // **************************************************************************
         //convertValueToType(converter, "(B)", Integer.class, localizedDecimalValue, localizedDecimalPattern, expectedValue);
 
-
         converter = new DoubleLocaleConverter(defaultValue,
                                                   localizedLocale,
                                                   defaultDecimalPattern,
                                                   false);
-
 
         convertValueNoPattern(converter, "(C)", localizedDecimalValue, expectedValue);
         convertValueWithPattern(converter, "(C)", localizedDecimalValue, defaultDecimalPattern, expectedValue);
@@ -245,8 +229,6 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertNull(converter, "(C)", defaultValue);
 
     }
-
-
 
 }
 

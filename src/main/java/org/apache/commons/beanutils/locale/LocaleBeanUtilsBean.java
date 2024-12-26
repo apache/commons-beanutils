@@ -17,7 +17,6 @@
 
 package org.apache.commons.beanutils.locale;
 
-
 import java.beans.IndexedPropertyDescriptor;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
@@ -35,7 +34,6 @@ import org.apache.commons.beanutils.PropertyUtilsBean;
 import org.apache.commons.beanutils.expression.Resolver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 
 /**
  * <p>Utility methods for populating JavaBeans properties
@@ -201,10 +199,8 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
         LOCALE_BEANS_BY_CLASSLOADER.set(newInstance);
     }
 
-
     /** All logging goes through this logger */
     private final Log log = LogFactory.getLog(LocaleBeanUtilsBean.class);
-
 
     /** Convertor used by this class */
     private final LocaleConvertUtilsBean localeConvertUtils;
@@ -223,7 +219,6 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     public LocaleBeanUtilsBean(final LocaleConvertUtilsBean localeConvertUtils) {
         this.localeConvertUtils = localeConvertUtils;
     }
-
 
     /**
      * Construct instance that uses given locale conversion
@@ -282,7 +277,6 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
 
         return new Descriptor(target, name, propName, key, index);
     }
-
 
     /**
      *  Convert the specified value to the required type.
@@ -441,8 +435,6 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
         }
         return type;
     }
-
-
 
     /**
      * Is the pattern to be applied localized
@@ -619,7 +611,6 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
         return getMappedPropertyLocale(bean, name, null);
     }
 
-
     /**
      * Return the value of the specified mapped locale-sensitive property
      * of the specified bean, as a String
@@ -645,7 +636,6 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
 
         return getMappedProperty(bean, name, key, null);
     }
-
 
     /**
      * Return the value of the specified mapped locale-sensitive property
@@ -1031,5 +1021,4 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
         }
     }
 }
-
 

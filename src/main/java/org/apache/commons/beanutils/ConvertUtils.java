@@ -15,7 +15,6 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils;
 
 /**
@@ -29,8 +28,6 @@ package org.apache.commons.beanutils;
  */
 
 public class ConvertUtils {
-
-
 
     /**
      * <p>Convert the specified value into a String.</p>
@@ -57,7 +54,6 @@ public class ConvertUtils {
     public static Object convert(final Object value, final Class<?> targetType) {
         return ConvertUtilsBean.getInstance().convert(value, targetType);
     }
-
 
     /**
      * <p>Convert the specified value to an object of the specified class (if
@@ -89,7 +85,6 @@ public class ConvertUtils {
         return ConvertUtilsBean.getInstance().convert(values, clazz);
     }
 
-
     /**
      * <p>Remove all registered {@link Converter}s, and re-establish the
      * standard Converters.</p>
@@ -115,7 +110,6 @@ public class ConvertUtils {
         ConvertUtilsBean.getInstance().deregister(clazz);
     }
 
-
     /**
      * Gets the default value for Boolean conversions.
      * @return The default Boolean value
@@ -137,7 +131,6 @@ public class ConvertUtils {
     public static byte getDefaultByte() {
         return ConvertUtilsBean.getInstance().getDefaultByte();
     }
-
 
     /**
      * Gets the default value for Character conversions.
@@ -161,7 +154,6 @@ public class ConvertUtils {
         return ConvertUtilsBean.getInstance().getDefaultDouble();
     }
 
-
     /**
      * Get the default value for Float conversions.
      * @return The default Float value
@@ -184,7 +176,6 @@ public class ConvertUtils {
         return ConvertUtilsBean.getInstance().getDefaultInteger();
     }
 
-
     /**
      * Gets the default value for Long conversions.
      * @return The default Long value
@@ -206,7 +197,6 @@ public class ConvertUtils {
     public static short getDefaultShort() {
         return ConvertUtilsBean.getInstance().getDefaultShort();
     }
-
 
     /**
      * <p>Look up and return any registered {@link Converter} for the specified
@@ -235,8 +225,6 @@ public class ConvertUtils {
     public static Converter lookup(final Class<?> sourceType, final Class<?> targetType) {
         return ConvertUtilsBean.getInstance().lookup(sourceType, targetType);
     }
-
-
 
     /**
      * Change primitive Class types to the associated wrapper class. This is
@@ -282,7 +270,6 @@ public class ConvertUtils {
         return type;
     }
 
-
     /**
      * <p>Register a custom {@link Converter} for the specified destination
      * <code>Class</code>, replacing any previously registered Converter.</p>
@@ -297,7 +284,6 @@ public class ConvertUtils {
     public static void register(final Converter converter, final Class<?> clazz) {
         ConvertUtilsBean.getInstance().register(converter, clazz);
     }
-
 
     /**
      * Sets the default value for Boolean conversions.
@@ -332,7 +318,6 @@ public class ConvertUtils {
         ConvertUtilsBean.getInstance().setDefaultCharacter(newDefaultCharacter);
     }
 
-
     /**
      * Sets the default value for Double conversions.
      * @param newDefaultDouble The default Double value
@@ -343,7 +328,6 @@ public class ConvertUtils {
     public static void setDefaultDouble(final double newDefaultDouble) {
         ConvertUtilsBean.getInstance().setDefaultDouble(newDefaultDouble);
     }
-
 
     /**
      * Sets the default value for Float conversions.
@@ -377,7 +361,6 @@ public class ConvertUtils {
     public static void setDefaultLong(final long newDefaultLong) {
         ConvertUtilsBean.getInstance().setDefaultLong(newDefaultLong);
     }
-
 
     /**
      * Sets the default value for Short conversions.

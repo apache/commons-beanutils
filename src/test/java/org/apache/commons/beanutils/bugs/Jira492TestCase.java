@@ -117,5 +117,4 @@ public class Jira492TestCase {
         assertEquals("item1-modified", beanUtils.getIndexedProperty(bean, "someList", 1));
     }
 
-
 }

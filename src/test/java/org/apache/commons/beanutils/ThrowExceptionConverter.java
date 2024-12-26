@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils;
-
 
 /**
  * Converter implementation that throws a <code>PassTestException</code>

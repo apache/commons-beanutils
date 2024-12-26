@@ -137,7 +137,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
         this.dynaClass = this;
     }
 
-
     /**
      * Add a new dynamic property.
      *
@@ -159,7 +158,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     public void add(final String name) {
         add(name, null);
     }
-
 
     /**
      * Add a new dynamic property with the specified data type, but with
@@ -192,7 +190,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
         }
 
     }
-
 
     /**
      * <p>Add a new dynamic property with the specified data type, readability,
@@ -299,8 +296,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     public Map<String, Object> getMap() {
         return values;
     }
-
-
 
     /**
      * Return the name of this DynaClass (analogous to the
@@ -442,8 +437,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
 
     }
 
-
-
     /**
      * Set the Map backing this <code>DynaBean</code>
      *
@@ -464,8 +457,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     public void setRestricted(final boolean restricted) {
         this.restricted = restricted;
     }
-
-
 
    /**
  * Set whether this DynaClass should return a <code>null</code> from

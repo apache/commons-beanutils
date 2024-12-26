@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils;
-
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,14 +23,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 /**
  * General purpose test bean for JUnit tests for the "beanutils" component.
  *
  */
 
 public class TestBean implements Serializable {
-
 
     /*
      * Another nested reference to a bean containing mapp properties
@@ -131,8 +127,6 @@ private java.util.Date dateProperty;
      */
     private float floatProperty = (float) 123.0;
 
-
-
     /**
      * An integer array property accessed as an array.
      */
@@ -147,7 +141,6 @@ private java.util.Date dateProperty;
      * An integer property.
      */
     private int intProperty = 123;
-
 
     /**
      * A List property accessed as an indexed property.
@@ -164,7 +157,6 @@ private java.util.Date dateProperty;
      */
     private Map<String, Object> mapProperty;
 
-
     /**
      * A mapped property that has String keys and Object values.
      */
@@ -179,7 +171,6 @@ private java.util.Date dateProperty;
      * A mapped property that has String keys and int values.
      */
     private HashMap<String, Integer> mappedIntProperty;
-
 
     /**
      * A nested reference to another test bean (populated as needed).
@@ -225,7 +216,6 @@ private java.util.Date dateProperty;
     private final String[] stringIndexed =
             { "String 0", "String 1", "String 2", "String 3", "String 4" };
 
-
     private String[][] string2dArray = {new String[] {"1", "2", "3"}, new String[] {"4","5","6"}};
 
     /**
@@ -254,7 +244,6 @@ private java.util.Date dateProperty;
         listIndexed.add("String 4");
     }
 
-
     public TestBean(final boolean booleanProperty) {
         setBooleanProperty(booleanProperty);
     }
@@ -270,7 +259,6 @@ private java.util.Date dateProperty;
         setStringProperty(stringProperty);
     }
 
-
     public TestBean(final Boolean booleanSecond) {
         setBooleanSecond(booleanSecond.booleanValue());
     }
@@ -283,7 +271,6 @@ private java.util.Date dateProperty;
     public TestBean(final double doubleProperty) {
            setDoubleProperty(doubleProperty);
        }
-
 
     public TestBean(final float floatProperty) {
         setFloatProperty(floatProperty);
@@ -298,7 +285,6 @@ private java.util.Date dateProperty;
         setIntProperty(intProperty);
     }
 
-
     public TestBean(final Integer intProperty) {
         setIntProperty(intProperty.intValue());
     }
@@ -311,7 +297,6 @@ private java.util.Date dateProperty;
         setStringProperty(stringProperty);
     }
 
-
     public TestBean(final String[][] string2dArray) {
         this.string2dArray = string2dArray;
     }
@@ -319,7 +304,6 @@ private java.util.Date dateProperty;
     public TestBean getAnotherNested() {
           return anotherNested;
        }
-
 
     public boolean getBooleanProperty() {
         return booleanProperty;
@@ -333,7 +317,6 @@ private java.util.Date dateProperty;
         return dateArrayProperty;
     }
 
-
     public java.util.Date getDateProperty() {
         return dateProperty;
     }
@@ -345,7 +328,6 @@ private java.util.Date dateProperty;
     public String[] getDupProperty() {
         return this.dupProperty;
     }
-
 
     public String getDupProperty(final int index) {
         return this.dupProperty[index];
@@ -359,7 +341,6 @@ private java.util.Date dateProperty;
         return this.intArray;
     }
 
-
     public int getIntIndexed(final int index) {
         return intIndexed[index];
     }
@@ -371,7 +352,6 @@ private java.util.Date dateProperty;
     public boolean getInvalidBoolean() {
         return this.invalidBoolean;
     }
-
 
     public List<Object> getListIndexed() {
         return listIndexed;
@@ -391,7 +371,6 @@ private java.util.Date dateProperty;
         final Integer x = mappedIntProperty.get(key);
         return x == null ? 0 : x.intValue();
     }
-
 
     public MappedTestBean getMappedNested() {
         if (mappedNested == null)
@@ -474,7 +453,6 @@ private java.util.Date dateProperty;
         return this.writeOnlyProperty;
     }
 
-
     public boolean isBooleanSecond() {
         return booleanSecond;
     }
@@ -482,7 +460,6 @@ private java.util.Date dateProperty;
     public boolean isInvalidBoolean() {
         return this.invalidBoolean;
     }
-
 
     public void setAnotherNested( final TestBean anotherNested ) {
           this.anotherNested = anotherNested;
@@ -496,7 +473,6 @@ private java.util.Date dateProperty;
         this.booleanSecond = booleanSecond;
     }
 
-
     public void setByteProperty(final byte byteProperty) {
         this.byteProperty = byteProperty;
     }
@@ -508,7 +484,6 @@ private java.util.Date dateProperty;
     public void setDateProperty(final java.util.Date dateProperty) {
         this.dateProperty = dateProperty;
     }
-
 
     public void setDoubleProperty(final double doubleProperty) {
         this.doubleProperty = doubleProperty;
@@ -547,7 +522,6 @@ private java.util.Date dateProperty;
         }
     }
 
-
     public void setLongProperty(final long longProperty) {
         this.longProperty = longProperty;
     }
@@ -565,9 +539,6 @@ private java.util.Date dateProperty;
         }
         mappedObjects.put(key, value);
     }
-
-
-
 
     public void setMappedProperty(final String key, final String value) {
         // Create the map the very first time
@@ -597,19 +568,13 @@ private java.util.Date dateProperty;
         this.nullProperty = nullProperty;
     }
 
-
-
-
-
     public void setShortProperty(final short shortProperty) {
         this.shortProperty = shortProperty;
     }
 
-
     public void setStringArray(final String[] stringArray) {
         this.stringArray = stringArray;
     }
-
 
     public void setStringIndexed(final int index, final String value) {
         stringIndexed[index] = value;

@@ -168,7 +168,6 @@ public class LocaleConvertUtilsBean {
         }
     }
 
-
     /**
      * Gets singleton instance.
      * This is the same as the instance used by the default {@link LocaleBeanUtilsBean} singleton.
@@ -187,13 +186,11 @@ public class LocaleConvertUtilsBean {
     /** The <code>Log</code> instance for this class. */
     private final Log log = LogFactory.getLog(LocaleConvertUtils.class);
 
-
     /** Every entry of the mapConverters is:
      *  key = locale
      *  value = FastHashMap of converters for the certain locale.
      */
     private final FastHashMap mapConverters = new DelegateFastHashMap(BeanUtils.createCache());
-
 
     /**
      *  Makes the state by default (deregisters all converters for all locales)
@@ -248,7 +245,6 @@ public class LocaleConvertUtilsBean {
     public String convert(final Object value, final String pattern) {
         return convert(value, defaultLocale, pattern);
     }
-
 
     /**
      * Convert the specified value to an object of the specified class (if
@@ -476,7 +472,6 @@ public void deregister() {
         return applyLocalized;
     }
 
-
     /**
      * getter for defaultLocale.
      * @return the default locale
@@ -485,7 +480,6 @@ public void deregister() {
 
         return defaultLocale;
     }
-
 
     /**
      * Look up and return any registered {@link LocaleConverter} for the specified

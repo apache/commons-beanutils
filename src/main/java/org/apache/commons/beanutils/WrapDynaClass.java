@@ -396,8 +396,6 @@ public class WrapDynaClass implements DynaClass {
         return descriptorsMap.get(name);
     }
 
-
-
     /**
      * Returns the {@code PropertyUtilsBean} instance associated with this class. This
      * bean is used for introspection.

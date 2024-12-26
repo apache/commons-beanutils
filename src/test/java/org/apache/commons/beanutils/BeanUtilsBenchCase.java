@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils;
-
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -27,16 +25,12 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-
 /**
  * JUnit Test Case containing microbenchmarks for BeanUtils.
  *
  */
 
 public class BeanUtilsBenchCase extends TestCase {
-
-
-
 
     /**
      * Return the tests included in this test suite.
@@ -46,9 +40,6 @@ public class BeanUtilsBenchCase extends TestCase {
         return new TestSuite(BeanUtilsBenchCase.class);
 
     }
-
-
-
 
     // Basic loop counter
     private long counter = 100000;
@@ -69,9 +60,6 @@ public class BeanUtilsBenchCase extends TestCase {
     // BeanUtilsBean instance to be used
     private BeanUtilsBean bu;
 
-
-
-
     /**
      * Construct a new instance of this test case.
      *
@@ -82,7 +70,6 @@ public class BeanUtilsBenchCase extends TestCase {
         super(name);
 
     }
-
 
     /**
      * Set up instance variables required by this test case.
@@ -146,7 +133,6 @@ public class BeanUtilsBenchCase extends TestCase {
 
     }
 
-
     /**
      * Tear down instance variables required by this test case.
      */
@@ -162,10 +148,6 @@ public class BeanUtilsBenchCase extends TestCase {
         bu = null;
 
     }
-
-
-
-
 
     // Time copyProperties() from a bean
     public void testCopyPropertiesBean() throws Exception {
@@ -199,7 +181,6 @@ public class BeanUtilsBenchCase extends TestCase {
 
     }
 
-
     // Time copyProperties() from a DynaBean
     public void testCopyPropertiesDyna() throws Exception {
 
@@ -231,7 +212,6 @@ public class BeanUtilsBenchCase extends TestCase {
                            ", time=" + (stop - start));
 
     }
-
 
     // Time copyProperties() from a Map of Objects
     public void testCopyPropertiesMap() throws Exception {
@@ -265,7 +245,6 @@ public class BeanUtilsBenchCase extends TestCase {
 
     }
 
-
     // Time copyProperties() from a Map of Strings
     public void testCopyPropertiesStrs() throws Exception {
 
@@ -297,7 +276,6 @@ public class BeanUtilsBenchCase extends TestCase {
                            ", time=" + (stop - start));
 
     }
-
 
     // Time populate() from a Map of Objects
     public void testPopulateMap() throws Exception {
@@ -331,7 +309,6 @@ public class BeanUtilsBenchCase extends TestCase {
 
     }
 
-
     // Time populate() from a Map of Strings
     // NOTE - This simulates what Struts does when processing form beans
     public void testPopulateStrs() throws Exception {
@@ -364,8 +341,5 @@ public class BeanUtilsBenchCase extends TestCase {
                            ", time=" + (stop - start));
 
     }
-
-
-
 
 }

@@ -23,7 +23,6 @@ import org.apache.commons.collections.Closure;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
 /**
  * <p><code>Closure</code> that sets a property.</p>
  * <p>

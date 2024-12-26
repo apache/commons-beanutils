@@ -17,7 +17,6 @@
 
 package org.apache.commons.beanutils;
 
-
 /**
  * Just a runtime exception. Useful for check that a method is called.
  *

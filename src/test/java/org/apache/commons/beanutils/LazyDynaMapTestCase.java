@@ -54,9 +54,7 @@ public class LazyDynaMapTestCase extends TestCase {
     protected String testString2      = "myStringValue-2";
     protected Integer testInteger1    = new Integer(30);
 
-
     protected Integer testInteger2    = new Integer(40);
-
 
     protected String testKey          = "myKey";
 
@@ -85,7 +83,6 @@ public class LazyDynaMapTestCase extends TestCase {
     public void tearDown() {
       dynaMap = null;
     }
-
 
     /**
      * General Tests

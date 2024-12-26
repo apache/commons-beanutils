@@ -17,10 +17,6 @@
 
 package org.apache.commons.beanutils;
 
-
-
-
-
 /**
  * <p>A specialized extension to <code>DynaClass</code> that allows properties
  * to be added or removed dynamically.</p>
@@ -33,7 +29,6 @@ package org.apache.commons.beanutils;
 
 public interface MutableDynaClass extends DynaClass {
 
-
     /**
      * Add a new dynamic property with no restrictions on data type,
      * readability, or writeability.
@@ -44,7 +39,6 @@ public interface MutableDynaClass extends DynaClass {
      *  restricted, so no new properties can be added
      */
     void add(String name);
-
 
     /**
      * Add a new dynamic property with the specified data type, but with
@@ -59,7 +53,6 @@ public interface MutableDynaClass extends DynaClass {
      *  restricted, so no new properties can be added
      */
     void add(String name, Class<?> type);
-
 
     /**
      * Add a new dynamic property with the specified data type, readability,
@@ -80,7 +73,6 @@ public interface MutableDynaClass extends DynaClass {
     void add(String name, Class<?> type, boolean readable,
                     boolean writeable);
 
-
     /**
      * Is this DynaClass currently restricted, if so, no changes to the
      * existing registration of property names, data types, readability, or
@@ -90,7 +82,6 @@ public interface MutableDynaClass extends DynaClass {
      * otherwise <code>false</code>
      */
     boolean isRestricted();
-
 
     /**
      * Remove the specified dynamic property, and any associated data type,
@@ -106,13 +97,11 @@ public interface MutableDynaClass extends DynaClass {
      */
     void remove(String name);
 
-
     /**
      * Set the restricted state of this DynaClass to the specified value.
      *
      * @param restricted The new restricted state
      */
     void setRestricted(boolean restricted);
-
 
 }

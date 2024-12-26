@@ -90,7 +90,6 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     private final DynaBean dynaBean;
     private final boolean readOnly;
 
-
     private transient Set<K> keySet;
 
     /**
@@ -103,9 +102,6 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     public BaseDynaBeanMapDecorator(final DynaBean dynaBean) {
         this(dynaBean, true);
     }
-
-
-
 
     /**
      * Construct a Map for the specified {@link DynaBean}.
@@ -122,7 +118,6 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
         this.dynaBean = dynaBean;
         this.readOnly = readOnly;
     }
-
 
     /**
      * Always throws UnsupportedOperationException because this operation is unsupported.
@@ -315,7 +310,6 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
         return previous;
     }
 
-
     /**
      * Copy the contents of a Map to the decorated {@link DynaBean}.
      *
@@ -344,7 +338,6 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     public Object remove(final Object key) {
         throw new UnsupportedOperationException();
     }
-
 
     /**
      * Returns the number properties in the decorated

@@ -26,13 +26,9 @@ import java.math.BigDecimal;
 
 public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
-
-
-
     public BigDecimalLocaleConverterTestCase(final String name) {
         super(name);
     }
-
 
     /**
      * Set up instance variables required by this test case.
@@ -54,7 +50,6 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
     public void tearDown() {
         super.tearDown();
     }
-
 
     // ------------------------------------------------------------------------
 
@@ -92,7 +87,6 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
         convertInvalid(converter, null);
         convertNull(converter, null);
 
-
     }
 
     /**
@@ -107,7 +101,6 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
         convertValueWithPattern(converter, localizedDecimalValue, defaultDecimalPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
 
     }
 
@@ -124,9 +117,7 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
         convertInvalid(converter, null);
         convertNull(converter, null);
 
-
     }
-
 
     /**
      * Test Converter(Locale, pattern) constructor
@@ -198,12 +189,10 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
                                                   localizedDecimalPattern,
                                                   true);
 
-
         convertValueNoPattern(converter, "(A)", localizedDecimalValue, expectedValue);
         convertValueWithPattern(converter, "(A)", localizedDecimalValue, localizedDecimalPattern, expectedValue);
         convertInvalid(converter, "(A)", defaultValue);
         convertNull(converter, "(A)", defaultValue);
-
 
         // **************************************************************************
         // Convert value in the wrong format - maybe you would expect it to throw an
@@ -212,7 +201,6 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
         // I guess this is one of the limitations of DecimalFormat
         // **************************************************************************
         convertValueNoPattern(converter, "(B)", defaultDecimalValue, new BigDecimal("1.234"));
-
 
         // **************************************************************************
         // Convert with non-localized pattern - this causes an exception in parse()
@@ -223,7 +211,6 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
         // **************************************************************************
         convertValueWithPattern(converter, "(B)", localizedDecimalValue, defaultDecimalPattern, defaultValue);
 
-
         // **************************************************************************
         // Convert with specified type
         //
@@ -233,12 +220,10 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
         // **************************************************************************
         //convertValueToType(converter, "(B)", Double.class, localizedDecimalValue, localizedDecimalPattern, expectedValue);
 
-
         converter = new BigDecimalLocaleConverter(defaultValue,
                                                   localizedLocale,
                                                   defaultDecimalPattern,
                                                   false);
-
 
         convertValueNoPattern(converter, "(C)", localizedDecimalValue, expectedValue);
         convertValueWithPattern(converter, "(C)", localizedDecimalValue, defaultDecimalPattern, expectedValue);
@@ -246,8 +231,6 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
         convertNull(converter, "(C)", defaultValue);
 
     }
-
-
 
 }
 

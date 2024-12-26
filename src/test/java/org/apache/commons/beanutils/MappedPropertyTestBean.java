@@ -15,7 +15,6 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils;
 
 import java.util.HashMap;
@@ -30,8 +29,6 @@ public class MappedPropertyTestBean {
 
     private final Map<Object, Object> map = new HashMap<>();
     private final Map<Object, Object> myMap = new HashMap<>();
-
-
 
     public Long getDifferentTypes(final String key) {
         return Long.valueOf(((Number)map.get(key)).longValue());

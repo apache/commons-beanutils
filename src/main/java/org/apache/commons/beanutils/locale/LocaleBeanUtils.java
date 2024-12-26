@@ -17,13 +17,10 @@
 
 package org.apache.commons.beanutils.locale;
 
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
 
 import org.apache.commons.beanutils.BeanUtils;
-
-
 
 /**
  * <p>Utility methods for populating JavaBeans properties
@@ -35,8 +32,6 @@ import org.apache.commons.beanutils.BeanUtils;
  */
 
 public class LocaleBeanUtils extends BeanUtils {
-
-
 
     /** @deprecated moved into <code>LocaleBeanUtils</code> */
     @Deprecated
@@ -157,7 +152,6 @@ public class LocaleBeanUtils extends BeanUtils {
         }
     }
 
-
     /**
      * Resolve any nested expression to get the actual target bean.
      *
@@ -217,8 +211,6 @@ public class LocaleBeanUtils extends BeanUtils {
 
         return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().convert(type, index, value, pattern);
     }
-
-
 
     /**
      * <p>Calculate the property type.</p>
@@ -405,7 +397,6 @@ public class LocaleBeanUtils extends BeanUtils {
         return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getMappedProperty(bean, name);
     }
 
-
     /**
      * <p>Return the value of the specified mapped locale-sensitive property
      * of the specified bean, as a String
@@ -434,7 +425,6 @@ public class LocaleBeanUtils extends BeanUtils {
 
         return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getMappedProperty(bean, name, key);
     }
-
 
     /**
      * <p>Return the value of the specified mapped locale-sensitive property
@@ -746,5 +736,4 @@ public class LocaleBeanUtils extends BeanUtils {
         LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().setProperty(bean, name, value, pattern);
      }
 }
-
 

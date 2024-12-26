@@ -25,16 +25,12 @@ import junit.framework.TestSuite;
  */
 public class BeanUtils2TestCase extends BeanUtilsTestCase {
 
-
     /**
      * Return the tests included in this test suite.
      */
     public static Test suite() {
         return new TestSuite(BeanUtils2TestCase.class);
     }
-
-
-
 
     /**
      * Construct a new instance of this test case.
@@ -44,7 +40,6 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
     public BeanUtils2TestCase(final String name) {
         super(name);
     }
-
 
     /**
      * Set up instance variables required by this test case.

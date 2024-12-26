@@ -125,7 +125,6 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
             throw new UnsupportedOperationException();
         }
 
-
         @Override
         public boolean addAll(final Collection<? extends E> c) {
             throw new UnsupportedOperationException();
@@ -177,7 +176,6 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
             }
         }
 
-
         protected abstract Collection<E> get(Map<K, V> map);
 
         @Override
@@ -206,7 +204,6 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
         }
 
         protected abstract E iteratorNext(Map.Entry<K, V> entry);
-
 
         @Override
         public boolean remove(final Object o) {
@@ -349,7 +346,6 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
      */
     private boolean fast;
 
-
     // Property access
     // ----------------------------------------------------------------------
 
@@ -368,7 +364,6 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
     public WeakFastHashMap(final int capacity) {
         this.map = createMap(capacity);
     }
-
 
     // Map access
     // ----------------------------------------------------------------------

@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils.priv;
-
 
 /**
  * Interface that is indirectly implemented by PrivateBean.
@@ -26,19 +24,14 @@ package org.apache.commons.beanutils.priv;
 
 public interface PrivateIndirect {
 
-
-
-
     /**
      * A property accessible via an indirectly implemented interface.
      */
     String getBaz();
 
-
     /**
      * A method accessible via an indirectly implemented interface.
      */
     String methodBaz(String in);
-
 
 }

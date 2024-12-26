@@ -26,7 +26,6 @@ import org.apache.commons.beanutils.locale.BaseLocaleConverter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
 /**
  * <p>Standard {@link org.apache.commons.beanutils.locale.LocaleConverter}
  * implementation that converts an incoming
@@ -40,11 +39,8 @@ import org.apache.commons.logging.LogFactory;
 
 public class DecimalLocaleConverter extends BaseLocaleConverter {
 
-
-
     /** All logging goes through this logger */
     private final Log log = LogFactory.getLog(DecimalLocaleConverter.class);
-
 
     /**
      * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
@@ -208,7 +204,6 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
         super(defaultValue, locale, pattern, locPattern);
 
     }
-
 
     /**
      * Convert the specified locale-sensitive input object into an output

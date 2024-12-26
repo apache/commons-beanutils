@@ -247,8 +247,6 @@ public class LazyDynaList extends ArrayList<Object> {
         }
     }
 
-
-
     /**
      * <p>Insert an element at the specified index position.</p>
      *
@@ -409,8 +407,6 @@ public class LazyDynaList extends ArrayList<Object> {
 
     }
 
-
-
     /**
      * <p>Set the element at the specified position.</p>
      *
@@ -525,8 +521,6 @@ public class LazyDynaList extends ArrayList<Object> {
         }
 
     }
-
-
 
     /**
      * <p>Converts the List to an Array.</p>

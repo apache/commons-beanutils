@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils.priv;
-
 
 /**
  * Factory class for PrivateBean instances.
@@ -25,7 +23,6 @@ package org.apache.commons.beanutils.priv;
  */
 
 public class PrivateBeanFactory {
-
 
     /**
      * Factory method to create new beans.
@@ -36,7 +33,6 @@ public class PrivateBeanFactory {
 
     }
 
-
     /**
      * Factory method to create new beans.
      */
@@ -45,6 +41,5 @@ public class PrivateBeanFactory {
         return new PrivateBeanSubclass();
 
     }
-
 
 }

@@ -15,14 +15,11 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils.converters;
-
 
 import java.util.List;
 
 import org.apache.commons.beanutils.ConversionException;
-
 
 /**
  * <p>Standard {@link org.apache.commons.beanutils.Converter} implementation that converts an incoming
@@ -37,14 +34,10 @@ import org.apache.commons.beanutils.ConversionException;
 @Deprecated
 public final class FloatArrayConverter extends AbstractArrayConverter {
 
-
-
-
     /**
      * <p>Model object for type comparisons.</p>
      */
     private static final float[] MODEL = {};
-
 
     /**
      * Create a {@link org.apache.commons.beanutils.Converter} that will throw
@@ -56,9 +49,6 @@ public final class FloatArrayConverter extends AbstractArrayConverter {
         this.useDefault = false;
 
     }
-
-
-
 
     /**
      * Create a {@link org.apache.commons.beanutils.Converter} that will return
@@ -72,9 +62,6 @@ public final class FloatArrayConverter extends AbstractArrayConverter {
         this.useDefault = true;
 
     }
-
-
-
 
     /**
      * Convert the specified input object into an output object of the
@@ -136,6 +123,5 @@ public final class FloatArrayConverter extends AbstractArrayConverter {
         }
 
     }
-
 
 }

@@ -156,7 +156,6 @@ public class BeanMapTestCase extends AbstractTestMap {
   Also note:  The sample keys and mappings were generated manually.
 */
 
-
     public static void main(final String[] args) {
         TestRunner.run(suite());
     }

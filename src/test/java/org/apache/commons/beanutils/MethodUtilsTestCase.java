@@ -34,7 +34,6 @@ import junit.framework.TestSuite;
  */
 public class MethodUtilsTestCase extends TestCase {
 
-
     private static void assertMethod(final Method method, final String methodName) {
         assertNotNull(method);
         assertEquals("Method is not named correctly", methodName,
@@ -43,16 +42,12 @@ public class MethodUtilsTestCase extends TestCase {
                 Modifier.isPublic(method.getModifiers()));
     }
 
-
-
-
     /**
      * Return the tests included in this test suite.
      */
     public static Test suite() {
         return new TestSuite(MethodUtilsTestCase.class);
     }
-
 
     /**
      * Construct a new instance of this test case.
@@ -69,8 +64,6 @@ public class MethodUtilsTestCase extends TestCase {
     @Override
     public void setUp() {
     }
-
-
 
     /**
      * Tear down instance variables required by this test case.
@@ -89,7 +82,6 @@ public class MethodUtilsTestCase extends TestCase {
         assertEquals(1, MethodUtils.clearCache());
         assertEquals(0, MethodUtils.clearCache());
     }
-
 
     /**
      * <p> Test <code>getAccessibleMethod</code>.
@@ -144,7 +136,6 @@ public class MethodUtilsTestCase extends TestCase {
         assertEquals("Method TWO wasn't invoked correctly", "ANOTHER TEST", ret);
     }
 
-
     public void testInvokeExactMethodIndirectInterface() throws Exception {
         final Object ret = MethodUtils.invokeExactMethod(
                 PrivateBeanFactory.createSubclass(),
@@ -196,7 +187,6 @@ public class MethodUtilsTestCase extends TestCase {
                         "ChildOne",
                         MethodUtils.invokeMethod(parent, "testAddChild", childOne));
     }
-
 
     public void testInvokeMethodArray() throws Exception {
         final AbstractParent parent = new AlphaBean("parent");
@@ -305,7 +295,6 @@ public class MethodUtilsTestCase extends TestCase {
         // reset default
         MethodUtils.setCacheMethods(true);
     }
-
 
     public void testParentMethod() throws Exception {
         final OutputStream os = new PrintStream(System.out);

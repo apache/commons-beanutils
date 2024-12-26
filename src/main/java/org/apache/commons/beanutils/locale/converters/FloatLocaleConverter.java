@@ -22,7 +22,6 @@ import java.util.Locale;
 
 import org.apache.commons.beanutils.ConversionException;
 
-
 /**
  * <p>Standard {@link org.apache.commons.beanutils.locale.LocaleConverter}
  * implementation that converts an incoming
@@ -34,8 +33,6 @@ import org.apache.commons.beanutils.ConversionException;
  */
 
 public class FloatLocaleConverter extends DecimalLocaleConverter {
-
-
 
     /**
      * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}

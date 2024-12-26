@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils;
-
 
 import java.io.File;
 import java.lang.reflect.Array;
@@ -51,7 +49,6 @@ import org.apache.commons.beanutils.converters.StringConverter;
 import org.apache.commons.beanutils.converters.URLConverter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 
 /**
  * <p>Utility methods for converting String scalar values to objects of the
@@ -136,8 +133,6 @@ public class ConvertUtilsBean {
     @Deprecated
     private static Short defaultShort = Short.valueOf((short) 0);
 
-
-
     /**
      * Get singleton instance
      * @return The singleton instance
@@ -153,12 +148,10 @@ public class ConvertUtilsBean {
     private final WeakFastHashMap<Class<?>, Converter> converters =
             new WeakFastHashMap<>();
 
-
     /**
      * The <code>Log</code> instance for this class.
      */
     private final Log log = LogFactory.getLog(ConvertUtils.class);
-
 
     /**
      * The default value for Boolean conversions.
@@ -184,7 +177,6 @@ public class ConvertUtilsBean {
     @Deprecated
     private Character defaultCharacter = Character.valueOf(' ');
 
-
     /**
      * The default value for Double conversions.
      * @deprecated Register replacement converters for Double.TYPE and
@@ -208,7 +200,6 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     private Integer defaultInteger = Integer.valueOf(0);
-
 
     /**
      * The default value for Long conversions.
@@ -256,7 +247,6 @@ public class ConvertUtilsBean {
         return converter.convert(String.class, value);
 
     }
-
 
     /**
      * Convert the value to an object of the specified class (if
@@ -377,7 +367,6 @@ public class ConvertUtilsBean {
 
     }
 
-
     /**
      * Remove all registered {@link Converter}s, and re-establish the
      * standard Converters.
@@ -417,7 +406,6 @@ public class ConvertUtilsBean {
         return defaultBoolean.booleanValue();
     }
 
-
     /**
      * Gets the default value for Byte conversions.
      * @return The default Byte value
@@ -451,7 +439,6 @@ public class ConvertUtilsBean {
         return defaultDouble.doubleValue();
     }
 
-
     /**
      * Gets the default value for Float conversions.
      * @return The default Float value
@@ -484,7 +471,6 @@ public class ConvertUtilsBean {
     public long getDefaultLong() {
         return defaultLong.longValue();
     }
-
 
     /**
      * Gets the default value for Short conversions.
@@ -558,8 +544,6 @@ public class ConvertUtilsBean {
 
     }
 
-
-
     /**
      * Register the provided converters with the specified defaults.
      *
@@ -582,12 +566,10 @@ public class ConvertUtilsBean {
         registerArrays(throwException, defaultArraySize);
     }
 
-
     /** strictly for convenience since it has same parameter order as Map.put */
     private void register(final Class<?> clazz, final Converter converter) {
         register(new ConverterFacade(converter), clazz);
     }
-
 
     /**
      * Register a custom {@link Converter} for the specified destination
@@ -602,7 +584,6 @@ public class ConvertUtilsBean {
         converters.put(clazz, converter);
 
     }
-
 
     /**
      * Register a new ArrayConverter with the specified element delegate converter
@@ -846,7 +827,6 @@ public class ConvertUtilsBean {
         register(new FloatConverter(defaultFloat), Float.TYPE);
         register(new FloatConverter(defaultFloat), Float.class);
     }
-
 
     /**
      * Sets the default value for Integer conversions.

@@ -15,14 +15,11 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils.converters;
-
 
 import java.util.List;
 
 import org.apache.commons.beanutils.ConversionException;
-
 
 /**
  * Standard {@link org.apache.commons.beanutils.Converter} implementation that converts an incoming
@@ -40,22 +37,15 @@ import org.apache.commons.beanutils.ConversionException;
 @Deprecated
 public final class StringArrayConverter extends AbstractArrayConverter {
 
-
-
-
     /**
      * <p>Model object for type comparisons.</p>
      */
     private static final String[] MODEL = {};
 
-
     /**
      * <p> Model object for int arrays.</p>
      */
     private static final int[] INT_MODEL = {};
-
-
-
 
     /**
      * Create a {@link org.apache.commons.beanutils.Converter} that will throw
@@ -80,10 +70,6 @@ public final class StringArrayConverter extends AbstractArrayConverter {
         this.useDefault = true;
 
     }
-
-
-
-
 
     /**
      * Convert the specified input object into an output object of the

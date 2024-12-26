@@ -33,8 +33,6 @@ import java.util.Locale;
 
 public class SqlTimestampLocaleConverter extends DateLocaleConverter {
 
-
-
     /**
      * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
@@ -195,7 +193,6 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter {
 
         super(defaultValue, locale, pattern, locPattern);
     }
-
 
     /**
      * Convert the specified locale-sensitive input object into an output object of the

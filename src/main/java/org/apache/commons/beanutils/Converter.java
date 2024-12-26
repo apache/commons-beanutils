@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils;
-
 
 /**
  * <p>General purpose data type converter that can be registered and used
@@ -37,7 +35,6 @@ package org.apache.commons.beanutils;
 
 public interface Converter {
 
-
     /**
      * Convert the specified input object into an output object of the
      * specified type.
@@ -50,6 +47,5 @@ public interface Converter {
      *  successfully
      */
     <T> T convert(Class<T> type, Object value);
-
 
 }

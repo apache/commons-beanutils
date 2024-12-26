@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils;
-
 
 /**
  * This is a public subclass of TestBean.  All of our properties should still
@@ -28,6 +26,5 @@ package org.apache.commons.beanutils;
 public class TestBeanPublicSubclass extends TestBean {
 
     private static final long serialVersionUID = 1L;
-
 
 }

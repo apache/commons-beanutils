@@ -40,9 +40,6 @@ public class LocaleBeanUtilsTestCase extends TestCase {
         return new TestSuite(LocaleBeanUtilsTestCase.class);
     }
 
-
-
-
     /**
      * Construct a new instance of this test case.
      *
@@ -52,7 +49,6 @@ public class LocaleBeanUtilsTestCase extends TestCase {
         super(name);
     }
 
-
     /**
      * Set up instance variables required by this test case.
      */
@@ -60,15 +56,12 @@ public class LocaleBeanUtilsTestCase extends TestCase {
     public void setUp() {
     }
 
-
     /**
      * Tear down instance variables required by this test case.
      */
     @Override
     public void tearDown() {
     }
-
-
 
     /**
      * Test setting a nested indexed property

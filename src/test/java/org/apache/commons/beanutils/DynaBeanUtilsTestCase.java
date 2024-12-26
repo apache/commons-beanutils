@@ -17,7 +17,6 @@
 
 package org.apache.commons.beanutils;
 
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,16 +27,12 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-
 /**
  * Test case for BeanUtils when the underlying bean is actually a DynaBean.
  *
  */
 
 public class DynaBeanUtilsTestCase extends TestCase {
-
-
-
 
     /**
      * Create and return a <code>DynaClass</code> instance for our test
@@ -75,7 +70,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Return the tests included in this test suite.
      */
@@ -85,22 +79,15 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * The basic test bean for each test.
      */
     protected DynaBean bean;
 
-
-
-
     /**
      * The nested bean pointed at by the "nested" property.
      */
     protected TestBean nested;
-
-
-
 
     /**
      * The set of properties that should be described.
@@ -129,7 +116,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
       "stringProperty"
     };
 
-
     /**
      * Construct a new instance of this test case.
      *
@@ -141,7 +127,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
     }
 
-
     // Ensure that the nested intArray matches the specified values
     protected void checkIntArray(final int actual[], final int expected[]) {
         assertNotNull("actual array not null", actual);
@@ -151,9 +136,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
                          expected[i], actual[i]);
         }
     }
-
-
-
 
     // Ensure that the actual Map matches the expected Map
     protected void checkMap(final Map<?, ?> actual, final Map<?, ?> expected) {
@@ -224,7 +206,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Tear down instance variables required by this test case.
      */
@@ -235,7 +216,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
         nested = null;
 
     }
-
 
     /**
      * Test the cloneBean() method from a DynaBean.
@@ -314,7 +294,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test the copyProperties() method from a DynaBean.
      */
@@ -391,7 +370,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test copyProperties() when the origin is a a <code>Map</code>.
      */
@@ -450,7 +428,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
         assertEquals("intArray[2]", 200, intArray[2]);
 
     }
-
 
     /**
      * Test the copyProperties() method from a standard JavaBean.
@@ -522,7 +499,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test narrowing and widening conversions on byte.
      */
@@ -545,7 +521,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test narrowing and widening conversions on double.
      */
@@ -566,7 +541,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test narrowing and widening conversions on float.
      */
@@ -586,7 +560,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
         assertEquals(123, ((Float) bean.get("floatProperty")).floatValue(), 0.005);
 
     }
-
 
     /**
      * Test narrowing and widening conversions on int.
@@ -610,7 +583,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test narrowing and widening conversions on long.
      */
@@ -632,7 +604,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
         assertEquals(123, ((Long) bean.get("longProperty")).longValue());
 
     }
-
 
     /**
      * Test copying a property using a nested indexed array expression,
@@ -675,7 +646,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test copying a property using a nested mapped map property.
      */
@@ -696,7 +666,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
         checkMap(((TestBean) bean.get("nested")).getMapProperty(), changedMap);
 
     }
-
 
     /**
      * Test copying a property using a nested simple expression, with and
@@ -729,7 +698,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test copying a null property value.
      */
@@ -740,7 +708,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
         assertNull("nullProperty is null", bean.get("nullProperty"));
 
     }
-
 
     /**
      * Test narrowing and widening conversions on short.
@@ -763,7 +730,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
         assertEquals((short) 123, ((Short) bean.get("shortProperty")).shortValue());
 
     }
-
 
     /**
      * Test the describe() method.
@@ -813,7 +779,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      *  tests the string and int arrays of TestBean
      */
@@ -840,7 +805,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      *  tests getting a 'whatever' property
      */
@@ -859,7 +823,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
             fail("NoSuchMethodException");
         }
     }
-
 
     /**
      *  tests getting an indexed property
@@ -881,7 +844,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
             fail("NoSuchMethodException");
         }
     }
-
 
     /**
      *  tests getting an indexed property
@@ -907,7 +869,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
         }
     }
 
-
     /**
      *  tests getting a nested property
      */
@@ -925,7 +886,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
             fail("NoSuchMethodException");
         }
     }
-
 
     /**
      *  tests getting a 'whatever' property
@@ -945,7 +905,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
             fail("NoSuchMethodException");
         }
     }
-
 
     /**
      * Test populate() method on individual array elements.
@@ -1006,7 +965,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test populate() method on array properties as a whole.
      */
@@ -1044,7 +1002,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test populate() on mapped properties.
      */
@@ -1077,7 +1034,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test populate() method on nested properties.
@@ -1128,7 +1084,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test populate() method on scalar properties.
@@ -1185,9 +1140,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
     }
 
-
-
-
     /**
      * Test setting a null property value.
      */
@@ -1198,7 +1150,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
         assertNull("nullProperty is null", bean.get("nullProperty"));
 
     }
-
 
     /**
      * Test calling setProperty() with null property values.
@@ -1239,7 +1190,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test converting to and from primitive wrapper types.
      */
@@ -1251,6 +1201,5 @@ public class DynaBeanUtilsTestCase extends TestCase {
         assertEquals(1, Integer.parseInt((String) bean.get("stringProperty")));
 
     }
-
 
 }

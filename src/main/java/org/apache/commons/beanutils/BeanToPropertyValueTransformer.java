@@ -23,7 +23,6 @@ import org.apache.commons.collections.Transformer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
 /**
  * <p><code>Transformer</code> that outputs a property value.</p>
  *

@@ -24,7 +24,6 @@ import org.junit.Test;
 class FirstChildBeanB extends RootBeanB {
 }
 
-
 /**
  * Variant of {@link Jira422TestCase} that is compatible with BEANUTILS-492
  *
@@ -39,7 +38,6 @@ public class Jira422bTestCase {
         final Class<?> propertyType = PropertyUtils.getPropertyType(bean, "file[0]");
         assertEquals(String.class.getName(), propertyType.getName());
     }
-
 
     @Test
     public void testSecondChildBean() throws Exception {

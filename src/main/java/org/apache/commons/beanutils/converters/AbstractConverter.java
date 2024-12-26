@@ -79,7 +79,6 @@ public abstract class AbstractConverter implements Converter {
      */
     private Object defaultValue;
 
-
     /**
      * Construct a <em>Converter</em> that throws a
      * <code>ConversionException</code> if an error occurs.
@@ -98,7 +97,6 @@ public abstract class AbstractConverter implements Converter {
     public AbstractConverter(final Object defaultValue) {
         setDefaultValue(defaultValue);
     }
-
 
     /**
      * Generates a standard conversion exception with a message indicating that
@@ -376,7 +374,6 @@ public abstract class AbstractConverter implements Converter {
     public boolean isUseDefault() {
         return useDefault;
     }
-
 
     /**
      * Accessor method for Log instance.

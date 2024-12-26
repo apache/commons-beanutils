@@ -17,11 +17,9 @@
 
 package org.apache.commons.beanutils;
 
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
 
 /**
  * <p>
@@ -30,7 +28,6 @@ import junit.framework.TestSuite;
  */
 
 public class BeanComparatorTestCase extends TestCase {
-
 
     /**
      * Return the tests included in this test suite.
@@ -44,12 +41,7 @@ public class BeanComparatorTestCase extends TestCase {
     protected TestBean bean;
     protected AlphaBean alphaBean1;
 
-
-
     protected AlphaBean alphaBean2;
-
-
-
 
     /**
      * Construct a new instance of this test case.
@@ -60,7 +52,6 @@ public class BeanComparatorTestCase extends TestCase {
         super(name);
     }
 
-
     /**
      * Set up instance variables required by this test case.
      */
@@ -69,7 +60,6 @@ public class BeanComparatorTestCase extends TestCase {
         bean = new TestBean();
         alphaBean1 = new AlphaBean("alphaBean1");
         alphaBean2 = new AlphaBean("alphaBean2");
-
 
     }
 
@@ -82,9 +72,6 @@ public class BeanComparatorTestCase extends TestCase {
         alphaBean1 = null;
         alphaBean2 = null;
     }
-
-
-
 
     /**
      *  tests comparing one bean against itself.
@@ -142,7 +129,6 @@ public class BeanComparatorTestCase extends TestCase {
           final BeanComparator<AlphaBean> beanComparator = new BeanComparator<>("bogusName");
           beanComparator.compare(alphaBean2, alphaBean1);
           fail("should not be able to compare");
-
 
         }
         catch (final Exception e) {

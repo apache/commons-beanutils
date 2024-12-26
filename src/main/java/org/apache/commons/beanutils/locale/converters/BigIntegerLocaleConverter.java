@@ -35,8 +35,6 @@ import org.apache.commons.beanutils.ConversionException;
 
 public class BigIntegerLocaleConverter extends DecimalLocaleConverter {
 
-
-
     /**
      * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}

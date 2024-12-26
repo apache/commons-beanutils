@@ -21,7 +21,6 @@ import org.apache.commons.beanutils.Converter;
 
 import junit.framework.TestSuite;
 
-
 /**
  * Test Case for the ByteConverter class.
  *

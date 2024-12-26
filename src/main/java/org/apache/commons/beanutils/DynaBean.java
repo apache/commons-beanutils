@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils;
-
 
 /**
  * <p>A <strong>DynaBean</strong> is a Java object that supports properties

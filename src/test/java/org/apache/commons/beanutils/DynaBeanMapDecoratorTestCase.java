@@ -67,9 +67,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
     private final Object[] values = {stringVal, null, intVal, dateVal, mapVal};
     private BasicDynaBean dynaBean;
 
-
     private Map<Object, Object> decoratedMap;
-
 
     private Map<Object, Object> modifiableMap;
 
@@ -158,7 +156,6 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
         modifiableMap = new DynaBeanMapDecorator(dynaBean, false);
 
     }
-
 
     /**
      * Tear down instance variables required by this test case.

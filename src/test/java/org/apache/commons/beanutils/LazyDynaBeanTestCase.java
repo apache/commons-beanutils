@@ -53,9 +53,7 @@ public class LazyDynaBeanTestCase extends TestCase {
     protected String testString2      = "myStringValue-2";
     protected Integer testInteger1    = Integer.valueOf(30);
 
-
     protected Integer testInteger2    = Integer.valueOf(40);
-
 
     protected String testKey          = "myKey";
 
@@ -85,7 +83,6 @@ public class LazyDynaBeanTestCase extends TestCase {
     public void tearDown() {
       bean = null;
     }
-
 
     /**
      * Test Getting/Setting an DynaBean[] array

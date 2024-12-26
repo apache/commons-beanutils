@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils.priv;
-
 
 /**
  * Bean that exposes methods defined by an interface that is implemented
@@ -27,18 +25,12 @@ package org.apache.commons.beanutils.priv;
 
 class PrivateBeanSubclass extends PrivateBean {
 
-
-
-
     /**
      * Create a new PrivateBeanSubclass instance.
      */
     PrivateBeanSubclass() {
 
     }
-
-
-
 
     /**
      * A property accessible via the superclass.
@@ -49,6 +41,5 @@ class PrivateBeanSubclass extends PrivateBean {
         return super.getBar();
 
     }
-
 
 }

@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils;
-
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -26,7 +24,6 @@ import java.io.Serializable;
 import java.io.StreamCorruptedException;
 import java.util.List;
 import java.util.Map;
-
 
 /**
  * <p>The metadata describing an individual property of a DynaBean.</p>
@@ -41,7 +38,6 @@ import java.util.Map;
  */
 
 public class DynaProperty implements Serializable {
-
 
     private static final long serialVersionUID = 1L;
     /*
@@ -61,19 +57,14 @@ public class DynaProperty implements Serializable {
     private static final int LONG_TYPE = 7;
     private static final int SHORT_TYPE = 8;
 
-
-
-
     /** Property name */
     protected String name;
-
 
     /** Property type */
     protected transient Class<?> type;
 
     /** The <em>(optional)</em> type of content elements for indexed <code>DynaProperty</code> */
     protected transient Class<?> contentType;
-
 
     /**
      * Construct a property that accepts any data type.
@@ -142,7 +133,6 @@ public class DynaProperty implements Serializable {
         return result;
     }
 
-
     /**
      * Gets the <em>(optional)</em> type of the indexed content for <code>DynaProperty</code>'s
      * that support this feature.
@@ -165,8 +155,6 @@ public class DynaProperty implements Serializable {
         return this.name;
     }
 
-
-
     /**
      * <p>Gets the Java class representing the data type of the underlying property
      * values.</p>
@@ -182,7 +170,6 @@ public class DynaProperty implements Serializable {
     public Class<?> getType() {
         return this.type;
     }
-
 
     /**
      * @return the hashcode for this dyna property
@@ -261,7 +248,6 @@ public class DynaProperty implements Serializable {
         }
     }
 
-
     /**
      * Reads field values for this object safely. There are issues with serializing primitive class types on certain JVM versions (including java 1.3). This
      * method provides a workaround.
@@ -333,7 +319,6 @@ public class DynaProperty implements Serializable {
             out.writeInt(primitiveType);
         }
     }
-
 
     /**
      * Writes this object safely. There are issues with serializing primitive class types on certain JVM versions (including java 1.3). This method provides a

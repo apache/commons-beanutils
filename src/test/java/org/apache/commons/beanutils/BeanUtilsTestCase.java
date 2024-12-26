@@ -17,7 +17,6 @@
 
 package org.apache.commons.beanutils;
 
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -30,7 +29,6 @@ import org.apache.commons.beanutils.converters.DateConverter;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
 
 /**
  * <p>
@@ -102,12 +100,8 @@ public class BeanUtilsTestCase extends TestCase {
     /** Test Calendar value */
     protected java.util.Calendar testCalendar;
 
-
     /** Test java.util.Date value */
     protected java.util.Date testUtilDate;
-
-
-
 
     /** Test String Date value */
     protected String testStringDate;
@@ -120,7 +114,6 @@ public class BeanUtilsTestCase extends TestCase {
     public BeanUtilsTestCase(final String name) {
         super(name);
     }
-
 
     // Ensure that the actual int[] matches the expected int[]
     protected void checkIntArray(final int actual[], final int expected[]) {
@@ -142,16 +135,12 @@ public class BeanUtilsTestCase extends TestCase {
         }
     }
 
-
-
-
     /**
      * Use reflection to get the cause
      */
     private Throwable getCause(final Throwable t) throws Throwable {
         return (Throwable) PropertyUtils.getProperty(t, "cause");
     }
-
 
     /**
      * Catch a cause, initialize using BeanUtils.initCause() and throw new exception
@@ -164,7 +153,6 @@ public class BeanUtilsTestCase extends TestCase {
         }
     }
 
-
     /**
      * Set up instance variables required by this test case.
      */
@@ -174,7 +162,6 @@ public class BeanUtilsTestCase extends TestCase {
         BeanUtilsBean.setInstance(new BeanUtilsBean());
         setUpShared();
     }
-
 
     /**
      * Shared Set up.
@@ -197,7 +184,6 @@ public class BeanUtilsTestCase extends TestCase {
         testUtilDate = testCalendar.getTime();
         testStringDate = "28.12.1992";
     }
-
 
     /**
      * Tear down instance variables required by this test case.
@@ -432,7 +418,6 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test narrowing and widening conversions on byte.
      */
@@ -453,7 +438,6 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test <code>copyProperty()</code> conversion.
      */
@@ -465,7 +449,6 @@ public class BeanUtilsTestCase extends TestCase {
         }
         assertEquals("Calendar --> java.util.Date", testUtilDate, bean.getDateProperty());
     }
-
 
     /**
      * Test <code>copyProperty()</code> converting from a String.
@@ -505,7 +488,6 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals("java.util.Date[] --> String[] value ", testUtilDate.toString(), bean.getStringArray()[0]);
     }
 
-
     /**
      * Test <code>copyProperty()</code> converting to a String on indexed property
      */
@@ -518,7 +500,6 @@ public class BeanUtilsTestCase extends TestCase {
         }
         assertEquals("java.util.Date --> String[]", testUtilDate.toString(), bean.getStringArray()[0]);
     }
-
 
     /**
      * Test narrowing and widening conversions on double.
@@ -540,7 +521,6 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test narrowing and widening conversions on float.
      */
@@ -560,7 +540,6 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals(123, bean.getFloatProperty(), 0.005);
 
     }
-
 
     /**
      * Test narrowing and widening conversions on int.
@@ -582,7 +561,6 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test narrowing and widening conversions on long.
      */
@@ -602,7 +580,6 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals(123, bean.getLongProperty());
 
     }
-
 
     /**
      * Test copying a property using a nested indexed array expression,
@@ -640,7 +617,6 @@ public class BeanUtilsTestCase extends TestCase {
         checkIntArray(bean.getNested().getIntArray(), intChanged);
 
     }
-
 
     /**
      * Test copying a property using a nested mapped map property.
@@ -812,13 +788,11 @@ public class BeanUtilsTestCase extends TestCase {
             assertTrue("String array length = " + iarr.length,
                     iarr.length == arr.length);
 
-
             // Test property which isn't array or collection
             arr = BeanUtils.getArrayProperty(bean, "shortProperty");
             final String shortAsString = "" + bean.getShortProperty();
             assertEquals("Short List Test lth", 1, arr.length);
             assertEquals("Short Test value", shortAsString, arr[0]);
-
 
             // Test comma delimited list
             bean.setStringProperty("ABC");
@@ -836,7 +810,6 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test <code>getArrayProperty()</code> converting to a String.
      */
@@ -851,7 +824,6 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals("java.util.Date[] --> String[] length", 1, value.length);
         assertEquals("java.util.Date[] --> String[] value ", testUtilDate.toString(), value[0]);
     }
-
 
     /**
      *  tests getting a 'whatever' property
@@ -871,7 +843,6 @@ public class BeanUtilsTestCase extends TestCase {
             fail("NoSuchMethodException");
         }
     }
-
 
     /**
      *  tests getting an indexed property
@@ -893,7 +864,6 @@ public class BeanUtilsTestCase extends TestCase {
             fail("NoSuchMethodException");
         }
     }
-
 
     /**
      *  tests getting an indexed property
@@ -918,7 +888,6 @@ public class BeanUtilsTestCase extends TestCase {
             fail("NoSuchMethodException");
         }
     }
-
 
     /**
      * Test <code>getArrayProperty()</code> converting to a String.
@@ -951,7 +920,6 @@ public class BeanUtilsTestCase extends TestCase {
             fail("NoSuchMethodException");
         }
     }
-
 
     /**
      *  tests getting a 'whatever' property
@@ -1138,7 +1106,6 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test populate() method on nested properties.
      */
@@ -1191,7 +1158,6 @@ public class BeanUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test populate() method on scalar properties.
@@ -1253,7 +1219,6 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
-
     /** Tests that separate instances can register separate instances */
     public void testSeparateInstances() throws Exception {
         final BeanUtilsBean utilsOne = new BeanUtilsBean(
@@ -1262,7 +1227,6 @@ public class BeanUtilsTestCase extends TestCase {
         final BeanUtilsBean utilsTwo = new BeanUtilsBean(
                                                 new ConvertUtilsBean(),
                                                 new PropertyUtilsBean());
-
 
         final TestBean bean = new TestBean();
 
@@ -1298,7 +1262,6 @@ public class BeanUtilsTestCase extends TestCase {
         }
     }
 
-
     /**
      * Test setting a value out of a mapped Map
      */
@@ -1318,7 +1281,6 @@ public class BeanUtilsTestCase extends TestCase {
         }
         assertEquals("AFTER", "SUB-KEY-3-UPDATED", ((Map<?, ?>)bean.getMapProperty().get("mappedMap")).get("sub-key-3"));
     }
-
 
     /**
      * Test narrowing and widening conversions on byte.
@@ -1342,7 +1304,6 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test <code>setProperty()</code> conversion.
      */
@@ -1354,7 +1315,6 @@ public class BeanUtilsTestCase extends TestCase {
         }
         assertEquals("Calendar --> java.util.Date", testUtilDate, bean.getDateProperty());
     }
-
 
     /**
      * Test <code>setProperty()</code> converting from a String.
@@ -1368,7 +1328,6 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals("String --> java.util.Date", testUtilDate, bean.getDateProperty());
     }
 
-
     /**
      * Test <code>setProperty()</code> converting to a String.
      */
@@ -1380,7 +1339,6 @@ public class BeanUtilsTestCase extends TestCase {
         }
         assertEquals("java.util.Date --> String", testUtilDate.toString(), bean.getStringProperty());
     }
-
 
     /**
      * Test <code>setProperty()</code> converting to a String array.
@@ -1395,7 +1353,6 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals("java.util.Date[] --> String[] length", 1, bean.getStringArray().length);
         assertEquals("java.util.Date[] --> String[] value ", testUtilDate.toString(), bean.getStringArray()[0]);
     }
-
 
     /**
      * Test <code>setProperty()</code> converting to a String on indexed property
@@ -1493,7 +1450,6 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals(123, bean.getLongProperty());
 
     }
-
 
     /**
      * Test setting a null property value.

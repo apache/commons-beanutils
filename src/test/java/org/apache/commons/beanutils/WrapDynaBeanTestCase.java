@@ -15,7 +15,6 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils;
 
 import java.io.ByteArrayInputStream;
@@ -26,7 +25,6 @@ import java.io.ObjectOutputStream;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-
 /**
  * <p>Test Case for the <code>WrapDynaBean</code> implementation class.
  * These tests were based on the ones in <code>PropertyUtilsTestCase</code>
@@ -36,11 +34,6 @@ import junit.framework.TestSuite;
 
 public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
-
-
-
-
-
     /**
      * Return the tests included in this test suite.
      */
@@ -49,9 +42,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         return new TestSuite(WrapDynaBeanTestCase.class);
 
     }
-
-
-
 
     /**
      * Construct a new instance of this test case.
@@ -63,7 +53,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         super(name);
 
     }
-
 
     /**
      * Helper method for testing whether basic access to properties works as
@@ -104,7 +93,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         }
     }
 
-
     /**
      * Do serialization and deserialization.
      */
@@ -136,10 +124,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
     }
 
-
-
-
-
     /**
      * Set up instance variables required by this test case.
      */
@@ -149,7 +133,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         bean = new WrapDynaBean(new TestBean());
 
     }
-
 
     /**
      * Tear down instance variables required by this test case.
@@ -179,7 +162,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         assertSame("Instance not cached", clazz,
                 WrapDynaClass.createDynaClass(TestBean.class));
     }
-
 
     /**
      * Tests whether the PropertyUtilsBean instance associated with a WrapDynaClass is
@@ -242,7 +224,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         checkSimplePropertyAccess();
     }
 
-
     /**
      * Tests whether a custom PropertyUtilsBean instance can be used for introspection of
      * bean properties.
@@ -274,7 +255,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         } catch (final Throwable t) {
             fail("Exception: " + t);
         }
-
 
         try {
             assertTrue("Can not see unknown key",

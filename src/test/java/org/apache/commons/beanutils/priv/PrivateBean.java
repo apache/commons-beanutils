@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils.priv;
-
 
 /**
  * Bean that has a private constructor that exposes properties via
@@ -32,16 +30,10 @@ package org.apache.commons.beanutils.priv;
 
 class PrivateBean implements PrivateDirect {
 
-
-
-
     /**
      * A directly implemented property.
      */
     private final String foo = "This is foo";
-
-
-
 
     /**
      * A property accessible via a directly implemented interface.
@@ -52,7 +44,6 @@ class PrivateBean implements PrivateDirect {
      * A property accessible via an indirectly implemented interface.
      */
     private final String baz = "This is baz";
-
 
     /**
      * Package private constructor - can only use factory method to create
@@ -69,14 +60,12 @@ class PrivateBean implements PrivateDirect {
 
     }
 
-
     @Override
     public String getBaz() {
 
         return this.baz;
 
     }
-
 
     public String getFoo() {
 
@@ -94,7 +83,6 @@ class PrivateBean implements PrivateDirect {
 
     }
 
-
     /**
      * A method accessible via an indirectly implemented interface.
      */
@@ -104,6 +92,5 @@ class PrivateBean implements PrivateDirect {
         return in;
 
     }
-
 
 }

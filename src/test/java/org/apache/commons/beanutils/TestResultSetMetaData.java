@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils;
-
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -25,7 +23,6 @@ import java.lang.reflect.Proxy;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Types;
-
 
 /**
  * <p>Mock object that implements enough of
@@ -36,9 +33,6 @@ import java.sql.Types;
 
 public class TestResultSetMetaData implements InvocationHandler {
 
-
-
-
     /**
      * Factory method for creating {@link ResultSetMetaData} proxies.
      *
@@ -47,7 +41,6 @@ public class TestResultSetMetaData implements InvocationHandler {
     public static ResultSetMetaData createProxy() {
         return TestResultSetMetaData.createProxy(new TestResultSetMetaData());
     }
-
 
     /**
      * Factory method for creating {@link ResultSetMetaData} proxies.
@@ -83,12 +76,9 @@ public class TestResultSetMetaData implements InvocationHandler {
         throw new UnsupportedOperationException();
     }
 
-
-
     public String getColumnClassName(final int columnIndex) throws SQLException {
         return metadata[columnIndex - 1][1];
     }
-
 
     public int getColumnCount() throws SQLException {
         return metadata.length;
@@ -98,18 +88,13 @@ public class TestResultSetMetaData implements InvocationHandler {
         throw new UnsupportedOperationException();
     }
 
-
     public String getColumnLabel(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
-
-
-
     public String getColumnName(final int columnIndex) throws SQLException {
         return metadata[columnIndex - 1][0];
     }
-
 
     public Integer getColumnType(final int columnIndex) throws SQLException {
         final String columnName = getColumnName(columnIndex);
@@ -161,31 +146,25 @@ public class TestResultSetMetaData implements InvocationHandler {
         return Integer.valueOf(sqlType);
     }
 
-
     public String getColumnTypeName(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
-
 
     public int getPrecision(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
-
     public int getScale(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
-
 
     public String getSchemaName(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
-
     public String getTableName(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
-
 
     /**
      * Handles method invocation on the {@link ResultSetMetaData} proxy.
@@ -215,50 +194,40 @@ public class TestResultSetMetaData implements InvocationHandler {
         throw new UnsupportedOperationException(methodName + " not implemented");
     }
 
-
     public boolean isAutoIncrement(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
-
 
     public boolean isCaseSensitive(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
-
     public boolean isCurrency(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
-
 
     public boolean isDefinitelyWritable(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
-
     public int isNullable(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
-
 
     public boolean isReadOnly(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
-
     public boolean isSearchable(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
-
 
     public boolean isSigned(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
-
     public boolean isWritable(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
-
 
 }

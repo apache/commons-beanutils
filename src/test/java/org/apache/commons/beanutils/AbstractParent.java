@@ -45,7 +45,6 @@ public abstract class AbstractParent {
         return child.getName();
     }
 
-
     /**
      * Method which matches signature but which has wrong parameters
      */

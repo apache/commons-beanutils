@@ -345,7 +345,6 @@ public class BeanUtils {
         return BeanUtilsBean.getInstance().getProperty(bean, name);
     }
 
-
     /**
      * <p>Return the value of the specified simple property of the specified
      * bean, converted to a String.</p>

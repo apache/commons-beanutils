@@ -23,7 +23,6 @@ import org.apache.commons.collections.Predicate;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
 /**
  * <p><code>Predicate</code> that evaluates a property value against a specified value.</p>
  * <p>

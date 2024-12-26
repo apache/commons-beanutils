@@ -17,7 +17,6 @@
 
 package org.apache.commons.beanutils;
 
-
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.InvocationTargetException;
@@ -29,7 +28,6 @@ import java.util.WeakHashMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 
 /**
  * <p>Utility reflection methods focused on methods in general rather than properties in particular.</p>
@@ -143,7 +141,6 @@ public class MethodUtils {
     /** An empty object array */
     private static final Object[] EMPTY_OBJECT_ARRAY = {};
 
-
     /**
      * Stores a cache of MethodDescriptor to Method in a WeakHashMap.
      * <p>
@@ -191,7 +188,6 @@ public class MethodUtils {
         cache.clear();
         return size;
     }
-
 
     /**
      * <p>Return an accessible method (that is, one that can be invoked via
@@ -249,7 +245,6 @@ public class MethodUtils {
         return method;
     }
 
-
     /**
      * <p>Return an accessible method (that is, one that can be invoked via
      * reflection) with given name and a single parameter.  If no such method
@@ -270,7 +265,6 @@ public class MethodUtils {
         final Class<?>[] parameterTypes = {parameterType};
         return getAccessibleMethod(clazz, methodName, parameterTypes);
     }
-
 
     /**
      * <p>Return an accessible method (that is, one that can be invoked via
@@ -306,7 +300,6 @@ public class MethodUtils {
         }
     }
 
-
     /**
      * <p>Return an accessible method (that is, one that can be invoked via
      * reflection) that implements the specified Method.  If no such method
@@ -324,7 +317,6 @@ public class MethodUtils {
 
         return getAccessibleMethod(method.getDeclaringClass(), method);
     }
-
 
     /**
      * <p>Return an accessible method (that is, one that can be invoked via
@@ -428,7 +420,6 @@ public class MethodUtils {
         }
         return null;
     }
-
 
     /**
      * <p>Find an accessible method that matches the given name and has compatible parameters.
@@ -551,7 +542,6 @@ public class MethodUtils {
         return bestMatch;
     }
 
-
     /**
      * Gets the number of steps required needed to turn the source class into the
      * destination class. This represents the number of steps in the object hierarchy
@@ -592,7 +582,6 @@ public class MethodUtils {
 
         return cost;
     }
-
 
     /**
      * Gets the class for the primitive type corresponding to the primitive wrapper class given.
@@ -670,7 +659,6 @@ public class MethodUtils {
         return null;
     }
 
-
     /**
      * Returns the sum of the object transformation cost for each class in the source
      * argument list.
@@ -722,7 +710,6 @@ public class MethodUtils {
         final Object[] args = toArray(arg);
         return invokeExactMethod(object, methodName, args);
     }
-
 
     /**
      * <p>Invoke a method whose parameter types match exactly the object
@@ -810,8 +797,6 @@ public class MethodUtils {
         return method.invoke(object, args);
     }
 
-
-
     /**
      * <p>Invoke a static method whose parameter type matches exactly the object
      * type.</p>
@@ -844,8 +829,6 @@ public class MethodUtils {
         final Object[] args = toArray(arg);
         return invokeExactStaticMethod (objectClass, methodName, args);
     }
-
-
 
     /**
      * <p>Invoke a static method whose parameter types match exactly the object
@@ -1117,7 +1100,6 @@ public class MethodUtils {
         return invokeStaticMethod (objectClass, methodName, args);
     }
 
-
     /**
      * <p>Invoke a named static method whose parameter type matches the object type.</p>
      *
@@ -1269,7 +1251,6 @@ public class MethodUtils {
             clearCache();
         }
     }
-
 
     /**
      * Try to make the method accessible

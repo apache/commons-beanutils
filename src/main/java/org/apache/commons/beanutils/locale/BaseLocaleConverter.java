@@ -25,7 +25,6 @@ import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
 /**
  * <p>The base class for all standart type locale-sensitive converters.
  * It has {@link LocaleConverter} and {@link org.apache.commons.beanutils.Converter} implementations,
@@ -36,7 +35,6 @@ import org.apache.commons.logging.LogFactory;
  */
 
 public abstract class BaseLocaleConverter implements LocaleConverter {
-
 
     /**
      * Checks whether the result of a conversion is conform to the specified
@@ -82,7 +80,6 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
 
     /** The default pattern specified to our Constructor, if any. */
     protected String pattern;
-
 
     /** The flag indicating whether the given pattern string is localized or not. */
     protected boolean locPattern;
@@ -141,7 +138,6 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
         this(defaultValue, locale, pattern, true, locPattern);
     }
 
-
     /**
      * Create a {@link LocaleConverter} that will return the specified default value
      * or throw a {@link ConversionException} if a conversion error occurs.
@@ -167,7 +163,6 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
         this.pattern = pattern;
         this.locPattern = locPattern;
     }
-
 
     /**
      * Convert the specified locale-sensitive input object into an output object of the

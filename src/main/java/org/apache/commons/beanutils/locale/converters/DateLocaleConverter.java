@@ -31,7 +31,6 @@ import org.apache.commons.beanutils.locale.BaseLocaleConverter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
 /**
  * <p>Standard {@link org.apache.commons.beanutils.locale.LocaleConverter}
  * implementation that converts an incoming
@@ -43,7 +42,6 @@ import org.apache.commons.logging.LogFactory;
  */
 
 public class DateLocaleConverter extends BaseLocaleConverter {
-
 
     /**
      * Default Pattern Characters
@@ -63,7 +61,6 @@ public class DateLocaleConverter extends BaseLocaleConverter {
 
     /** All logging goes through this logger */
     private final Log log = LogFactory.getLog(DateLocaleConverter.class);
-
 
     /** Should the date conversion be lenient? */
     boolean isLenient;
@@ -187,7 +184,6 @@ public class DateLocaleConverter extends BaseLocaleConverter {
         this(defaultValue, locale, false);
     }
 
-
     /**
      * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
@@ -215,7 +211,6 @@ public class DateLocaleConverter extends BaseLocaleConverter {
 
         this(defaultValue, locale, pattern, false);
     }
-
 
     /**
      * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
@@ -268,7 +263,6 @@ public class DateLocaleConverter extends BaseLocaleConverter {
          }
          return convertedPattern;
     }
-
 
     /**
      * <p>Converts a Pattern from one character set to another.</p>
@@ -347,7 +341,6 @@ public class DateLocaleConverter extends BaseLocaleConverter {
          final DateFormat formatter = pattern == null ? DateFormat.getDateInstance(DateFormat.SHORT, locale)
                                                 : new SimpleDateFormat(pattern, locale);
          formatter.setLenient(isLenient);
-
 
          // Parse the Date
         final ParsePosition pos = new ParsePosition(0);

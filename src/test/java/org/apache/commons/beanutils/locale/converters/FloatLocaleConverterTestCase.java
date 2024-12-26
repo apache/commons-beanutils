@@ -30,13 +30,9 @@ import org.apache.commons.beanutils.locale.LocaleConvertUtils;
 
 public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
-
-
-
     public FloatLocaleConverterTestCase(final String name) {
         super(name);
     }
-
 
     /**
      * Set up instance variables required by this test case.
@@ -58,7 +54,6 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
     public void tearDown() {
         super.tearDown();
     }
-
 
     // ------------------------------------------------------------------------
 
@@ -96,7 +91,6 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertInvalid(converter, null);
         convertNull(converter, null);
 
-
     }
 
     /**
@@ -111,7 +105,6 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, localizedDecimalValue, defaultDecimalPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
 
     }
 
@@ -128,9 +121,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertInvalid(converter, null);
         convertNull(converter, null);
 
-
     }
-
 
     /**
      * Test Converter(Locale, pattern) constructor
@@ -202,12 +193,10 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
                                                   localizedDecimalPattern,
                                                   true);
 
-
         convertValueNoPattern(converter, "(A)", localizedDecimalValue, expectedValue);
         convertValueWithPattern(converter, "(A)", localizedDecimalValue, localizedDecimalPattern, expectedValue);
         convertInvalid(converter, "(A)", defaultValue);
         convertNull(converter, "(A)", defaultValue);
-
 
         // **************************************************************************
         // Convert value in the wrong format - maybe you would expect it to throw an
@@ -216,7 +205,6 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         // I guess this is one of the limitations of DecimalFormat
         // **************************************************************************
         convertValueNoPattern(converter, "(B)", defaultDecimalValue, Float.valueOf("1.234"));
-
 
         // **************************************************************************
         // Convert with non-localized pattern - this causes an exception in parse()
@@ -227,7 +215,6 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         // **************************************************************************
         convertValueWithPattern(converter, "(B)", localizedDecimalValue, defaultDecimalPattern, defaultValue);
 
-
         // **************************************************************************
         // Convert with specified type
         //
@@ -237,12 +224,10 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         // **************************************************************************
         //convertValueToType(converter, "(B)", Integer.class, localizedDecimalValue, localizedDecimalPattern, expectedValue);
 
-
         converter = new FloatLocaleConverter(defaultValue,
                                                   localizedLocale,
                                                   defaultDecimalPattern,
                                                   false);
-
 
         convertValueNoPattern(converter, "(C)", localizedDecimalValue, expectedValue);
         convertValueWithPattern(converter, "(C)", localizedDecimalValue, defaultDecimalPattern, expectedValue);
@@ -265,7 +250,6 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
         assertEquals("Negative Float.MAX_VALUE", Float.valueOf(Float.MAX_VALUE * -1), converter.convert(fmt.format(Float.MAX_VALUE * -1)));
         assertEquals("Negative Float.MIN_VALUE", Float.valueOf(Float.MIN_VALUE * -1), converter.convert(fmt.format(Float.MIN_VALUE * -1)));
-
 
         try {
             converter.convert(fmt.format((double)Float.MAX_VALUE * (double)10));
@@ -306,7 +290,6 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         }
 
     }
-
 
 }
 

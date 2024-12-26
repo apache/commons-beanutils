@@ -116,7 +116,6 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LazyDynaBean implements DynaBean, Serializable {
 
-
    private static final long serialVersionUID = 1L;
 
 /** BigInteger Zero */
@@ -158,8 +157,6 @@ protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
      */
     protected MutableDynaClass dynaClass;
 
-
-
     /**
      * Construct a new <code>LazyDynaBean</code> with a <code>LazyDynaClass</code> instance.
      */
@@ -194,8 +191,6 @@ protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
     public LazyDynaBean(final String name) {
         this(new LazyDynaClass(name));
     }
-
-
 
     /**
      * Does the specified mapped property contain a value for the specified
@@ -246,7 +241,6 @@ protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
             return null;
         }
     }
-
 
     /**
      * Create a new Instance of an 'Indexed' Property
@@ -364,7 +358,6 @@ protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
             return null;
         }
     }
-
 
     /**
      * Create a new Instance of a 'Primitive' Property.
@@ -502,7 +495,6 @@ protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
         return value;
 
     }
-
 
     /**
      * <p>Return the value of an indexed property with the specified name.</p>

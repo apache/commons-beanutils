@@ -58,9 +58,7 @@ public class LazyDynaListTestCase extends TestCase {
     protected DynaClass treeMapDynaClass = new LazyDynaMap(new TreeMap<>());
     protected DynaClass hashMapDynaClass = new LazyDynaMap(new HashMap<>());
 
-
     protected DynaClass pojoDynaClass = new WrapDynaBean(new TestBean()).getDynaClass();
-
 
     protected DynaClass basicDynaClass = new BasicDynaClass("test", BasicDynaBean.class, properties);
 
@@ -110,7 +108,6 @@ public class LazyDynaListTestCase extends TestCase {
             // expected result
         }
 
-
         // find a String property to set
         final String testProperty = findStringProperty(testDynaClass);
         assertNotNull("Test Property Not Found", testProperty);
@@ -149,7 +146,6 @@ public class LazyDynaListTestCase extends TestCase {
         assertEquals("15. Wrong Value", origValue+"_updated_"+2, dynaArray[3].get(testProperty));
         assertEquals("16. Wrong Value", "orig_pos1",             dynaArray[4].get(testProperty));
 
-
         // Test Insert - add(index, Object)
         try {
             final DynaBean extraElement = testDynaClass.newInstance();
@@ -177,7 +173,6 @@ public class LazyDynaListTestCase extends TestCase {
         }
         return null;
     }
-
 
     /**
      * Test Map Create
@@ -337,7 +332,6 @@ public class LazyDynaListTestCase extends TestCase {
             testList.add(testArray[i]);
         }
 
-
         LazyDynaList lazyList = new LazyDynaList(testList);
         assertEquals("1. check size", size, lazyList.size());
 
@@ -351,8 +345,6 @@ public class LazyDynaListTestCase extends TestCase {
             assertEquals("4."+i+" DynaBean error ", "val"+i, dynaArray[i].get("prop"+i));
             assertEquals("5."+i+" Map error ", "val"+i, mapArray[i].get("prop"+i));
         }
-
-
 
         lazyList = new LazyDynaList(testArray);
         assertEquals("6. check size", size, lazyList.size());
@@ -390,7 +382,6 @@ public class LazyDynaListTestCase extends TestCase {
         // Create LazyArrayList for DynaBeans
         final LazyDynaList list = new LazyDynaList(LazyDynaBean.class);
 
-
         final LazyDynaBean bean = new LazyDynaBean();
         bean.set("prop1", "val");
 
@@ -423,8 +414,6 @@ public class LazyDynaListTestCase extends TestCase {
         mapTest(list, HashMap.class, new BenchBean());
 
     }
-
-
 
     /**
      * Test adding a map to List with no type set.

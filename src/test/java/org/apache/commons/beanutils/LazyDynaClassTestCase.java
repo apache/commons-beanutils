@@ -39,9 +39,7 @@ public class LazyDynaClassTestCase extends TestCase {
         return new TestSuite(LazyDynaClassTestCase.class);
     }
 
-
     protected LazyDynaClass dynaClass;
-
 
     protected String testProperty     = "myProperty";
 
@@ -69,7 +67,6 @@ public class LazyDynaClassTestCase extends TestCase {
     public void tearDown() {
         dynaClass = null;
     }
-
 
     /**
      * Test add(name) method
@@ -192,7 +189,6 @@ public class LazyDynaClassTestCase extends TestCase {
         assertEquals("type is correct", Object.class, dynaProperty.getType());
         assertFalse("property doesnt exist", dynaClass.isDynaProperty(testProperty));
     }
-
 
     /**
      * Test retrieving a property which doesn't exist (returnNull is 'true')

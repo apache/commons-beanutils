@@ -33,7 +33,6 @@ import org.apache.commons.collections.FastHashMap;
  */
 public class LocaleConvertUtils {
 
-
     /**
      * <p>Convert the specified locale-sensitive value into a String.</p>
      *
@@ -94,7 +93,6 @@ public class LocaleConvertUtils {
 
         return LocaleConvertUtilsBean.getInstance().convert(value, clazz);
     }
-
 
     /**
      * <p>Convert the specified value to an object of the specified class (if
@@ -266,7 +264,6 @@ public static void deregister(final Class<?> clazz, final Locale locale) {
         return LocaleConvertUtilsBean.getInstance().getDefaultLocale();
     }
 
-
     /**
      * <p>Look up and return any registered {@link LocaleConverter} for the specified
      * destination class and locale; if there is no registered Converter, return
@@ -283,7 +280,6 @@ public static void deregister(final Class<?> clazz, final Locale locale) {
 
         return LocaleConvertUtilsBean.getInstance().lookup(clazz, locale);
     }
-
 
     /**
      * <p>Look up and return any registered FastHashMap instance for the specified locale.</p>

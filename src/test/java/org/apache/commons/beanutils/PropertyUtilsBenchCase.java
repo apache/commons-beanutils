@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils;
-
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,16 +24,12 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-
 /**
  * JUnit Test Case containing microbenchmarks for PropertyUtils.
  *
  */
 
 public class PropertyUtilsBenchCase extends TestCase {
-
-
-
 
     /**
      * Return the tests included in this test suite.
@@ -45,9 +39,6 @@ public class PropertyUtilsBenchCase extends TestCase {
         return new TestSuite(PropertyUtilsBenchCase.class);
 
     }
-
-
-
 
     // Basic loop counter
     private long counter = 100000;
@@ -67,9 +58,6 @@ public class PropertyUtilsBenchCase extends TestCase {
     // PropertyUtilsBean instance to be used
     private PropertyUtilsBean pu;
 
-
-
-
     /**
      * Construct a new instance of this test case.
      *
@@ -80,7 +68,6 @@ public class PropertyUtilsBenchCase extends TestCase {
         super(name);
 
     }
-
 
     /**
      * Set up instance variables required by this test case.
@@ -137,7 +124,6 @@ public class PropertyUtilsBenchCase extends TestCase {
 
     }
 
-
     /**
      * Tear down instance variables required by this test case.
      */
@@ -153,10 +139,6 @@ public class PropertyUtilsBenchCase extends TestCase {
         pu = null;
 
     }
-
-
-
-
 
     // Time copyProperties() from a bean
     public void testCopyPropertiesBean() throws Exception {
@@ -190,7 +172,6 @@ public class PropertyUtilsBenchCase extends TestCase {
 
     }
 
-
     // Time copyProperties() from a DynaBean
     public void testCopyPropertiesDyna() throws Exception {
 
@@ -223,7 +204,6 @@ public class PropertyUtilsBenchCase extends TestCase {
 
     }
 
-
     // Time copyProperties() from a Map
     public void testCopyPropertiesMap() throws Exception {
 
@@ -255,8 +235,5 @@ public class PropertyUtilsBenchCase extends TestCase {
                            ", time=" + (stop - start));
 
     }
-
-
-
 
 }

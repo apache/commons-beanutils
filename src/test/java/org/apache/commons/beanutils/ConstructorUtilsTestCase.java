@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils;
-
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
@@ -26,13 +24,11 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-
 /**
  * <p> Test case for <code>ConstructorUtils</code> </p>
  *
  */
 public class ConstructorUtilsTestCase extends TestCase {
-
 
     /**
      * Return the tests included in this test suite.
@@ -40,9 +36,6 @@ public class ConstructorUtilsTestCase extends TestCase {
     public static Test suite() {
         return new TestSuite(ConstructorUtilsTestCase.class);
     }
-
-
-
 
     /**
      * Construct a new instance of this test case.
@@ -52,7 +45,6 @@ public class ConstructorUtilsTestCase extends TestCase {
     public ConstructorUtilsTestCase(final String name) {
         super(name);
     }
-
 
     /**
      * Set up instance variables required by this test case.
@@ -69,8 +61,6 @@ public class ConstructorUtilsTestCase extends TestCase {
     public void tearDown() throws Exception {
         super.tearDown();
     }
-
-
 
     public void testGetAccessibleConstructor() throws Exception {
         {

@@ -16,7 +16,6 @@
  */
 package org.apache.commons.beanutils.converters;
 
-
 /**
  * {@link org.apache.commons.beanutils.Converter} implementation that handles conversion
  * to and from <strong>java.lang.Character</strong> objects.

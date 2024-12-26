@@ -17,7 +17,6 @@
 
 package org.apache.commons.beanutils;
 
-
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.ref.Reference;
@@ -25,7 +24,6 @@ import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-
 
 /**
  * A MappedPropertyDescriptor describes one mapped property.
@@ -206,7 +204,6 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                 "\" with " + parameterCount + " parameter(s) of matching types.");
     }
 
-
     /**
      * Find a method on a class with a specified number of parameters.
      */
@@ -225,7 +222,6 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         throw new IntrospectionException("No method \"" + methodName +
                 "\" with " + parameterCount + " parameter(s)");
     }
-
 
     /**
      * Find a method on a class with a specified number of parameters.
@@ -271,7 +267,6 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      * The underlying data type of the property we are describing.
      */
     private Reference<Class<?>> mappedPropertyTypeRef;
-
 
     /**
      * The reader method for this property (if any).
@@ -427,7 +422,6 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         findMappedPropertyType();
     }
 
-
     /**
      * Introspect our bean class to identify the corresponding getter
      * and setter methods.
@@ -469,7 +463,6 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
             throw ex;
         }
     }
-
 
     /**
      * Gets the Class object for the property values.

@@ -35,7 +35,6 @@ import java.util.Map;
 
 abstract class JDBCDynaClass implements DynaClass, Serializable {
 
-
     private static final long serialVersionUID = 1L;
 
     /**
@@ -68,7 +67,6 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      * (needed when lowerCase option is true)
      */
     private Map<String, String> columnNameXref;
-
 
     /**
      * <p>Factory method to create a new DynaProperty for the given index

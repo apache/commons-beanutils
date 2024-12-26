@@ -15,7 +15,6 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils;
 
 import java.beans.PropertyDescriptor;
@@ -24,7 +23,6 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 import org.apache.commons.collections.FastHashMap;
-
 
 /**
  * <p>Utility methods for using Java Reflection APIs to facilitate generic
@@ -39,9 +37,6 @@ import org.apache.commons.collections.FastHashMap;
 
 public class PropertyUtils {
 
-
-
-
     /**
      * The delimiter that preceeds the zero-relative subscript for an
      * indexed reference.
@@ -52,7 +47,6 @@ public class PropertyUtils {
      */
     @Deprecated
     public static final char INDEXED_DELIM = '[';
-
 
     /**
      * The delimiter that follows the zero-relative subscript for an
@@ -65,7 +59,6 @@ public class PropertyUtils {
     @Deprecated
     public static final char INDEXED_DELIM2 = ']';
 
-
     /**
      * The delimiter that preceeds the key of a mapped property.
      *
@@ -75,7 +68,6 @@ public class PropertyUtils {
      */
     @Deprecated
     public static final char MAPPED_DELIM = '(';
-
 
     /**
      * The delimiter that follows the key of a mapped property.
@@ -87,7 +79,6 @@ public class PropertyUtils {
     @Deprecated
     public static final char MAPPED_DELIM2 = ')';
 
-
     /**
      * The delimiter that separates the components of a nested reference.
      *
@@ -97,9 +88,6 @@ public class PropertyUtils {
      */
     @Deprecated
     public static final char NESTED_DELIM = '.';
-
-
-
 
     /**
      * The debugging detail level for this component.
@@ -141,8 +129,6 @@ public class PropertyUtils {
         PropertyUtilsBean.getInstance().clearDescriptors();
 
     }
-
-
 
     /**
      * <p>Copy property values from the "origin" bean to the "destination" bean
@@ -266,7 +252,6 @@ public class PropertyUtils {
         return PropertyUtilsBean.getInstance().getIndexedProperty(bean, name, index);
     }
 
-
     /**
      * <p>Return the value of the specified mapped property of the
      * specified bean, with no type conversions.</p>
@@ -292,7 +277,6 @@ public class PropertyUtils {
         return PropertyUtilsBean.getInstance().getMappedProperty(bean, name);
 
     }
-
 
     /**
      * <p>Return the value of the specified mapped property of the specified
@@ -321,7 +305,6 @@ public class PropertyUtils {
 
     }
 
-
     /**
      * <p>Return the mapped property descriptors for this bean class.</p>
      *
@@ -339,7 +322,6 @@ public class PropertyUtils {
 
     }
 
-
     /**
      * <p>Return the mapped property descriptors for this bean.</p>
      *
@@ -356,7 +338,6 @@ public class PropertyUtils {
         return PropertyUtilsBean.getInstance().getMappedPropertyDescriptors(bean);
 
     }
-
 
     /**
      * <p>Return the value of the (possibly nested) property of the specified
@@ -387,7 +368,6 @@ public class PropertyUtils {
 
     }
 
-
     /**
      * <p>Return the value of the specified property of the specified bean,
      * no matter which property reference format is used, with no
@@ -416,7 +396,6 @@ public class PropertyUtils {
         return PropertyUtilsBean.getInstance().getProperty(bean, name);
 
     }
-
 
     /**
      * <p>Retrieve the property descriptor for the specified property of the
@@ -450,7 +429,6 @@ public class PropertyUtils {
 
     }
 
-
     /**
      * <p>Retrieve the property descriptors for the specified class,
      * introspecting and caching them the first time a particular bean class
@@ -470,7 +448,6 @@ public class PropertyUtils {
 
     }
 
-
     /**
      * <p>Retrieve the property descriptors for the specified bean,
      * introspecting and caching them the first time a particular bean class
@@ -488,7 +465,6 @@ public class PropertyUtils {
         return PropertyUtilsBean.getInstance().getPropertyDescriptors(bean);
 
     }
-
 
     /**
      * <p>Return the Java Class repesenting the property editor class that has
@@ -520,7 +496,6 @@ public class PropertyUtils {
 
     }
 
-
     /**
      * <p>Return the Java Class representing the property type of the specified
      * property, or <code>null</code> if there is no such property for the
@@ -551,7 +526,6 @@ public class PropertyUtils {
         return PropertyUtilsBean.getInstance().getPropertyType(bean, name);
     }
 
-
     /**
      * <p>Return an accessible property getter method for this property,
      * if there is one; otherwise return <code>null</code>.</p>
@@ -567,7 +541,6 @@ public class PropertyUtils {
         return PropertyUtilsBean.getInstance().getReadMethod(descriptor);
 
     }
-
 
     /**
      * <p>Return the value of the specified simple property of the specified
@@ -598,7 +571,6 @@ public class PropertyUtils {
 
     }
 
-
     /**
      * <p>Return an accessible property setter method for this property,
      * if there is one; otherwise return <code>null</code>.</p>
@@ -614,7 +586,6 @@ public class PropertyUtils {
         return PropertyUtilsBean.getInstance().getWriteMethod(descriptor);
 
     }
-
 
     /**
      * <p>Return <code>true</code> if the specified property name identifies
@@ -638,7 +609,6 @@ public class PropertyUtils {
         return PropertyUtilsBean.getInstance().isReadable(bean, name);
     }
 
-
     /**
      * <p>Return <code>true</code> if the specified property name identifies
      * a writeable property on the specified bean; otherwise, return
@@ -661,7 +631,6 @@ public class PropertyUtils {
         return PropertyUtilsBean.getInstance().isWriteable(bean, name);
     }
 
-
     /**
      * Removes the specified <code>BeanIntrospector</code>.
      *
@@ -675,7 +644,6 @@ public class PropertyUtils {
                 introspector);
     }
 
-
     /**
      * Resets the registered {@link BeanIntrospector} objects to the initial default
      * state.
@@ -686,7 +654,6 @@ public class PropertyUtils {
         PropertyUtilsBean.getInstance().resetBeanIntrospectors();
     }
 
-
     /**
      * The <code>debug</code> static property is no longer used
      * @param newDebug debug property
@@ -696,7 +663,6 @@ public class PropertyUtils {
     public static void setDebug(final int newDebug) {
         debug = newDebug;
     }
-
 
     /**
      * <p>Sets the value of the specified indexed property of the specified
@@ -727,7 +693,6 @@ public class PropertyUtils {
 
         PropertyUtilsBean.getInstance().setIndexedProperty(bean, name, index, value);
     }
-
 
     /**
      * <p>Sets the value of the specified indexed property of the specified
@@ -762,7 +727,6 @@ public class PropertyUtils {
 
     }
 
-
     /**
      * <p>Sets the value of the specified mapped property of the
      * specified bean, with no type conversions.</p>
@@ -789,7 +753,6 @@ public class PropertyUtils {
         PropertyUtilsBean.getInstance().setMappedProperty(bean, name, value);
     }
 
-
     /**
      * <p>Sets the value of the specified mapped property of the specified
      * bean, with no type conversions.</p>
@@ -815,7 +778,6 @@ public class PropertyUtils {
 
         PropertyUtilsBean.getInstance().setMappedProperty(bean, name, key, value);
     }
-
 
     /**
      * <p>Sets the value of the (possibly nested) property of the specified
@@ -846,7 +808,6 @@ public class PropertyUtils {
         PropertyUtilsBean.getInstance().setNestedProperty(bean, name, value);
     }
 
-
     /**
      * <p>Set the value of the specified property of the specified bean,
      * no matter which property reference format is used, with no
@@ -876,7 +837,6 @@ public class PropertyUtils {
 
     }
 
-
     /**
      * <p>Set the value of the specified simple property of the specified bean,
      * with no type conversions.</p>
@@ -905,6 +865,5 @@ public class PropertyUtils {
 
         PropertyUtilsBean.getInstance().setSimpleProperty(bean, name, value);
     }
-
 
 }

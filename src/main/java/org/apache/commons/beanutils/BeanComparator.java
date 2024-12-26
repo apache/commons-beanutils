@@ -181,7 +181,6 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
         return true;
     }
 
-
     /**
      * Gets the Comparator being used to compare beans.
      *
@@ -190,7 +189,6 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
     public Comparator<?> getComparator() {
         return comparator;
     }
-
 
     /**
      * Gets the property attribute of the BeanComparator

@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils;
-
 
 /**
  * Test Child Interface
@@ -25,7 +23,6 @@ package org.apache.commons.beanutils;
  */
 
 public interface MappedPropertyChildInterface extends MappedPropertyTestInterface  {
-
 
 }
 

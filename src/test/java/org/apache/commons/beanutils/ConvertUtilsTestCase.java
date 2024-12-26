@@ -17,7 +17,6 @@
 
 package org.apache.commons.beanutils;
 
-
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -31,7 +30,6 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-
 /**
  * <p>
  *  Test Case for the ConvertUtils class.
@@ -41,19 +39,12 @@ import junit.framework.TestSuite;
 
 public class ConvertUtilsTestCase extends TestCase {
 
-
-
-
-
     /**
      * Return the tests included in this test suite.
      */
     public static Test suite() {
         return new TestSuite(ConvertUtilsTestCase.class);
     }
-
-
-
 
     /**
      * Construct a new instance of this test case.
@@ -63,7 +54,6 @@ public class ConvertUtilsTestCase extends TestCase {
     public ConvertUtilsTestCase(final String name) {
         super(name);
     }
-
 
     private void checkIntegerArray(final Object value, final int intArray[]) {
 
@@ -78,7 +68,6 @@ public class ConvertUtilsTestCase extends TestCase {
         }
 
     }
-
 
     private void checkStringArray(final Object value, final String stringArray[]) {
 
@@ -95,9 +84,6 @@ public class ConvertUtilsTestCase extends TestCase {
 
     }
 
-
-
-
     /**
      * Set up instance variables required by this test case.
      */
@@ -108,7 +94,6 @@ public class ConvertUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Tear down instance variables required by this test case.
      */
@@ -116,7 +101,6 @@ public class ConvertUtilsTestCase extends TestCase {
     public void tearDown() {
         // No action required
     }
-
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
     // We need to use raw types in order to test legacy converters
@@ -166,7 +150,6 @@ public class ConvertUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Tests a conversion to an unsupported target type.
      */
@@ -176,7 +159,6 @@ public class ConvertUtilsTestCase extends TestCase {
         assertSame("Got different object", value,
                 utils.convert(value, getClass()));
     }
-
 
     public void testDeregisteringSingleConverter() throws Exception {
         // make sure that the test work ok before anything's changed
@@ -193,7 +175,6 @@ public class ConvertUtilsTestCase extends TestCase {
         assertNull("Converter should be null",ConvertUtils.lookup(Boolean.TYPE));
 
     }
-
 
     /**
      * Negative String to primitive integer array tests.
@@ -218,9 +199,7 @@ public class ConvertUtilsTestCase extends TestCase {
         value = ConvertUtils.convert("{ 0, 1a3 }", intArray.getClass());
         checkIntegerArray(value, intArray);
 
-
     }
-
 
     /**
      * Negative scalar conversion tests.  These rely on the standard
@@ -299,7 +278,6 @@ public class ConvertUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Negative String to String array tests.
      */
@@ -312,7 +290,6 @@ public class ConvertUtilsTestCase extends TestCase {
         checkStringArray(value, stringArray);
 
     }
-
 
     /**
      * Test conversion of object to string for arrays.
@@ -583,8 +560,6 @@ public class ConvertUtilsTestCase extends TestCase {
 
     }
 
-
-
     /**
      * Positive String to String array tests.
      */
@@ -636,9 +611,7 @@ public class ConvertUtilsTestCase extends TestCase {
                                      stringArray.getClass());
         checkStringArray(value, stringArray2);
 
-
     }
-
 
     public void testSeparateConvertInstances() throws Exception {
         final ConvertUtilsBean utilsOne = new ConvertUtilsBean();
@@ -698,7 +671,6 @@ public class ConvertUtilsTestCase extends TestCase {
                     ((Boolean) value).booleanValue(),
                     true);
     }
-
 
 }
 

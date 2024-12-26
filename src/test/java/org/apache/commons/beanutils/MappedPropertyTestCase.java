@@ -26,14 +26,12 @@ import junit.framework.TestSuite;
  */
 public class MappedPropertyTestCase extends TestCase {
 
-
     /**
      * Run this Test
      */
     public static void main(final String[] args) {
       junit.textui.TestRunner.run(suite());
     }
-
 
     /**
      * Return the tests included in this test suite.
@@ -64,7 +62,6 @@ public class MappedPropertyTestCase extends TestCase {
     @Override
     public void tearDown() {
     }
-
 
     /**
      * Test property with any two args
@@ -211,7 +208,6 @@ public class MappedPropertyTestCase extends TestCase {
         }
     }
 
-
     /**
      * Test Map getter
      */
@@ -259,7 +255,6 @@ public class MappedPropertyTestCase extends TestCase {
         }
     }
 
-
     /**
      * Test invalid method name
      */
@@ -289,7 +284,6 @@ public class MappedPropertyTestCase extends TestCase {
             fail("Property '" + property + "' Not Found in " + clazz.getName() + ": " + ex);
         }
     }
-
 
     /**
      * Test 'protected' mapped property

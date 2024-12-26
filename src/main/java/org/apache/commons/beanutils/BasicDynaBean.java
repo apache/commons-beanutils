@@ -15,16 +15,13 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils;
-
 
 import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 
 /**
  * <p>Minimal implementation of the <code>DynaBean</code> interface.  Can be
@@ -41,9 +38,6 @@ import java.util.Map;
 
 public class BasicDynaBean implements DynaBean, Serializable {
 
-
-
-
     private static final long serialVersionUID = 1L;
 
     /**
@@ -52,14 +46,10 @@ public class BasicDynaBean implements DynaBean, Serializable {
      */
     protected DynaClass dynaClass;
 
-
-
-
     /**
      * The set of property values for this DynaBean, keyed by property name.
      */
     protected HashMap<String, Object> values = new HashMap<>();
-
 
     /** Map decorator for this DynaBean */
     private transient Map<String, Object> mapDecorator;
@@ -103,8 +93,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
                 ("Non-mapped property for '" + name + "(" + key + ")'");
 
     }
-
-
 
     /**
      * Return the value of a simple property with the specified name.
@@ -157,7 +145,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
         return null;
     }
 
-
     /**
      * Return the value of an indexed property with the specified name.
      *
@@ -192,7 +179,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
 
     }
 
-
     /**
      * Return the value of a mapped property with the specified name,
      * or <code>null</code> if there is no value for the specified key.
@@ -221,7 +207,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
 
     }
 
-
     /**
      * Return the <code>DynaClass</code> instance that describes the set of
      * properties available for this DynaBean.
@@ -234,7 +219,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
         return this.dynaClass;
 
     }
-
 
     /**
      * Return the property descriptor for the specified property name.
@@ -254,7 +238,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
         return descriptor;
 
     }
-
 
     /**
      * Return a Map representation of this DynaBean.
@@ -276,7 +259,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
         return mapDecorator;
 
     }
-
 
     /**
      * Is an object of the source class assignable to the destination class?
@@ -303,7 +285,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
 
     }
 
-
     /**
      * Remove any existing value for the specified key on the
      * specified mapped property.
@@ -329,7 +310,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
         ((Map<?, ?>) value).remove(key);
 
     }
-
 
     /**
      * Set the value of an indexed property with the specified name.
@@ -374,9 +354,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
 
     }
 
-
-
-
     /**
      * Set the value of a simple property with the specified name.
      *
@@ -408,7 +385,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
         values.put(name, value);
 
     }
-
 
     /**
      * Set the value of a mapped property with the specified name.
@@ -443,6 +419,5 @@ public class BasicDynaBean implements DynaBean, Serializable {
         map.put(key, value);
 
     }
-
 
 }

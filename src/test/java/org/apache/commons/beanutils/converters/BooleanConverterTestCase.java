@@ -33,7 +33,6 @@ public class BooleanConverterTestCase extends TestCase {
             "no", "n", "false", "off", "0"
         };
 
-
     public BooleanConverterTestCase(final String name) {
         super(name);
     }
@@ -69,7 +68,6 @@ public class BooleanConverterTestCase extends TestCase {
             new String[] {"Yes", "TRUE"},
             new String[] {"NO", "fAlSe"});
     }
-
 
     /**
      * Tests a conversion to another target type. This should not be possible.

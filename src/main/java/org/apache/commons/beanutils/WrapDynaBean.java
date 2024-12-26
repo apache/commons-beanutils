@@ -15,12 +15,10 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils;
 
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
-
 
 /**
  * <p>Implements <code>DynaBean</code> to wrap a standard JavaBean

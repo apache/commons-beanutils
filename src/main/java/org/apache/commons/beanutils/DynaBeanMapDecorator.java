@@ -16,7 +16,6 @@
  */
 package org.apache.commons.beanutils;
 
-
 /**
  * <p>Decorates a {@link DynaBean} to provide <code>Map</code> behaviour.</p>
  *

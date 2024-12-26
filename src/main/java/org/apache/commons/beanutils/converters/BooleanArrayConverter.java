@@ -15,14 +15,11 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils.converters;
-
 
 import java.util.List;
 
 import org.apache.commons.beanutils.ConversionException;
-
 
 /**
  * <p>Standard {@link org.apache.commons.beanutils.Converter} implementation that converts an incoming
@@ -42,16 +39,12 @@ import org.apache.commons.beanutils.ConversionException;
 @Deprecated
 public final class BooleanArrayConverter extends AbstractArrayConverter {
 
-
-
-
     /**
      * Type which this class converts its input to. This value can be
      * used as a parameter to the ConvertUtils.register method.
      * @since 1.8.0
      */
     public static final Class MODEL = new boolean[0].getClass();
-
 
     /**
      * The converter that all instances of this class will use to
@@ -61,13 +54,11 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
     private static final BooleanConverter DEFAULT_CONVERTER
         = new BooleanConverter();
 
-
     /**
      * This object is used to perform the conversion of individual strings
      * into Boolean/boolean values.
      */
     protected final BooleanConverter booleanConverter;
-
 
     /**
      * Create a {@link org.apache.commons.beanutils.Converter} that will throw
@@ -106,7 +97,6 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
 
     }
 
-
     /**
      * Create a {@link org.apache.commons.beanutils.Converter} that will return
      * the specified default value if a conversion error occurs.
@@ -122,8 +112,6 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
         this.booleanConverter = DEFAULT_CONVERTER;
 
     }
-
-
 
     /**
      * Convert the specified input object into an output object of type
@@ -232,6 +220,5 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
         }
 
     }
-
 
 }

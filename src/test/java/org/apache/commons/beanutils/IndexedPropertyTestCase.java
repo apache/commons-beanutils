@@ -31,14 +31,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-
 /**
  * <p>Test Case for the Indexed Properties.</p>
  *
  */
 
 public class IndexedPropertyTestCase {
-
 
     /**
      * The test bean for each test.
@@ -51,9 +49,6 @@ public class IndexedPropertyTestCase {
     private List<String> testList;
     private List<Object> newList;
     private ArrayList<Object> arrayList;
-
-
-
 
     /**
      * Set up instance variables required by this test case.
@@ -98,8 +93,6 @@ public class IndexedPropertyTestCase {
     public void tearDown() {
         bean = null;
     }
-
-
 
     /**
      * Test IndexedPropertyDescriptor for an Array
@@ -353,7 +346,6 @@ public class IndexedPropertyTestCase {
         assertNotNull("No List Write Method", descriptor.getWriteMethod());
     }
 
-
     /**
      * Test setting an Array property
      *
@@ -395,7 +387,6 @@ public class IndexedPropertyTestCase {
         assertEquals("modified-1", bean.getStringArray(1));
     }
 
-
     /**
      * Test setting an ArrayList property
      */
@@ -430,7 +421,6 @@ public class IndexedPropertyTestCase {
             assertEquals("Element " + i + " is different", newList.get(i), list.get(i));
         }
     }
-
 
     /**
      * Test setting an indexed item of a List using setProperty("name[x]", value)

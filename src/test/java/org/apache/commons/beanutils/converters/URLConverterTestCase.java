@@ -25,7 +25,6 @@ import org.apache.commons.beanutils.Converter;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-
 /**
  * Test Case for the URLConverter class.
  *

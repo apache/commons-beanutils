@@ -15,14 +15,11 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils;
-
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Iterator;
-
 
 /**
  * <p>Implements <code>DynaClass</code> for DynaBeans that wrap the
@@ -81,17 +78,12 @@ import java.util.Iterator;
 
 public class ResultSetDynaClass extends JDBCDynaClass {
 
-
-
-
     private static final long serialVersionUID = 1L;
-
 
     /**
      * <p>The <code>ResultSet</code> we are wrapping.</p>
      */
     protected ResultSet resultSet;
-
 
     /**
      * <p>Construct a new ResultSetDynaClass for the specified
@@ -109,7 +101,6 @@ public class ResultSetDynaClass extends JDBCDynaClass {
         this(resultSet, true);
 
     }
-
 
     /**
      * <p>Construct a new ResultSetDynaClass for the specified
@@ -137,9 +128,6 @@ public class ResultSetDynaClass extends JDBCDynaClass {
         this(resultSet, lowerCase, false);
 
     }
-
-
-
 
     /**
      * <p>Construct a new ResultSetDynaClass for the specified
@@ -176,9 +164,6 @@ public class ResultSetDynaClass extends JDBCDynaClass {
 
     }
 
-
-
-
     /**
      * Get a value from the {@link ResultSet} for the specified
      * property name.
@@ -192,7 +177,6 @@ public class ResultSetDynaClass extends JDBCDynaClass {
         return getObject(getResultSet(), name);
     }
 
-
     /**
      * <p>Return the result set we are wrapping.</p>
      */
@@ -201,8 +185,6 @@ public class ResultSetDynaClass extends JDBCDynaClass {
         return this.resultSet;
 
     }
-
-
 
     /**
      * <p>Return an <code>Iterator</code> of {@link DynaBean} instances for
@@ -216,8 +198,6 @@ public class ResultSetDynaClass extends JDBCDynaClass {
         return new ResultSetIterator(this);
 
     }
-
-
 
     /**
      * <p>Loads the class of the given name which by default uses the class loader used

@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils.converters;
-
 
 import java.io.IOException;
 import java.io.StreamTokenizer;
@@ -27,8 +25,6 @@ import java.util.List;
 
 import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.Converter;
-
-
 
 /**
  * <p>Convenience base class for converters that translate the String
@@ -51,9 +47,6 @@ import org.apache.commons.beanutils.Converter;
 @Deprecated
 public abstract class AbstractArrayConverter implements Converter {
 
-
-
-
     /**
      * This is a special reference that can be passed as the "default object"
      * to the constructor to indicate that no default is desired. Note that
@@ -68,19 +61,15 @@ public abstract class AbstractArrayConverter implements Converter {
      */
     protected static String[] strings = {};
 
-
     /**
      * The default value specified to our Constructor, if any.
      */
     protected Object defaultValue;
 
-
-
     /**
      * Should we return the default value on conversion errors?
      */
     protected boolean useDefault = true;
-
 
     /**
      * Create a {@link Converter} that will throw a {@link ConversionException}
@@ -92,7 +81,6 @@ public abstract class AbstractArrayConverter implements Converter {
         this.useDefault = false;
 
     }
-
 
     /**
      * Create a {@link Converter} that will return the specified default value
@@ -112,9 +100,6 @@ public abstract class AbstractArrayConverter implements Converter {
 
     }
 
-
-
-
     /**
      * Convert the specified input object into an output object of the
      * specified type.  This method must be implemented by a concrete
@@ -128,9 +113,6 @@ public abstract class AbstractArrayConverter implements Converter {
      */
     @Override
     public abstract Object convert(Class type, Object value);
-
-
-
 
     /**
      * <p>Parse an incoming String of the form similar to an array initializer
@@ -202,9 +184,6 @@ public abstract class AbstractArrayConverter implements Converter {
 
         }
 
-
-
     }
-
 
 }

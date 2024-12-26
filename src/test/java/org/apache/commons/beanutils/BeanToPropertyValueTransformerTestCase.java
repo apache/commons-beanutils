@@ -19,7 +19,6 @@ package org.apache.commons.beanutils;
 
 import junit.framework.TestCase;
 
-
 /**
  * Test cases for <code>BeanToPropertyValueTransformer</code>.
  *

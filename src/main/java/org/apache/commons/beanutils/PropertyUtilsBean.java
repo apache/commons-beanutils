@@ -17,7 +17,6 @@
 
 package org.apache.commons.beanutils;
 
-
 import java.beans.IndexedPropertyDescriptor;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
@@ -37,7 +36,6 @@ import org.apache.commons.beanutils.expression.Resolver;
 import org.apache.commons.collections.FastHashMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 
 /**
  * Utility methods for using Java Reflection APIs to facilitate generic
@@ -97,7 +95,6 @@ public class PropertyUtilsBean {
     /** An empty object array */
     private static final Object[] EMPTY_OBJECT_ARRAY = {};
 
-
     /**
      * Return the PropertyUtils bean instance.
      * @return The PropertyUtils bean instance
@@ -105,7 +102,6 @@ public class PropertyUtilsBean {
     protected static PropertyUtilsBean getInstance() {
         return BeanUtilsBean.getInstance().getPropertyUtils();
     }
-
 
     /**
      * Converts an object to a list of objects. This method is used when dealing
@@ -140,12 +136,8 @@ public class PropertyUtilsBean {
 
     private final WeakFastHashMap<Class<?>, FastHashMap> mappedDescriptorsCache;
 
-
     /** Log instance */
     private final Log log = LogFactory.getLog(PropertyUtils.class);
-
-
-
 
     /** The list with BeanIntrospector objects. */
     private final List<BeanIntrospector> introspectors;
@@ -342,7 +334,6 @@ public class PropertyUtilsBean {
 
     }
 
-
     /**
      * Performs introspection on the specified class. This method invokes all {@code BeanIntrospector} objects that were
      * added to this instance.
@@ -363,7 +354,6 @@ public class PropertyUtilsBean {
 
         return new BeanIntrospectionData(ictx.getPropertyDescriptors());
     }
-
 
     /**
      * Return the value of the specified indexed property of the specified
@@ -421,7 +411,6 @@ public class PropertyUtilsBean {
         return getIndexedProperty(bean, name, index);
 
     }
-
 
     /**
      * Return the value of the specified indexed property of the specified
@@ -533,7 +522,6 @@ public class PropertyUtilsBean {
 
     }
 
-
     /**
      * Obtains the {@code BeanIntrospectionData} object describing the specified bean
      * class. This object is looked up in the internal cache. If necessary, introspection
@@ -557,7 +545,6 @@ public class PropertyUtilsBean {
 
         return data;
     }
-
 
     /**
      * Return the value of the specified mapped property of the
@@ -610,7 +597,6 @@ public class PropertyUtilsBean {
         return getMappedProperty(bean, name, key);
 
     }
-
 
     /**
      * Return the value of the specified mapped property of the specified
@@ -695,7 +681,6 @@ public class PropertyUtilsBean {
 
     }
 
-
     /**
      * <p>Return the mapped property descriptors for this bean class.</p>
      *
@@ -717,7 +702,6 @@ public class PropertyUtilsBean {
 
     }
 
-
     /**
      * <p>Return the mapped property descriptors for this bean.</p>
      *
@@ -736,7 +720,6 @@ public class PropertyUtilsBean {
         return getMappedPropertyDescriptors(bean.getClass());
 
     }
-
 
     /**
      * Return the value of the (possibly nested) property of the specified
@@ -828,8 +811,6 @@ public class PropertyUtilsBean {
         return getNestedProperty(bean, name);
 
     }
-
-
 
     /**
      * <p>Retrieve the property descriptor for the specified property of the
@@ -927,7 +908,6 @@ public class PropertyUtilsBean {
 
     }
 
-
     /**
      * <p>Retrieve the property descriptors for the specified class,
      * introspecting and caching them the first time a particular bean class
@@ -945,7 +925,6 @@ public class PropertyUtilsBean {
         return getIntrospectionData(beanClass).getDescriptors();
 
     }
-
 
     /**
      * <p>Retrieve the property descriptors for the specified bean,
@@ -1017,7 +996,6 @@ public class PropertyUtilsBean {
 
     }
 
-
     /**
      * This method is called by getNestedProperty and setNestedProperty to
      * define what it means to get a property from an object which implements
@@ -1061,7 +1039,6 @@ public class PropertyUtilsBean {
 
         return bean.get(propertyName);
     }
-
 
     /**
      * Return the Java Class representing the property type of the specified
@@ -1156,7 +1133,6 @@ public class PropertyUtilsBean {
 
     }
 
-
     /**
      * <p>Return an accessible property getter method for this property,
      * if there is one; otherwise return <code>null</code>.</p>
@@ -1170,7 +1146,6 @@ public class PropertyUtilsBean {
     Method getReadMethod(final Class<?> clazz, final PropertyDescriptor descriptor) {
         return MethodUtils.getAccessibleMethod(clazz, descriptor.getReadMethod());
     }
-
 
     /**
      * <p>Return an accessible property getter method for this property,
@@ -1186,7 +1161,6 @@ public class PropertyUtilsBean {
         return MethodUtils.getAccessibleMethod(descriptor.getReadMethod());
 
     }
-
 
     /**
      * Return the configured {@link Resolver} implementation used by BeanUtils.
@@ -1204,7 +1178,6 @@ public class PropertyUtilsBean {
     public Resolver getResolver() {
         return resolver;
     }
-
 
     /**
      * Return the value of the specified simple property of the specified
@@ -1282,7 +1255,6 @@ public class PropertyUtilsBean {
 
     }
 
-
     /**
      * <p>Return an accessible property setter method for this property,
      * if there is one; otherwise return <code>null</code>.</p>
@@ -1299,7 +1271,6 @@ public class PropertyUtilsBean {
         return MethodUtils.getAccessibleMethod(clazz,
                 data.getWriteMethod(clazz, descriptor));
     }
-
 
     /**
      * <p>Return an accessible property setter method for this property,

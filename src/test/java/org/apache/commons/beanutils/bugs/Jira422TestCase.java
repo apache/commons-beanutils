@@ -31,7 +31,6 @@ import org.junit.Assume;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-
 class FirstChildBean extends RootBean {
 }
 

@@ -42,7 +42,6 @@ public class BooleanArrayConverterTestCase extends TestCase {
             "no", "n", "false", "off", "0"
         };
 
-
     public BooleanArrayConverterTestCase(final String name) {
         super(name);
     }

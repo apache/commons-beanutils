@@ -125,7 +125,6 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
         Locale.setDefault(Locale.US);
         isUSFormatWithComma();
 
-
         // Create & Configure the Converter
         final DateTimeConverter converter = makeConverter();
         converter.setUseLocaleFormat(true);
@@ -144,7 +143,6 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
             pattern = pattern.replace(" a", "\u202Fa");
             testString = testString.replace(" PM", "\u202FPM");
         }
-
 
         // Valid String --> Type Conversion
         final Object expected = toType(testString, pattern, null);

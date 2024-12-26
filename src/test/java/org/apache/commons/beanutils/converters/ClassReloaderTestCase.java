@@ -32,7 +32,6 @@ public class ClassReloaderTestCase extends TestCase {
     public static class DummyClass {
     }
 
-
     public static TestSuite suite() {
         return new TestSuite(ClassReloaderTestCase.class);
     }

@@ -17,7 +17,6 @@
 
 package org.apache.commons.beanutils.locale.converters;
 
-
 /**
  * Test Case for the IntegerLocaleConverter class.
  *
@@ -25,13 +24,9 @@ package org.apache.commons.beanutils.locale.converters;
 
 public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
-
-
-
     public IntegerLocaleConverterTestCase(final String name) {
         super(name);
     }
-
 
     /**
      * Set up instance variables required by this test case.
@@ -53,7 +48,6 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
     public void tearDown() {
         super.tearDown();
     }
-
 
     // ------------------------------------------------------------------------
 
@@ -91,7 +85,6 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
         convertInvalid(converter, null);
         convertNull(converter, null);
 
-
     }
 
     /**
@@ -106,7 +99,6 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
         convertValueWithPattern(converter, localizedIntegerValue, defaultIntegerPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
 
     }
 
@@ -123,9 +115,7 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
         convertInvalid(converter, null);
         convertNull(converter, null);
 
-
     }
-
 
     /**
      * Test Converter(Locale, pattern) constructor
@@ -197,12 +187,10 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
                                                   localizedIntegerPattern,
                                                   true);
 
-
         convertValueNoPattern(converter, "(A)", localizedIntegerValue, expectedValue);
         convertValueWithPattern(converter, "(A)", localizedIntegerValue, localizedIntegerPattern, expectedValue);
         convertInvalid(converter, "(A)", defaultValue);
         convertNull(converter, "(A)", defaultValue);
-
 
         // **************************************************************************
         // Convert value in the wrong format - maybe you would expect it to throw an
@@ -212,7 +200,6 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
         // **************************************************************************
         convertValueNoPattern(converter, "(B)", defaultIntegerValue, Integer.valueOf("1"));
 
-
         // **************************************************************************
         // Convert with non-localized pattern - unlike the equivalent BigDecimal Test Case
         // it doesn't causes an exception in parse() - DecimalFormat parses it
@@ -220,7 +207,6 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
         // Again this is one of the limitations of DecimalFormat
         // **************************************************************************
         convertValueWithPattern(converter, "(B)", localizedIntegerValue, defaultIntegerPattern, Integer.valueOf("1"));
-
 
         // **************************************************************************
         // Convert with specified type
@@ -231,12 +217,10 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
         // **************************************************************************
         //convertValueToType(converter, "(B)", Double.class, localizedIntegerValue, localizedIntegerPattern, expectedValue);
 
-
         converter = new IntegerLocaleConverter(defaultValue,
                                                   localizedLocale,
                                                   defaultIntegerPattern,
                                                   false);
-
 
         convertValueNoPattern(converter, "(C)", localizedIntegerValue, expectedValue);
         convertValueWithPattern(converter, "(C)", localizedIntegerValue, defaultIntegerPattern, expectedValue);
@@ -244,7 +228,6 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
         convertNull(converter, "(C)", defaultValue);
 
     }
-
 
     /**
      * Test Converting a number

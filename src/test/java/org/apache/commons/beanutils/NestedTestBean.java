@@ -15,10 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils;
-
-
 
 /**
  * Specialist test bean for complex nested properties.
@@ -27,17 +24,13 @@ package org.apache.commons.beanutils;
 
 public class NestedTestBean {
 
-
     private String name;
-
-
 
     private String testString = "NOT SET";
 
     private boolean testBoolean;
 
     private NestedTestBean indexedBeans[];
-
 
     private NestedTestBean simpleBean;
 
@@ -48,7 +41,6 @@ public class NestedTestBean {
     public NestedTestBean getIndexedProperty(final int index) {
         return this.indexedBeans[index];
     }
-
 
     public String getName() {
         return name;
@@ -61,7 +53,6 @@ public class NestedTestBean {
     public boolean getTestBoolean() {
         return testBoolean;
     }
-
 
     public String getTestString() {
         return testString;
@@ -93,6 +84,5 @@ public class NestedTestBean {
     public void setTestString(final String testString) {
         this.testString = testString;
     }
-
 
 }

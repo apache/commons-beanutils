@@ -37,7 +37,6 @@ import junit.framework.TestSuite;
 
 public class BeanificationTestCase extends TestCase {
 
-
     class Signal {
         private Exception e;
         private int signal;
@@ -95,10 +94,6 @@ public class BeanificationTestCase extends TestCase {
         }
     }
 
-
-
-
-
     class TestClassLoader extends ClassLoader {
         @Override
         public String toString() {
@@ -106,12 +101,8 @@ public class BeanificationTestCase extends TestCase {
         }
     }
 
-
-
-
     /** Maximum number of iterations before our test fails */
     public static final int MAX_GC_ITERATIONS = 50;
-
 
     /**
      * Return the tests included in this test suite.
@@ -119,7 +110,6 @@ public class BeanificationTestCase extends TestCase {
     public static Test suite() {
         return new TestSuite(BeanificationTestCase.class);
     }
-
 
     /**
      * Construct a new instance of this test case.
@@ -129,8 +119,6 @@ public class BeanificationTestCase extends TestCase {
     public BeanificationTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Set up instance variables required by this test case.
@@ -257,7 +245,6 @@ public class BeanificationTestCase extends TestCase {
         assertEquals("Wrong property value(3)", 9, bean.getInt());
 
     }
-
 
     /**
      * Tests whether difference instances are loaded by different
@@ -395,7 +382,6 @@ public class BeanificationTestCase extends TestCase {
             }
         }
 
-
         GetBeanUtilsBeanThread thread = new GetBeanUtilsBeanThread();
         @SuppressWarnings("unused")
         final
@@ -443,7 +429,6 @@ public class BeanificationTestCase extends TestCase {
             bytz = bytz * 2;
         }
     }
-
 
     /** Tests whether classloaders and beans are released from memory by the map used by beanutils */
     public void testMemoryLeak2() throws Exception {

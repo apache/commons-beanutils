@@ -89,8 +89,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
     private TimeZone timeZone;
     private boolean useLocaleFormat;
 
-
-
     /**
      * Construct a Date/Time <em>Converter</em> that throws a
      * <code>ConversionException</code> if an error occurs.
@@ -109,8 +107,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
     public DateTimeConverter(final Object defaultValue) {
         super(defaultValue);
     }
-
-
 
     /**
      * Convert an input Date/Calendar object into a String.
@@ -347,7 +343,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
             log().debug(buffer.toString());
         }
     }
-
 
     /**
      * Parse a String date value using the set of patterns.

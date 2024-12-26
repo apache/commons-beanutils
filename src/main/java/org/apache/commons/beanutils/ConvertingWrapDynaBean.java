@@ -33,10 +33,7 @@ import java.lang.reflect.InvocationTargetException;
 
 public class ConvertingWrapDynaBean extends WrapDynaBean {
 
-
-
     private static final long serialVersionUID = 1L;
-
 
     /**
      * Construct a new <code>DynaBean</code> associated with the specified
@@ -49,7 +46,6 @@ public class ConvertingWrapDynaBean extends WrapDynaBean {
         super(instance);
 
     }
-
 
     /**
      * Set the value of the property with the specified name

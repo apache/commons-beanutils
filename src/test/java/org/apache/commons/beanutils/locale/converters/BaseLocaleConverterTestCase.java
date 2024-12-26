@@ -32,7 +32,6 @@ import junit.framework.TestCase;
 
 public class BaseLocaleConverterTestCase extends TestCase {
 
-
     // Original Default Locale
     protected Locale origLocale;
 
@@ -41,7 +40,6 @@ public class BaseLocaleConverterTestCase extends TestCase {
     protected Object result;
     protected Object defaultValue;
     protected Object expectedValue;
-
 
     // Localized values
     protected Locale localizedLocale;
@@ -57,16 +55,13 @@ public class BaseLocaleConverterTestCase extends TestCase {
     protected String defaultDecimalValue;
     protected String defaultIntegerValue;
 
-
     // Expected values
     protected String expectedDecimalValue;
     protected String expectedIntegerValue;
 
-
     public BaseLocaleConverterTestCase(final String name) {
         super(name);
     }
-
 
     /**
      * Test Converting an invalid value.
@@ -97,8 +92,6 @@ public class BaseLocaleConverterTestCase extends TestCase {
         }
 
     }
-
-
 
     /**
      * Test Converting Null value.
@@ -146,7 +139,6 @@ public class BaseLocaleConverterTestCase extends TestCase {
             fail("No Pattern conversion threw " + msgId + " threw " + e);
         }
         assertEquals("Check conversion value without pattern " + msgId, expectedValue, result);
-
 
     }
 
@@ -233,7 +225,6 @@ public class BaseLocaleConverterTestCase extends TestCase {
             // System.out.println("Changing default locale from " + origLocale + " to " + defaultLocale);
             Locale.setDefault(defaultLocale);
         }
-
 
     }
 

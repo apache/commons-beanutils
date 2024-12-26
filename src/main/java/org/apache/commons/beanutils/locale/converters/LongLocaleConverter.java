@@ -20,7 +20,6 @@ package org.apache.commons.beanutils.locale.converters;
 import java.text.ParseException;
 import java.util.Locale;
 
-
 /**
  * <p>Standard {@link org.apache.commons.beanutils.locale.LocaleConverter}
  * implementation that converts an incoming
@@ -32,8 +31,6 @@ import java.util.Locale;
  */
 
 public class LongLocaleConverter extends DecimalLocaleConverter {
-
-
 
     /**
      * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}

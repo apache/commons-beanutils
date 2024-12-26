@@ -51,7 +51,6 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         super(name);
     }
 
-
     /**
      * Set up instance variables required by this test case.
      */
@@ -62,7 +61,6 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
         final String version = System.getProperty("java.specification.version");
         log.debug("JDK Version "+version);
-
 
         try {
             final SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
@@ -108,7 +106,6 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
     public void tearDown() {
         super.tearDown();
     }
-
 
     // ------------------------------------------------------------------------
 
@@ -156,7 +153,6 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertInvalid(converter, null);
         convertNull(converter, null);
 
-
     }
 
     /**
@@ -171,7 +167,6 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, localizedDateValue, defaultDatePattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
 
     }
 
@@ -194,9 +189,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertInvalid(converter, null);
         convertNull(converter, null);
 
-
     }
-
 
     /**
      * Test Converter(Locale, pattern) constructor
@@ -280,12 +273,10 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
                                             localizedDatePattern,
                                             true);
 
-
         convertValueNoPattern(converter, "(A)", localizedDateValue, expectedValue);
         convertValueWithPattern(converter, "(A)", localizedDateValue, localizedDatePattern, expectedValue);
         convertInvalid(converter, "(A)", defaultValue);
         convertNull(converter, "(A)", defaultValue);
-
 
         // Convert value in the wrong format - should return default value
         convertValueNoPattern(converter, "(B)", defaultDateValue, defaultValue);
@@ -302,12 +293,10 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         // **************************************************************************
         //convertValueToType(converter, "(B)", String.class, localizedDateValue, localizedDatePattern, expectedValue);
 
-
         converter = new DateLocaleConverter(defaultValue,
                                             localizedLocale,
                                             defaultDatePattern,
                                             false);
-
 
         convertValueNoPattern(converter, "(C)", localizedDateValue, expectedValue);
         convertValueWithPattern(converter, "(C)", localizedDateValue, defaultDatePattern, expectedValue);

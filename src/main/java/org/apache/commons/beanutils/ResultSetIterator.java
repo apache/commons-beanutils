@@ -136,7 +136,6 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
             ("FIXME - indexed properties not currently supported");
     }
 
-
     /**
      * Return the value of a mapped property with the specified name,
      * or <code>null</code> if there is no value for the specified key.
@@ -247,7 +246,6 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
         throw new UnsupportedOperationException
             ("FIXME - indexed properties not currently supported");
     }
-
 
     /**
      * Set the value of a simple property with the specified name.

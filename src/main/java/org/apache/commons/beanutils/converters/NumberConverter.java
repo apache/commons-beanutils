@@ -96,7 +96,6 @@ public abstract class NumberConverter extends AbstractConverter {
     private boolean useLocaleFormat;
     private Locale locale;
 
-
     /**
      * Construct a <strong>java.lang.Number</strong> <em>Converter</em>
      * that throws a <code>ConversionException</code> if a error occurs.
@@ -118,7 +117,6 @@ public abstract class NumberConverter extends AbstractConverter {
         this.allowDecimals = allowDecimals;
         setDefaultValue(defaultValue);
     }
-
 
     /**
      * Convert an input Number object into a String.
@@ -276,7 +274,6 @@ public abstract class NumberConverter extends AbstractConverter {
     public boolean isAllowDecimals() {
         return allowDecimals;
     }
-
 
     /**
      * Convert a String into a <code>Number</code> object.
