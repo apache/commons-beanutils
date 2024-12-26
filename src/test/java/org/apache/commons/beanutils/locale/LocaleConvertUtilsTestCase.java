@@ -20,7 +20,6 @@ package org.apache.commons.beanutils.locale;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -281,7 +280,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
 
         LocaleConvertUtils.deregister();
 
-        final NumberFormat nf = DecimalFormat.getNumberInstance();
+        final NumberFormat nf = NumberFormat.getNumberInstance();
         final String result = nf.format(1.1);
 
         // could be commas instead of stops in Europe.
@@ -337,9 +336,9 @@ public class LocaleConvertUtilsTestCase extends TestCase {
      * converters have been generified.)
      */
     public void testDefaultToStringConversionUnsupportedType() {
-        final Integer value = 20131101;
-        assertEquals("Wrong result", value.toString(),
-                LocaleConvertUtils.convert(value.toString(), getClass()));
+        final int value = 20131101;
+        assertEquals("Wrong result", Integer.toString(value),
+                LocaleConvertUtils.convert(Integer.toString(value), getClass()));
     }
 
     /**

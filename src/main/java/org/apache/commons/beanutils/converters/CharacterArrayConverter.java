@@ -112,7 +112,7 @@ public final class CharacterArrayConverter extends AbstractArrayConverter {
             final List<String> list = parseElements(value.toString());
             final char[] results = new char[list.size()];
             for (int i = 0; i < results.length; i++) {
-                results[i] = ((String) list.get(i)).charAt(0);
+                results[i] = list.get(i).charAt(0);
             }
             return results;
         } catch (final Exception e) {

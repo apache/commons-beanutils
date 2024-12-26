@@ -112,7 +112,7 @@ public final class ShortArrayConverter extends AbstractArrayConverter {
             final List<String> list = parseElements(value.toString());
             final short[] results = new short[list.size()];
             for (int i = 0; i < results.length; i++) {
-                results[i] = Short.parseShort((String) list.get(i));
+                results[i] = Short.parseShort(list.get(i));
             }
             return results;
         } catch (final Exception e) {

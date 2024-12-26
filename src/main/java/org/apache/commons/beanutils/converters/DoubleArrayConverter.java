@@ -112,7 +112,7 @@ public final class DoubleArrayConverter extends AbstractArrayConverter {
             final List<String> list = parseElements(value.toString());
             final double[] results = new double[list.size()];
             for (int i = 0; i < results.length; i++) {
-                results[i] = Double.parseDouble((String) list.get(i));
+                results[i] = Double.parseDouble(list.get(i));
             }
             return results;
         } catch (final Exception e) {

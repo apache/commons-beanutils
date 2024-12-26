@@ -112,7 +112,7 @@ public final class IntegerArrayConverter extends AbstractArrayConverter {
             final List<String> list = parseElements(value.toString());
             final int[] results = new int[list.size()];
             for (int i = 0; i < results.length; i++) {
-                results[i] = Integer.parseInt((String) list.get(i));
+                results[i] = Integer.parseInt(list.get(i));
             }
             return results;
         } catch (final Exception e) {

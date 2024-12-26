@@ -112,7 +112,7 @@ public final class FloatArrayConverter extends AbstractArrayConverter {
             final List<String> list = parseElements(value.toString());
             final float[] results = new float[list.size()];
             for (int i = 0; i < results.length; i++) {
-                results[i] = Float.parseFloat((String) list.get(i));
+                results[i] = Float.parseFloat(list.get(i));
             }
             return results;
         } catch (final Exception e) {

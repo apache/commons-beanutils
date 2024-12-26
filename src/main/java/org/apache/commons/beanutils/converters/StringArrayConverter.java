@@ -137,7 +137,7 @@ public final class StringArrayConverter extends AbstractArrayConverter {
             final List<String> list = parseElements(value.toString());
             final String[] results = new String[list.size()];
             for (int i = 0; i < results.length; i++) {
-                results[i] = (String) list.get(i);
+                results[i] = list.get(i);
             }
             return results;
         } catch (final Exception e) {

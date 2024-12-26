@@ -207,7 +207,7 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
             final List<String> list = parseElements(value.toString());
             final boolean[] results = new boolean[list.size()];
             for (int i = 0; i < results.length; i++) {
-                final String stringValue = (String) list.get(i);
+                final String stringValue = list.get(i);
                 final Object result = booleanConverter.convert(Boolean.class, stringValue);
                 results[i] = ((Boolean) result).booleanValue();
             }
