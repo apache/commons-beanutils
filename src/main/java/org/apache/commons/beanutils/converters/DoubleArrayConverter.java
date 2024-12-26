@@ -122,7 +122,7 @@ public final class DoubleArrayConverter extends AbstractArrayConverter {
         // Parse the input value as a String into elements
         // and convert to the appropriate type
         try {
-            final List list = parseElements(value.toString());
+            final List<String> list = parseElements(value.toString());
             final double[] results = new double[list.size()];
             for (int i = 0; i < results.length; i++) {
                 results[i] = Double.parseDouble((String) list.get(i));

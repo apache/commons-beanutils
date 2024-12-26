@@ -122,7 +122,7 @@ public final class IntegerArrayConverter extends AbstractArrayConverter {
         // Parse the input value as a String into elements
         // and convert to the appropriate type
         try {
-            final List list = parseElements(value.toString());
+            final List<String> list = parseElements(value.toString());
             final int[] results = new int[list.size()];
             for (int i = 0; i < results.length; i++) {
                 results[i] = Integer.parseInt((String) list.get(i));

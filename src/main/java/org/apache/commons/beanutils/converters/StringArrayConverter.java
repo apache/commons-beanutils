@@ -148,7 +148,7 @@ public final class StringArrayConverter extends AbstractArrayConverter {
         // Parse the input value as a String into elements
         // and convert to the appropriate type
         try {
-            final List list = parseElements(value.toString());
+            final List<String> list = parseElements(value.toString());
             final String[] results = new String[list.size()];
             for (int i = 0; i < results.length; i++) {
                 results[i] = (String) list.get(i);

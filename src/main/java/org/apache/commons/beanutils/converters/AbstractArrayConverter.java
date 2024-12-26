@@ -152,7 +152,7 @@ public abstract class AbstractArrayConverter implements Converter {
      * @throws NullPointerException if <code>svalue</code>
      *  is <code>null</code>
      */
-    protected List parseElements(String svalue) {
+    protected List<String> parseElements(String svalue) {
 
         // Validate the passed argument
         if (svalue == null) {
