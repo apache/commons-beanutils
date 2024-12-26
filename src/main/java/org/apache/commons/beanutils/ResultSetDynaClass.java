@@ -20,6 +20,7 @@ package org.apache.commons.beanutils;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Iterator;
+import java.util.Objects;
 
 /**
  * <p>Implements <code>DynaClass</code> for DynaBeans that wrap the
@@ -153,11 +154,7 @@ public class ResultSetDynaClass extends JDBCDynaClass {
      */
     public ResultSetDynaClass(final ResultSet resultSet, final boolean lowerCase, final boolean useColumnLabel)
         throws SQLException {
-
-        if (resultSet == null) {
-            throw new NullPointerException();
-        }
-        this.resultSet = resultSet;
+        this.resultSet = Objects.requireNonNull(resultSet, "resultSet");
         this.lowerCase = lowerCase;
         setUseColumnLabel(useColumnLabel);
         introspect(resultSet);

@@ -22,6 +22,7 @@ import java.io.StreamTokenizer;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.Converter;
@@ -135,55 +136,41 @@ public abstract class AbstractArrayConverter implements Converter {
      *  is <code>null</code>
      */
     protected List<String> parseElements(String svalue) {
-
         // Validate the passed argument
-        if (svalue == null) {
-            throw new NullPointerException();
-        }
-
+        Objects.requireNonNull(svalue, "svalue");
         // Trim any matching '{' and '}' delimiters
         svalue = svalue.trim();
         if (svalue.startsWith("{") && svalue.endsWith("}")) {
             svalue = svalue.substring(1, svalue.length() - 1);
         }
-
         try {
 
             // Set up a StreamTokenizer on the characters in this String
-            final StreamTokenizer st =
-                new StreamTokenizer(new StringReader(svalue));
-            st.whitespaceChars(',',','); // Commas are delimiters
-            st.ordinaryChars('0', '9');  // Needed to turn off numeric flag
+            final StreamTokenizer st = new StreamTokenizer(new StringReader(svalue));
+            st.whitespaceChars(',', ','); // Commas are delimiters
+            st.ordinaryChars('0', '9'); // Needed to turn off numeric flag
             st.ordinaryChars('.', '.');
             st.ordinaryChars('-', '-');
-            st.wordChars('0', '9');      // Needed to make part of tokens
+            st.wordChars('0', '9'); // Needed to make part of tokens
             st.wordChars('.', '.');
             st.wordChars('-', '-');
-
             // Split comma-delimited tokens into a List
             final ArrayList<String> list = new ArrayList<>();
             while (true) {
                 final int ttype = st.nextToken();
-                if (ttype == StreamTokenizer.TT_WORD ||
-                    ttype > 0) {
+                if (ttype == StreamTokenizer.TT_WORD || ttype > 0) {
                     list.add(st.sval);
                 } else if (ttype == StreamTokenizer.TT_EOF) {
                     break;
                 } else {
-                    throw new ConversionException
-                        ("Encountered token of type " + ttype);
+                    throw new ConversionException("Encountered token of type " + ttype);
                 }
             }
-
             // Return the completed list
             return list;
-
         } catch (final IOException e) {
-
             throw new ConversionException(e);
-
         }
-
     }
 
 }
