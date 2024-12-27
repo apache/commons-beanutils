@@ -1,3 +1,186 @@
+              Apache Commons BeanUtils 2.0.0-M1
+                  RELEASE NOTES
+
+The Apache Commons BeanUtils team is pleased to announce the release of Apache Commons BeanUtils 2.0.0-M1
+
+Apache Commons BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.
+
+This is a major release, requires Java 8.
+
+Changes in this version include:
+
+New features:
+o BEANUTILS-530:  New converters for Java 8 Time classes #13. Thanks to Melloware, Matt Sicker, Gary Gregory.
+o BEANUTILS-346:  New converter for Enum. Thanks to Melloware.
+o                 Add github/codeql-action #118. Thanks to Dependabot, Gary Gregory.
+o                 Add and use ConversionException.format(String, Object...). Thanks to Dependabot, Gary Gregory.
+o                 Add Converters for additional types: Color, Dimension, InetAddress, Locale, Pattern, Point #47. Thanks to Seth Falco, Gary Gregory.
+o                 Make PropertyUtilsBean.getReadMethod(Class, PropertyDescriptor) public #232. Thanks to Sergey Chernov, Gary Gregory.
+
+Fixed Bugs:
+o BEANUTILS-402:  Double-Checked Locking anti pattern in WeakFastHashMap. Thanks to Melloware.
+o                 Refactor logger usage #72. Thanks to Andrei Korzhevskii, Gary Gregory.
+o                 Migrate to JUnit 5 #93, #283, #284, #285, #287. Thanks to SethFalco, Steve Bosman, Gary Gregory.
+o                 Fix SpotBugs [ERROR] Medium: org.apache.commons.beanutils2.BasicDynaClass.constructorTypes should be both final and package protected [org.apache.commons.beanutils2.BasicDynaClass] At BasicDynaClass.java:[line 95] MS_FINAL_PKGPROTECT. Thanks to Gary Gregory.
+o                 Fix SpotBugs [ERROR] Medium: Load of known null value in org.apache.commons.beanutils2.converters.AbstractConverter.convert(Class, Object) [org.apache.commons.beanutils2.converters.AbstractConverter] At AbstractConverter.java:[line 163] NP_LOAD_OF_KNOWN_NULL_VALUE. Thanks to Gary Gregory.
+o                 Fix SpotBugs [ERROR] Medium: Unused public or protected field: org.apache.commons.beanutils2.WrapDynaClass.descriptors [org.apache.commons.beanutils2.WrapDynaClass] In WrapDynaClass.java UUF_UNUSED_PUBLIC_OR_PROTECTED_FIELD. Thanks to Gary Gregory.
+o                 Fix SpotBugs [ERROR] Medium: org.apache.commons.beanutils2.converters.ArrayConverter.setAllowedChars(char[]) may expose internal representation by storing an externally mutable object into ArrayConverter.allowedChars [org.apache.commons.beanutils2.converters.ArrayConverter] At ArrayConverter.java:[line 202] EI_EXPOSE_REP2. Thanks to Gary Gregory.
+o                 Fix SpotBugs [ERROR] Medium: org.apache.commons.beanutils2.converters.DateTimeConverter.setPatterns(String[]) may expose internal representation by storing an externally mutable object into DateTimeConverter.patterns [org.apache.commons.beanutils2.converters.DateTimeConverter] At DateTimeConverter.java:[line 204] EI_EXPOSE_REP2. Thanks to Gary Gregory.
+o                 Fix SpotBugs [ERROR] Medium: org.apache.commons.beanutils2.ConversionException.getCause() may expose internal representation by returning ConversionException.cause [org.apache.commons.beanutils2.ConversionException] At ConversionException.java:[line 83] EI_EXPOSE_REP. Thanks to Gary Gregory.
+o                 Fix SpotBugs [ERROR] Medium: new org.apache.commons.beanutils2.ConversionException(String, Throwable) may expose internal representation by storing an externally mutable object into ConversionException.cause [org.apache.commons.beanutils2.ConversionException] At ConversionException.java:[line 53] EI_EXPOSE_REP2. Thanks to Gary Gregory.
+o                 Fix SpotBugs [ERROR] Medium: new org.apache.commons.beanutils2.ConversionException(Throwable) may expose internal representation by storing an externally mutable object into ConversionException.cause [org.apache.commons.beanutils2.ConversionException] At ConversionException.java:[line 65] EI_EXPOSE_REP2. Thanks to Gary Gregory.
+o                 Fix SpotBugs [ERROR] Medium: org.apache.commons.beanutils2.converters.DateTimeConverter.getPatterns() may expose internal representation by returning DateTimeConverter.patterns [org.apache.commons.beanutils2.converters.DateTimeConverter] At DateTimeConverter.java:[line 189] EI_EXPOSE_REP. Thanks to Gary Gregory.
+o                 Fix SpotBugs [ERROR] Medium: org.apache.commons.beanutils2.WrapDynaClass.getDynaProperties() may expose internal representation by returning WrapDynaClass.properties [org.apache.commons.beanutils2.WrapDynaClass] At WrapDynaClass.java:[line 172] EI_EXPOSE_REP. Thanks to Gary Gregory.
+o                 Replace Commons Collections Test Framework 3.2.2 with 4.5.0-M3 #40. Thanks to Melloware, sebbASF, Gary Gregory, Michal Landsman.
+o                 Provide error index in ConversionException message in DateTimeConverter.parse(Class, Class, String, DateFormat). Thanks to Gary Gregory.
+o                 Avoid possible NPE in DateTimeConverter.parse(Class, Class, String). Thanks to Gary Gregory.
+o                 Annotate Converter with @FunctionalInterface. Thanks to Claude Warren, Gary Gregory.
+o BEANUTILS-564:  Fix JDK 21 CI failure due to locale changes #201. Thanks to SingingBush.
+o                 Fix warnings and To-Dos #92. Thanks to Seth Falco.
+o                 Replace internal use of Locale.ENGLISH with Locale.ROOT. Thanks to Gary Gregory.
+o BEANUTILS-541:  FluentPropertyBeanIntrospector caches corrupted writeMethod (2.x) #68. Thanks to Sergey Chernov.
+
+Changes:
+o BEANUTILS-503:  Change packaging from org.apache.commons.beanutils to org.apache.commons.beanutils2. Thanks to Gary Gregory.
+o BEANUTILS-505:  Add missing serialVersionUID to Serializable classes. Thanks to Gary Gregory.
+o BEANUTILS-512:  Add Automatic-Module-Name entry to MANIFEST.MF. Thanks to Gary Gregory.
+o BEANUTILS-514:  Remove deprecated code for 2.0.0. Thanks to Gary Gregory.
+o BEANUTILS-509:  WeakHashmap enters into infinite loop in WrapDynaClass.java. Thanks to sunil, Akshay Gehi.
+o BEANUTILS-520:  BeanUtils2 mitigate CVE-2014-0114. Thanks to Melloware.
+o BEANUTILS-527:  Convert Collections4 to java.util.function. #8. Thanks to Melloware, Matt Sicker, Gary Gregory.
+o BEANUTILS-528:  New converters for UUID, URI, and Path #10. Thanks to Melloware, Matt Sicker, Gary Gregory.
+o BEANUTILS-529:  Log at the debug level instead of info. Thanks to Gary Gregory.
+o BEANUTILS-537:  Fix typos; fix error in Javadoc; performance fix; fix code smells #25. Thanks to XenoAmess, Gary Gregory.
+o                 Bump actions/cache from 2 to 3.0.11 #77, #89, #103, #111. #137, #141. Thanks to Dependabot, Gary Gregory.
+o                 Update actions/checkout from 2.3.1 to 3.0.2 #33, #108. Thanks to Dependabot, Gary Gregory.
+o                 Update actions/setup-java from 1.4.0 to 3.6.0 #35, #114, #144. Thanks to Dependabot, Gary Gregory.
+o                 Bump actions/upload-artifact from 3.1.0 to 3.1.1 #143. Thanks to Dependabot.
+o BEANUTILS-522:  Bump Apache Commons Collections from 4.3 to 4.4. Thanks to Gary Gregory.
+o BEANUTILS-504:  Bump Java from 6 to 7. Thanks to Gary Gregory.
+o BEANUTILS-515:  Bump Java from 7 to 8. Thanks to Gary Gregory.
+o                 Bump junit-jupiter from 5.7.2 to 5.9.1 #113, #126, #134. Thanks to Dependabot.
+o                 Bump JUnit from 4 to 5.9.1 vintage, #78, #112, #127, #136. Thanks to Gary Gregory, Dependabot.
+o                 Bump Jacoco from 0.8.4 to 0.8.8. Thanks to Gary Gregory.
+o                 Bump JApiCmp from 0.12.0 to 0.17.1, #46, #110, #130, #146. Thanks to Gary Gregory, Dependabot.
+o                 Bump maven-surefire-plugin from 2.22.1 to 3.0.0-M7, #116, #122. Thanks to Gary Gregory, Dependabot.
+o                 Bump maven-checkstyle-plugin from 3.0.0 to 3.2.0, #76, #129. Thanks to Gary Gregory, Dependabot.
+o                 Bump maven-pmd-plugin from 3.12.0 to 3.19.0, #120, #128, #131. Thanks to Gary Gregory, Dependabot.
+o                 Bump BC version from 1.9.3 to 1.9.4. Thanks to Gary Gregory.
+o                 Bump org.apache.commons:commons-parent from 50 to 74 #229, #245, #254, #264, #274, #279. Thanks to Gary Gregory, Dependabot.
+o                 Bump biz.aQute.bndlib from 5.1.0 to 6.4.1 #29, #45, #79, #109, #119, #121, #147, #175. Thanks to Dependabot.
+o                 Jacoco 0.8.6 for JDK15 support #55. Thanks to melloware.
+o                 Updated URLConverterTestCase to run without Internet access #50. Thanks to SethFalco.
+o                 Don't initialize variables to defaults #71. Thanks to Arturo Bernal.
+o                 Bump spotbugs-maven-plugin from 4.5.3.0 to 4.6.0.0. Thanks to Dependabot.
+o                 Bump spotbugs from 4.5.3 to 4.6.0. Thanks to Dependabot.
+o                 Bump org.apache.commons:commons-lang3 from 3.12.0 to 3.17.0 #263, #269, #280. Thanks to Gary Gregory, Dependabot.
+o                 Bump commons-logging:commons-logging from 1.2 to 1.3.4 #226, #246, #259, #275. Thanks to Gary Gregory, Dependabot.
+o                 Bump org.apache.commons:commons-parent from 74 to 78 #291, #295, #299, #306. Thanks to Gary Gregory, Dependabot.
+
+Removed:
+o BEANUTILS-527:  Removed Commons Collections dependency. #8. Thanks to Melloware, Matt Sicker, Gary Gregory.
+o                 Removed BeanUtilsBean2, use BeanUtilsBean. BeanUtilsBean2 functionality is now in BeanUtilsBean.
+                  Previous BeanUtilsBean functionality for those methods is no longer supported. Thanks to Gary Gregory, Niall Pemberton.
+o                 Removed ConvertUtilsBean2, use ConvertUtilsBean. ConvertUtilsBean2 functionality is now in ConvertUtilsBean.
+                  Previous ConvertUtilsBean functionality for those methods is no longer supported. Thanks to Gary Gregory, Niall Pemberton.
+o                 Do not implement Serializable. Thanks to Gary Gregory.
+
+Historical list of changes: https://commons.apache.org/proper/commons-beanutils/changes-report.html
+
+For complete information on Apache Commons BeanUtils, including instructions on how to submit bug reports,
+patches, or suggestions for improvement, see the Apache Commons BeanUtils website:
+
+https://commons.apache.org/proper/commons-beanutils/
+
+-----------------------------------------------------------------------------
+
+              Apache Commons BeanUtils 1.10.0
+                  RELEASE NOTES
+
+The Apache Commons BeanUtils team is pleased to announce the release of Apache Commons BeanUtils 1.10.0
+
+Apache Commons BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.
+
+This is a maintenance release, requires Java 8.
+
+Changes in this version include:
+
+Fixed Bugs:
+o BEANUTILS-541:  FluentPropertyBeanIntrospector caches corrupted writeMethod (1.x backport) #69. Thanks to Sergey Chernov.
+o                 Replace internal use of Locale.ENGLISH with Locale.ROOT. Thanks to Gary Gregory.
+o                 Replace Maven CLIRR plugin with JApiCmp. Thanks to Gary Gregory.
+o                 Port to Java 1.4 Throwable APIs (!). Thanks to Gary Gregory.
+o                 Fix Javadoc generation on Java 8, 17, and 21. Thanks to Gary Gregory.
+o                 AbstractArrayConverter.parseElements(String) now returns a List<String> instead of a raw List. Thanks to Gary Gregory.
+
+Changes:
+o                 Bump org.apache.commons:commons-parent from 47 to 78. Thanks to Gary Gregory.
+o                 Bump Java requirement from Java 6 to 8. Thanks to Gary Gregory.
+o                 Bump junit:junit from 4.12 to 4.13.2. Thanks to Gary Gregory.
+o                 Bump JUnit from 4.x to 5.x "vintage". Thanks to Gary Gregory.
+o                 Bump commons-logging:commons-logging from 1.2 to 1.3.4. Thanks to Gary Gregory.
+o                 Deprecate BeanUtilsBean.initCause(Throwable, Throwable) for removal, use Throwable.initCause(Throwable). Thanks to Gary Gregory.
+o                 Deprecate BeanUtils.initCause(Throwable, Throwable) for removal, use Throwable.initCause(Throwable). Thanks to Gary Gregory.
+
+
+Historical list of changes: https://commons.apache.org/proper/commons-beanutils//changes-report.html
+
+For complete information on Apache Commons BeanUtils, including instructions on how to submit bug reports,
+patches, or suggestions for improvement, see the Apache Commons BeanUtils website:
+
+https://commons.apache.org/proper/commons-beanutils/
+
+Download it from https://commons.apache.org/proper/commons-beanutils/download_bcel.cgi
+
+Have fun!
+-Apache Commons BCEL team
+
+Feedback
+--------
+Open source works best when you give feedback:
+
+    https://commons.apache.org/beanutils
+
+Please direct all bug reports to JIRA:
+
+    https://issues.apache.org/jira/browse/BEANUTILS
+
+Or subscribe to the commons-user mailing list
+
+The Apache Commons Team
+
+-----------------------------------------------------------------------------
+
+              Apache Commons BeanUtils 1.9.4
+                  RELEASE NOTES
+
+The Apache Commons BeanUtils team is pleased to announce the release of Apache Commons BeanUtils 1.9.4
+
+Apache Commons BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.
+
+The primary reason for this release is a bugfix for CVE-2014-0114. More specifically, our goal with
+BEANUTILS-520 is to set the default behaviour of the BeanUtilsBean to not allow class level access. The goal
+in doing this now is to bring 1.9.X into alignment with the same behaviour of the 2.X version line in
+regards to security.
+
+If one would like to opt out of the default behaviour, one could follow the example set out in the
+test class available in src/test/java/org/apache/commons/beanutils/bugs/Jira520TestCase.java.
+
+Changes in this version include:
+
+Fixed Bugs:
+o BEANUTILS-520:  BeanUtils mitigation of CVE-2014-0114. (CVE-2019-10086 for commons-beanutils). Thanks to Melloware.
+
+
+Historical list of changes: https://commons.apache.org/proper/commons-beanutils/changes-report.html
+
+For complete information on Apache Commons BeanUtils, including instructions on how to submit bug reports,
+patches, or suggestions for improvement, see the Apache Apache Commons BeanUtils website:
+
+https://commons.apache.org/proper/commons-beanutils/
+
+-----------------------------------------------------------------------------
+
               Apache Commons BeanUtils 1.9.3
                   RELEASE NOTES
 

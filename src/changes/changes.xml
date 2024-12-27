@@ -27,7 +27,7 @@
     <title>Apache Commons BeanUtils Release Notes</title>
   </properties>
   <body>
-    <release version="2.0.0-M1" date="20YY-MM-DD" description="Update to Java 8.">
+    <release version="2.0.0-M1" date="2024-12-27" description="This is a major release, requires Java 8.">
       <action issue="BEANUTILS-503" dev="ggregory" type="update" due-to="Gary Gregory">
         Change packaging from org.apache.commons.beanutils to org.apache.commons.beanutils2.
       </action>
@@ -226,7 +226,24 @@
         Do not implement Serializable.
       </action>
     </release>
-
+    <release version="1.10.0" date="2024-12-26" description="This is a maintenance release, requires Java 8.">
+      <!-- FIX -->
+      <action type="fix" issue="BEANUTILS-541" dev="ggregory" due-to="Sergey Chernov">FluentPropertyBeanIntrospector caches corrupted writeMethod (1.x backport) #69.</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">Replace internal use of Locale.ENGLISH with Locale.ROOT.</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">Replace Maven CLIRR plugin with JApiCmp.</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">Port to Java 1.4 Throwable APIs (!).</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">Fix Javadoc generation on Java 8, 17, and 21.</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">AbstractArrayConverter.parseElements(String) now returns a List&lt;String&gt; instead of a raw List.</action>
+      <!-- UPDATE -->
+      <action dev="ggregory" type="update" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 47 to 78.</action>
+      <action dev="ggregory" type="update" due-to="Gary Gregory">Bump Java requirement from Java 6 to 8.</action>
+      <action dev="ggregory" type="update" due-to="Gary Gregory">Bump junit:junit from 4.12 to 4.13.2.</action>
+      <action dev="ggregory" type="update" due-to="Gary Gregory">Bump JUnit from 4.x to 5.x "vintage".</action>
+      <action dev="ggregory" type="update" due-to="Gary Gregory">Bump commons-logging:commons-logging from 1.2 to 1.3.4.</action>
+      <!-- REMOVE -->
+      <action dev="ggregory" type="update" due-to="Gary Gregory">Deprecate BeanUtilsBean.initCause(Throwable, Throwable) for removal, use Throwable.initCause(Throwable).</action>
+      <action dev="ggregory" type="update" due-to="Gary Gregory">Deprecate BeanUtils.initCause(Throwable, Throwable) for removal, use Throwable.initCause(Throwable).</action>
+    </release>
     <release version="1.9.4" date="2019-08-13" description="The primary reason for this release is a bugfix for
 CVE-2014-0114. More specifically, our goal with BEANUTILS-520
 is to set the default behavior of the BeanUtilsBean

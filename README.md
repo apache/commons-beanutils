@@ -25,7 +25,7 @@
  | commons-build-plugin/trunk/src/main/resources/commons-xdoc-templates |
  +======================================================================+
  |                                                                      |
- | 1) Re-generate using: mvn commons:readme-md                          |
+ | 1) Re-generate using: mvn commons-build:readme-md                    |
  |                                                                      |
  | 2) Set the following properties in the component's pom:              |
  |    - commons.componentid (required, alphabetic, lower case)          |
@@ -45,7 +45,9 @@ Apache Commons BeanUtils
 
 [![Java CI](https://github.com/apache/commons-beanutils/actions/workflows/maven.yml/badge.svg)](https://github.com/apache/commons-beanutils/actions/workflows/maven.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/org.apache.commons/commons-beanutils2?label=Maven%20Central)](https://search.maven.org/artifact/org.apache.commons/commons-beanutils2)
-[![Javadocs](https://javadoc.io/badge/org.apache.commons/commons-beanutils2/2.0.0.svg)](https://javadoc.io/doc/org.apache.commons/commons-beanutils2/2.0.0)
+[![Javadocs](https://javadoc.io/badge/org.apache.commons/commons-beanutils2/2.0.0-M1.svg)](https://javadoc.io/doc/org.apache.commons/commons-beanutils2/2.0.0-M1)
+[![CodeQL](https://github.com/apache/commons-beanutils/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/apache/commons-beanutils/actions/workflows/codeql-analysis.yml)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/apache/commons-beanutils/badge)](https://api.securityscorecards.dev/projects/github.com/apache/commons-beanutils)
 
 Apache Commons BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.
 
@@ -53,11 +55,11 @@ Documentation
 -------------
 
 More information can be found on the [Apache Commons BeanUtils homepage](https://commons.apache.org/proper/commons-beanutils).
-The [Javadoc](https://commons.apache.org/proper/commons-beanutils/javadocs/api-release) can be browsed.
+The [Javadoc](https://commons.apache.org/proper/commons-beanutils/apidocs) can be browsed.
 Questions related to the usage of Apache Commons BeanUtils should be posted to the [user mailing list](https://commons.apache.org/mail-lists.html).
 
-Where can I get the latest release?
------------------------------------
+Getting the latest release
+--------------------------
 You can download source and binaries from our [download page](https://commons.apache.org/proper/commons-beanutils/download_beanutils.cgi).
 
 Alternatively, you can pull it from the central Maven repositories:
@@ -66,39 +68,52 @@ Alternatively, you can pull it from the central Maven repositories:
 <dependency>
   <groupId>org.apache.commons</groupId>
   <artifactId>commons-beanutils2</artifactId>
-  <version>2.0.0</version>
+  <version>2.0.0-M1</version>
 </dependency>
 ```
+
+Building
+--------
+
+Building requires a Java JDK and [Apache Maven](https://maven.apache.org/).
+The required Java version is found in the `pom.xml` as the `maven.compiler.source` property.
+
+From a command shell, run `mvn` without arguments to invoke the default Maven goal to run all tests and checks.
 
 Contributing
 ------------
 
-We accept Pull Requests via GitHub. The [developer mailing list][ml] is the main channel of communication for contributors.
+We accept Pull Requests via GitHub. The [developer mailing list](https://commons.apache.org/mail-lists.html) is the main channel of communication for contributors.
 There are some guidelines which will make applying PRs easier for us:
 + No tabs! Please use spaces for indentation.
-+ Respect the code style.
++ Respect the existing code style for each file.
 + Create minimal diffs - disable on save actions like reformat source code or organize imports. If you feel the source code should be reformatted create a separate PR for this change.
-+ Provide JUnit tests for your changes and make sure your changes don't break any existing tests by running ```mvn```.
++ Provide JUnit tests for your changes and make sure your changes don't break any existing tests by running `mvn`.
++ Before you pushing a PR, run `mvn` (by itself), this runs the default goal, which contains all build checks.
++ To see the code coverage report, regardless of coverage failures, run `mvn clean site -Dcommons.jacoco.haltOnFailure=false`
 
 If you plan to contribute on a regular basis, please consider filing a [contributor license agreement](https://www.apache.org/licenses/#clas).
 You can learn more about contributing via GitHub in our [contribution guidelines](CONTRIBUTING.md).
 
 License
 -------
-This code is under the [Apache License v2](https://www.apache.org/licenses/LICENSE-2.0).
+This code is licensed under the [Apache License v2](https://www.apache.org/licenses/LICENSE-2.0).
 
 See the `NOTICE.txt` file for required notices and attributions.
 
-Donations
----------
-You like Apache Commons BeanUtils? Then [donate back to the ASF](https://www.apache.org/foundation/contributing.html) to support the development.
+Donating
+--------
+You like Apache Commons BeanUtils? Then [donate back to the ASF](https://www.apache.org/foundation/contributing.html) to support development.
 
 Additional Resources
 --------------------
 
 + [Apache Commons Homepage](https://commons.apache.org/)
 + [Apache Issue Tracker (JIRA)](https://issues.apache.org/jira/browse/BEANUTILS)
++ [Apache Commons Slack Channel](https://the-asf.slack.com/archives/C60NVB8AD)
 + [Apache Commons Twitter Account](https://twitter.com/ApacheCommons)
-+ `#apache-commons` IRC channel on `irc.freenode.org`
 
-[ml]:https://commons.apache.org/mail-lists.html
+Apache Commons Components
+-------------------------
+
+Please see the [list of components](https://commons.apache.org/components.html)
