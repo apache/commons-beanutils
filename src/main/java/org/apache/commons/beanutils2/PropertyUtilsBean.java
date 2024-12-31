@@ -803,9 +803,10 @@ public class PropertyUtilsBean {
      * method follows the same name resolution rules used by {@code getPropertyDescriptor()}, so if the last element of a name reference is indexed, the type of
      * the property itself will be returned. If the last (or only) element has no property with the specified name, {@code null} is returned.
      * <p>
-     * If the property is an indexed property (e.g. {@code String[]}), this method will return the type of the items within that array. Note that from Java 8
-     * and newer, this method do not support such index types from items within an Collection, and will instead return the collection type (e.g. java.util.List)
-     * from the getter method.
+     * If the property is an indexed property (for example {@code String[]}), this method will return the type of the items within that array. Note that from
+     * Java 8 and newer, this method do not support such index types from items within an Collection, and will instead return the collection type (for example
+     * java.util.List) from the getter method.
+     * </p>
      *
      * @param bean Bean for which a property descriptor is requested
      * @param name Possibly indexed and/or nested name of the property for which a property descriptor is requested
@@ -873,8 +874,9 @@ public class PropertyUtilsBean {
      *
      * <p>
      * This fairly low-level method shouldn't be needed for most usecases. However, if you do have to implement something extra, you can improve consistency
-     * with the standard code (e.g. that of {@link #getProperty getProperty()}) by calling this method instead of using {@code descriptor.getReadMethod()}
-     * directly.
+     * with the standard code (for example that of {@link #getProperty getProperty()}) by calling this method instead of using
+     * {@code descriptor.getReadMethod()} directly.
+     * </p>
      *
      * @param clazz      The class of the read method will be invoked on
      * @param descriptor Property descriptor to return a getter for
@@ -976,8 +978,9 @@ public class PropertyUtilsBean {
      *
      * <p>
      * This fairly low-level method shouldn't be needed for most usecases. However, if you do have to implement something extra, you can improve consistency
-     * with the standard code (e.g. that of {@link #setProperty setProperty()}) by calling this method instead of using {@code descriptor.getWriteMethod()}
-     * directly.
+     * with the standard code (for example that of {@link #setProperty setProperty()}) by calling this method instead of using
+     * {@code descriptor.getWriteMethod()} directly.
+     * </p>
      *
      * @param clazz      The class of the read method will be invoked on
      * @param descriptor Property descriptor to return a setter for
