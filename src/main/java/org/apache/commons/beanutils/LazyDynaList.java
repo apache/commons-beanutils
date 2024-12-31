@@ -97,13 +97,13 @@ import java.util.Map;
  *    uses the Class to automatically populate elements:</p>
  *
  * <pre><code>
- *    // e.g. For Maps
+ *    // for example For Maps
  *    List lazyList = new LazyDynaList(TreeMap.class);
  *
- *    // e.g. For POJO Beans
+ *    // for example For POJO Beans
  *    List lazyList = new LazyDynaList(MyPojo.class);
  *
- *    // e.g. For DynaBeans
+ *    // for example For DynaBeans
  *    List lazyList = new LazyDynaList(MyDynaBean.class);
  * </code></pre>
  *
@@ -113,15 +113,15 @@ import java.util.Map;
  *    the DynaClass to automatically populate elements:</p>
  *
  * <pre><code>
- *    // e.g. For Maps
+ *    // for example For Maps
  *    DynaClass dynaClass = new LazyDynaMap(new HashMap());
  *    List lazyList = new LazyDynaList(dynaClass);
  *
- *    // e.g. For POJO Beans
+ *    // for example For POJO Beans
  *    DynaClass dynaClass = (new WrapDynaBean(myPojo)).getDynaClass();
  *    List lazyList = new LazyDynaList(dynaClass);
  *
- *    // e.g. For DynaBeans
+ *    // for example For DynaBeans
  *    DynaClass dynaClass = new BasicDynaClass(properties);
  *    List lazyList = new LazyDynaList(dynaClass);
  * </code></pre>

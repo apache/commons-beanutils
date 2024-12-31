@@ -31,7 +31,7 @@ package org.apache.commons.beanutils;
  * BeanUtils 1.7.0 delegated all conversion to String to the converter
  * registered for the <code>String.class</code>. One of the improvements in
  * BeanUtils 1.8.0 was to upgrade the {@link Converter} implementations so
- * that they could handle conversion to String for their type (e.g.
+ * that they could handle conversion to String for their type (for example
  * IntegerConverter now handles conversion from an Integer to a String as
  * well as String to Integer).
  * </p>
