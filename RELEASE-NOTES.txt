@@ -1,5 +1,6 @@
-              Apache Commons BeanUtils 1.10.0
-                  RELEASE NOTES
+Apache Commons BeanUtils 1.10.0
+Release Notes
+
 
 The Apache Commons BeanUtils team is pleased to announce the release of Apache Commons BeanUtils 1.10.0
 
@@ -54,8 +55,9 @@ Or subscribe to the commons-user mailing list
 The Apache Commons Team
 
 -----------------------------------------------------------------------------
-              Apache Commons BeanUtils 1.9.4
-                  RELEASE NOTES
+Apache Commons BeanUtils 1.9.4
+Release Notes
+
 
 The Apache Commons BeanUtils team is pleased to announce the release of Apache Commons BeanUtils 1.9.4
 
@@ -83,9 +85,9 @@ patches, or suggestions for improvement, see the Apache Apache Commons BeanUtils
 https://commons.apache.org/proper/commons-beanutils/
 
 -----------------------------------------------------------------------------
+Apache Commons BeanUtils 1.9.3
+Release Notes
 
-              Apache Commons BeanUtils 1.9.3
-                  RELEASE NOTES
 
 The Apache Commons team is pleased to announce the release of Apache
 Commons BeanUtils 1.9.3
@@ -142,10 +144,9 @@ Apache Apache Commons BeanUtils website:
 https://commons.apache.org/proper/commons-beanutils/
 
 -----------------------------------------------------------------------------
+Apache Commons BeanUtils 1.9.2
+Release Notes
 
-                          Commons BeanUtils Package
-                               Version 1.9.2
-                               Release Notes
 
 INTRODUCTION:
 ============
@@ -191,8 +192,9 @@ New features in version 1.9.2
   class loader vulnerability.
 
 -----------------------------------------------------------------------------
+Apache Commons BeanUtils 1.9.1
+Release Notes
 
-                        Release Notes for version 1.9.1
 
 Release 1.9.1 is a bug fix release which addresses a problem with the new
 feature of custom introspection introduced with release 1.9.0. It is fully
@@ -207,8 +209,9 @@ BUGFIXES in version 1.9.1
   garbage collection.
 
 -----------------------------------------------------------------------------
+Apache Commons BeanUtils 1.9.0
+Release Notes
 
-                        Release Notes for version 1.9.0
 
 Release 1.9.0 contains some bug fixes and improvements that have accumulated
 after the 1.8.3 release. The most obvious change is that the new version now
@@ -341,8 +344,8 @@ Other changes in version 1.9.0
   empty lines.
 
 -----------------------------------------------------------------------------
-
-                        Release Notes for version 1.8.3
+Apache Commons BeanUtils 1.8.3
+Release Notes
 
 Compatibility with 1.8.2
 ========================
