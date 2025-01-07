@@ -93,15 +93,15 @@ patches, or suggestions for improvement, see the Apache Commons BeanUtils websit
 https://commons.apache.org/proper/commons-beanutils/
 
 -----------------------------------------------------------------------------
+Apache Commons BeanUtils 1.10.0
+Release Notes
 
-              Apache Commons BeanUtils 1.10.0
-                  RELEASE NOTES
 
 The Apache Commons BeanUtils team is pleased to announce the release of Apache Commons BeanUtils 1.10.0
 
 Apache Commons BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.
 
-This is a maintenance release, requires Java 8.
+This is a maintenance release and requires Java 8.
 
 Changes in this version include:
 
@@ -150,9 +150,9 @@ Or subscribe to the commons-user mailing list
 The Apache Commons Team
 
 -----------------------------------------------------------------------------
+Apache Commons BeanUtils 1.9.4
+Release Notes
 
-              Apache Commons BeanUtils 1.9.4
-                  RELEASE NOTES
 
 The Apache Commons BeanUtils team is pleased to announce the release of Apache Commons BeanUtils 1.9.4
 
@@ -180,9 +180,9 @@ patches, or suggestions for improvement, see the Apache Apache Commons BeanUtils
 https://commons.apache.org/proper/commons-beanutils/
 
 -----------------------------------------------------------------------------
+Apache Commons BeanUtils 1.9.3
+Release Notes
 
-              Apache Commons BeanUtils 1.9.3
-                  RELEASE NOTES
 
 The Apache Commons team is pleased to announce the release of Apache
 Commons BeanUtils 1.9.3
@@ -206,23 +206,23 @@ Fixed Bugs:
 * BEANUTILS-477: Changed log level in FluentPropertyBeanIntrospector
 * BEANUTILS-492: Fixed exception when setting indexed properties on DynaBeans.
   Thanks to Bernhard Seebass.
-* BEANUTILS-470: Precision lost when converting BigDecimal. Thanks to Tommy
+* BEANUTILS-470: Precision lost when converting BigDecimal Thanks to Tommy
   Tynjä.
 * BEANUTILS-465: Indexed List Setters fixed. Thanks to Daniel Atallah.
 
 Changes:
-* BEANUTILS-433: Update dependency from JUnit 3.8.1 to 4.12. 
+* BEANUTILS-433: Update dependency from JUnit 3.8.1 to 4.12.
   Thanks to Benedikt Ritter, Gary Gregory.
-* BEANUTILS-469: Update commons-logging from 1.1.1 to 1.2. 
+* BEANUTILS-469: Update commons-logging from 1.1.1 to 1.2.
   Thanks to Gary Gregory.
 * BEANUTILS-474: FluentPropertyBeanIntrospector does not use the same naming
   algorithm as DefaultBeanIntrospector.  Thanks to Michael Grove.
-* BEANUTILS-490: Update Java requirement from Java 5 to 6. 
+* BEANUTILS-490: Update Java requirement from Java 5 to 6.
   Thanks to Gary Gregory.
 * BEANUTILS-482: Update commons-collections from 3.2.1 to 3.2.2
   (CVE-2015-4852). Thanks to Gary Gregory.
 * BEANUTILS-490: Update java requirement to Java 6. Thanks to Gary Gregory.
-* BEANUTILS-492: IndexedPropertyDescriptor tests now pass on Java 8. 
+* BEANUTILS-492: IndexedPropertyDescriptor tests now pass on Java 8.
   Thanks to Stian Soiland-Reyes.
 * BEANUTILS-495: DateConverterTestBase fails on M/d/yy in Java 9.
   Thanks to Stian Soiland-Reyes.
@@ -230,19 +230,18 @@ Changes:
   Thanks to Stian Soiland-Reyes.
 
 
-Historical list of changes: https://commons.apache.org/proper/commons-beanutils/changes-report.html
+Historical list of changes: http://commons.apache.org/proper/commons-beanutils/changes-report.html
 
 For complete information on Apache Commons BeanUtils, including instructions on
 how to submit bug reports, patches, or suggestions for improvement, see the
-Apache Commons BeanUtils website:
+Apache Apache Commons BeanUtils website:
 
 https://commons.apache.org/proper/commons-beanutils/
 
 -----------------------------------------------------------------------------
+Apache Commons BeanUtils 1.9.2
+Release Notes
 
-                          Commons BeanUtils Package
-                               Version 1.9.2
-                               Release Notes
 
 INTRODUCTION:
 ============
@@ -251,7 +250,7 @@ This document contains the release notes for this version of the Commons
 BeanUtils package, and highlights changes since the previous version.
 
 For more information on Commons BeanUtils, see
-o https://commons.apache.org/beanutils/
+o http://commons.apache.org/beanutils/
 
 Release 1.9.2 mainly addresses a potential security issue when accessing
 properties in an uncontrolled way. In a nutshell, if an application that uses
@@ -288,8 +287,9 @@ New features in version 1.9.2
   class loader vulnerability.
 
 -----------------------------------------------------------------------------
+Apache Commons BeanUtils 1.9.1
+Release Notes
 
-                        Release Notes for version 1.9.1
 
 Release 1.9.1 is a bug fix release which addresses a problem with the new
 feature of custom introspection introduced with release 1.9.0. It is fully
@@ -304,8 +304,9 @@ BUGFIXES in version 1.9.1
   garbage collection.
 
 -----------------------------------------------------------------------------
+Apache Commons BeanUtils 1.9.0
+Release Notes
 
-                        Release Notes for version 1.9.0
 
 Release 1.9.0 contains some bug fixes and improvements that have accumulated
 after the 1.8.3 release. The most obvious change is that the new version now
@@ -438,8 +439,8 @@ Other changes in version 1.9.0
   empty lines.
 
 -----------------------------------------------------------------------------
-
-                        Release Notes for version 1.8.3
+Apache Commons BeanUtils 1.8.3
+Release Notes
 
 Compatibility with 1.8.2
 ========================
@@ -456,8 +457,8 @@ Testing of BeanUtils 1.8.1 revealed that the leak still appears to exist
 in IBM's JDK 1.6 implementation.
 
 
-see https://issues.apache.org/jira/browse/BEANUTILS-291
-    https://issues.apache.org/jira/browse/BEANUTILS-366
+see http://issues.apache.org/jira/browse/BEANUTILS-291
+    http://issues.apache.org/jira/browse/BEANUTILS-366
 
 
 BUGS FIXED:
@@ -467,4 +468,3 @@ The following is a list of the bugs fixed in this release, with their Jira issue
 
   * [BEANUTILS-373] - MethodUtils is not thread safe because WeakFastHashMap which uses WeakHashMap is not thread-safe
   * [BEANUTILS-371] - Add constructors which have useColumnLabel parameter to ResultSetDynaClass and RowSetDynaClass
-
