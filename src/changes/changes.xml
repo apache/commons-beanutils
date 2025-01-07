@@ -27,7 +27,12 @@
     <title>Apache Commons BeanUtils Release Notes</title>
   </properties>
   <body>
-    <release version="2.0.0-M1" date="2024-12-27" description="This is a major release, requires Java 8.">
+    <release version="2.0.0-M2" date="YYYY-MM-DD" description="This is a major release and requires Java 8.">
+      <!-- FIX -->
+      <!-- ADD -->
+      <!-- UPDATE -->
+    </release>
+    <release version="2.0.0-M1" date="2024-12-27" description="This is a major release and requires Java 8">
       <action issue="BEANUTILS-503" dev="ggregory" type="update" due-to="Gary Gregory">
         Change packaging from org.apache.commons.beanutils to org.apache.commons.beanutils2.
       </action>
