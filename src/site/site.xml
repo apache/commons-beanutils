@@ -34,27 +34,37 @@
         </menu>
 
         <menu name="Documentation">
-            <item name="Building"             href="/building.html"/>
-            <item name="History"              href="/changes-report.html"/>
-            <item name="2.0.0" collapse="true" href="/index.html">
-                <item name="Release Notes"    href="https://commons.apache.org/beanutils/javadocs/v2.0.0/RELEASE-NOTES.txt"/>
-                <item name="User Guide"       href="https://commons.apache.org/beanutils/javadocs/v2.0.0/apidocs/org/apache/commons/beanutils2/package-summary.html#package_description"/>
-                <item name="API"              href="https://commons.apache.org/beanutils/javadocs/v2.0.0/apidocs/index.html"/>
+            <item name="Building"                 href="/building.html"/>
+            <item name="History"                  href="/changes-report.html"/>
+            <item name="2.0.0-M2" collapse="true" href="/index.html">
+                <item name="Release Notes"        href="https://dlcdn.apache.org//commons/beanutils/RELEASE-NOTES.txt"/>
+                <item name="User Guide"           href="https://commons.apache.org/proper/commons-beanutils/apidocs/org/apache/commons/beanutils2/package-summary.html"/>
+                <item name="API"                  href="https://commons.apache.org/proper/commons-beanutils/apidocs/index.html"/>
             </item>
-            <item name="1.9.3" collapse="true" href="/index.html">
-                <item name="Release Notes"    href="https://commons.apache.org/beanutils/javadocs/v1.9.3/RELEASE-NOTES.txt"/>
-                <item name="User Guide"       href="https://commons.apache.org/beanutils/javadocs/v1.9.3/apidocs/org/apache/commons/beanutils/package-summary.html#package_description"/>
-                <item name="API"              href="https://commons.apache.org/beanutils/javadocs/v1.9.3/apidocs/index.html"/>
+            <item name="2.0.0-M1" collapse="true" href="/index.html">
+                <item name="Release Notes"        href="https://dlcdn.apache.org//commons/beanutils/RELEASE-NOTES.txt"/>
+                <item name="User Guide"           href="https://javadoc.io/doc/org.apache.commons/commons-beanutils2/2.0.0-M1/org/apache/commons/beanutils2/package-summary.html"/>
+                <item name="API"                  href="https://javadoc.io/doc/org.apache.commons/commons-beanutils2/2.0.0-M1/index.html"/>
             </item>
-            <item name="1.9.2" collapse="true" href="/index.html">
-                <item name="Release Notes"    href="https://commons.apache.org/beanutils/javadocs/v1.9.2/RELEASE-NOTES.txt"/>
-                <item name="User Guide"       href="https://commons.apache.org/beanutils/javadocs/v1.9.2/apidocs/org/apache/commons/beanutils/package-summary.html#package_description"/>
-                <item name="API"              href="https://commons.apache.org/beanutils/javadocs/v1.9.2/apidocs/index.html"/>
+            <item name="1.10.0" collapse="true"   href="/index.html">
+                <item name="Release Notes"        href="https://dlcdn.apache.org//commons/beanutils/RELEASE-NOTES.txt"/>
+                <item name="User Guide"           href="https://javadoc.io/doc/commons-beanutils/commons-beanutils/1.10.0/org/apache/commons/beanutils/package-summary.html"/>
+                <item name="API"                  href="https://javadoc.io/doc/commons-beanutils/commons-beanutils/1.10.0/index.html"/>
             </item>
-            <item name="1.8.3" collapse="true" href="/index.html">
-                <item name="Release Notes"    href="https://commons.apache.org/beanutils/javadocs/v1.8.3/RELEASE-NOTES.txt"/>
-                <item name="User Guide"       href="https://commons.apache.org/beanutils/javadocs/v1.8.3/apidocs/org/apache/commons/beanutils/package-summary.html#package_description"/>
-                <item name="API"              href="https://commons.apache.org/beanutils/javadocs/v1.8.3/apidocs/index.html"/>
+            <item name="1.9.3" collapse="true"    href="/index.html">
+                <item name="Release Notes"        href="https://commons.apache.org/beanutils/javadocs/v1.9.3/RELEASE-NOTES.txt"/>
+                <item name="User Guide"           href="https://commons.apache.org/beanutils/javadocs/v1.9.3/apidocs/org/apache/commons/beanutils/package-summary.html#package_description"/>
+                <item name="API"                  href="https://commons.apache.org/beanutils/javadocs/v1.9.3/apidocs/index.html"/>
+            </item>
+            <item name="1.9.2" collapse="true"    href="/index.html">
+                <item name="Release Notes"        href="https://commons.apache.org/beanutils/javadocs/v1.9.2/RELEASE-NOTES.txt"/>
+                <item name="User Guide"           href="https://commons.apache.org/beanutils/javadocs/v1.9.2/apidocs/org/apache/commons/beanutils/package-summary.html#package_description"/>
+                <item name="API"                  href="https://commons.apache.org/beanutils/javadocs/v1.9.2/apidocs/index.html"/>
+            </item>
+            <item name="1.8.3" collapse="true"    href="/index.html">
+                <item name="Release Notes"        href="https://commons.apache.org/beanutils/javadocs/v1.8.3/RELEASE-NOTES.txt"/>
+                <item name="User Guide"           href="https://commons.apache.org/beanutils/javadocs/v1.8.3/apidocs/org/apache/commons/beanutils/package-summary.html#package_description"/>
+                <item name="API"                  href="https://commons.apache.org/beanutils/javadocs/v1.8.3/apidocs/index.html"/>
             </item>
         </menu>
 
