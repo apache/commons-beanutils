@@ -6,7 +6,7 @@ The Apache Commons BeanUtils team is pleased to announce the release of Apache C
 
 Apache Commons BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.
 
-This is a maintenance release, requires Java 8.
+This is a maintenance release and requires Java 8.
 
 Changes in this version include:
 
