@@ -19,10 +19,9 @@ limitations under the License.
 <!DOCTYPE module PUBLIC
     "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
     "https://checkstyle.org/dtds/configuration_1_3.dtd">
-
 <!-- commons lang customization of default Checkstyle behavior -->
 <module name="Checker">
-  <property name="localeLanguage" value="en"/>
+  <module name="FileTabCharacter"/>
   <module name="SuppressionFilter">
     <!-- Default property set by maven-checkstyle-plugin -->
     <property name="file" value="${checkstyle.suppressions.file}"/>
@@ -30,9 +29,6 @@ limitations under the License.
   </module>
   <module name="JavadocPackage">
     <property name="allowLegacy" value="false"/>
-  </module>
-  <module name="FileTabCharacter">
-    <property name="fileExtensions" value="java,xml"/>
   </module>
   <module name="LineLength">
     <property name="max" value="160"/>
@@ -68,4 +64,5 @@ limitations under the License.
     <property name="fileExtensions" value="java" />
     <property name="severity" value="warning" />
   </module>
+  <property name="localeLanguage" value="en"/>
 </module>
