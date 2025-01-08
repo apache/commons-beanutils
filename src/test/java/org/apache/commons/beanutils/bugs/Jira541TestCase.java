@@ -73,16 +73,16 @@ public class Jira541TestCase {
 
     @Test
     public void testFluentBeanIntrospectorOnOverriddenSetterConcurrent() throws Exception {
-        ExecutorService executionService = Executors.newFixedThreadPool(256);
+        final ExecutorService executionService = Executors.newFixedThreadPool(256);
         try {
-            List<Future<?>> futures = new ArrayList<>();
+            final List<Future<?>> futures = new ArrayList<>();
             for (int i = 0; i < 10000; i++) {
                 futures.add(executionService.submit(() -> {
                     testImpl();
                     return null;
                 }));
             }
-            for (Future<?> future : futures) {
+            for (final Future<?> future : futures) {
                 future.get();
             }
         } finally {
