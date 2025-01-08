@@ -18,6 +18,12 @@ package org.apache.commons.beanutils.bugs;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
 import org.apache.commons.beanutils.FluentPropertyBeanIntrospector;
 import org.apache.commons.beanutils.PropertyUtilsBean;
 import org.junit.Test;
@@ -42,6 +48,7 @@ public class Jira541TestCase {
             return this;
         }
     }
+
     public static class SubTypeA extends BaseType {
 
         @Override
@@ -61,6 +68,29 @@ public class Jira541TestCase {
 
     @Test
     public void testFluentBeanIntrospectorOnOverriddenSetter() throws Exception {
+        testImpl();
+    }
+
+    @Test
+    public void testFluentBeanIntrospectorOnOverriddenSetterConcurrent() throws Exception {
+        ExecutorService executionService = Executors.newFixedThreadPool(256);
+        try {
+            List<Future<?>> futures = new ArrayList<>();
+            for (int i = 0; i < 10000; i++) {
+                futures.add(executionService.submit(() -> {
+                    testImpl();
+                    return null;
+                }));
+            }
+            for (Future<?> future : futures) {
+                future.get();
+            }
+        } finally {
+            executionService.shutdown();
+        }
+    }
+
+    private void testImpl() throws Exception {
         final PropertyUtilsBean propertyUtilsBean = new PropertyUtilsBean();
         propertyUtilsBean.addBeanIntrospector(new FluentPropertyBeanIntrospector());
 
