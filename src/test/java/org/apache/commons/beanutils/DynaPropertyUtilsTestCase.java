@@ -98,7 +98,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         final int intArray[] = {};
         final String stringArray[] = {};
 
-        final DynaClass dynaClass = new BasicDynaClass
+        return new BasicDynaClass
                 ("TestDynaClass", null,
                         new DynaProperty[]{
                             new DynaProperty("booleanProperty", Boolean.TYPE),
@@ -122,7 +122,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                             new DynaProperty("stringIndexed", stringArray.getClass()),
                             new DynaProperty("stringProperty", String.class),
                         });
-        return dynaClass;
 
     }
 
