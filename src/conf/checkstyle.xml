@@ -27,9 +27,7 @@ limitations under the License.
     <property name="file" value="${checkstyle.suppressions.file}"/>
     <property name="optional" value="false"/>
   </module>
-  <module name="JavadocPackage">
-    <property name="allowLegacy" value="false"/>
-  </module>
+  <module name="JavadocPackage" />
   <module name="LineLength">
     <property name="max" value="160"/>
   </module>
