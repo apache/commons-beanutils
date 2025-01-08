@@ -30,12 +30,13 @@
   <body>
     <release version="1.10.1" date="YYYY-MM-DD" description="This is a maintenance release and requires Java 8.">
       <!-- FIX -->
+      <action type="fix" issue="BEANUTILS-541" dev="ggregory" due-to="Sergey Chernov">FluentPropertyBeanIntrospector concurrency issue (backport to 1.X) #325.</action>
       <!-- ADD -->
       <!-- UPDATE -->
     </release>
     <release version="1.10.0" date="2024-12-26" description="This is a maintenance release and requires Java 8.">
       <!-- FIX -->
-      <action type="fix" issue="BEANUTILS-541" dev="ggregory" due-to="Sergey Chernov">FluentPropertyBeanIntrospector caches corrupted writeMethod (1.x backport) #69.</action>
+      <action type="fix" issue="BEANUTILS-541" dev="ggregory" due-to="Sergey Chernov">FluentPropertyBeanIntrospector caches corrupted writeMethod (backport to 1.x) #69.</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Replace internal use of Locale.ENGLISH with Locale.ROOT.</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Replace Maven CLIRR plugin with JApiCmp.</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Port to Java 1.4 Throwable APIs (!).</action>
