@@ -32,25 +32,6 @@ limitations under the License.
     <property name="max" value="160"/>
   </module>
   <module name="NewlineAtEndOfFile" />
-  <module name="TreeWalker">
-    <module name="ExplicitInitializationCheck" />
-    <module name="AvoidStarImport"/>
-    <module name="RedundantImport"/>
-    <module name="UnusedImports"/>
-    <module name="NeedBraces"/>
-    <module name="JavadocType">
-      <property name="scope" value="protected"/>
-    </module>
-    <module name="JavadocMethod">
-      <property name="accessModifiers" value="protected"/>
-    </module>
-    <module name="ImportOrder">
-      <property name="option" value="top"/>
-      <property name="groups" value="java,javax,org"/>
-      <property name="ordered" value="true"/>
-      <property name="separated" value="true"/>
-    </module>
-  </module>
   <!-- Line with trailing spaces -->
   <module name="RegexpSingleline">
     <property name="format" value="\s+$"/>
@@ -62,6 +43,25 @@ limitations under the License.
     <property name="message" value="Deprecated @author tag" />
     <property name="fileExtensions" value="java" />
     <property name="severity" value="warning" />
+  </module>
+  <module name="TreeWalker">
+    <module name="AvoidStarImport"/>
+    <module name="ExplicitInitializationCheck" />
+    <module name="ImportOrder">
+      <property name="option" value="top"/>
+      <property name="groups" value="java,javax,org"/>
+      <property name="ordered" value="true"/>
+      <property name="separated" value="true"/>
+    </module>
+    <module name="JavadocType">
+    <module name="JavadocMethod">
+      <property name="accessModifiers" value="protected"/>
+    </module>
+    <module name="NeedBraces"/>
+    <module name="RedundantImport"/>
+    <module name="UnusedImports"/>
+      <property name="scope" value="protected"/>
+    </module>
   </module>
   <property name="localeLanguage" value="en"/>
 </module>
