@@ -458,17 +458,14 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
         this.restricted = restricted;
     }
 
-   /**
- * Set whether this DynaClass should return a <code>null</code> from
- * the <code>getDynaProperty(name)</code> method if the property
- * doesn't exist.
- *
- * @param returnNull <code>true</code> if a <code>null</code> {@link DynaProperty}
- * should be returned if the property doesn't exist, otherwise
- * <code>false</code> if a new {@link DynaProperty} should be created.
- */
-public void setReturnNull(final boolean returnNull) {
-    this.returnNull = returnNull;
-}
+    /**
+     * Set whether this DynaClass should return a <code>null</code> from the <code>getDynaProperty(name)</code> method if the property doesn't exist.
+     *
+     * @param returnNull <code>true</code> if a <code>null</code> {@link DynaProperty} should be returned if the property doesn't exist, otherwise
+     *                   <code>false</code> if a new {@link DynaProperty} should be created.
+     */
+    public void setReturnNull(final boolean returnNull) {
+        this.returnNull = returnNull;
+    }
 
 }

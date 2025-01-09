@@ -35,8 +35,6 @@ public class DateConverterTestCase extends DateConverterTestBase {
         return new TestSuite(DateConverterTestCase.class);
     }
 
-    // ------------------------------------------------------------------------
-
     /**
      * Construct a new Date test case.
      * @param name Test Name
@@ -62,8 +60,6 @@ public class DateConverterTestCase extends DateConverterTestBase {
     protected DateTimeConverter makeConverter() {
         return new DateConverter();
     }
-
-    // ------------------------------------------------------------------------
 
     /**
      * Create the Converter with a default value.
