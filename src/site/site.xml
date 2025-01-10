@@ -21,7 +21,6 @@
         <src>/images/logo.png</src>
         <href>/index.html</href>
     </bannerRight>
-
     <body>
         <menu name="BeanUtils">
             <item name="Overview"             href="/index.html"/>
@@ -32,10 +31,9 @@
             <item name="Source Repository"    href="/scm.html"/>
             <item name="License"              href="http://www.apache.org/licenses/LICENSE-2.0.txt"/>
         </menu>
-
         <menu name="Documentation">
             <item name="Building"             href="/building.html"/>
-            <item name="History"              href="/changes-report.html"/>
+            <item name="History"              href="/changes.html"/>
             <item name="1.9.4" collapse="true" href="/index.html">
                 <item name="Release Notes"    href="http://commons.apache.org/beanutils/javadocs/v1.9.4/RELEASE-NOTES.txt"/>
                 <item name="User Guide"       href="http://commons.apache.org/beanutils/javadocs/v1.9.4/apidocs/org/apache/commons/beanutils/package-summary.html#package_description"/>
@@ -57,7 +55,5 @@
                 <item name="API"              href="http://commons.apache.org/beanutils/javadocs/v1.8.3/apidocs/index.html"/>
             </item>
         </menu>
-
     </body>
-
 </project>
