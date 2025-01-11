@@ -48,6 +48,7 @@
       <maven.javadoc.failOnError>false</maven.javadoc.failOnError>
       <commons.scmPubUrl>https://svn.apache.org/repos/infra/websites/production/commons/content/proper/commons-beanutils</commons.scmPubUrl>
       <commons.scmPubCheckoutDirectory>site-content</commons.scmPubCheckoutDirectory>
+      <!-- project.build.outputTimestamp is managed by Maven plugins, see https://maven.apache.org/guides/mini/guide-reproducible-builds.html -->
       <project.build.outputTimestamp>2025-01-07T13:21:19Z</project.build.outputTimestamp>
       <japicmp.skip>false</japicmp.skip>
       <!-- Commons Release Plugin -->
