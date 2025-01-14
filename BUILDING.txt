@@ -36,5 +36,3 @@ purpose of checking API version compatibility, to enable this, use Java 7 or
 later and run instead:
 
     mvn clean package site -Pjapicmp
-
-
