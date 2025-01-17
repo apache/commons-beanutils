@@ -36,11 +36,11 @@
     <commons.componentid>beanutils</commons.componentid>
     <commons.module.name>org.apache.commons.beanutils2</commons.module.name>
     <!-- Current version -->
-    <commons.release.version>2.0.0-M1</commons.release.version>
+    <commons.release.version>2.0.0-M2</commons.release.version>
     <commons.rc.version>RC1</commons.rc.version>
     <commons.main.branch>master</commons.main.branch>
     <commons.release.branch>release</commons.release.branch>
-    <commons.release.next>2.0.0-M2</commons.release.next>
+    <commons.release.next>2.0.0-M3</commons.release.next>
     <commons.release.desc>(Java 8 or above)</commons.release.desc>
     <!-- Previous major version -->
     <commons.release.2.version>1.9.4</commons.release.2.version>
