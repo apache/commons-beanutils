@@ -170,9 +170,9 @@
  * additional packages be available in the application's class path at runtime:
  * </p>
  * <ul>
- * <li><a href="https://commons.apache.org/downloads/download_logging.cgi">
+ * <li><a href="https://commons.apache.org/logging/download_logging.cgi">
  * Logging Package (Apache Commons)</a>, version 1.0 or later</li>
- * <li><a href="https://commons.apache.org/downloads/download_collections.cgi">
+ * <li><a href="https://commons.apache.org/collections/download_collections.cgi">
  * Collections Package (Apache Commons)</a>, version 1.0 or later</li>
  * </ul>
  *
