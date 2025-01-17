@@ -33,6 +33,7 @@
       <action type="fix" issue="BEANUTILS-541" dev="ggregory" due-to="Sergey Chernov">FluentPropertyBeanIntrospector concurrency issue (backport to 1.X) #325.</action>
       <!-- ADD -->
       <!-- UPDATE -->
+      <action dev="ggregory" type="update" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 78 to 79.</action>
     </release>
     <release version="1.10.0" date="2024-12-26" description="This is a maintenance release and requires Java 8.">
       <!-- FIX -->
