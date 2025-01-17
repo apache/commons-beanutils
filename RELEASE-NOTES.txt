@@ -130,10 +130,10 @@ patches, or suggestions for improvement, see the Apache Commons BeanUtils websit
 
 https://commons.apache.org/proper/commons-beanutils/
 
-Download it from https://commons.apache.org/proper/commons-beanutils/download_bcel.cgi
+Download it from https://commons.apache.org/proper/commons-beanutils/download_beanutils.cgi
 
 Have fun!
--Apache Commons BCEL team
+-Apache Commons BeanUtils team
 
 Feedback
 --------
