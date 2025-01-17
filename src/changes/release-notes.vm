@@ -15,10 +15,10 @@
 ## specific language governing permissions and limitations
 ## under the License.
 ##
-              ${project.name} ${version}
-                  RELEASE NOTES
+${project.name} ${version}
+Release Notes
 
-The ${developmentTeam} is pleased to announce the release of ${project.name} ${version}
+The ${developmentTeam} is pleased to announce the release of ${project.name} ${version}.
 
 $introduction.replaceAll("(?<!\015)\012", "
 ").replaceAll("(?m)^ +","")
@@ -125,19 +125,5 @@ Download it from ${project.url}/download_beanutils.cgi
 
 Have fun!
 -Apache Commons BCEL team
-
-Feedback
---------
-Open source works best when you give feedback:
-
-    https://commons.apache.org/beanutils
-
-Please direct all bug reports to JIRA:
-
-    https://issues.apache.org/jira/browse/BEANUTILS
-
-Or subscribe to the commons-user mailing list
-
-The Apache Commons Team
 
 -----------------------------------------------------------------------------

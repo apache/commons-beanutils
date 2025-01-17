@@ -1,7 +1,7 @@
 Apache Commons BeanUtils 2.0.0-M1
 Release Notes
 
-The Apache Commons BeanUtils team is pleased to announce the release of Apache Commons BeanUtils 2.0.0-M1
+The Apache Commons BeanUtils team is pleased to announce the release of Apache Commons BeanUtils 2.0.0-M1.
 
 Apache Commons BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.
 
@@ -92,6 +92,8 @@ patches, or suggestions for improvement, see the Apache Commons BeanUtils websit
 
 https://commons.apache.org/proper/commons-beanutils/
 
+Download it from https://commons.apache.org/proper/commons-beanutils/download_beanutils.cgi
+
 -----------------------------------------------------------------------------
 Apache Commons BeanUtils 1.10.0
 Release Notes
@@ -131,23 +133,6 @@ patches, or suggestions for improvement, see the Apache Commons BeanUtils websit
 https://commons.apache.org/proper/commons-beanutils/
 
 Download it from https://commons.apache.org/proper/commons-beanutils/download_beanutils.cgi
-
-Have fun!
--Apache Commons BeanUtils team
-
-Feedback
---------
-Open source works best when you give feedback:
-
-    https://commons.apache.org/beanutils
-
-Please direct all bug reports to JIRA:
-
-    https://issues.apache.org/jira/browse/BEANUTILS
-
-Or subscribe to the commons-user mailing list
-
-The Apache Commons Team
 
 -----------------------------------------------------------------------------
 Apache Commons BeanUtils 1.9.4
