@@ -28,7 +28,7 @@ o                 Deprecate BeanUtilsBean.initCause(Throwable, Throwable) for re
 o                 Deprecate BeanUtils.initCause(Throwable, Throwable) for removal, use Throwable.initCause(Throwable). Thanks to Gary Gregory.
 
 
-Historical list of changes: https://commons.apache.org/proper/commons-beanutils//changes-report.html
+Historical list of changes: https://commons.apache.org/proper/commons-beanutils/changes.html
 
 For complete information on Apache Commons BeanUtils, including instructions on how to submit bug reports,
 patches, or suggestions for improvement, see the Apache Commons BeanUtils website:
