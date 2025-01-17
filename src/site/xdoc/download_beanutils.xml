@@ -7,7 +7,7 @@ The ASF licenses this file to You under the Apache License, Version 2.0
 (the "License"); you may not use this file except in compliance with
 the License.  You may obtain a copy of the License at
 
-     http://www.apache.org/licenses/LICENSE-2.0
+     https://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -59,7 +59,7 @@ limitations under the License.
 <document>
   <properties>
     <title>Download Apache Commons BeanUtils</title>
-    <author email="dev@commons.apache.org">Apache Commons Documentation Team</author>
+    <author email="dev@commons.apache.org">Apache Commons Team</author>
   </properties>
   <body>
     <section name="Download Apache Commons BeanUtils">
@@ -113,32 +113,32 @@ limitations under the License.
       </p>
     </subsection>
     </section>
-    <section name="Apache Commons BeanUtils 2.0.0-M1 (Java 8 or above)">
+    <section name="Apache Commons BeanUtils 2.0.0-M2 (Java 8 or above)">
       <subsection name="Binaries">
         <table>
           <tr>
-              <td><a href="[preferred]/commons/beanutils/binaries/commons-beanutils2-2.0.0-M1-bin.tar.gz">commons-beanutils2-2.0.0-M1-bin.tar.gz</a></td>
-              <td><a href="https://downloads.apache.org/commons/beanutils/binaries/commons-beanutils2-2.0.0-M1-bin.tar.gz.sha512">sha512</a></td>
-              <td><a href="https://downloads.apache.org/commons/beanutils/binaries/commons-beanutils2-2.0.0-M1-bin.tar.gz.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/beanutils/binaries/commons-beanutils2-2.0.0-M2-bin.tar.gz">commons-beanutils2-2.0.0-M2-bin.tar.gz</a></td>
+              <td><a href="https://downloads.apache.org/commons/beanutils/binaries/commons-beanutils2-2.0.0-M2-bin.tar.gz.sha512">sha512</a></td>
+              <td><a href="https://downloads.apache.org/commons/beanutils/binaries/commons-beanutils2-2.0.0-M2-bin.tar.gz.asc">pgp</a></td>
           </tr>
           <tr>
-              <td><a href="[preferred]/commons/beanutils/binaries/commons-beanutils2-2.0.0-M1-bin.zip">commons-beanutils2-2.0.0-M1-bin.zip</a></td>
-              <td><a href="https://downloads.apache.org/commons/beanutils/binaries/commons-beanutils2-2.0.0-M1-bin.zip.sha512">sha512</a></td>
-              <td><a href="https://downloads.apache.org/commons/beanutils/binaries/commons-beanutils2-2.0.0-M1-bin.zip.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/beanutils/binaries/commons-beanutils2-2.0.0-M2-bin.zip">commons-beanutils2-2.0.0-M2-bin.zip</a></td>
+              <td><a href="https://downloads.apache.org/commons/beanutils/binaries/commons-beanutils2-2.0.0-M2-bin.zip.sha512">sha512</a></td>
+              <td><a href="https://downloads.apache.org/commons/beanutils/binaries/commons-beanutils2-2.0.0-M2-bin.zip.asc">pgp</a></td>
           </tr>
         </table>
       </subsection>
       <subsection name="Source">
         <table>
           <tr>
-              <td><a href="[preferred]/commons/beanutils/source/commons-beanutils2-2.0.0-M1-src.tar.gz">commons-beanutils2-2.0.0-M1-src.tar.gz</a></td>
-              <td><a href="https://downloads.apache.org/commons/beanutils/source/commons-beanutils2-2.0.0-M1-src.tar.gz.sha512">sha512</a></td>
-              <td><a href="https://downloads.apache.org/commons/beanutils/source/commons-beanutils2-2.0.0-M1-src.tar.gz.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/beanutils/source/commons-beanutils2-2.0.0-M2-src.tar.gz">commons-beanutils2-2.0.0-M2-src.tar.gz</a></td>
+              <td><a href="https://downloads.apache.org/commons/beanutils/source/commons-beanutils2-2.0.0-M2-src.tar.gz.sha512">sha512</a></td>
+              <td><a href="https://downloads.apache.org/commons/beanutils/source/commons-beanutils2-2.0.0-M2-src.tar.gz.asc">pgp</a></td>
           </tr>
           <tr>
-              <td><a href="[preferred]/commons/beanutils/source/commons-beanutils2-2.0.0-M1-src.zip">commons-beanutils2-2.0.0-M1-src.zip</a></td>
-              <td><a href="https://downloads.apache.org/commons/beanutils/source/commons-beanutils2-2.0.0-M1-src.zip.sha512">sha512</a></td>
-              <td><a href="https://downloads.apache.org/commons/beanutils/source/commons-beanutils2-2.0.0-M1-src.zip.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/beanutils/source/commons-beanutils2-2.0.0-M2-src.zip">commons-beanutils2-2.0.0-M2-src.zip</a></td>
+              <td><a href="https://downloads.apache.org/commons/beanutils/source/commons-beanutils2-2.0.0-M2-src.zip.sha512">sha512</a></td>
+              <td><a href="https://downloads.apache.org/commons/beanutils/source/commons-beanutils2-2.0.0-M2-src.zip.asc">pgp</a></td>
           </tr>
         </table>
       </subsection>
