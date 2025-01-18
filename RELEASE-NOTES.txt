@@ -2,7 +2,7 @@ Apache Commons BeanUtils 1.10.0
 Release Notes
 
 
-The Apache Commons BeanUtils team is pleased to announce the release of Apache Commons BeanUtils 1.10.0
+The Apache Commons BeanUtils team is pleased to announce the release of Apache Commons BeanUtils 1.10.0.
 
 Apache Commons BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.
 
@@ -35,22 +35,7 @@ patches, or suggestions for improvement, see the Apache Commons BeanUtils websit
 
 https://commons.apache.org/proper/commons-beanutils/
 
-Download it from https://commons.apache.org/proper/commons-beanutils/download_bcel.cgi
-
-Have fun!
--Apache Commons BCEL team
-
-Feedback
---------
-Open source works best when you give feedback:
-
-    https://commons.apache.org/beanutils
-
-Please direct all bug reports to JIRA:
-
-    https://issues.apache.org/jira/browse/BEANUTILS
-
-Or subscribe to the commons-user mailing list
+Download it from https://commons.apache.org/proper/commons-beanutils/download_beanutils.cgi
 
 The Apache Commons Team
 
@@ -83,6 +68,10 @@ For complete information on Apache Commons BeanUtils, including instructions on 
 patches, or suggestions for improvement, see the Apache Apache Commons BeanUtils website:
 
 https://commons.apache.org/proper/commons-beanutils/
+
+Download it from https://commons.apache.org/proper/commons-beanutils/download_beanutils.cgi
+
+The Apache Commons Team
 
 -----------------------------------------------------------------------------
 Apache Commons BeanUtils 1.9.3
@@ -143,6 +132,10 @@ Apache Apache Commons BeanUtils website:
 
 https://commons.apache.org/proper/commons-beanutils/
 
+Download it from https://commons.apache.org/proper/commons-beanutils/download_beanutils.cgi
+
+The Apache Commons Team
+
 -----------------------------------------------------------------------------
 Apache Commons BeanUtils 1.9.2
 Release Notes
@@ -190,6 +183,10 @@ New features in version 1.9.2
 * [BEANUTILS-463]
   Added new SuppressPropertiesBeanIntrospector class to deal with a potential
   class loader vulnerability.
+
+Download it from https://commons.apache.org/proper/commons-beanutils/download_beanutils.cgi
+
+The Apache Commons Team
 
 -----------------------------------------------------------------------------
 Apache Commons BeanUtils 1.9.1
