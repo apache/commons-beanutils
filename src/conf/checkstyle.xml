@@ -61,6 +61,7 @@ limitations under the License.
     </module>
     <module name="NeedBraces" />
     <module name="RedundantImport" />
+    <module name="TypecastParenPad" />    
     <module name="UnusedImports" />
   </module>
   <property name="localeLanguage" value="en" />
