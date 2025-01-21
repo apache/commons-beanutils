@@ -71,7 +71,7 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
      * </p>
      */
     public BeanComparator() {
-        this( null );
+        this(null);
     }
 
     /**
@@ -232,7 +232,7 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
      * @param property String method name to call to compare
      * If the property passed in is null then the actual objects will be compared
      */
-    public void setProperty( final String property ) {
+    public void setProperty(final String property) {
         this.property = property;
     }
 }

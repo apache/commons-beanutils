@@ -33,29 +33,25 @@ public class BeanPredicateTestCase extends TestCase {
     }
 
     public void testEqual() {
-        final BeanPredicate predicate =
-            new BeanPredicate("stringProperty",new EqualPredicate("foo"));
+        final BeanPredicate predicate = new BeanPredicate("stringProperty", new EqualPredicate("foo"));
         assertTrue(predicate.evaluate(new TestBean("foo")));
         assertTrue(!predicate.evaluate(new TestBean("bar")));
     }
 
     public void testInstanceOf() {
-        final BeanPredicate predicate =
-            new BeanPredicate("stringProperty",new InstanceofPredicate( String.class ));
+        final BeanPredicate predicate = new BeanPredicate("stringProperty", new InstanceofPredicate(String.class));
         assertTrue(predicate.evaluate(new TestBean("foo")));
         assertTrue(predicate.evaluate(new TestBean("bar")));
     }
 
     public void testNotEqual() {
-        final BeanPredicate predicate =
-            new BeanPredicate("stringProperty",new NotPredicate( new EqualPredicate("foo")));
+        final BeanPredicate predicate = new BeanPredicate("stringProperty", new NotPredicate(new EqualPredicate("foo")));
         assertTrue(!predicate.evaluate(new TestBean("foo")));
         assertTrue(predicate.evaluate(new TestBean("bar")));
     }
 
     public void testNull() {
-        final BeanPredicate predicate =
-            new BeanPredicate("stringProperty", NullPredicate.INSTANCE);
+        final BeanPredicate predicate = new BeanPredicate("stringProperty", NullPredicate.INSTANCE);
         final String nullString = null;
         assertTrue(predicate.evaluate(new TestBean(nullString)));
         assertTrue(!predicate.evaluate(new TestBean("bar")));

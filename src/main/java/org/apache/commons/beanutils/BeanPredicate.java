@@ -65,7 +65,7 @@ public class BeanPredicate implements Predicate {
         boolean evaluation = false;
 
         try {
-            final Object propValue = PropertyUtils.getProperty( object, propertyName );
+            final Object propValue = PropertyUtils.getProperty(object, propertyName);
             evaluation = predicate.evaluate(propValue);
         } catch (final IllegalArgumentException e) {
             final String errorMsg = "Problem during evaluation.";

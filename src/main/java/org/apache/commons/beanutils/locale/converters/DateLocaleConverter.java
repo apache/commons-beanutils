@@ -282,7 +282,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
                quoted = true;
             } else if (thisChar >= 'a' && thisChar <= 'z' ||
                        thisChar >= 'A' && thisChar <= 'Z') {
-                final int index = fromChars.indexOf(thisChar );
+                final int index = fromChars.indexOf(thisChar);
                 if (index == -1) {
                     throw new IllegalArgumentException(
                         "Illegal pattern character '" + thisChar + "'");

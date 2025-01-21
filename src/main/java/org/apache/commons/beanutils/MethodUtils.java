@@ -521,9 +521,9 @@ public class MethodUtils {
                             }
                             setMethodAccessible(method); // Default access superclass workaround
                             myCost = getTotalTransformationCost(parameterTypes,method.getParameterTypes());
-                            if ( myCost < bestMatchCost ) {
-                               bestMatch = method;
-                               bestMatchCost = myCost;
+                            if (myCost < bestMatchCost) {
+                                bestMatch = method;
+                                bestMatchCost = myCost;
                             }
                         }
 
@@ -532,11 +532,11 @@ public class MethodUtils {
                 }
             }
         }
-        if ( bestMatch != null ){
-                 cacheMethod(md, bestMatch);
+        if (bestMatch != null) {
+            cacheMethod(md, bestMatch);
         } else {
-        // didn't find a match
-               log.trace("No match found.");
+            // didn't find a match
+            log.trace("No match found.");
         }
 
         return bestMatch;

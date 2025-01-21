@@ -2395,8 +2395,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (final NoSuchMethodException e) {
             // Correct result for this test
-            assertEquals("Unknown property 'unknown' on class '" +
-                         bean.getClass() + "'", e.getMessage() );
+            assertEquals("Unknown property 'unknown' on class '" + bean.getClass() + "'", e.getMessage());
         }
 
     }
@@ -2417,8 +2416,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (final NoSuchMethodException e) {
             // Correct result for this test
-            assertEquals("Property 'writeOnlyProperty' has no getter method in class '" +
-                         bean.getClass() + "'", e.getMessage() );
+            assertEquals("Property 'writeOnlyProperty' has no getter method in class '" + bean.getClass() + "'", e.getMessage());
         }
 
     }
@@ -2431,10 +2429,9 @@ public class PropertyUtilsTestCase extends TestCase {
      * @param className Class name where this method should be defined
      */
     protected void testGetWriteMethod(final Object bean, final String properties[],
-                                      final String className) {
+            final String className) {
 
-        final PropertyDescriptor pd[] =
-                PropertyUtils.getPropertyDescriptors(bean);
+        final PropertyDescriptor pd[] = PropertyUtils.getPropertyDescriptors(bean);
         for (final String propertie : properties) {
 
             // Identify the property descriptor for this property
@@ -2459,19 +2456,14 @@ public class PropertyUtilsTestCase extends TestCase {
                     break;
                 }
             }
-            assertTrue("PropertyDescriptor for " + propertie,
-                    n >= 0);
+            assertTrue("PropertyDescriptor for " + propertie, n >= 0);
 
             // Locate an accessible property reader method for it
             final Method writer = PropertyUtils.getWriteMethod(pd[n]);
-            assertNotNull("Writer for " + propertie,
-                    writer);
+            assertNotNull("Writer for " + propertie, writer);
             final Class<?> clazz = writer.getDeclaringClass();
-            assertNotNull("Declaring class for " + propertie,
-                    clazz);
-            assertEquals("Correct declaring class for " + propertie,
-                    clazz.getName(),
-                    className);
+            assertNotNull("Declaring class for " + propertie, clazz);
+            assertEquals("Correct declaring class for " + propertie, clazz.getName(), className);
 
         }
 
@@ -4286,9 +4278,7 @@ public class PropertyUtilsTestCase extends TestCase {
         try {
             final String oldValue = bean.getWriteOnlyPropertyValue();
             final String newValue = oldValue + " Extra Value";
-            PropertyUtils.setSimpleProperty(bean,
-                    "readOnlyProperty",
-                    newValue);
+            PropertyUtils.setSimpleProperty(bean, "readOnlyProperty", newValue);
             fail("Should have thrown NoSuchMethodException");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
@@ -4298,8 +4288,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (final NoSuchMethodException e) {
             // Correct result for this test
-            assertEquals("Property 'readOnlyProperty' has no setter method in class '" +
-                         bean.getClass() + "'", e.getMessage() );
+            assertEquals("Property 'readOnlyProperty' has no setter method in class '" + bean.getClass() + "'", e.getMessage());
         }
 
     }
@@ -4313,12 +4302,8 @@ public class PropertyUtilsTestCase extends TestCase {
             final short oldValue = bean.getShortProperty();
             short newValue = oldValue;
             newValue++;
-            PropertyUtils.setSimpleProperty(bean,
-                    "shortProperty",
-                    Short.valueOf(newValue));
-            assertEquals("Matched new value",
-                    newValue,
-                    bean.getShortProperty());
+            PropertyUtils.setSimpleProperty(bean, "shortProperty", Short.valueOf(newValue));
+            assertEquals("Matched new value", newValue, bean.getShortProperty());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -4339,12 +4324,8 @@ public class PropertyUtilsTestCase extends TestCase {
         try {
             final String oldValue = bean.getStringProperty();
             final String newValue = oldValue + " Extra Value";
-            PropertyUtils.setSimpleProperty(bean,
-                    "stringProperty",
-                    newValue);
-            assertEquals("Matched new value",
-                    newValue,
-                    bean.getStringProperty());
+            PropertyUtils.setSimpleProperty(bean, "stringProperty", newValue);
+            assertEquals("Matched new value", newValue, bean.getStringProperty());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -4364,9 +4345,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
         try {
             final String newValue = "New String Value";
-            PropertyUtils.setSimpleProperty(bean,
-                    "unknown",
-                    newValue);
+            PropertyUtils.setSimpleProperty(bean, "unknown", newValue);
             fail("Should have thrown NoSuchMethodException");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
@@ -4376,8 +4355,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (final NoSuchMethodException e) {
             // Correct result for this test
-            assertEquals("Unknown property 'unknown' on class '" +
-                         bean.getClass() + "'", e.getMessage() );
+            assertEquals("Unknown property 'unknown' on class '" + bean.getClass() + "'", e.getMessage());
         }
 
     }
@@ -4390,12 +4368,8 @@ public class PropertyUtilsTestCase extends TestCase {
         try {
             final String oldValue = bean.getWriteOnlyPropertyValue();
             final String newValue = oldValue + " Extra Value";
-            PropertyUtils.setSimpleProperty(bean,
-                    "writeOnlyProperty",
-                    newValue);
-            assertEquals("Matched new value",
-                    newValue,
-                    bean.getWriteOnlyPropertyValue());
+            PropertyUtils.setSimpleProperty(bean, "writeOnlyProperty", newValue);
+            assertEquals("Matched new value", newValue, bean.getWriteOnlyPropertyValue());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -4417,9 +4391,7 @@ public class PropertyUtilsTestCase extends TestCase {
         // don't init!
 
         try {
-            PropertyUtils.getProperty(
-                                nestedBean,
-                                "simpleBeanProperty.indexedProperty[0]");
+            PropertyUtils.getProperty(nestedBean, "simpleBeanProperty.indexedProperty[0]");
             fail("NestedNullException not thrown");
         } catch (final NestedNullException e) {
             // that's what we wanted!
