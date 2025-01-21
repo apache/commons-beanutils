@@ -120,7 +120,6 @@ public class Jira347TestCase extends TestCase {
         final ClassLoader loader = newClassLoader();
         final Class<?> beanClass    = loader.loadClass(className);
         beanClass.getConstructor().newInstance();
-        // -----------------------------------------------------------------------------
 
         // Sanity checks only
         assertNotNull("ClassLoader is null", loader);

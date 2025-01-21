@@ -32,11 +32,7 @@ public class DoubleConverterTestCase extends NumberConverterTestBase {
         return new TestSuite(DoubleConverterTestCase.class);
     }
 
-    // ------------------------------------------------------------------------
-
     private Converter converter;
-
-    // ------------------------------------------------------------------------
 
     public DoubleConverterTestCase(final String name) {
         super(name);
@@ -51,8 +47,6 @@ public class DoubleConverterTestCase extends NumberConverterTestBase {
     protected NumberConverter makeConverter() {
         return new DoubleConverter();
     }
-
-    // ------------------------------------------------------------------------
 
     @Override
     protected NumberConverter makeConverter(final Object defaultValue) {
@@ -72,8 +66,6 @@ public class DoubleConverterTestCase extends NumberConverterTestBase {
     public void tearDown() throws Exception {
         converter = null;
     }
-
-    // ------------------------------------------------------------------------
 
     public void testSimpleConversion() throws Exception {
         final String[] message= {

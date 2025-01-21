@@ -316,7 +316,6 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     // Constructors
-    // ----------------------------------------------------------------------
 
     /**
      * Collection implementation over the values of the FastHashMap
@@ -347,7 +346,6 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
     private boolean fast;
 
     // Property access
-    // ----------------------------------------------------------------------
 
     /**
      * Construct an empty map.
@@ -366,7 +364,6 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     // Map access
-    // ----------------------------------------------------------------------
     // These methods can forward straight to the wrapped Map in 'fast' mode.
     // (because they are query methods)
 
@@ -430,7 +427,6 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     // Map modification
-    // ----------------------------------------------------------------------
     // These methods perform special behaviour in 'fast' mode.
     // The map is cloned, updated and then assigned back.
     // See the comments at the top as to why this won't always work.
@@ -478,7 +474,6 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     // Basic object methods
-    // ----------------------------------------------------------------------
 
     protected Map<K, V> createMap(final int capacity, final float factor) {
         return new WeakHashMap<>(capacity, factor);
@@ -499,7 +494,6 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     // Map views
-    // ----------------------------------------------------------------------
 
     /**
      * Compare the specified object with this list for equality.  This
@@ -588,7 +582,6 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     // Abstractions on Map creations (for subclasses such as WeakFastHashMap)
-    // ----------------------------------------------------------------------
 
     /**
      * Return the hash code value for this map.  This implementation uses
@@ -685,7 +678,6 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     // Map view inner classes
-    // ----------------------------------------------------------------------
 
     /**
      * Remove any mapping for this key, and return any previously

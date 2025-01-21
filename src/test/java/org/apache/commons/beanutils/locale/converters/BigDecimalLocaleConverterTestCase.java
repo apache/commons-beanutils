@@ -51,8 +51,6 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
         super.tearDown();
     }
 
-    // ------------------------------------------------------------------------
-
     /**
      * Test Converter() constructor
      *

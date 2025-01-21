@@ -199,7 +199,6 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     private transient HashMap<String, Method> writeMethods = new HashMap<>();
 
     // Constructors
-    //-------------------------------------------------------------------------
 
     private transient HashMap<String, Class<? extends Object>> types = new HashMap<>();
 
@@ -210,7 +209,6 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     }
 
     // Map interface
-    //-------------------------------------------------------------------------
 
     /**
      * Constructs a new <code>BeanMap</code> that operates on the
@@ -539,7 +537,6 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     }
 
     // Helper methods
-    //-------------------------------------------------------------------------
 
     /**
      * Returns the accessor for the property with the given name.
@@ -586,7 +583,6 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     }
 
     // Properties
-    //-------------------------------------------------------------------------
 
     /**
      * Returns the mutator for the property with the given name.
@@ -656,7 +652,6 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     }
 
     // Implementation methods
-    //-------------------------------------------------------------------------
 
     /**
      * Get the keys for this BeanMap.
@@ -750,7 +745,6 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     }
 
     // Implementation classes
-    //-------------------------------------------------------------------------
 
     /**
      * Reinitializes this bean.  Called during {@link #setBean(Object)}.

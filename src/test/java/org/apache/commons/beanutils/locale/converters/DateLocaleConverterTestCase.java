@@ -45,8 +45,6 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
     protected boolean validLocalDateSymbols;
 
-    // ------------------------------------------------------------------------
-
     public DateLocaleConverterTestCase(final String name) {
         super(name);
     }
@@ -106,8 +104,6 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
     public void tearDown() {
         super.tearDown();
     }
-
-    // ------------------------------------------------------------------------
 
     /**
      * Test Calendar

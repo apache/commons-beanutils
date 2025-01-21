@@ -36,8 +36,6 @@ import junit.framework.TestCase;
 
 public abstract class DateConverterTestBase extends TestCase {
 
-    // ------------------------------------------------------------------------
-
     /**
      * Construct a new test case.
      * @param name Name of the test
@@ -45,8 +43,6 @@ public abstract class DateConverterTestBase extends TestCase {
     public DateConverterTestBase(final String name) {
         super(name);
     }
-
-    // ------------------------------------------------------------------------
 
     /**
      * Return the expected type
@@ -98,8 +94,6 @@ public abstract class DateConverterTestBase extends TestCase {
      * @return A new Converter
      */
     protected abstract DateTimeConverter makeConverter();
-
-    // ------------------------------------------------------------------------
 
     /**
      * Create the Converter with a default value.
