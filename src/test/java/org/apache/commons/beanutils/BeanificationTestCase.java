@@ -479,8 +479,9 @@ public class BeanificationTestCase extends TestCase {
     public void testMemoryTestMethodology() throws Exception {
         // test methodology
         // many thanks to Juozas Baliuka for suggesting this method
-        ClassLoader loader = new ClassLoader(this.getClass().getClassLoader()) {};
-        final WeakReference<ClassLoader> reference = new  WeakReference<>(loader);
+        ClassLoader loader = new ClassLoader(this.getClass().getClassLoader()) {
+        };
+        final WeakReference<ClassLoader> reference = new WeakReference<>(loader);
         @SuppressWarnings("unused")
         Class<?> myClass = loader.loadClass("org.apache.commons.beanutils.BetaBean");
 
@@ -492,19 +493,18 @@ public class BeanificationTestCase extends TestCase {
 
         int iterations = 0;
         int bytz = 2;
-        while(true) {
+        while (true) {
             System.gc();
-            if(iterations++ > MAX_GC_ITERATIONS){
+            if (iterations++ > MAX_GC_ITERATIONS) {
                 fail("Max iterations reached before resource released.");
             }
-            if( reference.get() == null ) {
+            if (reference.get() == null) {
                 break;
 
             }
             // create garbage:
             @SuppressWarnings("unused")
-            final
-            byte[] b =  new byte[bytz];
+            final byte[] b = new byte[bytz];
             bytz = bytz * 2;
         }
     }

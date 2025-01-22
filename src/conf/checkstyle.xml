@@ -60,7 +60,9 @@ limitations under the License.
       <property name="scope" value="protected" />
     </module>
     <module name="NeedBraces" />
+    <module name="ParenPad" />
     <module name="RedundantImport" />
+    <module name="TypecastParenPad" />    
     <module name="UnusedImports" />
   </module>
   <property name="localeLanguage" value="en" />

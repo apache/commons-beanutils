@@ -599,14 +599,13 @@ public class MethodUtilsTestCase extends TestCase {
         value = MethodUtils.invokeStaticMethod(TestBean.class, "currentCounter", new Object[0]);
         assertEquals("currentCounter value", current, ((Integer) value).intValue());
 
-        MethodUtils.invokeStaticMethod(TestBean.class, "incrementCounter", new Object[] { Integer.valueOf(8) } );
+        MethodUtils.invokeStaticMethod(TestBean.class, "incrementCounter", new Object[] { Integer.valueOf(8) });
         current += 8;
 
         value = MethodUtils.invokeStaticMethod(TestBean.class, "currentCounter", new Object[0]);
         assertEquals("currentCounter value", current, ((Integer) value).intValue());
 
-        MethodUtils.invokeExactStaticMethod(TestBean.class, "incrementCounter",
-            new Object[] { Integer.valueOf(8) }, new Class[] { Number.class } );
+        MethodUtils.invokeExactStaticMethod(TestBean.class, "incrementCounter", new Object[] { Integer.valueOf(8) }, new Class[] { Number.class });
         current += 16;
 
         value = MethodUtils.invokeStaticMethod(TestBean.class, "currentCounter", new Object[0]);

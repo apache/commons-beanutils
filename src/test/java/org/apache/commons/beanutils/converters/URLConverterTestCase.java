@@ -36,11 +36,7 @@ public class URLConverterTestCase extends TestCase {
         return new TestSuite(URLConverterTestCase.class);
     }
 
-    // ------------------------------------------------------------------------
-
     private Converter converter;
-
-    // ------------------------------------------------------------------------
 
     public URLConverterTestCase(final String name) {
         super(name);
@@ -54,8 +50,6 @@ public class URLConverterTestCase extends TestCase {
         return new URLConverter();
     }
 
-    // ------------------------------------------------------------------------
-
     @Override
     public void setUp() throws Exception {
         converter = makeConverter();
@@ -65,8 +59,6 @@ public class URLConverterTestCase extends TestCase {
     public void tearDown() throws Exception {
         converter = null;
     }
-
-    // ------------------------------------------------------------------------
 
     public void testSimpleConversion() throws Exception {
         final String[] message= {

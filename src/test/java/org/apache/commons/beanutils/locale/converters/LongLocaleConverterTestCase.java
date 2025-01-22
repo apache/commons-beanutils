@@ -49,8 +49,6 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         super.tearDown();
     }
 
-    // ------------------------------------------------------------------------
-
     /**
      * Test Converter() constructor
      *

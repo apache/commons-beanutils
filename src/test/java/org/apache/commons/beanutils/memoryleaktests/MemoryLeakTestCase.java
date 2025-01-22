@@ -185,7 +185,6 @@ public class MemoryLeakTestCase {
         ClassLoader loader = newClassLoader();
         Class<?> beanClass    = loader.loadClass(className);
         Object bean        = beanClass.getConstructor().newInstance();
-        // -----------------------------------------------------------------------------
 
         final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
@@ -233,7 +232,6 @@ public class MemoryLeakTestCase {
         ClassLoader loader = newClassLoader();
         Class<?> beanClass    = loader.loadClass(className);
         Object bean        = beanClass.getConstructor().newInstance();
-        // -----------------------------------------------------------------------------
 
         final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
@@ -280,7 +278,6 @@ public class MemoryLeakTestCase {
         final ClassLoader loader = newClassLoader();
         final Class<?> beanClass    = loader.loadClass(className);
         final Object bean        = beanClass.getConstructor().newInstance();
-        // -----------------------------------------------------------------------------
 
         // Sanity checks only
         assertNotNull("ClassLoader is null", loader);
@@ -326,7 +323,6 @@ public class MemoryLeakTestCase {
         ClassLoader loader = newClassLoader();
         Class<?> beanClass    = loader.loadClass(className);
         Object bean        = beanClass.getConstructor().newInstance();
-        // -----------------------------------------------------------------------------
 
         // Sanity checks only
         assertNotNull("ClassLoader is null", loader);
@@ -378,7 +374,6 @@ public class MemoryLeakTestCase {
         ClassLoader loader = newClassLoader();
         Class<?> beanClass    = loader.loadClass(className);
         Object bean        = beanClass.getConstructor().newInstance();
-        // -----------------------------------------------------------------------------
 
         final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
@@ -425,7 +420,6 @@ public class MemoryLeakTestCase {
         ClassLoader loader = newClassLoader();
         Class<?> beanClass    = loader.loadClass(className);
         Object bean        = beanClass.getConstructor().newInstance();
-        // -----------------------------------------------------------------------------
 
         final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
@@ -472,7 +466,6 @@ public class MemoryLeakTestCase {
         ClassLoader loader = newClassLoader();
         Class<?> beanClass    = loader.loadClass(className);
         Object bean        = beanClass.getConstructor().newInstance();
-        // -----------------------------------------------------------------------------
 
         final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
@@ -526,7 +519,6 @@ public class MemoryLeakTestCase {
         Class<?> beanClass    = loader.loadClass(className);
         Object bean        = beanClass.getConstructor().newInstance();
         WrapDynaBean wrapDynaBean = new WrapDynaBean(bean);
-        // -----------------------------------------------------------------------------
 
         final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 

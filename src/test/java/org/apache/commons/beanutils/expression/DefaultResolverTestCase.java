@@ -53,8 +53,6 @@ public class DefaultResolverTestCase extends TestCase {
 
     private final String[] removeProperties  = {null, null, "e",  "h",    "kl",    null,    null,      "s",       null,    "wx"};
 
-    // ------------------------------------------------------------------------
-
     /**
      * Construct a DefaultResolver Test Case.
      * @param name The name of the test
@@ -73,8 +71,6 @@ public class DefaultResolverTestCase extends TestCase {
     @Override
     protected void setUp() {
     }
-
-    // ------------------------------------------------------------------------
 
     /**
      * Tear Down

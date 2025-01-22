@@ -32,11 +32,7 @@ public class LongConverterTestCase extends NumberConverterTestBase {
         return new TestSuite(LongConverterTestCase.class);
     }
 
-    // ------------------------------------------------------------------------
-
     private Converter converter;
-
-    // ------------------------------------------------------------------------
 
     public LongConverterTestCase(final String name) {
         super(name);
@@ -51,8 +47,6 @@ public class LongConverterTestCase extends NumberConverterTestBase {
     protected NumberConverter makeConverter() {
         return new LongConverter();
     }
-
-    // ------------------------------------------------------------------------
 
     @Override
     protected NumberConverter makeConverter(final Object defaultValue) {
@@ -72,8 +66,6 @@ public class LongConverterTestCase extends NumberConverterTestBase {
     public void tearDown() throws Exception {
         converter = null;
     }
-
-    // ------------------------------------------------------------------------
 
     public void testSimpleConversion() throws Exception {
         final String[] message= {

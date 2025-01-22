@@ -243,7 +243,7 @@ public class RowSetDynaClass extends JDBCDynaClass {
     protected void copy(final ResultSet resultSet) throws SQLException {
 
         int cnt = 0;
-        while (resultSet.next() && (limit < 0  || cnt++ < limit) ) {
+        while (resultSet.next() && (limit < 0 || cnt++ < limit)) {
             final DynaBean bean = createDynaBean();
             for (final DynaProperty propertie : properties) {
                 final String name = propertie.getName();

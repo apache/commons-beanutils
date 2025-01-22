@@ -32,11 +32,7 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
         return new TestSuite(FloatConverterTestCase.class);
     }
 
-    // ------------------------------------------------------------------------
-
     private Converter converter;
-
-    // ------------------------------------------------------------------------
 
     public FloatConverterTestCase(final String name) {
         super(name);
@@ -51,8 +47,6 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
     protected NumberConverter makeConverter() {
         return new FloatConverter();
     }
-
-    // ------------------------------------------------------------------------
 
     @Override
     protected NumberConverter makeConverter(final Object defaultValue) {
@@ -72,8 +66,6 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
     public void tearDown() throws Exception {
         converter = null;
     }
-
-    // ------------------------------------------------------------------------
 
     /**
      * Test Invalid Amounts (too big/small)

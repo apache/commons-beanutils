@@ -417,9 +417,7 @@ public class LocaleConvertUtilsBean {
         // behaviour of toString and valueOf methods of these classes
         converter.put(java.sql.Date.class, new SqlDateLocaleConverter(locale, "yyyy-MM-dd"));
         converter.put(java.sql.Time.class, new SqlTimeLocaleConverter(locale, "HH:mm:ss"));
-        converter.put( java.sql.Timestamp.class,
-                       new SqlTimestampLocaleConverter(locale, "yyyy-MM-dd HH:mm:ss.S")
-                     );
+        converter.put(java.sql.Timestamp.class, new SqlTimestampLocaleConverter(locale, "yyyy-MM-dd HH:mm:ss.S"));
 
         converter.setFast(true);
 

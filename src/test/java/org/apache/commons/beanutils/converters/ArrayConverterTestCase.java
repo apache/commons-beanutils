@@ -38,8 +38,6 @@ public class ArrayConverterTestCase extends TestCase {
         return new TestSuite(ArrayConverterTestCase.class);
     }
 
-    // ------------------------------------------------------------------------
-
     /**
      * Construct a new Array Converter test case.
      * @param name Test Name
@@ -73,8 +71,6 @@ public class ArrayConverterTestCase extends TestCase {
     @Override
     public void setUp() throws Exception {
     }
-
-    // ------------------------------------------------------------------------
 
     /** Tear Down */
     @Override

@@ -1197,58 +1197,43 @@ public class PropertyUtilsBean {
      * @throws NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
-    public Object getSimpleProperty(final Object bean, final String name)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+    public Object getSimpleProperty(final Object bean, final String name) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
         }
         if (name == null) {
-            throw new IllegalArgumentException("No name specified for bean class '" +
-                    bean.getClass() + "'");
+            throw new IllegalArgumentException("No name specified for bean class '" + bean.getClass() + "'");
         }
 
         // Validate the syntax of the property name
         if (resolver.hasNested(name)) {
-            throw new IllegalArgumentException
-                    ("Nested property names are not allowed: Property '" +
-                    name + "' on bean class '" + bean.getClass() + "'");
+            throw new IllegalArgumentException("Nested property names are not allowed: Property '" + name + "' on bean class '" + bean.getClass() + "'");
         }
         if (resolver.isIndexed(name)) {
-            throw new IllegalArgumentException
-                    ("Indexed property names are not allowed: Property '" +
-                    name + "' on bean class '" + bean.getClass() + "'");
+            throw new IllegalArgumentException("Indexed property names are not allowed: Property '" + name + "' on bean class '" + bean.getClass() + "'");
         }
         if (resolver.isMapped(name)) {
-            throw new IllegalArgumentException
-                    ("Mapped property names are not allowed: Property '" +
-                    name + "' on bean class '" + bean.getClass() + "'");
+            throw new IllegalArgumentException("Mapped property names are not allowed: Property '" + name + "' on bean class '" + bean.getClass() + "'");
         }
 
         // Handle DynaBean instances specially
         if (bean instanceof DynaBean) {
-            final DynaProperty descriptor =
-                    ((DynaBean) bean).getDynaClass().getDynaProperty(name);
+            final DynaProperty descriptor = ((DynaBean) bean).getDynaClass().getDynaProperty(name);
             if (descriptor == null) {
-                throw new NoSuchMethodException("Unknown property '" +
-                        name + "' on dynaclass '" +
-                        ((DynaBean) bean).getDynaClass() + "'" );
+                throw new NoSuchMethodException("Unknown property '" + name + "' on dynaclass '" + ((DynaBean) bean).getDynaClass() + "'");
             }
             return ((DynaBean) bean).get(name);
         }
 
         // Retrieve the property getter method for the specified property
-        final PropertyDescriptor descriptor =
-                getPropertyDescriptor(bean, name);
+        final PropertyDescriptor descriptor = getPropertyDescriptor(bean, name);
         if (descriptor == null) {
-            throw new NoSuchMethodException("Unknown property '" +
-                    name + "' on class '" + bean.getClass() + "'" );
+            throw new NoSuchMethodException("Unknown property '" + name + "' on class '" + bean.getClass() + "'");
         }
         final Method readMethod = getReadMethod(bean.getClass(), descriptor);
         if (readMethod == null) {
-            throw new NoSuchMethodException("Property '" + name +
-                    "' has no getter method in class '" + bean.getClass() + "'");
+            throw new NoSuchMethodException("Property '" + name + "' has no getter method in class '" + bean.getClass() + "'");
         }
 
         return invokeMethod(readMethod, bean, EMPTY_OBJECT_ARRAY);

@@ -514,10 +514,10 @@ public class LazyDynaList extends ArrayList<Object> {
         this.elementDynaBeanType = dynaBean.getClass();
 
         // Re-calculate the type
-        if (WrapDynaBean.class.isAssignableFrom(elementDynaBeanType )) {
-            this.elementType = ((WrapDynaBean)dynaBean).getInstance().getClass();
-        } else if (LazyDynaMap.class.isAssignableFrom(elementDynaBeanType )) {
-            this.elementType = ((LazyDynaMap)dynaBean).getMap().getClass();
+        if (WrapDynaBean.class.isAssignableFrom(elementDynaBeanType)) {
+            this.elementType = ((WrapDynaBean) dynaBean).getInstance().getClass();
+        } else if (LazyDynaMap.class.isAssignableFrom(elementDynaBeanType)) {
+            this.elementType = ((LazyDynaMap) dynaBean).getMap().getClass();
         }
 
     }

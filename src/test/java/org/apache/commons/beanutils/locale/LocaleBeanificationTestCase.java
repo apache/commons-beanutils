@@ -517,8 +517,9 @@ public class LocaleBeanificationTestCase extends TestCase {
     public void testMemoryTestMethodology() throws Exception {
         // test methodology
         // many thanks to Juozas Baliuka for suggesting this method
-        ClassLoader loader = new ClassLoader(this.getClass().getClassLoader()) {};
-        final WeakReference<ClassLoader> reference = new  WeakReference<>(loader);
+        ClassLoader loader = new ClassLoader(this.getClass().getClassLoader()) {
+        };
+        final WeakReference<ClassLoader> reference = new WeakReference<>(loader);
         Class<?> myClass = loader.loadClass("org.apache.commons.beanutils.BetaBean");
 
         assertNotNull("Weak reference released early", reference.get());
@@ -529,17 +530,17 @@ public class LocaleBeanificationTestCase extends TestCase {
 
         int iterations = 0;
         int bytz = 2;
-        while(true) {
+        while (true) {
             System.gc();
-            if(iterations++ > MAX_GC_ITERATIONS){
+            if (iterations++ > MAX_GC_ITERATIONS) {
                 fail("Max iterations reached before resource released.");
             }
-            if( reference.get() == null ) {
+            if (reference.get() == null) {
                 break;
 
             }
             // create garbage:
-            final byte[] b =  new byte[bytz];
+            final byte[] b = new byte[bytz];
             bytz = bytz * 2;
         }
     }

@@ -1424,8 +1424,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (final NoSuchMethodException e) {
             // Correct result for this test
-            assertEquals("Unknown property 'unknown' on dynaclass '" +
-                         bean.getDynaClass() + "'", e.getMessage() );
+            assertEquals("Unknown property 'unknown' on dynaclass '" + bean.getDynaClass() + "'", e.getMessage());
         }
 
     }
@@ -2513,12 +2512,8 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             final String oldValue = (String) bean.get("stringProperty");
             final String newValue = oldValue + " Extra Value";
-            PropertyUtils.setSimpleProperty(bean,
-                    "stringProperty",
-                    newValue);
-            assertEquals("Matched new value",
-                    newValue,
-                    (String) bean.get("stringProperty"));
+            PropertyUtils.setSimpleProperty(bean, "stringProperty", newValue);
+            assertEquals("Matched new value", newValue, (String) bean.get("stringProperty"));
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -2538,9 +2533,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
         try {
             final String newValue = "New String Value";
-            PropertyUtils.setSimpleProperty(bean,
-                    "unknown",
-                    newValue);
+            PropertyUtils.setSimpleProperty(bean, "unknown", newValue);
             fail("Should have thrown NoSuchMethodException");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
@@ -2550,8 +2543,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (final NoSuchMethodException e) {
             // Correct result for this test
-            assertEquals("Unknown property 'unknown' on dynaclass '" +
-                         bean.getDynaClass() + "'", e.getMessage() );
+            assertEquals("Unknown property 'unknown' on dynaclass '" + bean.getDynaClass() + "'", e.getMessage());
         }
 
     }

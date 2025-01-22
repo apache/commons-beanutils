@@ -36,8 +36,6 @@ public class ClassConverterTestCase extends TestCase {
         return new TestSuite(ClassConverterTestCase.class);
     }
 
-    // ------------------------------------------------------------------------
-
     /**
      * Construct a new Class Converter test case.
      * @param name Test Name
@@ -55,8 +53,6 @@ public class ClassConverterTestCase extends TestCase {
     @Override
     public void tearDown() throws Exception {
     }
-
-    // ------------------------------------------------------------------------
 
     /**
      * Test Array Conversion

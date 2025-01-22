@@ -461,9 +461,9 @@ private java.util.Date dateProperty;
         return this.invalidBoolean;
     }
 
-    public void setAnotherNested( final TestBean anotherNested ) {
-          this.anotherNested = anotherNested;
-       }
+    public void setAnotherNested(final TestBean anotherNested) {
+        this.anotherNested = anotherNested;
+    }
 
     public void setBooleanProperty(final boolean booleanProperty) {
         this.booleanProperty = booleanProperty;

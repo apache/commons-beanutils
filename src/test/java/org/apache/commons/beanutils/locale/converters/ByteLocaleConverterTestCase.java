@@ -59,8 +59,6 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         super.tearDown();
     }
 
-    // ------------------------------------------------------------------------
-
     /**
      * Test Converter() constructor
      *
