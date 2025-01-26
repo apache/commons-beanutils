@@ -16,8 +16,9 @@
    limitations under the License.
 -->
 
-<document>
-
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 https://maven.apache.org/xsd/xdoc-2.0.xsd">
  <properties>
   <title>Commons</title>
   <author email="dev@commons.apache.org">Commons Documentation Team</author>
@@ -58,14 +59,16 @@ easy-to-use wrappers around these capabilities.
 <subsection name='BeanUtils Core And Modules'>
 <p>
 The 1.7.x and 1.8.x releases of BeanUtils have distributed three jars:
+</p>
 <ul>
   <li><code>commons-beanutils.jar</code> - contains everything</li>
   <li><code>commons-beanutils-core.jar</code> - excludes <i>Bean Collections</i> classes</li>
   <li><code>commons-beanutils-bean-collections.jar</code> - only <i>Bean Collections</i> classes</li>
 </ul>
+<p>
 The main <code>commons-beanutils.jar</code> has an <b><i>optional</i></b> dependency on
-<a href='http://commons.apache.org/collections'>Commons Collections</a>
 </p>
+<a href='http://commons.apache.org/collections'>Commons Collections</a>
 <p>
 Version 1.9.0 reverts this split for reasons outlined at
 <a href="http://issues.apache.org/jira/browse/BEANUTILS-379">BEANUTILS-379</a>.
@@ -94,11 +97,13 @@ Bean Collections has an additional dependency on
     The latest BeanUtils release is available to download
     <a href="http://commons.apache.org/beanutils/download_beanutils.cgi">here</a>.<br/>
     <em><strong>1.9.4</strong></em><br/><br/>
-    <ul>
+   </p>
+   <ul>
       <li><a href="http://commons.apache.org/beanutils/javadocs/v1.9.4/RELEASE-NOTES.txt">Release Notes</a></li>
       <li><a href="http://commons.apache.org/beanutils/javadocs/v1.9.4/apidocs/index.html">JavaDoc</a></li>
     </ul>
-    <strong>CVE-2019-10086.</strong> Apache Commons Beanutils does not suppresses
+   <p>
+   <strong>CVE-2019-10086.</strong> Apache Commons Beanutils does not suppresses
     the class property in bean introspection by default.<br/><br/>
     <strong>Severity.</strong> Medium<br/><br/>
     <strong>Vendor.</strong> The Apache Software Foundation<br/><br/>
@@ -238,7 +243,6 @@ commons collections 3.
 </p>
 </subsection>
     <subsection name='Older Releases (Not Mirrored)'>
-    <p>
     <ul>
     <li>Version 1.6.1 - 18 Feb 2003 
         <a href="http://archive.apache.org/dist/commons/beanutils/binaries/">binary</a> and
@@ -254,7 +258,6 @@ commons collections 3.
     <li><a href="http://archive.apache.org/dist/commons/beanutils/old/v1.1/">Version 1.1</a> - 22 Sep 2001</li>
     <li><a href="http://archive.apache.org/dist/commons/beanutils/old/v1.0/">Version 1.0</a> - 14 July 2001</li>
     </ul>
-    </p>
     </subsection>
 </section>
 
