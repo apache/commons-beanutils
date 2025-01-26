@@ -157,6 +157,24 @@ public void testAllowAccessToClassProperty() throws Exception {
     <a href="http://commons.apache.org/beanutils/download_beanutils.cgi">here</a>.
   </p>
   <ul>
+    <li>1.10.1
+      <ul>
+        <li><a href="/changes.html#a1.10.1">Release Notes</a></li>
+        <li><a href="https://javadoc.io/doc/commons-beanutils/commons-beanutils/latest/index.html">JavaDoc</a></li>
+      </ul>
+    </li>
+    <li>1.10.0
+      <ul>
+        <li><a href="/changes.html#a1.10.0">Release Notes</a></li>
+        <li><a href="https://javadoc.io/doc/commons-beanutils/commons-beanutils/1.9.4/index.html#package_description">JavaDoc</a></li>
+      </ul>
+    </li>
+    <li>1.9.4
+      <ul>
+        <li><a href="http://commons.apache.org/beanutils/javadocs/v1.9.4/RELEASE-NOTES.txt">Release Notes</a></li>
+        <li><a href="http://commons.apache.org/beanutils/javadocs/v1.9.4/apidocs/index.html">JavaDoc</a></li>
+      </ul>
+    </li>
     <li>1.9.3
       <ul>
         <li><a href="http://commons.apache.org/beanutils/javadocs/v1.9.3/RELEASE-NOTES.txt">Release Notes</a></li>
