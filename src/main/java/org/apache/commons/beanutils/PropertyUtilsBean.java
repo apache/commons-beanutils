@@ -1828,7 +1828,7 @@ public class PropertyUtilsBean {
      * 1.6.0, 1.6.1, 1.7.0 was for "a.b" to mean a.setB(obj) if such a method existed, and a.put(b, obj) otherwise. In version 1.5 it meant a.put(b, obj) always
      * (ie the same as the behaviour in the current version). In versions prior to 1.5 it meant a.setB(obj) always. [yes, this is all <em>very</em> unfortunate]
      * <p>
-     * Users who would like to customise the meaning of "a.b" in method setNestedProperty when a is a Map can create a custom subclass of this class and
+     * Users who would like to customize the meaning of "a.b" in method setNestedProperty when a is a Map can create a custom subclass of this class and
      * override this method to implement the behaviour of their choice, such as restoring the pre-1.4 behaviour of this class if they wish. When overriding this
      * method, do not forget to deal with MAPPED_DELIM and INDEXED_DELIM characters in the propertyName.
      * <p>

@@ -28,7 +28,7 @@ import org.apache.commons.beanutils.ConversionException;
  * on how this instance is constructed.</p>
  *
  * <p>By default, the values to be converted are expected to be those
- * recognized by a default instance of BooleanConverter. A customised
+ * recognized by a default instance of BooleanConverter. A customized
  * BooleanConverter can be provided in order to recognise alternative values
  * as true/false. </p>
  *

@@ -48,7 +48,7 @@ public class BooleanArrayConverterTestCase extends TestCase {
 
     /**
      * Check that the user can specify non-standard true/false values by
-     * providing a customised BooleanConverter.
+     * providing a customized BooleanConverter.
      */
     public void testAdditionalStrings() {
         final String[] trueStrings = {"sure"};
