@@ -631,7 +631,7 @@ src/test/java/org/apache/commons/beanutils/bugs/Jira520TestCase.java.">
         Create new methods getPropertyOfMapBean and setPropertyOfMapBean that the existing
         setNestedProperty and getNestedProperty methods now call when they discover the bean
         they are accessing implements Map. This makes it much easier for users to subclass
-        and customise this behavior of PropertyUtilsBean, eg in order to restore pre-1.5 behavior.
+        and customize this behavior of PropertyUtilsBean, eg in order to restore pre-1.5 behavior.
         This patch also causes an exception to be thrown when the propertyName passed to
         getPropertyOfMapBean or setPropertyOfMapBean has MAPPED_DELIM or INDEXED_DELIM chars in
         it. This never worked as expected before (the whole string was treated literally as the
