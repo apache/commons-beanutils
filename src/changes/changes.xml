@@ -30,9 +30,10 @@
     <release version="2.0.0-M2" date="YYYY-MM-DD" description="This is a major release and requires Java 8.">
       <!-- FIX -->
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Javadoc is missing its Overview page.</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">Remove -nouses directive from maven-bundle-plugin. OSGi package imports now state 'uses' definitions for package imports, this doesn't affect JPMS (from org.apache.commons:commons-parent:80).</action>
       <!-- ADD -->
       <!-- UPDATE -->
-      <action type="update" dev="ggregory" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 78 to 79.</action>
+      <action type="update" dev="ggregory" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 78 to 80.</action>
     </release>
     <release version="2.0.0-M1" date="2024-12-27" description="This is a major release and requires Java 8">
       <action issue="BEANUTILS-503" dev="ggregory" type="update" due-to="Gary Gregory">
