@@ -59,7 +59,6 @@ public class LocaleConvertUtils {
      * @see LocaleConvertUtilsBean#convert(Object, Locale, String)
      */
     public static String convert(final Object value, final Locale locale, final String pattern) {
-
         return LocaleConvertUtilsBean.getInstance().convert(value, locale, pattern);
     }
 
@@ -90,7 +89,6 @@ public class LocaleConvertUtils {
      * @see LocaleConvertUtilsBean#convert(String, Class)
      */
     public static Object convert(final String value, final Class<?> clazz) {
-
         return LocaleConvertUtilsBean.getInstance().convert(value, clazz);
     }
 
@@ -109,7 +107,6 @@ public class LocaleConvertUtils {
      * @see LocaleConvertUtilsBean#convert(String, Class, Locale, String)
      */
     public static Object convert(final String value, final Class<?> clazz, final Locale locale, final String pattern) {
-
         return LocaleConvertUtilsBean.getInstance().convert(value, clazz, locale, pattern);
     }
 
@@ -127,25 +124,26 @@ public class LocaleConvertUtils {
      * @see LocaleConvertUtilsBean#convert(String, Class, String)
      */
     public static Object convert(final String value, final Class<?> clazz, final String pattern) {
-
         return LocaleConvertUtilsBean.getInstance().convert(value, clazz, pattern);
     }
 
     /**
-        * <p>Convert an array of specified values to an array of objects of the
-        * specified class (if possible).</p>
-        *
-        * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
-        *
-        * @param values Value to be converted (may be null)
-        * @param clazz Java array or element class to be converted to
-        * @return the converted value
-        * @see LocaleConvertUtilsBean#convert(String[], Class)
-        */
-       public static Object convert(final String[] values, final Class<?> clazz) {
-
-           return LocaleConvertUtilsBean.getInstance().convert(values, clazz);
-       }
+     * <p>
+     * Convert an array of specified values to an array of objects of the specified class (if possible).
+     * </p>
+     *
+     * <p>
+     * For more details see <code>LocaleConvertUtilsBean</code>
+     * </p>
+     *
+     * @param values Value to be converted (may be null)
+     * @param clazz  Java array or element class to be converted to
+     * @return the converted value
+     * @see LocaleConvertUtilsBean#convert(String[], Class)
+     */
+    public static Object convert(final String[] values, final Class<?> clazz) {
+        return LocaleConvertUtilsBean.getInstance().convert(values, clazz);
+    }
 
     /**
      * <p>Convert an array of specified values to an array of objects of the
@@ -161,7 +159,6 @@ public class LocaleConvertUtils {
      * @see LocaleConvertUtilsBean#convert(String[], Class, Locale, String)
      */
     public static Object convert(final String[] values, final Class<?> clazz, final Locale locale, final String pattern) {
-
         return LocaleConvertUtilsBean.getInstance().convert(values, clazz, locale, pattern);
     }
 
@@ -178,7 +175,6 @@ public class LocaleConvertUtils {
      * @see LocaleConvertUtilsBean#convert(String[], Class, String)
      */
     public static Object convert(final String[] values, final Class<?> clazz, final String pattern) {
-
         return LocaleConvertUtilsBean.getInstance().convert(values, clazz, pattern);
     }
 
@@ -195,7 +191,6 @@ public class LocaleConvertUtils {
      */
     @Deprecated
     protected static FastHashMap create(final Locale locale) {
-
         return LocaleConvertUtilsBean.getInstance().create(locale);
     }
 
@@ -207,34 +202,35 @@ public class LocaleConvertUtils {
      * @see LocaleConvertUtilsBean#deregister()
      */
     public static void deregister() {
-
        LocaleConvertUtilsBean.getInstance().deregister();
     }
 
-   /**
- * <p>Remove any registered {@link LocaleConverter} for the specified locale and Class.</p>
- *
- * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
- *
- * @param clazz Class for which to remove a registered Converter
- * @param locale The locale
- * @see LocaleConvertUtilsBean#deregister(Class, Locale)
- */
-public static void deregister(final Class<?> clazz, final Locale locale) {
-
-    LocaleConvertUtilsBean.getInstance().deregister(clazz, locale);
-}
-
     /**
-     * <p>Remove any registered {@link LocaleConverter} for the specified locale.</p>
+     * <p>Remove any registered {@link LocaleConverter} for the specified locale and Class.</p>
      *
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
+     *
+     * @param clazz Class for which to remove a registered Converter
+     * @param locale The locale
+     * @see LocaleConvertUtilsBean#deregister(Class, Locale)
+     */
+    public static void deregister(final Class<?> clazz, final Locale locale) {
+        LocaleConvertUtilsBean.getInstance().deregister(clazz, locale);
+    }
+
+    /**
+     * <p>
+     * Remove any registered {@link LocaleConverter} for the specified locale.
+     * </p>
+     *
+     * <p>
+     * For more details see <code>LocaleConvertUtilsBean</code>
+     * </p>
      *
      * @param locale The locale
      * @see LocaleConvertUtilsBean#deregister(Locale)
      */
     public static void deregister(final Locale locale) {
-
         LocaleConvertUtilsBean.getInstance().deregister(locale);
     }
 
@@ -310,7 +306,6 @@ public static void deregister(final Class<?> clazz, final Locale locale) {
      * @see LocaleConvertUtilsBean#register(LocaleConverter, Class, Locale)
      */
     public static void register(final LocaleConverter converter, final Class<?> clazz, final Locale locale) {
-
         LocaleConvertUtilsBean.getInstance().register(converter, clazz, locale);
     }
 
@@ -337,7 +332,16 @@ public static void deregister(final Class<?> clazz, final Locale locale) {
      * @see LocaleConvertUtilsBean#setDefaultLocale(Locale)
      */
     public static void setDefaultLocale(final Locale locale) {
-
         LocaleConvertUtilsBean.getInstance().setDefaultLocale(locale);
+    }
+
+    /**
+     * Deprecated, all methods are static.
+     *
+     * @deprecated Will be private in 2.0.
+     */
+    @Deprecated
+    public LocaleConvertUtils() {
+        // empty
     }
 }

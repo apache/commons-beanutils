@@ -741,6 +741,7 @@ public class LocaleBeanUtils extends BeanUtils {
      *
      * @deprecated Will be private in 2.0.
      */
+    @Deprecated
     public LocaleBeanUtils() {
         // empty
     }

@@ -36,6 +36,7 @@
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Deprecate BeanUtils.BeanUtils().</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Deprecate ConstructorUtils.ConstructorUtils().</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Deprecate LocaleBeanUtils.LocaleBeanUtils().</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">Deprecate LocaleConvertUtils.LocaleConvertUtils().</action>
       <!-- ADD -->
       <!-- UPDATE -->
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 78 to 81.</action>
