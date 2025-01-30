@@ -372,4 +372,14 @@ public class ConvertUtils {
     public static void setDefaultShort(final short newDefaultShort) {
         ConvertUtilsBean.getInstance().setDefaultShort(newDefaultShort);
     }
+
+    /**
+     * Deprecated, all methods are static.
+     *
+     * @deprecated Will be private in 2.0.
+     */
+    @Deprecated
+    public ConvertUtils() {
+        // empty
+    }
 }
