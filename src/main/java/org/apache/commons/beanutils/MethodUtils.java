@@ -1333,4 +1333,14 @@ public class MethodUtils {
         }
         return clazz;
     }
+
+    /**
+     * Deprecated, all methods are static.
+     *
+     * @deprecated Will be private in 2.0.
+     */
+    @Deprecated
+    public MethodUtils() {
+        // empty
+    }
 }
