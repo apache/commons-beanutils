@@ -866,4 +866,13 @@ public class PropertyUtils {
         PropertyUtilsBean.getInstance().setSimpleProperty(bean, name, value);
     }
 
+    /**
+     * Deprecated, all methods are static.
+     *
+     * @deprecated Will be private in 2.0.
+     */
+    @Deprecated
+    public PropertyUtils() {
+        // empty
+    }
 }

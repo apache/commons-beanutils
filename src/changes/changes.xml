@@ -39,6 +39,7 @@
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Deprecate LocaleConvertUtils.LocaleConvertUtils().</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Deprecate ConvertUtils.ConvertUtils().</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Deprecate MethodUtils.MethodUtils().</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">Deprecate PropertyUtils.PropertyUtils().</action>
       <!-- ADD -->
       <!-- UPDATE -->
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 78 to 81.</action>
