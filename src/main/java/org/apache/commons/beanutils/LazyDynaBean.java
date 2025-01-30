@@ -81,8 +81,8 @@ import org.apache.commons.logging.LogFactory;
  *     <pre>DynaBean myBean = new LazyDynaBean();
  *     MutableDynaClass myClass = (MutableDynaClass)myBean.getDynaClass();
  *     myClass.add("myIndexedProperty", int[].class);
- *     myBean.set("myIndexedProperty", 0, new Integer(10));
- *     myBean.set("myIndexedProperty", 1, new Integer(20));</pre>
+ *     myBean.set("myIndexedProperty", 0, Integer.valueOf(10));
+ *     myBean.set("myIndexedProperty", 1, Integer.valueOf(20));</pre>
  *
  * <p><strong><u>Setting Mapped Properties</u></strong></p>
  *    <p>If the property <strong>doesn't</strong> exist, the <code>LazyDynaBean</code> will automatically add
