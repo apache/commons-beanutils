@@ -31,6 +31,13 @@ package org.apache.commons.beanutils;
 public class ConvertUtilsBean2 extends ConvertUtilsBean {
 
     /**
+     * Constructs a new instance.
+     */
+    public ConvertUtilsBean2() {
+        // empty
+    }
+
+    /**
      * Delegates to the new {@link ConvertUtilsBean#convert(Object, Class)}
      * method.
      *
