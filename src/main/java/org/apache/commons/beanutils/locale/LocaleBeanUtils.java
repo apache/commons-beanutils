@@ -735,5 +735,14 @@ public class LocaleBeanUtils extends BeanUtils {
 
         LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().setProperty(bean, name, value, pattern);
      }
+
+    /**
+     * Deprecated, all methods are static.
+     *
+     * @deprecated Will be private in 2.0.
+     */
+    public LocaleBeanUtils() {
+        // empty
+    }
 }
 
