@@ -43,6 +43,16 @@ public class ConstructorUtils {
     private static final Object[] EMPTY_OBJECT_ARRAY = {};
 
     /**
+     * Deprecated, all methods are static.
+     *
+     * @deprecated Will be private in 2.0.
+     */
+    @Deprecated
+    public ConstructorUtils() {
+        // empty
+    }
+
+    /**
      * Returns a constructor with single argument.
      * @param <T> the type of the constructor
      * @param klass the class to be constructed

@@ -34,6 +34,7 @@
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Javadoc is missing its Overview page.</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Remove -nouses directive from maven-bundle-plugin. OSGi package imports now state 'uses' definitions for package imports, this doesn't affect JPMS (from org.apache.commons:commons-parent:80).</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Deprecate BeanUtils.BeanUtils().</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">Deprecate ConstructorUtils.ConstructorUtils().</action>
       <!-- ADD -->
       <!-- UPDATE -->
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 78 to 81.</action>
