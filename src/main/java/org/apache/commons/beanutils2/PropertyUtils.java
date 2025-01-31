@@ -35,7 +35,7 @@ import java.util.Map;
  * @see org.apache.commons.beanutils2.expression.Resolver
  */
 
-public class PropertyUtils {
+public final class PropertyUtils {
 
     /**
      * Adds a {@code BeanIntrospector}. This object is invoked when the property descriptors of a class need to be obtained.
