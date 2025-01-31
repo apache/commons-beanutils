@@ -23,7 +23,6 @@ limitations under the License.
     <author email="dev@commons.apache.org">Commons Documentation Team</author>
   </properties>
   <body>
-    <!-- ================================================== -->
     <section name="Overview">
       <p>
         Commons BeanUtils can be built using
@@ -36,7 +35,6 @@ limitations under the License.
         <a href="http://commons.apache.org/building.html">commons build instructions</a>.
       </p>
     </section>
-    <!-- ================================================== -->
     <section name="Maven 3 Goals">
       <p>
         Build using
@@ -44,50 +42,38 @@ limitations under the License.
         is the preferred build method.
         The compiled BeanUtils JAR should work with Java 6 or later.
       </p>
-
-
       <p>
         To run all build checks: 
       </p>
-
       <pre>
         mvn
       </pre>
-
       <p>
         To build 
         <code>target/commons-beanutils-*.jar</code>:
       </p>
-
       <pre>
         mvn clean package
       </pre>
-
       <p>
         or to install into your
         <code>~/.m2/repository</code>:
       </p>
-
       <pre>
         mvn clean install
       </pre>
-
-
       <p>
         You can skip the unit tests by adding the parameter
         <code>-DskipTests=true</code>
       </p>
-
       <p>
         To regenerate the web site
         (corresponding to
         https://commons.apache.org/proper/commons-beanutils/):
       </p>
-
       <pre>
         mvn clean site
       </pre>
-
       <p>
         Note: the Apache Commons BeanUtils site should include a
         <a href="japicmp.html">japicmp report</a>
@@ -95,7 +81,6 @@ limitations under the License.
         purpose of checking API version compatibility; to enable this, use Java 7
         or later and run instead:
       </p>
-
       <pre>
         mvn clean package site -Pjapicmp
       </pre>
