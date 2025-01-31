@@ -41,6 +41,8 @@
       <action type="fix" dev="ggregory" due-to="Gary Gregory">The constructor org.apache.commons.beanutils2.MethodUtils is now private (the class only contains static methods).</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">The class org.apache.commons.beanutils2.ConvertUtils is now final (the class only contains static methods).</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">The constructor org.apache.commons.beanutils2.ConvertUtils is now private (the class only contains static methods).</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">The class org.apache.commons.beanutils2.ConstructorUtils is now final (the class only contains static methods).</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">The constructor org.apache.commons.beanutils2.ConstructorUtils is now private (the class only contains static methods).</action>
       <!-- ADD -->
       <!-- UPDATE -->
       <action type="update" dev="ggregory" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 78 to 81.</action>

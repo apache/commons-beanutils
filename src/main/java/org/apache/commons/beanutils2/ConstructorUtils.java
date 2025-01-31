@@ -40,7 +40,7 @@ import java.lang.reflect.Modifier;
  * warning will be logged and the method may fail.
  * </p>
  */
-public class ConstructorUtils {
+public final class ConstructorUtils {
 
     /**
      * Returns a constructor with single argument.
@@ -410,4 +410,7 @@ public class ConstructorUtils {
         return args;
     }
 
+    private ConstructorUtils() {
+        // empty
+    }
 }
