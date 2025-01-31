@@ -36,6 +36,13 @@ public class SqlTimeLocaleConverter extends DateLocaleConverter<Time> {
      */
     public static class Builder extends DateLocaleConverter.Builder<Builder, Time> {
 
+        /**
+         * Constructs a new instance.
+         */
+        public Builder() {
+            // empty
+        }
+
         @Override
         public SqlTimeLocaleConverter get() {
             return new SqlTimeLocaleConverter(defaultValue, locale, pattern, useDefault || defaultValue != null, localizedPattern, isLenient());

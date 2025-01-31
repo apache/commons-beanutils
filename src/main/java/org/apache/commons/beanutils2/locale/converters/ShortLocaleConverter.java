@@ -34,6 +34,13 @@ public class ShortLocaleConverter extends DecimalLocaleConverter<Short> {
     public static class Builder extends DecimalLocaleConverter.Builder<Builder, Short> {
 
         /**
+         * Constructs a new instance.
+         */
+        public Builder() {
+            // empty
+        }
+
+        /**
          * Gets a new instance.
          *
          * @return a new instance.

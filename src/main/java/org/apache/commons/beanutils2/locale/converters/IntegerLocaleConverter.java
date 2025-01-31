@@ -33,6 +33,13 @@ public class IntegerLocaleConverter extends DecimalLocaleConverter<Integer> {
      */
     public static class Builder extends DecimalLocaleConverter.Builder<Builder, Integer> {
 
+        /**
+         * Constructs a new instance.
+         */
+        public Builder() {
+            // empty
+        }
+
         @Override
         public IntegerLocaleConverter get() {
             return new IntegerLocaleConverter(defaultValue, locale, pattern, useDefault || defaultValue != null, localizedPattern);

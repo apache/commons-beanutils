@@ -36,6 +36,13 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter<Timestamp> 
      */
     public static class Builder extends DateLocaleConverter.Builder<Builder, Timestamp> {
 
+        /**
+         * Constructs a new instance.
+         */
+        public Builder() {
+            // empty
+        }
+
         @Override
         public SqlTimestampLocaleConverter get() {
             return new SqlTimestampLocaleConverter(defaultValue, locale, pattern, useDefault || defaultValue != null, localizedPattern, isLenient());

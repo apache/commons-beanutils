@@ -35,6 +35,13 @@ public class BigIntegerLocaleConverter extends DecimalLocaleConverter<BigInteger
      */
     public static class Builder extends DecimalLocaleConverter.Builder<Builder, BigInteger> {
 
+        /**
+         * Constructs a new instance.
+         */
+        public Builder() {
+            // empty
+        }
+
         @Override
         public BigIntegerLocaleConverter get() {
             return new BigIntegerLocaleConverter(defaultValue, locale, pattern, useDefault || defaultValue != null, localizedPattern);

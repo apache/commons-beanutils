@@ -58,6 +58,13 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
         protected boolean useDefault;
 
         /**
+         * Constructs a new instance.
+         */
+        public Builder() {
+            // empty
+        }
+
+        /**
          * Returns this instance cast as the exact subclass type.
          *
          * @return this instance cast as the exact subclass type.

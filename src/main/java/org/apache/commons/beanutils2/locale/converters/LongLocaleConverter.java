@@ -33,6 +33,13 @@ public class LongLocaleConverter extends DecimalLocaleConverter<Long> {
      */
     public static class Builder extends DecimalLocaleConverter.Builder<Builder, Long> {
 
+        /**
+         * Constructs a new instance.
+         */
+        public Builder() {
+            // empty
+        }
+
         @Override
         public LongLocaleConverter get() {
             return new LongLocaleConverter(defaultValue, locale, pattern, useDefault || defaultValue != null, localizedPattern);

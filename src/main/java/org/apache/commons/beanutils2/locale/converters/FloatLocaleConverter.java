@@ -34,6 +34,13 @@ public class FloatLocaleConverter extends DecimalLocaleConverter<Float> {
      */
     public static class Builder extends DecimalLocaleConverter.Builder<Builder, Float> {
 
+        /**
+         * Constructs a new instance.
+         */
+        public Builder() {
+            // empty
+        }
+
         @Override
         public FloatLocaleConverter get() {
             return new FloatLocaleConverter(defaultValue, locale, pattern, useDefault || defaultValue != null, localizedPattern);

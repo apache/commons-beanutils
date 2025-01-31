@@ -33,6 +33,13 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter<Double> {
      */
     public static class Builder extends DecimalLocaleConverter.Builder<Builder, Double> {
 
+        /**
+         * Constructs a new instance.
+         */
+        public Builder() {
+            // empty
+        }
+
         @Override
         public DoubleLocaleConverter get() {
             return new DoubleLocaleConverter(defaultValue, locale, pattern, useDefault || defaultValue != null, localizedPattern);

@@ -33,6 +33,13 @@ public class ByteLocaleConverter extends DecimalLocaleConverter<Byte> {
      */
     public static class Builder extends DecimalLocaleConverter.Builder<Builder, Byte> {
 
+        /**
+         * Constructs a new instance.
+         */
+        public Builder() {
+            // empty
+        }
+
         @Override
         public ByteLocaleConverter get() {
             return new ByteLocaleConverter(defaultValue, locale, pattern, useDefault || defaultValue != null, localizedPattern);

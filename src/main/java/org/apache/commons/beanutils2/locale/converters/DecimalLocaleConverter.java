@@ -47,6 +47,13 @@ public class DecimalLocaleConverter<T extends Number> extends BaseLocaleConverte
 
         /**
          * Constructs a new instance.
+         */
+        public Builder() {
+            // empty
+        }
+
+        /**
+         * Constructs a new instance.
          * <p>
          * By default, construct a {@link LocaleConverter} that will throw a {@link ConversionException} if a conversion error occurs. The locale is the default
          * locale for this instance of the Java Virtual Machine and an unlocalized pattern is used for the conversion.

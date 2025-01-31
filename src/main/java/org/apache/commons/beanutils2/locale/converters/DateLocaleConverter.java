@@ -53,6 +53,13 @@ public class DateLocaleConverter<D extends Date> extends BaseLocaleConverter<D> 
         private boolean lenient;
 
         /**
+         * Constructs a new instance.
+         */
+        public Builder() {
+            // empty
+        }
+
+        /**
          * Gets a new instance.
          * <p>
          * Defaults construct a {@link LocaleConverter} that will throw a {@link ConversionException} if a conversion error occurs. The locale is the default

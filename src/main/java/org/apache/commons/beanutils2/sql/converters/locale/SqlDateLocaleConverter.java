@@ -36,6 +36,13 @@ public class SqlDateLocaleConverter extends DateLocaleConverter<Date> {
      */
     public static class Builder extends DateLocaleConverter.Builder<Builder, Date> {
 
+        /**
+         * Constructs a new instance.
+         */
+        public Builder() {
+            // empty
+        }
+
         @Override
         public SqlDateLocaleConverter get() {
             return new SqlDateLocaleConverter(defaultValue, locale, pattern, useDefault || defaultValue != null, localizedPattern, isLenient());
