@@ -30,7 +30,7 @@ import java.util.Locale;
  * can be provided by using a {@code LocaleConvertUtilsBean} instance.
  * </p>
  */
-public class LocaleConvertUtils {
+public final class LocaleConvertUtils {
 
     /**
      * <p>
