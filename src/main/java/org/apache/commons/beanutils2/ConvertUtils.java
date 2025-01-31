@@ -28,7 +28,7 @@ package org.apache.commons.beanutils2;
  *
  * @see ConvertUtilsBean
  */
-public class ConvertUtils {
+public final class ConvertUtils {
 
     /**
      * <p>
@@ -219,5 +219,9 @@ public class ConvertUtils {
      */
     public static <T> void register(final Converter<T> converter, final Class<T> clazz) {
         ConvertUtilsBean.getInstance().register(converter, clazz);
+    }
+    
+    private ConvertUtils() {
+        // empty
     }
 }
