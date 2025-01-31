@@ -1064,7 +1064,7 @@ public final class MethodUtils {
      * @param parameterization the type of parameter being tested
      * @return true if the assignment is compatible.
      */
-    public static final boolean isAssignmentCompatible(final Class<?> parameterType, final Class<?> parameterization) {
+    public static boolean isAssignmentCompatible(final Class<?> parameterType, final Class<?> parameterization) {
         // try plain assignment
         if (parameterType.isAssignableFrom(parameterization)) {
             return true;
@@ -1170,7 +1170,7 @@ public final class MethodUtils {
         }
         return clazz;
     }
-    
+
     private MethodUtils() {
         // empty
     }

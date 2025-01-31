@@ -20,8 +20,6 @@ package org.apache.commons.beanutils2.locale;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
 
-import org.apache.commons.beanutils2.BeanUtils;
-
 /**
  * <p>
  * Utility methods for populating JavaBeans properties via reflection in a locale-dependent manner.
@@ -31,7 +29,7 @@ import org.apache.commons.beanutils2.BeanUtils;
  * The implementations for these methods are provided by {@code LocaleBeanUtilsBean}. For more details see {@link LocaleBeanUtilsBean}.
  * </p>
  */
-public final class LocaleBeanUtils extends BeanUtils {
+public final class LocaleBeanUtils {
 
     /**
      * <p>
@@ -546,7 +544,7 @@ public final class LocaleBeanUtils extends BeanUtils {
             throws IllegalAccessException, InvocationTargetException {
         LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().setProperty(bean, name, value, pattern);
     }
-    
+
     private LocaleBeanUtils() {
         // empty
     }

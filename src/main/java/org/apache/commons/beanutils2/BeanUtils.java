@@ -34,7 +34,7 @@ import org.apache.commons.collections4.map.ConcurrentReferenceHashMap;
  *
  * @see BeanUtilsBean
  */
-public class BeanUtils {
+public final class BeanUtils {
 
     /** An empty class array */
     static final Class<?>[] EMPTY_CLASS_ARRAY = {};
@@ -358,5 +358,9 @@ public class BeanUtils {
      */
     public static void setProperty(final Object bean, final String name, final Object value) throws IllegalAccessException, InvocationTargetException {
         BeanUtilsBean.getInstance().setProperty(bean, name, value);
+    }
+
+    private BeanUtils() {
+        // empty
     }
 }

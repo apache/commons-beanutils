@@ -220,7 +220,7 @@ public final class ConvertUtils {
     public static <T> void register(final Converter<T> converter, final Class<T> clazz) {
         ConvertUtilsBean.getInstance().register(converter, clazz);
     }
-    
+
     private ConvertUtils() {
         // empty
     }

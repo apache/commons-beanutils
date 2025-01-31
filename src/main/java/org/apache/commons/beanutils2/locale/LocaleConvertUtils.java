@@ -352,7 +352,7 @@ public final class LocaleConvertUtils {
     public static void setDefaultLocale(final Locale locale) {
         LocaleConvertUtilsBean.getInstance().setDefaultLocale(locale);
     }
-    
+
     private LocaleConvertUtils() {
         // empty
     }
