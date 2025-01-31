@@ -25,10 +25,10 @@ import java.util.Map;
  * <p>Its a <em>light weight</em> <code>DynaBean</code> implementation because there is no
  *    actual <code>DynaClass</code> associated with this <code>DynaBean</code> - in fact
  *    it implements the <code>DynaClass</code> interface itself providing <em>pseudo</em> DynaClass
- *    behaviour from the actual values stored in the <code>Map</code>.</p>
+ *    behavior from the actual values stored in the <code>Map</code>.</p>
  *
  * <p>As well providing rhe standard <code>DynaBean</code> access to the <code>Map</code>'s properties
- *    this class also provides the usual <em>Lazy</em> behaviour:</p>
+ *    this class also provides the usual <em>Lazy</em> behavior:</p>
  *    <ul>
  *       <li>Properties don't need to be pre-defined in a <code>DynaClass</code></li>
  *       <li>Indexed properties (<code>Lists</code> or <code>Arrays</code>) are automatically instantiated

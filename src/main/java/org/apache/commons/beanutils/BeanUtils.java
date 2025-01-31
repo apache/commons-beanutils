@@ -25,7 +25,7 @@ import java.util.Map;
  *
  * <p>The implementations are provided by {@link BeanUtilsBean}.
  * These static utility methods use the default instance.
- * More sophisticated behaviour can be provided by using a <code>BeanUtilsBean</code> instance.</p>
+ * More sophisticated behavior can be provided by using a <code>BeanUtilsBean</code> instance.</p>
  *
  * @see BeanUtilsBean
  */

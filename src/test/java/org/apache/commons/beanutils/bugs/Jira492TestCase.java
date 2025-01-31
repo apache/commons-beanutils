@@ -92,7 +92,7 @@ public class Jira492TestCase {
     @Test
     public void getPropertyType() throws Exception {
         if (supportsIndexedLists()) {
-            // legacy behaviour (< Java 8)
+            // legacy behavior (< Java 8)
             assertEquals(String.class, propertyUtils.getPropertyType(bean, "someList[0]"));
         } else {
             assertEquals(List.class, propertyUtils.getPropertyType(bean, "someList"));

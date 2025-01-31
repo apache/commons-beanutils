@@ -921,7 +921,7 @@ public class MethodUtils {
     /**
      * <p>Invoke a named method whose parameter type matches the object type.</p>
      *
-     * <p>The behaviour of this method is less deterministic
+     * <p>The behavior of this method is less deterministic
      * than <code>invokeExactMethod()</code>.
      * It loops through all methods with names that match
      * and then executes the first it finds with compatible parameters.</p>
@@ -961,7 +961,7 @@ public class MethodUtils {
     /**
      * <p>Invoke a named method whose parameter type matches the object type.</p>
      *
-     * <p>The behaviour of this method is less deterministic
+     * <p>The behavior of this method is less deterministic
      * than {@link #invokeExactMethod(Object object,String methodName,Object [] args)}.
      * It loops through all methods with names that match
      * and then executes the first it finds with compatible parameters.</p>
@@ -1008,7 +1008,7 @@ public class MethodUtils {
     /**
      * <p>Invoke a named method whose parameter type matches the object type.</p>
      *
-     * <p>The behaviour of this method is less deterministic
+     * <p>The behavior of this method is less deterministic
      * than {@link
      * #invokeExactMethod(Object object,String methodName,Object [] args,Class[] parameterTypes)}.
      * It loops through all methods with names that match
@@ -1062,7 +1062,7 @@ public class MethodUtils {
     /**
      * <p>Invoke a named static method whose parameter type matches the object type.</p>
      *
-     * <p>The behaviour of this method is less deterministic
+     * <p>The behavior of this method is less deterministic
      * than {@link #invokeExactMethod(Object, String, Object[], Class[])}.
      * It loops through all methods with names that match
      * and then executes the first it finds with compatible parameters.</p>
@@ -1103,7 +1103,7 @@ public class MethodUtils {
     /**
      * <p>Invoke a named static method whose parameter type matches the object type.</p>
      *
-     * <p>The behaviour of this method is less deterministic
+     * <p>The behavior of this method is less deterministic
      * than {@link #invokeExactMethod(Object object,String methodName,Object [] args)}.
      * It loops through all methods with names that match
      * and then executes the first it finds with compatible parameters.</p>
@@ -1151,7 +1151,7 @@ public class MethodUtils {
     /**
      * <p>Invoke a named static method whose parameter type matches the object type.</p>
      *
-     * <p>The behaviour of this method is less deterministic
+     * <p>The behavior of this method is less deterministic
      * than {@link
      * #invokeExactStaticMethod(Class objectClass,String methodName,Object [] args,Class[] parameterTypes)}.
      * It loops through all methods with names that match
@@ -1227,7 +1227,7 @@ public class MethodUtils {
 
         if (parameterType.isPrimitive()) {
             // this method does *not* do widening - you must specify exactly
-            // is this the right behaviour?
+            // is this the right behavior?
             final Class<?> parameterWrapperClazz = getPrimitiveWrapper(parameterType);
             if (parameterWrapperClazz != null) {
                 return parameterWrapperClazz.equals(parameterization);

@@ -429,7 +429,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     // Map modification
-    // These methods perform special behaviour in 'fast' mode.
+    // These methods perform special behavior in 'fast' mode.
     // The map is cloned, updated and then assigned back.
     // See the comments at the top as to why this won't always work.
 

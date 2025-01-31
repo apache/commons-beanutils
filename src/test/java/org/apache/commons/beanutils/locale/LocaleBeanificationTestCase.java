@@ -472,7 +472,7 @@ public class LocaleBeanificationTestCase extends TestCase {
 
     /** Tests whether classloaders and beans are released from memory by the map used by beanutils */
     public void testMemoryLeak2() throws Exception {
-        // tests when the map used by beanutils has the right behaviour
+        // tests when the map used by beanutils has the right behavior
         // many thanks to Juozas Baliuka for suggesting this methodology
         TestClassLoader loader = new TestClassLoader();
         final ReferenceQueue<Object> queue = new ReferenceQueue<>();

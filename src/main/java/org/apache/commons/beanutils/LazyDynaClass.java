@@ -22,7 +22,7 @@ package org.apache.commons.beanutils;
  * <p>A <code>MutableDynaClass</code> is a specialized extension to <code>DynaClass</code>
  *    that allows properties to be added or removed dynamically.</p>
  *
- * <p>This implementation has one slightly unusual default behaviour - calling
+ * <p>This implementation has one slightly unusual default behavior - calling
  *    the <code>getDynaProperty(name)</code> method for a property which doesn't
  *    exist returns a <code>DynaProperty</code> rather than <code>null</code>. The
  *    reason for this is that <code>BeanUtils</code> calls this method to check if
@@ -31,7 +31,7 @@ package org.apache.commons.beanutils;
  *    when any of its <code>set()</code> methods are called. For this reason the
  *    <code>isDynaProperty(name)</code> method has been added to this implementation
  *    in order to determine if a property actually exists. If the more <em>normal</em>
- *    behaviour of returning <code>null</code> is required, then this can be achieved
+ *    behavior of returning <code>null</code> is required, then this can be achieved
  *    by calling the <code>setReturnNull(true)</code>.</p>
  *
  * <p>The <code>add(name, type, readable, writable)</code> method is not implemented

@@ -414,7 +414,7 @@ public class LocaleConvertUtilsBean {
         converter.put(String.class, new StringLocaleConverter(locale, applyLocalized));
 
         // conversion format patterns of java.sql.* types should correspond to default
-        // behaviour of toString and valueOf methods of these classes
+        // behavior of toString and valueOf methods of these classes
         converter.put(java.sql.Date.class, new SqlDateLocaleConverter(locale, "yyyy-MM-dd"));
         converter.put(java.sql.Time.class, new SqlTimeLocaleConverter(locale, "HH:mm:ss"));
         converter.put(java.sql.Timestamp.class, new SqlTimestampLocaleConverter(locale, "yyyy-MM-dd HH:mm:ss.S"));

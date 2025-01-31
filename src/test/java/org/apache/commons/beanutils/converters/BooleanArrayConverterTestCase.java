@@ -29,7 +29,7 @@ import junit.framework.TestCase;
  * strings to booleans, as the BooleanArrayConverter class uses a
  * BooleanConverter instance to do those conversions, and the BooleanConverter
  * class has its own unit tests. Here, the tests focus on the array-related
- * behaviour.</p>
+ * behavior.</p>
  *
  */
 public class BooleanArrayConverterTestCase extends TestCase {

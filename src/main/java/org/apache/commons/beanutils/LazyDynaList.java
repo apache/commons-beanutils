@@ -26,7 +26,7 @@ import java.util.Map;
  *
  * <p>There are two main purposes for this class:</p>
  *    <ul>
- *        <li>To provide <em>Lazy List</em> behaviour - automatically
+ *        <li>To provide <em>Lazy List</em> behavior - automatically
  *            <em>growing</em> and <em>populating</em> the <code>List</code>
  *            with either <code>DynaBean</code>, <code>java.util.Map</code>
  *            or POJO Beans.</li>

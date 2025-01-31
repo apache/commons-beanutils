@@ -17,7 +17,7 @@
 package org.apache.commons.beanutils;
 
 /**
- * <p>Decorates a {@link DynaBean} to provide <code>Map</code> behaviour.</p>
+ * <p>Decorates a {@link DynaBean} to provide <code>Map</code> behavior.</p>
  *
  * <p>The motivation for this implementation is to provide access to {@link DynaBean}
  *    properties in technologies that are unaware of BeanUtils and {@link DynaBean}s -
