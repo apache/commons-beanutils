@@ -34,6 +34,7 @@
       <action type="fix" dev="ggregory" due-to="Gary Gregory">The class org.apache.commons.beanutils2.PropertyUtils is now final (the class only contains static methods).</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">The constructor org.apache.commons.beanutils2.PropertyUtils is now private (the class only contains static methods).</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">The class org.apache.commons.beanutils2.locale.LocaleConvertUtils is now final (the class only contains static methods).</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">The constructor org.apache.commons.beanutils2.locale.LocaleConvertUtils is now final (the class only contains static methods).</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">The class org.apache.commons.beanutils2.locale.LocaleBeanUtils is now final (the class only contains static methods).</action>
       <!-- ADD -->
       <!-- UPDATE -->
