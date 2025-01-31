@@ -45,7 +45,7 @@ Apache Commons BeanUtils
 
 [![Java CI](https://github.com/apache/commons-beanutils/actions/workflows/maven.yml/badge.svg)](https://github.com/apache/commons-beanutils/actions/workflows/maven.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/commons-beanutils/commons-beanutils?label=Maven%20Central)](https://search.maven.org/artifact/commons-beanutils/commons-beanutils)
-[![Javadocs](https://javadoc.io/badge/commons-beanutils/commons-beanutils/1.10.0.svg)](https://javadoc.io/doc/commons-beanutils/commons-beanutils/1.10.0)
+[![Javadocs](https://javadoc.io/badge/commons-beanutils/commons-beanutils/1.10.1.svg)](https://javadoc.io/doc/commons-beanutils/commons-beanutils/1.10.1)
 [![CodeQL](https://github.com/apache/commons-beanutils/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/apache/commons-beanutils/actions/workflows/codeql-analysis.yml)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/apache/commons-beanutils/badge)](https://api.securityscorecards.dev/projects/github.com/apache/commons-beanutils)
 
@@ -68,7 +68,7 @@ Alternatively, you can pull it from the central Maven repositories:
 <dependency>
   <groupId>commons-beanutils</groupId>
   <artifactId>commons-beanutils</artifactId>
-  <version>1.10.0</version>
+  <version>1.10.1</version>
 </dependency>
 ```
 
