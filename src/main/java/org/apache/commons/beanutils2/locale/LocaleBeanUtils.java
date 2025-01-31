@@ -31,7 +31,7 @@ import org.apache.commons.beanutils2.BeanUtils;
  * The implementations for these methods are provided by {@code LocaleBeanUtilsBean}. For more details see {@link LocaleBeanUtilsBean}.
  * </p>
  */
-public class LocaleBeanUtils extends BeanUtils {
+public final class LocaleBeanUtils extends BeanUtils {
 
     /**
      * <p>
