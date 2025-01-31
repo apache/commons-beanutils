@@ -546,4 +546,8 @@ public final class LocaleBeanUtils extends BeanUtils {
             throws IllegalAccessException, InvocationTargetException {
         LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().setProperty(bean, name, value, pattern);
     }
+    
+    private LocaleBeanUtils() {
+        // empty
+    }
 }
