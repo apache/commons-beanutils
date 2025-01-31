@@ -1,6 +1,62 @@
-Apache Commons BeanUtils 1.10.0
-Release Notes
+Apache Commons BeanUtils 1.10.1 Release Notes
+---------------------------------------------
 
+The Apache Commons BeanUtils team is pleased to announce the release of Apache Commons BeanUtils 1.10.0
+
+Apache Commons BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.
+
+This is a maintenance release and requires Java 8.
+
+Changes in this version include:
+
+Fixed Bugs:
+o BEANUTILS-541:  FluentPropertyBeanIntrospector caches corrupted writeMethod (backport to 1.x) #69. Thanks to Sergey Chernov.
+o                 Replace internal use of Locale.ENGLISH with Locale.ROOT. Thanks to Gary Gregory.
+o                 Replace Maven CLIRR plugin with JApiCmp. Thanks to Gary Gregory.
+o                 Port to Java 1.4 Throwable APIs (!). Thanks to Gary Gregory.
+o                 Fix Javadoc generation on Java 8, 17, and 21. Thanks to Gary Gregory.
+o                 AbstractArrayConverter.parseElements(String) now returns a List<String> instead of a raw List. Thanks to Gary Gregory.
+
+Changes:
+o                 Bump org.apache.commons:commons-parent from 47 to 78. Thanks to Gary Gregory.
+o                 Bump Java requirement from Java 6 to 8. Thanks to Gary Gregory.
+o                 Bump junit:junit from 4.12 to 4.13.2. Thanks to Gary Gregory.
+o                 Bump JUnit from 4.x to 5.x "vintage". Thanks to Gary Gregory.
+o                 Bump commons-logging:commons-logging from 1.2 to 1.3.4. Thanks to Gary Gregory.
+o                 Deprecate BeanUtilsBean.initCause(Throwable, Throwable) for removal, use Throwable.initCause(Throwable). Thanks to Gary Gregory.
+o                 Deprecate BeanUtils.initCause(Throwable, Throwable) for removal, use Throwable.initCause(Throwable). Thanks to Gary Gregory.
+
+
+Historical list of changes: https://commons.apache.org/proper/commons-beanutils/changes.html
+
+For complete information on Apache Commons BeanUtils, including instructions on how to submit bug reports,
+patches, or suggestions for improvement, see the Apache Commons BeanUtils website:
+
+https://commons.apache.org/proper/commons-beanutils
+
+Download it from https://commons.apache.org/proper/commons-beanutils/download_beanutils.cgi
+
+Have fun!
+-Apache Commons BCEL team
+
+Feedback
+--------
+Open source works best when you give feedback:
+
+    https://commons.apache.org/beanutils
+
+Please direct all bug reports to JIRA:
+
+    https://issues.apache.org/jira/browse/BEANUTILS
+
+Or subscribe to the commons-user mailing list
+
+The Apache Commons Team
+
+-----------------------------------------------------------------------------
+
+Apache Commons BeanUtils 1.10.0 Release Notes
+---------------------------------------------
 
 The Apache Commons BeanUtils team is pleased to announce the release of Apache Commons BeanUtils 1.10.0.
 
@@ -40,8 +96,9 @@ Download it from https://commons.apache.org/proper/commons-beanutils/download_be
 The Apache Commons Team
 
 -----------------------------------------------------------------------------
-Apache Commons BeanUtils 1.9.4
-Release Notes
+
+Apache Commons BeanUtils 1.9.4 Release Notes
+--------------------------------------------
 
 
 The Apache Commons BeanUtils team is pleased to announce the release of Apache Commons BeanUtils 1.9.4
@@ -74,8 +131,9 @@ Download it from https://commons.apache.org/proper/commons-beanutils/download_be
 The Apache Commons Team
 
 -----------------------------------------------------------------------------
-Apache Commons BeanUtils 1.9.3
-Release Notes
+
+Apache Commons BeanUtils 1.9.3 Release Notes
+--------------------------------------------
 
 
 The Apache Commons team is pleased to announce the release of Apache
@@ -137,8 +195,9 @@ Download it from https://commons.apache.org/proper/commons-beanutils/download_be
 The Apache Commons Team
 
 -----------------------------------------------------------------------------
-Apache Commons BeanUtils 1.9.2
-Release Notes
+
+Apache Commons BeanUtils 1.9.2 Release Notes
+--------------------------------------------
 
 
 INTRODUCTION:
@@ -189,8 +248,9 @@ Download it from https://commons.apache.org/proper/commons-beanutils/download_be
 The Apache Commons Team
 
 -----------------------------------------------------------------------------
-Apache Commons BeanUtils 1.9.1
-Release Notes
+
+Apache Commons BeanUtils 1.9.1 Release Notes
+--------------------------------------------
 
 
 Release 1.9.1 is a bug fix release which addresses a problem with the new
@@ -206,8 +266,9 @@ BUGFIXES in version 1.9.1
   garbage collection.
 
 -----------------------------------------------------------------------------
-Apache Commons BeanUtils 1.9.0
-Release Notes
+
+Apache Commons BeanUtils 1.9.0 Release Notes
+--------------------------------------------
 
 
 Release 1.9.0 contains some bug fixes and improvements that have accumulated
@@ -341,8 +402,9 @@ Other changes in version 1.9.0
   empty lines.
 
 -----------------------------------------------------------------------------
-Apache Commons BeanUtils 1.8.3
-Release Notes
+
+Apache Commons BeanUtils 1.8.3 Release Notes
+--------------------------------------------
 
 Compatibility with 1.8.2
 ========================
