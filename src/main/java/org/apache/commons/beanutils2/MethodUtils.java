@@ -50,7 +50,7 @@ import org.apache.commons.logging.LogFactory;
  * be logged and the method may fail.
  * </p>
  */
-public class MethodUtils {
+public final class MethodUtils {
 
     /**
      * Represents the key to looking up a Method by reflection.
@@ -1169,5 +1169,9 @@ public class MethodUtils {
             }
         }
         return clazz;
+    }
+    
+    private MethodUtils() {
+        // empty
     }
 }
