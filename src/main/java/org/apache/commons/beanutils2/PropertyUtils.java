@@ -653,4 +653,7 @@ public final class PropertyUtils {
         PropertyUtilsBean.getInstance().setSimpleProperty(bean, name, value);
     }
 
+    private PropertyUtils() {
+        // empty
+    }
 }
