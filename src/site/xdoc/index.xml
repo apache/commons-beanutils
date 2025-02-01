@@ -106,13 +106,13 @@ Bean Collections has an additional dependency on
   </p>
   <p>
     The latest BeanUtils release is available to download
-    <a href="https://commons.apache.org/beanutils/download_beanutils.cgi">here</a>.
+    <a href="/beanutils/download_beanutils.cgi">here</a>.
   </p>
   <ul>
     <li>2.0.0
       <ul>
-        <li><a href="https://commons.apache.org/beanutils/javadocs/v2.0.0/RELEASE-NOTES.txt">Release Notes</a></li>
-        <li><a href="https://commons.apache.org/beanutils/javadocs/v2.0.0/apidocs/index.html">Javadoc</a></li>
+        <li><a href="/beanutils/changes.html">Release Notes</a></li>
+        <li><a href="/beanutils/apidocs/index.html">Javadoc</a></li>
       </ul>
     </li>
   </ul>
@@ -120,12 +120,12 @@ Bean Collections has an additional dependency on
 <subsection name="1.9.x releases">
     <p>
     The latest BeanUtils release is available to download
-    <a href="http://commons.apache.org/beanutils/download_beanutils.cgi">here</a>.<br/>
+    <a href="/beanutils/download_beanutils.cgi">here</a>.<br/>
     <em><strong>1.9.4</strong></em><br/><br/>
     </p>
     <ul>
-      <li><a href="http://commons.apache.org/beanutils/javadocs/v1.9.4/RELEASE-NOTES.txt">Release Notes</a></li>
-      <li><a href="http://commons.apache.org/beanutils/javadocs/v1.9.4/apidocs/index.html">JavaDoc</a></li>
+      <li><a href="/beanutils/changes.html#a1.9.4">Release Notes</a></li>
+      <li><a href="/beanutils/javadocs/v1.9.4/apidocs/index.html">JavaDoc</a></li>
     </ul>
     <p>
     <strong>CVE-2019-10086.</strong> Apache Commons Beanutils does not suppresses
