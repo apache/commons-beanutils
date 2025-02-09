@@ -94,7 +94,7 @@ public class PropertyUtilsTest {
      * The set of property names we expect to have returned when calling {@code getPropertyDescriptors()}. You should update this list when new properties are
      * added to TestBean.
      */
-    protected final static String[] properties = { "booleanProperty", "booleanSecond", "doubleProperty", "dupProperty", "floatProperty", "intArray",
+    protected static final String[] properties = { "booleanProperty", "booleanSecond", "doubleProperty", "dupProperty", "floatProperty", "intArray",
             "intIndexed", "intProperty", "listIndexed", "longProperty", "nested", "nullProperty", "readOnlyProperty", "shortProperty", "stringArray",
             "stringIndexed", "stringProperty", "writeOnlyProperty", };
 

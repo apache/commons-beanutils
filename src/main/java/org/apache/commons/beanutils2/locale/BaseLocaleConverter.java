@@ -292,5 +292,5 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
      * @return The converted value
      * @throws ParseException if conversion cannot be performed successfully
      */
-    abstract protected T parse(Object value, String pattern) throws ParseException;
+    protected abstract T parse(Object value, String pattern) throws ParseException;
 }

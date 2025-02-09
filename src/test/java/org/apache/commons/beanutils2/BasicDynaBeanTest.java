@@ -53,7 +53,7 @@ public class BasicDynaBeanTest {
      * The set of property names we expect to have returned when calling {@code getDynaProperties()}. You should update this list when new properties are added
      * to TestBean.
      */
-    protected final static String[] properties = { "booleanProperty", "booleanSecond", "doubleProperty", "floatProperty", "intArray", "intIndexed",
+    protected static final String[] properties = { "booleanProperty", "booleanSecond", "doubleProperty", "floatProperty", "intArray", "intIndexed",
             "intProperty", "listIndexed", "longProperty", "mappedProperty", "mappedIntProperty", "nullProperty", "shortProperty", "stringArray",
             "stringIndexed", "stringProperty", };
 
