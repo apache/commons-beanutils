@@ -28,6 +28,11 @@
     <title>Release Notes</title>
   </properties>
   <body>
+    <release version="1.10.2" date="YYYY-MM-DD" description="This is a maintenance release and requires Java 8.">
+      <!-- FIX -->
+      <!-- ADD -->
+      <!-- UPDATE -->
+    </release>
     <release version="1.10.1" date="2025-01-31" description="This is a maintenance release and requires Java 8.">
       <!-- FIX -->
       <action type="fix" issue="BEANUTILS-541" dev="ggregory" due-to="Sergey Chernov">FluentPropertyBeanIntrospector concurrency issue (backport to 1.X) #325.</action>
