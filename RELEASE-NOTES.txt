@@ -95,11 +95,66 @@ https://commons.apache.org/proper/commons-beanutils/
 Download it from https://commons.apache.org/proper/commons-beanutils/download_beanutils.cgi
 
 -----------------------------------------------------------------------------
-Apache Commons BeanUtils 1.10.0
-Release Notes
+
+Apache Commons BeanUtils 1.10.1 Release Notes
+---------------------------------------------
+
+The Apache Commons BeanUtils team is pleased to announce the release of Apache Commons BeanUtils 1.10.1
+
+Apache Commons BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.
+
+This is a maintenance release and requires Java 8.
+
+Changes in this version include:
+
+Fixed Bugs:
+o BEANUTILS-541:  FluentPropertyBeanIntrospector concurrency issue (backport to 1.X) #325. Thanks to Sergey Chernov.
+o                 Javadoc is missing its Overview page. Thanks to Gary Gregory.
+o                 Remove -nouses directive from maven-bundle-plugin. OSGi package imports now state 'uses' definitions for package imports, this doesn't affect JPMS (from org.apache.commons:commons-parent:80). Thanks to Gary Gregory.
+o                 Deprecate BeanUtils.BeanUtils(). Thanks to Gary Gregory.
+o                 Deprecate ConstructorUtils.ConstructorUtils(). Thanks to Gary Gregory.
+o                 Deprecate LocaleBeanUtils.LocaleBeanUtils(). Thanks to Gary Gregory.
+o                 Deprecate LocaleConvertUtils.LocaleConvertUtils(). Thanks to Gary Gregory.
+o                 Deprecate ConvertUtils.ConvertUtils(). Thanks to Gary Gregory.
+o                 Deprecate MethodUtils.MethodUtils(). Thanks to Gary Gregory.
+o                 Deprecate PropertyUtils.PropertyUtils(). Thanks to Gary Gregory.
+
+Changes:
+o                 Bump org.apache.commons:commons-parent from 78 to 81. Thanks to Gary Gregory.
 
 
-The Apache Commons BeanUtils team is pleased to announce the release of Apache Commons BeanUtils 1.10.0
+Historical list of changes: https://commons.apache.org/proper/commons-beanutils/changes.html
+
+For complete information on Apache Commons BeanUtils, including instructions on how to submit bug reports,
+patches, or suggestions for improvement, see the Apache Commons BeanUtils website:
+
+https://commons.apache.org/proper/commons-beanutils
+
+Download it from https://commons.apache.org/proper/commons-beanutils/download_beanutils.cgi
+
+Have fun!
+-Apache Commons BCEL team
+
+Feedback
+--------
+Open source works best when you give feedback:
+
+    https://commons.apache.org/beanutils
+
+Please direct all bug reports to JIRA:
+
+    https://issues.apache.org/jira/browse/BEANUTILS
+
+Or subscribe to the commons-user mailing list
+
+The Apache Commons Team
+
+-----------------------------------------------------------------------------
+
+Apache Commons BeanUtils 1.10.0 Release Notes
+---------------------------------------------
+
+The Apache Commons BeanUtils team is pleased to announce the release of Apache Commons BeanUtils 1.10.0.
 
 Apache Commons BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.
 
@@ -134,7 +189,10 @@ https://commons.apache.org/proper/commons-beanutils/
 
 Download it from https://commons.apache.org/proper/commons-beanutils/download_beanutils.cgi
 
+The Apache Commons Team
+
 -----------------------------------------------------------------------------
+
 Apache Commons BeanUtils 1.9.4
 Release Notes
 
