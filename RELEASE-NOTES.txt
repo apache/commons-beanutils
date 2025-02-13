@@ -99,7 +99,7 @@ Download it from https://commons.apache.org/proper/commons-beanutils/download_be
 Apache Commons BeanUtils 1.10.1 Release Notes
 ---------------------------------------------
 
-The Apache Commons BeanUtils team is pleased to announce the release of Apache Commons BeanUtils 1.10.1
+The Apache Commons BeanUtils team is pleased to announce the release of Apache Commons BeanUtils 1.10.1.
 
 Apache Commons BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.
 
