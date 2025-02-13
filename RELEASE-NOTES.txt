@@ -1,7 +1,7 @@
 Apache Commons BeanUtils 1.10.1 Release Notes
 ---------------------------------------------
 
-The Apache Commons BeanUtils team is pleased to announce the release of Apache Commons BeanUtils 1.10.1
+The Apache Commons BeanUtils team is pleased to announce the release of Apache Commons BeanUtils 1.10.1.
 
 Apache Commons BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.
 
@@ -157,7 +157,7 @@ Fixed Bugs:
 * BEANUTILS-492: Fixed exception when setting indexed properties on DynaBeans.
   Thanks to Bernhard Seebass.
 * BEANUTILS-470: Precision lost when converting BigDecimal Thanks to Tommy
-  Tynjä.
+  Tynjï¿½.
 * BEANUTILS-465: Indexed List Setters fixed. Thanks to Daniel Atallah.
 
 Changes:
