@@ -210,7 +210,7 @@ public class LocaleConvertUtilsBean {
     }
 
     /**
-     * Convert an array of specified values to an array of objects of the specified class (if possible) .
+     * Convert an array of specified values to an array of objects of the specified class (if possible).
      *
      * @param values Value to be converted (may be null)
      * @param clazz  Java array or element class to be converted to
