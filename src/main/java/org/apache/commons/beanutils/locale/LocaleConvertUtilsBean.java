@@ -314,19 +314,16 @@ public class LocaleConvertUtilsBean {
     }
 
     /**
-        * Convert an array of specified values to an array of objects of the
-        * specified class (if possible) .
-        *
-        * @param values Value to be converted (may be null)
-        * @param clazz Java array or element class to be converted to
-        * @return the converted value
-         * @throws org.apache.commons.beanutils.ConversionException if thrown by an
-         * underlying Converter
-        */
-       public Object convert(final String[] values, final Class<?> clazz) {
-
-           return convert(values, clazz, getDefaultLocale(), null);
-       }
+     * Convert an array of specified values to an array of objects of the specified class (if possible).
+     *
+     * @param values Value to be converted (may be null)
+     * @param clazz  Java array or element class to be converted to
+     * @return the converted value
+     * @throws org.apache.commons.beanutils.ConversionException if thrown by an underlying Converter
+     */
+    public Object convert(final String[] values, final Class<?> clazz) {
+        return convert(values, clazz, getDefaultLocale(), null);
+    }
 
     /**
      * Convert an array of specified values to an array of objects of the
