@@ -627,7 +627,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
         final String msg = toString(getClass()) + " does not support default String to '" + toString(type) + "' conversion.";
         if (log().isWarnEnabled()) {
             log().warn("    " + msg);
-            log().warn("    (N.B. Re-configure Converter or use alternative implementation)");
+            log().warn("    (Re-configure Converter or use alternative implementation)");
         }
         throw new ConversionException(msg);
     }

@@ -52,7 +52,7 @@ import org.apache.commons.logging.LogFactory;
 public abstract class AbstractConverter<D> implements Converter<D> {
 
     /** Debug logging message to indicate default value configuration */
-    private static final String DEFAULT_CONFIG_MSG = "(N.B. Converters can be configured to use default values to avoid throwing exceptions)";
+    private static final String DEFAULT_CONFIG_MSG = "(Converters can be configured to use default values to avoid throwing exceptions)";
 
     /** Current package name */
     // getPackage() below returns null on some platforms/jvm versions during the unit tests.
