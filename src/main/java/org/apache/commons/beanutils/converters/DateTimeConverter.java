@@ -578,7 +578,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
                    + toString(type) + "' conversion.";
         if (log().isWarnEnabled()) {
             log().warn("    " + msg);
-            log().warn("    (N.B. Re-configure Converter or use alternative implementation)");
+            log().warn("    (Re-configure Converter or use alternative implementation)");
         }
         throw new ConversionException(msg);
     }
