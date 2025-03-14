@@ -76,7 +76,7 @@ import org.apache.commons.beanutils.Converter;
  *                    <li><em>defaultSize &lt; 0</em> - default is <code>null</code></li>
  *                    <li><em>defaultSize = 0</em> - default is an array of length zero</li>
  *                    <li><em>defaultSize &gt; 0</em> - default is an array with a
- *                        length specified by <code>defaultSize</code> (N.B. elements
+ *                        length specified by <code>defaultSize</code> (elements
  *                        in the array will be <code>null</code>)</li>
  *                 </ul>
  *             </li>
