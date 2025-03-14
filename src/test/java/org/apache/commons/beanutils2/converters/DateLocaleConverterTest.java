@@ -78,8 +78,8 @@ class DateLocaleConverterTest extends AbstractLocaleConverterTest<Date> {
         defaultShortDateValue = "10/01/04";
 
         // Use German Locale
-//        localizedLocale         = Locale.GERMAN;  // N.B. doesn't work for dates
-//        localizedLocale         = Locale.GERMANY; // N.B. doesn't work for dates
+//        localizedLocale         = Locale.GERMAN;  // doesn't work for dates
+//        localizedLocale         = Locale.GERMANY; // doesn't work for dates
         localizedLocale = new Locale("de", "AT"); // Austria/German works
         localizedDatePattern = "t MMMM uuuu";
         localizedDateValue = "1 Oktober 2004";

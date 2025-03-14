@@ -190,7 +190,7 @@ public abstract class AbstractConverter<D> implements Converter<D> {
     /**
      * Returns the first element from an Array (or Collection) or the value unchanged if not an Array (or Collection).
      *
-     * N.B. This needs to be overridden for array/Collection converters.
+     * This needs to be overridden for array/Collection converters.
      *
      * @param value The value to convert
      * @return The first element in an Array (or Collection) or the value unchanged if not an Array (or Collection)

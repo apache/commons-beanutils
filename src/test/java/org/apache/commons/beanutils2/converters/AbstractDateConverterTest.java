@@ -200,7 +200,7 @@ public abstract class AbstractDateConverterTest<T> {
     /**
      * Test default String to type conversion
      *
-     * N.B. This method is overridden by test case implementations for java.sql.Date/Time/Timestamp
+     * This method is overridden by test case implementations for java.sql.Date/Time/Timestamp
      */
     @Test
     public void testDefaultStringToTypeConvert() {

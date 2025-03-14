@@ -408,9 +408,9 @@ public class ConvertUtilsBean {
      *                         value should be used.
      * @param defaultNull      {@code true}if the <em>standard</em> converters (see {@link ConvertUtilsBean#registerStandard(boolean, boolean)}) should use a
      *                         default value of {@code null</code>, otherwise <code>false}.
-     * N.B. This values is ignored if {@code throwException</code> is <code>true}
+     * This values is ignored if {@code throwException</code> is <code>true}
      * @param defaultArraySize The size of the default array value for array converters
-     * (N.B. This values is ignored if {@code throwException</code> is <code>true}). Specifying a value less than zero causes a {@code null} value to be used
+     * (This values is ignored if {@code throwException</code> is <code>true}). Specifying a value less than zero causes a {@code null} value to be used
      * for the default.
      */
     public void register(final boolean throwException, final boolean defaultNull, final int defaultArraySize) {
@@ -461,7 +461,7 @@ public class ConvertUtilsBean {
      *
      * @param throwException   {@code true} if the converters should throw an exception when a conversion error occurs, otherwise {@code false} if a default
      *                         value should be used.
-     * @param defaultArraySize The size of the default array value for array converters (N.B. This values is ignored if
+     * @param defaultArraySize The size of the default array value for array converters (This values is ignored if
      *                         {@code throwException</code> is <code>true}). Specifying a value less than zero causes a {@code null} value to be used for the
      *                         default.
      */
@@ -649,7 +649,7 @@ public class ConvertUtilsBean {
      * @param defaultNull {@code true}if the <em>standard</em> converters
      * (see {@link ConvertUtilsBean#registerStandard(boolean, boolean)})
      * should use a default value of {@code null</code>, otherwise <code>false}.
-     * N.B. This values is ignored if {@code throwException</code> is <code>true}
+     * This values is ignored if {@code throwException</code> is <code>true}
      */
     private void registerStandard(final boolean throwException, final boolean defaultNull) {
 

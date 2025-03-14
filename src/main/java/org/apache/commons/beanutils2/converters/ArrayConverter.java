@@ -57,7 +57,7 @@ import org.apache.commons.beanutils2.Converter;
  * <ul>
  * <li><em>defaultSize &lt; 0</em> - default is {@code null}</li>
  * <li><em>defaultSize = 0</em> - default is an array of length zero</li>
- * <li><em>defaultSize &gt; 0</em> - default is an array with a length specified by {@code defaultSize} (N.B. elements in the array will be {@code null})</li>
+ * <li><em>defaultSize &gt; 0</em> - default is an array with a length specified by {@code defaultSize} (elements in the array will be {@code null})</li>
  * </ul>
  * </li>
  * </ul>
@@ -83,12 +83,12 @@ import org.apache.commons.beanutils2.Converter;
  *
  * // Construct an array Converter for an integer array (i.e. int[]) using
  * // an IntegerConverter as the element converter.
- * // N.B. Uses the default comma (i.e. ",") as the delimiter between individual numbers
+ * // Uses the default comma (i.e. ",") as the delimiter between individual numbers
  * ArrayConverter arrayConverter = new ArrayConverter(int[].class, integerConverter);
  *
  * // Construct a "Matrix" Converter which converts arrays of integer arrays using
  * // the preceding ArrayConverter as the element Converter.
- * // N.B. Uses a semicolon (i.e. ";") as the delimiter to separate the different sets of numbers.
+ * // Uses a semicolon (i.e. ";") as the delimiter to separate the different sets of numbers.
  * // Also the delimiter used by the first ArrayConverter needs to be added to the
  * // "allowed characters" for this one.
  * ArrayConverter matrixConverter = new ArrayConverter(int[][].class, arrayConverter);

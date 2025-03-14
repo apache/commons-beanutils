@@ -250,12 +250,12 @@ public class ArrayConverterTest {
 
         // Construct an array Converter for an integer array (i.e. int[]) using
         // an IntegerConverter as the element converter.
-        // N.B. Uses the default comma (i.e. ",") as the delimiter between individual numbers
+        // Uses the default comma (i.e. ",") as the delimiter between individual numbers
         final ArrayConverter arrayConverter = new ArrayConverter(int[].class, integerConverter);
 
         // Construct a "Matrix" Converter which converts arrays of integer arrays using
         // the first (int[]) Converter as the element Converter.
-        // N.B. Uses a semicolon (i.e. ";") as the delimiter to separate the different sets of numbers.
+        // Uses a semicolon (i.e. ";") as the delimiter to separate the different sets of numbers.
         // Also the delimiter for the above array Converter needs to be added to this
         // array Converter's "allowed characters"
         final ArrayConverter matrixConverter = new ArrayConverter(int[][].class, arrayConverter);

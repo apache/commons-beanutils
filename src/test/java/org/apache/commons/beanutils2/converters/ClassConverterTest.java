@@ -48,7 +48,7 @@ public class ClassConverterTest {
         final Converter<Class<?>> converter = new ClassConverter();
         // Test Array Class to String
         assertEquals("[Ljava.lang.Boolean;", converter.convert(String.class, Boolean[].class), "Array to String");
-        // *** N.B. for some reason the following works on m1, but not m2
+        // *** For some reason the following works on m1, but not m2
         // Test String to Array Class
         // assertEquals("String to Array", Boolean[].class, converter.convert(Class.class, "[Ljava.lang.Boolean;"));
     }

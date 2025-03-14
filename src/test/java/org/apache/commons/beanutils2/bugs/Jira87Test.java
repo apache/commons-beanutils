@@ -67,7 +67,7 @@ public class Jira87Test {
     public void testJira87() throws Exception {
 
         final Jira87BeanFactory.PublicMappedInterface bean = Jira87BeanFactory.createMappedPropertyBean();
-        // N.B. The test impl. returns the key value
+        // The test impl. returns the key value
         assertEquals("foo", PropertyUtils.getMappedProperty(bean, "value(foo)"));
     }
 }
