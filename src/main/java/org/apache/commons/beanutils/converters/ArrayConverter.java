@@ -110,12 +110,12 @@ import org.apache.commons.beanutils.Converter;
  *
  *    // Construct an array Converter for an integer array (i.e. int[]) using
  *    // an IntegerConverter as the element converter.
- *    // N.B. Uses the default comma (i.e. ",") as the delimiter between individual numbers
+ *    // Uses the default comma (i.e. ",") as the delimiter between individual numbers
  *    ArrayConverter arrayConverter = new ArrayConverter(int[].class, integerConverter);
  *
  *    // Construct a "Matrix" Converter which converts arrays of integer arrays using
  *    // the pre-ceeding ArrayConverter as the element Converter.
- *    // N.B. Uses a semi-colon (i.e. ";") as the delimiter to separate the different sets of numbers.
+ *    // Uses a semi-colon (i.e. ";") as the delimiter to separate the different sets of numbers.
  *    //      Also the delimiter used by the first ArrayConverter needs to be added to the
  *    //      "allowed characters" for this one.
  *    ArrayConverter matrixConverter = new ArrayConverter(int[][].class, arrayConverter);

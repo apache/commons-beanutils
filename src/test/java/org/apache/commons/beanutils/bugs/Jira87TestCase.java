@@ -97,7 +97,7 @@ public class Jira87TestCase extends TestCase {
 
         final Jira87BeanFactory.PublicMappedInterface bean = Jira87BeanFactory.createMappedPropertyBean();
         try {
-            // N.B. The test impl. returns the key value
+            // The test impl. returns the key value
             assertEquals("foo", PropertyUtils.getMappedProperty(bean, "value(foo)"));
         } catch (final Throwable t) {
             log.error("ERROR " + t, t);

@@ -193,7 +193,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
         // Handle java.sql.Timestamp
         if (value instanceof java.sql.Timestamp) {
 
-            // N.B. Prior to JDK 1.4 the Timestamp's getTime() method
+            // Prior to JDK 1.4 the Timestamp's getTime() method
             //      didn't include the milliseconds. The following code
             //      ensures it works consistently accross JDK versions
             final java.sql.Timestamp timestamp = (java.sql.Timestamp)value;
