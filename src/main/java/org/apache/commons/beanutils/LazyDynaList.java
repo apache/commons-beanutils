@@ -170,7 +170,7 @@ public class LazyDynaList extends ArrayList<Object> {
      * The WrapDynaClass if the List's contains
      * POJO Bean elements.
      *
-     * N.B. WrapDynaClass isn't serlializable, which
+     * WrapDynaClass isn't serlializable, which
      *      is why its stored separately in a
      *      transient instance variable.
      */

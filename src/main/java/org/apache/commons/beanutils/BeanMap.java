@@ -84,12 +84,14 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
      * An empty array. Used to invoke accessors via reflection.
      */
     public static final Object[] NULL_ARGUMENTS = {};
+
     /**
      * Maps primitive Class types to transformers. The transformer transform strings into the appropriate primitive wrapper.
      *
-     * N.B. private & unmodifiable replacement for the (public & static) defaultTransformers instance.
+     * Private & unmodifiable replacement for the (public & static) defaultTransformers instance.
      */
     private static final Map<Class<? extends Object>, Transformer> typeTransformers = Collections.unmodifiableMap(createTypeTransformers());
+
     /**
      * This HashMap has been made unmodifiable to prevent issues when loaded in a shared ClassLoader enviroment.
      *

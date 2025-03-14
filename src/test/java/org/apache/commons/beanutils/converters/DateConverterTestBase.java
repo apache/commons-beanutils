@@ -173,7 +173,7 @@ public abstract class DateConverterTestBase extends TestCase {
     /**
      * Test default String to type conversion
      *
-     * N.B. This method is overridden by test case
+     * This method is overridden by test case
      * implementations for java.sql.Date/Time/Timestamp
      */
     public void testDefaultStringToTypeConvert() {

@@ -553,9 +553,9 @@ public class ConvertUtilsBean {
      * @param defaultNull <code>true</code>if the <em>standard</em> converters
      * (see {@link ConvertUtilsBean#registerStandard(boolean, boolean)})
      * should use a default value of <code>null</code>, otherwise <code>false</code>.
-     * N.B. This values is ignored if <code>throwException</code> is <code>true</code>
+     * This values is ignored if <code>throwException</code> is <code>true</code>
      * @param defaultArraySize The size of the default array value for array converters
-     * (N.B. This values is ignored if <code>throwException</code> is <code>true</code>).
+     * (This values is ignored if <code>throwException</code> is <code>true</code>).
      * Specifying a value less than zero causes a <code>null</code> value to be used for
      * the default.
      */
@@ -614,7 +614,7 @@ public class ConvertUtilsBean {
      * throw an exception when a conversion error occurs, otherwise <code>
      * <code>false</code> if a default value should be used.
      * @param defaultArraySize The size of the default array value for array converters
-     * (N.B. This values is ignored if <code>throwException</code> is <code>true</code>).
+     * (This values is ignored if <code>throwException</code> is <code>true</code>).
      * Specifying a value less than zero causes a <code>null<code> value to be used for
      * the default.
      */
@@ -736,7 +736,7 @@ public class ConvertUtilsBean {
      * @param defaultNull <code>true</code>if the <em>standard</em> converters
      * (see {@link ConvertUtilsBean#registerStandard(boolean, boolean)})
      * should use a default value of <code>null</code>, otherwise <code>false</code>.
-     * N.B. This values is ignored if <code>throwException</code> is <code>true</code>
+     * This values is ignored if <code>throwException</code> is <code>true</code>
      */
     private void registerStandard(final boolean throwException, final boolean defaultNull) {
 
