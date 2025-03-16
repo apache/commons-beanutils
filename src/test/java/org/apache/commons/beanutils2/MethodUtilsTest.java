@@ -16,7 +16,6 @@
  */
 package org.apache.commons.beanutils2;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -275,14 +274,10 @@ public class MethodUtilsTest {
     @Test
     public void testParentMethod() throws Exception {
         final String a = "A";
-
-        assertAll(() -> {
-            final String actual1 = (String) MethodUtils.invokeMethod(a, "toLowerCase", null);
-            assertEquals("a", actual1);
-        }, () -> {
-            final char actual2 = (char) MethodUtils.invokeMethod(a, "charAt", 0);
-            assertEquals('A', actual2);
-        });
+        final String actual1 = (String) MethodUtils.invokeMethod(a, "toLowerCase", null);
+        assertEquals("a", actual1);
+        final char actual2 = (char) MethodUtils.invokeMethod(a, "charAt", 0);
+        assertEquals('A', actual2);
     }
 
     @Test
