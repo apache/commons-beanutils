@@ -267,7 +267,7 @@ public abstract class NumberConverter extends AbstractConverter {
     }
 
     /**
-     * Return whether decimals are allowed in the number.
+     * Tests whether decimals are allowed in the number.
      *
      * @return Whether decimals are allowed in the number
      */

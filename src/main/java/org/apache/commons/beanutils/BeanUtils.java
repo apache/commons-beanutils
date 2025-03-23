@@ -170,8 +170,9 @@ public class BeanUtils {
     }
 
     /**
-     * Return whether a Map is fast
-     * @param map The map
+     * Gets whether a Map is fast.
+     *
+     * @param map The map.
      * @return Whether it is fast or not.
      * @since 1.8.0
      */
