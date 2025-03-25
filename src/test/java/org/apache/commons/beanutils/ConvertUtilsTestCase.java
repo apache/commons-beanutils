@@ -353,7 +353,7 @@ public class ConvertUtilsTestCase extends TestCase {
      * Positive array conversion tests.
      */
     public void testPositiveArray() {
-
+        // array 1
         final String values1[] = { "10", "20", "30" };
         Object value = ConvertUtils.convert(values1, Integer.TYPE);
         final int shape[] = {};
@@ -362,7 +362,7 @@ public class ConvertUtilsTestCase extends TestCase {
         assertEquals(results1[0], 10);
         assertEquals(results1[1], 20);
         assertEquals(results1[2], 30);
-
+        // array 2
         final String values2[] = { "100", "200", "300" };
         value = ConvertUtils.convert(values2, shape.getClass());
         assertEquals(shape.getClass(), value.getClass());
@@ -370,7 +370,6 @@ public class ConvertUtilsTestCase extends TestCase {
         assertEquals(results2[0], 100);
         assertEquals(results2[1], 200);
         assertEquals(results2[2], 300);
-
     }
 
     /**
