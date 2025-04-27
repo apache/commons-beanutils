@@ -25,7 +25,7 @@ import org.apache.commons.beanutils.PropertyUtilsBean;
 import junit.framework.TestCase;
 
 /**
- * Write methods for PropertyDescriptors created during custom introspection are lost. See
+ * Writes methods for PropertyDescriptors created during custom introspection are lost. See
  * <a href="https://issues.apache.org/jira/browse/BEANUTILS-456">JIRA issue
  * BEANUTILS-456</a>.
  *
