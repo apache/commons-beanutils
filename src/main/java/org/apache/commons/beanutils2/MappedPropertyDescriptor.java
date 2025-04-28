@@ -24,6 +24,7 @@ import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.Objects;
 
 /**
  * A MappedPropertyDescriptor describes one mapped property. Mapped properties are multivalued properties like indexed properties but that are accessed with a
@@ -85,9 +86,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                         classRef = new WeakReference<>(clazz);
                     }
                 }
-                if (clazz == null) {
-                    throw new RuntimeException("Method " + methodName + " for " + className + " could not be reconstructed - class reference has gone");
-                }
+                Objects.requireNonNull(clazz, () -> "Method " + methodName + " for " + className + " could not be reconstructed - class reference has gone");
                 Class<?>[] paramTypes = null;
                 if (writeParamClassNames != null) {
                     paramTypes = new Class[2];
