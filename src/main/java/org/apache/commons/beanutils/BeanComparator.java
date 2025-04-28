@@ -18,7 +18,6 @@
 package org.apache.commons.beanutils;
 
 import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Comparator;
 
 import org.apache.commons.collections.comparators.ComparableComparator;
@@ -122,7 +121,7 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
     }
 
     /**
-     * Compare two JavaBeans by their shared property.
+     * Compares two JavaBeans by their shared property.
      * If {@link #getProperty} is null then the actual objects will be compared.
      *
      * @param  o1 Object The first bean to get data from to compare against
@@ -131,22 +130,16 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
      */
     @Override
     public int compare(final T o1, final T o2) {
-
         if (property == null) {
             // compare the actual objects
             return internalCompare(o1, o2);
         }
-
         try {
             final Object value1 = PropertyUtils.getProperty(o1, property);
             final Object value2 = PropertyUtils.getProperty(o2, property);
             return internalCompare(value1, value2);
-        } catch (final IllegalAccessException iae) {
-            throw new RuntimeException("IllegalAccessException: " + iae.toString());
-        } catch (final InvocationTargetException ite) {
-            throw new RuntimeException("InvocationTargetException: " + ite.toString());
-        } catch (final NoSuchMethodException nsme) {
-            throw new RuntimeException("NoSuchMethodException: " + nsme.toString());
+        } catch (final ReflectiveOperationException e) {
+            throw new IllegalArgumentException(e);
         }
     }
 
