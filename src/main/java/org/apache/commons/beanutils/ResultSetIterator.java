@@ -176,7 +176,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
             advance();
             return !eof;
         } catch (final SQLException e) {
-            throw new IllegalArgumentException("hasNext():  SQLException:  " + e, e);
+            throw new IllegalStateException("hasNext():  SQLException:  " + e, e);
         }
     }
 
@@ -195,7 +195,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
             current = false;
             return this;
         } catch (final SQLException e) {
-            throw new IllegalArgumentException("next():  SQLException:  " + e, e);
+            throw new IllegalStateException("next():  SQLException:  " + e, e);
         }
 
     }

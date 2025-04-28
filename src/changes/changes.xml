@@ -33,7 +33,8 @@
       <action type="fix" dev="ggregory" due-to="Gary Gregory">BeanComparator.compare(T, T) now throws IllegalArgumentException instead of RuntimeException to wrap all cases of ReflectiveOperationException.</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">MappedMethodReference.get() now throws IllegalStateException instead of RuntimeException to wrap cases of NoSuchMethodException.</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">ResultSetIterator.get(String) now throws IllegalArgumentException instead of RuntimeException to wrap cases of SQLException.</action>
-      <action type="fix" dev="ggregory" due-to="Gary Gregory">ResultSetIterator.hasNext() now throws IllegalArgumentException instead of RuntimeException to wrap cases of SQLException.</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">ResultSetIterator.hasNext() now throws IllegalStateException instead of RuntimeException to wrap cases of SQLException.</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">ResultSetIterator.next() now throws IllegalStateException instead of RuntimeException to wrap cases of SQLException.</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">ResultSetIterator.set(String, Object) now throws IllegalArgumentException instead of RuntimeException to wrap cases of SQLException.</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">ResultSetIterator.set(String, String, Object) now throws IllegalArgumentException instead of RuntimeException to wrap cases of SQLException.</action>
       <!-- ADD -->
