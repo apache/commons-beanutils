@@ -24,6 +24,7 @@ import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.Objects;
 
 /**
  * A MappedPropertyDescriptor describes one mapped property.
@@ -50,6 +51,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      * See http://issues.apache.org/jira/browse/BEANUTILS-291
      */
     private static class MappedMethodReference {
+
         private String className;
         private String methodName;
         private Reference<Method> methodRef;
@@ -57,6 +59,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         private Reference<Class<?>> writeParamTypeRef0;
         private Reference<Class<?>> writeParamTypeRef1;
         private String[] writeParamClassNames;
+
         MappedMethodReference(final Method m) {
             if (m != null) {
                 className = m.getDeclaringClass().getName();
@@ -91,10 +94,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                         classRef = new WeakReference<>(clazz);
                     }
                 }
-                if (clazz == null) {
-                    throw new RuntimeException("Method " + methodName + " for " +
-                            className + " could not be reconstructed - class reference has gone");
-                }
+                Objects.requireNonNull(clazz, () -> "Method " + methodName + " for " + className + " could not be reconstructed - class reference has gone");
                 Class<?>[] paramTypes = null;
                 if (writeParamClassNames != null) {
                     paramTypes = new Class[2];
@@ -122,8 +122,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                     // Un-comment following line for testing
                     // System.out.println("Recreated Method " + methodName + " for " + className);
                 } catch (final NoSuchMethodException e) {
-                    throw new RuntimeException("Method " + methodName + " for " +
-                            className + " could not be reconstructed - method not found");
+                    throw new RuntimeException("Method " + methodName + " for " + className + " could not be reconstructed - method not found", e);
                 }
                 methodRef = new SoftReference<>(m);
             }
