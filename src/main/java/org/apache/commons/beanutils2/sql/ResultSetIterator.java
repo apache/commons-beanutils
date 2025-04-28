@@ -113,7 +113,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
         try {
             return dynaClass.getObjectFromResultSet(name);
         } catch (final SQLException e) {
-            throw new RuntimeException("get(" + name + "): SQLException: " + e);
+            throw new IllegalArgumentException("get(" + name + "): SQLException: " + e);
         }
     }
 
@@ -170,7 +170,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
             advance();
             return !eof;
         } catch (final SQLException e) {
-            throw new RuntimeException("hasNext():  SQLException:  " + e);
+            throw new IllegalStateException("hasNext():  SQLException:  " + e);
         }
     }
 
@@ -191,7 +191,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
             current = false;
             return this;
         } catch (final SQLException e) {
-            throw new RuntimeException("next():  SQLException:  " + e);
+            throw new IllegalStateException("next():  SQLException:  " + e);
         }
     }
 
@@ -251,7 +251,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
         try {
             dynaClass.getResultSet().updateObject(name, value);
         } catch (final SQLException e) {
-            throw new RuntimeException("set(" + name + "): SQLException: " + e);
+            throw new IllegalArgumentException("set(" + name + "): SQLException: " + e);
         }
     }
 

@@ -112,7 +112,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                     // Un-comment following line for testing
                     // System.out.println("Recreated Method " + methodName + " for " + className);
                 } catch (final NoSuchMethodException e) {
-                    throw new RuntimeException("Method " + methodName + " for " + className + " could not be reconstructed - method not found");
+                    throw new IllegalStateException("Method " + methodName + " for " + className + " could not be reconstructed - method not found");
                 }
                 methodRef = new SoftReference<>(m);
             }

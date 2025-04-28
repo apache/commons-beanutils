@@ -46,6 +46,13 @@
       <action type="fix" dev="ggregory" due-to="Gary Gregory">The class LocaleBeanUtils no longer extends BeanUtils (both classes only contains static methods).</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">The class org.apache.commons.beanutils2.BeanUtils is now final (the class only contains static methods).</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">The constructor org.apache.commons.beanutils2.BeanUtils is now private (the class only contains static methods).</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">BeanComparator.compare(T, T) now throws IllegalArgumentException instead of RuntimeException to wrap all cases of ReflectiveOperationException.</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">MappedMethodReference.get() now throws IllegalStateException instead of RuntimeException to wrap cases of NoSuchMethodException.</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">ResultSetIterator.get(String) now throws IllegalArgumentException instead of RuntimeException to wrap cases of SQLException.</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">ResultSetIterator.hasNext() now throws IllegalStateException instead of RuntimeException to wrap cases of SQLException.</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">ResultSetIterator.next() now throws IllegalStateException instead of RuntimeException to wrap cases of SQLException.</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">ResultSetIterator.set(String, Object) now throws IllegalArgumentException instead of RuntimeException to wrap cases of SQLException.</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">ResultSetIterator.set(String, String, Object) now throws IllegalArgumentException instead of RuntimeException to wrap cases of SQLException.</action>
       <!-- ADD -->
       <!-- UPDATE -->
       <action type="update" dev="ggregory" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 78 to 81.</action>
