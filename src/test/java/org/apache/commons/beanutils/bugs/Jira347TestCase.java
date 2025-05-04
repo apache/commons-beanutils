@@ -90,7 +90,7 @@ public class Jira347TestCase extends TestCase {
     }
 
     /**
-     * Retrieves the string representation of the mapped write method
+     * Gets the string representation of the mapped write method
      * for the given descriptor.
      * This conversion is needed as there must not be strong reference to the
      * Method object outside of this method as otherwise the garbage collector will not
