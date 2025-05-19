@@ -53,7 +53,7 @@ public class DefaultBeanIntrospector implements BeanIntrospector {
     private static final Class<?>[] EMPTY_CLASS_PARAMETERS = new Class[0];
 
     /** Constant for arguments types of a method that expects a list argument. */
-    private static final Class<?>[] LIST_CLASS_PARAMETER = new Class[] { java.util.List.class };
+    private static final Class<?>[] LIST_CLASS_PARAMETER = new Class[] { List.class };
 
     /** Log instance */
     private final Log log = LogFactory.getLog(getClass());
