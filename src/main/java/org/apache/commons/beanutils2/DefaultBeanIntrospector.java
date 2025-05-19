@@ -48,7 +48,7 @@ public class DefaultBeanIntrospector implements BeanIntrospector {
     public static final BeanIntrospector INSTANCE = new DefaultBeanIntrospector();
 
     /** Constant for arguments types of a method that expects a list argument. */
-    private static final Class<?>[] LIST_CLASS_PARAMETER = new Class[] { java.util.List.class };
+    private static final Class<?>[] LIST_CLASS_PARAMETER = new Class[] { List.class };
 
     /** For logging. Each subclass gets its own log instance. */
     private final Log log = LogFactory.getLog(getClass());
