@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -105,7 +106,7 @@ class DateLocaleConverterTest extends AbstractLocaleConverterTest<Date> {
     @Test
     public void testCalendarObject() {
         converter = DateLocaleConverter.builder().setLocale(defaultLocale).get();
-        final java.util.Calendar calendar = java.util.Calendar.getInstance();
+        final Calendar calendar = Calendar.getInstance();
         calendar.setTime((java.util.Date) expectedValue);
         assertEquals(expectedValue, converter.convert(calendar), "java.util.Calendar");
     }
