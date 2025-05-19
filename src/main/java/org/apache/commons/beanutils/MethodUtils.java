@@ -22,6 +22,7 @@ import java.lang.ref.WeakReference;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -97,7 +98,7 @@ public class MethodUtils {
             return exact == md.exact &&
             methodName.equals(md.methodName) &&
             cls.equals(md.cls) &&
-            java.util.Arrays.equals(paramTypes, md.paramTypes);
+            Arrays.equals(paramTypes, md.paramTypes);
         }
         /**
          * Returns the string length of method name. I.e. if the
