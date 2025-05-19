@@ -206,7 +206,7 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     private String keysToString(final Map<?, ?> map) {
         final Object[] mapKeys = map.keySet().toArray();
-        java.util.Arrays.sort(mapKeys);
+        Arrays.sort(mapKeys);
         final StringBuilder buf = new StringBuilder();
         for(int i=0; i<mapKeys.length; ++i) {
             if (i != 0) {
