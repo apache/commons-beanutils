@@ -20,6 +20,7 @@ package org.apache.commons.beanutils.locale.converters;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Locale;
 
 import org.apache.commons.beanutils.ConversionException;
@@ -110,7 +111,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      */
     public void testCalendarObject() {
         converter = new DateLocaleConverter(defaultLocale);
-        final java.util.Calendar calendar = java.util.Calendar.getInstance();
+        final Calendar calendar = Calendar.getInstance();
         calendar.setTime((java.util.Date)expectedValue);
         assertEquals("java.util.Calendar", expectedValue, converter.convert(calendar));
     }
