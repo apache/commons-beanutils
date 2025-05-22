@@ -1,5 +1,5 @@
-Apache Commons BeanUtils 2.0.0-M1
-Release Notes
+Apache Commons BeanUtils 2.0.0-M1 Release Notes
+-----------------------------------------------
 
 The Apache Commons BeanUtils team is pleased to announce the release of Apache Commons BeanUtils 2.0.0-M1.
 
