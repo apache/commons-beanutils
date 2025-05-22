@@ -1,24 +1,10 @@
 <?xml version="1.0"?>
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
-   https://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
--->
-<document xmlns="http://maven.apache.org/XDOC/2.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements. See the NOTICE file distributed with this work for additional information regarding 
+  copyright ownership. The ASF licenses this file to you under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may 
+  obtain a copy of the License at https://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed 
+  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the 
+  License. -->
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 https://maven.apache.org/xsd/xdoc-2.0.xsd">
   <properties>
     <title>Apache Commons Security Reports</title>
@@ -28,24 +14,87 @@
     <section name="About Security">
       <p>
         For information about reporting or asking questions about security, please see
-        <a href="https://commons.apache.org/security.html">Apache Commons Security</a>.
+        <a href="https://commons.apache.org/security.html">Apache Commons Security</a>
+        .
       </p>
-      <p>This page lists all security vulnerabilities fixed in released versions of this component. 
+      <p>This page lists all security vulnerabilities fixed in released versions of this component.
       </p>
       <p>Please note that binary patches are never provided. If you need to apply a source code patch, use the building instructions for the component version
-        that you are using. 
+        that you are using.
       </p>
       <p>
         If you need help on building this component or other help on following the instructions to mitigate the known vulnerabilities listed here, please send
-        your questions to the public
-        <a href="mail-lists.html">user mailing list</a>.
+        your questions to the
+        public
+        <a href="mail-lists.html">user mailing list</a>
+        .
       </p>
       <p>If you have encountered an unlisted security vulnerability or other unexpected behavior that has security impact, or if the descriptions here are
-        incomplete, please report them privately to the Apache Security Team. Thank you. 
+        incomplete, please report
+        them privately to the Apache Security Team. Thank you.
       </p>
     </section>
     <section name="Security Vulnerabilities">
-      <p>None.</p>
+      <subsection name="CVE-2019-10086">
+        <ul>
+          <li>CVE-2019-10086: Apache Commons Beanutils does not suppresses the class property in PropertyUtilsBean by default.</li>
+          <li>Severity: Medium</li>
+          <li>Vendor: The Apache Software Foundation</li>
+          <li>Versions Affected: commons-beanutils-1.9.3 and earlier</li>
+          <li>Description: A special BeanIntrospector class was added in version 1.9.2.
+            This can be used to stop attackers from using the class property of
+            Java objects to get access to the classloader.
+            However this protection was not enabled by default.
+            PropertyUtilsBean (and consequently BeanUtilsBean) now disallows class
+            level property access by default, thus protecting against
+            CVE-2014-0114.
+          </li>
+
+          <li>Mitigation: 1.X users should migrate to 1.9.4.</li>
+
+          <li>Credit: This was discovered by Melloware (https://melloware.com/).</li>
+        </ul>
+        <p>
+          Example:
+        </p>
+<pre>
+/**
+ * Example displaying the new default behavior such that
+ * it is not possible to access class level properties utilizing the
+ * BeanUtilsBean, which in turn utilizes the PropertyUtilsBean.
+ */
+public void testSuppressClassPropertyByDefault() throws Exception {
+    final BeanUtilsBean bub = new BeanUtilsBean();
+    final AlphaBean bean = new AlphaBean();
+    try {
+        bub.getProperty(bean, "class");
+        fail("Could access class property!");
+    } catch (final NoSuchMethodException ex) {
+        // ok
+    }
+}
+
+/**
+ * Example showing how by which one would use to revert to the 
+ * behaviour prior to the 1.9.4 release where class level properties were accessible by
+ * the BeanUtilsBean and the PropertyUtilsBean.
+ */
+public void testAllowAccessToClassProperty() throws Exception {
+    final BeanUtilsBean bub = new BeanUtilsBean();
+    bub.getPropertyUtils().removeBeanIntrospector(SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
+    final AlphaBean bean = new AlphaBean();
+    String result = bub.getProperty(bean, "class");
+    assertEquals("Class property should have been accessed", "class org.apache.commons.beanutils2.AlphaBean", result);
+}
+</pre>
+        <p>
+          References:
+        </p>
+        <ol>
+          <li>https://issues.apache.org/jira/browse/BEANUTILS-520</li>
+          <li>http://commons.apache.org/proper/commons-beanutils/</li>
+        </ol>
+      </subsection>
     </section>
   </body>
 </document>
