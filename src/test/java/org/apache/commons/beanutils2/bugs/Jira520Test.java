@@ -30,6 +30,7 @@ import org.junit.jupiter.api.Test;
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-520">https://issues.apache.org/jira/browse/BEANUTILS-520</a>
  */
 public class Jira520Test {
+
     /**
      * Allow opt-out to make your app less secure but allow access to "class".
      */
