@@ -55,7 +55,7 @@
     <surefire.argLine>-Xmx256M -Djava.locale.providers=COMPAT</surefire.argLine>
     <commons.encoding>utf-8</commons.encoding>
     <!-- Commons Release Plugin -->
-    <commons.bc.version>2.0.0-SNAPSHOT</commons.bc.version>
+    <commons.bc.version>2.0.0-M1</commons.bc.version>
     <commons.release.isDistModule>true</commons.release.isDistModule>
     <!-- project.build.outputTimestamp is managed by Maven plugins, see https://maven.apache.org/guides/mini/guide-reproducible-builds.html -->
     <project.build.outputTimestamp>2025-01-07T14:08:08Z</project.build.outputTimestamp>
@@ -70,6 +70,8 @@
     <commons.jacoco.lineRatio>0.72</commons.jacoco.lineRatio>
     <!-- Dependencies -->
     <commons.collections.version>4.5.0</commons.collections.version>
+    <!-- TEMP until 2.0.0 is done. -->
+    <japicmp.skip>true</japicmp.skip>
   </properties>
 
   <issueManagement>
