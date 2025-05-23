@@ -28,6 +28,7 @@ import junit.framework.TestCase;
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-520">https://issues.apache.org/jira/browse/BEANUTILS-520</a>
  */
 public class Jira520TestCase extends TestCase {
+
     /**
      * Allow opt-out to make your app less secure but allow access to "class".
      */
