@@ -23,7 +23,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>commons-beanutils2</artifactId>
-  <version>2.0.0-M2-SNAPSHOT</version>
+  <version>2.0.0-M2</version>
   <name>Apache Commons BeanUtils</name>
 
   <inceptionYear>2000</inceptionYear>
@@ -58,7 +58,7 @@
     <commons.bc.version>2.0.0-M1</commons.bc.version>
     <commons.release.isDistModule>true</commons.release.isDistModule>
     <!-- project.build.outputTimestamp is managed by Maven plugins, see https://maven.apache.org/guides/mini/guide-reproducible-builds.html -->
-    <project.build.outputTimestamp>2025-01-07T14:08:08Z</project.build.outputTimestamp>
+    <project.build.outputTimestamp>2025-05-25T13:32:31Z</project.build.outputTimestamp>
     <!-- JaCoCo: Don't make code coverage worse than: -->
     <commons.jacoco.haltOnFailure>true</commons.jacoco.haltOnFailure>
     <commons.jacoco.classRatio>0.95</commons.jacoco.classRatio>
