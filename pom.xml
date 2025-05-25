@@ -71,7 +71,7 @@
     <!-- Dependencies -->
     <commons.collections.version>4.5.0</commons.collections.version>
     <!-- TEMP until 2.0.0 is done. -->
-    <japicmp.skip>true</japicmp.skip>
+    <commons.japicmp.breakBuildOnBinaryIncompatibleModifications>false</commons.japicmp.breakBuildOnBinaryIncompatibleModifications>
   </properties>
 
   <issueManagement>
