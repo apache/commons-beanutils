@@ -43,16 +43,20 @@
     </menu>
     <menu name="Documentation">
       <item name="Building" href="/building.html" />
-      <item name="2.0.0-M2-SNAPSHOT" collapse="true" href="/index.html">
+      <item name="2.0.0-M2" collapse="true" href="/index.html">
         <item name="Release Notes" href="https://dlcdn.apache.org//commons/beanutils/RELEASE-NOTES.txt" />
-        <item name="User Guide" href="https://commons.apache.org/proper/commons-beanutils/apidocs/org/apache/commons/beanutils2/package-summary.html" />
-        <item name="API" href="https://commons.apache.org/proper/commons-beanutils/apidocs/index.html" />
+        <item name="User Guide" href="https://javadoc.io/doc/org.apache.commons/commons-beanutils2/2.0.0-M2/org/apache/commons/beanutils2/package-summary.html" />
+        <item name="API" href="https://javadoc.io/doc/org.apache.commons/commons-beanutils2/2.0.0-M2/index.html" />
       </item>
       <item name="2.0.0-M1" collapse="true" href="/index.html">
         <item name="Release Notes" href="https://dlcdn.apache.org//commons/beanutils/RELEASE-NOTES.txt" />
-        <item name="User Guide"
-          href="https://javadoc.io/doc/org.apache.commons/commons-beanutils2/2.0.0-M1/org/apache/commons/beanutils2/package-summary.html" />
+        <item name="User Guide" href="https://javadoc.io/doc/org.apache.commons/commons-beanutils2/2.0.0-M1/org/apache/commons/beanutils2/package-summary.html" />
         <item name="API" href="https://javadoc.io/doc/org.apache.commons/commons-beanutils2/2.0.0-M1/index.html" />
+      </item>
+      <item name="1.11.0" collapse="true" href="/index.html">
+        <item name="Release Notes" href="https://dlcdn.apache.org//commons/beanutils/RELEASE-NOTES.txt" />
+        <item name="User Guide" href="https://javadoc.io/doc/commons-beanutils/commons-beanutils/1.11.0/org/apache/commons/beanutils/package-summary.html" />
+        <item name="API" href="https://javadoc.io/doc/commons-beanutils/commons-beanutils/1.11.0/index.html" />
       </item>
       <item name="1.10.1" collapse="true" href="/index.html">
         <item name="Release Notes" href="https://dlcdn.apache.org//commons/beanutils/RELEASE-NOTES.txt" />
