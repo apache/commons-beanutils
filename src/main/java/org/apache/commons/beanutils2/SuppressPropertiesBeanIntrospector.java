@@ -35,6 +35,7 @@ import java.util.Set;
  * @since 1.9.2
  */
 public class SuppressPropertiesBeanIntrospector implements BeanIntrospector {
+
     /**
      * A specialized instance which is configured to suppress the special {@code class} properties of Java beans. Unintended access to the property
      * {@code class} (which is common to all Java objects) can be a security risk because it also allows access to the class loader. Adding this instance as
@@ -42,7 +43,18 @@ public class SuppressPropertiesBeanIntrospector implements BeanIntrospector {
      */
     public static final SuppressPropertiesBeanIntrospector SUPPRESS_CLASS = new SuppressPropertiesBeanIntrospector(Collections.singleton("class"));
 
-    /** A set with the names of the properties to be suppressed. */
+    /**
+     * A specialized instance which is configured to suppress the special {@code class} properties of Java beans. Unintended access to the call for
+     * {@code declaringClass} (which is common to all Java {@code enum}) can be a security risk because it also allows access to the class loader. Adding this
+     * instance as {@code BeanIntrospector} to an instance of {@code PropertyUtilsBean} suppresses the {@code class} property; it can then no longer be
+     * accessed.
+     *
+     * @since 2.0.0-M2
+     */
+    public static final SuppressPropertiesBeanIntrospector SUPPRESS_DECLARING_CLASS = new SuppressPropertiesBeanIntrospector(
+            Collections.singleton("declaringClass"));
+
+/** A set with the names of the properties to be suppressed. */
     private final Set<String> propertyNames;
 
     /**
