@@ -420,20 +420,26 @@
  * then be removed if they have been detected by other <code>BeanIntrospector</code>
  * instances during processing of a bean class.</p>
  *
- * <p>A good use case for suppressing properties is the special <code>class</code>
+ * <p>A good use case for suppressing properties is the special {@code class}
  * property which is per default available for all beans; it is generated from the
- * <code>getClass()</code> method inherited from <code>Object</code> which follows the
+ * {@code getClass()} method inherited from {@code Object} which follows the
  * naming conventions for property get methods. Exposing this property in an
  * uncontrolled way can lead to a security vulnerability as it allows access to
  * the class loader. More information can be found at
  * <a href="https://issues.apache.org/jira/browse/BEANUTILS-463">
  * https://issues.apache.org/jira/browse/BEANUTILS-463</a>.</p>
  *
- * <p>Because the <code>class</code> property is undesired in many use cases
- * there is already an instance of <code>SuppressPropertiesBeanIntrospector</code>
+ * <p>Because the {@code class} property is undesired in many use cases
+ * there is already an instance of {@code SuppressPropertiesBeanIntrospector}
  * which is configured to suppress this property. It can be obtained via the
- * <code>SUPPRESS_CLASS</code> constant of
- * <code>SuppressPropertiesBeanIntrospector</code>.</p>
+ * {@code SUPPRESS_CLASS} constant of
+ * {@code SuppressPropertiesBeanIntrospector}.</p>
+ *
+ * <p>Another problematic property is the {@code enum} "declaredClass" property,
+ * through which you can also access that class' class loader. The {@code SuppressPropertiesBeanIntrospector}
+ * provides {@code SUPPRESS_DECLARING_CLASS} to workaround this issue.</p>
+ *
+ * <p>Both {@code SUPPRESS_CLASS} and {@code SUPPRESS_DECLARING_CLASS} are enabled by default.</p>
  *
  * <h2>3. Dynamic Beans (DynaBeans)</h2>
  *
