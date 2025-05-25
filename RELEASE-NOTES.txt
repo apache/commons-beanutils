@@ -1,3 +1,62 @@
+Apache Commons BeanUtils 2.0.0-M2
+Release Notes
+
+The Apache Commons BeanUtils team is pleased to announce the release of Apache Commons BeanUtils 2.0.0-M2.
+
+Apache Commons BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.
+
+This is a major release and requires Java 8.
+
+Changes in this version include:
+
+New features:
+o                 Add org.apache.commons.beanutils.SuppressPropertiesBeanIntrospector.SUPPRESS_DECLARING_CLASS. Thanks to Gary Gregory.
+
+Fixed Bugs:
+o                 Javadoc is missing its Overview page. Thanks to Gary Gregory.
+o                 Remove -nouses directive from maven-bundle-plugin. OSGi package imports now state 'uses' definitions for package imports, this doesn't affect JPMS (from org.apache.commons:commons-parent:80). Thanks to Gary Gregory.
+o                 The class org.apache.commons.beanutils2.PropertyUtils is now final (the class only contains static methods). Thanks to Gary Gregory.
+o                 The constructor org.apache.commons.beanutils2.PropertyUtils is now private (the class only contains static methods). Thanks to Gary Gregory.
+o                 The class org.apache.commons.beanutils2.locale.LocaleConvertUtils is now final (the class only contains static methods). Thanks to Gary Gregory.
+o                 The constructor org.apache.commons.beanutils2.locale.LocaleConvertUtils is now private (the class only contains static methods). Thanks to Gary Gregory.
+o                 The class org.apache.commons.beanutils2.locale.LocaleBeanUtils is now final (the class only contains static methods). Thanks to Gary Gregory.
+o                 The constructor org.apache.commons.beanutils2.locale.LocaleBeanUtils is now private (the class only contains static methods). Thanks to Gary Gregory.
+o                 The class org.apache.commons.beanutils2.MethodUtils is now final (the class only contains static methods). Thanks to Gary Gregory.
+o                 The constructor org.apache.commons.beanutils2.MethodUtils is now private (the class only contains static methods). Thanks to Gary Gregory.
+o                 The class org.apache.commons.beanutils2.ConvertUtils is now final (the class only contains static methods). Thanks to Gary Gregory.
+o                 The constructor org.apache.commons.beanutils2.ConvertUtils is now private (the class only contains static methods). Thanks to Gary Gregory.
+o                 The class org.apache.commons.beanutils2.ConstructorUtils is now final (the class only contains static methods). Thanks to Gary Gregory.
+o                 The constructor org.apache.commons.beanutils2.ConstructorUtils is now private (the class only contains static methods). Thanks to Gary Gregory.
+o                 The class LocaleBeanUtils no longer extends BeanUtils (both classes only contains static methods). Thanks to Gary Gregory.
+o                 The class org.apache.commons.beanutils2.BeanUtils is now final (the class only contains static methods). Thanks to Gary Gregory.
+o                 The constructor org.apache.commons.beanutils2.BeanUtils is now private (the class only contains static methods). Thanks to Gary Gregory.
+o                 BeanComparator.compare(T, T) now throws IllegalArgumentException instead of RuntimeException to wrap all cases of ReflectiveOperationException. Thanks to Gary Gregory.
+o                 MappedMethodReference.get() now throws IllegalStateException instead of RuntimeException to wrap cases of NoSuchMethodException. Thanks to Gary Gregory.
+o                 ResultSetIterator.get(String) now throws IllegalArgumentException instead of RuntimeException to wrap cases of SQLException. Thanks to Gary Gregory.
+o                 ResultSetIterator.hasNext() now throws IllegalStateException instead of RuntimeException to wrap cases of SQLException. Thanks to Gary Gregory.
+o                 ResultSetIterator.next() now throws IllegalStateException instead of RuntimeException to wrap cases of SQLException. Thanks to Gary Gregory.
+o                 ResultSetIterator.set(String, Object) now throws IllegalArgumentException instead of RuntimeException to wrap cases of SQLException. Thanks to Gary Gregory.
+o                 ResultSetIterator.set(String, String, Object) now throws IllegalArgumentException instead of RuntimeException to wrap cases of SQLException. Thanks to Gary Gregory.
+
+Changes:
+o                 Bump org.apache.commons:commons-parent from 78 to 84 #348. Thanks to Gary Gregory, Dependabot.
+o                 Bump commons-logging:commons-logging from 1.3.4 to 1.3.5. Thanks to Gary Gregory.
+o                 Bump org.apache.commons:commons-collections4 from 4.5.0-M3 to 4.5.0. Thanks to Gary Gregory.
+
+
+Historical list of changes: https://commons.apache.org/proper/commons-beanutils//changes.html
+
+For complete information on Apache Commons BeanUtils, including instructions on how to submit bug reports,
+patches, or suggestions for improvement, see the Apache Commons BeanUtils website:
+
+https://commons.apache.org/proper/commons-beanutils/
+
+Download it from https://commons.apache.org/proper/commons-beanutils//download_beanutils.cgi
+
+Have fun!
+-Apache Commons BeanUtils team
+
+-----------------------------------------------------------------------------
 Apache Commons BeanUtils 2.0.0-M1 Release Notes
 -----------------------------------------------
 
@@ -95,7 +154,61 @@ https://commons.apache.org/proper/commons-beanutils/
 Download it from https://commons.apache.org/proper/commons-beanutils/download_beanutils.cgi
 
 -----------------------------------------------------------------------------
+Apache Commons BeanUtils 1.11.0 Release Notes
+---------------------------------------------
 
+The Apache Commons BeanUtils team is pleased to announce the release of Apache Commons BeanUtils 1.11.0.
+
+Apache Commons BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.
+
+This is a maintenance release and requires Java 8.
+
+Changes in this version include:
+
+New features:
+o                 Add org.apache.commons.beanutils.SuppressPropertiesBeanIntrospector.SUPPRESS_DECLARING_CLASS. Thanks to Gary Gregory.
+
+Fixed Bugs:
+o                 BeanComparator.compare(T, T) now throws IllegalArgumentException instead of RuntimeException to wrap all cases of ReflectiveOperationException. Thanks to Gary Gregory.
+o                 MappedMethodReference.get() now throws IllegalStateException instead of RuntimeException to wrap cases of NoSuchMethodException. Thanks to Gary Gregory.
+o                 ResultSetIterator.get(String) now throws IllegalArgumentException instead of RuntimeException to wrap cases of SQLException. Thanks to Gary Gregory.
+o                 ResultSetIterator.hasNext() now throws IllegalStateException instead of RuntimeException to wrap cases of SQLException. Thanks to Gary Gregory.
+o                 ResultSetIterator.next() now throws IllegalStateException instead of RuntimeException to wrap cases of SQLException. Thanks to Gary Gregory.
+o                 ResultSetIterator.set(String, Object) now throws IllegalArgumentException instead of RuntimeException to wrap cases of SQLException. Thanks to Gary Gregory.
+o                 ResultSetIterator.set(String, String, Object) now throws IllegalArgumentException instead of RuntimeException to wrap cases of SQLException. Thanks to Gary Gregory.
+
+Changes:
+o                 Bump org.apache.commons:commons-parent from 81 to 84. Thanks to Gary Gregory.
+o                 Bump commons-logging:commons-logging from 1.3.4 to 1.3.5. Thanks to Gary Gregory.
+
+
+Historical list of changes: https://commons.apache.org/proper/commons-beanutils/changes.html
+
+For complete information on Apache Commons BeanUtils, including instructions on how to submit bug reports,
+patches, or suggestions for improvement, see the Apache Commons BeanUtils website:
+
+https://commons.apache.org/proper/commons-beanutils
+
+Download it from https://commons.apache.org/proper/commons-beanutils/download_beanutils.cgi
+
+Have fun!
+-Apache Commons BCEL team
+
+Feedback
+--------
+Open source works best when you give feedback:
+
+    https://commons.apache.org/beanutils
+
+Please direct all bug reports to JIRA:
+
+    https://issues.apache.org/jira/browse/BEANUTILS
+
+Or subscribe to the commons-user mailing list
+
+The Apache Commons Team
+
+-----------------------------------------------------------------------------
 Apache Commons BeanUtils 1.10.1 Release Notes
 ---------------------------------------------
 
