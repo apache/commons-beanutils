@@ -27,6 +27,11 @@
     <title>Apache Commons BeanUtils Release Notes</title>
   </properties>
   <body>
+    <release version="2.0.0-M3" date="YYYY-MM-DD" description="This is a major release and requires Java 8.">
+      <!-- FIX -->
+      <!-- ADD -->
+      <!-- UPDATE -->
+    </release>
     <release version="2.0.0-M2" date="2025-05-25" description="This is a major release and requires Java 8.">
       <!-- FIX -->
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Javadoc is missing its Overview page.</action>
