@@ -38,8 +38,8 @@
       <commons.componentid>beanutils</commons.componentid>
       <commons.main.branch>1.X</commons.main.branch>
       <commons.release.branch>release-1.x</commons.release.branch>
-      <commons.release.version>1.11.0</commons.release.version>
-      <commons.release.next>1.11.1</commons.release.next>
+      <commons.release.version>1.11.1</commons.release.version>
+      <commons.release.next>1.11.2</commons.release.next>
       <commons.jira.id>BEANUTILS</commons.jira.id>
       <commons.jira.pid>12310460</commons.jira.pid>
       <!-- Limit memory size see BEANUTILS-291; allow command-line override -->
@@ -52,7 +52,7 @@
       <project.build.outputTimestamp>2025-05-27T22:47:31Z</project.build.outputTimestamp>
       <japicmp.skip>false</japicmp.skip>
       <!-- Commons Release Plugin -->
-      <commons.bc.version>1.10.0</commons.bc.version>
+      <commons.bc.version>1.11.0</commons.bc.version>
       <commons.rc.version>RC1</commons.rc.version>
       <commons.release.isDistModule>true</commons.release.isDistModule>
       <commons.distSvnStagingUrl>scm:svn:https://dist.apache.org/repos/dist/dev/commons/${commons.componentid}</commons.distSvnStagingUrl>
