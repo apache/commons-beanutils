@@ -24,7 +24,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>commons-beanutils</groupId>
   <artifactId>commons-beanutils</artifactId>
-  <version>1.11.0</version>
+  <version>1.11.1-SNAPSHOT</version>
   <name>Apache Commons BeanUtils</name>
 
   <inceptionYear>2000</inceptionYear>
@@ -49,7 +49,7 @@
       <commons.scmPubUrl>https://svn.apache.org/repos/infra/websites/production/commons/content/proper/commons-beanutils</commons.scmPubUrl>
       <commons.scmPubCheckoutDirectory>site-content</commons.scmPubCheckoutDirectory>
       <!-- project.build.outputTimestamp is managed by Maven plugins, see https://maven.apache.org/guides/mini/guide-reproducible-builds.html -->
-      <project.build.outputTimestamp>2025-05-25T13:14:59Z</project.build.outputTimestamp>
+      <project.build.outputTimestamp>2025-05-27T22:47:31Z</project.build.outputTimestamp>
       <japicmp.skip>false</japicmp.skip>
       <!-- Commons Release Plugin -->
       <commons.bc.version>1.10.0</commons.bc.version>
