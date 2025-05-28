@@ -43,8 +43,8 @@
     <commons.release.next>2.0.0-M4</commons.release.next>
     <commons.release.desc>(Java 8 or above)</commons.release.desc>
     <!-- Previous major version -->
-    <commons.release.2.version>1.9.4</commons.release.2.version>
-    <commons.release.2.desc>(Java 6 or above)</commons.release.2.desc>
+    <commons.release.2.version>1.11.0</commons.release.2.version>
+    <commons.release.2.desc>(Java 8 or above)</commons.release.2.desc>
     <!-- override parent name, because 1.x uses different artifactId -->
     <commons.release.2.name>commons-beanutils-${commons.release.2.version}</commons.release.2.name>
     <commons.jira.id>BEANUTILS</commons.jira.id>
