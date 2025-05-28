@@ -34,6 +34,7 @@
     </release>
     <release version="2.0.0-M2" date="2025-05-25" description="This is a major release and requires Java 8.">
       <!-- FIX -->
+      <action type="fix" dev="ggregory" due-to="Raj, Muthukumar Marikani, Gary Gregory">CVE-2025-48734: Apache Commons BeanUtils: PropertyUtilsBean does not suppresses an enum's declaredClass property by default (https://www.cve.org/CVERecord?id=CVE-2025-48734).</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Javadoc is missing its Overview page.</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Remove -nouses directive from maven-bundle-plugin. OSGi package imports now state 'uses' definitions for package imports, this doesn't affect JPMS (from org.apache.commons:commons-parent:80).</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">The class org.apache.commons.beanutils2.PropertyUtils is now final (the class only contains static methods).</action>

@@ -49,9 +49,7 @@
             level property access by default, thus protecting against
             CVE-2014-0114.
           </li>
-
           <li>Mitigation: 1.X users should migrate to 1.9.4.</li>
-
           <li>Credit: This was discovered by Melloware (https://melloware.com/).</li>
         </ul>
         <p>
@@ -94,6 +92,26 @@ public void testAllowAccessToClassProperty() throws Exception {
           <li>https://issues.apache.org/jira/browse/BEANUTILS-520</li>
           <li>http://commons.apache.org/proper/commons-beanutils/</li>
         </ol>
+      </subsection>
+      <subsection name="CVE-2025-48734">
+        <ul>
+          <li><a href="https://www.cve.org/CVERecord?id=CVE-2025-48734">CVE-2025-48734</a>: Apache Commons BeanUtils: PropertyUtilsBean does not suppresses an enum's declaredClass property by default</li>
+          <li>Severity: important</li>
+          <li>Affected versions: 1.x 1.0 before 1.11.0</li>
+          <li>Affected versions: 2.x 2.0.0-M1 before 2.0.0-M2</li>
+          <li>Description: Improper Access Control vulnerability in Apache Commons.
+              A special BeanIntrospector class was added in version 1.9.2. This can be used to stop attackers from using the declared class property of Java enum objects to get access to the classloader. However this protection was not enabled by default. PropertyUtilsBean (and consequently BeanUtilsBean) now disallows declared class level property access by default.
+              Releases 1.11.0 and 2.0.0-M2 address a potential security issue when accessing enum properties in an uncontrolled way. If an application using Commons BeanUtils passes property paths from an external source directly to the getProperty() method of PropertyUtilsBean, an attacker can access the enum’s class loader via the “declaredClass” property available on all Java “enum” objects. Accessing the enum’s “declaredClass” allows remote attackers to access the ClassLoader and execute arbitrary code. The same issue exists with PropertyUtilsBean.getNestedProperty().
+              Starting in versions 1.11.0 and 2.0.0-M2 a special BeanIntrospector suppresses the “declaredClass” property. Note that this new BeanIntrospector is enabled by default, but you can disable it to regain the old behavior; see section 2.5 of the user's guide and the unit tests.
+              This issue affects Apache Commons BeanUtils 1.x before 1.11.0, and 2.x before 2.0.0-M2.
+          </li>
+          <li>Mitigation: Users of the artifact commons-beanutils:commons-beanutils 1.x are recommended to upgrade to version 1.11.0, which fixes the issue.</li>
+          <li>Mitigation: Users of the artifact org.apache.commons:commons-beanutils2 2.x are recommended to upgrade to version 2.0.0-M2, which fixes the issue.</li>
+          <li>Credit: Raj (mailto:denesh.raj@zohocorp.com) (reporter)</li>
+          <li>Credit: Muthukumar Marikani (mailto:muthukumar.marikani@zohocorp.com) (finder)</li>
+          <li>Reference: https://commons.apache.org/</li>
+          <li>Reference: <a href="https://www.cve.org/CVERecord?id=CVE-2025-48734">CVE-2025-48734</a></li>
+        </ul>
       </subsection>
     </section>
   </body>
