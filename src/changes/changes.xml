@@ -267,6 +267,7 @@
     </release>
     <release version="1.11.0" date="2025-05-25" description="This is a maintenance release and requires Java 8.">
       <!-- FIX -->
+      <action type="fix" dev="ggregory" due-to="Raj, Muthukumar Marikani, Gary Gregory">CVE-2025-48734: Apache Commons BeanUtils: PropertyUtilsBean does not suppresses an enum's declaredClass property by default (https://www.cve.org/CVERecord?id=CVE-2025-48734).</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">BeanComparator.compare(T, T) now throws IllegalArgumentException instead of RuntimeException to wrap all cases of ReflectiveOperationException.</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">MappedMethodReference.get() now throws IllegalStateException instead of RuntimeException to wrap cases of NoSuchMethodException.</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">ResultSetIterator.get(String) now throws IllegalArgumentException instead of RuntimeException to wrap cases of SQLException.</action>
