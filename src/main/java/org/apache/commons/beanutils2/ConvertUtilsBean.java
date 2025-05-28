@@ -30,6 +30,7 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.sql.Timestamp;
 import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -68,6 +69,7 @@ import org.apache.commons.beanutils2.converters.EnumConverter;
 import org.apache.commons.beanutils2.converters.FileConverter;
 import org.apache.commons.beanutils2.converters.FloatConverter;
 import org.apache.commons.beanutils2.converters.InetAddressConverter;
+import org.apache.commons.beanutils2.converters.InstantConverter;
 import org.apache.commons.beanutils2.converters.IntegerConverter;
 import org.apache.commons.beanutils2.converters.LocalDateConverter;
 import org.apache.commons.beanutils2.converters.LocalDateTimeConverter;
@@ -144,6 +146,7 @@ import org.apache.commons.logging.LogFactory;
  * <li>java.sql.Date (no default value)</li>
  * <li>java.sql.Time (no default value)</li>
  * <li>java.sql.Timestamp (no default value)</li>
+ * <li>java.time.Instant (no default value)</li>
  * <li>java.time.LocalDate (no default value)</li>
  * <li>java.time.LocalDateTime (no default value)</li>
  * <li>java.time.LocalTime (no default value)</li>
@@ -500,6 +503,7 @@ public class ConvertUtilsBean {
         registerArrayConverter(Dimension.class,      new DimensionConverter(),     throwException, defaultArraySize);
         registerArrayConverter(File.class,           new FileConverter(),          throwException, defaultArraySize);
         registerArrayConverter(InetAddress.class,    new InetAddressConverter(),   throwException, defaultArraySize);
+        registerArrayConverter(Instant.class,        new InstantConverter(),       throwException, defaultArraySize);
         registerArrayConverter(Path.class,           new PathConverter(),          throwException, defaultArraySize);
         registerArrayConverter(java.sql.Date.class,  new SqlDateConverter(),       throwException, defaultArraySize);
         registerArrayConverter(java.sql.Time.class,  new SqlTimeConverter(),       throwException, defaultArraySize);
@@ -536,6 +540,7 @@ public class ConvertUtilsBean {
      * <li>{@code java.util.Date.class} - {@link DateConverter}</li>
      * <li>{@code java.util.Calendar.class} - {@link CalendarConverter}</li>
      * <li>{@code File.class} - {@link FileConverter}</li>
+     * <li>{@code Instant.class} - {@link InstantConverter}</li>
      * <li>{@code Path.class} - {@link PathConverter}</li>
      * <li>{@code java.sql.Date.class} - {@link SqlDateConverter}</li>
      * <li>{@code java.sql.Time.class} - {@link SqlTimeConverter}</li>
@@ -571,6 +576,7 @@ public class ConvertUtilsBean {
         register(Calendar.class,       throwException ? new CalendarConverter()       : new CalendarConverter(null));
         register(File.class,           throwException ? new FileConverter()           : new FileConverter(null));
         register(InetAddress.class,    throwException ? new InetAddressConverter()    : new InetAddressConverter(null));
+        register(Instant.class,        throwException ? new InstantConverter()        : new InstantConverter(null));
         register(Path.class,           throwException ? new PathConverter()           : new PathConverter(null));
         register(java.sql.Date.class,  throwException ? new SqlDateConverter()        : new SqlDateConverter(null));
         register(java.sql.Time.class,  throwException ? new SqlTimeConverter()        : new SqlTimeConverter(null));
