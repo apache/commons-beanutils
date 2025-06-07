@@ -29,6 +29,7 @@ import java.util.function.Function;
 
 import org.apache.commons.beanutils2.bugs.other.Jira87BeanFactory;
 import org.apache.commons.collections4.map.AbstractMapTest;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link BeanMap}.
@@ -265,6 +266,7 @@ public class BeanMapTest extends AbstractMapTest<BeanMap, String, Object> {
         return super.putIfAbsent(key, value);
     }
 
+    @Test
     public void testBeanMapClone() {
         final BeanMap map = (BeanMap) makeFullMap();
         try {
@@ -281,6 +283,7 @@ public class BeanMapTest extends AbstractMapTest<BeanMap, String, Object> {
         }
     }
 
+    @Test
     public void testBeanMapPutAllWriteable() {
         final BeanMap map1 = (BeanMap) makeFullMap();
         final BeanMap map2 = (BeanMap) makeFullMap();
@@ -292,6 +295,7 @@ public class BeanMapTest extends AbstractMapTest<BeanMap, String, Object> {
     /**
      * Test that the cause of exception thrown by clear() is initialized.
      */
+    @Test
     public void testExceptionThrowFromClear() {
         try {
             final Object bean = Jira87BeanFactory.createMappedPropertyBean();
@@ -313,6 +317,7 @@ public class BeanMapTest extends AbstractMapTest<BeanMap, String, Object> {
     /**
      * Test that the cause of exception thrown by a clone() is initialized.
      */
+    @Test
     public void testExceptionThrowFromClone() {
         // Test cloning a non-public bean (instantiation exception)
         try {
@@ -351,6 +356,7 @@ public class BeanMapTest extends AbstractMapTest<BeanMap, String, Object> {
     /**
      * Test that the cause of exception thrown by put() is initialized.
      */
+    @Test
     public void testExceptionThrowFromPut() {
         try {
             final Map<String, Object> map = new BeanMap(new BeanThrowingExceptions());
@@ -375,6 +381,7 @@ public class BeanMapTest extends AbstractMapTest<BeanMap, String, Object> {
     /**
      * Test the default transformers using the getTypeTransformer() method
      */
+    @Test
     public void testGetTypeTransformerMethod() {
         final BeanMap beanMap = new BeanMap();
         assertEquals(Boolean.TRUE, beanMap.getTypeTransformer(Boolean.TYPE).apply("true"), "Boolean.TYPE");
@@ -393,6 +400,7 @@ public class BeanMapTest extends AbstractMapTest<BeanMap, String, Object> {
      * this class is not add/remove modifiable. In our case though, we do not always throw that exception.
      */
     @Override
+    @Test
     public void testMapClear() {
         // TODO: make sure a call to BeanMap.clear returns the bean to its
         // default initialization values.
@@ -402,16 +410,19 @@ public class BeanMapTest extends AbstractMapTest<BeanMap, String, Object> {
      * Need to override this method because the "put()" method on the bean doesn't work for this type of Map.
      */
     @Override
+    @Test
     public void testMapPut() {
         // see testBeanMapPutAllWriteable
     }
 
+    @Test
     public void testMethodAccessor() throws Exception {
         final BeanMap map = (BeanMap) makeFullMap();
         final Method method = BeanWithProperties.class.getDeclaredMethod("getSomeIntegerValue");
         assertEquals(method, map.getReadMethod("someIntegerValue"));
     }
 
+    @Test
     public void testMethodMutator() throws Exception {
         final BeanMap map = (BeanMap) makeFullMap();
         final Method method = BeanWithProperties.class.getDeclaredMethod("setSomeIntegerValue", Integer.class);
@@ -419,6 +430,7 @@ public class BeanMapTest extends AbstractMapTest<BeanMap, String, Object> {
     }
 
     @Override
+    // TODO @Test
     public void testReplaceAll() {
         assumeFalse(getMap().keySet().stream().anyMatch(k -> getMap().getWriteMethod(k) == null));
         super.testReplaceAll();
