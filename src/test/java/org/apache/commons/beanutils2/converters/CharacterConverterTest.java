@@ -74,7 +74,7 @@ public class CharacterConverterTest {
      */
     @Test
     @SuppressWarnings("unchecked") // testing raw conversion
-    public void testConvertToString() {
+    void testConvertToString() {
 
         final Converter<Character> converter = new CharacterConverter();
         @SuppressWarnings("rawtypes")
@@ -91,7 +91,7 @@ public class CharacterConverterTest {
      */
     @Test
     @SuppressWarnings("unchecked") // tests failure so allow mismatch
-    public void testConvertToUnsupportedType() {
+    void testConvertToUnsupportedType() {
         @SuppressWarnings("rawtypes") // tests failure so allow mismatch
         final Converter converter = new CharacterConverter();
         assertThrows(ConversionException.class, () -> converter.convert(Integer.class, "Test"));

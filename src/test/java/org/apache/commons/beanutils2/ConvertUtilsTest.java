@@ -84,7 +84,7 @@ public class ConvertUtilsTest {
     @Test
     @SuppressWarnings({ "unchecked", "rawtypes" })
     // We need to use raw types in order to test legacy converters
-    public void testConvertToString() throws Exception {
+    void testConvertToString() throws Exception {
         final Converter dummyConverter = (type, value) -> value;
 
         final Converter fooConverter = (type, value) -> "Foo-Converter";

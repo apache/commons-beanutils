@@ -93,7 +93,7 @@ public class IntegerConverterTest extends AbstractNumberConverterTest<Integer> {
      */
     @Test
     @SuppressWarnings("unchecked") // raw to test throwing
-    public void testInvalidDefaultObject() {
+    void testInvalidDefaultObject() {
         @SuppressWarnings("rawtypes") // raw to test throwing
         final NumberConverter converter = makeConverter();
         assertThrows(ConversionException.class, () -> converter.setDefaultValue("notANumber"), "Invalid default value not detected!");
