@@ -55,7 +55,7 @@ public class Jira509Test {
      */
     @Timeout(value = 60, unit = TimeUnit.SECONDS)
     @Test
-    public void testConcurrent() throws InterruptedException {
+    void testConcurrent() throws InterruptedException {
         final List<Class<?>> classList = Arrays.asList(Map.class, HashMap.class, Collections.class, Arrays.class, Collection.class, Set.class, ArrayList.class,
                 List.class, HashSet.class);
         // All daemon threads.

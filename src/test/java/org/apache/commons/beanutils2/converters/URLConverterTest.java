@@ -37,7 +37,7 @@ public class URLConverterTest {
     }
 
     @Test
-    public void testSimpleConversion() {
+    void testSimpleConversion() {
         final String[] input = { "http://www.apache.org", "http://www.apache.org/", "ftp://cvs.apache.org", "file://project.xml", "http://208.185.179.12",
                 "http://www.apache.org:9999/test/thing", "http://user:admin@www.apache.org:50/one/two.three", "http://notreal.apache.org",
                 "http://notreal.apache.org/test/file.xml#计算机图形学",

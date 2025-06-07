@@ -33,7 +33,7 @@ public class Jira463Test {
      * Tests that with a specialized {@code BeanIntrospector} implementation the class property can be suppressed.
      */
     @Test
-    public void testSuppressClassProperty() throws Exception {
+    void testSuppressClassProperty() throws Exception {
         final BeanUtilsBean bub = new BeanUtilsBean();
         bub.getPropertyUtils().addBeanIntrospector(SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
         final AlphaBean bean = new AlphaBean();

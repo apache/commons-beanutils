@@ -54,7 +54,7 @@ public class FloatLocaleConverterTest extends AbstractLocaleConverterTest<Float>
      * Uses the default locale, no default value
      */
     @Test
-    public void testConstructor_2() {
+    void testConstructor_2() {
 
         // Construct using default locale
         converter = FloatLocaleConverter.builder().get();
@@ -73,7 +73,7 @@ public class FloatLocaleConverterTest extends AbstractLocaleConverterTest<Float>
      * Uses the default locale, no default value
      */
     @Test
-    public void testConstructor_3() {
+    void testConstructor_3() {
 
         // Construct using localized pattern (default locale)
         converter = FloatLocaleConverter.builder().setLocalizedPattern(true).get();
@@ -90,7 +90,7 @@ public class FloatLocaleConverterTest extends AbstractLocaleConverterTest<Float>
      * Test Converter(Locale) constructor
      */
     @Test
-    public void testConstructor_4() {
+    void testConstructor_4() {
 
         // Construct using specified Locale
         converter = FloatLocaleConverter.builder().setLocale(localizedLocale).get();
@@ -107,7 +107,7 @@ public class FloatLocaleConverterTest extends AbstractLocaleConverterTest<Float>
      * Test Converter(Locale, locPattern) constructor
      */
     @Test
-    public void testConstructor_5() {
+    void testConstructor_5() {
 
         // Construct using specified Locale
         converter = FloatLocaleConverter.builder().setLocale(localizedLocale).setLocalizedPattern(true).get();
@@ -124,7 +124,7 @@ public class FloatLocaleConverterTest extends AbstractLocaleConverterTest<Float>
      * Test Converter(Locale, pattern) constructor
      */
     @Test
-    public void testConstructor_6() {
+    void testConstructor_6() {
 
         // Construct using specified Locale
         converter = FloatLocaleConverter.builder().setLocale(localizedLocale).setPattern(defaultDecimalPattern).get();
@@ -141,7 +141,7 @@ public class FloatLocaleConverterTest extends AbstractLocaleConverterTest<Float>
      * Test Converter(Locale, pattern, locPattern) constructor
      */
     @Test
-    public void testConstructor_7() {
+    void testConstructor_7() {
 
         // Construct using specified Locale
         converter = FloatLocaleConverter.builder().setLocale(localizedLocale).setPattern(localizedDecimalPattern).setLocalizedPattern(true).get();
@@ -158,7 +158,7 @@ public class FloatLocaleConverterTest extends AbstractLocaleConverterTest<Float>
      * Test Converter(defaultValue) constructor
      */
     @Test
-    public void testConstructor_8() {
+    void testConstructor_8() {
 
         // Construct using specified Locale
         converter = FloatLocaleConverter.builder().setDefault(defaultValue).get();
@@ -175,7 +175,7 @@ public class FloatLocaleConverterTest extends AbstractLocaleConverterTest<Float>
      * Test Converter(defaultValue, locPattern) constructor
      */
     @Test
-    public void testConstructor_9() {
+    void testConstructor_9() {
 
         // Construct using specified Locale
         converter = FloatLocaleConverter.builder().setDefault(defaultValue).setLocalizedPattern(true).get();
@@ -192,7 +192,7 @@ public class FloatLocaleConverterTest extends AbstractLocaleConverterTest<Float>
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
      */
     @Test
-    public void testConstructorMain() {
+    void testConstructorMain() {
 
         // Construct with localized pattern
         converter = FloatLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(localizedDecimalPattern)
@@ -244,7 +244,7 @@ public class FloatLocaleConverterTest extends AbstractLocaleConverterTest<Float>
      * Test Float limits
      */
     @Test
-    public void testFloatLimits() {
+    void testFloatLimits() {
 
         converter = FloatLocaleConverter.builder().setLocale(defaultLocale).setPattern(defaultDecimalPattern).get();
         final DecimalFormat fmt = new DecimalFormat("#.#############################################################");
@@ -287,7 +287,7 @@ public class FloatLocaleConverterTest extends AbstractLocaleConverterTest<Float>
      * Test parsing zero - see BEANUTILS-351
      */
     @Test
-    public void testParseZero() {
+    void testParseZero() {
         try {
             final Object result = LocaleConvertUtils.convert("0", Float.class, Locale.US, null);
             assertEquals(Float.valueOf(0), result);

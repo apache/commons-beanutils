@@ -44,7 +44,7 @@ public class CharacterConverterTest {
      * Tests whether the primitive char class can be passed as target type.
      */
     @Test
-    public void testConvertToChar() {
+    void testConvertToChar() {
         final Converter<Character> converter = new CharacterConverter();
         assertEquals(Character.valueOf('F'), converter.convert(Character.TYPE, "FOO"), "Wrong result");
     }
@@ -53,7 +53,7 @@ public class CharacterConverterTest {
      * Test Conversion to Character
      */
     @Test
-    public void testConvertToCharacter() {
+    void testConvertToCharacter() {
         final Converter<Character> converter = new CharacterConverter();
         assertEquals(Character.valueOf('N'), converter.convert(Character.class, Character.valueOf('N')), "Character Test");
         assertEquals(Character.valueOf('F'), converter.convert(Character.class, "FOO"), "String Test");
@@ -64,7 +64,7 @@ public class CharacterConverterTest {
      * Tests a conversion to character for null input if no default value is provided.
      */
     @Test
-    public void testConvertToCharacterNullNoDefault() {
+    void testConvertToCharacterNullNoDefault() {
         final Converter<Character> converter = new CharacterConverter();
         assertThrows(ConversionException.class, () -> converter.convert(Character.class, null));
     }
@@ -101,7 +101,7 @@ public class CharacterConverterTest {
      * Test Conversion to Character (with default)
      */
     @Test
-    public void testDefault() {
+    void testDefault() {
         final CharacterConverter converter = new CharacterConverter('C');
         assertEquals(Character.valueOf('C'), converter.convert(Character.class, null), "Default Test");
     }

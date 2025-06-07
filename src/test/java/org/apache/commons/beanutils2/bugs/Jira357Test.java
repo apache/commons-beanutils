@@ -149,7 +149,7 @@ public class Jira357Test {
      * Test {@link PropertyUtils#getPropertyDescriptors(Class)}
      */
     @Test
-    public void testPropertyUtils_getPropertyDescriptors_Bar() throws Exception {
+    void testPropertyUtils_getPropertyDescriptors_Bar() throws Exception {
         checkReadMethod("bar", ConcreteTestBean.class);
     }
 
@@ -157,7 +157,7 @@ public class Jira357Test {
      * Test {@link PropertyUtils#getPropertyDescriptors(Class)}
      */
     @Test
-    public void testPropertyUtils_getPropertyDescriptors_Foo() throws Exception {
+    void testPropertyUtils_getPropertyDescriptors_Foo() throws Exception {
         checkReadMethod("foo", ConcreteTestBean.class);
     }
 
@@ -165,7 +165,7 @@ public class Jira357Test {
      * Test {@link PropertyUtils#getPropertyDescriptors(Class)}
      */
     @Test
-    public void testPropertyUtils_getPropertyDescriptors_InnerClassProperty() throws Exception {
+    void testPropertyUtils_getPropertyDescriptors_InnerClassProperty() throws Exception {
         checkReadMethod("innerClassProperty", ConcreteTestBean.class);
     }
 }

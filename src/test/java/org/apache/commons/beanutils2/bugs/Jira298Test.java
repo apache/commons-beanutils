@@ -59,7 +59,7 @@ public class Jira298Test {
      * Test {@link MethodUtils#getAccessibleMethod(Class, Method)}
      */
     @Test
-    public void testIssue_BEANUTILS_298_MethodUtils_getAccessibleMethod() throws Exception {
+    void testIssue_BEANUTILS_298_MethodUtils_getAccessibleMethod() throws Exception {
         final Object bean = Jira298BeanFactory.createImplX();
         Object result = null;
         final Method m2 = MethodUtils.getAccessibleMethod(bean.getClass(), "getName", new Class[0]);
@@ -71,7 +71,7 @@ public class Jira298Test {
      * Test {@link PropertyUtils#getProperty(Object, String)}
      */
     @Test
-    public void testIssue_BEANUTILS_298_PropertyUtils_getProperty() throws Exception {
+    void testIssue_BEANUTILS_298_PropertyUtils_getProperty() throws Exception {
         final Object bean = Jira298BeanFactory.createImplX();
         final Object result = PropertyUtils.getProperty(bean, "name");
         assertEquals("BaseX name value", result);
@@ -81,7 +81,7 @@ public class Jira298Test {
      * Test {@link PropertyUtils#setProperty(Object, String, Object)}
      */
     @Test
-    public void testIssue_BEANUTILS_298_PropertyUtils_setProperty() throws Exception {
+    void testIssue_BEANUTILS_298_PropertyUtils_setProperty() throws Exception {
         final Object bean = Jira298BeanFactory.createImplX();
         assertEquals("BaseX name value", ((IX) bean).getName());
         PropertyUtils.setProperty(bean, "name", "new name");

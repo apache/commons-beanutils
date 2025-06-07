@@ -72,7 +72,7 @@ public class DefaultResolverTest {
      * Test getIndex() method.
      */
     @Test
-    public void testGetIndex() throws Exception {
+    void testGetIndex() throws Exception {
         String label = null;
 
         // Simple Properties (expect -1)
@@ -111,7 +111,7 @@ public class DefaultResolverTest {
      * Test getMapKey() method.
      */
     @Test
-    public void testGetMapKey() {
+    void testGetMapKey() {
         String label = null;
 
         // Simple Properties (expect null)
@@ -142,7 +142,7 @@ public class DefaultResolverTest {
      * Test getName() method.
      */
     @Test
-    public void testGetName() {
+    void testGetName() {
         String label = null;
 
         // Simple Properties
@@ -168,7 +168,7 @@ public class DefaultResolverTest {
      * Test isIndexed() method.
      */
     @Test
-    public void testIsIndexed() {
+    void testIsIndexed() {
         String label = null;
 
         // Simple Properties (expect -1)
@@ -194,7 +194,7 @@ public class DefaultResolverTest {
      * Test isMapped() method.
      */
     @Test
-    public void testIsMapped() {
+    void testIsMapped() {
         String label = null;
 
         // Simple Properties (expect null)
@@ -220,7 +220,7 @@ public class DefaultResolverTest {
      * Test next() method.
      */
     @Test
-    public void testNext() {
+    void testNext() {
         String label = null;
         for (int i = 0; i < nextExpressions.length; i++) {
             label = label(nextExpressions[i], i);
@@ -232,7 +232,7 @@ public class DefaultResolverTest {
      * Test remove() method.
      */
     @Test
-    public void testRemove() {
+    void testRemove() {
         String label = null;
         for (int i = 0; i < nextExpressions.length; i++) {
             label = label(nextExpressions[i], i);

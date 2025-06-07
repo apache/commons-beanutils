@@ -73,7 +73,7 @@ public class ArrayConverterTest {
      * Test Converting using the IntegerConverter as the component Converter
      */
     @Test
-    public void testComponentIntegerConverter() {
+    void testComponentIntegerConverter() {
 
         final IntegerConverter intConverter = new IntegerConverter(Integer.valueOf(0));
         intConverter.setPattern("#,###");
@@ -162,7 +162,7 @@ public class ArrayConverterTest {
      * Test Empty String
      */
     @Test
-    public void testEmptyString() {
+    void testEmptyString() {
         final int[] zeroArray = {};
         final IntegerConverter intConverter = new IntegerConverter();
 
@@ -174,7 +174,7 @@ public class ArrayConverterTest {
      * Test Errors creating the converter
      */
     @Test
-    public void testErrors() {
+    void testErrors() {
         assertThrows(NullPointerException.class, () -> new ArrayConverter(null, new DateConverter()));
         assertThrows(IllegalArgumentException.class, () -> new ArrayConverter(Boolean.class, new DateConverter()));
         assertThrows(NullPointerException.class, () -> new ArrayConverter(int[].class, null));
@@ -184,7 +184,7 @@ public class ArrayConverterTest {
      * Test Converting using the IntegerConverter as the component Converter
      */
     @Test
-    public void testInvalidWithDefault() {
+    void testInvalidWithDefault() {
         final int[] zeroArray = {};
         final int[] oneArray = new int[1];
         final IntegerConverter intConverter = new IntegerConverter();
@@ -198,7 +198,7 @@ public class ArrayConverterTest {
      * Test Converting a String[] to integer array (with leading/trailing whitespace)
      */
     @Test
-    public void testStringArrayToNumber() {
+    void testStringArrayToNumber() {
 
         // Configure Converter
         final IntegerConverter intConverter = new IntegerConverter();
@@ -236,7 +236,7 @@ public class ArrayConverterTest {
      * Test the Matrix!!!! (parses a String into a 2 dimensional integer array or matrix)
      */
     @Test
-    public void testTheMatrix() {
+    void testTheMatrix() {
 
         // Test Date - create the Matrix!!
         // Following String uses two delimiter:
@@ -283,7 +283,7 @@ public class ArrayConverterTest {
      * Test for BEANUTILS-302 - throwing a NPE when underscore used
      */
     @Test
-    public void testUnderscore_BEANUTILS_302() {
+    void testUnderscore_BEANUTILS_302() {
         final String value = "first_value,second_value";
         final ArrayConverter<String[]> converter = new ArrayConverter(String[].class, new StringConverter());
 

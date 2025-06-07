@@ -54,7 +54,7 @@ public class YearConverterTest {
     }
 
     @Test
-    public void testSimpleConversion() throws Exception {
+    void testSimpleConversion() throws Exception {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from String", };
 
         final Object[] input = { "2019", "1974", "2112" };
@@ -75,7 +75,7 @@ public class YearConverterTest {
      * Tests a conversion to an unsupported type.
      */
     @Test
-    public void testUnsupportedType() {
+    void testUnsupportedType() {
         assertThrows(ConversionException.class, () -> converter.convert(Integer.class, "http://www.apache.org"));
     }
 }

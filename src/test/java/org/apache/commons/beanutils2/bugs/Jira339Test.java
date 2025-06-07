@@ -85,7 +85,7 @@ public class Jira339Test {
      * Test {@link BeanUtils#populate(Object, Map)}
      */
     @Test
-    public void testIssue_BEANUTILS_331_BeanUtilsBean_populate() throws Exception {
+    void testIssue_BEANUTILS_331_BeanUtilsBean_populate() throws Exception {
         final TestBean bean = new TestBean();
         final Map<String, Object> properties = new HashMap<>();
         properties.put("comparator", null);
@@ -97,7 +97,7 @@ public class Jira339Test {
      * Test {@link PropertyUtils#setProperty(Object, String, Object)}
      */
     @Test
-    public void testIssue_BEANUTILS_339_BeanUtilsBean_setProperty() throws Exception {
+    void testIssue_BEANUTILS_339_BeanUtilsBean_setProperty() throws Exception {
         final TestBean bean = new TestBean();
         BeanUtils.setProperty(bean, "comparator", null);
         assertNull(bean.getComparator(), "TestBean comparator should be null");

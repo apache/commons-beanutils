@@ -120,7 +120,7 @@ public class Jira347Test {
      * not being of type String) this would be fine as well.
      */
     @Test
-    public void testMappedPropertyDescriptor_AnyArgsProperty() throws Exception {
+    void testMappedPropertyDescriptor_AnyArgsProperty() throws Exception {
         final String className = "org.apache.commons.beanutils2.MappedPropertyTestBean";
         try (final URLClassLoader loader = newClassLoader()) {
             final Class<?> beanClass = loader.loadClass(className);

@@ -33,14 +33,14 @@ final class FirstChildBeanB extends RootBeanB {
 public class Jira422bTest {
 
     @Test
-    public void testRootBean() throws Exception {
+    void testRootBean() throws Exception {
         final RootBeanB bean = new FirstChildBeanB();
         final Class<?> propertyType = PropertyUtils.getPropertyType(bean, "file[0]");
         assertEquals(String.class.getName(), propertyType.getName());
     }
 
     @Test
-    public void testSecondChildBean() throws Exception {
+    void testSecondChildBean() throws Exception {
         final RootBeanB bean = new SecondChildBeanB();
         final Class<?> propertyType = PropertyUtils.getPropertyType(bean, "file[0]");
         assertEquals(String.class.getName(), propertyType.getName());

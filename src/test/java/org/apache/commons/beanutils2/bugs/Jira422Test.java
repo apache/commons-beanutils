@@ -62,14 +62,14 @@ public class Jira422Test {
     }
 
     @Test
-    public void testRootBean() throws Exception {
+    void testRootBean() throws Exception {
         final RootBean bean = new FirstChildBean();
         final Class<?> propertyType = PropertyUtils.getPropertyType(bean, "file[0]");
         assertEquals(String.class.getName(), propertyType.getName());
     }
 
     @Test
-    public void testSecondChildBean() throws Exception {
+    void testSecondChildBean() throws Exception {
         final RootBean bean = new SecondChildBean();
         final Class<?> propertyType = PropertyUtils.getPropertyType(bean, "file[0]");
         assertEquals(String.class.getName(), propertyType.getName());

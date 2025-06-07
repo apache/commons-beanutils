@@ -43,7 +43,7 @@ public class InetAddressConverterTest {
     }
 
     @Test
-    public void testConvertingIpv4() throws UnknownHostException {
+    void testConvertingIpv4() throws UnknownHostException {
         final InetAddress expected = InetAddress.getByName("192.168.0.1");
         final InetAddress actual = converter.convert(InetAddress.class, "192.168.0.1");
 
@@ -51,7 +51,7 @@ public class InetAddressConverterTest {
     }
 
     @Test
-    public void testConvertingIpv6() throws UnknownHostException {
+    void testConvertingIpv6() throws UnknownHostException {
         final InetAddress expected = InetAddress.getByName("2001:db8:0:1234:0:567:8:1");
         final InetAddress actual = converter.convert(InetAddress.class, "2001:db8:0:1234:0:567:8:1");
 
@@ -59,7 +59,7 @@ public class InetAddressConverterTest {
     }
 
     @Test
-    public void testConvertingLocalhost() throws UnknownHostException {
+    void testConvertingLocalhost() throws UnknownHostException {
         final InetAddress expected = InetAddress.getByName("127.0.0.1");
         final InetAddress actual = converter.convert(InetAddress.class, "localhost");
 
@@ -67,12 +67,12 @@ public class InetAddressConverterTest {
     }
 
     @Test
-    public void testInvalidIp() {
+    void testInvalidIp() {
         assertThrows(ConversionException.class, () -> converter.convert(InetAddress.class, "512.512.512.512"));
     }
 
     @Test
-    public void testText() {
+    void testText() {
         assertThrows(ConversionException.class, () -> converter.convert(InetAddress.class, "Hello, world!"));
     }
 }

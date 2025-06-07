@@ -66,7 +66,7 @@ public class Jira381Test {
      * See Jira issue# BEANUTILS-381.
      */
     @Test
-    public void testIssue_BEANUTILS_381_getMatchingAccessibleMethod() {
+    void testIssue_BEANUTILS_381_getMatchingAccessibleMethod() {
 
         final Class<?> target = TestServiceBean.class;
         final String methodName = "performOp";

@@ -51,7 +51,7 @@ abstract class AbstractNumberConverterTest<T extends Number> {
      * Convert Boolean --> Number (default conversion)
      */
     @Test
-    public void testBooleanToNumberDefault() {
+    void testBooleanToNumberDefault() {
         final NumberConverter<T> converter = makeConverter();
 
         // Other type --> String conversion
@@ -63,7 +63,7 @@ abstract class AbstractNumberConverterTest<T extends Number> {
      * Convert Calendar --> Long
      */
     @Test
-    public void testCalendarToNumber() {
+    void testCalendarToNumber() {
         final NumberConverter<T> converter = makeConverter();
 
         final Calendar calendarValue = Calendar.getInstance();
@@ -80,7 +80,7 @@ abstract class AbstractNumberConverterTest<T extends Number> {
      * Assumes ConversionException in response to covert(getExpectedType(),null).
      */
     @Test
-    public void testConvertNull() {
+    void testConvertNull() {
         assertThrows(ConversionException.class, () -> makeConverter().convert(getExpectedType(), null), "Expected ConversionException");
     }
 
@@ -88,7 +88,7 @@ abstract class AbstractNumberConverterTest<T extends Number> {
      * Assumes convert(getExpectedType(),Number) returns some non-null instance of getExpectedType().
      */
     @Test
-    public void testConvertNumber() {
+    void testConvertNumber() {
         final String[] message = { "from Byte", "from Short", "from Integer", "from Long", "from Float", "from Double", "from BigDecimal", "from BigInteger",
                 "from Integer array", };
 
@@ -107,7 +107,7 @@ abstract class AbstractNumberConverterTest<T extends Number> {
      * Convert Date --> Long
      */
     @Test
-    public void testDateToNumber() {
+    void testDateToNumber() {
         final NumberConverter<T> converter = makeConverter();
 
         final Date dateValue = new Date();
@@ -124,7 +124,7 @@ abstract class AbstractNumberConverterTest<T extends Number> {
      * Convert Number --> String (using default and specified Locales)
      */
     @Test
-    public void testInvalidDefault() {
+    void testInvalidDefault() {
         final T defaultvalue = (T) numbers[0];
         final NumberConverter<T> converter = makeConverter(defaultvalue);
 
@@ -137,7 +137,7 @@ abstract class AbstractNumberConverterTest<T extends Number> {
      * Convert Number --> String (using default and specified Locales)
      */
     @Test
-    public void testInvalidException() {
+    void testInvalidException() {
         final NumberConverter<T> converter = makeConverter();
 
         assertThrows(ConversionException.class, () -> converter.convert(getExpectedType(), null), "Null test, expected ConversionException");
@@ -149,7 +149,7 @@ abstract class AbstractNumberConverterTest<T extends Number> {
      * Test specifying an invalid type.
      */
     @Test
-    public void testInvalidType() {
+    void testInvalidType() {
         final NumberConverter<T> converter = makeConverter();
 
         assertThrows(ConversionException.class, () -> converter.convert(Object.class, numbers[0]), "Invalid type test, expected ConversionException");
@@ -159,7 +159,7 @@ abstract class AbstractNumberConverterTest<T extends Number> {
      * Tests a conversion to an unsupported type if a default value is set.
      */
     @Test
-    public void testInvalidTypeWithDefault() {
+    void testInvalidTypeWithDefault() {
         final NumberConverter<T> converter = makeConverter((T) numbers[0]);
 
         assertThrows(ConversionException.class, () -> converter.convert(Object.class, numbers[0]),
@@ -170,7 +170,7 @@ abstract class AbstractNumberConverterTest<T extends Number> {
      * Convert Number --> String (default conversion)
      */
     @Test
-    public void testNumberToStringDefault() {
+    void testNumberToStringDefault() {
         final NumberConverter<T> converter = makeConverter();
 
         // Default Number --> String conversion
@@ -182,7 +182,7 @@ abstract class AbstractNumberConverterTest<T extends Number> {
      * Convert Number --> String (using default and specified Locales)
      */
     @Test
-    public void testNumberToStringLocale() {
+    void testNumberToStringLocale() {
         // Re-set the default Locale to Locale.US
         final Locale defaultLocale = Locale.getDefault();
         Locale.setDefault(Locale.US);
@@ -207,7 +207,7 @@ abstract class AbstractNumberConverterTest<T extends Number> {
      * Convert Number --> String (using a Pattern, with default and specified Locales)
      */
     @Test
-    public void testNumberToStringPattern() {
+    void testNumberToStringPattern() {
         // Re-set the default Locale to Locale.US
         final Locale defaultLocale = Locale.getDefault();
         Locale.setDefault(Locale.US);
@@ -232,7 +232,7 @@ abstract class AbstractNumberConverterTest<T extends Number> {
      * Convert Other --> String (default conversion)
      */
     @Test
-    public void testOtherToStringDefault() {
+    void testOtherToStringDefault() {
         final NumberConverter<T> converter = makeConverter();
 
         // Other type --> String conversion
@@ -243,7 +243,7 @@ abstract class AbstractNumberConverterTest<T extends Number> {
      * Convert Array --> Number
      */
     @Test
-    public void testStringArrayToInteger() {
+    void testStringArrayToInteger() {
         final Integer defaultValue = Integer.valueOf(-1);
         final NumberConverter<Integer> converter = new IntegerConverterTest().makeConverter(defaultValue);
 
@@ -258,7 +258,7 @@ abstract class AbstractNumberConverterTest<T extends Number> {
      * Convert String --> Number (default conversion)
      */
     @Test
-    public void testStringToNumberDefault() {
+    void testStringToNumberDefault() {
         final NumberConverter<T> converter = makeConverter();
         converter.setUseLocaleFormat(false);
 
@@ -273,7 +273,7 @@ abstract class AbstractNumberConverterTest<T extends Number> {
      * Convert String --> Number if the target type is not defined. Then the default type should be used.
      */
     @Test
-    public void testStringToNumberDefaultType() {
+    void testStringToNumberDefaultType() {
         final NumberConverter<T> converter = makeConverter();
         converter.setUseLocaleFormat(false);
 
@@ -284,7 +284,7 @@ abstract class AbstractNumberConverterTest<T extends Number> {
      * Convert String --> Number (using default and specified Locales)
      */
     @Test
-    public void testStringToNumberLocale() {
+    void testStringToNumberLocale() {
         // Re-set the default Locale to Locale.US
         final Locale defaultLocale = Locale.getDefault();
         Locale.setDefault(Locale.US);
@@ -315,7 +315,7 @@ abstract class AbstractNumberConverterTest<T extends Number> {
      * Convert String --> Number (using a Pattern, with default and specified Locales)
      */
     @Test
-    public void testStringToNumberPattern() {
+    void testStringToNumberPattern() {
 
         // Re-set the default Locale to Locale.US
         final Locale defaultLocale = Locale.getDefault();
@@ -350,7 +350,7 @@ abstract class AbstractNumberConverterTest<T extends Number> {
     }
 
     @Test
-    public void testToString() {
+    void testToString() {
         assertNotNull(makeConverter().toString());
     }
 

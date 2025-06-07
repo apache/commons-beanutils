@@ -45,7 +45,7 @@ public class IntegerLocaleConverterTest extends AbstractLocaleConverterTest<Inte
      * Uses the default locale, no default value
      */
     @Test
-    public void testConstructor_2() {
+    void testConstructor_2() {
         // Construct using default locale
         converter = IntegerLocaleConverter.builder().get();
 
@@ -62,7 +62,7 @@ public class IntegerLocaleConverterTest extends AbstractLocaleConverterTest<Inte
      * Uses the default locale, no default value
      */
     @Test
-    public void testConstructor_3() {
+    void testConstructor_3() {
         // Construct using localized pattern (default locale)
         converter = IntegerLocaleConverter.builder().setLocalizedPattern(true).get();
 
@@ -77,7 +77,7 @@ public class IntegerLocaleConverterTest extends AbstractLocaleConverterTest<Inte
      * Test Converter(Locale) constructor
      */
     @Test
-    public void testConstructor_4() {
+    void testConstructor_4() {
         // Construct using specified Locale
         converter = IntegerLocaleConverter.builder().setLocale(localizedLocale).get();
 
@@ -92,7 +92,7 @@ public class IntegerLocaleConverterTest extends AbstractLocaleConverterTest<Inte
      * Test Converter(Locale, locPattern) constructor
      */
     @Test
-    public void testConstructor_5() {
+    void testConstructor_5() {
         // Construct using specified Locale
         converter = IntegerLocaleConverter.builder().setLocale(localizedLocale).setLocalizedPattern(true).get();
 
@@ -107,7 +107,7 @@ public class IntegerLocaleConverterTest extends AbstractLocaleConverterTest<Inte
      * Test Converter(Locale, pattern) constructor
      */
     @Test
-    public void testConstructor_6() {
+    void testConstructor_6() {
         // Construct using specified Locale
         converter = IntegerLocaleConverter.builder().setLocale(localizedLocale).setPattern(defaultIntegerPattern).get();
 
@@ -122,7 +122,7 @@ public class IntegerLocaleConverterTest extends AbstractLocaleConverterTest<Inte
      * Test Converter(Locale, pattern, locPattern) constructor
      */
     @Test
-    public void testConstructor_7() {
+    void testConstructor_7() {
         // Construct using specified Locale
         converter = IntegerLocaleConverter.builder().setLocale(localizedLocale).setPattern(localizedIntegerPattern).setLocalizedPattern(true).get();
 
@@ -137,7 +137,7 @@ public class IntegerLocaleConverterTest extends AbstractLocaleConverterTest<Inte
      * Test Converter(defaultValue) constructor
      */
     @Test
-    public void testConstructor_8() {
+    void testConstructor_8() {
         // Construct using specified Locale
         converter = IntegerLocaleConverter.builder().setDefault(defaultValue).get();
 
@@ -152,7 +152,7 @@ public class IntegerLocaleConverterTest extends AbstractLocaleConverterTest<Inte
      * Test Converter(defaultValue, locPattern) constructor
      */
     @Test
-    public void testConstructor_9() {
+    void testConstructor_9() {
         // Construct using specified Locale
         converter = IntegerLocaleConverter.builder().setDefault(defaultValue).setLocalizedPattern(true).get();
 
@@ -167,7 +167,7 @@ public class IntegerLocaleConverterTest extends AbstractLocaleConverterTest<Inte
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
      */
     @Test
-    public void testConstructorMain() {
+    void testConstructorMain() {
 
         // Construct with localized pattern
         converter = IntegerLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(localizedIntegerPattern)
@@ -217,7 +217,7 @@ public class IntegerLocaleConverterTest extends AbstractLocaleConverterTest<Inte
      * Test Converting a number
      */
     @Test
-    public void testNumber() {
+    void testNumber() {
         // Construct using specified Locale
         converter = IntegerLocaleConverter.builder().setLocale(localizedLocale).get();
 
@@ -230,7 +230,7 @@ public class IntegerLocaleConverterTest extends AbstractLocaleConverterTest<Inte
      * Tests whether a conversion to a primitive type can be performed.
      */
     @Test
-    public void testToPrimitiveType() {
+    void testToPrimitiveType() {
         converter = IntegerLocaleConverter.builder().get();
         final Integer value = 20131028;
         final Class<Integer> target = Integer.TYPE;

@@ -113,7 +113,7 @@ public class PropertyUtilsBenchCase {
 
     // Time copyProperties() from a bean
     @Test
-    public void testCopyPropertiesBean() throws Exception {
+    void testCopyPropertiesBean() throws Exception {
 
         long startMillis;
         long stopMillis;
@@ -144,7 +144,7 @@ public class PropertyUtilsBenchCase {
 
     // Time copyProperties() from a DynaBean
     @Test
-    public void testCopyPropertiesDyna() throws Exception {
+    void testCopyPropertiesDyna() throws Exception {
 
         long startMillis;
         long stopMillis;
@@ -175,7 +175,7 @@ public class PropertyUtilsBenchCase {
 
     // Time copyProperties() from a Map
     @Test
-    public void testCopyPropertiesMap() throws Exception {
+    void testCopyPropertiesMap() throws Exception {
 
         long startMillis;
         long stopMillis;

@@ -40,7 +40,7 @@ public class LocaleConverterTest {
     }
 
     @Test
-    public void testConvertCustomLocale() {
+    void testConvertCustomLocale() {
         final Locale expected = Locale.forLanguageTag("en-owo");
         final Locale actual = converter.convert(Locale.class, "en-owo");
 
@@ -48,7 +48,7 @@ public class LocaleConverterTest {
     }
 
     @Test
-    public void testConvertStandardLocale() {
+    void testConvertStandardLocale() {
         final Locale expected = Locale.ENGLISH;
         final Locale actual = converter.convert(Locale.class, "en");
 

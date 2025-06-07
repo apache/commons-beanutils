@@ -93,7 +93,7 @@ public class Jira157Test {
      * See Jira issue# BEANUTILS-157.
      */
     @Test
-    public void testIssue_BEANUTILS_157_BeanUtils_Describe_Bean() throws Exception {
+    void testIssue_BEANUTILS_157_BeanUtils_Describe_Bean() throws Exception {
         final Object bean = new FooBar();
         Map<String, String> result = null;
         result = BeanUtils.describe(bean);
@@ -109,7 +109,7 @@ public class Jira157Test {
      * See Jira issue# BEANUTILS-157.
      */
     @Test
-    public void testIssue_BEANUTILS_157_BeanUtils_Describe_Interface() throws Exception {
+    void testIssue_BEANUTILS_157_BeanUtils_Describe_Interface() throws Exception {
         final Object bean = new XY() {
             @Override
             public String getX() {
@@ -136,7 +136,7 @@ public class Jira157Test {
      * See Jira issue# BEANUTILS-157.
      */
     @Test
-    public void testIssue_BEANUTILS_157_BeanUtils_Describe_Serializable() throws Exception {
+    void testIssue_BEANUTILS_157_BeanUtils_Describe_Serializable() throws Exception {
         final Object bean = new Serializable() {
             private static final long serialVersionUID = 1L;
 

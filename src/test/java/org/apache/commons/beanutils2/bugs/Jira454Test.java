@@ -40,7 +40,7 @@ public class Jira454Test {
     }
 
     @Test
-    public void testCopyProperties() throws Exception {
+    void testCopyProperties() throws Exception {
         final TestBean bean = new TestBean();
         final TestBean b2 = new TestBean();
         BeanUtils.copyProperties(b2, bean);

@@ -317,7 +317,7 @@ public class LazyDynaListTest {
      * Test DynaBean Create
      */
     @Test
-    public void testDynaBeanDynaClass() throws Exception {
+    void testDynaBeanDynaClass() throws Exception {
         // Create LazyArrayList for DynaBeans
         final LazyDynaList list = new LazyDynaList(basicDynaClass);
         // test
@@ -328,7 +328,7 @@ public class LazyDynaListTest {
      * Test DynaBean Create
      */
     @Test
-    public void testDynaBeanType() throws Exception {
+    void testDynaBeanType() throws Exception {
         // Create LazyArrayList for DynaBeans
         final LazyDynaList list = new LazyDynaList(LazyDynaBean.class);
         final LazyDynaBean bean = new LazyDynaBean();
@@ -341,7 +341,7 @@ public class LazyDynaListTest {
      * Test Map Create
      */
     @Test
-    public void testMapDynaClass() {
+    void testMapDynaClass() {
 
         // Create LazyArrayList for TreeMap's
         final LazyDynaList list = new LazyDynaList(treeMapDynaClass);
@@ -355,7 +355,7 @@ public class LazyDynaListTest {
      * Test Map Create
      */
     @Test
-    public void testMapType() {
+    void testMapType() {
 
         // Create LazyArrayList for HashMap's
         final LazyDynaList list = new LazyDynaList(HashMap.class);
@@ -369,7 +369,7 @@ public class LazyDynaListTest {
      * Test adding a map to List with no type set.
      */
     @Test
-    public void testNullType() {
+    void testNullType() {
         final LazyDynaList lazyList = new LazyDynaList();
         lazyList.add(new HashMap<>());
     }
@@ -378,7 +378,7 @@ public class LazyDynaListTest {
      * Test Pojo Create
      */
     @Test
-    public void testPojoDynaClass() {
+    void testPojoDynaClass() {
 
         // Create LazyArrayList for POJO's
         final LazyDynaList list = new LazyDynaList(pojoDynaClass);
@@ -392,7 +392,7 @@ public class LazyDynaListTest {
      * Test Pojo Create
      */
     @Test
-    public void testPojoType() {
+    void testPojoType() {
 
         // Create LazyArrayList for POJO's
         final LazyDynaList list = new LazyDynaList(TestBean.class);
@@ -406,7 +406,7 @@ public class LazyDynaListTest {
      * Test DynaBean serialization.
      */
     @Test
-    public void testSerializationDynaBean() throws Exception {
+    void testSerializationDynaBean() throws Exception {
 
         // Create LazyArrayList for DynaBeans
         final LazyDynaList target = new LazyDynaList(basicDynaClass);
@@ -426,7 +426,7 @@ public class LazyDynaListTest {
      * Test DynaBean serialization.
      */
     @Test
-    public void testSerializationLazyDynaBean() throws Exception {
+    void testSerializationLazyDynaBean() throws Exception {
 
         // Create LazyArrayList for DynaBeans
         final LazyDynaList target = new LazyDynaList();
@@ -446,7 +446,7 @@ public class LazyDynaListTest {
      * Test Map serialization.
      */
     @Test
-    public void testSerializationMap() throws Exception {
+    void testSerializationMap() throws Exception {
 
         // Create LazyArrayList for DynaBeans
         final LazyDynaList target = new LazyDynaList(treeMapDynaClass);
@@ -465,7 +465,7 @@ public class LazyDynaListTest {
      * Test POJO (WrapDynaBean) serialization.
      */
     @Test
-    public void testSerializationPojo() throws Exception {
+    void testSerializationPojo() throws Exception {
         // Create LazyArrayList for DynaBeans
         final LazyDynaList target = new LazyDynaList(pojoDynaClass);
         final WrapDynaBean bean = (WrapDynaBean) target.get(0);
@@ -483,7 +483,7 @@ public class LazyDynaListTest {
      * Tests toArray() if the list contains DynaBean objects.
      */
     @Test
-    public void testToArrayDynaBeans() {
+    void testToArrayDynaBeans() {
         final LazyDynaList list = new LazyDynaList(LazyDynaBean.class);
         final LazyDynaBean elem = new LazyDynaBean();
         list.add(elem);
@@ -496,7 +496,7 @@ public class LazyDynaListTest {
      * Tests toArray() if the list contains maps.
      */
     @Test
-    public void testToArrayMapType() {
+    void testToArrayMapType() {
         final LazyDynaList list = new LazyDynaList(HashMap.class);
         final HashMap<String, Object> elem = new HashMap<>();
         list.add(elem);
@@ -509,7 +509,7 @@ public class LazyDynaListTest {
      * Tests toArray() for other bean elements.
      */
     @Test
-    public void testToArrayOtherType() {
+    void testToArrayOtherType() {
         final LazyDynaList list = new LazyDynaList(TestBean.class);
         final TestBean elem = new TestBean();
         list.add(elem);
@@ -522,7 +522,7 @@ public class LazyDynaListTest {
      * Tests toArray() if the array's size does not fit the collection size.
      */
     @Test
-    public void testToArrayUnsufficientSize() {
+    void testToArrayUnsufficientSize() {
         final LazyDynaList list = new LazyDynaList(LazyDynaBean.class);
         final LazyDynaBean elem = new LazyDynaBean();
         list.add(elem);

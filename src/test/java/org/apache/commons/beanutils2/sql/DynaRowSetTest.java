@@ -138,7 +138,7 @@ public class DynaRowSetTest {
     }
 
     @Test
-    public void testGetDynaProperties() {
+    void testGetDynaProperties() {
 
         final DynaProperty[] dynaProps = dynaClass.getDynaProperties();
         assertNotNull(dynaProps, "dynaProps exists");
@@ -150,7 +150,7 @@ public class DynaRowSetTest {
     }
 
     @Test
-    public void testGetDynaProperty() {
+    void testGetDynaProperty() {
         // Invalid argument test
         assertThrows(NullPointerException.class, () -> dynaClass.getDynaProperty(null));
         // Negative test
@@ -164,7 +164,7 @@ public class DynaRowSetTest {
     }
 
     @Test
-    public void testGetName() {
+    void testGetName() {
         assertEquals("org.apache.commons.beanutils2.sql.RowSetDynaClass", dynaClass.getName(), "DynaClass name");
     }
 
@@ -176,7 +176,7 @@ public class DynaRowSetTest {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testInconsistentOracleDriver() throws Exception {
+    void testInconsistentOracleDriver() throws Exception {
 
         final ResultSetMetaData metaData = TestResultSetMetaData.createProxy(new TestResultSetMetaDataInconsistent());
         final ResultSet resultSet = TestResultSet.createProxy(new TestResultSetInconsistent(metaData));
@@ -215,7 +215,7 @@ public class DynaRowSetTest {
     }
 
     @Test
-    public void testLimitedRows() throws Exception {
+    void testLimitedRows() throws Exception {
 
         // created one with low limit
         final RowSetDynaClass limitedDynaClass = new RowSetDynaClass(TestResultSet.createProxy(), 3);
@@ -226,7 +226,7 @@ public class DynaRowSetTest {
     }
 
     @Test
-    public void testListCount() {
+    void testListCount() {
 
         final List<DynaBean> rows = dynaClass.getRows();
         assertNotNull(rows, "list exists");
@@ -235,7 +235,7 @@ public class DynaRowSetTest {
     }
 
     @Test
-    public void testListResults() {
+    void testListResults() {
 
         // Grab the third row
         final List<DynaBean> rows = dynaClass.getRows();
@@ -270,7 +270,7 @@ public class DynaRowSetTest {
      * Test normal case column names (i.e. not converted to lower case)
      */
     @Test
-    public void testListResultsNormalCase() throws Exception {
+    void testListResultsNormalCase() throws Exception {
         final RowSetDynaClass dynaClass = new RowSetDynaClass(TestResultSet.createProxy(), false);
 
         // Grab the third row
@@ -303,7 +303,7 @@ public class DynaRowSetTest {
     }
 
     @Test
-    public void testNewInstance() {
+    void testNewInstance() {
         assertThrows(UnsupportedOperationException.class, () -> dynaClass.newInstance());
     }
 }

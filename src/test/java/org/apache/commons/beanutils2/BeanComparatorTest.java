@@ -62,7 +62,7 @@ public class BeanComparatorTest {
      * Tests comparing one bean against itself.
      */
     @Test
-    public void testCompareBeanAgainstSelf() {
+    void testCompareBeanAgainstSelf() {
         final BeanComparator<AlphaBean, String> beanComparator = new BeanComparator<>("name");
         final int result = beanComparator.compare(alphaBean1, alphaBean1);
         assertEquals(0, result, () -> "Comparator did not sort properly.  Result:" + result);
@@ -72,7 +72,7 @@ public class BeanComparatorTest {
      * Tests comparing two beans via their name using the default Comparator where they have the same value.
      */
     @Test
-    public void testCompareIdentical() {
+    void testCompareIdentical() {
         alphaBean1 = new AlphaBean("alphabean");
         alphaBean2 = new AlphaBean("alphabean");
         final BeanComparator<AlphaBean, String> beanComparator = new BeanComparator<>("name");
@@ -84,7 +84,7 @@ public class BeanComparatorTest {
      * Tests comparing two beans on a boolean property, which is not possible.
      */
     @Test
-    public void testCompareOnBooleanProperty() {
+    void testCompareOnBooleanProperty() {
         try {
             final TestBean testBeanA = new TestBean();
             final TestBean testBeanB = new TestBean();
@@ -108,7 +108,7 @@ public class BeanComparatorTest {
      * Tests comparing two beans who don't have a property
      */
     @Test
-    public void testCompareOnMissingProperty() {
+    void testCompareOnMissingProperty() {
         final BeanComparator<AlphaBean, String> beanComparator = new BeanComparator<>("bogusName");
         final Exception e = assertThrows(RuntimeException.class, () -> beanComparator.compare(alphaBean2, alphaBean1));
         assertTrue(e.toString().contains("Unknown property"), () -> "Wrong exception was thrown: " + e);
@@ -118,7 +118,7 @@ public class BeanComparatorTest {
      * Tests comparing two beans via their name using the default Comparator, but with one of the beans being null.
      */
     @Test
-    public void testCompareWithNulls() {
+    void testCompareWithNulls() {
         final BeanComparator<AlphaBean, String> beanComparator = new BeanComparator<>("name");
         assertThrows(NullPointerException.class, () -> beanComparator.compare(alphaBean2, null));
     }
@@ -127,7 +127,7 @@ public class BeanComparatorTest {
      * Tests comparing two beans on a boolean property, then changing the property and testing/
      */
     @Test
-    public void testSetProperty() {
+    void testSetProperty() {
         final TestBean testBeanA = new TestBean();
         final TestBean testBeanB = new TestBean();
 
@@ -153,7 +153,7 @@ public class BeanComparatorTest {
      * Tests comparing two beans via their name using the default Comparator
      */
     @Test
-    public void testSimpleCompare() {
+    void testSimpleCompare() {
         final BeanComparator<AlphaBean, String> beanComparator = new BeanComparator<>("name");
         final int result = beanComparator.compare(alphaBean1, alphaBean2);
         assertEquals(-1, result, () -> "Comparator did not sort properly.  Result:" + result);
@@ -163,7 +163,7 @@ public class BeanComparatorTest {
      * Tests comparing two beans via their name using the default Comparator, but the inverse
      */
     @Test
-    public void testSimpleCompareInverse() {
+    void testSimpleCompareInverse() {
         final BeanComparator<AlphaBean, String> beanComparator = new BeanComparator<>("name");
         final int result = beanComparator.compare(alphaBean2, alphaBean1);
         assertEquals(1, result, () -> "Comparator did not sort properly.  Result:" + result);

@@ -42,7 +42,7 @@ public class DimensionConverterTest {
     }
 
     @Test
-    public void testConvertingDimension() {
+    void testConvertingDimension() {
         final Dimension expected = new Dimension(1920, 1080);
         final Dimension actual = converter.convert(Dimension.class, "1920x1080");
 
@@ -50,7 +50,7 @@ public class DimensionConverterTest {
     }
 
     @Test
-    public void testConvertingSquare() {
+    void testConvertingSquare() {
         final Dimension expected = new Dimension(512, 512);
         final Dimension actual = converter.convert(Dimension.class, "512");
 
@@ -58,17 +58,17 @@ public class DimensionConverterTest {
     }
 
     @Test
-    public void testInvalidDimensions() {
+    void testInvalidDimensions() {
         assertThrows(ConversionException.class, () -> converter.convert(Dimension.class, "512n512"));
     }
 
     @Test
-    public void testInvalidNumberFormatException() {
+    void testInvalidNumberFormatException() {
         assertThrows(ConversionException.class, () -> converter.convert(Dimension.class, "3000000000x100"));
     }
 
     @Test
-    public void testNegativeDimension() {
+    void testNegativeDimension() {
         assertThrows(ConversionException.class, () -> converter.convert(Dimension.class, "-512x512"));
     }
 }

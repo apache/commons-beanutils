@@ -54,7 +54,7 @@ public class MonthDayConverterTest {
     }
 
     @Test
-    public void testSimpleConversion() throws Exception {
+    void testSimpleConversion() throws Exception {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from String", };
 
         final Object[] input = { "--12-03", "--05-30", "--01-01" };
@@ -75,7 +75,7 @@ public class MonthDayConverterTest {
      * Tests a conversion to an unsupported type.
      */
     @Test
-    public void testUnsupportedType() {
+    void testUnsupportedType() {
         assertThrows(ConversionException.class, () -> converter.convert(Integer.class, "http://www.apache.org"));
     }
 }

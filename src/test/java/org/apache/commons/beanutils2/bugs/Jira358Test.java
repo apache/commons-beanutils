@@ -51,7 +51,7 @@ public class Jira358Test {
      * Test {@link PropertyUtils#getIndexedProperty(Object, String, int)}
      */
     @Test
-    public void testPropertyUtils_getIndexedProperty_Array() throws Exception {
+    void testPropertyUtils_getIndexedProperty_Array() throws Exception {
 
         final TestBean bean = new TestBean();
         assertThrows(ArrayIndexOutOfBoundsException.class, () -> PropertyUtils.getIndexedProperty(bean, "intArray", bean.getIntArray().length));
@@ -61,7 +61,7 @@ public class Jira358Test {
      * Test {@link PropertyUtils#getIndexedProperty(Object, String, int)}
      */
     @Test
-    public void testPropertyUtils_getIndexedProperty_List() throws Exception {
+    void testPropertyUtils_getIndexedProperty_List() throws Exception {
 
         final TestBean bean = new TestBean();
         assertThrows(IndexOutOfBoundsException.class, () -> PropertyUtils.getIndexedProperty(bean, "listIndexed", bean.getListIndexed().size()));

@@ -38,7 +38,7 @@ public class BeanPropertyValueChangeConsumerTest {
      * Test execute with indexed property.
      */
     @Test
-    public void testExecuteWithIndexedProperty() {
+    void testExecuteWithIndexedProperty() {
         final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeConsumer<>("intIndexed[0]", expectedIntegerValue).accept(testBean);
         assertSame(expectedIntegerValue.intValue(), testBean.getIntIndexed(0));
@@ -48,7 +48,7 @@ public class BeanPropertyValueChangeConsumerTest {
      * Test execute with an invalid property name.
      */
     @Test
-    public void testExecuteWithInvalidPropertyName() {
+    void testExecuteWithInvalidPropertyName() {
         assertThrows(IllegalArgumentException.class, () -> new BeanPropertyValueChangeConsumer<>("bogusProperty", "foo").accept(new TestBean()));
     }
 
@@ -56,7 +56,7 @@ public class BeanPropertyValueChangeConsumerTest {
      * Test execute with mapped property.
      */
     @Test
-    public void testExecuteWithMappedProperty() {
+    void testExecuteWithMappedProperty() {
         final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeConsumer<>("mappedProperty(fred)", "barney").accept(testBean);
         assertEquals("barney", testBean.getMappedProperty("fred"));
@@ -66,7 +66,7 @@ public class BeanPropertyValueChangeConsumerTest {
      * Test execute with a nested property.
      */
     @Test
-    public void testExecuteWithNestedProperty() {
+    void testExecuteWithNestedProperty() {
         final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeConsumer<>("nested.stringProperty", "bar").accept(testBean);
         assertEquals("bar", testBean.getNested().getStringProperty());
@@ -76,7 +76,7 @@ public class BeanPropertyValueChangeConsumerTest {
      * Test execute with a nested property and null in the property path.
      */
     @Test
-    public void testExecuteWithNullInPropertyPath() {
+    void testExecuteWithNullInPropertyPath() {
         assertThrows(IllegalArgumentException.class, () -> new BeanPropertyValueChangeConsumer<>("anotherNested.stringProperty", "foo").accept(new TestBean()));
     }
 
@@ -84,7 +84,7 @@ public class BeanPropertyValueChangeConsumerTest {
      * Test execute with a nested property and null in the property path and ignoreNull = true.
      */
     @Test
-    public void testExecuteWithNullInPropertyPathAngIgnoreTrue() {
+    void testExecuteWithNullInPropertyPathAngIgnoreTrue() {
         final TestBean testBean = new TestBean();
 
         // create a consumer that will attempt to set a property on the null bean in the path
@@ -97,7 +97,7 @@ public class BeanPropertyValueChangeConsumerTest {
      * Test execute with read only property.
      */
     @Test
-    public void testExecuteWithReadOnlyProperty() {
+    void testExecuteWithReadOnlyProperty() {
         assertThrows(IllegalArgumentException.class, () -> new BeanPropertyValueChangeConsumer<>("readOnlyProperty", "foo").accept(new TestBean()));
     }
 
@@ -105,7 +105,7 @@ public class BeanPropertyValueChangeConsumerTest {
      * Test execute with simple boolean property and Boolean value.
      */
     @Test
-    public void testExecuteWithSimpleBooleanPropertyAndBooleanValue() {
+    void testExecuteWithSimpleBooleanPropertyAndBooleanValue() {
         final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeConsumer<>("booleanProperty", expectedBooleanValue).accept(testBean);
         assertEquals(expectedBooleanValue.booleanValue(), testBean.getBooleanProperty());
@@ -115,7 +115,7 @@ public class BeanPropertyValueChangeConsumerTest {
      * Test execute with simple boolean property and String value.
      */
     @Test
-    public void testExecuteWithSimpleBooleanPropertyAndStringValue() {
+    void testExecuteWithSimpleBooleanPropertyAndStringValue() {
         assertThrows(IllegalArgumentException.class, () -> new BeanPropertyValueChangeConsumer<>("booleanProperty", "true").accept(new TestBean()));
     }
 
@@ -123,7 +123,7 @@ public class BeanPropertyValueChangeConsumerTest {
      * Test execute with simple byte property and Byte value.
      */
     @Test
-    public void testExecuteWithSimpleBytePropertyAndByteValue() {
+    void testExecuteWithSimpleBytePropertyAndByteValue() {
         final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeConsumer<>("byteProperty", expectedByteValue).accept(testBean);
         assertEquals(expectedByteValue.byteValue(), testBean.getByteProperty());
@@ -133,7 +133,7 @@ public class BeanPropertyValueChangeConsumerTest {
      * Test execute with simple boolean property and String value.
      */
     @Test
-    public void testExecuteWithSimpleBytePropertyAndStringValue() {
+    void testExecuteWithSimpleBytePropertyAndStringValue() {
         assertThrows(IllegalArgumentException.class, () -> new BeanPropertyValueChangeConsumer<>("byteProperty", "foo").accept(new TestBean()));
     }
 
@@ -141,7 +141,7 @@ public class BeanPropertyValueChangeConsumerTest {
      * Test execute with simple double property and Double value.
      */
     @Test
-    public void testExecuteWithSimpleDoublePropertyAndDoubleValue() {
+    void testExecuteWithSimpleDoublePropertyAndDoubleValue() {
         final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeConsumer<>("doubleProperty", expectedDoubleValue).accept(testBean);
         assertEquals(expectedDoubleValue.doubleValue(), testBean.getDoubleProperty());
@@ -151,7 +151,7 @@ public class BeanPropertyValueChangeConsumerTest {
      * Test execute with simple double property and Float value.
      */
     @Test
-    public void testExecuteWithSimpleDoublePropertyAndFloatValue() {
+    void testExecuteWithSimpleDoublePropertyAndFloatValue() {
         final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeConsumer<>("doubleProperty", expectedFloatValue).accept(testBean);
         assertEquals(expectedFloatValue.doubleValue(), testBean.getDoubleProperty());
@@ -161,7 +161,7 @@ public class BeanPropertyValueChangeConsumerTest {
      * Test execute with simple double property and Integer value.
      */
     @Test
-    public void testExecuteWithSimpleDoublePropertyAndIntegerValue() {
+    void testExecuteWithSimpleDoublePropertyAndIntegerValue() {
         final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeConsumer<>("doubleProperty", expectedIntegerValue).accept(testBean);
         assertEquals(expectedIntegerValue.doubleValue(), testBean.getDoubleProperty());
@@ -171,7 +171,7 @@ public class BeanPropertyValueChangeConsumerTest {
      * Test execute with simple double property and String value.
      */
     @Test
-    public void testExecuteWithSimpleDoublePropertyAndStringValue() {
+    void testExecuteWithSimpleDoublePropertyAndStringValue() {
         assertThrows(IllegalArgumentException.class, () -> new BeanPropertyValueChangeConsumer<>("doubleProperty", "123").accept(new TestBean()));
     }
 
@@ -179,7 +179,7 @@ public class BeanPropertyValueChangeConsumerTest {
      * Test execute with simple float property and Double value.
      */
     @Test
-    public void testExecuteWithSimpleFloatPropertyAndDoubleValue() {
+    void testExecuteWithSimpleFloatPropertyAndDoubleValue() {
         assertThrows(IllegalArgumentException.class, () -> new BeanPropertyValueChangeConsumer<>("floatProperty", expectedDoubleValue).accept(new TestBean()));
     }
 
@@ -187,7 +187,7 @@ public class BeanPropertyValueChangeConsumerTest {
      * Test execute with simple float property and Float value.
      */
     @Test
-    public void testExecuteWithSimpleFloatPropertyAndFloatValue() {
+    void testExecuteWithSimpleFloatPropertyAndFloatValue() {
         final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeConsumer<>("floatProperty", expectedFloatValue).accept(testBean);
         assertEquals(expectedFloatValue.floatValue(), testBean.getFloatProperty());
@@ -197,7 +197,7 @@ public class BeanPropertyValueChangeConsumerTest {
      * Test execute with simple float property and Integer value.
      */
     @Test
-    public void testExecuteWithSimpleFloatPropertyAndIntegerValue() {
+    void testExecuteWithSimpleFloatPropertyAndIntegerValue() {
         final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeConsumer<>("floatProperty", expectedIntegerValue).accept(testBean);
         assertEquals(expectedIntegerValue.floatValue(), testBean.getFloatProperty());
@@ -207,7 +207,7 @@ public class BeanPropertyValueChangeConsumerTest {
      * Test execute with simple float property and String value.
      */
     @Test
-    public void testExecuteWithSimpleFloatPropertyAndStringValue() {
+    void testExecuteWithSimpleFloatPropertyAndStringValue() {
         assertThrows(IllegalArgumentException.class, () -> new BeanPropertyValueChangeConsumer<>("floatProperty", "123").accept(new TestBean()));
     }
 
@@ -215,7 +215,7 @@ public class BeanPropertyValueChangeConsumerTest {
      * Test execute with simple int property and Double value.
      */
     @Test
-    public void testExecuteWithSimpleIntPropertyAndDoubleValue() {
+    void testExecuteWithSimpleIntPropertyAndDoubleValue() {
         assertThrows(IllegalArgumentException.class, () -> new BeanPropertyValueChangeConsumer<>("intProperty", expectedDoubleValue).accept(new TestBean()));
     }
 
@@ -223,7 +223,7 @@ public class BeanPropertyValueChangeConsumerTest {
      * Test execute with simple int property and Float value.
      */
     @Test
-    public void testExecuteWithSimpleIntPropertyAndFloatValue() {
+    void testExecuteWithSimpleIntPropertyAndFloatValue() {
         assertThrows(IllegalArgumentException.class, () -> new BeanPropertyValueChangeConsumer<>("intProperty", expectedFloatValue).accept(new TestBean()));
     }
 
@@ -231,7 +231,7 @@ public class BeanPropertyValueChangeConsumerTest {
      * Test execute with simple int property and Integer value.
      */
     @Test
-    public void testExecuteWithSimpleIntPropertyAndIntegerValue() {
+    void testExecuteWithSimpleIntPropertyAndIntegerValue() {
         final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeConsumer<>("intProperty", expectedIntegerValue).accept(testBean);
         assertEquals(expectedIntegerValue.intValue(), testBean.getIntProperty());
@@ -241,7 +241,7 @@ public class BeanPropertyValueChangeConsumerTest {
      * Test execute with simple int property and String value.
      */
     @Test
-    public void testExecuteWithSimpleIntPropertyAndStringValue() {
+    void testExecuteWithSimpleIntPropertyAndStringValue() {
         assertThrows(IllegalArgumentException.class, () -> new BeanPropertyValueChangeConsumer<>("intProperty", "123").accept(new TestBean()));
     }
 
@@ -249,7 +249,7 @@ public class BeanPropertyValueChangeConsumerTest {
      * Test execute with simple primitive property and null value.
      */
     @Test
-    public void testExecuteWithSimplePrimitivePropertyAndNullValue() {
+    void testExecuteWithSimplePrimitivePropertyAndNullValue() {
         assertThrows(IllegalArgumentException.class, () -> new BeanPropertyValueChangeConsumer<>("intProperty", null).accept(new TestBean()));
     }
 
@@ -257,7 +257,7 @@ public class BeanPropertyValueChangeConsumerTest {
      * Test execute with a simple String property.
      */
     @Test
-    public void testExecuteWithSimpleStringProperty() {
+    void testExecuteWithSimpleStringProperty() {
         final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeConsumer<>("stringProperty", "barney").accept(testBean);
         assertEquals("barney", testBean.getStringProperty());
@@ -267,7 +267,7 @@ public class BeanPropertyValueChangeConsumerTest {
      * Test execute with write only property.
      */
     @Test
-    public void testExecuteWithWriteOnlyProperty() {
+    void testExecuteWithWriteOnlyProperty() {
         final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeConsumer<>("writeOnlyProperty", "foo").accept(testBean);
         assertEquals("foo", testBean.getWriteOnlyPropertyValue());

@@ -83,12 +83,12 @@ public class Jira541Test {
     }
 
     @Test
-    public void testFluentBeanIntrospectorOnOverriddenSetter() throws Exception {
+    void testFluentBeanIntrospectorOnOverriddenSetter() throws Exception {
         testImpl();
     }
 
     @Test
-    public void testFluentBeanIntrospectorOnOverriddenSetterConcurrent() throws Exception {
+    void testFluentBeanIntrospectorOnOverriddenSetterConcurrent() throws Exception {
         final ExecutorService executionService = Executors.newFixedThreadPool(256);
         try {
             final List<Future<?>> futures = new ArrayList<>();

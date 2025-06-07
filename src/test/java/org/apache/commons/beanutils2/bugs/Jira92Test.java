@@ -49,7 +49,7 @@ public class Jira92Test {
      * Test copy properties where the target bean only has an indexed setter.
      */
     @Test
-    public void testIssue_BEANUTILS_92_copyProperties_indexed_only_setter() throws Exception {
+    void testIssue_BEANUTILS_92_copyProperties_indexed_only_setter() throws Exception {
         PropertyUtils.copyProperties(new Jira92TestBean(), new TestBean());
     }
 }

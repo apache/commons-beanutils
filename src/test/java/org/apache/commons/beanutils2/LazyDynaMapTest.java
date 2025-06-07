@@ -74,7 +74,7 @@ public class LazyDynaMapTest {
      * General Tests
      */
     @Test
-    public void testGeneral() {
+    void testGeneral() {
 //        LazyDynaMap bean = new LazyDynaMap("TestBean");
         assertEquals("TestBean", new LazyDynaMap("TestBean").getName(), "Check DynaClass name");
 
@@ -84,7 +84,7 @@ public class LazyDynaMapTest {
      * Test Getting/Setting an DynaBean[] array
      */
     @Test
-    public void testIndexedDynaBeanArray() {
+    void testIndexedDynaBeanArray() {
 
         final int index = 3;
         final Object objectArray = new LazyDynaBean[0];
@@ -115,7 +115,7 @@ public class LazyDynaMapTest {
      * Test setting indexed property for type which is not List or Array
      */
     @Test
-    public void testIndexedInvalidType() {
+    void testIndexedInvalidType() {
         final int index = 3;
         dynaMap.set(testProperty, "Test String");
         assertFalse(dynaMap.getDynaProperty(testProperty).isIndexed(), "Check Property is not indexed");
@@ -126,7 +126,7 @@ public class LazyDynaMapTest {
      * Test Getting/Setting a List 'Indexed' Property - use alternative List (LinkedList)
      */
     @Test
-    public void testIndexedLinkedList() {
+    void testIndexedLinkedList() {
 
         int index = 3;
 
@@ -157,7 +157,7 @@ public class LazyDynaMapTest {
      * Test Getting/Setting an Object array 'Indexed' Property - use String[]
      */
     @Test
-    public void testIndexedObjectArray() {
+    void testIndexedObjectArray() {
 
         int index = 3;
         final Object objectArray = new String[0];
@@ -191,7 +191,7 @@ public class LazyDynaMapTest {
      * Test Getting/Setting a primitive array 'Indexed' Property - use int[]
      */
     @Test
-    public void testIndexedPrimitiveArray() {
+    void testIndexedPrimitiveArray() {
 
         int index = 3;
         final int[] primitiveArray = {};
@@ -226,7 +226,7 @@ public class LazyDynaMapTest {
      * Test Getting/Setting an 'Indexed' Property - default ArrayList property
      */
     @Test
-    public void testIndexedPropertyDefault() {
+    void testIndexedPropertyDefault() {
 
         int index = 3;
 
@@ -253,7 +253,7 @@ public class LazyDynaMapTest {
      * Test Setting an Indexed Property when MutableDynaClass is set to restricted
      */
     @Test
-    public void testIndexedPropertyRestricted() {
+    void testIndexedPropertyRestricted() {
 
         final int index = 3;
 
@@ -273,7 +273,7 @@ public class LazyDynaMapTest {
      * Test Setting an 'Indexed' Property using PropertyUtils
      */
     @Test
-    public void testIndexedPropertyUtils() throws Exception {
+    void testIndexedPropertyUtils() throws Exception {
 
         final int index = 3;
         dynaMap.setReturnNull(false);
@@ -293,7 +293,7 @@ public class LazyDynaMapTest {
      * Test setting mapped property for type which is not Map
      */
     @Test
-    public void testMappedInvalidType() {
+    void testMappedInvalidType() {
         dynaMap.set(testProperty, Integer.valueOf(1));
         assertFalse(dynaMap.getDynaProperty(testProperty).isMapped(), "Check Property is not mapped");
         assertThrows(IllegalArgumentException.class, () -> dynaMap.set(testProperty, testKey, testInteger1));
@@ -303,7 +303,7 @@ public class LazyDynaMapTest {
      * Test Getting/Setting a 'Mapped' Property - default HashMap property
      */
     @Test
-    public void testMappedPropertyDefault() {
+    void testMappedPropertyDefault() {
 
         // Check the property & value doesn't exist
         assertNull(dynaMap.getDynaProperty(testProperty), "Check Mapped Property doesn't exist");
@@ -326,7 +326,7 @@ public class LazyDynaMapTest {
      * Test Setting a Mapped Property when MutableDynaClass is set to restricted
      */
     @Test
-    public void testMappedPropertyRestricted() {
+    void testMappedPropertyRestricted() {
 
         // Set the MutableDyanClass to 'restricted' (i.e. no new properties cab be added
         dynaMap.setRestricted(true);
@@ -344,7 +344,7 @@ public class LazyDynaMapTest {
      * Test Getting/Setting a 'Mapped' Property - use TreeMap property
      */
     @Test
-    public void testMappedPropertyTreeMap() {
+    void testMappedPropertyTreeMap() {
 
         // Check the property & value doesn't exist
         assertNull(dynaMap.getDynaProperty(testProperty), "Check Mapped Property doesn't exist");
@@ -372,7 +372,7 @@ public class LazyDynaMapTest {
      * Test Setting a 'Mapped' Property using PropertyUtils
      */
     @Test
-    public void testMappedPropertyUtils() throws Exception {
+    void testMappedPropertyUtils() throws Exception {
         dynaMap.setReturnNull(false);
         // Check the property & value doesn't exist
         assertFalse(dynaMap.isDynaProperty(testProperty), "Check Mapped Property doesn't exist");
@@ -388,7 +388,7 @@ public class LazyDynaMapTest {
      * Test creating using DynaClass.newInstance()
      */
     @Test
-    public void testNewInstance() {
+    void testNewInstance() {
 
         // Create LazyDynaMap using TreeMap
         // containing some properties
@@ -410,7 +410,7 @@ public class LazyDynaMapTest {
      * Test Getting/Setting a Simple Property
      */
     @Test
-    public void testSimpleProperty() {
+    void testSimpleProperty() {
 
         // Check the property & value doesn't exist
         assertNull(dynaMap.getDynaProperty(testProperty), "Check Property doesn't exist");
@@ -435,7 +435,7 @@ public class LazyDynaMapTest {
      * Test Setting a Simple Property when MutableDynaClass is set to restricted
      */
     @Test
-    public void testSimplePropertyRestricted() {
+    void testSimplePropertyRestricted() {
         // Set the MutableDyanClass to 'restricted' (i.e. no new properties cab be added
         dynaMap.setRestricted(true);
         assertTrue(dynaMap.isRestricted(), "Check MutableDynaClass is restricted");

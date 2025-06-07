@@ -125,7 +125,7 @@ public class BeanificationTest {
 
     /** Tests whether different threads can set BeanUtils instances correctly */
     @Test
-    public void testBeanUtilsBeanSetInstance() throws Exception {
+    void testBeanUtilsBeanSetInstance() throws Exception {
 
         final class SetInstanceTesterThread extends Thread {
 
@@ -172,7 +172,7 @@ public class BeanificationTest {
 
     /** Tests whether calls are independent for different class loaders */
     @Test
-    public void testContextClassloaderIndependence() throws Exception {
+    void testContextClassloaderIndependence() throws Exception {
 
         final class TestIndependenceThread extends Thread {
             private final Signal signal;
@@ -229,7 +229,7 @@ public class BeanificationTest {
      * Tests whether difference instances are loaded by different context class loaders.
      */
     @Test
-    public void testContextClassLoaderLocal() throws Exception {
+    void testContextClassLoaderLocal() throws Exception {
 
         final class CCLLTesterThread extends Thread {
 
@@ -274,7 +274,7 @@ public class BeanificationTest {
 
     /** Tests whether the unset method works */
     @Test
-    public void testContextClassLoaderUnset() throws Exception {
+    void testContextClassLoaderUnset() throws Exception {
         final BeanUtilsBean beanOne = new BeanUtilsBean();
         final ContextClassLoaderLocal<BeanUtilsBean> ccll = new ContextClassLoaderLocal<>();
         ccll.set(beanOne);
@@ -287,7 +287,7 @@ public class BeanificationTest {
      * Tests whether difference instances are loaded by different context class loaders.
      */
     @Test
-    public void testGetByContextClassLoader() throws Exception {
+    void testGetByContextClassLoader() throws Exception {
 
         final class GetBeanUtilsBeanThread extends Thread {
 
@@ -328,7 +328,7 @@ public class BeanificationTest {
 
     /** Tests whether class loaders and beans are released from memory */
     @Test
-    public void testMemoryLeak() throws Exception {
+    void testMemoryLeak() throws Exception {
         // many thanks to Juozas Baliuka for suggesting this methodology
         TestClassLoader loader = new TestClassLoader();
         final WeakReference<ClassLoader> loaderReference = new WeakReference<>(loader);
@@ -401,7 +401,7 @@ public class BeanificationTest {
 
     /** Tests whether class loaders and beans are released from memory by the map used by BeanUtils. */
     @Test
-    public void testMemoryLeak2() throws Exception {
+    void testMemoryLeak2() throws Exception {
         // many thanks to Juozas Baliuka for suggesting this methodology
         TestClassLoader loader = new TestClassLoader();
         final ReferenceQueue<Object> queue = new ReferenceQueue<>();
@@ -442,7 +442,7 @@ public class BeanificationTest {
 
     /** Test of the methodology we'll use for some of the later tests */
     @Test
-    public void testMemoryTestMethodology() throws Exception {
+    void testMemoryTestMethodology() throws Exception {
         // test methodology
         // many thanks to Juozas Baliuka for suggesting this method
         ClassLoader loader = new ClassLoader(this.getClass().getClassLoader()) {

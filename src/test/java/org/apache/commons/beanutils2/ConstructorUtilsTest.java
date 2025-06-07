@@ -53,7 +53,7 @@ public class ConstructorUtilsTest {
     }
 
     @Test
-    public void testGetAccessibleConstructor() throws Exception {
+    void testGetAccessibleConstructor() throws Exception {
         {
             final Constructor<?> ctor = ConstructorUtils.getAccessibleConstructor(TestBean.class, String.class);
             assertNotNull(ctor);
@@ -71,7 +71,7 @@ public class ConstructorUtilsTest {
     }
 
     @Test
-    public void testGetAccessibleConstructorWithConstructorArg() throws Exception {
+    void testGetAccessibleConstructorWithConstructorArg() throws Exception {
         {
             final Class<?>[] types = { Integer.class };
             final Constructor<?> c1 = TestBean.class.getConstructor(types);
@@ -95,7 +95,7 @@ public class ConstructorUtilsTest {
     }
 
     @Test
-    public void testGetAccessibleConstructorWithTypeArray() throws Exception {
+    void testGetAccessibleConstructorWithTypeArray() throws Exception {
         {
             final Class<?>[] types = { Boolean.TYPE, String.class };
             final Constructor<?> ctor = ConstructorUtils.getAccessibleConstructor(TestBean.class, types);
@@ -110,7 +110,7 @@ public class ConstructorUtilsTest {
     }
 
     @Test
-    public void testInvokeConstructor() throws Exception {
+    void testInvokeConstructor() throws Exception {
         {
             final Object obj = ConstructorUtils.invokeConstructor(TestBean.class, "TEST");
             assertNotNull(obj);
@@ -126,14 +126,14 @@ public class ConstructorUtilsTest {
     }
 
     @Test
-    public void testInvokeConstructorNull() throws Exception {
+    void testInvokeConstructorNull() throws Exception {
         final Object obj = ConstructorUtils.invokeConstructor(TestBean.class, (Object) null);
         assertNotNull(obj);
         assertInstanceOf(TestBean.class, obj);
     }
 
     @Test
-    public void testInvokeConstructorWithArgArray() throws Exception {
+    void testInvokeConstructorWithArgArray() throws Exception {
         final Object[] args = { Float.valueOf(17.3f), "TEST" };
         final Object obj = ConstructorUtils.invokeConstructor(TestBean.class, args);
         assertNotNull(obj);
@@ -143,7 +143,7 @@ public class ConstructorUtilsTest {
     }
 
     @Test
-    public void testInvokeConstructorWithTypeArray() throws Exception {
+    void testInvokeConstructorWithTypeArray() throws Exception {
         {
             final Object[] args = { Boolean.TRUE, "TEST" };
             final Class<?>[] types = { Boolean.TYPE, String.class };
@@ -165,7 +165,7 @@ public class ConstructorUtilsTest {
     }
 
     @Test
-    public void testInvokeExactConstructor() throws Exception {
+    void testInvokeExactConstructor() throws Exception {
         {
             final Object obj = ConstructorUtils.invokeExactConstructor(TestBean.class, "TEST");
             assertNotNull(obj);
@@ -182,7 +182,7 @@ public class ConstructorUtilsTest {
     }
 
     @Test
-    public void testInvokeExactConstructorWithArgArray() throws Exception {
+    void testInvokeExactConstructorWithArgArray() throws Exception {
         {
             final Object[] args = { Float.valueOf(17.3f), "TEST" };
             assertThrows(NoSuchMethodException.class, () -> ConstructorUtils.invokeExactConstructor(TestBean.class, args));
@@ -198,14 +198,14 @@ public class ConstructorUtilsTest {
     }
 
     @Test
-    public void testInvokeExactConstructorWithNull() throws Exception {
+    void testInvokeExactConstructorWithNull() throws Exception {
         final Object obj = ConstructorUtils.invokeExactConstructor(TestBean.class, (Object) null);
         assertNotNull(obj);
         assertInstanceOf(TestBean.class, obj);
     }
 
     @Test
-    public void testInvokeExactConstructorWithTypeArray() throws Exception {
+    void testInvokeExactConstructorWithTypeArray() throws Exception {
         {
             final Object[] args = { Boolean.TRUE, "TEST" };
             final Class<?>[] types = { Boolean.TYPE, String.class };

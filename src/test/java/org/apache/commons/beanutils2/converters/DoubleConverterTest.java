@@ -61,7 +61,7 @@ public class DoubleConverterTest extends AbstractNumberConverterTest<Double> {
     }
 
     @Test
-    public void testSimpleConversion() {
+    void testSimpleConversion() {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from Byte",
                 "from Short", "from Integer", "from Long", "from Float", "from Double" };
 

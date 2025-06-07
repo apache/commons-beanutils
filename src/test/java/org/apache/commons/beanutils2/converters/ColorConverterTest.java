@@ -42,17 +42,17 @@ public class ColorConverterTest {
     }
 
     @Test
-    public void testColorBlank() {
+    void testColorBlank() {
         assertThrows(ConversionException.class, () -> converter.convert(Color.class, "#"));
     }
 
     @Test
-    public void testColorInvalidLength() {
+    void testColorInvalidLength() {
         assertThrows(ConversionException.class, () -> converter.convert(Color.class, "#F"));
     }
 
     @Test
-    public void testConvertingColorName() {
+    void testConvertingColorName() {
         final Color expected = Color.WHITE;
         final Color actual = converter.convert(Color.class, "white");
 
@@ -60,7 +60,7 @@ public class ColorConverterTest {
     }
 
     @Test
-    public void testConvertingColorNameCaps() {
+    void testConvertingColorNameCaps() {
         final Color expected = Color.LIGHT_GRAY;
         final Color actual = converter.convert(Color.class, "LIGHTGRAY");
 
@@ -68,7 +68,7 @@ public class ColorConverterTest {
     }
 
     @Test
-    public void testConvertingJavaColorStringFull() {
+    void testConvertingJavaColorStringFull() {
         final Color expected = Color.WHITE;
         final Color actual = converter.convert(Color.class, "java.awt.Color[r=255,g=255,b=255]");
 
@@ -76,7 +76,7 @@ public class ColorConverterTest {
     }
 
     @Test
-    public void testConvertingJavaColorStringWithoutBrackets() {
+    void testConvertingJavaColorStringWithoutBrackets() {
         final Color expected = Color.DARK_GRAY;
         final Color actual = converter.convert(Color.class, "r=64,g=64,b=64");
 
@@ -84,7 +84,7 @@ public class ColorConverterTest {
     }
 
     @Test
-    public void testConvertingJavaColorStringWithoutColorPrefixes() {
+    void testConvertingJavaColorStringWithoutColorPrefixes() {
         final Color expected = Color.PINK;
         final Color actual = converter.convert(Color.class, "255,175,175");
 
@@ -92,7 +92,7 @@ public class ColorConverterTest {
     }
 
     @Test
-    public void testConvertingJavaColorStringWithoutPackage() {
+    void testConvertingJavaColorStringWithoutPackage() {
         final Color expected = Color.GREEN;
         final Color actual = converter.convert(Color.class, "[r=0,g=255,b=0]");
 
@@ -104,7 +104,7 @@ public class ColorConverterTest {
      * {@link String} from an inherited class.
      */
     @Test
-    public void testConvertingJavaExtendsColorString() {
+    void testConvertingJavaExtendsColorString() {
         final Color expected = Color.MAGENTA;
         final Color actual = converter.convert(Color.class, "org.apache.ExtendedColor[r=255,g=0,b=255]");
 
@@ -112,7 +112,7 @@ public class ColorConverterTest {
     }
 
     @Test
-    public void testConvertingLiteralHex() {
+    void testConvertingLiteralHex() {
         final Color expected = Color.BLUE;
         final Color actual = converter.convert(Color.class, "0x0000FF");
 
@@ -120,7 +120,7 @@ public class ColorConverterTest {
     }
 
     @Test
-    public void testConvertingPattern() {
+    void testConvertingPattern() {
         final Color expected = Color.BLACK;
         final Color actual = converter.convert(Color.class, "#000000");
 
@@ -128,7 +128,7 @@ public class ColorConverterTest {
     }
 
     @Test
-    public void testConvertingPattern3Digit() {
+    void testConvertingPattern3Digit() {
         final Color expected = Color.WHITE;
         final Color actual = converter.convert(Color.class, "#FFF");
 
@@ -136,7 +136,7 @@ public class ColorConverterTest {
     }
 
     @Test
-    public void testConvertingPattern4Digit() {
+    void testConvertingPattern4Digit() {
         final Color expected = Color.YELLOW;
         final Color actual = converter.convert(Color.class, "#FF0F");
 
@@ -144,7 +144,7 @@ public class ColorConverterTest {
     }
 
     @Test
-    public void testConvertingPatternWithAlpha() {
+    void testConvertingPatternWithAlpha() {
         final Color expected = Color.LIGHT_GRAY;
         final Color actual = converter.convert(Color.class, "#C0C0C0FF");
 
@@ -152,12 +152,12 @@ public class ColorConverterTest {
     }
 
     @Test
-    public void testInvalidNumber3() {
+    void testInvalidNumber3() {
         assertThrows(ConversionException.class, () -> converter.convert(Color.class, "#FFZ"));
     }
 
     @Test
-    public void testInvalidNumber4() {
+    void testInvalidNumber4() {
         assertThrows(ConversionException.class, () -> converter.convert(Color.class, "#FFFY"));
     }
 }

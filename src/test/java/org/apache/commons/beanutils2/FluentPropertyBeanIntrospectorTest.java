@@ -75,7 +75,7 @@ public class FluentPropertyBeanIntrospectorTest {
      * Tries to create an instance without a prefix for write methods.
      */
     @Test
-    public void testInitNoPrefix() {
+    void testInitNoPrefix() {
         assertThrows(NullPointerException.class, () -> new FluentPropertyBeanIntrospector(null));
     }
 
@@ -83,7 +83,7 @@ public class FluentPropertyBeanIntrospectorTest {
      * Tests whether correct property descriptors are detected.
      */
     @Test
-    public void testIntrospection() throws IntrospectionException {
+    void testIntrospection() throws IntrospectionException {
         final PropertyUtilsBean pu = new PropertyUtilsBean();
         final FluentPropertyBeanIntrospector introspector = new FluentPropertyBeanIntrospector();
         pu.addBeanIntrospector(introspector);
@@ -101,7 +101,7 @@ public class FluentPropertyBeanIntrospectorTest {
     }
 
     @Test
-    public void testIntrospectionCaps() throws Exception {
+    void testIntrospectionCaps() throws Exception {
         final PropertyUtilsBean pu = new PropertyUtilsBean();
 
         final FluentPropertyBeanIntrospector introspector = new FluentPropertyBeanIntrospector();

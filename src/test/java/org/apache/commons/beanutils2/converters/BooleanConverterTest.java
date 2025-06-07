@@ -34,7 +34,7 @@ public class BooleanConverterTest {
     public static final String[] STANDARD_FALSES = { "no", "n", "false", "off", "0" };
 
     @Test
-    public void testAdditionalStrings() {
+    void testAdditionalStrings() {
         final String[] trueStrings = { "sure" };
         final String[] falseStrings = { "nope" };
         final AbstractConverter<Boolean> converter = new BooleanConverter(trueStrings, falseStrings);
@@ -45,7 +45,7 @@ public class BooleanConverterTest {
     }
 
     @Test
-    public void testCaseInsensitivity() {
+    void testCaseInsensitivity() {
         final AbstractConverter<Boolean> converter = new BooleanConverter();
         testConversionValues(converter, new String[] { "Yes", "TRUE" }, new String[] { "NO", "fAlSe" });
     }
@@ -54,7 +54,7 @@ public class BooleanConverterTest {
      * Tests a conversion to another target type. This should not be possible.
      */
     @Test
-    public void testConversionToOtherType() {
+    void testConversionToOtherType() {
         final AbstractConverter<Boolean> converter = new BooleanConverter();
         assertThrows(ConversionException.class, () -> converter.convert(Integer.class, STANDARD_TRUES[0]));
     }
@@ -70,7 +70,7 @@ public class BooleanConverterTest {
     }
 
     @Test
-    public void testDefaultValue() {
+    void testDefaultValue() {
         final Boolean defaultValue = Boolean.TRUE;
         final AbstractConverter<Boolean> converter = new BooleanConverter(defaultValue);
 
@@ -79,7 +79,7 @@ public class BooleanConverterTest {
     }
 
     @Test
-    public void testInvalidString() {
+    void testInvalidString() {
         final AbstractConverter<Boolean> converter = new BooleanConverter();
         assertThrows(ConversionException.class, () -> converter.convert(Boolean.class, "bogus"));
     }
@@ -88,13 +88,13 @@ public class BooleanConverterTest {
      * Tests whether a conversion to a primitive boolean is possible.
      */
     @Test
-    public void testPrimitiveTargetClass() {
+    void testPrimitiveTargetClass() {
         final AbstractConverter<Boolean> converter = new BooleanConverter();
         assertTrue(converter.convert(Boolean.TYPE, STANDARD_TRUES[0]), "Wrong result");
     }
 
     @Test
-    public void testStandardValues() {
+    void testStandardValues() {
         final AbstractConverter<Boolean> converter = new BooleanConverter();
         testConversionValues(converter, STANDARD_TRUES, STANDARD_FALSES);
     }

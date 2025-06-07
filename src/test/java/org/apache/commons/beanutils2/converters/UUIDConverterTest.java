@@ -54,7 +54,7 @@ public class UUIDConverterTest {
     }
 
     @Test
-    public void testSimpleConversion() throws Exception {
+    void testSimpleConversion() throws Exception {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from String", };
 
         final Object[] input = { "123e4567-e89b-12d3-a456-556642440000", "7dc53df5-703e-49b3-8670-b1c468f47f1f" };
@@ -75,7 +75,7 @@ public class UUIDConverterTest {
      * Tests a conversion to an unsupported type.
      */
     @Test
-    public void testUnsupportedType() {
+    void testUnsupportedType() {
         assertThrows(ConversionException.class, () -> converter.convert(Integer.class, "http://www.apache.org"));
     }
 }

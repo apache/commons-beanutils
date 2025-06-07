@@ -166,7 +166,7 @@ public class DynaBeanUtilsTest {
      * Test the cloneBean() method from a DynaBean.
      */
     @Test
-    public void testCloneDynaBean() throws Exception {
+    void testCloneDynaBean() throws Exception {
 
         // Set up an origin bean with customized properties
         final DynaClass dynaClass = DynaBeanUtilsTest.createDynaClass();
@@ -219,7 +219,7 @@ public class DynaBeanUtilsTest {
      * Test the copyProperties() method from a DynaBean.
      */
     @Test
-    public void testCopyPropertiesDynaBean() throws Exception {
+    void testCopyPropertiesDynaBean() throws Exception {
 
         // Set up an origin bean with customized properties
         final DynaClass dynaClass = DynaBeanUtilsTest.createDynaClass();
@@ -272,7 +272,7 @@ public class DynaBeanUtilsTest {
      * Test copyProperties() when the origin is a {@code Map}.
      */
     @Test
-    public void testCopyPropertiesMap() throws Exception {
+    void testCopyPropertiesMap() throws Exception {
 
         final Map<String, Object> map = new HashMap<>();
         map.put("booleanProperty", "false");
@@ -318,7 +318,7 @@ public class DynaBeanUtilsTest {
      * Test the copyProperties() method from a standard JavaBean.
      */
     @Test
-    public void testCopyPropertiesStandard() throws Exception {
+    void testCopyPropertiesStandard() throws Exception {
 
         // Set up an origin bean with customized properties
         final TestBean orig = new TestBean();
@@ -370,7 +370,7 @@ public class DynaBeanUtilsTest {
      * Test narrowing and widening conversions on byte.
      */
     @Test
-    public void testCopyPropertyByte() throws Exception {
+    void testCopyPropertyByte() throws Exception {
 
         BeanUtils.setProperty(bean, "byteProperty", Byte.valueOf((byte) 123));
         assertEquals((byte) 123, ((Byte) bean.get("byteProperty")).byteValue());
@@ -391,7 +391,7 @@ public class DynaBeanUtilsTest {
      * Test narrowing and widening conversions on double.
      */
     @Test
-    public void testCopyPropertyDouble() throws Exception {
+    void testCopyPropertyDouble() throws Exception {
 
         BeanUtils.setProperty(bean, "doubleProperty", Byte.valueOf((byte) 123));
         assertEquals(123, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005);
@@ -412,7 +412,7 @@ public class DynaBeanUtilsTest {
      * Test narrowing and widening conversions on float.
      */
     @Test
-    public void testCopyPropertyFloat() throws Exception {
+    void testCopyPropertyFloat() throws Exception {
 
         BeanUtils.setProperty(bean, "floatProperty", Byte.valueOf((byte) 123));
         assertEquals(123, ((Float) bean.get("floatProperty")).floatValue(), 0.005);
@@ -433,7 +433,7 @@ public class DynaBeanUtilsTest {
      * Test narrowing and widening conversions on int.
      */
     @Test
-    public void testCopyPropertyInteger() throws Exception {
+    void testCopyPropertyInteger() throws Exception {
 
         BeanUtils.setProperty(bean, "longProperty", Byte.valueOf((byte) 123));
         assertEquals(123, ((Integer) bean.get("intProperty")).intValue());
@@ -454,7 +454,7 @@ public class DynaBeanUtilsTest {
      * Test narrowing and widening conversions on long.
      */
     @Test
-    public void testCopyPropertyLong() throws Exception {
+    void testCopyPropertyLong() throws Exception {
 
         BeanUtils.setProperty(bean, "longProperty", Byte.valueOf((byte) 123));
         assertEquals(123, ((Long) bean.get("longProperty")).longValue());
@@ -475,7 +475,7 @@ public class DynaBeanUtilsTest {
      * Test copying a property using a nested indexed array expression, with and without conversions.
      */
     @Test
-    public void testCopyPropertyNestedIndexedArray() throws Exception {
+    void testCopyPropertyNestedIndexedArray() throws Exception {
 
         final int[] origArray = { 0, 10, 20, 30, 40 };
         final int[] intArray = { 0, 0, 0 };
@@ -512,7 +512,7 @@ public class DynaBeanUtilsTest {
      * Test copying a property using a nested mapped map property.
      */
     @Test
-    public void testCopyPropertyNestedMappedMap() throws Exception {
+    void testCopyPropertyNestedMappedMap() throws Exception {
 
         final Map<String, Object> origMap = new HashMap<>();
         origMap.put("First Key", "First Value");
@@ -533,7 +533,7 @@ public class DynaBeanUtilsTest {
      * Test copying a property using a nested simple expression, with and without conversions.
      */
     @Test
-    public void testCopyPropertyNestedSimple() throws Exception {
+    void testCopyPropertyNestedSimple() throws Exception {
 
         bean.set("intProperty", Integer.valueOf(0));
         nested.setIntProperty(0);
@@ -564,7 +564,7 @@ public class DynaBeanUtilsTest {
      * Test copying a null property value.
      */
     @Test
-    public void testCopyPropertyNull() throws Exception {
+    void testCopyPropertyNull() throws Exception {
 
         bean.set("nullProperty", "non-null value");
         BeanUtils.copyProperty(bean, "nullProperty", null);
@@ -576,7 +576,7 @@ public class DynaBeanUtilsTest {
      * Test narrowing and widening conversions on short.
      */
     @Test
-    public void testCopyPropertyShort() throws Exception {
+    void testCopyPropertyShort() throws Exception {
 
         BeanUtils.setProperty(bean, "shortProperty", Byte.valueOf((byte) 123));
         assertEquals((short) 123, ((Short) bean.get("shortProperty")).shortValue());
@@ -597,7 +597,7 @@ public class DynaBeanUtilsTest {
      * Test the describe() method.
      */
     @Test
-    public void testDescribe() throws Exception {
+    void testDescribe() throws Exception {
 
         final Map<String, Object> map = PropertyUtils.describe(bean);
 
@@ -623,7 +623,7 @@ public class DynaBeanUtilsTest {
      * tests the string and int arrays of TestBean
      */
     @Test
-    public void testGetArrayProperty() throws Exception {
+    void testGetArrayProperty() throws Exception {
         String[] arr = BeanUtils.getArrayProperty(bean, "stringArray");
         final String[] comp = (String[]) bean.get("stringArray");
 
@@ -639,7 +639,7 @@ public class DynaBeanUtilsTest {
      * tests getting a 'whatever' property
      */
     @Test
-    public void testGetGeneralProperty() throws Exception {
+    void testGetGeneralProperty() throws Exception {
         final String val = BeanUtils.getProperty(bean, "nested.intIndexed[2]");
         final String comp = String.valueOf(bean.get("intIndexed", 2));
 
@@ -650,7 +650,7 @@ public class DynaBeanUtilsTest {
      * tests getting an indexed property
      */
     @Test
-    public void testGetIndexedProperty1() throws Exception {
+    void testGetIndexedProperty1() throws Exception {
         String val = BeanUtils.getIndexedProperty(bean, "intIndexed[3]");
         String comp = String.valueOf(bean.get("intIndexed", 3));
         assertEquals(val, comp, "intIndexed[3] == " + comp);
@@ -664,7 +664,7 @@ public class DynaBeanUtilsTest {
      * tests getting an indexed property
      */
     @Test
-    public void testGetIndexedProperty2() throws Exception {
+    void testGetIndexedProperty2() throws Exception {
         String val = BeanUtils.getIndexedProperty(bean, "intIndexed", 3);
         String comp = String.valueOf(bean.get("intIndexed", 3));
 
@@ -680,7 +680,7 @@ public class DynaBeanUtilsTest {
      * tests getting a nested property
      */
     @Test
-    public void testGetNestedProperty() throws Exception {
+    void testGetNestedProperty() throws Exception {
         final String val = BeanUtils.getNestedProperty(bean, "nested.stringProperty");
         final String comp = nested.getStringProperty();
         assertEquals(val, comp, "nested.StringProperty == " + comp);
@@ -690,7 +690,7 @@ public class DynaBeanUtilsTest {
      * tests getting a 'whatever' property
      */
     @Test
-    public void testGetSimpleProperty() throws Exception {
+    void testGetSimpleProperty() throws Exception {
         final String val = BeanUtils.getSimpleProperty(bean, "shortProperty");
         final String comp = String.valueOf(bean.get("shortProperty"));
 
@@ -701,7 +701,7 @@ public class DynaBeanUtilsTest {
      * Test populate() method on individual array elements.
      */
     @Test
-    public void testPopulateArrayElements() throws Exception {
+    void testPopulateArrayElements() throws Exception {
         final HashMap<String, Object> map = new HashMap<>();
         map.put("intIndexed[0]", "100");
         map.put("intIndexed[2]", "120");
@@ -736,7 +736,7 @@ public class DynaBeanUtilsTest {
      * Test populate() method on array properties as a whole.
      */
     @Test
-    public void testPopulateArrayProperties() throws Exception {
+    void testPopulateArrayProperties() throws Exception {
         final HashMap<String, Object> map = new HashMap<>();
         // int[] intArray = new int[] { 123, 456, 789 };
         final String[] intArrayIn = { "123", "456", "789" };
@@ -763,7 +763,7 @@ public class DynaBeanUtilsTest {
      * Test populate() on mapped properties.
      */
     @Test
-    public void testPopulateMapped() throws Exception {
+    void testPopulateMapped() throws Exception {
         final HashMap<String, Object> map = new HashMap<>();
         map.put("mappedProperty(First Key)", "New First Value");
         map.put("mappedProperty(Third Key)", "New Third Value");
@@ -780,7 +780,7 @@ public class DynaBeanUtilsTest {
      * Test populate() method on nested properties.
      */
     @Test
-    public void testPopulateNested() throws Exception {
+    void testPopulateNested() throws Exception {
         final HashMap<String, Object> map = new HashMap<>();
         map.put("nested.booleanProperty", "false");
         // booleanSecond is left at true
@@ -808,7 +808,7 @@ public class DynaBeanUtilsTest {
      * Test populate() method on scalar properties.
      */
     @Test
-    public void testPopulateScalar() throws Exception {
+    void testPopulateScalar() throws Exception {
         bean.set("nullProperty", "non-null value");
 
         final HashMap<String, Object> map = new HashMap<>();
@@ -846,7 +846,7 @@ public class DynaBeanUtilsTest {
      * Test setting a null property value.
      */
     @Test
-    public void testSetPropertyNull() throws Exception {
+    void testSetPropertyNull() throws Exception {
 
         bean.set("nullProperty", "non-null value");
         BeanUtils.setProperty(bean, "nullProperty", null);
@@ -858,7 +858,7 @@ public class DynaBeanUtilsTest {
      * Test calling setProperty() with null property values.
      */
     @Test
-    public void testSetPropertyNullValues() throws Exception {
+    void testSetPropertyNullValues() throws Exception {
 
         Object oldValue;
         Object newValue;
@@ -892,7 +892,7 @@ public class DynaBeanUtilsTest {
      * Test converting to and from primitive wrapper types.
      */
     @Test
-    public void testSetPropertyOnPrimitiveWrappers() throws Exception {
+    void testSetPropertyOnPrimitiveWrappers() throws Exception {
 
         BeanUtils.setProperty(bean, "intProperty", Integer.valueOf(1));
         assertEquals(1, ((Integer) bean.get("intProperty")).intValue());

@@ -101,28 +101,28 @@ public class Jira465Test {
     }
 
     @Test
-    public void testArrayIndexedProperty() throws Exception {
+    void testArrayIndexedProperty() throws Exception {
         final ArrayIndexedProp bean = new ArrayIndexedProp();
         changeValue(bean);
         assertEquals(NEW_VALUE, bean.getFoo(0), "Wrong value");
     }
 
     @Test
-    public void testArrayProperty() throws Exception {
+    void testArrayProperty() throws Exception {
         final ArrayProp bean = new ArrayProp();
         changeValue(bean);
         assertEquals(NEW_VALUE, bean.getFoo()[0], "Wrong value");
     }
 
     @Test
-    public void testListIndexedProperty() throws Exception {
+    void testListIndexedProperty() throws Exception {
         final ListIndexedProp bean = new ListIndexedProp();
         changeValue(bean);
         assertEquals(NEW_VALUE, bean.getFoo(0), "Wrong value");
     }
 
     @Test
-    public void testListProperty() throws Exception {
+    void testListProperty() throws Exception {
         final ListProp bean = new ListProp();
         changeValue(bean);
         assertEquals(NEW_VALUE, bean.getFoo().get(0), "Wrong value");

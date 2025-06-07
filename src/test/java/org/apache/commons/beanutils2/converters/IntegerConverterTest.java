@@ -66,7 +66,7 @@ public class IntegerConverterTest extends AbstractNumberConverterTest<Integer> {
      * Test Invalid Amounts (too big/small)
      */
     @Test
-    public void testInvalidAmount() {
+    void testInvalidAmount() {
         final Converter<Integer> converter = makeConverter();
         final Class<?> clazz = Integer.class;
 
@@ -100,7 +100,7 @@ public class IntegerConverterTest extends AbstractNumberConverterTest<Integer> {
     }
 
     @Test
-    public void testSimpleConversion() throws Exception {
+    void testSimpleConversion() throws Exception {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from Byte",
                 "from Short", "from Integer", "from Long", "from Float", "from Double" };
 

@@ -86,7 +86,7 @@ public class SqlDateConverterTest extends AbstractDateConverterTest<Date> {
      * Test default java.sql.Date to String conversion
      */
     @Test
-    public void testDefaultTypeToStringConvert() {
+    void testDefaultTypeToStringConvert() {
 
         // Create & Configure the Converter
         final DateTimeConverter<Date> converter = makeConverter();

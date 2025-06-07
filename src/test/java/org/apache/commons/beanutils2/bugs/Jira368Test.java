@@ -50,7 +50,7 @@ public class Jira368Test {
      * Test {@link BeanUtils} setProperty() with Null value
      */
     @Test
-    public void testBeanUtilsSetProperty_NullBean() throws Exception {
+    void testBeanUtilsSetProperty_NullBean() throws Exception {
         assertThrows(NullPointerException.class, () -> BeanUtils.setProperty(null, "foo", "bar"));
     }
 }

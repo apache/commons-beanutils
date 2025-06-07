@@ -52,7 +52,7 @@ public class MappedPropertyTest {
      * Test property with any two args
      */
     @Test
-    public void testAnyArgsProperty() throws Exception {
+    void testAnyArgsProperty() throws Exception {
         final String property = "anyMapped";
         final Class<?> clazz = MappedPropertyTestBean.class;
         final MappedPropertyDescriptor desc = new MappedPropertyDescriptor(property, clazz);
@@ -64,7 +64,7 @@ public class MappedPropertyTest {
      * Test boolean "is" method name
      */
     @Test
-    public void testBooleanMapped() throws Exception {
+    void testBooleanMapped() throws Exception {
         final String property = "mappedBoolean";
         final Class<?> clazz = MappedPropertyTestBean.class;
         final MappedPropertyDescriptor desc = new MappedPropertyDescriptor(property, clazz);
@@ -76,7 +76,7 @@ public class MappedPropertyTest {
      * Test Interface Inherited mapped property
      */
     @Test
-    public void testChildInterfaceMapped() throws Exception {
+    void testChildInterfaceMapped() throws Exception {
         final String property = "mapproperty";
         final Class<?> clazz = MappedPropertyChildInterface.class;
         final MappedPropertyDescriptor desc = new MappedPropertyDescriptor(property, clazz);
@@ -91,7 +91,7 @@ public class MappedPropertyTest {
      * getDifferentTypes() returns a Long.
      */
     @Test
-    public void testDifferentTypes() throws Exception {
+    void testDifferentTypes() throws Exception {
         final String property = "differentTypes";
         final Class<?> clazz = MappedPropertyTestBean.class;
         final MappedPropertyDescriptor desc = new MappedPropertyDescriptor(property, clazz);
@@ -103,7 +103,7 @@ public class MappedPropertyTest {
      * Test valid method name
      */
     @Test
-    public void testFound() throws Exception {
+    void testFound() throws Exception {
         final String property = "mapproperty";
         final Class<?> clazz = MappedPropertyTestBean.class;
         final MappedPropertyDescriptor desc = new MappedPropertyDescriptor(property, clazz);
@@ -115,7 +115,7 @@ public class MappedPropertyTest {
      * Test Interface with mapped property
      */
     @Test
-    public void testInterfaceMapped() throws Exception {
+    void testInterfaceMapped() throws Exception {
         final String property = "mapproperty";
         final Class<?> clazz = MappedPropertyTestInterface.class;
         final MappedPropertyDescriptor desc = new MappedPropertyDescriptor(property, clazz);
@@ -127,7 +127,7 @@ public class MappedPropertyTest {
      * Test property not found in interface
      */
     @Test
-    public void testInterfaceNotFound() {
+    void testInterfaceNotFound() {
         final String property = "XXXXXX";
         final Class<?> clazz = MappedPropertyTestInterface.class;
         assertThrows(IntrospectionException.class, () -> new MappedPropertyDescriptor(property, clazz));
@@ -137,7 +137,7 @@ public class MappedPropertyTest {
      * Test Mapped Property - Invalid Getter
      */
     @Test
-    public void testInvalidGetter() throws Exception {
+    void testInvalidGetter() throws Exception {
         final String property = "invalidGetter";
         final Class<?> clazz = MappedPropertyTestBean.class;
         final MappedPropertyDescriptor desc = new MappedPropertyDescriptor(property, clazz);
@@ -149,7 +149,7 @@ public class MappedPropertyTest {
      * Test Mapped Property - Invalid Setter
      */
     @Test
-    public void testInvalidSetter() throws Exception {
+    void testInvalidSetter() throws Exception {
         final String property = "invalidSetter";
         final Class<?> clazz = MappedPropertyTestBean.class;
         final MappedPropertyDescriptor desc = new MappedPropertyDescriptor(property, clazz);
@@ -161,7 +161,7 @@ public class MappedPropertyTest {
      * Test Map getter
      */
     @Test
-    public void testMapGetter() throws Exception {
+    void testMapGetter() throws Exception {
         final MappedPropertyTestBean bean = new MappedPropertyTestBean();
         final String testValue = "test value";
         final String testKey = "testKey";
@@ -173,7 +173,7 @@ public class MappedPropertyTest {
      * Test Mapped Property - Getter only
      */
     @Test
-    public void testMappedGetterOnly() throws Exception {
+    void testMappedGetterOnly() throws Exception {
         final String property = "mappedGetterOnly";
         final Class<?> clazz = MappedPropertyTestBean.class;
         final MappedPropertyDescriptor desc = new MappedPropertyDescriptor(property, clazz);
@@ -185,7 +185,7 @@ public class MappedPropertyTest {
      * Test Mapped Property - Setter Only
      */
     @Test
-    public void testMappedSetterOnly() throws Exception {
+    void testMappedSetterOnly() throws Exception {
         final String property = "mappedSetterOnly";
         final Class<?> clazz = MappedPropertyTestBean.class;
         final MappedPropertyDescriptor desc = new MappedPropertyDescriptor(property, clazz);
@@ -197,7 +197,7 @@ public class MappedPropertyTest {
      * Test invalid method name
      */
     @Test
-    public void testNotFound() {
+    void testNotFound() {
         final String property = "xxxxxxx";
         final Class<?> clazz = MappedPropertyTestBean.class;
         assertThrows(IntrospectionException.class, () -> new MappedPropertyDescriptor(property, clazz));
@@ -207,7 +207,7 @@ public class MappedPropertyTest {
      * Test property with two primitive args
      */
     @Test
-    public void testPrimitiveArgsProperty() throws Exception {
+    void testPrimitiveArgsProperty() throws Exception {
         final String property = "mappedPrimitive";
         final Class<?> clazz = MappedPropertyTestBean.class;
         final MappedPropertyDescriptor desc = new MappedPropertyDescriptor(property, clazz);
@@ -219,7 +219,7 @@ public class MappedPropertyTest {
      * Test 'protected' mapped property
      */
     @Test
-    public void testProtected() {
+    void testProtected() {
         final String property = "protectedProperty";
         final Class<?> clazz = MappedPropertyTestBean.class;
         assertThrows(IntrospectionException.class, () -> new MappedPropertyDescriptor(property, clazz));
@@ -229,7 +229,7 @@ public class MappedPropertyTest {
      * Test 'protected' method in parent
      */
     @Test
-    public void testProtectedParentMethod() {
+    void testProtectedParentMethod() {
         final String property = "protectedMapped";
         final Class<?> clazz = MappedPropertyChildBean.class;
         assertThrows(IntrospectionException.class, () -> new MappedPropertyDescriptor(property, clazz));
@@ -239,7 +239,7 @@ public class MappedPropertyTest {
      * Test 'public' method in parent
      */
     @Test
-    public void testPublicParentMethod() throws Exception {
+    void testPublicParentMethod() throws Exception {
         final String property = "mapproperty";
         final Class<?> clazz = MappedPropertyChildBean.class;
         final MappedPropertyDescriptor desc = new MappedPropertyDescriptor(property, clazz);

@@ -113,7 +113,7 @@ public class LocaleBeanificationTest {
 
     /** Tests whether different threads can set BeanUtils instances correctly */
     @Test
-    public void testBeanUtilsBeanSetInstance() throws Exception {
+    void testBeanUtilsBeanSetInstance() throws Exception {
 
         final class SetInstanceTesterThread extends Thread {
 
@@ -160,7 +160,7 @@ public class LocaleBeanificationTest {
 
     /** Tests whether calls are independent for different class loaders */
     @Test
-    public void testContextClassloaderIndependence() throws Exception {
+    void testContextClassloaderIndependence() throws Exception {
 
         final class TestIndependenceThread extends Thread {
             private final Signal signal;
@@ -235,7 +235,7 @@ public class LocaleBeanificationTest {
      * Tests whether difference instances are loaded by different context class loaders.
      */
     @Test
-    public void testContextClassLoaderLocal() throws Exception {
+    void testContextClassLoaderLocal() throws Exception {
 
         final class CCLLTesterThread extends Thread {
 
@@ -280,7 +280,7 @@ public class LocaleBeanificationTest {
 
     /** Tests whether the unset method works */
     @Test
-    public void testContextClassLoaderUnset() {
+    void testContextClassLoaderUnset() {
         final LocaleBeanUtilsBean beanOne = new LocaleBeanUtilsBean();
         final ContextClassLoaderLocal<LocaleBeanUtilsBean> ccll = new ContextClassLoaderLocal<>();
         ccll.set(beanOne);
@@ -293,7 +293,7 @@ public class LocaleBeanificationTest {
      * Tests whether difference instances are loaded by different context class loaders.
      */
     @Test
-    public void testGetByContextClassLoader() throws Exception {
+    void testGetByContextClassLoader() throws Exception {
 
         final class GetBeanUtilsBeanThread extends Thread {
 
@@ -334,7 +334,7 @@ public class LocaleBeanificationTest {
      * Test registering a locale-aware converter with the standard ConvertUtils.
      */
     @Test
-    public void testLocaleAwareConverterInConvertUtils() {
+    void testLocaleAwareConverterInConvertUtils() {
         try {
             // first use the default non-locale-aware converter
             Long data = (Long) ConvertUtils.convert("777", Long.class);
@@ -364,7 +364,7 @@ public class LocaleBeanificationTest {
 
     /** Tests whether class loaders and beans are released from memory */
     @Test
-    public void testMemoryLeak() throws Exception {
+    void testMemoryLeak() throws Exception {
         // many thanks to Juozas Baliuka for suggesting this methodology
         TestClassLoader loader = new TestClassLoader();
         final WeakReference<TestClassLoader> loaderReference = new WeakReference<>(loader);
@@ -431,7 +431,7 @@ public class LocaleBeanificationTest {
 
     /** Tests whether class loaders and beans are released from memory by the map used by BeanUtils */
     @Test
-    public void testMemoryLeak2() {
+    void testMemoryLeak2() {
         // many thanks to Juozas Baliuka for suggesting this methodology
         TestClassLoader loader = new TestClassLoader();
         final ReferenceQueue<Object> queue = new ReferenceQueue<>();
@@ -470,7 +470,7 @@ public class LocaleBeanificationTest {
 
     /** Test of the methodology we'll use for some of the later tests */
     @Test
-    public void testMemoryTestMethodology() throws Exception {
+    void testMemoryTestMethodology() throws Exception {
         // test methodology
         // many thanks to Juozas Baliuka for suggesting this method
         ClassLoader loader = new ClassLoader(this.getClass().getClassLoader()) {

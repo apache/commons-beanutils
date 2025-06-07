@@ -172,7 +172,7 @@ public class MemoryLeakTest {
      * Tests that ConvertUtilsBean's converters doesn't cause a memory leak.
      */
     @Test
-    public void testConvertUtilsBean_converters_memoryLeak() throws Exception {
+    void testConvertUtilsBean_converters_memoryLeak() throws Exception {
 
         // Clear All BeanUtils caches before the test
         clearAllBeanUtilsCaches();
@@ -219,7 +219,7 @@ public class MemoryLeakTest {
      * Tests that LocaleConvertUtilsBean's converters doesn't cause a memory leak.
      */
     @Test
-    public void testLocaleConvertUtilsBean_converters_memoryLeak() throws Exception {
+    void testLocaleConvertUtilsBean_converters_memoryLeak() throws Exception {
 
         // Clear All BeanUtils caches before the test
         clearAllBeanUtilsCaches();
@@ -267,7 +267,7 @@ public class MemoryLeakTest {
      * Tests that MappedPropertyDescriptor can re-create the Method reference after it has been garbage collected.
      */
     @Test
-    public void testMappedPropertyDescriptor_MappedMethodReference1() throws Exception {
+    void testMappedPropertyDescriptor_MappedMethodReference1() throws Exception {
 
         // Clear All BeanUtils caches before the test
         clearAllBeanUtilsCaches();
@@ -311,7 +311,7 @@ public class MemoryLeakTest {
      * Tests that MappedPropertyDescriptor can re-create the Method reference after it has been garbage collected.
      */
     @Test
-    public void testMappedPropertyDescriptor_MappedMethodReference2() throws Exception {
+    void testMappedPropertyDescriptor_MappedMethodReference2() throws Exception {
 
         // Clear All BeanUtils caches before the test
         clearAllBeanUtilsCaches();
@@ -360,7 +360,7 @@ public class MemoryLeakTest {
      * Tests that MethodUtils's cache doesn't cause a memory leak.
      */
     @Test
-    public void testMethodUtils_cache_memoryLeak() throws Exception {
+    void testMethodUtils_cache_memoryLeak() throws Exception {
 
         // Clear All BeanUtils caches before the test
         clearAllBeanUtilsCaches();
@@ -406,7 +406,7 @@ public class MemoryLeakTest {
      * Tests that PropertyUtilsBean's descriptorsCache doesn't cause a memory leak.
      */
     @Test
-    public void testPropertyUtilsBean_descriptorsCache_memoryLeak() throws Exception {
+    void testPropertyUtilsBean_descriptorsCache_memoryLeak() throws Exception {
 
         // Clear All BeanUtils caches before the test
         clearAllBeanUtilsCaches();
@@ -452,7 +452,7 @@ public class MemoryLeakTest {
      * Tests that PropertyUtilsBean's mappedDescriptorsCache doesn't cause a memory leak.
      */
     @Test
-    public void testPropertyUtilsBean_mappedDescriptorsCache_memoryLeak() throws Exception {
+    void testPropertyUtilsBean_mappedDescriptorsCache_memoryLeak() throws Exception {
 
         // Clear All BeanUtils caches before the test
         clearAllBeanUtilsCaches();
@@ -504,7 +504,7 @@ public class MemoryLeakTest {
      * Tests that WrapDynaClass's dynaClasses doesn't cause a memory leak.
      */
     @Test
-    public void testWrapDynaClass_dynaClasses_memoryLeak() throws Exception {
+    void testWrapDynaClass_dynaClasses_memoryLeak() throws Exception {
 
         // Clear All BeanUtils caches before the test
         clearAllBeanUtilsCaches();

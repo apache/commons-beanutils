@@ -90,7 +90,7 @@ public class MemoryTest {
      * </ul>
      */
     @Test
-    public void testComponentRegistersCustomConverter() throws Exception {
+    void testComponentRegistersCustomConverter() throws Exception {
 
         final ClassLoader origContextClassLoader = Thread.currentThread().getContextClassLoader();
         try {
@@ -176,7 +176,7 @@ public class MemoryTest {
      * </ul>
      */
     @Test
-    public void testComponentRegistersStandardConverter() throws Exception {
+    void testComponentRegistersStandardConverter() throws Exception {
 
         final ClassLoader origContextClassLoader = Thread.currentThread().getContextClassLoader();
         try {
@@ -250,7 +250,7 @@ public class MemoryTest {
     }
 
     @Test
-    public void testWeakReference() throws Exception {
+    void testWeakReference() throws Exception {
         final ClassLoader origContextClassLoader = Thread.currentThread().getContextClassLoader();
         try {
             ClassReloader componentLoader = new ClassReloader(origContextClassLoader);

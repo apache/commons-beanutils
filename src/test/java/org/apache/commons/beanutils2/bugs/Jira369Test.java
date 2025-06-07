@@ -75,7 +75,7 @@ public class Jira369Test {
      * Test {@link BeanUtils} getProperty() for property "aRatedCd".
      */
     @Test
-    public void testBeanUtilsGetProperty_aRatedCd() throws Exception {
+    void testBeanUtilsGetProperty_aRatedCd() throws Exception {
         final TestBean bean = new TestBean();
         bean.setARatedCd("foo");
         assertThrows(NoSuchMethodException.class, () -> assertEquals("foo", BeanUtils.getProperty(bean, "aRatedCd")));
@@ -85,7 +85,7 @@ public class Jira369Test {
      * Test {@link BeanUtils} getProperty() for property "ARatedCd".
      */
     @Test
-    public void testBeanUtilsGetProperty_ARatedCd() throws Exception {
+    void testBeanUtilsGetProperty_ARatedCd() throws Exception {
         final TestBean bean = new TestBean();
         bean.setARatedCd("foo");
         assertEquals("foo", BeanUtils.getProperty(bean, "ARatedCd"));
@@ -95,7 +95,7 @@ public class Jira369Test {
      * Test {@link BeanUtils} getProperty() for property "bRatedCd".
      */
     @Test
-    public void testBeanUtilsGetProperty_bRatedCd() throws Exception {
+    void testBeanUtilsGetProperty_bRatedCd() throws Exception {
         final TestBean bean = new TestBean();
         bean.setbRatedCd("foo");
         assertEquals("foo", BeanUtils.getProperty(bean, "bRatedCd"));

@@ -56,7 +56,7 @@ public class EnumDeclaringClassTest {
      * Allow opt-out to make your app less secure but allow access to "declaringClass".
      */
     @Test
-    public void testAllowAccessToClassPropertyFromBeanUtilsBean() throws ReflectiveOperationException {
+    void testAllowAccessToClassPropertyFromBeanUtilsBean() throws ReflectiveOperationException {
         final BeanUtilsBean bub = new BeanUtilsBean();
         final PropertyUtilsBean propertyUtilsBean = bub.getPropertyUtils();
         propertyUtilsBean.removeBeanIntrospector(SuppressPropertiesBeanIntrospector.SUPPRESS_DECLARING_CLASS);
@@ -74,7 +74,7 @@ public class EnumDeclaringClassTest {
      * Allow opt-out to make your app less secure but allow access to "declaringClass".
      */
     @Test
-    public void testAllowAccessToClassPropertyFromPropertyUtilsBean() throws ReflectiveOperationException {
+    void testAllowAccessToClassPropertyFromPropertyUtilsBean() throws ReflectiveOperationException {
         final PropertyUtilsBean propertyUtilsBean = new PropertyUtilsBean();
         propertyUtilsBean.removeBeanIntrospector(SuppressPropertiesBeanIntrospector.SUPPRESS_DECLARING_CLASS);
         final Fixture fixture = new Fixture();
@@ -89,7 +89,7 @@ public class EnumDeclaringClassTest {
      * By default opt-in to security that does not allow access to "declaringClass".
      */
     @Test
-    public void testSuppressClassPropertyByDefaultFromBeanUtilsBean() throws ReflectiveOperationException {
+    void testSuppressClassPropertyByDefaultFromBeanUtilsBean() throws ReflectiveOperationException {
         final Fixture fixture = new Fixture();
         final BeanUtilsBean bub = new BeanUtilsBean();
         assertThrows(NoSuchMethodException.class, () -> bub.getProperty(fixture, "testEnum.declaringClass.classLoader"));
@@ -100,7 +100,7 @@ public class EnumDeclaringClassTest {
      * By default opt-in to security that does not allow access to "declaringClass".
      */
     @Test
-    public void testSuppressClassPropertyByDefaultFromPropertyUtilsBean() throws ReflectiveOperationException {
+    void testSuppressClassPropertyByDefaultFromPropertyUtilsBean() throws ReflectiveOperationException {
         final Fixture fixture = new Fixture();
         final PropertyUtilsBean propertyUtilsBean = new PropertyUtilsBean();
         assertThrows(NoSuchMethodException.class, () -> propertyUtilsBean.getNestedProperty(fixture, "testEnum.declaringClass.classLoader"));

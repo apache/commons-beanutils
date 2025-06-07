@@ -45,7 +45,7 @@ public class BigIntegerLocaleConverterTest extends AbstractLocaleConverterTest<B
      * Uses the default locale, no default value
      */
     @Test
-    public void testConstructor_2() {
+    void testConstructor_2() {
 
         // Construct using default locale
         converter = BigIntegerLocaleConverter.builder().get();
@@ -64,7 +64,7 @@ public class BigIntegerLocaleConverterTest extends AbstractLocaleConverterTest<B
      * Uses the default locale, no default value
      */
     @Test
-    public void testConstructor_3() {
+    void testConstructor_3() {
 
         // Construct using localized pattern (default locale)
         converter = BigIntegerLocaleConverter.builder().setLocalizedPattern(true).get();
@@ -81,7 +81,7 @@ public class BigIntegerLocaleConverterTest extends AbstractLocaleConverterTest<B
      * Test Converter(Locale) constructor
      */
     @Test
-    public void testConstructor_4() {
+    void testConstructor_4() {
 
         // Construct using specified Locale
         converter = BigIntegerLocaleConverter.builder().setLocale(localizedLocale).get();
@@ -98,7 +98,7 @@ public class BigIntegerLocaleConverterTest extends AbstractLocaleConverterTest<B
      * Test Converter(Locale, locPattern) constructor
      */
     @Test
-    public void testConstructor_5() {
+    void testConstructor_5() {
 
         // Construct using specified Locale
         converter = BigIntegerLocaleConverter.builder().setLocale(localizedLocale).setLocalizedPattern(true).get();
@@ -115,7 +115,7 @@ public class BigIntegerLocaleConverterTest extends AbstractLocaleConverterTest<B
      * Test Converter(Locale, pattern) constructor
      */
     @Test
-    public void testConstructor_6() {
+    void testConstructor_6() {
 
         // Construct using specified Locale
         converter = BigIntegerLocaleConverter.builder().setLocale(localizedLocale).setPattern(defaultIntegerPattern).get();
@@ -132,7 +132,7 @@ public class BigIntegerLocaleConverterTest extends AbstractLocaleConverterTest<B
      * Test Converter(Locale, pattern, locPattern) constructor
      */
     @Test
-    public void testConstructor_7() {
+    void testConstructor_7() {
 
         // Construct using specified Locale
         converter = BigIntegerLocaleConverter.builder().setLocale(localizedLocale).setPattern(localizedIntegerPattern).setLocalizedPattern(true).get();
@@ -149,7 +149,7 @@ public class BigIntegerLocaleConverterTest extends AbstractLocaleConverterTest<B
      * Test Converter(defaultValue) constructor
      */
     @Test
-    public void testConstructor_8() {
+    void testConstructor_8() {
 
         // Construct using specified Locale
         converter = BigIntegerLocaleConverter.builder().setDefault(defaultValue).get();
@@ -166,7 +166,7 @@ public class BigIntegerLocaleConverterTest extends AbstractLocaleConverterTest<B
      * Test Converter(defaultValue, locPattern) constructor
      */
     @Test
-    public void testConstructor_9() {
+    void testConstructor_9() {
 
         // Construct using specified Locale
         converter = BigIntegerLocaleConverter.builder().setDefault(defaultValue).setLocalizedPattern(true).get();
@@ -183,7 +183,7 @@ public class BigIntegerLocaleConverterTest extends AbstractLocaleConverterTest<B
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
      */
     @Test
-    public void testConstructorMain() {
+    void testConstructorMain() {
 
         // Construct with localized pattern
         converter = BigIntegerLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(localizedIntegerPattern)

@@ -65,7 +65,7 @@ public class DefaultIntrospectionContextTest {
      * Tests whether a property descriptor can be added.
      */
     @Test
-    public void testAddPropertyDescriptor() {
+    void testAddPropertyDescriptor() {
         final PropertyDescriptor desc = createDescriptor(PROP);
         context.addPropertyDescriptor(desc);
         assertTrue(context.hasProperty(PROP), "Property not found");
@@ -76,7 +76,7 @@ public class DefaultIntrospectionContextTest {
      * Tries to add a null descriptor.
      */
     @Test
-    public void testAddPropertyDescriptorNull() {
+    void testAddPropertyDescriptorNull() {
         assertThrows(NullPointerException.class, () -> context.addPropertyDescriptor(null));
     }
 
@@ -84,7 +84,7 @@ public class DefaultIntrospectionContextTest {
      * Tests whether multiple descriptors can be added.
      */
     @Test
-    public void testAddPropertyDescriptors() {
+    void testAddPropertyDescriptors() {
         final int count = 4;
         final PropertyDescriptor[] descs = new PropertyDescriptor[count];
         final Set<PropertyDescriptor> descSet = new HashSet<>();
@@ -113,7 +113,7 @@ public class DefaultIntrospectionContextTest {
      * Tries to add a null array with property descriptors.
      */
     @Test
-    public void testAddPropertyDescriptorsNull() {
+    void testAddPropertyDescriptorsNull() {
         assertThrows(NullPointerException.class, () -> context.addPropertyDescriptors(null));
     }
 
@@ -121,7 +121,7 @@ public class DefaultIntrospectionContextTest {
      * Tests getPropertyDescriptor() if the property name is unknown.
      */
     @Test
-    public void testGetPropertyDescriptorUnknown() {
+    void testGetPropertyDescriptorUnknown() {
         assertNull(context.getPropertyDescriptor(PROP), "Got a property (1)");
         context.addPropertyDescriptor(createDescriptor(PROP));
         assertNull(context.getPropertyDescriptor("other"), "Got a property (2)");
@@ -131,7 +131,7 @@ public class DefaultIntrospectionContextTest {
      * Tests hasProperty() if the expected result is false.
      */
     @Test
-    public void testHasPropertyFalse() {
+    void testHasPropertyFalse() {
         assertFalse(context.hasProperty(PROP), "Wrong result (1)");
         context.addPropertyDescriptor(createDescriptor(PROP));
         assertFalse(context.hasProperty("other"), "Wrong result (2)");
@@ -141,7 +141,7 @@ public class DefaultIntrospectionContextTest {
      * Tests a newly created instance.
      */
     @Test
-    public void testInit() {
+    void testInit() {
         assertEquals(getClass(), context.getTargetClass(), "Wrong current class");
         assertTrue(context.propertyNames().isEmpty(), "Got property names");
     }
@@ -150,7 +150,7 @@ public class DefaultIntrospectionContextTest {
      * Tests that the set with property names cannot be changed.
      */
     @Test
-    public void testPropertyNamesModify() {
+    void testPropertyNamesModify() {
         final Set<String> names = context.propertyNames();
         assertThrows(UnsupportedOperationException.class, () -> names.add(PROP));
     }
@@ -159,7 +159,7 @@ public class DefaultIntrospectionContextTest {
      * Tests whether a descriptor can be removed.
      */
     @Test
-    public void testRemovePropertyDescriptor() {
+    void testRemovePropertyDescriptor() {
         context.addPropertyDescriptor(createDescriptor(PROP));
         context.removePropertyDescriptor(PROP);
         assertTrue(context.propertyNames().isEmpty(), "Got property names");

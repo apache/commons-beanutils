@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 public class BeanPredicateTest {
 
     @Test
-    public void testEqual() {
+    void testEqual() {
         final Predicate<String> p = s -> s.equals("foo");
         final BeanPredicate<String> predicate = new BeanPredicate<>("stringProperty", p);
         assertTrue(predicate.test(new TestBean("foo")));
@@ -38,7 +38,7 @@ public class BeanPredicateTest {
     }
 
     @Test
-    public void testInstanceOf() {
+    void testInstanceOf() {
         final Predicate<String> p = String.class::isInstance;
         final BeanPredicate<String> predicate = new BeanPredicate<>("stringProperty", p);
         assertTrue(predicate.test(new TestBean("foo")));
@@ -46,7 +46,7 @@ public class BeanPredicateTest {
     }
 
     @Test
-    public void testNotEqual() {
+    void testNotEqual() {
         final Predicate<String> p = s -> !s.equals("foo");
         final BeanPredicate<String> predicate = new BeanPredicate<>("stringProperty", p);
         assertFalse(predicate.test(new TestBean("foo")));
@@ -54,7 +54,7 @@ public class BeanPredicateTest {
     }
 
     @Test
-    public void testNull() {
+    void testNull() {
         final Predicate<String> p = s -> s == null;
         final BeanPredicate<String> predicate = new BeanPredicate<>("stringProperty", p);
         final String nullString = null;

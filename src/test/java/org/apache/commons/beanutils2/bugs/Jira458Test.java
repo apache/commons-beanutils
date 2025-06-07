@@ -45,7 +45,7 @@ public class Jira458Test {
      * Tests a conversion passing in an empty string.
      */
     @Test
-    public void testConversionWithNullDefaultEmptyString() {
+    void testConversionWithNullDefaultEmptyString() {
         checkConversionWithNullDefault("");
     }
 
@@ -53,7 +53,7 @@ public class Jira458Test {
      * Tests a conversion passing in null.
      */
     @Test
-    public void testConversionWithNullDefaultNullInput() {
+    void testConversionWithNullDefaultNullInput() {
         checkConversionWithNullDefault(null);
     }
 }

@@ -54,7 +54,7 @@ public class URIConverterTest {
     }
 
     @Test
-    public void testSimpleConversion() throws Exception {
+    void testSimpleConversion() throws Exception {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from String", };
 
         final Object[] input = { "http://www.apache.org", "http://www.apache.org/", "ftp://cvs.apache.org", "file://project.xml", "http://208.185.179.12",
@@ -78,7 +78,7 @@ public class URIConverterTest {
      * Tests a conversion to an unsupported type.
      */
     @Test
-    public void testUnsupportedType() {
+    void testUnsupportedType() {
         assertThrows(ConversionException.class, () -> converter.convert(Integer.class, "http://www.apache.org"));
     }
 }

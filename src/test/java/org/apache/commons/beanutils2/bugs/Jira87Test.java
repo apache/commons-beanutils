@@ -64,7 +64,7 @@ public class Jira87Test {
      * Interface definition with a mapped property
      */
     @Test
-    public void testJira87() throws Exception {
+    void testJira87() throws Exception {
 
         final Jira87BeanFactory.PublicMappedInterface bean = Jira87BeanFactory.createMappedPropertyBean();
         // The test impl. returns the key value

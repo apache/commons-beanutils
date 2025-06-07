@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 public class Jira493Test {
 
     @Test
-    public void testIndexedProperties() throws Exception {
+    void testIndexedProperties() throws Exception {
         final LazyDynaBean lazyDynaBean = new LazyDynaBean();
         final BeanUtilsBean beanUtilsBean = BeanUtilsBean.getInstance();
         beanUtilsBean.setProperty(lazyDynaBean, "x[0]", "x1");

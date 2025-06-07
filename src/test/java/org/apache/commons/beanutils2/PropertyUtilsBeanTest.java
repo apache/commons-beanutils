@@ -30,25 +30,25 @@ import org.junit.jupiter.api.Test;
 public class PropertyUtilsBeanTest {
 
     @Test
-    public void testGetMappedPropertyDescriptors() throws Exception {
+    void testGetMappedPropertyDescriptors() throws Exception {
         assertNull(new PropertyUtilsBean().getMappedPropertyDescriptors((Object) null));
         assertNull(new PropertyUtilsBean().getMappedPropertyDescriptors((Class<?>) null));
     }
 
     @Test
-    public void testGetPropertyDescriptor() throws Exception {
+    void testGetPropertyDescriptor() throws Exception {
         assertThrows(NullPointerException.class, () -> new PropertyUtilsBean().getPropertyDescriptor((Object) null, null));
         assertThrows(NullPointerException.class, () -> new PropertyUtilsBean().getPropertyDescriptor("", null));
     }
 
     @Test
-    public void testGetPropertyEditorClass() throws Exception {
+    void testGetPropertyEditorClass() throws Exception {
         assertThrows(NullPointerException.class, () -> new PropertyUtilsBean().getPropertyEditorClass(null, ""));
         assertThrows(NullPointerException.class, () -> new PropertyUtilsBean().getPropertyEditorClass("", null));
     }
 
     @Test
-    public void testSetResolver() throws Exception {
+    void testSetResolver() throws Exception {
         final PropertyUtilsBean propertyUtilsBean = new PropertyUtilsBean();
         final Resolver resolver = propertyUtilsBean.getResolver();
         assertNotNull(resolver);

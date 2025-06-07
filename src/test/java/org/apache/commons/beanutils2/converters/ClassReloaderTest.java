@@ -35,7 +35,7 @@ public class ClassReloaderTest {
      * Test basic operation of the ClassReloader.
      */
     @Test
-    public void testBasicOperation() throws Exception {
+    void testBasicOperation() throws Exception {
         final ClassLoader sharedLoader = this.getClass().getClassLoader();
         final ClassReloader componentLoader = new ClassReloader(sharedLoader);
 

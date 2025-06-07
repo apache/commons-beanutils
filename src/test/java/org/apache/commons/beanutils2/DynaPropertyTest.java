@@ -69,7 +69,7 @@ public class DynaPropertyTest {
      * Class under test for boolean equals(Object)
      */
     @Test
-    public void testEqualsObject() {
+    void testEqualsObject() {
 
         assertEquals(testPropertyWithName, testProperty1Duplicate);
         assertEquals(testPropertyWithNameAndType, testProperty2Duplicate);
@@ -83,7 +83,7 @@ public class DynaPropertyTest {
      * Class under test for int hashCode(Object)
      */
     @Test
-    public void testHashCode() {
+    void testHashCode() {
 
         final int initialHashCode = testPropertyWithNameAndTypeAndContentType.hashCode();
         assertEquals(testPropertyWithName.hashCode(), testProperty1Duplicate.hashCode());

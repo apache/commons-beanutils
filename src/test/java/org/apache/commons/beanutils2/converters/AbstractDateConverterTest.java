@@ -155,7 +155,7 @@ public abstract class AbstractDateConverterTest<T> {
      * Assumes convert() returns some non-null instance of getExpectedType().
      */
     @Test
-    public void testConvertDate() {
+    void testConvertDate() {
         final String[] message = { "from Date", "from Calendar", "from SQL Date", "from SQL Time", "from SQL Timestamp", "from LocalDate", "from LocalDateTime",
                 "from ZonedDateTime", "from OffsetDateTime" };
 
@@ -191,7 +191,7 @@ public abstract class AbstractDateConverterTest<T> {
      * Assumes ConversionException in response to covert(getExpectedType(), null).
      */
     @Test
-    public void testConvertNull() {
+    void testConvertNull() {
         assertThrows(ConversionException.class,
                      () -> makeConverter().convert(getExpectedType(), null),
                      "Expected ConversionException");
@@ -218,7 +218,7 @@ public abstract class AbstractDateConverterTest<T> {
      * Test Default Type conversion (i.e. don't specify target type)
      */
     @Test
-    public void testDefaultType() {
+    void testDefaultType() {
         final String pattern = "yyyy-MM-dd";
 
         // Create & Configure the Converter
@@ -244,7 +244,7 @@ public abstract class AbstractDateConverterTest<T> {
      * Test Converter with types it can't handle
      */
     @Test
-    public void testInvalidType() {
+    void testInvalidType() {
 
         // Create & Configure the Converter
         @SuppressWarnings("unchecked") // we are creating a mismatch to assert a failure
@@ -294,7 +294,7 @@ public abstract class AbstractDateConverterTest<T> {
      * Test Converter with multiple patterns
      */
     @Test
-    public void testMultiplePatterns() {
+    void testMultiplePatterns() {
         String testString;
         Object expected;
 
@@ -323,7 +323,7 @@ public abstract class AbstractDateConverterTest<T> {
      * Test Converter with no default value
      */
     @Test
-    public void testPatternDefault() {
+    void testPatternDefault() {
 
         final String pattern = "yyyy-MM-dd";
 
@@ -352,7 +352,7 @@ public abstract class AbstractDateConverterTest<T> {
      * Test Converter with no default value
      */
     @Test
-    public void testPatternNoDefault() {
+    void testPatternNoDefault() {
 
         final String pattern = "yyyy-MM-dd";
 
@@ -396,7 +396,7 @@ public abstract class AbstractDateConverterTest<T> {
      * Test Converter with no default value
      */
     @Test
-    public void testPatternNullDefault() {
+    void testPatternNullDefault() {
 
         final String pattern = "yyyy-MM-dd";
 
@@ -424,7 +424,7 @@ public abstract class AbstractDateConverterTest<T> {
      * Test Conversion to String
      */
     @Test
-    public void testStringConversion() {
+    void testStringConversion() {
 
         final String pattern = "yyyy-MM-dd";
 

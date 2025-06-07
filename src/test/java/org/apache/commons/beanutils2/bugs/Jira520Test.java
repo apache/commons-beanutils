@@ -35,7 +35,7 @@ public class Jira520Test {
      * Allow opt-out to make your app less secure but allow access to "class".
      */
     @Test
-    public void testAllowAccessToClassProperty() throws Exception {
+    void testAllowAccessToClassProperty() throws Exception {
         final BeanUtilsBean bub = new BeanUtilsBean();
         bub.getPropertyUtils().removeBeanIntrospector(SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
         final AlphaBean bean = new AlphaBean();
@@ -47,7 +47,7 @@ public class Jira520Test {
      * By default opt-in to security that does not allow access to "class".
      */
     @Test
-    public void testSuppressClassPropertyByDefault() throws Exception {
+    void testSuppressClassPropertyByDefault() throws Exception {
         final BeanUtilsBean bub = new BeanUtilsBean();
         final AlphaBean bean = new AlphaBean();
         assertThrows(NoSuchMethodException.class, () -> bub.getProperty(bean, "class"));

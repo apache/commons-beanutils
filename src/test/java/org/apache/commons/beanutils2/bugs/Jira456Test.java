@@ -64,7 +64,7 @@ public class Jira456Test {
      * Tests whether a property is recognized as writable even if the reference to its write method was freed.
      */
     @Test
-    public void testPropertyIsWritable() throws Exception {
+    void testPropertyIsWritable() throws Exception {
         final FluentIntrospectionTestBean bean = clearWriteMethodRef();
         assertTrue(pub.isWriteable(bean, TEST_PROP), "Not writable");
     }
@@ -73,7 +73,7 @@ public class Jira456Test {
      * Tests whether a lost write method is automatically recovered and can be invoked.
      */
     @Test
-    public void testWriteMethodRecover() throws Exception {
+    void testWriteMethodRecover() throws Exception {
         final FluentIntrospectionTestBean bean = clearWriteMethodRef();
         final String value = "Test value";
         pub.setProperty(bean, TEST_PROP, value);

@@ -84,7 +84,7 @@ public class Jira349Test {
      * Test {@link PropertyUtils#copyProperties(Object, Object)}
      */
     @Test
-    public void testIssue_BEANUTILS_349_PropertyUtils_copyProperties() {
+    void testIssue_BEANUTILS_349_PropertyUtils_copyProperties() {
         final PrimitiveBean dest = new PrimitiveBean();
         final ObjectBean origin = new ObjectBean();
         assertThrows(IllegalArgumentException.class, () -> PropertyUtils.copyProperties(dest, origin));

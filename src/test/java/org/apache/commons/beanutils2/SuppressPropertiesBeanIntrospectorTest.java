@@ -90,7 +90,7 @@ public class SuppressPropertiesBeanIntrospectorTest {
      * Tests that the set with properties to be removed cannot be modified.
      */
     @Test
-    public void testGetSuppressedPropertiesModify() {
+    void testGetSuppressedPropertiesModify() {
         final SuppressPropertiesBeanIntrospector introspector = new SuppressPropertiesBeanIntrospector(Arrays.asList("p1", "p2"));
         final Set<String> properties = introspector.getSuppressedProperties();
         assertThrows(UnsupportedOperationException.class, () -> properties.add("anotherProperty"));
@@ -100,7 +100,7 @@ public class SuppressPropertiesBeanIntrospectorTest {
      * Tries to create an instance without properties.
      */
     @Test
-    public void testInitNoPropertyNames() {
+    void testInitNoPropertyNames() {
         assertThrows(NullPointerException.class, () -> new SuppressPropertiesBeanIntrospector(null));
     }
 
@@ -108,7 +108,7 @@ public class SuppressPropertiesBeanIntrospectorTest {
      * Tests that a defensive copy is created from the collection with properties to be removed.
      */
     @Test
-    public void testPropertyNamesDefensiveCopy() throws IntrospectionException {
+    void testPropertyNamesDefensiveCopy() throws IntrospectionException {
         final Collection<String> properties = new HashSet<>();
         properties.add("prop1");
         final SuppressPropertiesBeanIntrospector introspector = new SuppressPropertiesBeanIntrospector(properties);
@@ -124,7 +124,7 @@ public class SuppressPropertiesBeanIntrospectorTest {
      * Tests whether the expected properties have been removed during introspection.
      */
     @Test
-    public void testRemovePropertiesDuringIntrospection() throws IntrospectionException {
+    void testRemovePropertiesDuringIntrospection() throws IntrospectionException {
         final String[] properties = { "test", "other", "oneMore" };
         final SuppressPropertiesBeanIntrospector introspector = new SuppressPropertiesBeanIntrospector(Arrays.asList(properties));
         final IntrospectionContextTestImpl context = new IntrospectionContextTestImpl();

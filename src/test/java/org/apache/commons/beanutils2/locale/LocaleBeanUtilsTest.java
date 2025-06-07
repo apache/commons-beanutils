@@ -34,7 +34,7 @@ public class LocaleBeanUtilsTest {
      * Test setting a nested indexed property
      */
     @Test
-    public void testSetNestedPropertyIndexed() throws Exception {
+    void testSetNestedPropertyIndexed() throws Exception {
         final TestBean bean = new TestBean();
         bean.getNested().setIntIndexed(1, 51);
         assertEquals(51, bean.getNested().getIntIndexed(1), "Initial value[1] 51");
@@ -46,7 +46,7 @@ public class LocaleBeanUtilsTest {
      * Test setting a nested simple property
      */
     @Test
-    public void testSetNestedPropertySimple() throws Exception {
+    void testSetNestedPropertySimple() throws Exception {
         final TestBean bean = new TestBean();
         bean.getNested().setIntProperty(5);
         assertEquals(5, bean.getNested().getIntProperty(), "Initial value 5");

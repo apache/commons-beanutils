@@ -54,7 +54,7 @@ public class FileConverterTest {
     }
 
     @Test
-    public void testSimpleConversion() throws Exception {
+    void testSimpleConversion() throws Exception {
         final String[] message = { "from String", "from String", "from String" };
 
         final Object[] input = { "/tmp", "/tmp/foo.txt", "/tmp/does/not/exist.foo" };
@@ -71,7 +71,7 @@ public class FileConverterTest {
      * Tries a conversion to an unsupported target type.
      */
     @Test
-    public void testUnsupportedTargetType() {
+    void testUnsupportedTargetType() {
         assertThrows(ConversionException.class, () -> converter.convert(Integer.class, "/tmp"));
     }
 }

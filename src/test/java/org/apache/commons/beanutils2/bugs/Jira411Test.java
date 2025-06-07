@@ -51,7 +51,7 @@ public class Jira411Test {
     }
 
     @Test
-    public void testSetProperty() throws Exception {
+    void testSetProperty() throws Exception {
         instance.setProperty(testBean, "imgLink.x", "1");
     }
 }

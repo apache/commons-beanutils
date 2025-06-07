@@ -105,7 +105,7 @@ public class WrapDynaBeanTest extends BasicDynaBeanTest {
 
     /** Tests getInstance method */
     @Test
-    public void testGetInstance() {
+    void testGetInstance() {
         final AlphaBean alphaBean = new AlphaBean("Now On Air... John Peel");
         final WrapDynaBean dynaBean = new WrapDynaBean(alphaBean);
         final Object wrappedInstance = dynaBean.getInstance();
@@ -118,7 +118,7 @@ public class WrapDynaBeanTest extends BasicDynaBeanTest {
      * Tests whether caching works for WrapDynaClass objects.
      */
     @Test
-    public void testGetWrapDynaClassFromCache() {
+    void testGetWrapDynaClassFromCache() {
         final WrapDynaClass clazz = WrapDynaClass.createDynaClass(TestBean.class);
         assertSame(clazz, WrapDynaClass.createDynaClass(TestBean.class), "Instance not cached");
     }
@@ -127,7 +127,7 @@ public class WrapDynaBeanTest extends BasicDynaBeanTest {
      * Tests whether the PropertyUtilsBean instance associated with a WrapDynaClass is taken into account when accessing an instance from the cache.
      */
     @Test
-    public void testGetWrapDynaClassFromCacheWithPropUtils() {
+    void testGetWrapDynaClassFromCacheWithPropUtils() {
         final WrapDynaClass clazz = WrapDynaClass.createDynaClass(TestBean.class);
         final PropertyUtilsBean pu = new PropertyUtilsBean();
         final WrapDynaClass clazz2 = WrapDynaClass.createDynaClass(TestBean.class, pu);
@@ -138,7 +138,7 @@ public class WrapDynaBeanTest extends BasicDynaBeanTest {
      * The {@code set()} method.
      */
     @Test
-    public void testIndexedProperties() {
+    void testIndexedProperties() {
 
         // Invalid getter
         assertThrows(IllegalArgumentException.class, () -> bean.get("invalidProperty", 0));
@@ -164,7 +164,7 @@ public class WrapDynaBeanTest extends BasicDynaBeanTest {
      * Tests whether a WrapDynaClass can be provided when constructing a bean.
      */
     @Test
-    public void testInitWithDynaClass() {
+    void testInitWithDynaClass() {
         final WrapDynaClass clazz = WrapDynaClass.createDynaClass(TestBean.class);
         bean = new WrapDynaBean(new TestBean(), clazz);
         assertSame(clazz, bean.getDynaClass(), "Wrong DynaClass");
@@ -175,7 +175,7 @@ public class WrapDynaBeanTest extends BasicDynaBeanTest {
      * Tests whether a custom PropertyUtilsBean instance can be used for introspection of bean properties.
      */
     @Test
-    public void testIntrospectionWithCustomPropUtils() {
+    void testIntrospectionWithCustomPropUtils() {
         final PropertyUtilsBean pu = new PropertyUtilsBean();
         pu.addBeanIntrospector(new FluentPropertyBeanIntrospector());
         final WrapDynaClass dynaClass = WrapDynaClass.createDynaClass(FluentIntrospectionTestBean.class, pu);
@@ -190,7 +190,7 @@ public class WrapDynaBeanTest extends BasicDynaBeanTest {
      */
     @Override
     @Test
-    public void testMappedContains() {
+    void testMappedContains() {
         assertThrows(UnsupportedOperationException.class, () -> bean.contains("mappedProperty", "First Key"));
         assertThrows(UnsupportedOperationException.class, () -> bean.contains("mappedProperty", "Unknown Key"));
     }
@@ -200,7 +200,7 @@ public class WrapDynaBeanTest extends BasicDynaBeanTest {
      */
     @Override
     @Test
-    public void testMappedRemove() {
+    void testMappedRemove() {
 
         assertThrows(UnsupportedOperationException.class, () -> bean.contains("mappedProperty", "First Key"));
         assertThrows(UnsupportedOperationException.class, () -> bean.remove("mappedProperty", "First Key"));
@@ -212,7 +212,7 @@ public class WrapDynaBeanTest extends BasicDynaBeanTest {
 
     /** Tests the newInstance implementation for WrapDynaClass */
     @Test
-    public void testNewInstance() throws Exception {
+    void testNewInstance() throws Exception {
         final WrapDynaClass dynaClass = WrapDynaClass.createDynaClass(AlphaBean.class);
         final Object createdInstance = dynaClass.newInstance();
         assertInstanceOf(WrapDynaBean.class, createdInstance, "Object type is WrapDynaBean");
@@ -225,7 +225,7 @@ public class WrapDynaBeanTest extends BasicDynaBeanTest {
      */
     @Override
     @Test
-    public void testNotSerializableException() throws Exception {
+    void testNotSerializableException() throws Exception {
         // Create a bean and set a value
         final WrapDynaBean origBean = new WrapDynaBean(new TestBean());
         final Integer newValue = Integer.valueOf(789);
@@ -240,7 +240,7 @@ public class WrapDynaBeanTest extends BasicDynaBeanTest {
      * The {@code set()} method.
      */
     @Test
-    public void testSimpleProperties() {
+    void testSimpleProperties() {
 
         checkSimplePropertyAccess();
 

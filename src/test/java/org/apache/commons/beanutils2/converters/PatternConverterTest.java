@@ -40,7 +40,7 @@ public class PatternConverterTest {
     }
 
     @Test
-    public void testConvertingPattern() {
+    void testConvertingPattern() {
         final String expected = "(?i)Ow.+O";
         final String actual = converter.convert(Pattern.class, "(?i)Ow.+O").toString();
 

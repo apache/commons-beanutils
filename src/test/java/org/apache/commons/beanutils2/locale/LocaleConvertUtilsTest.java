@@ -269,7 +269,7 @@ public class LocaleConvertUtilsTest {
      * Test conversion of a String array using a Locale and pattern.
      */
     @Test
-    public void testConvertStringArrayLocaleNull() {
+    void testConvertStringArrayLocaleNull() {
         final Object result = LocaleConvertUtils.convert(new String[] { "123" }, Integer[].class, null, "#,###");
         assertNotNull(result, "Null Result");
         assertEquals(Integer[].class, result.getClass(), "Integer Array Type");
@@ -281,7 +281,7 @@ public class LocaleConvertUtilsTest {
      * Test conversion of a String using a Locale and pattern.
      */
     @Test
-    public void testConvertStringLocaleNull() {
+    void testConvertStringLocaleNull() {
         final Object result = LocaleConvertUtils.convert("123", Integer.class, null, "#,###");
         assertNotNull(result, "Null Result");
         assertEquals(Integer.class, result.getClass(), "Integer Type");
@@ -293,7 +293,7 @@ public class LocaleConvertUtilsTest {
      * (This test is added to prevent a regression after the locale converters have been generified.)
      */
     @Test
-    public void testDefaultToStringConversionUnsupportedType() {
+    void testDefaultToStringConversionUnsupportedType() {
         final Integer value = 20131101;
         assertEquals(value.toString(), LocaleConvertUtils.convert(value.toString(), getClass()), "Wrong result");
     }
@@ -302,7 +302,7 @@ public class LocaleConvertUtilsTest {
      * Negative scalar conversion tests. These rely on the standard default value conversions in LocaleConvertUtils.
      */
     @Test
-    public void testNegativeScalar() {
+    void testNegativeScalar() {
         /*
          * fixme Boolean converters not implemented at this point value = LocaleConvertUtils.convert("foo", Boolean.TYPE); ...
          *
@@ -330,7 +330,7 @@ public class LocaleConvertUtilsTest {
      * Test conversion of object to string for scalars.
      */
     @Test
-    public void testObjectToStringScalar() {
+    void testObjectToStringScalar() {
 
         assertEquals("false", LocaleConvertUtils.convert(Boolean.FALSE), "Boolean->String");
         assertEquals("true", LocaleConvertUtils.convert(Boolean.TRUE), "Boolean->String");
@@ -350,7 +350,7 @@ public class LocaleConvertUtilsTest {
      * Positive scalar conversion tests.
      */
     @Test
-    public void testPositiveScalar() {
+    void testPositiveScalar() {
         Object value;
 
         /*

@@ -82,7 +82,7 @@ public class Jira359Test {
      * Test {@link BeanUtils} setProperty() String to array with colon value
      */
     @Test
-    public void testBeanUtilsSetProperty_CustomConvertStringToArray_WithColonValue() throws Exception {
+    void testBeanUtilsSetProperty_CustomConvertStringToArray_WithColonValue() throws Exception {
         final ArrayConverter converter = new ArrayConverter(String[].class, new StringConverter());
         converter.setAllowedChars(new char[] { '.', '-', ':' });
 
@@ -101,7 +101,7 @@ public class Jira359Test {
      * Test {@link BeanUtils} setProperty() String to array with colon value
      */
     @Test
-    public void testBeanUtilsSetProperty_DefaultConvertStringToArray_WithColonValue() throws Exception {
+    void testBeanUtilsSetProperty_DefaultConvertStringToArray_WithColonValue() throws Exception {
         final SimplePojoData simplePojo = new SimplePojoData();
         BeanUtils.setProperty(simplePojo, "jcrMixinTypes", "mix:rereferencible,mix:simple");
         showArray("Default WithColonValue", simplePojo.getJcrMixinTypes());
@@ -116,7 +116,7 @@ public class Jira359Test {
      * Test {@link BeanUtils} setProperty() String to array without colon value
      */
     @Test
-    public void testBeanUtilsSetProperty_DefaultConvertStringToArray_WithoutColonValue() throws Exception {
+    void testBeanUtilsSetProperty_DefaultConvertStringToArray_WithoutColonValue() throws Exception {
         final SimplePojoData simplePojo = new SimplePojoData();
         BeanUtils.setProperty(simplePojo, "jcrMixinTypes", "mixrereferencible,mixsimple");
         showArray("Default WithoutColonValue", simplePojo.getJcrMixinTypes());
@@ -129,7 +129,7 @@ public class Jira359Test {
      * Test {@link BeanUtils} setProperty() String to array without colon value and no comma
      */
     @Test
-    public void testBeanUtilsSetProperty_DefaultConvertStringToArray_WithoutColonValueAndNocoma() throws Exception {
+    void testBeanUtilsSetProperty_DefaultConvertStringToArray_WithoutColonValueAndNocoma() throws Exception {
         final SimplePojoData simplePojo = new SimplePojoData();
         BeanUtils.setProperty(simplePojo, "jcrMixinTypes", "mixrereferencible");
         showArray("Default WithoutColonAndNocoma", simplePojo.getJcrMixinTypes());

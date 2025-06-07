@@ -135,7 +135,7 @@ public class BasicDynaBeanTest {
      * Corner cases on getDynaProperty invalid arguments.
      */
     @Test
-    public void testGetDescriptorArguments() {
+    void testGetDescriptorArguments() {
         assertNull(bean.getDynaClass().getDynaProperty("unknown"));
         assertThrows(NullPointerException.class, () -> bean.getDynaClass().getDynaProperty(null));
     }
@@ -156,7 +156,7 @@ public class BasicDynaBeanTest {
      * Positive getDynaProperty on property {@code booleanProperty}.
      */
     @Test
-    public void testGetDescriptorBoolean() {
+    void testGetDescriptorBoolean() {
         testGetDescriptorBase("booleanProperty", Boolean.TYPE);
     }
 
@@ -164,7 +164,7 @@ public class BasicDynaBeanTest {
      * Positive getDynaProperty on property {@code doubleProperty}.
      */
     @Test
-    public void testGetDescriptorDouble() {
+    void testGetDescriptorDouble() {
         testGetDescriptorBase("doubleProperty", Double.TYPE);
     }
 
@@ -172,7 +172,7 @@ public class BasicDynaBeanTest {
      * Positive getDynaProperty on property {@code floatProperty}.
      */
     @Test
-    public void testGetDescriptorFloat() {
+    void testGetDescriptorFloat() {
         testGetDescriptorBase("floatProperty", Float.TYPE);
     }
 
@@ -180,7 +180,7 @@ public class BasicDynaBeanTest {
      * Positive getDynaProperty on property {@code intProperty}.
      */
     @Test
-    public void testGetDescriptorInt() {
+    void testGetDescriptorInt() {
         testGetDescriptorBase("intProperty", Integer.TYPE);
     }
 
@@ -188,7 +188,7 @@ public class BasicDynaBeanTest {
      * Positive getDynaProperty on property {@code longProperty}.
      */
     @Test
-    public void testGetDescriptorLong() {
+    void testGetDescriptorLong() {
         testGetDescriptorBase("longProperty", Long.TYPE);
     }
 
@@ -196,7 +196,7 @@ public class BasicDynaBeanTest {
      * Positive test for getDynaProperties(). Each property name listed in {@code properties} should be returned exactly once.
      */
     @Test
-    public void testGetDescriptors() {
+    void testGetDescriptors() {
         final DynaProperty[] pd = bean.getDynaClass().getDynaProperties();
         assertNotNull(pd, "Got descriptors");
         final int[] count = new int[properties.length];
@@ -221,7 +221,7 @@ public class BasicDynaBeanTest {
      * Positive getDynaProperty on property {@code booleanSecond} that uses an "is" method as the getter.
      */
     @Test
-    public void testGetDescriptorSecond() {
+    void testGetDescriptorSecond() {
         testGetDescriptorBase("booleanSecond", Boolean.TYPE);
     }
 
@@ -229,7 +229,7 @@ public class BasicDynaBeanTest {
      * Positive getDynaProperty on property {@code shortProperty}.
      */
     @Test
-    public void testGetDescriptorShort() {
+    void testGetDescriptorShort() {
         testGetDescriptorBase("shortProperty", Short.TYPE);
     }
 
@@ -237,7 +237,7 @@ public class BasicDynaBeanTest {
      * Positive getDynaProperty on property {@code stringProperty}.
      */
     @Test
-    public void testGetDescriptorString() {
+    void testGetDescriptorString() {
         testGetDescriptorBase("stringProperty", String.class);
     }
 
@@ -245,7 +245,7 @@ public class BasicDynaBeanTest {
      * Corner cases on getIndexedProperty invalid arguments.
      */
     @Test
-    public void testGetIndexedArguments() {
+    void testGetIndexedArguments() {
         assertThrows(IndexOutOfBoundsException.class, () -> bean.get("intArray", -1));
     }
 
@@ -253,7 +253,7 @@ public class BasicDynaBeanTest {
      * Positive and negative tests on getIndexedProperty valid arguments.
      */
     @Test
-    public void testGetIndexedValues() {
+    void testGetIndexedValues() {
         Object value = null;
         for (int i = 0; i < 5; i++) {
             value = bean.get("intArray", i);
@@ -283,7 +283,7 @@ public class BasicDynaBeanTest {
      * Corner cases on getMappedProperty invalid arguments.
      */
     @Test
-    public void testGetMappedArguments() {
+    void testGetMappedArguments() {
         final Object value = bean.get("mappedProperty", "unknown");
         assertNull(value, "Should not return a value");
     }
@@ -292,7 +292,7 @@ public class BasicDynaBeanTest {
      * Positive and negative tests on getMappedProperty valid arguments.
      */
     @Test
-    public void testGetMappedValues() {
+    void testGetMappedValues() {
         Object value = null;
         value = bean.get("mappedProperty", "First Key");
         assertEquals("First Value", value, "Can find first value");
@@ -306,7 +306,7 @@ public class BasicDynaBeanTest {
      * Corner cases on getSimpleProperty invalid arguments.
      */
     @Test
-    public void testGetSimpleArguments() {
+    void testGetSimpleArguments() {
         assertThrows(NullPointerException.class, () -> bean.get(null));
     }
 
@@ -314,7 +314,7 @@ public class BasicDynaBeanTest {
      * Test getSimpleProperty on a boolean property.
      */
     @Test
-    public void testGetSimpleBoolean() {
+    void testGetSimpleBoolean() {
         final Object value = bean.get("booleanProperty");
         assertNotNull(value, "Got a value");
         assertInstanceOf(Boolean.class, value, "Got correct type");
@@ -325,7 +325,7 @@ public class BasicDynaBeanTest {
      * Test getSimpleProperty on a double property.
      */
     @Test
-    public void testGetSimpleDouble() {
+    void testGetSimpleDouble() {
         final Object value = bean.get("doubleProperty");
         assertNotNull(value, "Got a value");
         assertInstanceOf(Double.class, value, "Got correct type");
@@ -336,7 +336,7 @@ public class BasicDynaBeanTest {
      * Test getSimpleProperty on a float property.
      */
     @Test
-    public void testGetSimpleFloat() {
+    void testGetSimpleFloat() {
         final Object value = bean.get("floatProperty");
         assertNotNull(value, "Got a value");
         assertInstanceOf(Float.class, value, "Got correct type");
@@ -347,7 +347,7 @@ public class BasicDynaBeanTest {
      * Test getSimpleProperty on a int property.
      */
     @Test
-    public void testGetSimpleInt() {
+    void testGetSimpleInt() {
         final Object value = bean.get("intProperty");
         assertNotNull(value, "Got a value");
         assertInstanceOf(Integer.class, value, "Got correct type");
@@ -358,7 +358,7 @@ public class BasicDynaBeanTest {
      * Test getSimpleProperty on a long property.
      */
     @Test
-    public void testGetSimpleLong() {
+    void testGetSimpleLong() {
         final Object value = bean.get("longProperty");
         assertNotNull(value, "Got a value");
         assertInstanceOf(Long.class, value, "Got correct type");
@@ -369,7 +369,7 @@ public class BasicDynaBeanTest {
      * Test getSimpleProperty on a short property.
      */
     @Test
-    public void testGetSimpleShort() {
+    void testGetSimpleShort() {
         final Object value = bean.get("shortProperty");
         assertNotNull(value, "Got a value");
         assertInstanceOf(Short.class, value, "Got correct type");
@@ -380,7 +380,7 @@ public class BasicDynaBeanTest {
      * Test getSimpleProperty on a String property.
      */
     @Test
-    public void testGetSimpleString() {
+    void testGetSimpleString() {
         final Object value = bean.get("stringProperty");
         assertNotNull(value, "Got a value");
         assertInstanceOf(String.class, value, "Got correct type");
@@ -391,7 +391,7 @@ public class BasicDynaBeanTest {
      * Test {@code contains()} method for mapped properties.
      */
     @Test
-    public void testMappedContains() {
+    void testMappedContains() {
         assertTrue(bean.contains("mappedProperty", "First Key"), "Can see first key");
         assertFalse(bean.contains("mappedProperty", "Unknown Key"), "Can not see unknown key");
     }
@@ -400,7 +400,7 @@ public class BasicDynaBeanTest {
      * Test {@code remove()} method for mapped properties.
      */
     @Test
-    public void testMappedRemove() {
+    void testMappedRemove() {
         assertTrue(bean.contains("mappedProperty", "First Key"), "Can see first key");
         bean.remove("mappedProperty", "First Key");
         assertFalse(bean.contains("mappedProperty", "First Key"), "Can not see first key");
@@ -413,7 +413,7 @@ public class BasicDynaBeanTest {
      * Test serialization and deserialization.
      */
     @Test
-    public void testNotSerializableException() throws Exception {
+    void testNotSerializableException() throws Exception {
         // Serialize the test bean
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try (ObjectOutputStream oos = new ObjectOutputStream(baos)) {
@@ -433,7 +433,7 @@ public class BasicDynaBeanTest {
      * Corner cases on setIndexedProperty invalid arguments.
      */
     @Test
-    public void testSetIndexedArguments() {
+    void testSetIndexedArguments() {
         assertThrows(IndexOutOfBoundsException.class, () -> bean.set("intArray", -1, Integer.valueOf(0)));
     }
 
@@ -441,7 +441,7 @@ public class BasicDynaBeanTest {
      * Positive and negative tests on setIndexedProperty valid arguments.
      */
     @Test
-    public void testSetIndexedValues() {
+    void testSetIndexedValues() {
         Object value = null;
         bean.set("intArray", 0, Integer.valueOf(1));
         value = bean.get("intArray", 0);
@@ -474,7 +474,7 @@ public class BasicDynaBeanTest {
      * Positive and negative tests on setMappedProperty valid arguments.
      */
     @Test
-    public void testSetMappedValues() {
+    void testSetMappedValues() {
         bean.set("mappedProperty", "First Key", "New First Value");
         assertEquals("New First Value", (String) bean.get("mappedProperty", "First Key"), "Can replace old value");
         bean.set("mappedProperty", "Fourth Key", "Fourth Value");
@@ -485,7 +485,7 @@ public class BasicDynaBeanTest {
      * Test setSimpleProperty on a boolean property.
      */
     @Test
-    public void testSetSimpleBoolean() {
+    void testSetSimpleBoolean() {
         final boolean oldValue = ((Boolean) bean.get("booleanProperty")).booleanValue();
         final boolean newValue = !oldValue;
         bean.set("booleanProperty", Boolean.valueOf(newValue));
@@ -496,7 +496,7 @@ public class BasicDynaBeanTest {
      * Test setSimpleProperty on a double property.
      */
     @Test
-    public void testSetSimpleDouble() {
+    void testSetSimpleDouble() {
         final double oldValue = ((Double) bean.get("doubleProperty")).doubleValue();
         final double newValue = oldValue + 1.0;
         bean.set("doubleProperty", Double.valueOf(newValue));
@@ -507,7 +507,7 @@ public class BasicDynaBeanTest {
      * Test setSimpleProperty on a float property.
      */
     @Test
-    public void testSetSimpleFloat() {
+    void testSetSimpleFloat() {
         final float oldValue = ((Float) bean.get("floatProperty")).floatValue();
         final float newValue = oldValue + (float) 1.0;
         bean.set("floatProperty", Float.valueOf(newValue));
@@ -518,7 +518,7 @@ public class BasicDynaBeanTest {
      * Test setSimpleProperty on a int property.
      */
     @Test
-    public void testSetSimpleInt() {
+    void testSetSimpleInt() {
         final int oldValue = ((Integer) bean.get("intProperty")).intValue();
         final int newValue = oldValue + 1;
         bean.set("intProperty", Integer.valueOf(newValue));
@@ -529,7 +529,7 @@ public class BasicDynaBeanTest {
      * Test setSimpleProperty on a long property.
      */
     @Test
-    public void testSetSimpleLong() {
+    void testSetSimpleLong() {
         final long oldValue = ((Long) bean.get("longProperty")).longValue();
         final long newValue = oldValue + 1;
         bean.set("longProperty", Long.valueOf(newValue));
@@ -540,7 +540,7 @@ public class BasicDynaBeanTest {
      * Test setSimpleProperty on a short property.
      */
     @Test
-    public void testSetSimpleShort() {
+    void testSetSimpleShort() {
         final short oldValue = ((Short) bean.get("shortProperty")).shortValue();
         final short newValue = (short) (oldValue + 1);
         bean.set("shortProperty", Short.valueOf(newValue));
@@ -551,7 +551,7 @@ public class BasicDynaBeanTest {
      * Test setSimpleProperty on a String property.
      */
     @Test
-    public void testSetSimpleString() {
+    void testSetSimpleString() {
         final String oldValue = (String) bean.get("stringProperty");
         final String newValue = oldValue + " Extra Value";
         bean.set("stringProperty", newValue);

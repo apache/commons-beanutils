@@ -120,7 +120,7 @@ public class BeanUtilsBenchCase {
 
     // Time copyProperties() from a bean
     @Test
-    public void testCopyPropertiesBean() throws Exception {
+    void testCopyPropertiesBean() throws Exception {
 
         long startMillis;
         long stopMillis;
@@ -151,7 +151,7 @@ public class BeanUtilsBenchCase {
 
     // Time copyProperties() from a DynaBean
     @Test
-    public void testCopyPropertiesDyna() throws Exception {
+    void testCopyPropertiesDyna() throws Exception {
 
         long startMillis;
         long stopMillis;
@@ -182,7 +182,7 @@ public class BeanUtilsBenchCase {
 
     // Time copyProperties() from a Map of Objects
     @Test
-    public void testCopyPropertiesMap() throws Exception {
+    void testCopyPropertiesMap() throws Exception {
 
         long startMillis;
         long stopMillis;
@@ -213,7 +213,7 @@ public class BeanUtilsBenchCase {
 
     // Time copyProperties() from a Map of Strings
     @Test
-    public void testCopyPropertiesStrs() throws Exception {
+    void testCopyPropertiesStrs() throws Exception {
 
         long startMillis;
         long stopMillis;
@@ -244,7 +244,7 @@ public class BeanUtilsBenchCase {
 
     // Time populate() from a Map of Objects
     @Test
-    public void testPopulateMap() throws Exception {
+    void testPopulateMap() throws Exception {
 
         long startMillis;
         long stop;
@@ -276,7 +276,7 @@ public class BeanUtilsBenchCase {
     // Time populate() from a Map of Strings
     // NOTE - This simulates what Struts does when processing form beans
     @Test
-    public void testPopulateStrs() throws Exception {
+    void testPopulateStrs() throws Exception {
 
         long startMillis;
         long stop;

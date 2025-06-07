@@ -104,7 +104,7 @@ class DateLocaleConverterTest extends AbstractLocaleConverterTest<Date> {
      * Test Calendar
      */
     @Test
-    public void testCalendarObject() {
+    void testCalendarObject() {
         converter = DateLocaleConverter.builder().setLocale(defaultLocale).get();
         final Calendar calendar = Calendar.getInstance();
         calendar.setTime((java.util.Date) expectedValue);
@@ -117,7 +117,7 @@ class DateLocaleConverterTest extends AbstractLocaleConverterTest<Date> {
      * Uses the default locale, no default value
      */
     @Test
-    public void testConstructor_2() {
+    void testConstructor_2() {
 
         // Construct using default pattern & default locale
         converter = DateLocaleConverter.builder().get();
@@ -144,7 +144,7 @@ class DateLocaleConverterTest extends AbstractLocaleConverterTest<Date> {
      * Uses the default locale, no default value
      */
     @Test
-    public void testConstructor_3() {
+    void testConstructor_3() {
 
         // Construct using default pattern & default locale
         converter = DateLocaleConverter.builder().setLocalizedPattern(true).get();
@@ -161,7 +161,7 @@ class DateLocaleConverterTest extends AbstractLocaleConverterTest<Date> {
      * Test Converter(Locale) constructor
      */
     @Test
-    public void testConstructor_4() {
+    void testConstructor_4() {
 
         // Construct using specified Locale
         converter = DateLocaleConverter.builder().setLocale(localizedLocale).get();
@@ -178,7 +178,7 @@ class DateLocaleConverterTest extends AbstractLocaleConverterTest<Date> {
      * Test Converter(Locale, locPattern) constructor
      */
     @Test
-    public void testConstructor_5() {
+    void testConstructor_5() {
 
         // Skip this test if no valid symbols for the locale
         if (!validLocalDateSymbols) {
@@ -201,7 +201,7 @@ class DateLocaleConverterTest extends AbstractLocaleConverterTest<Date> {
      * Test Converter(Locale, pattern) constructor
      */
     @Test
-    public void testConstructor_6() {
+    void testConstructor_6() {
 
         // Construct using specified Locale
         converter = DateLocaleConverter.builder().setLocale(localizedLocale).setPattern(defaultDatePattern).get();
@@ -218,7 +218,7 @@ class DateLocaleConverterTest extends AbstractLocaleConverterTest<Date> {
      * Test Converter(Locale, pattern, locPattern) constructor
      */
     @Test
-    public void testConstructor_7() {
+    void testConstructor_7() {
 
         // Skip this test if no valid symbols for the locale
         if (!validLocalDateSymbols) {
@@ -247,7 +247,7 @@ class DateLocaleConverterTest extends AbstractLocaleConverterTest<Date> {
      * Test Converter(defaultValue) constructor
      */
     @Test
-    public void testConstructor_8() {
+    void testConstructor_8() {
 
         // Construct using specified Locale
         converter = DateLocaleConverter.builder().setDefault(defaultValue).get();
@@ -264,7 +264,7 @@ class DateLocaleConverterTest extends AbstractLocaleConverterTest<Date> {
      * Test Converter(defaultValue, locPattern) constructor
      */
     @Test
-    public void testConstructor_9() {
+    void testConstructor_9() {
 
         // Construct using specified Locale
         converter = DateLocaleConverter.builder().setDefault(defaultValue).setLocalizedPattern(true).get();
@@ -289,7 +289,7 @@ class DateLocaleConverterTest extends AbstractLocaleConverterTest<Date> {
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
      */
     @Test
-    public void testConstructorMain() {
+    void testConstructorMain() {
 
         // Skip this test if no valid symbols for the locale
         if (!validLocalDateSymbols) {
@@ -348,7 +348,7 @@ class DateLocaleConverterTest extends AbstractLocaleConverterTest<Date> {
      * Test java.util.Date
      */
     @Test
-    public void testDateObject() {
+    void testDateObject() {
         converter = DateLocaleConverter.builder().setLocale(defaultLocale).get();
         assertEquals(expectedValue, converter.convert(expectedValue), "java.util.Date");
     }
@@ -357,7 +357,7 @@ class DateLocaleConverterTest extends AbstractLocaleConverterTest<Date> {
      * Test invalid date
      */
     @Test
-    public void testInvalidDate() {
+    void testInvalidDate() {
 
         converter = DateLocaleConverter.builder().setLocale(defaultLocale).get();
 
@@ -376,7 +376,7 @@ class DateLocaleConverterTest extends AbstractLocaleConverterTest<Date> {
     }
 
     @Test
-    public void testSetLenient() {
+    void testSetLenient() {
         // make sure that date format works as expected
         final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.UK);
 

@@ -120,7 +120,7 @@ public class DynaBeanMapDecoratorTest {
      * Test clear() method
      */
     @Test
-    public void testClear() {
+    void testClear() {
         assertThrows(UnsupportedOperationException.class, () -> decoratedMap.clear());
         assertThrows(UnsupportedOperationException.class, () -> modifiableMap.clear());
     }
@@ -129,7 +129,7 @@ public class DynaBeanMapDecoratorTest {
      * Test containsKey() method
      */
     @Test
-    public void testContainsKey() {
+    void testContainsKey() {
         assertTrue(decoratedMap.containsKey(stringProp.getName()), "decoratedMap true");
         assertFalse(decoratedMap.containsKey("xyz"), "decoratedMap false");
     }
@@ -138,7 +138,7 @@ public class DynaBeanMapDecoratorTest {
      * Test containsValue() method
      */
     @Test
-    public void testContainsValue() {
+    void testContainsValue() {
         assertTrue(decoratedMap.containsValue(stringVal), "decoratedMap true");
         assertFalse(decoratedMap.containsValue("xyz"), "decoratedMap false");
     }
@@ -147,7 +147,7 @@ public class DynaBeanMapDecoratorTest {
      * Test entrySet() method
      */
     @Test
-    public void testEntrySet() {
+    void testEntrySet() {
         final Set<Map.Entry<String, Object>> set = modifiableMap.entrySet();
 
         // Check the Set can't be modified
@@ -176,7 +176,7 @@ public class DynaBeanMapDecoratorTest {
      * Test get() method
      */
     @Test
-    public void testGet() {
+    void testGet() {
         // valid property name
         assertEquals(stringVal, decoratedMap.get(stringProp.getName()), "decoratedMap valid");
         // invalid property name
@@ -187,7 +187,7 @@ public class DynaBeanMapDecoratorTest {
      * Test isEmpty() method
      */
     @Test
-    public void testIsEmpty() {
+    void testIsEmpty() {
         assertTrue(emptyMap.isEmpty(), "Empty");
         assertFalse(decoratedMap.isEmpty(), "Not Empty");
     }
@@ -196,7 +196,7 @@ public class DynaBeanMapDecoratorTest {
      * Test isReadOnly() method
      */
     @Test
-    public void testIsReadOnly() {
+    void testIsReadOnly() {
         assertTrue(((DynaBeanPropertyMapDecorator) decoratedMap).isReadOnly(), "decoratedMap true");
         assertFalse(((DynaBeanPropertyMapDecorator) modifiableMap).isReadOnly(), "modifiableMap false");
     }
@@ -205,7 +205,7 @@ public class DynaBeanMapDecoratorTest {
      * Test keySet() method
      */
     @Test
-    public void testKeySet() {
+    void testKeySet() {
         final Set<String> set = modifiableMap.keySet();
 
         // Check the Set can't be modified
@@ -223,7 +223,7 @@ public class DynaBeanMapDecoratorTest {
      * Test put() method
      */
     @Test
-    public void testPut() {
+    void testPut() {
         final String newValue = "ABC";
         // Test read only
         assertThrows(UnsupportedOperationException.class, () -> decoratedMap.put(stringProp.getName(), newValue));
@@ -237,7 +237,7 @@ public class DynaBeanMapDecoratorTest {
      * Test putAll() method
      */
     @Test
-    public void testPutAll() {
+    void testPutAll() {
         final String newValue = "ABC";
         final Map<String, Object> newMap = new HashMap<>();
         newMap.put(stringProp.getName(), newValue);
@@ -253,7 +253,7 @@ public class DynaBeanMapDecoratorTest {
      * Test remove() method
      */
     @Test
-    public void testRemove() {
+    void testRemove() {
         assertThrows(UnsupportedOperationException.class, () -> decoratedMap.remove(stringProp.getName()));
         assertThrows(UnsupportedOperationException.class, () -> modifiableMap.remove(stringProp.getName()));
     }
@@ -262,7 +262,7 @@ public class DynaBeanMapDecoratorTest {
      * Test size() method
      */
     @Test
-    public void testSize() {
+    void testSize() {
         assertEquals(0, emptyMap.size(), "Empty");
         assertEquals(properties.length, decoratedMap.size(), "Not Empty");
     }
@@ -271,7 +271,7 @@ public class DynaBeanMapDecoratorTest {
      * Test values() method
      */
     @Test
-    public void testValues() {
+    void testValues() {
         final Collection<Object> collection = modifiableMap.values();
 
         // Check the Collection can't be modified

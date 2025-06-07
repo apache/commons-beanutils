@@ -40,7 +40,7 @@ public class PointConverterTest {
     }
 
     @Test
-    public void testConvertingNoSpace() {
+    void testConvertingNoSpace() {
         final Point expected = new Point(100, 200);
         final Point actual = converter.convert(Point.class, "(100,200)");
 
@@ -48,7 +48,7 @@ public class PointConverterTest {
     }
 
     @Test
-    public void testConvertingPoint() {
+    void testConvertingPoint() {
         final Point expected = new Point(100, 200);
         final Point actual = converter.convert(Point.class, "(100, 200)");
 

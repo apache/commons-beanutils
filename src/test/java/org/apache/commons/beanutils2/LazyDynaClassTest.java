@@ -58,7 +58,7 @@ public class LazyDynaClassTest {
      * Test add(name) method
      */
     @Test
-    public void testAddProperty1() {
+    void testAddProperty1() {
         dynaClass.add(testProperty);
         final DynaProperty dynaProperty = dynaClass.getDynaProperty(testProperty);
         assertEquals(testProperty, dynaProperty.getName(), "name is correct");
@@ -69,7 +69,7 @@ public class LazyDynaClassTest {
      * Test add(name, type) method
      */
     @Test
-    public void testAddProperty2() {
+    void testAddProperty2() {
         dynaClass.add(testProperty, String.class);
         final DynaProperty dynaProperty = dynaClass.getDynaProperty(testProperty);
         assertEquals(testProperty, dynaProperty.getName(), "name is correct");
@@ -80,7 +80,7 @@ public class LazyDynaClassTest {
      * Test add(name, type, readable, writable) method
      */
     @Test
-    public void testAddProperty3() {
+    void testAddProperty3() {
         assertThrows(UnsupportedOperationException.class, () -> dynaClass.add(testProperty, String.class, true, true));
     }
 
@@ -88,7 +88,7 @@ public class LazyDynaClassTest {
      * Test add(name) method with 'null' name
      */
     @Test
-    public void testAddPropertyNullName1() {
+    void testAddPropertyNullName1() {
         assertThrows(NullPointerException.class, () -> dynaClass.add((String) null));
     }
 
@@ -96,7 +96,7 @@ public class LazyDynaClassTest {
      * Test add(name, type) method with 'null' name
      */
     @Test
-    public void testAddPropertyNullName2() {
+    void testAddPropertyNullName2() {
         assertThrows(NullPointerException.class, () -> dynaClass.add(null, String.class));
     }
 
@@ -104,7 +104,7 @@ public class LazyDynaClassTest {
      * Test add(name, type, readable, writable) method with 'null' name
      */
     @Test
-    public void testAddPropertyNullName3() {
+    void testAddPropertyNullName3() {
         assertThrows(UnsupportedOperationException.class, () -> dynaClass.add(null, String.class, true, true));
     }
 
@@ -112,7 +112,7 @@ public class LazyDynaClassTest {
      * Test add(name) method when restricted is set to 'true'
      */
     @Test
-    public void testAddPropertyRestricted1() {
+    void testAddPropertyRestricted1() {
         dynaClass.setRestricted(true);
         assertTrue(dynaClass.isRestricted(), "MutableDynaClass is restricted");
         assertThrows(IllegalStateException.class, () -> dynaClass.add(testProperty));
@@ -122,7 +122,7 @@ public class LazyDynaClassTest {
      * Test add(name, type) method when restricted is set to 'true'
      */
     @Test
-    public void testAddPropertyRestricted2() {
+    void testAddPropertyRestricted2() {
         dynaClass.setRestricted(true);
         assertTrue(dynaClass.isRestricted(), "MutableDynaClass is restricted");
         assertThrows(IllegalStateException.class, () -> dynaClass.add(testProperty, String.class));
@@ -132,7 +132,7 @@ public class LazyDynaClassTest {
      * Test add(name, type, readable, writable) method when restricted is set to 'true'
      */
     @Test
-    public void testAddPropertyRestricted3() {
+    void testAddPropertyRestricted3() {
         dynaClass.setRestricted(true);
         assertTrue(dynaClass.isRestricted(), "MutableDynaClass is restricted");
         assertThrows(UnsupportedOperationException.class, () -> dynaClass.add(testProperty, String.class, true, true));
@@ -142,7 +142,7 @@ public class LazyDynaClassTest {
      * Test retrieving a property which doesn't exist (returnNull is 'false')
      */
     @Test
-    public void testGetPropertyDoesntExist1() {
+    void testGetPropertyDoesntExist1() {
         dynaClass.setReturnNull(false);
         assertFalse(dynaClass.isReturnNull(), "returnNull is 'false'");
         final DynaProperty dynaProperty = dynaClass.getDynaProperty(testProperty);
@@ -155,7 +155,7 @@ public class LazyDynaClassTest {
      * Test retrieving a property which doesn't exist (returnNull is 'true')
      */
     @Test
-    public void testGetPropertyDoesntExist2() {
+    void testGetPropertyDoesntExist2() {
         dynaClass.setReturnNull(true);
         assertTrue(dynaClass.isReturnNull(), "returnNull is 'true'");
         assertNull(dynaClass.getDynaProperty(testProperty), "property is null");
@@ -165,7 +165,7 @@ public class LazyDynaClassTest {
      * Test removing a property
      */
     @Test
-    public void testRemoveProperty() {
+    void testRemoveProperty() {
         dynaClass.setReturnNull(true);
         dynaClass.add(testProperty);
         assertTrue(dynaClass.isDynaProperty(testProperty), "Property exists");
@@ -179,7 +179,7 @@ public class LazyDynaClassTest {
      * Test removing a property which doesn't exist
      */
     @Test
-    public void testRemovePropertyDoesntExist() {
+    void testRemovePropertyDoesntExist() {
         assertFalse(dynaClass.isDynaProperty(testProperty), "property doesn't exist");
         dynaClass.remove(testProperty);
         assertFalse(dynaClass.isDynaProperty(testProperty), "property still doesn't exist");
@@ -189,7 +189,7 @@ public class LazyDynaClassTest {
      * Test removing a property, name is null
      */
     @Test
-    public void testRemovePropertyNullName() {
+    void testRemovePropertyNullName() {
         assertThrows(NullPointerException.class, () -> dynaClass.remove(null));
     }
 
@@ -197,7 +197,7 @@ public class LazyDynaClassTest {
      * Test removing a property, DynaClass is restricted
      */
     @Test
-    public void testRemovePropertyRestricted() {
+    void testRemovePropertyRestricted() {
         dynaClass.add(testProperty);
         assertTrue(dynaClass.isDynaProperty(testProperty), "Property exists");
         dynaClass.setRestricted(true);

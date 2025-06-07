@@ -66,7 +66,7 @@ public class DynaResultSetTest {
     }
 
     @Test
-    public void testGetDynaProperties() {
+    void testGetDynaProperties() {
 
         final DynaProperty[] dynaProps = dynaClass.getDynaProperties();
         assertNotNull(dynaProps, "dynaProps exists");
@@ -78,7 +78,7 @@ public class DynaResultSetTest {
     }
 
     @Test
-    public void testGetDynaProperty() {
+    void testGetDynaProperty() {
         // Invalid argument test
         assertThrows(NullPointerException.class, () -> dynaClass.getDynaProperty(null));
         // Negative test
@@ -92,12 +92,12 @@ public class DynaResultSetTest {
     }
 
     @Test
-    public void testGetName() {
+    void testGetName() {
         assertEquals("org.apache.commons.beanutils2.sql.ResultSetDynaClass", dynaClass.getName(), "DynaClass name");
     }
 
     @Test
-    public void testIteratorCount() {
+    void testIteratorCount() {
 
         final Iterator<?> rows = dynaClass.iterator();
         assertNotNull(rows, "iterator exists");
@@ -112,7 +112,7 @@ public class DynaResultSetTest {
     }
 
     @Test
-    public void testIteratorResults() {
+    void testIteratorResults() {
 
         // Grab the third row
         final Iterator<DynaBean> rows = dynaClass.iterator();
@@ -149,7 +149,7 @@ public class DynaResultSetTest {
      * Test normal case column names (i.e. not converted to lower case)
      */
     @Test
-    public void testIteratorResultsNormalCase() throws Exception {
+    void testIteratorResultsNormalCase() throws Exception {
         final ResultSetDynaClass dynaClass = new ResultSetDynaClass(TestResultSet.createProxy(), false);
 
         // Grab the third row
@@ -184,7 +184,7 @@ public class DynaResultSetTest {
     }
 
     @Test
-    public void testNewInstance() {
+    void testNewInstance() {
         assertThrows(UnsupportedOperationException.class, () -> dynaClass.newInstance());
     }
 

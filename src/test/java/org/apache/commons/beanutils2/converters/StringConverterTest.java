@@ -37,7 +37,7 @@ public class StringConverterTest {
      * Tests a conversion to a string type.
      */
     @Test
-    public void testConvertToTypeString() {
+    void testConvertToTypeString() {
         final Object value = new Object();
         final String strVal = converter.convert(String.class, value);
         assertEquals(value.toString(), strVal, "Wrong conversion result");
@@ -47,7 +47,7 @@ public class StringConverterTest {
      * Tests whether the correct default type is returned.
      */
     @Test
-    public void testDefaultType() {
+    void testDefaultType() {
         assertEquals(String.class, converter.getDefaultType(), "Wrong default type");
     }
 }

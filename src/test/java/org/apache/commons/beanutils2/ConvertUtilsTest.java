@@ -124,14 +124,14 @@ public class ConvertUtilsTest {
      * Tests a conversion to an unsupported target type.
      */
     @Test
-    public void testConvertUnsupportedTargetType() {
+    void testConvertUnsupportedTargetType() {
         final ConvertUtilsBean utils = new ConvertUtilsBean();
         final Object value = "A test value";
         assertSame(value, utils.convert(value, getClass()), "Got different object");
     }
 
     @Test
-    public void testDeregisteringSingleConverter() throws Exception {
+    void testDeregisteringSingleConverter() throws Exception {
         // make sure that the test work ok before anything's changed
         final Object value = ConvertUtils.convert("true", Boolean.TYPE);
         assertInstanceOf(Boolean.class, value);
@@ -147,7 +147,7 @@ public class ConvertUtilsTest {
      * Negative String to primitive integer array tests.
      */
     @Test
-    public void testNegativeIntegerArray() {
+    void testNegativeIntegerArray() {
 
         Object value;
         final int[] intArray = {};
@@ -173,7 +173,7 @@ public class ConvertUtilsTest {
      * Negative scalar conversion tests. These rely on the standard default value conversions in ConvertUtils.
      */
     @Test
-    public void testNegativeScalar() {
+    void testNegativeScalar() {
 
         Object value;
 
@@ -241,7 +241,7 @@ public class ConvertUtilsTest {
      * Negative String to String array tests.
      */
     @Test
-    public void testNegativeStringArray() {
+    void testNegativeStringArray() {
 
         Object value;
         final String[] stringArray = {};
@@ -255,7 +255,7 @@ public class ConvertUtilsTest {
      * Test conversion of object to string for arrays.
      */
     @Test
-    public void testObjectToStringArray() {
+    void testObjectToStringArray() {
 
         final int[] intArray0 = {};
         final int[] intArray1 = { 123 };
@@ -278,7 +278,7 @@ public class ConvertUtilsTest {
      * Test conversion of object to string for scalars.
      */
     @Test
-    public void testObjectToStringScalar() {
+    void testObjectToStringScalar() {
 
         assertEquals("false", ConvertUtils.convert(Boolean.FALSE), "Boolean->String");
         assertEquals("true", ConvertUtils.convert(Boolean.TRUE), "Boolean->String");
@@ -298,7 +298,7 @@ public class ConvertUtilsTest {
      * Positive array conversion tests.
      */
     @Test
-    public void testPositiveArray() {
+    void testPositiveArray() {
         // check 1
         final String[] values1 = { "10", "20", "30" };
         final int[] shape = ArrayUtils.EMPTY_INT_ARRAY;
@@ -326,7 +326,7 @@ public class ConvertUtilsTest {
      * Positive String to primitive integer array tests.
      */
     @Test
-    public void testPositiveIntegerArray() {
+    void testPositiveIntegerArray() {
         Object value;
         final int[] intArray = {};
         final int[] intArray1 = { 0 };
@@ -361,7 +361,7 @@ public class ConvertUtilsTest {
      * Positive scalar conversion tests.
      */
     @Test
-    public void testPositiveScalar() {
+    void testPositiveScalar() {
 
         Object value;
 
@@ -512,7 +512,7 @@ public class ConvertUtilsTest {
      * Positive String to String array tests.
      */
     @Test
-    public void testPositiveStringArray() {
+    void testPositiveStringArray() {
 
         Object value;
         final String[] stringArray = {};
@@ -557,7 +557,7 @@ public class ConvertUtilsTest {
     }
 
     @Test
-    public void testSeparateConvertInstances() throws Exception {
+    void testSeparateConvertInstances() throws Exception {
         final ConvertUtilsBean utilsOne = new ConvertUtilsBean();
         final ConvertUtilsBean utilsTwo = new ConvertUtilsBean();
 
