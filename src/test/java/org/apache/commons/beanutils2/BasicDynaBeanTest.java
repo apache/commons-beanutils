@@ -47,7 +47,7 @@ import org.junit.jupiter.api.Test;
  * provide similar levels of functionality.
  * </p>
  */
-public class BasicDynaBeanTest {
+class BasicDynaBeanTest {
 
     /**
      * The set of property names we expect to have returned when calling {@code getDynaProperties()}. You should update this list when new properties are added

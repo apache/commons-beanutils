@@ -57,7 +57,7 @@ import org.junit.jupiter.api.Test;
  * <li>getArrayProperty(Object bean, String name)</li>
  * </ul>
  */
-public class BeanUtilsBeanTest {
+class BeanUtilsBeanTest {
 
     /**
      * The test bean for each test.

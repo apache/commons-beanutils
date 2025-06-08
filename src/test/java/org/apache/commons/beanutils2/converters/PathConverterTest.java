@@ -33,7 +33,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the PathConverter class.
  */
-public class PathConverterTest {
+class PathConverterTest {
 
     private Converter<Path> converter;
 

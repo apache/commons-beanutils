@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test case for {@link DynaProperty}.
  */
-public class DynaPropertyTest {
+class DynaPropertyTest {
 
     private DynaProperty testPropertyWithName;
     private DynaProperty testProperty1Duplicate;

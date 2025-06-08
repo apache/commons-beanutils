@@ -33,7 +33,7 @@ import org.junit.jupiter.api.Test;
 /**
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-339">https://issues.apache.org/jira/browse/BEANUTILS-339</a>
  */
-public class Jira339Test {
+class Jira339Test {
 
     /**
      * Test Bean.

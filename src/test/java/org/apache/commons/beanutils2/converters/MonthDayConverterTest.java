@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the MonthDayConverter class.
  */
-public class MonthDayConverterTest {
+class MonthDayConverterTest {
 
     private Converter<MonthDay> converter;
 

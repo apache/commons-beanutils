@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Unit test for {@link BeanPredicate}
  */
-public class BeanPredicateTest {
+class BeanPredicateTest {
 
     @Test
     void testEqual() {

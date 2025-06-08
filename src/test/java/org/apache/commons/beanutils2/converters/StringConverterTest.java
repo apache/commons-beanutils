@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test case for {@code StringConverter}.
  */
-public class StringConverterTest {
+class StringConverterTest {
     /** The converter to be tested. */
     private StringConverter converter;
 

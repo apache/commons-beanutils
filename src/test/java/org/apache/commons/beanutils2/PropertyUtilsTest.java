@@ -73,7 +73,7 @@ import org.junit.jupiter.api.Test;
  * <li>setSimpleProperty(Object,String,Object)</li>
  * </ul>
  */
-public class PropertyUtilsTest {
+class PropertyUtilsTest {
 
     /**
      * The fully qualified class name of our private directly implemented interface.

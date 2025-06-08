@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the ZoneIdConverter class.
  */
-public class ZoneIdConverterTest {
+class ZoneIdConverterTest {
 
     private Converter<ZoneId> converter;
 

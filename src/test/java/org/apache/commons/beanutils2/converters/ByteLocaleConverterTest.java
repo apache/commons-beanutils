@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the ByteLocaleConverter class.
  */
-public class ByteLocaleConverterTest extends AbstractLocaleConverterTest<Byte> {
+class ByteLocaleConverterTest extends AbstractLocaleConverterTest<Byte> {
 
     /**
      * Sets up instance variables required by this test case.

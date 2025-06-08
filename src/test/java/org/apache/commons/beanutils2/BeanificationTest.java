@@ -38,7 +38,7 @@ import org.junit.jupiter.api.Test;
  * Test Case for changes made during Beanutils Beanification
  * </p>
  */
-public class BeanificationTest {
+class BeanificationTest {
 
     final class Signal {
         private Exception e;

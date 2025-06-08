@@ -33,7 +33,7 @@ import org.junit.jupiter.api.Test;
  *
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-541">https://issues.apache.org/jira/browse/BEANUTILS-541</a>
  */
-public class Jira541Test {
+class Jira541Test {
 
     public static class BaseType {
 

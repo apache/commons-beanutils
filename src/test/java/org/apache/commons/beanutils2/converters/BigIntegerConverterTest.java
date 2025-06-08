@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the BigInteger class.
  */
-public class BigIntegerConverterTest extends AbstractNumberConverterTest<BigInteger> {
+class BigIntegerConverterTest extends AbstractNumberConverterTest<BigInteger> {
 
     private Converter<BigInteger> converter;
 

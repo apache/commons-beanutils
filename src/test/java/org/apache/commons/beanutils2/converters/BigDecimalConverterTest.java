@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the DoubleConverter class.
  */
-public class BigDecimalConverterTest extends AbstractNumberConverterTest<BigDecimal> {
+class BigDecimalConverterTest extends AbstractNumberConverterTest<BigDecimal> {
 
     /**
      * A class derived from {@code BigDecimal} used for testing whether derived number classes are handled correctly.

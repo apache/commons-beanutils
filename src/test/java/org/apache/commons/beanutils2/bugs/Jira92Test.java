@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Test;
  *
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-92">https://issues.apache.org/jira/browse/BEANUTILS-92</a>
  */
-public class Jira92Test {
+class Jira92Test {
 
     /**
      * Test bean which has only indexed setter

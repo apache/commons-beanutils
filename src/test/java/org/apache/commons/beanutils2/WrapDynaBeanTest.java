@@ -40,7 +40,7 @@ import org.junit.jupiter.api.Test;
  * provide similar levels of functionality.
  * </p>
  */
-public class WrapDynaBeanTest extends BasicDynaBeanTest {
+class WrapDynaBeanTest extends BasicDynaBeanTest {
 
     /**
      * Helper method for testing whether basic access to properties works as expected.

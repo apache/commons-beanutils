@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the ZoneOffsetConverter class.
  */
-public class ZoneOffsetConverterTest {
+class ZoneOffsetConverterTest {
 
     private Converter<ZoneOffset> converter;
 

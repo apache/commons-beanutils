@@ -40,7 +40,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test accessing RowSets via DynaBeans.
  */
-public class DynaRowSetTest {
+class DynaRowSetTest {
 
     private static class CustomTimestamp {
         private final long timestamp = new java.util.Date().getTime();

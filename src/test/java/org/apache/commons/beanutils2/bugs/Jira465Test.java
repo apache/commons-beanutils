@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
  *
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-465">https://issues.apache.org/jira/browse/BEANUTILS-465</a>
  */
-public class Jira465Test {
+class Jira465Test {
     public static class ArrayIndexedProp {
         private final Object[] foo = { OLD_VALUE };
 

@@ -33,7 +33,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the ArrayConverter class.
  */
-public class ArrayConverterTest {
+class ArrayConverterTest {
 
     /**
      * Check that two arrays are the same.

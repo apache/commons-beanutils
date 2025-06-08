@@ -36,7 +36,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test case for BeanUtils when the underlying bean is actually a DynaBean.
  */
-public class DynaBeanUtilsTest {
+class DynaBeanUtilsTest {
 
     /**
      * Create and return a {@code DynaClass} instance for our test {@code DynaBean}.

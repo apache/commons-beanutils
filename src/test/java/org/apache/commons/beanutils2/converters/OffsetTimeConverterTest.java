@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the OffsetTimeConverter class.
  */
-public class OffsetTimeConverterTest {
+class OffsetTimeConverterTest {
 
     private Converter<OffsetTime> converter;
 

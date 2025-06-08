@@ -38,7 +38,7 @@ import org.junit.jupiter.api.Test;
  * Test Case for the LocaleConvertUtils class. See unimplemented functionality of the convert utils in the method begining with fixme
  * </p>
  */
-public class LocaleConvertUtilsTest {
+class LocaleConvertUtilsTest {
 
     private char decimalSeparator;
 

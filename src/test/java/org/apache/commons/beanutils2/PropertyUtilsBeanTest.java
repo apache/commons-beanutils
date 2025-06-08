@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests {@link PropertyUtilsBean}.
  */
-public class PropertyUtilsBeanTest {
+class PropertyUtilsBeanTest {
 
     @Test
     void testGetMappedPropertyDescriptors() throws Exception {

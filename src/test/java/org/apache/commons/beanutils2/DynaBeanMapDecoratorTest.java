@@ -41,7 +41,7 @@ import org.junit.jupiter.api.Test;
  * </p>
  */
 @SuppressWarnings("deprecation")
-public class DynaBeanMapDecoratorTest {
+class DynaBeanMapDecoratorTest {
 
     private static final DynaProperty stringProp = new DynaProperty("stringProp", String.class);
     private static final DynaProperty nullProp = new DynaProperty("nullProp", String.class);

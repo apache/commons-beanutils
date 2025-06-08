@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the URIConverter class.
  */
-public class URIConverterTest {
+class URIConverterTest {
 
     private Converter<URI> converter;
 

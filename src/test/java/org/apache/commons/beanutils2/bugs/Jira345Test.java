@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 /**
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-345">https://issues.apache.org/jira/browse/BEANUTILS-345</a>
  */
-public class Jira345Test {
+class Jira345Test {
 
     /** Example Bean */
     public static class MyBean {

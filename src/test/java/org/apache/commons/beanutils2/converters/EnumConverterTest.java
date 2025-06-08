@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the EnumConverter class.
  */
-public class EnumConverterTest {
+class EnumConverterTest {
 
     public enum PizzaStatus {
         ORDERED, READY, DELIVERED;

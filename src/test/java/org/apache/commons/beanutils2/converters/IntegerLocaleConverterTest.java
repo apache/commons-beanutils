@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the IntegerLocaleConverter class.
  */
-public class IntegerLocaleConverterTest extends AbstractLocaleConverterTest<Integer> {
+class IntegerLocaleConverterTest extends AbstractLocaleConverterTest<Integer> {
 
     /**
      * Sets up instance variables required by this test case.

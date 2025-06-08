@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the LongConverter class.
  */
-public class LongConverterTest extends AbstractNumberConverterTest<Long> {
+class LongConverterTest extends AbstractNumberConverterTest<Long> {
 
     private Converter<Long> converter;
 

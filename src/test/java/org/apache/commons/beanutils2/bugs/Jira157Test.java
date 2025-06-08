@@ -36,7 +36,7 @@ import org.junit.jupiter.api.Test;
  *
  * See <a href="https://issues.apache.org/jira/browse/BEANUTILS-157">https://issues.apache.org/jira/browse/BEANUTILS-157<a/>
  */
-public class Jira157Test {
+class Jira157Test {
 
     public static class FooBar {
         String getPackageFoo() {

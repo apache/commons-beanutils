@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the PeriodConverter class.
  */
-public class PeriodConverterTest {
+class PeriodConverterTest {
 
     private Converter<Period> converter;
 

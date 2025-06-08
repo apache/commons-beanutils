@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
 /**
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-369">https://issues.apache.org/jira/browse/BEANUTILS-369</a>
  */
-public class Jira369Test {
+class Jira369Test {
 
     /**
      * Test Bean

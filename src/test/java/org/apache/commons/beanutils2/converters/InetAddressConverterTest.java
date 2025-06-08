@@ -33,7 +33,7 @@ import org.junit.jupiter.api.Test;
  *
  * @since 2.0.0
  */
-public class InetAddressConverterTest {
+class InetAddressConverterTest {
 
     private InetAddressConverter converter;
 

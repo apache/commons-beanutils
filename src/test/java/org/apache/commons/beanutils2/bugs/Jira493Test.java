@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-493">BEANUTILS-493</a>
  */
 
-public class Jira493Test {
+class Jira493Test {
 
     @Test
     void testIndexedProperties() throws Exception {

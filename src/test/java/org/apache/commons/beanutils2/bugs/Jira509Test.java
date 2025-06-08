@@ -43,7 +43,7 @@ import org.junit.jupiter.api.Timeout;
  * The bug causes an infinite loop in WeakHashMap.get which was not accessed in a thread safe manner. This originates with WrapDynaClass.createDynaClass().
  */
 @Disabled("https://issues.apache.org/jira/browse/BEANUTILS-509.")
-public class Jira509Test {
+class Jira509Test {
 
     protected int random(final int max) {
         return (int) (Math.random() * 100_000) % max;

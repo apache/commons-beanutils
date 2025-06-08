@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the DurationConverter class.
  */
-public class DurationConverterTest {
+class DurationConverterTest {
 
     private Converter<Duration> converter;
 

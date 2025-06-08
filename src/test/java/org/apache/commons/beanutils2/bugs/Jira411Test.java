@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Test;
  *
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-411">https://issues.apache.org/jira/browse/BEANUTILS-411</a>
  */
-public class Jira411Test {
+class Jira411Test {
 
     public class DummyBean {
 

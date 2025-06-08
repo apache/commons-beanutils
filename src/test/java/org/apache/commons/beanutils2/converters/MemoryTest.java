@@ -32,7 +32,7 @@ import org.junit.jupiter.api.Test;
 /**
  * This class provides a number of unit tests related to class loaders and garbage collection, particularly in j2ee-like situations.
  */
-public class MemoryTest {
+class MemoryTest {
 
     /**
      * Attempt to force garbage collection of the specified target.

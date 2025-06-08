@@ -40,7 +40,7 @@ import org.junit.jupiter.api.Test;
  *
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-347">https://issues.apache.org/jira/browse/BEANUTILS-347</a>
  */
-public class Jira347Test {
+class Jira347Test {
 
     /**
      * Create a new class loader instance.

@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the FloatConverter class.
  */
-public class FloatConverterTest extends AbstractNumberConverterTest<Float> {
+class FloatConverterTest extends AbstractNumberConverterTest<Float> {
 
     private Converter<Float> converter;
 

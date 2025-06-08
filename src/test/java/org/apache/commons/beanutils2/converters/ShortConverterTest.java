@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the ShortConverter class.
  */
-public class ShortConverterTest extends AbstractNumberConverterTest<Short> {
+class ShortConverterTest extends AbstractNumberConverterTest<Short> {
 
     private ShortConverter converter;
 

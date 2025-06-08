@@ -37,7 +37,7 @@ import org.junit.jupiter.api.Test;
  * </p>
  */
 
-public class IndexedPropertyTest {
+class IndexedPropertyTest {
 
     /**
      * The test bean for each test.

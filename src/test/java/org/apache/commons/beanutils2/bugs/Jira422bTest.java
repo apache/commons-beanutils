@@ -30,7 +30,7 @@ final class FirstChildBeanB extends RootBeanB {
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-422">BEANUTILS-422</a>
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-492">BEANUTILS-492</a>
  */
-public class Jira422bTest {
+class Jira422bTest {
 
     @Test
     void testRootBean() throws Exception {

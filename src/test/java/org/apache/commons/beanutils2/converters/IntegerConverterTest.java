@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the IntegerConverter class.
  */
-public class IntegerConverterTest extends AbstractNumberConverterTest<Integer> {
+class IntegerConverterTest extends AbstractNumberConverterTest<Integer> {
 
     private Converter<Integer> converter;
 

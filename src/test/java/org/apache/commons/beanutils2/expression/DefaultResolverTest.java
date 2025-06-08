@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Junit Test for BasicResolver.
  */
-public class DefaultResolverTest {
+class DefaultResolverTest {
 
     private final DefaultResolver resolver = new DefaultResolver();
     // Simple Properties Test Data

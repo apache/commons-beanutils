@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test cases for {@code BeanPropertyValueChangeClosure}.
  */
-public class BeanPropertyValueChangeConsumerTest {
+class BeanPropertyValueChangeConsumerTest {
 
     private static final Integer expectedIntegerValue = Integer.valueOf(123);
     private static final Float expectedFloatValue = Float.valueOf(123.123f);

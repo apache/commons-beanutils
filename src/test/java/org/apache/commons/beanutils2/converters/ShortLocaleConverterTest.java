@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the ShortLocaleConverter class.
  */
-public class ShortLocaleConverterTest extends AbstractLocaleConverterTest<Short> {
+class ShortLocaleConverterTest extends AbstractLocaleConverterTest<Short> {
 
     /**
      * Sets up instance variables required by this test case.

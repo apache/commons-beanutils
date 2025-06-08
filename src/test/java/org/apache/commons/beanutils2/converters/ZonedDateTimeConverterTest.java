@@ -24,7 +24,7 @@ import java.util.Calendar;
 /**
  * Test Case for the ZonedDateTimeConverter class.
  */
-public class ZonedDateTimeConverterTest extends AbstractDateConverterTest<ZonedDateTime> {
+class ZonedDateTimeConverterTest extends AbstractDateConverterTest<ZonedDateTime> {
 
     /**
      * Gets the expected type

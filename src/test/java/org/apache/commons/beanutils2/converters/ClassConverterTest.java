@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the ClassConverter class.
  */
-public class ClassConverterTest {
+class ClassConverterTest {
 
     /** Sets Up */
     @BeforeEach

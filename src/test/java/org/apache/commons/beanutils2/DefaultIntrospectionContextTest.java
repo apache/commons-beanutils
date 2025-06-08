@@ -34,7 +34,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test class for {@code IntrospectionContext}.
  */
-public class DefaultIntrospectionContextTest {
+class DefaultIntrospectionContextTest {
 
     /** Constant for the name of a property. */
     private static final String PROP = "foo";

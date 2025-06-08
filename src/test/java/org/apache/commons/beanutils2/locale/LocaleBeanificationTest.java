@@ -43,7 +43,7 @@ import org.junit.jupiter.api.Test;
  * Test Case for changes made during LocaleBeanutils Beanification. This is basically a cut-and-correct version of the BeanUtils beanifications tests.
  * </p>
  */
-public class LocaleBeanificationTest {
+class LocaleBeanificationTest {
 
     final class Signal {
         private Exception e;

@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test cases for {@code BeanToPropertyValueTransformer}.
  */
-public class BeanToPropertyValueTransformerTest {
+class BeanToPropertyValueTransformerTest {
 
     private static final Integer expectedIntegerValue = Integer.valueOf(123);
     private static final Long expectedLongValue = Long.valueOf(123);

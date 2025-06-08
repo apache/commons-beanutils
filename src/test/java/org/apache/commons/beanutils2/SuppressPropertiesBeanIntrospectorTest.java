@@ -32,7 +32,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test class for {@code SuppressPropertiesBeanIntrospector}.
  */
-public class SuppressPropertiesBeanIntrospectorTest {
+class SuppressPropertiesBeanIntrospectorTest {
 
     /**
      * A test implementation of IntrospectionContext which collects the properties which have been removed.

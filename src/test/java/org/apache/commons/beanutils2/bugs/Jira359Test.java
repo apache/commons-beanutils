@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
 /**
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-359">https://issues.apache.org/jira/browse/BEANUTILS-359</a>
  */
-public class Jira359Test {
+class Jira359Test {
 
     public static class SimplePojoData {
         private String[] jcrMixinTypes = new String[1];

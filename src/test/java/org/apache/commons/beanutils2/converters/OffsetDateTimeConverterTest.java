@@ -24,7 +24,7 @@ import java.util.Calendar;
 /**
  * Test Case for the OffsetDateTimeConverter class.
  */
-public class OffsetDateTimeConverterTest extends AbstractDateConverterTest<OffsetDateTime> {
+class OffsetDateTimeConverterTest extends AbstractDateConverterTest<OffsetDateTime> {
 
     /**
      * Gets the expected type

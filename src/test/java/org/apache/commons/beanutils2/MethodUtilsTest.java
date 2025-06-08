@@ -37,7 +37,7 @@ import org.junit.jupiter.api.Test;
  * Test case for {@code MethodUtils}
  * </p>
  */
-public class MethodUtilsTest {
+class MethodUtilsTest {
 
     private static void assertMethod(final Method method, final String methodName) {
         assertNotNull(method);

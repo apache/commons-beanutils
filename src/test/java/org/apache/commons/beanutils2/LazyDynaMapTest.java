@@ -39,7 +39,7 @@ import org.junit.jupiter.api.Test;
  * Test Case for the {@code LazyDynaMap} implementation class.
  * </p>
  */
-public class LazyDynaMapTest {
+class LazyDynaMapTest {
 
     protected LazyDynaMap dynaMap;
     protected String testProperty = "myProperty";

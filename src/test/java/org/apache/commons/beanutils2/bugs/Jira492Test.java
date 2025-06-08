@@ -38,7 +38,7 @@ import org.junit.jupiter.api.Test;
  *
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-492">BEANUTILS-492</a>
  */
-public class Jira492Test {
+class Jira492Test {
 
     private final BeanUtilsBean beanUtils = new BeanUtilsBean();
 

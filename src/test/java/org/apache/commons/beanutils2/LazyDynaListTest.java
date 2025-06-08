@@ -41,7 +41,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests {@link LazyDynaList}.
  */
-public class LazyDynaListTest {
+class LazyDynaListTest {
 
     private static final String BASIC_PROP1 = "BasicDynaClass_Property1";
     private static final String BASIC_PROP2 = "BasicDynaClass_Property2";

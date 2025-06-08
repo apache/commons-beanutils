@@ -42,7 +42,7 @@ final class FirstChildBean extends RootBean {
  *
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-422">https://issues.apache.org/jira/browse/BEANUTILS-422</a>
  */
-public class Jira422Test {
+class Jira422Test {
 
     /**
      * Detects BEANUTILS-492 in Java 8 or later

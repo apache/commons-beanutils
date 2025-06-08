@@ -21,7 +21,7 @@ import java.util.Calendar;
 /**
  * Test Case for the CalendarConverter class.
  */
-public class CalendarConverterTest extends AbstractDateConverterTest<Calendar> {
+class CalendarConverterTest extends AbstractDateConverterTest<Calendar> {
 
     /**
      * Gets the expected type

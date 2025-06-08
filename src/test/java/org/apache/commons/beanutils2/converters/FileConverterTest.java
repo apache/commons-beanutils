@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the FileConverter class.
  */
-public class FileConverterTest {
+class FileConverterTest {
 
     private Converter<File> converter;
 

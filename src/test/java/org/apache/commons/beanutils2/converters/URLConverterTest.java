@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the URLConverter class.
  */
-public class URLConverterTest {
+class URLConverterTest {
 
     private URLConverter converter;
 

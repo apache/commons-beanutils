@@ -32,7 +32,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the FloatLocaleConverter class.
  */
-public class FloatLocaleConverterTest extends AbstractLocaleConverterTest<Float> {
+class FloatLocaleConverterTest extends AbstractLocaleConverterTest<Float> {
 
     /**
      * Sets up instance variables required by this test case.

@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the LocalTimeConverter class.
  */
-public class LocalTimeConverterTest {
+class LocalTimeConverterTest {
 
     private Converter<LocalTime> converter;
 

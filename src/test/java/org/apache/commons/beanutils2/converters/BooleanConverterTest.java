@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  */
-public class BooleanConverterTest {
+class BooleanConverterTest {
 
     public static final String[] STANDARD_TRUES = { "yes", "y", "true", "on", "1" };
 

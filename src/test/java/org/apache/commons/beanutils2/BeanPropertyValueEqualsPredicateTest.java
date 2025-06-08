@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test cases for {@code BeanPropertyValueEqualsPredicateTest}.
  */
-public class BeanPropertyValueEqualsPredicateTest {
+class BeanPropertyValueEqualsPredicateTest {
 
     private static final Integer expectedIntegerValue = Integer.valueOf(123);
     private static final Float expectedFloatValue = Float.valueOf(123.123f);

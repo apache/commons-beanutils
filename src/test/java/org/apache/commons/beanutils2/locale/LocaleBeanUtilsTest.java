@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for {@link LocaleBeanUtils}.
  */
-public class LocaleBeanUtilsTest {
+class LocaleBeanUtilsTest {
 
     private static final Log LOG = LogFactory.getLog(LocaleBeanUtilsTest.class);
 

@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the ByteConverter class.
  */
-public class ByteConverterTest extends AbstractNumberConverterTest<Byte> {
+class ByteConverterTest extends AbstractNumberConverterTest<Byte> {
 
     private Converter<Byte> converter;
 

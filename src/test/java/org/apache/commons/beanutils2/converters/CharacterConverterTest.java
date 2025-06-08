@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the CharacterConverter class.
  */
-public class CharacterConverterTest {
+class CharacterConverterTest {
 
     /** Sets Up */
     @BeforeEach

@@ -36,7 +36,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test accessing ResultSets via DynaBeans.
  */
-public class DynaResultSetTest {
+class DynaResultSetTest {
 
     /**
      * The mock result set DynaClass to be tested.

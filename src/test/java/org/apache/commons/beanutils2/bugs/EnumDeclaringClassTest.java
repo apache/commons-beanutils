@@ -28,7 +28,7 @@ import org.apache.commons.beanutils2.SuppressPropertiesBeanIntrospector;
 import org.apache.commons.beanutils2.TestEnum;
 import org.junit.jupiter.api.Test;
 
-public class EnumDeclaringClassTest {
+class EnumDeclaringClassTest {
 
     public static class Fixture {
 

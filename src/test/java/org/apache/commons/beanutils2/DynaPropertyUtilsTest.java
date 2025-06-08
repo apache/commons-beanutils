@@ -37,7 +37,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test accessing DynaBeans transparently via PropertyUtils.
  */
-public class DynaPropertyUtilsTest {
+class DynaPropertyUtilsTest {
 
     /**
      * The basic test bean for each test.

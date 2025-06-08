@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
 /**
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-357">https://issues.apache.org/jira/browse/BEANUTILS-357</a>
  */
-public class Jira357Test {
+class Jira357Test {
 
     /**
      * Abstract test bean.

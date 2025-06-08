@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the {@link SqlDateConverter} class.
  */
-public class SqlDateConverterTest extends AbstractDateConverterTest<Date> {
+class SqlDateConverterTest extends AbstractDateConverterTest<Date> {
 
     /**
      * Gets the expected type

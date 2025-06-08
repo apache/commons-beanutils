@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the BeanComparator class.
  */
-public class BeanComparatorTest {
+class BeanComparatorTest {
 
     /**
      * The test beans for each test.

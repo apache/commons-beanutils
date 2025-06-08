@@ -24,7 +24,7 @@ import java.util.Calendar;
 /**
  * Test Case for the LocalDateTimeConverter class.
  */
-public class LocalDateTimeConverterTest extends AbstractDateConverterTest<LocalDateTime> {
+class LocalDateTimeConverterTest extends AbstractDateConverterTest<LocalDateTime> {
 
     /**
      * Gets the expected type

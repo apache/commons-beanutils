@@ -37,7 +37,7 @@ import org.junit.jupiter.api.Test;
  * Test Case for the {@code LazyDynaBean} implementation class.
  * </p>
  */
-public class LazyDynaBeanTest {
+class LazyDynaBeanTest {
 
     protected LazyDynaBean bean;
     protected LazyDynaClass dynaClass;

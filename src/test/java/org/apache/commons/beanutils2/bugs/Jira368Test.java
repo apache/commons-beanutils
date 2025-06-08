@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 /**
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-368">https://issues.apache.org/jira/browse/BEANUTILS-368</a>
  */
-public class Jira368Test {
+class Jira368Test {
 
     /**
      * Sets up.

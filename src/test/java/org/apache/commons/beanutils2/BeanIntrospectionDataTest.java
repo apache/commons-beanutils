@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test class for {@code BeanIntrospectionData}.
  */
-public class BeanIntrospectionDataTest {
+class BeanIntrospectionDataTest {
     /** Constant for the test bean class. */
     private static final Class<?> BEAN_CLASS = FluentIntrospectionTestBean.class;
 

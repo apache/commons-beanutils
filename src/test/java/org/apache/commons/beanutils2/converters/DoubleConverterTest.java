@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the DoubleConverter class.
  */
-public class DoubleConverterTest extends AbstractNumberConverterTest<Double> {
+class DoubleConverterTest extends AbstractNumberConverterTest<Double> {
 
     private Converter<Double> converter;
 

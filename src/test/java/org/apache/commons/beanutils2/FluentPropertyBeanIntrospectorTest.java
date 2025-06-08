@@ -32,7 +32,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test class for {@code FluentPropertyBeanIntrospector}.
  */
-public class FluentPropertyBeanIntrospectorTest {
+class FluentPropertyBeanIntrospectorTest {
     public static final class CapsBean {
         private URI mURI;
 

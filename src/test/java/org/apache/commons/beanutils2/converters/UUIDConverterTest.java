@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the UUIDConverter class.
  */
-public class UUIDConverterTest {
+class UUIDConverterTest {
 
     private Converter<UUID> converter;
 

@@ -32,7 +32,7 @@ import org.junit.jupiter.api.Test;
  * Test Case for the {@code MappedPropertyDescriptor}.
  * </p>
  */
-public class MappedPropertyTest {
+class MappedPropertyTest {
 
     /**
      * Sets up instance variables required by this test case.

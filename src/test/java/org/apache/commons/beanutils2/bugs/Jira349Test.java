@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
 /**
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-349">https://issues.apache.org/jira/browse/BEANUTILS-349</a>
  */
-public class Jira349Test {
+class Jira349Test {
 
     /**
      * Test Bean with a Boolean object property.

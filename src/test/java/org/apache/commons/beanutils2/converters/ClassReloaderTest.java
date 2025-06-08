@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests for the ClassReloader utility class.
  */
-public class ClassReloaderTest {
+class ClassReloaderTest {
 
     public static class DummyClass {
     }

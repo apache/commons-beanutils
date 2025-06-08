@@ -36,7 +36,7 @@ import org.junit.jupiter.api.Test;
  * Test case for {@code ConstructorUtils}
  * </p>
  */
-public class ConstructorUtilsTest {
+class ConstructorUtilsTest {
 
     /**
      * Sets up instance variables required by this test case.

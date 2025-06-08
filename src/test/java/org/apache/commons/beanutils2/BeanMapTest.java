@@ -34,7 +34,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests {@link BeanMap}.
  */
-public class BeanMapTest extends AbstractMapTest<BeanMap, String, Object> {
+class BeanMapTest extends AbstractMapTest<BeanMap, String, Object> {
 
     public static class BeanThrowingExceptions extends BeanWithProperties {
 

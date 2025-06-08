@@ -32,7 +32,7 @@ import org.junit.jupiter.api.Test;
  *
  * @since 2.0.0
  */
-public class ColorConverterTest {
+class ColorConverterTest {
 
     private ColorConverter converter;
 

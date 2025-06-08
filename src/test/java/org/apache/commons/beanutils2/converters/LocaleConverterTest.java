@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
  *
  * @since 2.0.0
  */
-public class LocaleConverterTest {
+class LocaleConverterTest {
 
     private LocaleConverter converter;
 

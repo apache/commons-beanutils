@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
  * Write methods for PropertyDescriptors created during custom introspection are lost. See <a href="https://issues.apache.org/jira/browse/BEANUTILS-456">JIRA
  * issue BEANUTILS-456</a>.
  */
-public class Jira456Test {
+class Jira456Test {
     /** Constant for the name of the test property. */
     private static final String TEST_PROP = "fluentGetProperty";
 

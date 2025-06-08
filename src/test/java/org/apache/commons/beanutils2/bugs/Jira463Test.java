@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
  *
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-463">https://issues.apache.org/jira/browse/BEANUTILS-463</a>
  */
-public class Jira463Test {
+class Jira463Test {
     /**
      * Tests that with a specialized {@code BeanIntrospector} implementation the class property can be suppressed.
      */

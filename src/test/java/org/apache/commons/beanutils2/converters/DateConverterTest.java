@@ -22,7 +22,7 @@ import java.util.Date;
 /**
  * Test Case for the DateConverter class.
  */
-public class DateConverterTest extends AbstractDateConverterTest<Date> {
+class DateConverterTest extends AbstractDateConverterTest<Date> {
 
     /**
      * Gets the expected type

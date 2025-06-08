@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test Case for the YearConverter class.
  */
-public class YearConverterTest {
+class YearConverterTest {
 
     private Converter<Year> converter;
 
