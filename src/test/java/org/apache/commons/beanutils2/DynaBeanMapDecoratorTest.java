@@ -40,7 +40,6 @@ import org.junit.jupiter.api.Test;
  * Test Case for the {@code DynaBeanMapDecorator} implementation class.
  * </p>
  */
-@SuppressWarnings("deprecation")
 class DynaBeanMapDecoratorTest {
 
     private static final DynaProperty stringProp = new DynaProperty("stringProp", String.class);
@@ -86,6 +85,8 @@ class DynaBeanMapDecoratorTest {
 
     /**
      * Sets up instance variables required by this test case.
+     *
+     * @throws Exception test failures.
      */
     @BeforeEach
     public void setUp() throws Exception {
