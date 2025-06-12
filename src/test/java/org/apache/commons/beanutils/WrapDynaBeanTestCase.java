@@ -28,7 +28,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -105,17 +104,10 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
     /**
      * Set up instance variables required by this test case.
      */
+    @Override
     @BeforeEach
     public void setUp() throws Exception {
         bean = new WrapDynaBean(new TestBean());
-    }
-
-    /**
-     * Tear down instance variables required by this test case.
-     */
-    @AfterEach
-    public void tearDown() {
-        bean = null;
     }
 
     /** Tests getInstance method */
