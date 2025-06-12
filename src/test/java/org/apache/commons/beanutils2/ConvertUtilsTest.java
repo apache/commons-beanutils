@@ -82,7 +82,7 @@ class ConvertUtilsTest {
     }
 
     @Test
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({ "rawtypes" })
     // We need to use raw types in order to test legacy converters
     void testConvertToString() throws Exception {
         final Converter dummyConverter = (type, value) -> value;
