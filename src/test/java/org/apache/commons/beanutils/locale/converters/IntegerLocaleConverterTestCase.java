@@ -42,14 +42,6 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
     }
 
     /**
-     * Tear down instance variables required by this test case.
-     */
-    @Override
-    public void tearDown() {
-        super.tearDown();
-    }
-
-    /**
      * Test Converter() constructor
      *
      * Uses the default locale, no default value
@@ -244,10 +236,10 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
      */
     public void testToPrimitiveType() {
         converter = new IntegerLocaleConverter();
-        final Integer value = 20131028;
+        final int value = 20131028;
         final Class<Integer> target = Integer.TYPE;
-        final int result = converter.convert(target, (Object) value.toString());
-        assertEquals("Wrong result", value.intValue(), result);
+        final int result = converter.convert(target, (Object) Integer.toString(value));
+        assertEquals("Wrong result", value, result);
     }
 }
 
