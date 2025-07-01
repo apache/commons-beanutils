@@ -645,7 +645,7 @@
  * <ul>
  *     <li>1. <a href="#LazyDynaBean">LazyDynaBean</a> - A <em>Lazy</em>
  *          {@link org.apache.commons.beanutils.DynaBean}</li>
- *     <li>2. <a href="#LazyDynaMap">LazyDynaMap</a> - A <em>light weight</em>
+ *     <li>2. <a href="#LazyDynaMap">LazyDynaMap</a> - A <em>lightweight</em>
  *          {@link org.apache.commons.beanutils.DynaBean} facade to a Map
  *          with <em>lazy</em> map/list processing</li>
  *     <li>3. <a href="#LazyDynaList">LazyDynaList</a> - A <em>lazy list</em>
@@ -708,9 +708,9 @@
  *     dynaBean.set("address", 2, addressLine3);     // indexed
  * </pre>
  *
- * <p><strong>2. {@link org.apache.commons.beanutils.LazyDynaMap}</strong> is a <em>light weight</em>
+ * <p><strong>2. {@link org.apache.commons.beanutils.LazyDynaMap}</strong> is a <em>lightweight</em>
  *    <code>DynaBean</code> facade to a <code>Map</code> with all the usual <em>lazy</em> features. Its
- *    <em>light weight</em> because it doesn't have an associated <code>DynaClass</code> containing all the properties.
+ *    <em>lightweight</em> because it doesn't have an associated <code>DynaClass</code> containing all the properties.
  *    In fact it actually implements the <code>DynaClass</code> interface itself (and <code>MutableDynaClass</code>)
  *    and derives all the <em>DynaClass</em> information from the actual contents of the <code>Map</code>. A
  *    <code>LazyDynaMap</code> can be created around an existing <code>Map</code> or can instantiate its own

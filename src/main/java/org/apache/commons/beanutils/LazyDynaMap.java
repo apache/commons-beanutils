@@ -19,10 +19,10 @@ package org.apache.commons.beanutils;
 import java.util.Map;
 
 /**
- * <p>Provides a <em>light weight</em> <code>DynaBean</code> facade to a <code>Map</code>
+ * <p>Provides a <em>lightweight</em> <code>DynaBean</code> facade to a <code>Map</code>
  *  with <em>lazy</em> map/list processing.</p>
  *
- * <p>Its a <em>light weight</em> <code>DynaBean</code> implementation because there is no
+ * <p>Its a <em>lightweight</em> <code>DynaBean</code> implementation because there is no
  *    actual <code>DynaClass</code> associated with this <code>DynaBean</code> - in fact
  *    it implements the <code>DynaClass</code> interface itself providing <em>pseudo</em> DynaClass
  *    behavior from the actual values stored in the <code>Map</code>.</p>
