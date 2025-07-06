@@ -76,6 +76,10 @@
       <url>scm:svn:https://svn.apache.org/repos/infra/websites/production/commons/content/proper/commons-beanutils</url>
     </site>
   </distributionManagement>
+  <ciManagement>
+    <system>GitHub</system>
+    <url>https://github.com/apache/commons-beanutils/actions</url>
+  </ciManagement>
 
   <dependencies>
     <dependency>
