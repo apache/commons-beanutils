@@ -31,12 +31,8 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * <p>
- *  Test Case for the ConvertUtils class.
- * </p>
- *
+ * Test Case for the ConvertUtils class.
  */
-
 public class ConvertUtilsTestCase extends TestCase {
 
     /**
