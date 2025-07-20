@@ -1138,7 +1138,7 @@ public final class MethodUtils {
                     vulnerableJVM = true;
                 }
                 if (vulnerableJVM) {
-                    LOG.warn("Current Security Manager restricts use of workarounds for reflection bugs " + " in pre-1.4 JVMs.");
+                    LOG.warn("Current Security Manager restricts use of workarounds for reflection bugs in pre-1.4 JVMs.");
                 }
                 loggedAccessibleWarning = true;
             }
