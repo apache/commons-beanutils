@@ -1280,7 +1280,7 @@ public class PropertyUtilsBean {
     /** This just catches and wraps IllegalArgumentException. */
     private Object invokeMethod(final Method method, final Object bean, final Object[] values) throws IllegalAccessException, InvocationTargetException {
         if (bean == null) {
-            throw new IllegalArgumentException("No bean specified " + "- this should have been checked before reaching this method");
+            throw new IllegalArgumentException("No bean specified - this should have been checked before reaching this method");
         }
         try {
             return method.invoke(bean, values);
@@ -1707,7 +1707,7 @@ public class PropertyUtilsBean {
             Method mappedWriteMethod = ((MappedPropertyDescriptor) descriptor).getMappedWriteMethod();
             mappedWriteMethod = MethodUtils.getAccessibleMethod(bean.getClass(), mappedWriteMethod);
             if (mappedWriteMethod == null) {
-                throw new NoSuchMethodException("Property '" + name + "' has no mapped setter method" + "on bean class '" + bean.getClass() + "'");
+                throw new NoSuchMethodException("Property '" + name + "' has no mapped setter method on bean class '" + bean.getClass() + "'");
             }
             final Object[] params = new Object[2];
             params[0] = key;
@@ -1860,7 +1860,7 @@ public class PropertyUtilsBean {
         }
 
         if (resolver.isIndexed(propertyName) || resolver.isMapped(propertyName)) {
-            throw new IllegalArgumentException("Indexed or mapped properties are not supported on" + " objects of type Map: " + propertyName);
+            throw new IllegalArgumentException("Indexed or mapped properties are not supported on objects of type Map: " + propertyName);
         }
 
         bean.put(propertyName, value);
