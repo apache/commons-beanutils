@@ -148,7 +148,7 @@ public class MemoryLeakTest {
         final long free = runtime.freeMemory() / 1024;
         final long total = runtime.totalMemory() / 1024;
         final long used = total - free;
-        return "MEMORY - Total: " + fmt.format(total) + "k " + "Used: " + fmt.format(used) + "k " + "Free: " + fmt.format(free) + "k";
+        return "MEMORY - Total: " + fmt.format(total) + "k Used: " + fmt.format(used) + "k Free: " + fmt.format(free) + "k";
     }
 
     /**

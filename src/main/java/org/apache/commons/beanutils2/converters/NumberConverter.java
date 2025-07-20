@@ -206,7 +206,7 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
                 format = new DecimalFormat(pattern);
             } else {
                 if (log().isDebugEnabled()) {
-                    log().debug("    Using pattern '" + pattern + "'" + " with Locale[" + locale + "]");
+                    log().debug("    Using pattern '" + pattern + "' with Locale[" + locale + "]");
                 }
                 final DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
                 format = new DecimalFormat(pattern, symbols);

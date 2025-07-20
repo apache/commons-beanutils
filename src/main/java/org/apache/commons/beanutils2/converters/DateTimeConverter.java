@@ -620,7 +620,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
             try {
                 return type.cast(java.sql.Timestamp.valueOf(value));
             } catch (final IllegalArgumentException e) {
-                throw new ConversionException("String must be in JDBC format [yyyy-MM-dd HH:mm:ss.fffffffff] " + "to create a java.sql.Timestamp");
+                throw new ConversionException("String must be in JDBC format [yyyy-MM-dd HH:mm:ss.fffffffff] to create a java.sql.Timestamp");
             }
         }
 

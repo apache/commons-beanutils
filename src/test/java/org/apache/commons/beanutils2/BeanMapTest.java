@@ -279,7 +279,7 @@ class BeanMapTest extends AbstractMapTest<BeanMap, String, Object> {
                 assertTrue(map2.containsKey(key), "Cloned BeanMap should contain the same keys");
             }
         } catch (final CloneNotSupportedException exception) {
-            fail("BeanMap.clone() should not throw a " + "CloneNotSupportedException when clone should succeed.");
+            fail("BeanMap.clone() should not throw a CloneNotSupportedException when clone should succeed.");
         }
     }
 
