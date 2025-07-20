@@ -30,7 +30,7 @@
   <body>
     <release version="1.11.1" date="YYYY-MM-DD" description="This is a maintenance release and requires Java 8.">
       <!-- FIX -->
-      <action dev="ggregory" type="update" due-to="Gary Gregory">Fix typo in exception message throws from org.apache.commons.beanutils.PropertyUtilsBean.setMappedProperty(Object, String, String, Object).</action>
+      <action dev="ggregory" type="fix" due-to="Gary Gregory">Fix typo in exception message throws from org.apache.commons.beanutils.PropertyUtilsBean.setMappedProperty(Object, String, String, Object).</action>
       <!-- ADD -->
       <!-- UPDATE -->
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 84 to 85.</action>
