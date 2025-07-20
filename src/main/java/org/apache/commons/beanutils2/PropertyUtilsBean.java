@@ -390,7 +390,7 @@ public class PropertyUtilsBean {
         // Otherwise, the underlying property must be an array
         final Method readMethod = getReadMethod(bean.getClass(), descriptor);
         if (readMethod == null) {
-            throw new NoSuchMethodException("Property '" + name + "' has no " + "getter method on bean class '" + bean.getClass() + "'");
+            throw new NoSuchMethodException("Property '" + name + "' has no getter method on bean class '" + bean.getClass() + "'");
         }
 
         // Call the property getter and return the value
@@ -792,7 +792,7 @@ public class PropertyUtilsBean {
         }
 
         if (resolver.isIndexed(propertyName) || resolver.isMapped(propertyName)) {
-            throw new IllegalArgumentException("Indexed or mapped properties are not supported on" + " objects of type Map: " + propertyName);
+            throw new IllegalArgumentException("Indexed or mapped properties are not supported on objects of type Map: " + propertyName);
         }
 
         return bean.get(propertyName);
@@ -1399,7 +1399,7 @@ public class PropertyUtilsBean {
             Method mappedWriteMethod = ((MappedPropertyDescriptor) descriptor).getMappedWriteMethod();
             mappedWriteMethod = MethodUtils.getAccessibleMethod(bean.getClass(), mappedWriteMethod);
             if (mappedWriteMethod == null) {
-                throw new NoSuchMethodException("Property '" + name + "' has no mapped setter method" + "on bean class '" + bean.getClass() + "'");
+                throw new NoSuchMethodException("Property '" + name + "' has no mapped setter method on bean class '" + bean.getClass() + "'");
             }
             if (LOG.isTraceEnabled()) {
                 final String valueClassName = value == null ? "<null>" : value.getClass().getName();
@@ -1537,7 +1537,7 @@ public class PropertyUtilsBean {
         }
 
         if (resolver.isIndexed(propertyName) || resolver.isMapped(propertyName)) {
-            throw new IllegalArgumentException("Indexed or mapped properties are not supported on" + " objects of type Map: " + propertyName);
+            throw new IllegalArgumentException("Indexed or mapped properties are not supported on objects of type Map: " + propertyName);
         }
 
         bean.put(propertyName, value);
