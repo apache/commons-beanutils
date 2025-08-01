@@ -28,7 +28,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.WeakHashMap;
 
-import org.apache.commons.lang3.SystemProperties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -1127,7 +1126,7 @@ public final class MethodUtils {
             if (!loggedAccessibleWarning) {
                 boolean vulnerableJVM = false;
                 try {
-                    final String specVersion = SystemProperties.getJavaSpecificationVersion();
+                    final String specVersion = System.getProperty("java.specification.version");
                     if (specVersion.charAt(0) == '1'
                             && (specVersion.charAt(2) == '0' || specVersion.charAt(2) == '1' || specVersion.charAt(2) == '2' || specVersion.charAt(2) == '3')) {
 

@@ -20,9 +20,9 @@ import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
+import java.util.Locale;
 import java.util.Objects;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -159,6 +159,6 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
      */
     private String propertyName(final Method m) {
         final String methodName = m.getName().substring(getWriteMethodPrefix().length());
-        return methodName.length() > 1 ? Introspector.decapitalize(methodName) : StringUtils.toRootLowerCase(methodName);
+        return methodName.length() > 1 ? Introspector.decapitalize(methodName) : methodName.toLowerCase(Locale.ROOT);
     }
 }

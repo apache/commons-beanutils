@@ -18,12 +18,12 @@ package org.apache.commons.beanutils2.converters;
 
 import java.lang.reflect.Array;
 import java.util.Collection;
+import java.util.Locale;
 import java.util.Objects;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.ConvertUtils;
 import org.apache.commons.beanutils2.Converter;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -66,7 +66,7 @@ public abstract class AbstractConverter<D> implements Converter<D> {
      * @return the given string trimmed and converter to lower-case.
      */
     protected static String toLowerCase(final Object value) {
-        return StringUtils.toRootLowerCase(toString(value));
+        return toString(value).toLowerCase(Locale.ROOT);
     }
 
     /**
