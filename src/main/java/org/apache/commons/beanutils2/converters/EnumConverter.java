@@ -45,7 +45,7 @@ public final class EnumConverter<E extends Enum<E>> extends AbstractConverter<En
 
     /**
      * <p>
-     * Converts a java.lang.Enum or object into a String.
+     * Converts a {@link Enum} or object into a {@link String}.
      * </p>
      *
      * @param <R>   Target type of the conversion.
