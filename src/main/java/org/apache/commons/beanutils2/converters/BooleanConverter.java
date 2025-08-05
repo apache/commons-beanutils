@@ -49,7 +49,7 @@ public final class BooleanConverter extends AbstractConverter<Boolean> {
      * Using this method to copy string arrays means that changes to the src array do not modify the dst array.
      * </p>
      */
-    private static String[] copyStrings(final String[] src) {
+    private String[] copyStrings(final String[] src) {
         final String[] dst = new String[src.length];
         for (int i = 0; i < src.length; ++i) {
             dst[i] = toLowerCase(src[i]);

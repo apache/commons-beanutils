@@ -59,14 +59,35 @@ public abstract class AbstractConverter<D> implements Converter<D> {
     // private static final String PACKAGE = AbstractConverter.class.getPackage().getName() + ".";
     private static final String PACKAGE = "org.apache.commons.beanutils2.converters.";
 
+    /** The locale used for converting to lowercase. */
+    private Locale locale = Locale.ROOT;
+
+    /**
+     * Get the locale used for converting to lowercase.
+     *
+     * @return the locale used for converting to lowercase
+     */
+    public Locale getLocale() {
+        return locale;
+    }
+
+    /**
+     * Set the locale used for converting to lowercase.
+     *
+     * @param locale the locale used for converting to lowercase
+     */
+    public void setLocale(Locale locale) {
+        this.locale = locale;
+    }
+
     /**
      * Converts the given object to a lower-case string.
      *
      * @param value the input string.
      * @return the given string trimmed and converter to lower-case.
      */
-    protected static String toLowerCase(final Object value) {
-        return toString(value).toLowerCase(Locale.ROOT);
+    protected String toLowerCase(final Object value) {
+        return toString(value).toLowerCase(locale);
     }
 
     /**
