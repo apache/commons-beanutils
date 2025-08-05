@@ -98,7 +98,7 @@ import java.util.WeakHashMap;
  * needs, ie avoided providing classes loaded via a "shared" classloader.</p>
  *
  * @param <T> the type of data stored in an instance
- * @see java.lang.Thread#getContextClassLoader
+ * @see Thread#getContextClassLoader
  */
 public class ContextClassLoaderLocal<T> {
     private final Map<ClassLoader, T> valueByClassLoader = new WeakHashMap<>();
@@ -121,31 +121,25 @@ public class ContextClassLoaderLocal<T> {
         // synchronizing the whole method is a bit slower
         // but guarantees no subtle threading problems, and there's no
         // need to synchronize valueByClassLoader
-
         // make sure that the map is given a change to purge itself
         valueByClassLoader.isEmpty();
         try {
-
             final ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
             if (contextClassLoader != null) {
-
                 T value = valueByClassLoader.get(contextClassLoader);
-                if (value == null
-                && !valueByClassLoader.containsKey(contextClassLoader)) {
+                if (value == null && !valueByClassLoader.containsKey(contextClassLoader)) {
                     value = initialValue();
                     valueByClassLoader.put(contextClassLoader, value);
                 }
                 return value;
-
             }
-
-        } catch (final SecurityException e) { /* SWALLOW - should we log this? */ }
-
+        } catch (final SecurityException e) {
+            /* SWALLOW - should we log this? */ }
         // if none or exception, return the globalValue
         if (!globalValueInitialized) {
             globalValue = initialValue();
             globalValueInitialized = true;
-        }//else already set
+        } // else already set
         return globalValue;
     }
 
@@ -175,19 +169,16 @@ public class ContextClassLoaderLocal<T> {
     public synchronized void set(final T value) {
         // synchronizing the whole method is a bit slower
         // but guarentees no subtle threading problems
-
         // make sure that the map is given a change to purge itself
         valueByClassLoader.isEmpty();
         try {
-
             final ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
             if (contextClassLoader != null) {
                 valueByClassLoader.put(contextClassLoader, value);
                 return;
             }
-
-        } catch (final SecurityException e) { /* SWALLOW - should we log this? */ }
-
+        } catch (final SecurityException e) {
+            /* SWALLOW - should we log this? */ }
         // if in doubt, set the global value
         globalValue = value;
         globalValueInitialized = true;
@@ -198,11 +189,10 @@ public class ContextClassLoaderLocal<T> {
      */
     public synchronized void unset() {
         try {
-
             final ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
             unset(contextClassLoader);
-
-        } catch (final SecurityException e) { /* SWALLOW - should we log this? */ }
+        } catch (final SecurityException e) {
+            /* SWALLOW - should we log this? */ }
     }
 
     /**
