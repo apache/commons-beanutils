@@ -24,7 +24,7 @@ import java.util.Locale;
 /**
  * <p>Standard {@link org.apache.commons.beanutils.locale.LocaleConverter}
  * implementation that converts an incoming
- * locale-sensitive String into a <code>java.sql.Timestamp</code> object,
+ * locale-sensitive String into a {@code java.sql.Timestamp} object,
  * optionally using a default value or throwing a
  * {@link org.apache.commons.beanutils.ConversionException}
  * if a conversion error occurs.</p>

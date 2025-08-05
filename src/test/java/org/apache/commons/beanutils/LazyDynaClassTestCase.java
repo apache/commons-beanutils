@@ -21,7 +21,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * <p>Test Case for the <code>LazyDynaClass</code> implementation class.</p>
+ * <p>Test Case for the {@code LazyDynaClass} implementation class.</p>
  *
  */
 public class LazyDynaClassTestCase extends TestCase {

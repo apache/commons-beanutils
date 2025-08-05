@@ -26,7 +26,7 @@ import java.sql.Types;
 
 /**
  * <p>Mock object that implements enough of
- * <code>java.sql.ResultSetMetaData</code>
+ * {@code java.sql.ResultSetMetaData}
  * to exercise the {@link ResultSetDynaClass} functionality.</p>
  *
  */

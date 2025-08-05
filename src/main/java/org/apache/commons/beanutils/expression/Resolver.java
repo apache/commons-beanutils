@@ -19,8 +19,8 @@ package org.apache.commons.beanutils.expression;
 /**
  * Property Name Expression Resolver.
  * <p>
- * Methods such as PropertyUtilsBean's <code>setNestedProperty()</code> method
- * use a <code>Resolver</code> to process a <em>property name</em>
+ * Methods such as PropertyUtilsBean's {@code setNestedProperty()} method
+ * use a {@code Resolver} to process a <em>property name</em>
  * expression and resolve <em>nested</em>, <em>indexed</em> and <em>mapped</em>
  * property names. The following code provides an example usage
  * demonstrating all the methods:
@@ -56,7 +56,7 @@ package org.apache.commons.beanutils.expression;
  * </pre>
  * <p>
  * In order to create an implementation, it is important to understand how
- * BeanUtils/PropertyUtils uses the <code>resolver</code>. The following are
+ * BeanUtils/PropertyUtils uses the {@code resolver}. The following are
  * the main methods that use it:
  * </p>
  * <ul>
@@ -103,7 +103,7 @@ public interface Resolver {
     int getIndex(String expression);
 
     /**
-     * Extract the map key from the property expression or <code>null</code>.
+     * Extract the map key from the property expression or {@code null}.
      *
      * @param expression The property expression
      * @return The index value
@@ -132,8 +132,8 @@ public interface Resolver {
      * Indicate whether the expression is for an indexed property or not.
      *
      * @param expression The property expression
-     * @return <code>true</code> if the expresion is indexed,
-     *  otherwise <code>false</code>
+     * @return {@code true} if the expresion is indexed,
+     *  otherwise {@code false}
      */
     boolean isIndexed(String expression);
 
@@ -141,8 +141,8 @@ public interface Resolver {
      * Indicate whether the expression is for a mapped property or not.
      *
      * @param expression The property expression
-     * @return <code>true</code> if the expresion is mapped,
-     *  otherwise <code>false</code>
+     * @return {@code true} if the expresion is mapped,
+     *  otherwise {@code false}
      */
     boolean isMapped(String expression);
 

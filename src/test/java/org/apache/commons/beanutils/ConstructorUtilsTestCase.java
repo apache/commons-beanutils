@@ -25,7 +25,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * <p> Test case for <code>ConstructorUtils</code> </p>
+ * <p> Test case for {@code ConstructorUtils} </p>
  *
  */
 public class ConstructorUtilsTestCase extends TestCase {

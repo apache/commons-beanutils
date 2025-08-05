@@ -34,7 +34,7 @@ import org.apache.commons.beanutils.Converter;
  * the String into a list of String elements that can later be
  * individually converted to the appropriate primitive type.</p>
  *
- * <p>The input syntax accepted by the <code>parseElements()</code> method
+ * <p>The input syntax accepted by the {@code parseElements()} method
  * is designed to be compatible with the syntax used to initialize arrays
  * in a Java source program, except that only String literal values are
  * supported.  For maximum flexibility, the surrounding '{' and '}'
@@ -117,7 +117,7 @@ public abstract class AbstractArrayConverter implements Converter {
 
     /**
      * <p>Parse an incoming String of the form similar to an array initializer
-     * in the Java language into a <code>List</code> individual Strings
+     * in the Java language into a {@code List} individual Strings
      * for each element, according to the following rules.</p>
      * <ul>
      * <li>The string is expected to be a comma-separated list of values.</li>
@@ -130,10 +130,10 @@ public abstract class AbstractArrayConverter implements Converter {
      *
      * @param svalue String value to be parsed
      * @return The parsed list of String values
-     * @throws ConversionException if the syntax of <code>svalue</code>
+     * @throws ConversionException if the syntax of {@code svalue}
      *  is not syntactically valid
-     * @throws NullPointerException if <code>svalue</code>
-     *  is <code>null</code>
+     * @throws NullPointerException if {@code svalue}
+     *  is {@code null}
      */
     protected List<String> parseElements(String svalue) {
         // Validate the passed argument

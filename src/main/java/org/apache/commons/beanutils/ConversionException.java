@@ -19,7 +19,7 @@ package org.apache.commons.beanutils;
 
 /**
  * <p>A <strong>ConversionException</strong> indicates that a call to
- * <code>Converter.convert()</code> has failed to complete successfully.
+ * {@code Converter.convert()} has failed to complete successfully.
  *
  * @since 1.3
  */

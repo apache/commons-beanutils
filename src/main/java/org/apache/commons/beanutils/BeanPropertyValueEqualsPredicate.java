@@ -24,12 +24,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <p><code>Predicate</code> that evaluates a property value against a specified value.</p>
+ * <p>{@code Predicate} that evaluates a property value against a specified value.</p>
  * <p>
- * An implementation of <code>org.apache.commons.collections.Predicate</code> that evaluates a
- * property value on the object provided against a specified value and returns <code>true</code>
- * if equal; <code>false</code> otherwise.
- * The <code>BeanPropertyValueEqualsPredicate</code> constructor takes two parameters which
+ * An implementation of {@code org.apache.commons.collections.Predicate} that evaluates a
+ * property value on the object provided against a specified value and returns {@code true}
+ * if equal; {@code false} otherwise.
+ * The {@code BeanPropertyValueEqualsPredicate} constructor takes two parameters which
  * determine what property will be evaluated on the target object and what its expected value should
  * be.
  * </p>
@@ -40,17 +40,17 @@ import org.apache.commons.logging.LogFactory;
  *       </code></strong>
  *    </dt>
  *    <dd>
- *       Will create a <code>Predicate</code> that will evaluate the target object and return
- *       <code>true</code> if the property specified by <code>propertyName</code> has a value which
- *       is equal to the the value specified by <code>propertyValue</code>. Or return
- *       <code>false</code> otherwise.
+ *       Will create a {@code Predicate} that will evaluate the target object and return
+ *       {@code true} if the property specified by {@code propertyName} has a value which
+ *       is equal to the the value specified by {@code propertyValue}. Or return
+ *       {@code false} otherwise.
  *    </dd>
  * </dl>
  * <p>
  * <strong>Note:</strong> Property names can be a simple, nested, indexed, or mapped property as defined by
- * <code>org.apache.commons.beanutils.PropertyUtils</code>.  If any object in the property path
- * specified by <code>propertyName</code> is <code>null</code> then the outcome is based on the
- * value of the <code>ignoreNull</code> attribute.
+ * {@code org.apache.commons.beanutils.PropertyUtils}.  If any object in the property path
+ * specified by {@code propertyName} is {@code null} then the outcome is based on the
+ * value of the {@code ignoreNull} attribute.
  * </p>
  * <p>
  * A typical usage might look like:
@@ -64,17 +64,17 @@ import org.apache.commons.logging.LogFactory;
  * CollectionUtils.filter( peopleCollection, predicate );
  * </pre>
  * <p>
- * This would take a <code>Collection</code> of person objects and filter out any people whose
- * <code>activeEmployee</code> property is <code>false</code>. Assuming...
+ * This would take a {@code Collection} of person objects and filter out any people whose
+ * {@code activeEmployee} property is {@code false}. Assuming...
  * </p>
  * <ul>
  *    <li>
- *       The top level object in the <code>peeopleCollection</code> is an object which represents a
+ *       The top level object in the {@code peeopleCollection} is an object which represents a
  *       person.
  *    </li>
  *    <li>
- *       The person object has a <code>getActiveEmployee()</code> method which returns
- *       the boolean value for the object's <code>activeEmployee</code> property.
+ *       The person object has a {@code getActiveEmployee()} method which returns
+ *       the boolean value for the object's {@code activeEmployee} property.
  *    </li>
  * </ul>
  * <p>
@@ -89,17 +89,17 @@ import org.apache.commons.logging.LogFactory;
  * CollectionUtils.find( peopleCollection, predicate );
  * </pre>
  * <p>
- * This would search a <code>Collection</code> of person objects and return the first object whose
+ * This would search a {@code Collection} of person objects and return the first object whose
  * </p>
- * <code>personId</code> property value equals <code>456-12-1234</code>. Assuming...
+ * {@code personId} property value equals {@code 456-12-1234}. Assuming...
  * <ul>
  *    <li>
- *       The top level object in the <code>peeopleCollection</code> is an object which represents a
+ *       The top level object in the {@code peeopleCollection} is an object which represents a
  *       person.
  *    </li>
  *    <li>
- *       The person object has a <code>getPersonId()</code> method which returns
- *       the value for the object's <code>personId</code> property.
+ *       The person object has a {@code getPersonId()} method which returns
+ *       the value for the object's {@code personId} property.
  *    </li>
  * </ul>
  *
@@ -112,26 +112,26 @@ public class BeanPropertyValueEqualsPredicate implements Predicate {
     private final Log log = LogFactory.getLog(this.getClass());
 
     /**
-     * The name of the property which will be evaluated when this <code>Predicate</code> is executed.
+     * The name of the property which will be evaluated when this {@code Predicate} is executed.
      */
     private final String propertyName;
 
     /**
-     * The value that the property specified by <code>propertyName</code>
-     * will be compared to when this <code>Predicate</code> executes.
+     * The value that the property specified by {@code propertyName}
+     * will be compared to when this {@code Predicate} executes.
      */
     private final Object propertyValue;
 
     /**
-     * <p>Should <code>null</code> objects in the property path be ignored?</p>
+     * <p>Should {@code null} objects in the property path be ignored?</p>
      * <p>
-     * Determines whether <code>null</code> objects in the property path will genenerate an
-     * <code>IllegalArgumentException</code> or not. If set to <code>true</code> then if any objects
-     * in the property path evaluate to <code>null</code> then the
-     * <code>IllegalArgumentException</code> throw by <code>PropertyUtils</code> will be logged but
-     * not rethrown and <code>false</code> will be returned.  If set to <code>false</code> then if
-     * any objects in the property path evaluate to <code>null</code> then the
-     * <code>IllegalArgumentException</code> throw by <code>PropertyUtils</code> will be logged and
+     * Determines whether {@code null} objects in the property path will genenerate an
+     * {@code IllegalArgumentException} or not. If set to {@code true} then if any objects
+     * in the property path evaluate to {@code null} then the
+     * {@code IllegalArgumentException} throw by {@code PropertyUtils} will be logged but
+     * not rethrown and {@code false} will be returned.  If set to {@code false} then if
+     * any objects in the property path evaluate to {@code null} then the
+     * {@code IllegalArgumentException} throw by {@code PropertyUtils} will be logged and
      * rethrown.
      * </p>
      */
@@ -139,7 +139,7 @@ public class BeanPropertyValueEqualsPredicate implements Predicate {
 
     /**
      * Constructor which takes the name of the property, its expected value to be used in evaluation,
-     * and assumes <code>ignoreNull</code> to be <code>false</code>.
+     * and assumes {@code ignoreNull} to be {@code false}.
      *
      * @param propertyName The name of the property that will be evaluated against the expected value.
      * @param propertyValue The value to use in object evaluation.
@@ -151,13 +151,13 @@ public class BeanPropertyValueEqualsPredicate implements Predicate {
 
     /**
      * Constructor which takes the name of the property, its expected value
-     * to be used in evaluation, and a boolean which determines whether <code>null</code> objects in
-     * the property path will genenerate an <code>IllegalArgumentException</code> or not.
+     * to be used in evaluation, and a boolean which determines whether {@code null} objects in
+     * the property path will genenerate an {@code IllegalArgumentException} or not.
      *
      * @param propertyName The name of the property that will be evaluated against the expected value.
      * @param propertyValue The value to use in object evaluation.
-     * @param ignoreNull Determines whether <code>null</code> objects in the property path will
-     * genenerate an <code>IllegalArgumentException</code> or not.
+     * @param ignoreNull Determines whether {@code null} objects in the property path will
+     * genenerate an {@code IllegalArgumentException} or not.
      * @throws IllegalArgumentException If the property name provided is null or empty.
      */
     public BeanPropertyValueEqualsPredicate(final String propertyName, final Object propertyValue, final boolean ignoreNull) {
@@ -171,21 +171,21 @@ public class BeanPropertyValueEqualsPredicate implements Predicate {
 
     /**
      * Evaulates the object provided against the criteria specified when this
-     * <code>BeanPropertyValueEqualsPredicate</code> was constructed.  Equality is based on
+     * {@code BeanPropertyValueEqualsPredicate} was constructed.  Equality is based on
      * either reference or logical equality as defined by the property object's equals method. If
-     * any object in the property path leading up to the target property is <code>null</code> then
-     * the outcome will be based on the value of the <code>ignoreNull</code> attribute. By default,
-     * <code>ignoreNull</code> is <code>false</code> and would result in an
-     * <code>IllegalArgumentException</code> if an object in the property path leading up to the
-     * target property is <code>null</code>.
+     * any object in the property path leading up to the target property is {@code null} then
+     * the outcome will be based on the value of the {@code ignoreNull} attribute. By default,
+     * {@code ignoreNull} is {@code false} and would result in an
+     * {@code IllegalArgumentException} if an object in the property path leading up to the
+     * target property is {@code null}.
      *
      * @param object The object to be evaluated.
-     * @return True if the object provided meets all the criteria for this <code>Predicate</code>;
+     * @return True if the object provided meets all the criteria for this {@code Predicate};
      * false otherwise.
      * @throws IllegalArgumentException If an IllegalAccessException, InvocationTargetException, or
      * NoSuchMethodException is thrown when trying to access the property specified on the object
-     * provided. Or if an object in the property path provided is <code>null</code> and
-     * <code>ignoreNull</code> is set to <code>false</code>.
+     * provided. Or if an object in the property path provided is {@code null} and
+     * {@code ignoreNull} is set to {@code false}.
      */
     @Override
     public boolean evaluate(final Object object) {
@@ -229,10 +229,10 @@ public class BeanPropertyValueEqualsPredicate implements Predicate {
     }
 
     /**
-     * Returns the name of the property which will be evaluated when this <code>Predicate</code> is
+     * Returns the name of the property which will be evaluated when this {@code Predicate} is
      * executed.
      *
-     * @return The name of the property which will be evaluated when this <code>Predicate</code> is
+     * @return The name of the property which will be evaluated when this {@code Predicate} is
      * executed.
      */
     public String getPropertyName() {
@@ -240,28 +240,28 @@ public class BeanPropertyValueEqualsPredicate implements Predicate {
     }
 
     /**
-     * Returns the value that the property specified by <code>propertyName</code> will be compared to
-     * when this <code>Predicate</code> executes.
+     * Returns the value that the property specified by {@code propertyName} will be compared to
+     * when this {@code Predicate} executes.
      *
-     * @return The value that the property specified by <code>propertyName</code> will be compared to
-     * when this <code>Predicate</code> executes.
+     * @return The value that the property specified by {@code propertyName} will be compared to
+     * when this {@code Predicate} executes.
      */
     public Object getPropertyValue() {
         return propertyValue;
     }
 
     /**
-     * Returns the flag which determines whether <code>null</code> objects in the property path will
-     * genenerate an <code>IllegalArgumentException</code> or not. If set to <code>true</code> then
-     * if any objects in the property path evaluate to <code>null</code> then the
-     * <code>IllegalArgumentException</code> throw by <code>PropertyUtils</code> will be logged but
-     * not rethrown and <code>false</code> will be returned.  If set to <code>false</code> then if
-     * any objects in the property path evaluate to <code>null</code> then the
-     * <code>IllegalArgumentException</code> throw by <code>PropertyUtils</code> will be logged and
+     * Returns the flag which determines whether {@code null} objects in the property path will
+     * genenerate an {@code IllegalArgumentException} or not. If set to {@code true} then
+     * if any objects in the property path evaluate to {@code null} then the
+     * {@code IllegalArgumentException} throw by {@code PropertyUtils} will be logged but
+     * not rethrown and {@code false} will be returned.  If set to {@code false} then if
+     * any objects in the property path evaluate to {@code null} then the
+     * {@code IllegalArgumentException} throw by {@code PropertyUtils} will be logged and
      * rethrown.
      *
-     * @return The flag which determines whether <code>null</code> objects in the property path will
-     * genenerate an <code>IllegalArgumentException</code> or not.
+     * @return The flag which determines whether {@code null} objects in the property path will
+     * genenerate an {@code IllegalArgumentException} or not.
      */
     public boolean isIgnoreNull() {
         return ignoreNull;

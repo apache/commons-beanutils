@@ -183,7 +183,7 @@ public class LocaleConvertUtilsBean {
     /** Indicate whether the pattern is localized or not */
     private boolean applyLocalized;
 
-    /** The <code>Log</code> instance for this class. */
+    /** The {@code Log} instance for this class. */
     private final Log log = LogFactory.getLog(LocaleConvertUtils.class);
 
     /** Every entry of the mapConverters is:
@@ -460,8 +460,8 @@ public void deregister() {
     /**
      * getter for applyLocalized
      *
-     * @return <code>true</code> if pattern is localized,
-     * otherwise <code>false</code>
+     * @return {@code true} if pattern is localized,
+     * otherwise {@code false}
      */
     public boolean getApplyLocalized() {
         return applyLocalized;
@@ -479,7 +479,7 @@ public void deregister() {
     /**
      * Look up and return any registered {@link LocaleConverter} for the specified
      * destination class and locale; if there is no registered Converter, return
-     * <code>null</code>.
+     * {@code null}.
      *
      * @param clazz Class for which to return a registered Converter
      * @param locale The Locale
@@ -498,7 +498,7 @@ public void deregister() {
 
     /**
      * Look up and return any registered FastHashMap instance for the specified locale;
-     * if there is no registered one, return <code>null</code>.
+     * if there is no registered one, return {@code null}.
      *
      * @param locale The Locale
      * @return The FastHashMap instance contains the all {@link LocaleConverter} types for
@@ -526,7 +526,7 @@ public void deregister() {
 
     /**
      * Register a custom {@link LocaleConverter} for the specified destination
-     * <code>Class</code>, replacing any previously registered converter.
+     * {@code Class}, replacing any previously registered converter.
      *
      * @param converter The LocaleConverter to be registered
      * @param clazz The Destination class for conversions performed by this
@@ -541,8 +541,8 @@ public void deregister() {
     /**
      * setter for applyLocalized
      *
-     * @param newApplyLocalized <code>true</code> if pattern is localized,
-     * otherwise <code>false</code>
+     * @param newApplyLocalized {@code true} if pattern is localized,
+     * otherwise {@code false}
      */
     public void setApplyLocalized(final boolean newApplyLocalized) {
         applyLocalized = newApplyLocalized;

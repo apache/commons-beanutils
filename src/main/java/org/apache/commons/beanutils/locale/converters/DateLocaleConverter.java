@@ -34,7 +34,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * <p>Standard {@link org.apache.commons.beanutils.locale.LocaleConverter}
  * implementation that converts an incoming
- * locale-sensitive String into a <code>java.util.Date</code> object,
+ * locale-sensitive String into a {@code java.util.Date} object,
  * optionally using a default value or throwing a
  * {@link org.apache.commons.beanutils.ConversionException}
  * if a conversion error occurs.</p>
@@ -302,7 +302,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      /**
      * Returns whether date formatting is lenient.
      *
-     * @return true if the <code>DateFormat</code> used for formatting is lenient
+     * @return true if the {@code DateFormat} used for formatting is lenient
      * @see java.text.DateFormat#isLenient
      */
     public boolean isLenient() {
@@ -361,7 +361,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
     /**
      * Specify whether or not date-time parsing should be lenient.
      *
-     * @param lenient true if the <code>DateFormat</code> used for formatting should be lenient
+     * @param lenient true if the {@code DateFormat} used for formatting should be lenient
      * @see java.text.DateFormat#setLenient
      */
     public void setLenient(final boolean lenient) {

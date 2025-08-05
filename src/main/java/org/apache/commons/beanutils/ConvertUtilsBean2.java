@@ -17,12 +17,12 @@
 package org.apache.commons.beanutils;
 
 /**
- * {@link ConvertUtilsBean} implementation that delegates <code>convert()</code>
+ * {@link ConvertUtilsBean} implementation that delegates {@code convert()}
  * methods to the new {@link ConvertUtilsBean#convert(Object, Class)} method.
  *
  * <p>
  * To configure this implementation for the current context ClassLoader invoke
- * <code>BeanUtilsBean.setInstance(new BeanUtilsBean2());</code>
+ * {@code BeanUtilsBean.setInstance(new BeanUtilsBean2());}
  * </p>
  *
  * @see BeanUtilsBean2

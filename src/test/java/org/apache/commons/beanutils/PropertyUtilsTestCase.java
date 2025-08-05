@@ -43,7 +43,7 @@ import junit.framework.TestSuite;
  * change the characteristics of that class.</p>
  *
  * <p>So far, this test case has tests for the following methods of the
- * <code>PropertyUtils</code> class:</p>
+ * {@code PropertyUtils} class:</p>
  * <ul>
  * <li>getIndexedProperty(Object,String)</li>
  * <li>getIndexedProperty(Object,String,int)</li>
@@ -88,7 +88,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
     /**
      * The set of property names we expect to have returned when calling
-     * <code>getPropertyDescriptors()</code>.  You should update this list
+     * {@code getPropertyDescriptors()}.  You should update this list
      * when new properties are added to TestBean.
      */
     protected final static String[] properties = {
@@ -269,7 +269,7 @@ public class PropertyUtilsTestCase extends TestCase {
     }
 
     /**
-     * Test copyProperties() when the origin is a a <code>Map</code>.
+     * Test copyProperties() when the origin is a a {@code Map}.
      */
     public void testCopyPropertiesMap() {
 
@@ -501,7 +501,7 @@ public class PropertyUtilsTestCase extends TestCase {
     }
 
     /**
-     * Positive getPropertyDescriptor on property <code>booleanProperty</code>.
+     * Positive getPropertyDescriptor on property {@code booleanProperty}.
      */
     public void testGetDescriptorBoolean() {
 
@@ -511,7 +511,7 @@ public class PropertyUtilsTestCase extends TestCase {
     }
 
     /**
-     * Positive getPropertyDescriptor on property <code>doubleProperty</code>.
+     * Positive getPropertyDescriptor on property {@code doubleProperty}.
      */
     public void testGetDescriptorDouble() {
 
@@ -521,7 +521,7 @@ public class PropertyUtilsTestCase extends TestCase {
     }
 
     /**
-     * Positive getPropertyDescriptor on property <code>floatProperty</code>.
+     * Positive getPropertyDescriptor on property {@code floatProperty}.
      */
     public void testGetDescriptorFloat() {
 
@@ -531,7 +531,7 @@ public class PropertyUtilsTestCase extends TestCase {
     }
 
     /**
-     * Positive getPropertyDescriptor on property <code>intProperty</code>.
+     * Positive getPropertyDescriptor on property {@code intProperty}.
      */
     public void testGetDescriptorInt() {
 
@@ -567,7 +567,7 @@ public class PropertyUtilsTestCase extends TestCase {
     }
 
     /**
-     * Positive getPropertyDescriptor on property <code>longProperty</code>.
+     * Positive getPropertyDescriptor on property {@code longProperty}.
      */
     public void testGetDescriptorLong() {
 
@@ -617,7 +617,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
     /**
      * Positive getPropertyDescriptor on property
-     * <code>readOnlyProperty</code>.
+     * {@code readOnlyProperty}.
      */
     public void testGetDescriptorReadOnly() {
 
@@ -628,7 +628,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
     /**
      * Positive test for getPropertyDescriptors().  Each property name
-     * listed in <code>properties</code> should be returned exactly once.
+     * listed in {@code properties} should be returned exactly once.
      */
     public void testGetDescriptors() {
 
@@ -671,7 +671,7 @@ public class PropertyUtilsTestCase extends TestCase {
     }
 
     /**
-     * Positive getPropertyDescriptor on property <code>booleanSecond</code>
+     * Positive getPropertyDescriptor on property {@code booleanSecond}
      * that uses an "is" method as the getter.
      */
     public void testGetDescriptorSecond() {
@@ -682,7 +682,7 @@ public class PropertyUtilsTestCase extends TestCase {
     }
 
     /**
-     * Positive getPropertyDescriptor on property <code>shortProperty</code>.
+     * Positive getPropertyDescriptor on property {@code shortProperty}.
      */
     public void testGetDescriptorShort() {
 
@@ -692,7 +692,7 @@ public class PropertyUtilsTestCase extends TestCase {
     }
 
     /**
-     * Positive getPropertyDescriptor on property <code>stringProperty</code>.
+     * Positive getPropertyDescriptor on property {@code stringProperty}.
      */
     public void testGetDescriptorString() {
 
@@ -702,7 +702,7 @@ public class PropertyUtilsTestCase extends TestCase {
     }
 
     /**
-     * Negative getPropertyDescriptor on property <code>unknown</code>.
+     * Negative getPropertyDescriptor on property {@code unknown}.
      */
     public void testGetDescriptorUnknown() {
 
@@ -712,7 +712,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
     /**
      * Positive getPropertyDescriptor on property
-     * <code>writeOnlyProperty</code>.
+     * {@code writeOnlyProperty}.
      */
     public void testGetDescriptorWriteOnly() {
 

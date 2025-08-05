@@ -36,10 +36,10 @@ import org.apache.commons.logging.LogFactory;
  * <strong>Known Limitations: Accessing Public Methods In A Default Access Superclass</strong>
  * <p>There is an issue when invoking public methods contained in a default access superclass.
  * Reflection locates these methods fine and correctly assigns them as public.
- * However, an <code>IllegalAccessException</code> is thrown if the method is invoked.</p>
+ * However, an {@code IllegalAccessException} is thrown if the method is invoked.</p>
  *
- * <p><code>MethodUtils</code> contains a workaround for this situation.
- * It will attempt to call <code>setAccessible</code> on this method.
+ * <p>{@code MethodUtils} contains a workaround for this situation.
+ * It will attempt to call {@code setAccessible} on this method.
  * If this call succeeds, then the method can be invoked as normal.
  * This call will only succeed when the application has sufficient security privileges.
  * If this call fails then a warning will be logged and the method may fail.</p>
@@ -181,7 +181,7 @@ public class MethodUtils {
     /**
      * <p>Return an accessible method (that is, one that can be invoked via
      * reflection) that implements the specified Method.  If no such method
-     * can be found, return <code>null</code>.</p>
+     * can be found, return {@code null}.</p>
      *
      * @param clazz The class of the object
      * @param method The method that we wish to call
@@ -237,8 +237,8 @@ public class MethodUtils {
     /**
      * <p>Return an accessible method (that is, one that can be invoked via
      * reflection) with given name and a single parameter.  If no such method
-     * can be found, return <code>null</code>.
-     * Basically, a convenience wrapper that constructs a <code>Class</code>
+     * can be found, return {@code null}.
+     * Basically, a convenience wrapper that constructs a {@code Class}
      * array for you.</p>
      *
      * @param clazz get method from this class
@@ -258,7 +258,7 @@ public class MethodUtils {
     /**
      * <p>Return an accessible method (that is, one that can be invoked via
      * reflection) with given name and parameters.  If no such method
-     * can be found, return <code>null</code>.
+     * can be found, return {@code null}.
      * This is just a convenient wrapper for
      * {@link #getAccessibleMethod(Method method)}.</p>
      *
@@ -292,7 +292,7 @@ public class MethodUtils {
     /**
      * <p>Return an accessible method (that is, one that can be invoked via
      * reflection) that implements the specified Method.  If no such method
-     * can be found, return <code>null</code>.</p>
+     * can be found, return {@code null}.</p>
      *
      * @param method The method that we wish to call
      * @return The accessible method
@@ -311,7 +311,7 @@ public class MethodUtils {
      * <p>Return an accessible method (that is, one that can be invoked via
      * reflection) that implements the specified method, by scanning through
      * all implemented interfaces and subinterfaces.  If no such method
-     * can be found, return <code>null</code>.</p>
+     * can be found, return {@code null}.</p>
      *
      * <p> There isn't any good reason why this method must be private.
      * It is because there doesn't seem any reason why other classes should
@@ -371,7 +371,7 @@ public class MethodUtils {
     /**
      * <p>Return an accessible method (that is, one that can be invoked via
      * reflection) by scanning through the superclasses. If no such method
-     * can be found, return <code>null</code>.</p>
+     * can be found, return {@code null}.</p>
      *
      * @param clazz Class to be checked
      * @param methodName Method name of the method we wish to call
@@ -424,7 +424,7 @@ public class MethodUtils {
      * #invokeMethod(Object object,String methodName,Object [] args,Class[] parameterTypes)}.
      * </p>
      * <p>This method can match primitive parameter by passing in wrapper classes.
-     * For example, a <code>Boolean</code> will match a primitive <code>boolean</code>
+     * For example, a {@code Boolean} will match a primitive {@code boolean}
      * parameter.
      * </p>
      *
@@ -574,7 +574,7 @@ public class MethodUtils {
 
     /**
      * Gets the class for the primitive type corresponding to the primitive wrapper class given.
-     * For example, an instance of <code>Boolean.class</code> returns a <code>boolean.class</code>.
+     * For example, an instance of {@code Boolean.class} returns a {@code boolean.class}.
      * @param wrapperType the
      * @return the primitive type class corresponding to the given wrapper class,
      * null if no match is found
@@ -614,7 +614,7 @@ public class MethodUtils {
 
     /**
      * Gets the wrapper object class for the given primitive type class.
-     * For example, passing <code>boolean.class</code> returns <code>Boolean.class</code>
+     * For example, passing {@code boolean.class} returns {@code Boolean.class}
      * @param primitiveType the primitive type class for which a match is to be found
      * @return the wrapper type associated with the given primitive
      * or null if no match is found
@@ -705,7 +705,7 @@ public class MethodUtils {
      * types.</p>
      *
      * <p> This uses reflection to invoke the method obtained from a call to
-     * <code>getAccessibleMethod()</code>.</p>
+     * {@code getAccessibleMethod()}.</p>
      *
      * @param object invoke method on this object
      * @param methodName get method with this name
@@ -743,7 +743,7 @@ public class MethodUtils {
      * types given.</p>
      *
      * <p>This uses reflection to invoke the method obtained from a call to
-     * <code>getAccessibleMethod()</code>.</p>
+     * {@code getAccessibleMethod()}.</p>
      *
      * @param object invoke method on this object
      * @param methodName get method with this name
@@ -911,13 +911,13 @@ public class MethodUtils {
      * <p>Invoke a named method whose parameter type matches the object type.</p>
      *
      * <p>The behavior of this method is less deterministic
-     * than <code>invokeExactMethod()</code>.
+     * than {@code invokeExactMethod()}.
      * It loops through all methods with names that match
      * and then executes the first it finds with compatible parameters.</p>
      *
      * <p>This method supports calls to methods taking primitive parameters
-     * via passing in wrapping classes. So, for example, a <code>Boolean</code> class
-     * would match a <code>boolean</code> primitive.</p>
+     * via passing in wrapping classes. So, for example, a {@code Boolean} class
+     * would match a {@code boolean} primitive.</p>
      *
      * <p> This is a convenient wrapper for
      * {@link #invokeMethod(Object object,String methodName,Object [] args)}.
@@ -956,8 +956,8 @@ public class MethodUtils {
      * and then executes the first it finds with compatible parameters.</p>
      *
      * <p>This method supports calls to methods taking primitive parameters
-     * via passing in wrapping classes. So, for example, a <code>Boolean</code> class
-     * would match a <code>boolean</code> primitive.</p>
+     * via passing in wrapping classes. So, for example, a {@code Boolean} class
+     * would match a {@code boolean} primitive.</p>
      *
      * <p> This is a convenient wrapper for
      * {@link #invokeMethod(Object object,String methodName,Object [] args,Class[] parameterTypes)}.
@@ -1004,8 +1004,8 @@ public class MethodUtils {
      * and then executes the first it finds with compatible parameters.</p>
      *
      * <p>This method supports calls to methods taking primitive parameters
-     * via passing in wrapping classes. So, for example, a <code>Boolean</code> class
-     * would match a <code>boolean</code> primitive.</p>
+     * via passing in wrapping classes. So, for example, a {@code Boolean} class
+     * would match a {@code boolean} primitive.</p>
      *
      *
      * @param object invoke method on this object
@@ -1057,8 +1057,8 @@ public class MethodUtils {
      * and then executes the first it finds with compatible parameters.</p>
      *
      * <p>This method supports calls to methods taking primitive parameters
-     * via passing in wrapping classes. So, for example, a <code>Boolean</code> class
-     * would match a <code>boolean</code> primitive.</p>
+     * via passing in wrapping classes. So, for example, a {@code Boolean} class
+     * would match a {@code boolean} primitive.</p>
      *
      * <p> This is a convenient wrapper for
      * {@link #invokeStaticMethod(Class objectClass,String methodName,Object [] args)}.
@@ -1098,8 +1098,8 @@ public class MethodUtils {
      * and then executes the first it finds with compatible parameters.</p>
      *
      * <p>This method supports calls to methods taking primitive parameters
-     * via passing in wrapping classes. So, for example, a <code>Boolean</code> class
-     * would match a <code>boolean</code> primitive.</p>
+     * via passing in wrapping classes. So, for example, a {@code Boolean} class
+     * would match a {@code boolean} primitive.</p>
      *
      * <p> This is a convenient wrapper for
      * {@link #invokeStaticMethod(Class objectClass,String methodName,Object [] args,Class[] parameterTypes)}.
@@ -1147,8 +1147,8 @@ public class MethodUtils {
      * and then executes the first it finds with compatible parameters.</p>
      *
      * <p>This method supports calls to methods taking primitive parameters
-     * via passing in wrapping classes. So, for example, a <code>Boolean</code> class
-     * would match a <code>boolean</code> primitive.</p>
+     * via passing in wrapping classes. So, for example, a {@code Boolean} class
+     * would match a {@code boolean} primitive.</p>
      *
      *
      * @param objectClass invoke static method on this class
@@ -1196,13 +1196,13 @@ public class MethodUtils {
      * <p>Determine whether a type can be used as a parameter in a method invocation.
      * This method handles primitive conversions correctly.</p>
      *
-     * <p>In order words, it will match a <code>Boolean</code> to a <code>boolean</code>,
-     * a <code>Long</code> to a <code>long</code>,
-     * a <code>Float</code> to a <code>float</code>,
-     * a <code>Integer</code> to a <code>int</code>,
-     * and a <code>Double</code> to a <code>double</code>.
+     * <p>In order words, it will match a {@code Boolean} to a {@code boolean},
+     * a {@code Long} to a {@code long},
+     * a {@code Float} to a {@code float},
+     * a {@code Integer} to a {@code int},
+     * and a {@code Double} to a {@code double}.
      * Now logic widening matches are allowed.
-     * For example, a <code>Long</code> will not match a <code>int</code>.
+     * For example, a {@code Long} will not match a {@code int}.
      *
      * @param parameterType the type of parameter accepted by the method
      * @param parameterization the type of parameter being tested
@@ -1228,10 +1228,10 @@ public class MethodUtils {
 
     /**
      * Set whether methods should be cached for greater performance or not,
-     * default is <code>true</code>.
+     * default is {@code true}.
      *
-     * @param cacheMethods <code>true</code> if methods should be
-     * cached for greater performance, otherwise <code>false</code>
+     * @param cacheMethods {@code true} if methods should be
+     * cached for greater performance, otherwise {@code false}
      * @since 1.8.0
      */
     public static synchronized void setCacheMethods(final boolean cacheMethods) {

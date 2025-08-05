@@ -29,7 +29,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * <p>Standard {@link org.apache.commons.beanutils.locale.LocaleConverter}
  * implementation that converts an incoming
- * locale-sensitive String into a <code>java.lang.Number</code> object,
+ * locale-sensitive String into a {@code java.lang.Number} object,
  * optionally using a default value or throwing a
  * {@link org.apache.commons.beanutils.ConversionException}
  * if a conversion error occurs.</p>

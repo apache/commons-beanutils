@@ -31,7 +31,7 @@ import java.util.TimeZone;
  * See the {@link DateTimeConverter} documentation for further details.
  * <p>
  * Can be configured to either return a <em>default value</em> or throw a
- * <code>ConversionException</code> if a conversion error occurs.
+ * {@code ConversionException} if a conversion error occurs.
  *
  * @since 1.3
  */
@@ -39,7 +39,7 @@ public final class SqlTimestampConverter extends DateTimeConverter {
 
     /**
      * Construct a <strong>java.sql.Timestamp</strong> <em>Converter</em> that throws
-     * a <code>ConversionException</code> if an error occurs.
+     * a {@code ConversionException} if an error occurs.
      */
     public SqlTimestampConverter() {
     }
@@ -57,9 +57,9 @@ public final class SqlTimestampConverter extends DateTimeConverter {
     }
 
     /**
-     * Return the default type this <code>Converter</code> handles.
+     * Return the default type this {@code Converter} handles.
      *
-     * @return The default type this <code>Converter</code> handles.
+     * @return The default type this {@code Converter} handles.
      * @since 1.8.0
      */
     @Override
@@ -68,7 +68,7 @@ public final class SqlTimestampConverter extends DateTimeConverter {
     }
 
     /**
-     * Return a <code>DateFormat</code> for the Locale.
+     * Return a {@code DateFormat} for the Locale.
      * @param locale TODO
      * @param timeZone TODO
      * @return The DateFormat.

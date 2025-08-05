@@ -33,8 +33,8 @@ public interface DynaBean {
      *
      * @param name Name of the property to check
      * @param key Name of the key to check
-     * @return <code>true</code> if the mapped property contains a value for
-     * the specified key, otherwise <code>false</code>
+     * @return {@code true} if the mapped property contains a value for
+     * the specified key, otherwise {@code false}
      *
      * @throws IllegalArgumentException if there is no property
      *  of the specified name
@@ -70,7 +70,7 @@ public interface DynaBean {
 
     /**
      * Return the value of a mapped property with the specified name,
-     * or <code>null</code> if there is no value for the specified key.
+     * or {@code null} if there is no value for the specified key.
      *
      * @param name Name of the property whose value is to be retrieved
      * @param key Key of the value to be retrieved
@@ -83,7 +83,7 @@ public interface DynaBean {
     Object get(String name, String key);
 
     /**
-     * Return the <code>DynaClass</code> instance that describes the set of
+     * Return the {@code DynaClass} instance that describes the set of
      * properties available for this DynaBean.
      *
      * @return The associated DynaClass

@@ -90,8 +90,8 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     }
 
     /**
-     * Create and return a <code>DynaClass</code> instance for our test
-     * <code>DynaBean</code>.
+     * Create and return a {@code DynaClass} instance for our test
+     * {@code DynaBean}.
      */
     protected DynaClass createDynaClass() {
 
@@ -195,7 +195,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     }
 
     /**
-     * Test copyProperties() when the origin is a a <code>Map</code>.
+     * Test copyProperties() when the origin is a a {@code Map}.
      */
     public void testCopyPropertiesMap() {
 

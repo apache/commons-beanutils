@@ -23,7 +23,7 @@ import java.util.NoSuchElementException;
 
 /**
  * <p>Implements {@link Iterator} returned by the
- * <code>iterator()</code> method of {@link ResultSetDynaClass}.  Each
+ * {@code iterator()} method of {@link ResultSetDynaClass}.  Each
  * object returned by this iterator will be a {@link DynaBean} that
  * represents a single row from the result set being wrapped.</p>
  *
@@ -48,7 +48,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
     protected boolean eof;
 
     /**
-     * <p>Construct an <code>Iterator</code> for the result set being wrapped
+     * <p>Construct an {@code Iterator} for the result set being wrapped
      * by the specified {@link ResultSetDynaClass}.</p>
      *
      * @param dynaClass The {@link ResultSetDynaClass} wrapping the
@@ -82,8 +82,8 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      *
      * @param name Name of the property to check
      * @param key Name of the key to check
-     * @return <code>true</code> if the mapped property contains a value for
-     * the specified key, otherwise <code>false</code>
+     * @return {@code true} if the mapped property contains a value for
+     * the specified key, otherwise {@code false}
      *
      * @throws IllegalArgumentException if there is no property
      *  of the specified name
@@ -137,7 +137,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
 
     /**
      * Return the value of a mapped property with the specified name,
-     * or <code>null</code> if there is no value for the specified key.
+     * or {@code null} if there is no value for the specified key.
      *
      * @param name Name of the property whose value is to be retrieved
      * @param key Key of the value to be retrieved
@@ -154,7 +154,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
     }
 
     /**
-     * Return the <code>DynaClass</code> instance that describes the set of
+     * Return the {@code DynaClass} instance that describes the set of
      * properties available for this DynaBean.
      *
      * @return The associated DynaClass
@@ -165,10 +165,10 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
     }
 
     /**
-     * <p>Return <code>true</code> if the iteration has more elements.</p>
+     * <p>Return {@code true} if the iteration has more elements.</p>
      *
-     * @return <code>true</code> if the result set has another
-     * row, otherwise <code>false</code>
+     * @return {@code true} if the result set has another
+     * row, otherwise {@code false}
      */
     @Override
     public boolean hasNext() {

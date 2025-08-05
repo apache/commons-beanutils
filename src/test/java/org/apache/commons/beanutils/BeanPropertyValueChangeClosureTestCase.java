@@ -20,7 +20,7 @@ package org.apache.commons.beanutils;
 import junit.framework.TestCase;
 
 /**
- * Test cases for <code>BeanPropertyValueChangeClosure</code>.
+ * Test cases for {@code BeanPropertyValueChangeClosure}.
  *
  */
 public class BeanPropertyValueChangeClosureTestCase extends TestCase {

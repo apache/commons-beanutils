@@ -51,7 +51,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
         private final BeanMap owner;
 
         /**
-         * Constructs a new <code>Entry</code>.
+         * Constructs a new {@code Entry}.
          *
          * @param owner the BeanMap this entry belongs to
          * @param key   the key for this entry
@@ -187,7 +187,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     private transient HashMap<String, Class<? extends Object>> types = new HashMap<>();
 
     /**
-     * Constructs a new empty <code>BeanMap</code>.
+     * Constructs a new empty {@code BeanMap}.
      */
     public BeanMap() {
     }
@@ -195,7 +195,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     // Map interface
 
     /**
-     * Constructs a new <code>BeanMap</code> that operates on the specified bean. If the given bean is <code>null</code>, then this map will be empty.
+     * Constructs a new {@code BeanMap} that operates on the specified bean. If the given bean is {@code null}, then this map will be empty.
      *
      * @param bean the bean for this map to operate on
      */
@@ -206,7 +206,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
 
     /**
      * This method reinitializes the bean map to have default values for the bean's properties. This is accomplished by constructing a new instance of the bean
-     * which the map uses as its underlying data source. This behavior for <code>clear()</code> differs from the Map contract in that the mappings are not
+     * which the map uses as its underlying data source. This behavior for {@code clear()} differs from the Map contract in that the mappings are not
      * actually removed from the map (the mappings for a BeanMap are fixed).
      */
     @Override
@@ -282,13 +282,13 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     /**
      * Returns true if the bean defines a property with the given name.
      * <p>
-     * The given name must be a <code>String</code>; if not, this method returns false. This method will also return false if the bean does not define a
+     * The given name must be a {@code String}; if not, this method returns false. This method will also return false if the bean does not define a
      * property with that name.
      * <p>
      * Write-only properties will not be matched as the test operates against property read methods.
      *
      * @param name the name of the property to check
-     * @return false if the given name is null or is not a <code>String</code>; false if the bean does not define a property with that name; or true if the bean
+     * @return false if the given name is null or is not a {@code String}; false if the bean does not define a property with that name; or true if the bean
      *         does define a property with that name
      */
     @Override
@@ -317,7 +317,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
      *
      * If no such constructor exists, and the given type is a primitive type, then the given value is converted to a string using its {@link Object#toString()
      * toString()} method, and that string is parsed into the correct primitive type using, for instance, {@link Integer#valueOf(String)} to convert the string
-     * into an <code>int</code>.
+     * into an {@code int}.
      * <P>
      *
      * If no special constructor exists and the given type is not a primitive type, this method returns the original value.
@@ -446,8 +446,8 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     /**
      * Returns the value of the bean's property with the given name.
      * <p>
-     * The given name must be a {@link String} and must not be null; otherwise, this method returns <code>null</code>. If the bean defines a property with the
-     * given name, the value of that property is returned. Otherwise, <code>null</code> is returned.
+     * The given name must be a {@link String} and must not be null; otherwise, this method returns {@code null}. If the bean defines a property with the
+     * given name, the value of that property is returned. Otherwise, {@code null} is returned.
      * <p>
      * Write-only properties will not be matched as the test operates against property read methods.
      *
@@ -504,7 +504,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
      * Returns the type of the property with the given name.
      *
      * @param name the name of the property
-     * @return the type of the property, or <code>null</code> if no such property exists
+     * @return the type of the property, or {@code null} if no such property exists
      */
     public Class<?> getType(final String name) {
         return types.get(name);
@@ -606,7 +606,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     }
 
     /**
-     * Logs the given exception to <code>System.out</code>. Used to display warnings while accessing/mutating the bean.
+     * Logs the given exception to {@code System.out}. Used to display warnings while accessing/mutating the bean.
      *
      * @param ex the exception to log
      */
@@ -616,7 +616,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     }
 
     /**
-     * Logs the given exception to <code>System.err</code>. Used to display errors while accessing/mutating the bean.
+     * Logs the given exception to {@code System.err}. Used to display errors while accessing/mutating the bean.
      *
      * @param ex the exception to log
      */
@@ -706,7 +706,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     /**
      * Renders a string representation of this object.
      *
-     * @return a <code>String</code> representation of this object
+     * @return a {@code String} representation of this object
      */
     @Override
     public String toString() {

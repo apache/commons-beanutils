@@ -18,7 +18,7 @@
 package org.apache.commons.beanutils;
 
 /**
- * <p>A specialized extension to <code>DynaClass</code> that allows properties
+ * <p>A specialized extension to {@code DynaClass} that allows properties
  * to be added or removed dynamically.</p>
  *
  * <p><strong>WARNING</strong> - No guarantees that this will be in the final
@@ -61,9 +61,9 @@ public interface MutableDynaClass extends DynaClass {
      * @param name Name of the new dynamic property
      * @param type Data type of the new dynamic property (null for no
      *  restrictions)
-     * @param readable Set to <code>true</code> if this property value
+     * @param readable Set to {@code true} if this property value
      *  should be readable
-     * @param writeable Set to <code>true</code> if this property value
+     * @param writeable Set to {@code true} if this property value
      *  should be writeable
      *
      * @throws IllegalArgumentException if name is null
@@ -78,8 +78,8 @@ public interface MutableDynaClass extends DynaClass {
      * existing registration of property names, data types, readability, or
      * writeability are allowed.
      *
-     * @return <code>true</code> if this Mutable {@link DynaClass} is restricted,
-     * otherwise <code>false</code>
+     * @return {@code true} if this Mutable {@link DynaClass} is restricted,
+     * otherwise {@code false}
      */
     boolean isRestricted();
 

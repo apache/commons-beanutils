@@ -60,7 +60,7 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
     }
 
     /**
-     * Test <code>copyProperty()</code> converting to a String.
+     * Test {@code copyProperty()} converting to a String.
      */
     @Override
     public void testCopyPropertyConvertToString() {
@@ -73,7 +73,7 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
     }
 
     /**
-     * Test <code>copyProperty()</code> converting to a String.
+     * Test {@code copyProperty()} converting to a String.
      */
     @Override
     public void testCopyPropertyConvertToStringArray() {
@@ -88,7 +88,7 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
     }
 
     /**
-     * Test <code>copyProperty()</code> converting to a String on indexed property
+     * Test {@code copyProperty()} converting to a String on indexed property
      */
     @Override
     public void testCopyPropertyConvertToStringIndexed() {
@@ -103,7 +103,7 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
     }
 
     /**
-     * Test <code>getArrayProperty()</code> converting to a String.
+     * Test {@code getArrayProperty()} converting to a String.
      */
     @Override
     public void testGetArrayPropertyDate() {
@@ -119,7 +119,7 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
     }
 
     /**
-     * Test <code>getArrayProperty()</code> converting to a String.
+     * Test {@code getArrayProperty()} converting to a String.
      */
     @Override
     public void testGetIndexedPropertyDate() {
@@ -134,7 +134,7 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
     }
 
     /**
-     * Test <code>getSimpleProperty()</code> converting to a String.
+     * Test {@code getSimpleProperty()} converting to a String.
      */
     @Override
     public void testGetSimplePropertyDate() {
@@ -149,7 +149,7 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
     }
 
     /**
-     * Test <code>setProperty()</code> converting to a String.
+     * Test {@code setProperty()} converting to a String.
      */
     @Override
     public void testSetPropertyConvertToString() {
@@ -162,7 +162,7 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
     }
 
     /**
-     * Test <code>setProperty()</code> converting to a String array.
+     * Test {@code setProperty()} converting to a String array.
      */
     @Override
     public void testSetPropertyConvertToStringArray() {
@@ -177,7 +177,7 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
     }
 
     /**
-     * Test <code>setProperty()</code> converting to a String on indexed property
+     * Test {@code setProperty()} converting to a String on indexed property
      */
     @Override
     public void testSetPropertyConvertToStringIndexed() {

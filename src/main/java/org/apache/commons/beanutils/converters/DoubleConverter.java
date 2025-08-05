@@ -26,7 +26,7 @@ package org.apache.commons.beanutils.converters;
  * documentation for further details.
  * <p>
  * Can be configured to either return a <em>default value</em> or throw a
- * <code>ConversionException</code> if a conversion error occurs.
+ * {@code ConversionException} if a conversion error occurs.
  *
  * @since 1.3
  */
@@ -34,7 +34,7 @@ public final class DoubleConverter extends NumberConverter {
 
     /**
      * Construct a <strong>java.lang.Double</strong> <em>Converter</em> that throws
-     * a <code>ConversionException</code> if an error occurs.
+     * a {@code ConversionException} if an error occurs.
      */
     public DoubleConverter() {
         super(true);
@@ -53,9 +53,9 @@ public final class DoubleConverter extends NumberConverter {
     }
 
     /**
-     * Return the default type this <code>Converter</code> handles.
+     * Return the default type this {@code Converter} handles.
      *
-     * @return The default type this <code>Converter</code> handles.
+     * @return The default type this {@code Converter} handles.
      * @since 1.8.0
      */
     @Override

@@ -21,12 +21,12 @@ import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 
 /**
- * <p>Implements <code>DynaBean</code> to wrap a standard JavaBean
+ * <p>Implements {@code DynaBean} to wrap a standard JavaBean
  * instance, so that DynaBean APIs can be used to access its properties.</p>
  *
  * <p>
  * The most common use cases for this class involve wrapping an existing java bean.
- * (This makes it different from the typical use cases for other <code>DynaBean</code>'s.)
+ * (This makes it different from the typical use cases for other {@code DynaBean}'s.)
  * For example:
  * </p>
  * <pre>
@@ -37,7 +37,7 @@ import java.lang.reflect.InvocationTargetException;
  * </pre>
  *
  * <p><strong>IMPLEMENTATION NOTE</strong> - This implementation does not
- * support the <code>contains()</code> and <code>remove()</code> methods.</p>
+ * support the {@code contains()} and {@code remove()} methods.</p>
  *
  */
 public class WrapDynaBean implements DynaBean, Serializable {
@@ -45,7 +45,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The <code>DynaClass</code> "base class" that this DynaBean
+     * The {@code DynaClass} "base class" that this DynaBean
      * is associated with.
      */
     protected transient WrapDynaClass dynaClass;
@@ -56,7 +56,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
     protected Object instance;
 
     /**
-     * Construct a new <code>DynaBean</code> associated with the specified
+     * Construct a new {@code DynaBean} associated with the specified
      * JavaBean instance.
      *
      * @param instance JavaBean instance to be wrapped
@@ -87,8 +87,8 @@ public class WrapDynaBean implements DynaBean, Serializable {
      *
      * @param name Name of the property to check
      * @param key Name of the key to check
-     * @return <code>true</code> if the mapped property contains a value for
-     * the specified key, otherwise <code>false</code>
+     * @return {@code true} if the mapped property contains a value for
+     * the specified key, otherwise {@code false}
      *
      * @throws IllegalArgumentException if there is no property
      *  of the specified name
@@ -164,7 +164,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
 
     /**
      * Return the value of a mapped property with the specified name,
-     * or <code>null</code> if there is no value for the specified key.
+     * or {@code null} if there is no value for the specified key.
      *
      * @param name Name of the property whose value is to be retrieved
      * @param key Key of the value to be retrieved
@@ -195,7 +195,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
     }
 
     /**
-     * Return the <code>DynaClass</code> instance that describes the set of
+     * Return the {@code DynaClass} instance that describes the set of
      * properties available for this DynaBean.
      * @return The associated DynaClass
      */
@@ -234,10 +234,10 @@ public class WrapDynaBean implements DynaBean, Serializable {
      * For most common use cases,
      * this object should already be known
      * and this method safely be ignored.
-     * But some creators of frameworks using <code>DynaBean</code>'s may
+     * But some creators of frameworks using {@code DynaBean}'s may
      * find this useful.
      *
-     * @return the java bean Object wrapped by this <code>DynaBean</code>
+     * @return the java bean Object wrapped by this {@code DynaBean}
      */
     public Object getInstance() {
         return instance;

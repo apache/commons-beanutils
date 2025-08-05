@@ -21,7 +21,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * <p>Test Case for the <code>MappedPropertyDescriptor</code>.</p>
+ * <p>Test Case for the {@code MappedPropertyDescriptor}.</p>
  *
  */
 public class MappedPropertyTestCase extends TestCase {

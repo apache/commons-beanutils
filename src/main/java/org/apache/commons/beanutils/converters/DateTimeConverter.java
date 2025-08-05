@@ -34,11 +34,11 @@ import org.apache.commons.beanutils.ConversionException;
  * <em>date/time</em> types.
  * </p>
  * <ul>
- *     <li><code>java.util.Date</code></li>
- *     <li><code>java.util.Calendar</code></li>
- *     <li><code>java.sql.Date</code></li>
- *     <li><code>java.sql.Time</code></li>
- *     <li><code>java.sql.Timestamp</code></li>
+ *     <li>{@code java.util.Date}</li>
+ *     <li>{@code java.util.Calendar}</li>
+ *     <li>{@code java.sql.Date}</li>
+ *     <li>{@code java.sql.Time}</li>
+ *     <li>{@code java.sql.Timestamp}</li>
  * </ul>
  *
  * <h2>String Conversions (to and from)</h2>
@@ -47,36 +47,36 @@ import org.apache.commons.beanutils.ConversionException;
  * <ul>
  *    <li>Using the SHORT date format for the default Locale, configure using:
  *        <ul>
- *           <li><code>setUseLocaleFormat(true)</code></li>
+ *           <li>{@code setUseLocaleFormat(true)}</li>
  *        </ul>
  *    </li>
  *    <li>Using the SHORT date format for a specified Locale, configure using:
  *        <ul>
- *           <li><code>setLocale(Locale)</code></li>
+ *           <li>{@code setLocale(Locale)}</li>
  *        </ul>
  *    </li>
  *    <li>Using the specified date pattern(s) for the default Locale, configure using:
  *        <ul>
- *           <li>Either <code>setPattern(String)</code> or
- *                      <code>setPatterns(String[])</code></li>
+ *           <li>Either {@code setPattern(String)} or
+ *                      {@code setPatterns(String[])}</li>
  *        </ul>
  *    </li>
  *    <li>Using the specified date pattern(s) for a specified Locale, configure using:
  *        <ul>
- *           <li><code>setPattern(String)</code> or
- *                    <code>setPatterns(String[]) and...</code></li>
- *           <li><code>setLocale(Locale)</code></li>
+ *           <li>{@code setPattern(String)} or
+ *                    {@code setPatterns(String[]) and...}</li>
+ *           <li>{@code setLocale(Locale)}</li>
  *        </ul>
  *    </li>
  *    <li>If none of the above are configured the
- *        <code>toDate(String)</code> method is used to convert
+ *        {@code toDate(String)} method is used to convert
  *        from String to Date and the Dates's
- *        <code>toString()</code> method used to convert from
+ *        {@code toString()} method used to convert from
  *        Date to String.</li>
  * </ul>
  * <p>
  * The <strong>Time Zone</strong> to use with the date format can be specified
- * using the <code>setTimeZone()</code> method.
+ * using the {@code setTimeZone()} method.
  * </p>
  *
  * @since 1.8.0
@@ -91,7 +91,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
 
     /**
      * Construct a Date/Time <em>Converter</em> that throws a
-     * <code>ConversionException</code> if an error occurs.
+     * {@code ConversionException} if an error occurs.
      */
     public DateTimeConverter() {
     }
@@ -112,9 +112,9 @@ public abstract class DateTimeConverter extends AbstractConverter {
      * Convert an input Date/Calendar object into a String.
      * <p>
      * <strong>N.B.</strong>If the converter has been configured to with
-     * one or more patterns (using <code>setPatterns()</code>), then
+     * one or more patterns (using {@code setPatterns()}), then
      * the first pattern will be used to format the date into a String.
-     * Otherwise the default <code>DateFormat</code> for the default locale
+     * Otherwise the default {@code DateFormat} for the default locale
      * (and <em>style</em> if configured) will be used.
      *
      * @param value The input value to be converted
@@ -162,21 +162,21 @@ public abstract class DateTimeConverter extends AbstractConverter {
      * This method handles conversions between the following
      * types:
      * <ul>
-     *     <li><code>java.util.Date</code></li>
-     *     <li><code>java.util.Calendar</code></li>
-     *     <li><code>java.sql.Date</code></li>
-     *     <li><code>java.sql.Time</code></li>
-     *     <li><code>java.sql.Timestamp</code></li>
+     *     <li>{@code java.util.Date}</li>
+     *     <li>{@code java.util.Calendar}</li>
+     *     <li>{@code java.sql.Date}</li>
+     *     <li>{@code java.sql.Time}</li>
+     *     <li>{@code java.sql.Timestamp}</li>
      * </ul>
      *
-     * It also handles conversion from a <code>String</code> to
+     * It also handles conversion from a {@code String} to
      * any of the above types.
      * <p>
      *
-     * For <code>String</code> conversion, if the converter has been configured
-     * with one or more patterns (using <code>setPatterns()</code>), then
+     * For {@code String} conversion, if the converter has been configured
+     * with one or more patterns (using {@code setPatterns()}), then
      * the conversion is attempted with each of the specified patterns.
-     * Otherwise the default <code>DateFormat</code> for the default locale
+     * Otherwise the default {@code DateFormat} for the default locale
      * (and <em>style</em> if configured) will be used.
      *
      * @param <T> The desired target type of the conversion.
@@ -247,7 +247,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
     }
 
     /**
-     * Return a <code>DateFormat</code> for the Locale.
+     * Return a {@code DateFormat} for the Locale.
      * @param locale The Locale to create the Format with (may be null)
      * @param timeZone The Time Zone create the Format with (may be null)
      * @return A Date Format.
@@ -281,7 +281,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
 
     /**
      * Return the Locale for the <em>Converter</em>
-     * (or <code>null</code> if none specified).
+     * (or {@code null} if none specified).
      *
      * @return The locale to use for conversion
      */
@@ -291,8 +291,8 @@ public abstract class DateTimeConverter extends AbstractConverter {
 
     /**
      * Return the date format patterns used to convert
-     * dates to/from a <code>java.lang.String</code>
-     * (or <code>null</code> if none specified).
+     * dates to/from a {@code java.lang.String}
+     * (or {@code null} if none specified).
      *
      * @see SimpleDateFormat
      * @return Array of format patterns.
@@ -303,7 +303,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
 
     /**
      * Return the Time Zone to use when converting dates
-     * (or <code>null</code> if none specified.
+     * (or {@code null} if none specified.
      *
      * @return The Time Zone.
      */
@@ -373,8 +373,8 @@ public abstract class DateTimeConverter extends AbstractConverter {
     }
 
     /**
-     * Parse a String into a <code>Calendar</code> object
-     * using the specified <code>DateFormat</code>.
+     * Parse a String into a {@code Calendar} object
+     * using the specified {@code DateFormat}.
      *
      * @param sourceType The type of the value being converted
      * @param targetType The type to convert the value to
@@ -413,7 +413,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
 
     /**
      * Set a date format pattern to use to convert
-     * dates to/from a <code>java.lang.String</code>.
+     * dates to/from a {@code java.lang.String}.
      *
      * @see SimpleDateFormat
      * @param pattern The format pattern.
@@ -424,7 +424,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
 
     /**
      * Set the date format patterns to use to convert
-     * dates to/from a <code>java.lang.String</code>.
+     * dates to/from a {@code java.lang.String}.
      *
      * @see SimpleDateFormat
      * @param patterns Array of format patterns.
@@ -450,8 +450,8 @@ public abstract class DateTimeConverter extends AbstractConverter {
     /**
      * Indicate whether conversion should use a format/pattern or not.
      *
-     * @param useLocaleFormat <code>true</code> if the format
-     * for the locale should be used, otherwise <code>false</code>
+     * @param useLocaleFormat {@code true} if the format
+     * for the locale should be used, otherwise {@code false}
      */
     public void setUseLocaleFormat(final boolean useLocaleFormat) {
         this.useLocaleFormat = useLocaleFormat;
@@ -464,11 +464,11 @@ public abstract class DateTimeConverter extends AbstractConverter {
      *
      * This method handles conversion to the following types:
      * <ul>
-     *     <li><code>java.util.Date</code></li>
-     *     <li><code>java.util.Calendar</code></li>
-     *     <li><code>java.sql.Date</code></li>
-     *     <li><code>java.sql.Time</code></li>
-     *     <li><code>java.sql.Timestamp</code></li>
+     *     <li>{@code java.util.Date}</li>
+     *     <li>{@code java.util.Calendar}</li>
+     *     <li>{@code java.sql.Date}</li>
+     *     <li>{@code java.sql.Time}</li>
+     *     <li>{@code java.sql.Timestamp}</li>
      * </ul>
      *
      * @param <T> The target type
@@ -528,14 +528,14 @@ public abstract class DateTimeConverter extends AbstractConverter {
      * <p>
      * This method handles conversion from a String to the following types:
      * <ul>
-     *     <li><code>java.sql.Date</code></li>
-     *     <li><code>java.sql.Time</code></li>
-     *     <li><code>java.sql.Timestamp</code></li>
+     *     <li>{@code java.sql.Date}</li>
+     *     <li>{@code java.sql.Time}</li>
+     *     <li>{@code java.sql.Timestamp}</li>
      * </ul>
      * <p>
      * <strong>N.B.</strong> No default String conversion
-     * mechanism is provided for <code>java.util.Date</code>
-     * and <code>java.util.Calendar</code> type.
+     * mechanism is provided for {@code java.util.Date}
+     * and {@code java.util.Calendar} type.
      *
      * @param <T> The target type
      * @param type The date type to convert to

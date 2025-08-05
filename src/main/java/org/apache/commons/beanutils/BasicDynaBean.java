@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * <p>Minimal implementation of the <code>DynaBean</code> interface.  Can be
+ * <p>Minimal implementation of the {@code DynaBean} interface.  Can be
  * used as a convenience base class for more sophisticated implementations.</p>
  *
  * <p><strong>IMPLEMENTATION NOTE</strong> - Instances of this class that are
@@ -33,7 +33,7 @@ import java.util.Objects;
  *
  * <p><strong>IMPLEMENTATION NOTE</strong> - Instances of this class can be
  * successfully serialized and deserialized <strong>ONLY</strong> if all
- * property values are <code>Serializable</code>.</p>
+ * property values are {@code Serializable}.</p>
  *
  */
 
@@ -42,7 +42,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The <code>DynaClass</code> "base class" that this DynaBean
+     * The {@code DynaClass} "base class" that this DynaBean
      * is associated with.
      */
     protected DynaClass dynaClass;
@@ -56,8 +56,8 @@ public class BasicDynaBean implements DynaBean, Serializable {
     private transient Map<String, Object> mapDecorator;
 
     /**
-     * Construct a new <code>DynaBean</code> associated with the specified
-     * <code>DynaClass</code> instance.
+     * Construct a new {@code DynaBean} associated with the specified
+     * {@code DynaClass} instance.
      *
      * @param dynaClass The DynaClass we are associated with
      */
@@ -73,8 +73,8 @@ public class BasicDynaBean implements DynaBean, Serializable {
      *
      * @param name Name of the property to check
      * @param key Name of the key to check
-     * @return <code>true</code> if the mapped property contains a value for
-     * the specified key, otherwise <code>false</code>
+     * @return {@code true} if the mapped property contains a value for
+     * the specified key, otherwise {@code false}
      *
      * @throws IllegalArgumentException if there is no property
      *  of the specified name
@@ -170,7 +170,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
 
     /**
      * Return the value of a mapped property with the specified name,
-     * or <code>null</code> if there is no value for the specified key.
+     * or {@code null} if there is no value for the specified key.
      *
      * @param name Name of the property whose value is to be retrieved
      * @param key Key of the value to be retrieved
@@ -191,7 +191,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
     }
 
     /**
-     * Return the <code>DynaClass</code> instance that describes the set of
+     * Return the {@code DynaClass} instance that describes the set of
      * properties available for this DynaBean.
      *
      * @return The associated DynaClass
@@ -226,9 +226,9 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * Return a Map representation of this DynaBean.
      * <p>
      * This, for example, could be used in JSTL in the following way to access
-     * a DynaBean's <code>fooProperty</code>:
+     * a DynaBean's {@code fooProperty}:
      * </p>
-     * <ul><li><code>${myDynaBean.<strong>map</strong>.fooProperty}</code></li></ul>
+     * <ul><li>{@code ${myDynaBean.<strong>map</strong>.fooProperty}}</li></ul>
      *
      * @return a Map representation of this DynaBean
      * @since 1.8.0
@@ -248,8 +248,8 @@ public class BasicDynaBean implements DynaBean, Serializable {
      *
      * @param dest Destination class
      * @param source Source class
-     * @return <code>true</code> if the source class is assignable to the
-     * destination class, otherwise <code>false</code>
+     * @return {@code true} if the source class is assignable to the
+     * destination class, otherwise {@code false}
      */
     protected boolean isAssignable(final Class<?> dest, final Class<?> source) {
 

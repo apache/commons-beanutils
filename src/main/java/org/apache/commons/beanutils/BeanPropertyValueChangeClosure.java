@@ -24,29 +24,29 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <p><code>Closure</code> that sets a property.</p>
+ * <p>{@code Closure} that sets a property.</p>
  * <p>
- * An implementation of <code>org.apache.commons.collections.Closure</code> that updates
+ * An implementation of {@code org.apache.commons.collections.Closure} that updates
  * a specified property on the object provided with a specified value.
- * The <code>BeanPropertyValueChangeClosure</code> constructor takes two parameters which determine
+ * The {@code BeanPropertyValueChangeClosure} constructor takes two parameters which determine
  * what property will be updated and with what value.
  * <dl>
  *    <dt>
  *       <b>
- *         <code>public BeanPropertyValueChangeClosure(String propertyName, Object propertyValue)</code>
+ *         {@code public BeanPropertyValueChangeClosure(String propertyName, Object propertyValue)}
  *       </b>
  *    </dt>
  *    <dd>
- *       Will create a <code>Closure</code> that will update an object by setting the property
- *       specified by <code>propertyName</code> to the value specified by <code>propertyValue</code>.
+ *       Will create a {@code Closure} that will update an object by setting the property
+ *       specified by {@code propertyName} to the value specified by {@code propertyValue}.
  *    </dd>
  * </dl>
  *
  * <p>
  * <strong>Note:</strong> Property names can be a simple, nested, indexed, or mapped property as defined by
- * <code>org.apache.commons.beanutils.PropertyUtils</code>.  If any object in the property path
- * specified by <code>propertyName</code> is <code>null</code> then the outcome is based on the
- * value of the <code>ignoreNull</code> attribute.
+ * {@code org.apache.commons.beanutils.PropertyUtils}.  If any object in the property path
+ * specified by {@code propertyName} is {@code null} then the outcome is based on the
+ * value of the {@code ignoreNull} attribute.
  * </p>
  * <p>
  * A typical usage might look like:
@@ -60,18 +60,18 @@ import org.apache.commons.logging.LogFactory;
  * CollectionUtils.forAllDo( peopleCollection, closure );
  * </pre>
  * <p>
- * This would take a <code>Collection</code> of person objects and update the
+ * This would take a {@code Collection} of person objects and update the
  * </p>
- * <code>activeEmployee</code> property of each object in the <code>Collection</code> to
- * <code>true</code>. Assuming...
+ * {@code activeEmployee} property of each object in the {@code Collection} to
+ * {@code true}. Assuming...
  * <ul>
  *    <li>
- *       The top level object in the <code>peopleCollection</code> is an object which represents a
+ *       The top level object in the {@code peopleCollection} is an object which represents a
  *       person.
  *    </li>
  *    <li>
- *       The person object has a <code>setActiveEmployee( boolean )</code> method which updates
- *       the value for the object's <code>activeEmployee</code> property.
+ *       The person object has a {@code setActiveEmployee( boolean )} method which updates
+ *       the value for the object's {@code activeEmployee} property.
  *    </li>
  * </ul>
  *
@@ -84,35 +84,35 @@ public class BeanPropertyValueChangeClosure implements Closure {
     private final Log log = LogFactory.getLog(this.getClass());
 
     /**
-     * The name of the property which will be updated when this <code>Closure</code> executes.
+     * The name of the property which will be updated when this {@code Closure} executes.
      */
     private final String propertyName;
 
     /**
-     * The value that the property specified by <code>propertyName</code>
-     * will be updated to when this <code>Closure</code> executes.
+     * The value that the property specified by {@code propertyName}
+     * will be updated to when this {@code Closure} executes.
      */
     private final Object propertyValue;
 
     /**
-     * Determines whether <code>null</code> objects in the property path will genenerate an
-     * <code>IllegalArgumentException</code> or not. If set to <code>true</code> then if any objects
-     * in the property path leading up to the target property evaluate to <code>null</code> then the
-     * <code>IllegalArgumentException</code> throw by <code>PropertyUtils</code> will be logged but
-     * not rethrown.  If set to <code>false</code> then if any objects in the property path leading
-     * up to the target property evaluate to <code>null</code> then the
-     * <code>IllegalArgumentException</code> throw by <code>PropertyUtils</code> will be logged and
+     * Determines whether {@code null} objects in the property path will genenerate an
+     * {@code IllegalArgumentException} or not. If set to {@code true} then if any objects
+     * in the property path leading up to the target property evaluate to {@code null} then the
+     * {@code IllegalArgumentException} throw by {@code PropertyUtils} will be logged but
+     * not rethrown.  If set to {@code false} then if any objects in the property path leading
+     * up to the target property evaluate to {@code null} then the
+     * {@code IllegalArgumentException} throw by {@code PropertyUtils} will be logged and
      * rethrown.
      */
     private final boolean ignoreNull;
 
     /**
      * Constructor which takes the name of the property to be changed, the new value to set
-     * the property to, and assumes <code>ignoreNull</code> to be <code>false</code>.
+     * the property to, and assumes {@code ignoreNull} to be {@code false}.
      *
      * @param propertyName The name of the property that will be updated with the value specified by
-     * <code>propertyValue</code>.
-     * @param propertyValue The value that <code>propertyName</code> will be set to on the target
+     * {@code propertyValue}.
+     * @param propertyValue The value that {@code propertyName} will be set to on the target
      * object.
      * @throws IllegalArgumentException If the propertyName provided is null or empty.
      */
@@ -122,15 +122,15 @@ public class BeanPropertyValueChangeClosure implements Closure {
 
     /**
      * Constructor which takes the name of the property to be changed, the new value to set
-     * the property to and a boolean which determines whether <code>null</code> objects in the
-     * property path will genenerate an <code>IllegalArgumentException</code> or not.
+     * the property to and a boolean which determines whether {@code null} objects in the
+     * property path will genenerate an {@code IllegalArgumentException} or not.
      *
      * @param propertyName The name of the property that will be updated with the value specified by
-     * <code>propertyValue</code>.
-     * @param propertyValue The value that <code>propertyName</code> will be set to on the target
+     * {@code propertyValue}.
+     * @param propertyValue The value that {@code propertyName} will be set to on the target
      * object.
-     * @param ignoreNull Determines whether <code>null</code> objects in the property path will
-     * genenerate an <code>IllegalArgumentException</code> or not.
+     * @param ignoreNull Determines whether {@code null} objects in the property path will
+     * genenerate an {@code IllegalArgumentException} or not.
      * @throws IllegalArgumentException If the propertyName provided is null or empty.
      */
     public BeanPropertyValueChangeClosure(final String propertyName, final Object propertyValue, final boolean ignoreNull) {
@@ -144,17 +144,17 @@ public class BeanPropertyValueChangeClosure implements Closure {
 
     /**
      * Updates the target object provided using the property update criteria provided when this
-     * <code>BeanPropertyValueChangeClosure</code> was constructed.  If any object in the property
-     * path leading up to the target property is <code>null</code> then the outcome will be based on
-     * the value of the <code>ignoreNull</code> attribute. By default, <code>ignoreNull</code> is
-     * <code>false</code> and would result in an <code>IllegalArgumentException</code> if an object
-     * in the property path leading up to the target property is <code>null</code>.
+     * {@code BeanPropertyValueChangeClosure} was constructed.  If any object in the property
+     * path leading up to the target property is {@code null} then the outcome will be based on
+     * the value of the {@code ignoreNull} attribute. By default, {@code ignoreNull} is
+     * {@code false} and would result in an {@code IllegalArgumentException} if an object
+     * in the property path leading up to the target property is {@code null}.
      *
      * @param object The object to be updated.
      * @throws IllegalArgumentException If an IllegalAccessException, InvocationTargetException, or
      * NoSuchMethodException is thrown when trying to access the property specified on the object
-     * provided. Or if an object in the property path provided is <code>null</code> and
-     * <code>ignoreNull</code> is set to <code>false</code>.
+     * provided. Or if an object in the property path provided is {@code null} and
+     * {@code ignoreNull} is set to {@code false}.
      */
     @Override
     public void execute(final Object object) {
@@ -182,37 +182,37 @@ public class BeanPropertyValueChangeClosure implements Closure {
     }
 
     /**
-     * Returns the name of the property which will be updated when this <code>Closure</code> executes.
+     * Returns the name of the property which will be updated when this {@code Closure} executes.
      *
-     * @return The name of the property which will be updated when this <code>Closure</code> executes.
+     * @return The name of the property which will be updated when this {@code Closure} executes.
      */
     public String getPropertyName() {
         return propertyName;
     }
 
     /**
-     * Returns the value that the property specified by <code>propertyName</code>
-     * will be updated to when this <code>Closure</code> executes.
+     * Returns the value that the property specified by {@code propertyName}
+     * will be updated to when this {@code Closure} executes.
      *
-     * @return The value that the property specified by <code>propertyName</code>
-     * will be updated to when this <code>Closure</code> executes.
+     * @return The value that the property specified by {@code propertyName}
+     * will be updated to when this {@code Closure} executes.
      */
     public Object getPropertyValue() {
         return propertyValue;
     }
 
     /**
-     * Returns the flag that determines whether <code>null</code> objects in the property path will
-     * genenerate an <code>IllegalArgumentException</code> or not. If set to <code>true</code> then
+     * Returns the flag that determines whether {@code null} objects in the property path will
+     * genenerate an {@code IllegalArgumentException} or not. If set to {@code true} then
      * if any objects in the property path leading up to the target property evaluate to
-     * <code>null</code> then the <code>IllegalArgumentException</code> throw by
-     * <code>PropertyUtils</code> will be logged but not rethrown.  If set to <code>false</code> then
+     * {@code null} then the {@code IllegalArgumentException} throw by
+     * {@code PropertyUtils} will be logged but not rethrown.  If set to {@code false} then
      * if any objects in the property path leading up to the target property evaluate to
-     * <code>null</code> then the <code>IllegalArgumentException</code> throw by
-     * <code>PropertyUtils</code> will be logged and rethrown.
+     * {@code null} then the {@code IllegalArgumentException} throw by
+     * {@code PropertyUtils} will be logged and rethrown.
      *
-     * @return The flag that determines whether <code>null</code> objects in the property path will
-     * genenerate an <code>IllegalArgumentException</code> or not.
+     * @return The flag that determines whether {@code null} objects in the property path will
+     * genenerate an {@code IllegalArgumentException} or not.
      */
     public boolean isIgnoreNull() {
         return ignoreNull;

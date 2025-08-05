@@ -22,31 +22,31 @@ package org.apache.commons.beanutils.expression;
  * This class assists in resolving property names in the following five formats,
  * with the layout of an identifying String in parentheses:
  * <ul>
- * <li><strong>Simple (<code>name</code>)</strong> - The specified
- *     <code>name</code> identifies an individual property of a particular
+ * <li><strong>Simple ({@code name})</strong> - The specified
+ *     {@code name} identifies an individual property of a particular
  *     JavaBean.  The name of the actual getter or setter method to be used
  *     is determined using standard JavaBeans instrospection, so that (unless
- *     overridden by a <code>BeanInfo</code> class, a property named "xyz"
- *     will have a getter method named <code>getXyz()</code> or (for boolean
- *     properties only) <code>isXyz()</code>, and a setter method named
- *     <code>setXyz()</code>.</li>
- * <li><strong>Nested (<code>name1.name2.name3</code>)</strong> The first
+ *     overridden by a {@code BeanInfo} class, a property named "xyz"
+ *     will have a getter method named {@code getXyz()} or (for boolean
+ *     properties only) {@code isXyz()}, and a setter method named
+ *     {@code setXyz()}.</li>
+ * <li><strong>Nested ({@code name1.name2.name3})</strong> The first
  *     name element is used to select a property getter, as for simple
  *     references above.  The object returned for this property is then
  *     consulted, using the same approach, for a property getter for a
- *     property named <code>name2</code>, and so on.  The property value that
+ *     property named {@code name2}, and so on.  The property value that
  *     is ultimately retrieved or modified is the one identified by the
  *     last name element.</li>
- * <li><strong>Indexed (<code>name[index]</code>)</strong> - The underlying
+ * <li><strong>Indexed ({@code name[index]})</strong> - The underlying
  *     property value is assumed to be an array, or this JavaBean is assumed
  *     to have indexed property getter and setter methods.  The appropriate
- *     (zero-relative) entry in the array is selected.  <code>List</code>
+ *     (zero-relative) entry in the array is selected.  {@code List}
  *     objects are now also supported for read/write.  You simply need to define
- *     a getter that returns the <code>List</code></li>
- * <li><strong>Mapped (<code>name(key)</code>)</strong> - The JavaBean
+ *     a getter that returns the {@code List}</li>
+ * <li><strong>Mapped ({@code name(key)})</strong> - The JavaBean
  *     is assumed to have an property getter and setter methods with an
- *     additional attribute of type <code>java.lang.String</code>.</li>
- * <li><strong>Combined (<code>name1.name2[index].name3(key)</code>)</strong> -
+ *     additional attribute of type {@code java.lang.String}.</li>
+ * <li><strong>Combined ({@code name1.name2[index].name3(key)})</strong> -
  *     Combining mapped, nested, and indexed references is also
  *     supported.</li>
  * </ul>
@@ -108,7 +108,7 @@ public class DefaultResolver implements Resolver {
     }
 
     /**
-     * Return the map key from the property expression or <code>null</code>.
+     * Return the map key from the property expression or {@code null}.
      *
      * @param expression The property expression
      * @return The index value
@@ -174,8 +174,8 @@ public class DefaultResolver implements Resolver {
      * Indicate whether the expression is for an indexed property or not.
      *
      * @param expression The property expression
-     * @return <code>true</code> if the expresion is indexed,
-     *  otherwise <code>false</code>
+     * @return {@code true} if the expresion is indexed,
+     *  otherwise {@code false}
      */
     @Override
     public boolean isIndexed(final String expression) {
@@ -198,8 +198,8 @@ public class DefaultResolver implements Resolver {
      * Indicate whether the expression is for a mapped property or not.
      *
      * @param expression The property expression
-     * @return <code>true</code> if the expresion is mapped,
-     *  otherwise <code>false</code>
+     * @return {@code true} if the expresion is mapped,
+     *  otherwise {@code false}
      */
     @Override
     public boolean isMapped(final String expression) {

@@ -33,7 +33,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * <p>
- * Test Case for the <code>WrapDynaBean</code> implementation class. These tests were based on the ones in <code>PropertyUtilsTestCase</code> because the two
+ * Test Case for the {@code WrapDynaBean} implementation class. These tests were based on the ones in {@code PropertyUtilsTestCase} because the two
  * classes provide similar levels of functionality.
  * </p>
  */
@@ -142,7 +142,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
     }
 
     /**
-     * The <code>set()</code> method.
+     * The {@code set()} method.
      */
     @Test
     public void testIndexedProperties() {
@@ -203,7 +203,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
     }
 
     /**
-     * The <code>contains()</code> method is not supported by the <code>WrapDynaBean</code> implementation class.
+     * The {@code contains()} method is not supported by the {@code WrapDynaBean} implementation class.
      */
     @Test
     @Override
@@ -227,7 +227,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
     }
 
     /**
-     * The <code>remove()</code> method is not supported by the <code>WrapDynaBean</code> implementation class.
+     * The {@code remove()} method is not supported by the {@code WrapDynaBean} implementation class.
      */
     @Test
     @Override
@@ -284,7 +284,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
     }
 
     /**
-     * The <code>set()</code> method.
+     * The {@code set()} method.
      */
     @Test
     public void testSimpleProperties() {

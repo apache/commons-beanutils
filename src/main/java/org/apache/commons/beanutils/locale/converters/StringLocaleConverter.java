@@ -34,7 +34,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * <p>Standard {@link org.apache.commons.beanutils.locale.LocaleConverter}
  * implementation that converts an incoming
- * locale-sensitive object into a <code>java.lang.String</code> object,
+ * locale-sensitive object into a {@code java.lang.String} object,
  * optionally using a default value or throwing a
  * {@link org.apache.commons.beanutils.ConversionException}
  * if a conversion error occurs.</p>

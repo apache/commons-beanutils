@@ -35,7 +35,7 @@ import org.apache.commons.beanutils.Converter;
  * to and from <strong>array</strong> objects.
  * <p>
  * Can be configured to either return a <em>default value</em> or throw a
- * <code>ConversionException</code> if a conversion error occurs.
+ * {@code ConversionException} if a conversion error occurs.
  * </p>
  * <p>
  * The main features of this implementation are:
@@ -53,11 +53,11 @@ import org.apache.commons.beanutils.Converter;
  *     <li><strong>Delimited Lists</strong> - can Convert <strong>to</strong> and <strong>from</strong> a
  *         delimited list in String format.</li>
  *     <li><strong>Conversion to String</strong> - converts an array to a
- *         <code>String</code> in one of two ways: as a <em>delimited list</em>
+ *         {@code String} in one of two ways: as a <em>delimited list</em>
  *         or by converting the first element in the array to a String - this
  *         is controlled by the {@link ArrayConverter#setOnlyFirstToString(boolean)}
  *         parameter.</li>
- *     <li><strong>Multi Dimensional Arrays</strong> - it is possible to convert a <code>String</code>
+ *     <li><strong>Multi Dimensional Arrays</strong> - it is possible to convert a {@code String}
  *         to a multi-dimensional arrays, by embedding {@link ArrayConverter}
  *         within each other - see example below.</li>
  *     <li><strong>Default Value</strong>
@@ -73,11 +73,11 @@ import org.apache.commons.beanutils.Converter;
  *                 value</i>. The <em>defaultSize</em> parameter controls the
  *                 <em>default value</em> in the following way:
  *                 <ul>
- *                    <li><em>defaultSize &lt; 0</em> - default is <code>null</code></li>
+ *                    <li><em>defaultSize &lt; 0</em> - default is {@code null}</li>
  *                    <li><em>defaultSize = 0</em> - default is an array of length zero</li>
  *                    <li><em>defaultSize &gt; 0</em> - default is an array with a
- *                        length specified by <code>defaultSize</code> (elements
- *                        in the array will be <code>null</code>)</li>
+ *                        length specified by {@code defaultSize} (elements
+ *                        in the array will be {@code null})</li>
  *                 </ul>
  *             </li>
  *         </ul>
@@ -85,24 +85,24 @@ import org.apache.commons.beanutils.Converter;
  * </ul>
  *
  * <h2>Parsing Delimited Lists</h2>
- * This implementation can convert a delimited list in <code>String</code> format
+ * This implementation can convert a delimited list in {@code String} format
  * into an array of the appropriate type. By default, it uses a comma as the delimiter
  * but the following methods can be used to configure parsing:
  * <ul>
- *     <li><code>setDelimiter(char)</code> - allows the character used as
+ *     <li>{@code setDelimiter(char)} - allows the character used as
  *         the delimiter to be configured [default is a comma].</li>
- *     <li><code>setAllowedChars(char[])</code> - adds additional characters
+ *     <li>{@code setAllowedChars(char[])} - adds additional characters
  *         (to the default alphabetic/numeric) to those considered to be
  *         valid token characters.
  * </ul>
  *
  * <h2>Multi Dimensional Arrays</h2>
- * It is possible to convert a <code>String</code> to mulit-dimensional arrays by using
+ * It is possible to convert a {@code String} to mulit-dimensional arrays by using
  * {@link ArrayConverter} as the element {@link Converter}
  * within another {@link ArrayConverter}.
  * <p>
  * For example, the following code demonstrates how to construct a {@link Converter}
- * to convert a delimited <code>String</code> into a two dimensional integer array:
+ * to convert a delimited {@code String} into a two dimensional integer array:
  * </p>
  * <pre>
  *    // Construct an Integer Converter
@@ -139,12 +139,12 @@ public class ArrayConverter extends AbstractConverter {
     private boolean onlyFirstToString = true;
 
     /**
-     * Construct an <strong>array</strong> <code>Converter</code> with the specified
-     * <strong>component</strong> <code>Converter</code> that throws a
-     * <code>ConversionException</code> if an error occurs.
+     * Construct an <strong>array</strong> {@code Converter} with the specified
+     * <strong>component</strong> {@code Converter} that throws a
+     * {@code ConversionException} if an error occurs.
      *
      * @param defaultType The default array type this
-     *  <code>Converter</code> handles
+     *  {@code Converter} handles
      * @param elementConverter Converter used to convert
      *  individual array elements.
      */
@@ -163,16 +163,16 @@ public class ArrayConverter extends AbstractConverter {
     }
 
     /**
-     * Construct an <strong>array</strong> <code>Converter</code> with the specified
-     * <strong>component</strong> <code>Converter</code> that returns a default
-     * array of the specified size (or <code>null</code>) if an error occurs.
+     * Construct an <strong>array</strong> {@code Converter} with the specified
+     * <strong>component</strong> {@code Converter} that returns a default
+     * array of the specified size (or {@code null}) if an error occurs.
      *
      * @param defaultType The default array type this
-     *  <code>Converter</code> handles
+     *  {@code Converter} handles
      * @param elementConverter Converter used to convert
      *  individual array elements.
      * @param defaultSize Specifies the size of the default array value or if less
-     *  than zero indicates that a <code>null</code> default value should be used.
+     *  than zero indicates that a {@code null} default value should be used.
      */
     public ArrayConverter(final Class<?> defaultType, final Converter elementConverter, final int defaultSize) {
         this(defaultType, elementConverter);
@@ -352,9 +352,9 @@ public class ArrayConverter extends AbstractConverter {
     }
 
     /**
-     * Return the default type this <code>Converter</code> handles.
+     * Return the default type this {@code Converter} handles.
      *
-     * @return The default type this <code>Converter</code> handles.
+     * @return The default type this {@code Converter} handles.
      */
     @Override
     protected Class<?> getDefaultType() {
@@ -363,7 +363,7 @@ public class ArrayConverter extends AbstractConverter {
 
     /**
      * <p>Parse an incoming String of the form similar to an array initializer
-     * in the Java language into a <code>List</code> individual Strings
+     * in the Java language into a {@code List} individual Strings
      * for each element, according to the following rules.</p>
      * <ul>
      * <li>The string is expected to be a comma-separated list of values.</li>
@@ -377,10 +377,10 @@ public class ArrayConverter extends AbstractConverter {
      * @param type The type to convert the value to
      * @param value String value to be parsed
      * @return List of parsed elements.
-     * @throws ConversionException if the syntax of <code>svalue</code>
+     * @throws ConversionException if the syntax of {@code svalue}
      *  is not syntactically valid
-     * @throws NullPointerException if <code>svalue</code>
-     *  is <code>null</code>
+     * @throws NullPointerException if {@code svalue}
+     *  is {@code null}
      */
     private List<String> parseElements(final Class<?> type, String value) {
 
@@ -467,10 +467,10 @@ public class ArrayConverter extends AbstractConverter {
      * Indicates whether converting to a String should create
      * a delimited list or just convert the first value.
      *
-     * @param onlyFirstToString <code>true</code> converts only
-     * the first value in the array to a String, <code>false</code>
+     * @param onlyFirstToString {@code true} converts only
+     * the first value in the array to a String, {@code false}
      * converts all values in the array into a delimited list (default
-     * is <code>true</code>
+     * is {@code true}
      */
     public void setOnlyFirstToString(final boolean onlyFirstToString) {
         this.onlyFirstToString = onlyFirstToString;
