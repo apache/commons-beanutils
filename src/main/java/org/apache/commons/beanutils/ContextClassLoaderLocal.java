@@ -38,7 +38,7 @@ import java.util.WeakHashMap;
  * variable with other components that happen to be running in the same
  * container at the same time (eg servlets or EJBs.)</p>
  *
- * <p>This class is strongly patterned after the java.lang.ThreadLocal
+ * <p>This class is strongly patterned after the {@link ThreadLocal}
  * class, which performs a similar task in allowing data to be associated
  * with a particular thread.</p>
  *
