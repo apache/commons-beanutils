@@ -20,7 +20,6 @@ import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
-import java.util.Locale;
 import java.util.Objects;
 
 import org.apache.commons.logging.Log;
