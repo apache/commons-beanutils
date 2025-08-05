@@ -45,7 +45,7 @@ public final class ClassConverter<T> extends AbstractConverter<Class<T>> {
 
     /**
      * <p>
-     * Converts a java.lang.Class or object into a String.
+     * Converts a {@link Class} or object into a {@link String}.
      * </p>
      *
      * @param value The input value to be converted
@@ -59,7 +59,7 @@ public final class ClassConverter<T> extends AbstractConverter<Class<T>> {
 
     /**
      * <p>
-     * Converts the input object into a java.lang.Class.
+     * Converts the input object into a {@link Class}.
      * </p>
      *
      * @param <R>   Target type of the conversion.

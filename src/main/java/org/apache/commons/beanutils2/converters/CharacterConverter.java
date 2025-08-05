@@ -51,7 +51,7 @@ public final class CharacterConverter extends AbstractConverter<Character> {
 
     /**
      * <p>
-     * Converts a java.lang.Class or object into a String.
+     * Converts a {@link Class} or object into a {@link String}.
      * </p>
      *
      * @param value The input value to be converted
@@ -66,7 +66,7 @@ public final class CharacterConverter extends AbstractConverter<Character> {
 
     /**
      * <p>
-     * Converts the input object into a java.lang.Character.
+     * Converts the input object into a {@link Character}.
      * </p>
      *
      * @param <T>   Target type of the conversion.

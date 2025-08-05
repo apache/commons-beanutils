@@ -34,7 +34,7 @@ import java.util.WeakHashMap;
  * </p>
  *
  * <p>
- * This class is strongly patterned after the java.lang.ThreadLocal class, which performs a similar task in allowing data to be associated with a particular
+ * This class is strongly patterned after the {@link ThreadLocal} class, which performs a similar task in allowing data to be associated with a particular
  * thread.
  * </p>
  *

@@ -110,7 +110,7 @@ public class PropertyUtilsBean {
     private Resolver resolver = new DefaultResolver();
 
     /**
-     * The cache of PropertyDescriptor arrays for beans we have already introspected, keyed by the java.lang.Class of this object.
+     * The cache of PropertyDescriptor arrays for beans we have already introspected, keyed by the {@link Class} of this object.
      */
     private final Map<Class<?>, BeanIntrospectionData> descriptorsCache;
 
