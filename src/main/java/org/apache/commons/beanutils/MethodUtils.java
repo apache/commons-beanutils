@@ -114,19 +114,6 @@ public class MethodUtils {
     }
 
     /**
-     * Only log warning about accessibility work around once.
-     * <p>
-     * Note that this is broken when this class is deployed via a shared
-     * classloader in a container, as the warning message will be emitted
-     * only once, not once per webapp. However making the warning appear
-     * once per webapp means having a map keyed by context classloader
-     * which introduces nasty memory-leak problems. As this warning is
-     * really optional we can ignore this problem; only one of the webapps
-     * will get the warning in its logs but that should be good enough.
-     */
-    private static boolean loggedAccessibleWarning;
-
-    /**
      * Indicates whether methods should be cached for improved performance.
      * <p>
      * Note that when this class is deployed via a shared classloader in
@@ -136,6 +123,7 @@ public class MethodUtils {
      * </p>
      */
     private static boolean CACHE_METHODS = true;
+
     /** An empty class array */
     private static final Class<?>[] EMPTY_CLASS_PARAMETERS = new Class[0];
 
@@ -1282,29 +1270,6 @@ public class MethodUtils {
         } catch (final SecurityException se) {
             // log but continue just in case the method.invoke works anyway
             final Log log = LogFactory.getLog(MethodUtils.class);
-            if (!loggedAccessibleWarning) {
-                boolean vulnerableJVM = false;
-                try {
-                    final String specVersion = System.getProperty("java.specification.version");
-                    if (specVersion.charAt(0) == '1' &&
-                            (specVersion.charAt(2) == '0' ||
-                             specVersion.charAt(2) == '1' ||
-                             specVersion.charAt(2) == '2' ||
-                             specVersion.charAt(2) == '3')) {
-
-                        vulnerableJVM = true;
-                    }
-                } catch (final SecurityException e) {
-                    // don't know - so display warning
-                    vulnerableJVM = true;
-                }
-                if (vulnerableJVM) {
-                    log.warn(
-                        "Current Security Manager restricts use of workarounds for reflection bugs "
-                        + " in pre-1.4 JVMs.");
-                }
-                loggedAccessibleWarning = true;
-            }
             log.debug("Cannot setAccessible on method. Therefore cannot use jvm access bug workaround.", se);
         }
     }
