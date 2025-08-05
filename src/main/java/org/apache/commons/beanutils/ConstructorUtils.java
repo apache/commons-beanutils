@@ -85,7 +85,7 @@ public class ConstructorUtils {
      * @param <T> the type of the constructor
      * @param ctor prototype constructor object.
      * @return <code>null</code> if accessible constructor cannot be found.
-     * @see java.lang.SecurityManager
+     * @see SecurityManager
      */
     public static <T> Constructor<T> getAccessibleConstructor(final Constructor<T> ctor) {
 
