@@ -34,6 +34,8 @@
       <!-- ADD -->
       <!-- UPDATE -->
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 84 to 85.</action>
+      <!-- REMOVE -->
+      <action dev="ggregory" type="remove" due-to="Gary Gregory">Remove pre-Java 1.4 code that will never run since we are on Java 8 or greater.</action>
     </release>
     <release version="1.11.0" date="2025-05-25" description="This is a maintenance release and requires Java 8.">
       <!-- FIX -->
