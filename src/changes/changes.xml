@@ -303,6 +303,15 @@
       <!-- UPDATE -->
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 78 to 81.</action>
     </release>
+    <release version="1.11.1" date="YYYY-MM-DD" description="This is a maintenance release and requires Java 8.">
+      <!-- FIX -->
+      <action dev="ggregory" type="fix" due-to="Gary Gregory">Fix typo in exception message throws from org.apache.commons.beanutils.PropertyUtilsBean.setMappedProperty(Object, String, String, Object).</action>
+      <!-- ADD -->
+      <!-- UPDATE -->
+      <action dev="ggregory" type="update" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 84 to 85.</action>
+      <!-- REMOVE -->
+      <action dev="ggregory" type="remove" due-to="Gary Gregory">Remove pre-Java 1.4 code that will never run since we are on Java 8 or greater.</action>
+    </release>
     <release version="1.10.0" date="2024-12-26" description="This is a maintenance release and requires Java 8.">
       <!-- FIX -->
       <action type="fix" issue="BEANUTILS-541" dev="ggregory" due-to="Sergey Chernov">FluentPropertyBeanIntrospector caches corrupted writeMethod (backport to 1.x) #69.</action>
