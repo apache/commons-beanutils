@@ -22,18 +22,24 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 
 /**
- * <p>Utility reflection methods focused on constructors, modeled after {@link MethodUtils}.</p>
+ * <p>
+ * Utility reflection methods focused on constructors, modeled after {@link MethodUtils}.
+ * </p>
  *
  * <strong>Known Limitations: Accessing Public Constructors In A Default Access Superclass</strong>
- * <p>There is an issue when invoking public constructors contained in a default access superclass.
- * Reflection locates these constructors fine and correctly assigns them as public.
- * However, an {@code IllegalAccessException} is thrown if the constructors is invoked.</p>
+ * <p>
+ * There is an issue when invoking public constructors contained in a default access superclass. Reflection locates these constructors fine and correctly
+ * assigns them as public. However, an {@code IllegalAccessException} is thrown if the constructors is invoked.
+ * </p>
  *
- * <p>{@code ConstructorUtils} contains a workaround for this situation.
- * It will attempt to call {@code setAccessible} on this constructor.
- * If this call succeeds, then the method can be invoked as normal.
- * This call will only succeed when the application has sufficient security privileges.
- * If this call fails then a warning will be logged and the method may fail.</p>
+ * <p>
+ * {@code ConstructorUtils} contains a workaround for this situation. It will attempt to call {@code setAccessible} on this constructor. If this call succeeds,
+ * then the method can be invoked as normal. This call will only succeed when the application has sufficient security privileges. If this call fails then a
+ * warning will be logged and the method may fail.
+ * </p>
+ *
+ * @deprecated Use <a href="https://commons.apache.org/proper/commons-lang/apidocs/org/apache/commons/lang3/reflect/ConstructorUtils.html">ConstructorUtils from
+ *             Apache Commons Lang</a>. ConstructorUtils is unused in this component.
  */
 public class ConstructorUtils {
 

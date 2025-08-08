@@ -25,9 +25,9 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * <p> Test case for {@code ConstructorUtils} </p>
- *
+ * Tests {@link ConstructorUtils} </p>
  */
+@SuppressWarnings("deprecation")
 public class ConstructorUtilsTestCase extends TestCase {
 
     /**
