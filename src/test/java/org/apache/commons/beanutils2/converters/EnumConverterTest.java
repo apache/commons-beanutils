@@ -20,6 +20,9 @@ package org.apache.commons.beanutils2.converters;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.time.DayOfWeek;
+import java.util.concurrent.TimeUnit;
+
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
 import org.junit.jupiter.api.AfterEach;
@@ -78,5 +81,39 @@ class EnumConverterTest {
     @Test
     void testUnsupportedType() {
         assertThrows(ConversionException.class, () -> converter.convert(Integer.class, "http://www.apache.org"));
+    }
+
+    @Test
+    void testConvertTimeUnit() {
+        final TimeUnit expected = TimeUnit.NANOSECONDS;
+        final Enum actual = converter.convert(Enum.class, "java.util.concurrent.TimeUnit.NANOSECONDS");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testConvertDayOfWeek() {
+        final DayOfWeek expected = DayOfWeek.MONDAY;
+        final DayOfWeek actual = converter.convert(DayOfWeek.class, "java.time.DayOfWeek#MONDAY");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testConvertMismatchingEnumType() {
+        assertThrows(ConversionException.class, () -> converter.convert(TimeUnit.class, "java.time.DayOfWeek#MONDAY"));
+    }
+
+    @Test
+    void testBrokenNamingConvention() {
+        assertThrows(ConversionException.class, () -> converter.convert(Enum.class, "JAVA-TIME-DAYOFWEEK#MONDAY"));
+    }
+
+    @Test
+    void testNonEnumClasses() {
+        assertThrows(ConversionException.class, () -> converter.convert(Enum.class, "java.lang.String#MONDAY"));
+    }
+
+    @Test
+    void testNonExistingClasses() {
+        assertThrows(ConversionException.class, () -> converter.convert(Enum.class, "java.lang.does.not.exist#MONDAY"));
     }
 }
