@@ -144,29 +144,22 @@ public abstract class AbstractConverter<D> implements Converter<D> {
         if (type == null) {
             return convertToDefaultType(value);
         }
-
         Class<?> sourceType = value == null ? null : value.getClass();
         final Class<R> targetType = ConvertUtils.primitiveToWrapper(type);
-
         if (log().isDebugEnabled()) {
             log().debug(
                     "Converting" + (value == null ? "" : " '" + toString(sourceType) + "'") + " value '" + value + "' to type '" + toString(targetType) + "'");
         }
-
         value = convertArray(value);
-
         // Missing Value
         if (value == null) {
             return handleMissing(targetType);
         }
-
         sourceType = value.getClass();
-
         try {
             // Convert --> String
             if (targetType.equals(String.class)) {
                 return targetType.cast(convertToString(value));
-
                 // No conversion necessary
             }
             if (targetType.equals(sourceType)) {
@@ -174,7 +167,6 @@ public abstract class AbstractConverter<D> implements Converter<D> {
                     log().debug("    No conversion required, value is already a " + toString(targetType));
                 }
                 return targetType.cast(value);
-
                 // Convert --> Type
             }
             final Object result = convertToType(targetType, value);
@@ -346,7 +338,6 @@ public abstract class AbstractConverter<D> implements Converter<D> {
             // value is now either null or of the desired target type
             return type.cast(value);
         }
-
         final ConversionException cex = ConversionException.format("No value specified for '%s'", toString(type));
         if (log().isDebugEnabled()) {
             log().debug("    Throwing ConversionException: " + cex.getMessage());

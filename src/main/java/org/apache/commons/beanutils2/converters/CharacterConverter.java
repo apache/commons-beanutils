@@ -80,14 +80,11 @@ public final class CharacterConverter extends AbstractConverter<Character> {
     protected <T> T convertToType(final Class<T> type, final Object value) throws Exception {
         if (Character.class.equals(type) || Character.TYPE.equals(type)) {
             final String stringValue = toString(value);
-
             if (stringValue.isEmpty()) {
                 throw new IllegalArgumentException("Value must not be empty");
             }
-
             return type.cast(Character.valueOf(stringValue.charAt(0)));
         }
-
         throw conversionException(type, value);
     }
 

@@ -61,15 +61,11 @@ class EnumConverterTest {
     @Test
     void testSimpleConversion() throws Exception {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from String", };
-
         final Object[] input = { "DELIVERED", "ORDERED", "READY" };
-
         final PizzaStatus[] expected = { PizzaStatus.DELIVERED, PizzaStatus.ORDERED, PizzaStatus.READY };
-
         for (int i = 0; i < expected.length; i++) {
             assertEquals(expected[i], converter.convert(PizzaStatus.class, input[i]), message[i] + " to Enum");
         }
-
         for (int i = 0; i < expected.length; i++) {
             assertEquals(input[i], converter.convert(String.class, expected[i]), input[i] + " to String");
         }
@@ -85,16 +81,12 @@ class EnumConverterTest {
 
     @Test
     void testConvertTimeUnit() {
-        final TimeUnit expected = TimeUnit.NANOSECONDS;
-        final Enum actual = converter.convert(Enum.class, "java.util.concurrent.TimeUnit.NANOSECONDS");
-        assertEquals(expected, actual);
+        assertEquals(TimeUnit.NANOSECONDS, converter.convert(Enum.class, "java.util.concurrent.TimeUnit.NANOSECONDS"));
     }
 
     @Test
     void testConvertDayOfWeek() {
-        final DayOfWeek expected = DayOfWeek.MONDAY;
-        final DayOfWeek actual = converter.convert(DayOfWeek.class, "java.time.DayOfWeek#MONDAY");
-        assertEquals(expected, actual);
+        assertEquals(DayOfWeek.MONDAY, converter.convert(DayOfWeek.class, "java.time.DayOfWeek#MONDAY"));
     }
 
     @Test

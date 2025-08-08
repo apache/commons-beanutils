@@ -76,7 +76,6 @@ class CharacterConverterTest {
     void testConvertToString() {
         @SuppressWarnings("rawtypes")
         final Converter raw = converter;
-
         assertEquals("N", raw.convert(String.class, Character.valueOf('N')), "Character Test");
         assertEquals("F", raw.convert(String.class, "FOO"), "String Test");
         assertEquals("3", raw.convert(String.class, Integer.valueOf(321)), "Integer Test");
