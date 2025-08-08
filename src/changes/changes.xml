@@ -34,6 +34,8 @@
       <!-- ADD -->
       <!-- UPDATE -->
       <action type="update" dev="ggregory" due-to="Gary Gregory, Dependabot">Bump org.apache.commons:commons-lang3 from 3.17.0 to 3.18.0 #357.</action>
+      <!-- REMOVE -->
+      <action dev="ggregory" type="remove" due-to="Gary Gregory">Remove ConstructorUtils in favor of Apache Commons Lang's ConstructorUtils. ConstructorUtils is unused in this component.</action>
     </release>
     <release version="2.0.0-M2" date="2025-05-25" description="This is a major release and requires Java 8.">
       <!-- FIX -->
