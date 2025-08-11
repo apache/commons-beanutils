@@ -22,6 +22,8 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Locale;
+
 import org.apache.commons.beanutils2.ConversionException;
 import org.junit.jupiter.api.Test;
 
@@ -42,6 +44,24 @@ class BooleanConverterTest {
 
         assertThrows(ConversionException.class, () -> converter.convert(Boolean.class, "true"));
         assertThrows(ConversionException.class, () -> converter.convert(Boolean.class, "bogus"));
+    }
+
+    @Test
+    void testAdditionalStringsLocale() {
+        final String[] trueStrings = { "ναι" };
+        final String[] falseStrings = { "hayır" };
+        final BooleanConverter converter = new BooleanConverter(trueStrings, falseStrings);
+
+        converter.setLocale(Locale.forLanguageTag("el"));
+        for (final String trueValue : new String[] { "ναι", "Ναι" }) {
+            assertEquals(Boolean.TRUE, converter.convert(Boolean.class, trueValue));
+        }
+
+        converter.setLocale(Locale.forLanguageTag("tr"));
+        for (final String falseValue : new String[] { "hayır", "Hayır" }) {
+            assertEquals(Boolean.FALSE, converter.convert(Boolean.class, falseValue));
+        }
+        assertThrows(ConversionException.class, () -> converter.convert(Boolean.class, "hayir"));
     }
 
     @Test
