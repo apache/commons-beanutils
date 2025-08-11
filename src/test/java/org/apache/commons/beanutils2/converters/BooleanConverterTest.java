@@ -35,10 +35,10 @@ class BooleanConverterTest {
 
     @Test
     void testAdditionalStrings() {
-        final String[] trueStrings = { "sure" };
-        final String[] falseStrings = { "nope" };
+        final String[] trueStrings = { "sure", "ναι" };
+        final String[] falseStrings = { "nope", "hayır" };
         final AbstractConverter<Boolean> converter = new BooleanConverter(trueStrings, falseStrings);
-        testConversionValues(converter, new String[] { "sure", "Sure" }, new String[] { "nope", "nOpE" });
+        testConversionValues(converter, new String[] { "sure", "Sure", "ναι", "Ναι" }, new String[] { "nope", "nOpE", "hayır", "Hayır" });
 
         assertThrows(ConversionException.class, () -> converter.convert(Boolean.class, "true"));
         assertThrows(ConversionException.class, () -> converter.convert(Boolean.class, "bogus"));

@@ -44,20 +44,6 @@ package org.apache.commons.beanutils2.converters;
 public final class BooleanConverter extends AbstractConverter<Boolean> {
 
     /**
-     * Copies the provided array, and ensures that all the strings in the newly created array contain only lower-case letters.
-     * <p>
-     * Using this method to copy string arrays means that changes to the src array do not modify the dst array.
-     * </p>
-     */
-    private static String[] copyStrings(final String[] src) {
-        final String[] dst = new String[src.length];
-        for (int i = 0; i < src.length; ++i) {
-            dst[i] = toLowerCase(src[i]);
-        }
-        return dst;
-    }
-
-    /**
      * The set of strings that are known to map to Boolean.TRUE.
      */
     private String[] trueStrings = { "true", "yes", "y", "on", "1" };
@@ -97,8 +83,8 @@ public final class BooleanConverter extends AbstractConverter<Boolean> {
      * @since 1.8.0
      */
     public BooleanConverter(final String[] trueStrings, final String[] falseStrings) {
-        this.trueStrings = copyStrings(trueStrings);
-        this.falseStrings = copyStrings(falseStrings);
+        this.trueStrings = trueStrings.clone();
+        this.falseStrings = falseStrings.clone();
     }
 
     /**
@@ -115,8 +101,8 @@ public final class BooleanConverter extends AbstractConverter<Boolean> {
      */
     public BooleanConverter(final String[] trueStrings, final String[] falseStrings, final Boolean defaultValue) {
         super(defaultValue);
-        this.trueStrings = copyStrings(trueStrings);
-        this.falseStrings = copyStrings(falseStrings);
+        this.trueStrings = trueStrings.clone();
+        this.falseStrings = falseStrings.clone();
     }
 
     /**
@@ -136,20 +122,16 @@ public final class BooleanConverter extends AbstractConverter<Boolean> {
     @Override
     protected <T> T convertToType(final Class<T> type, final Object value) throws Throwable {
         if (Boolean.class.equals(type) || Boolean.TYPE.equals(type)) {
-            // All the values in the trueStrings and falseStrings arrays are
-            // guaranteed to be lower-case. By converting the input value
-            // to lowercase too, we can use the efficient String.equals method
-            // instead of the less-efficient String.equalsIgnoreCase method.
-            final String stringValue = toLowerCase(value);
+            final String stringValue = toString(value);
 
             for (final String trueString : trueStrings) {
-                if (trueString.equals(stringValue)) {
+                if (trueString.equalsIgnoreCase(stringValue)) {
                     return type.cast(Boolean.TRUE);
                 }
             }
 
             for (final String falseString : falseStrings) {
-                if (falseString.equals(stringValue)) {
+                if (falseString.equalsIgnoreCase(stringValue)) {
                     return type.cast(Boolean.FALSE);
                 }
             }
