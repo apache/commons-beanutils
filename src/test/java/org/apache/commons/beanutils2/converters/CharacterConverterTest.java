@@ -30,14 +30,16 @@ import org.junit.jupiter.api.Test;
  */
 class CharacterConverterTest {
 
-    /** Sets Up */
+    private Converter<Character> converter;
+
     @BeforeEach
     public void setUp() throws Exception {
+        converter = new CharacterConverter();
     }
 
-    /** Tear Down */
     @AfterEach
     public void tearDown() throws Exception {
+        converter = null;
     }
 
     /**
@@ -45,7 +47,6 @@ class CharacterConverterTest {
      */
     @Test
     void testConvertToChar() {
-        final Converter<Character> converter = new CharacterConverter();
         assertEquals(Character.valueOf('F'), converter.convert(Character.TYPE, "FOO"), "Wrong result");
     }
 
@@ -54,7 +55,6 @@ class CharacterConverterTest {
      */
     @Test
     void testConvertToCharacter() {
-        final Converter<Character> converter = new CharacterConverter();
         assertEquals(Character.valueOf('N'), converter.convert(Character.class, Character.valueOf('N')), "Character Test");
         assertEquals(Character.valueOf('F'), converter.convert(Character.class, "FOO"), "String Test");
         assertEquals(Character.valueOf('3'), converter.convert(Character.class, Integer.valueOf(321)), "Integer Test");
@@ -65,7 +65,6 @@ class CharacterConverterTest {
      */
     @Test
     void testConvertToCharacterNullNoDefault() {
-        final Converter<Character> converter = new CharacterConverter();
         assertThrows(ConversionException.class, () -> converter.convert(Character.class, null));
     }
 
@@ -75,11 +74,8 @@ class CharacterConverterTest {
     @Test
     @SuppressWarnings("unchecked") // testing raw conversion
     void testConvertToString() {
-
-        final Converter<Character> converter = new CharacterConverter();
         @SuppressWarnings("rawtypes")
         final Converter raw = converter;
-
         assertEquals("N", raw.convert(String.class, Character.valueOf('N')), "Character Test");
         assertEquals("F", raw.convert(String.class, "FOO"), "String Test");
         assertEquals("3", raw.convert(String.class, Integer.valueOf(321)), "Integer Test");
@@ -90,10 +86,7 @@ class CharacterConverterTest {
      * Tries a conversion to an unsupported type.
      */
     @Test
-    @SuppressWarnings("unchecked") // tests failure so allow mismatch
     void testConvertToUnsupportedType() {
-        @SuppressWarnings("rawtypes") // tests failure so allow mismatch
-        final Converter converter = new CharacterConverter();
         assertThrows(ConversionException.class, () -> converter.convert(Integer.class, "Test"));
     }
 

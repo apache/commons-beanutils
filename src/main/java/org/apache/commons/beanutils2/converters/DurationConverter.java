@@ -54,14 +54,12 @@ public final class DurationConverter extends AbstractConverter<Duration> {
      * @param value The input value to be converted.
      * @return The converted value.
      * @throws Throwable if an error occurs converting to the specified type
-     * @since 2.0
      */
     @Override
     protected <T> T convertToType(final Class<T> type, final Object value) throws Throwable {
         if (Duration.class.equals(type)) {
-            return type.cast(Duration.parse(String.valueOf(value)));
+            return type.cast(Duration.parse(toString(value)));
         }
-
         throw conversionException(type, value);
     }
 
@@ -69,7 +67,6 @@ public final class DurationConverter extends AbstractConverter<Duration> {
      * Gets the default type this {@code Converter} handles.
      *
      * @return The default type this {@code Converter} handles.
-     * @since 2.0
      */
     @Override
     protected Class<Duration> getDefaultType() {

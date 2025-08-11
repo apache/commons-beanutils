@@ -59,18 +59,32 @@ public final class EnumConverter<E extends Enum<E>> extends AbstractConverter<En
     @Override
     protected <R> R convertToType(final Class<R> type, final Object value) throws Throwable {
         if (Enum.class.isAssignableFrom(type)) {
-            final String enumValue = String.valueOf(value);
-            final R[] constants = type.getEnumConstants();
-            if (constants == null) {
-                throw conversionException(type, value);
+            final String stringValue = toString(value);
+            try {
+                return type.cast((Enum) Enum.valueOf((Class) type, stringValue));
+            } catch (final IllegalArgumentException ex) {
+                // Continue to check fully qualified name.
             }
-            for (final R candidate : constants) {
-                if (((Enum) candidate).name().equalsIgnoreCase(enumValue)) {
-                    return candidate;
+            final int lastHash = stringValue.lastIndexOf('#');
+            final int lastDot = stringValue.lastIndexOf('.');
+            if (lastDot == -1 && lastHash == -1) {
+                throw new IllegalArgumentException("Expected fully qualified name for Enum constant like: java.time.DayOfWeek.MONDAY");
+            }
+            final String enumValue = stringValue.substring(Math.max(lastHash, lastDot) + 1);
+            final String className = stringValue.substring(0, stringValue.length() - enumValue.length() - 1);
+            try {
+                final Class classForName = Class.forName(className);
+                if (!classForName.isEnum()) {
+                    throw new IllegalArgumentException("Value isn't an enumerated type.");
                 }
+                if (!type.isAssignableFrom(classForName)) {
+                    throw new IllegalArgumentException("Class is not the required type.");
+                }
+                return type.cast((Enum) Enum.valueOf(classForName, enumValue));
+            } catch (final ClassNotFoundException ex) {
+                throw new IllegalArgumentException("Class \"" + className + "\" doesn't exist.", ex);
             }
         }
-
         throw conversionException(type, value);
     }
 

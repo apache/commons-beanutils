@@ -20,6 +20,9 @@ package org.apache.commons.beanutils2.converters;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.time.DayOfWeek;
+import java.util.concurrent.TimeUnit;
+
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
 import org.junit.jupiter.api.AfterEach;
@@ -58,15 +61,11 @@ class EnumConverterTest {
     @Test
     void testSimpleConversion() throws Exception {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from String", };
-
         final Object[] input = { "DELIVERED", "ORDERED", "READY" };
-
         final PizzaStatus[] expected = { PizzaStatus.DELIVERED, PizzaStatus.ORDERED, PizzaStatus.READY };
-
         for (int i = 0; i < expected.length; i++) {
             assertEquals(expected[i], converter.convert(PizzaStatus.class, input[i]), message[i] + " to Enum");
         }
-
         for (int i = 0; i < expected.length; i++) {
             assertEquals(input[i], converter.convert(String.class, expected[i]), input[i] + " to String");
         }
@@ -78,5 +77,35 @@ class EnumConverterTest {
     @Test
     void testUnsupportedType() {
         assertThrows(ConversionException.class, () -> converter.convert(Integer.class, "http://www.apache.org"));
+    }
+
+    @Test
+    void testConvertTimeUnit() {
+        assertEquals(TimeUnit.NANOSECONDS, converter.convert(Enum.class, "java.util.concurrent.TimeUnit.NANOSECONDS"));
+    }
+
+    @Test
+    void testConvertDayOfWeek() {
+        assertEquals(DayOfWeek.MONDAY, converter.convert(DayOfWeek.class, "java.time.DayOfWeek#MONDAY"));
+    }
+
+    @Test
+    void testConvertMismatchingEnumType() {
+        assertThrows(ConversionException.class, () -> converter.convert(TimeUnit.class, "java.time.DayOfWeek#MONDAY"));
+    }
+
+    @Test
+    void testBrokenNamingConvention() {
+        assertThrows(ConversionException.class, () -> converter.convert(Enum.class, "JAVA-TIME-DAYOFWEEK#MONDAY"));
+    }
+
+    @Test
+    void testNonEnumClasses() {
+        assertThrows(ConversionException.class, () -> converter.convert(Enum.class, "java.lang.String#MONDAY"));
+    }
+
+    @Test
+    void testNonExistingClasses() {
+        assertThrows(ConversionException.class, () -> converter.convert(Enum.class, "java.lang.does.not.exist#MONDAY"));
     }
 }
