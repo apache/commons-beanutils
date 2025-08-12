@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.WeakHashMap;
 
+import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -442,7 +443,7 @@ public final class MethodUtils {
                             LOG.trace("Param=" + parameterTypes[n].getName());
                             LOG.trace("Method=" + methodsParams[n].getName());
                         }
-                        if (!isAssignmentCompatible(methodsParams[n], parameterTypes[n])) {
+                        if (!ClassUtils.isAssignable(parameterTypes[n], methodsParams[n])) {
                             if (LOG.isTraceEnabled()) {
                                 LOG.trace(methodsParams[n] + " is not assignable from " + parameterTypes[n]);
                             }
@@ -493,13 +494,14 @@ public final class MethodUtils {
         float cost = 0.0f;
         while (srcClass != null && !destClass.equals(srcClass)) {
             if (destClass.isPrimitive()) {
-                final Class<?> destClassWrapperClazz = getPrimitiveWrapper(destClass);
+                final Class<?> destClassWrapperClazz = ClassUtils.wrapperToPrimitive(destClass);
                 if (destClassWrapperClazz != null && destClassWrapperClazz.equals(srcClass)) {
                     cost += 0.25f;
                     break;
                 }
             }
-            if (destClass.isInterface() && isAssignmentCompatible(destClass, srcClass)) {
+            final Class<?> cls = srcClass;
+            if (destClass.isInterface() && ClassUtils.isAssignable(cls, destClass)) {
                 // slight penalty for interface match.
                 // we still want an exact match to override an interface match, but
                 // an interface match should override anything where we have to get a
@@ -519,80 +521,6 @@ public final class MethodUtils {
         }
 
         return cost;
-    }
-
-    /**
-     * Gets the class for the primitive type corresponding to the primitive wrapper class given. For example, an instance of
-     * {@code Boolean.class</code> returns a <code>boolean.class}.
-     *
-     * @param wrapperType the
-     * @return the primitive type class corresponding to the given wrapper class, null if no match is found
-     */
-    public static Class<?> getPrimitiveType(final Class<?> wrapperType) {
-        // does anyone know a better strategy than comparing names?
-        if (Boolean.class.equals(wrapperType)) {
-            return boolean.class;
-        }
-        if (Float.class.equals(wrapperType)) {
-            return float.class;
-        }
-        if (Long.class.equals(wrapperType)) {
-            return long.class;
-        }
-        if (Integer.class.equals(wrapperType)) {
-            return int.class;
-        }
-        if (Short.class.equals(wrapperType)) {
-            return short.class;
-        }
-        if (Byte.class.equals(wrapperType)) {
-            return byte.class;
-        }
-        if (Double.class.equals(wrapperType)) {
-            return double.class;
-        }
-        if (Character.class.equals(wrapperType)) {
-            return char.class;
-        }
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Not a known primitive wrapper class: " + wrapperType);
-        }
-        return null;
-    }
-
-    /**
-     * Gets the wrapper object class for the given primitive type class. For example, passing {@code boolean.class</code> returns <code>Boolean.class}
-     *
-     * @param primitiveType the primitive type class for which a match is to be found
-     * @return the wrapper type associated with the given primitive or null if no match is found
-     */
-    public static Class<?> getPrimitiveWrapper(final Class<?> primitiveType) {
-        // does anyone know a better strategy than comparing names?
-        if (boolean.class.equals(primitiveType)) {
-            return Boolean.class;
-        }
-        if (float.class.equals(primitiveType)) {
-            return Float.class;
-        }
-        if (long.class.equals(primitiveType)) {
-            return Long.class;
-        }
-        if (int.class.equals(primitiveType)) {
-            return Integer.class;
-        }
-        if (short.class.equals(primitiveType)) {
-            return Short.class;
-        }
-        if (byte.class.equals(primitiveType)) {
-            return Byte.class;
-        }
-        if (double.class.equals(primitiveType)) {
-            return Double.class;
-        }
-        if (char.class.equals(primitiveType)) {
-            return Character.class;
-        }
-        return null;
     }
 
     /**
@@ -616,29 +544,6 @@ public final class MethodUtils {
 
     /**
      * <p>
-     * Invoke a method whose parameter type matches exactly the object type.
-     * </p>
-     *
-     * <p>
-     * This is a convenient wrapper for {@link #invokeExactMethod(Object object,String methodName,Object [] args)}.
-     * </p>
-     *
-     * @param object     invoke method on this object
-     * @param methodName get method with this name
-     * @param arg        use this argument. May be null (this will result in calling the parameterless method with name {@code methodName}).
-     * @return The value returned by the invoked method
-     * @throws NoSuchMethodException     if there is no such accessible method
-     * @throws InvocationTargetException wraps an exception thrown by the method invoked
-     * @throws IllegalAccessException    if the requested method is not accessible via reflection
-     */
-    public static Object invokeExactMethod(final Object object, final String methodName, final Object arg)
-            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        final Object[] args = toArray(arg);
-        return invokeExactMethod(object, methodName, args);
-    }
-
-    /**
-     * <p>
      * Invoke a method whose parameter types match exactly the object types.
      * </p>
      *
@@ -655,7 +560,7 @@ public final class MethodUtils {
      * @throws InvocationTargetException wraps an exception thrown by the method invoked
      * @throws IllegalAccessException    if the requested method is not accessible via reflection
      */
-    public static Object invokeExactMethod(final Object object, final String methodName, Object[] args)
+    public static Object invokeExactMethod(final Object object, final String methodName, Object... args)
             throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         if (args == null) {
             args = BeanUtils.EMPTY_OBJECT_ARRAY;
@@ -706,62 +611,6 @@ public final class MethodUtils {
 
     /**
      * <p>
-     * Invoke a static method whose parameter type matches exactly the object type.
-     * </p>
-     *
-     * <p>
-     * This is a convenient wrapper for {@link #invokeExactStaticMethod(Class objectClass,String methodName,Object [] args)}.
-     * </p>
-     *
-     * @param objectClass invoke static method on this class
-     * @param methodName  get method with this name
-     * @param arg         use this argument. May be null (this will result in calling the parameterless method with name {@code methodName}).
-     * @return The value returned by the invoked method
-     * @throws NoSuchMethodException     if there is no such accessible method
-     * @throws InvocationTargetException wraps an exception thrown by the method invoked
-     * @throws IllegalAccessException    if the requested method is not accessible via reflection
-     * @since 1.8.0
-     */
-    public static Object invokeExactStaticMethod(final Class<?> objectClass, final String methodName, final Object arg)
-            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        final Object[] args = toArray(arg);
-        return invokeExactStaticMethod(objectClass, methodName, args);
-    }
-
-    /**
-     * <p>
-     * Invoke a static method whose parameter types match exactly the object types.
-     * </p>
-     *
-     * <p>
-     * This uses reflection to invoke the method obtained from a call to {@link #getAccessibleMethod(Class, String, Class[])}.
-     * </p>
-     *
-     * @param objectClass invoke static method on this class
-     * @param methodName  get method with this name
-     * @param args        use these arguments - treat null as empty array (passing null will result in calling the parameterless method with name
-     *                    {@code methodName}).
-     * @return The value returned by the invoked method
-     * @throws NoSuchMethodException     if there is no such accessible method
-     * @throws InvocationTargetException wraps an exception thrown by the method invoked
-     * @throws IllegalAccessException    if the requested method is not accessible via reflection
-     * @since 1.8.0
-     */
-    public static Object invokeExactStaticMethod(final Class<?> objectClass, final String methodName, Object[] args)
-            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        if (args == null) {
-            args = BeanUtils.EMPTY_OBJECT_ARRAY;
-        }
-        final int arguments = args.length;
-        final Class<?>[] parameterTypes = new Class[arguments];
-        for (int i = 0; i < arguments; i++) {
-            parameterTypes[i] = args[i].getClass();
-        }
-        return invokeExactStaticMethod(objectClass, methodName, args, parameterTypes);
-    }
-
-    /**
-     * <p>
      * Invoke a static method whose parameter types match exactly the parameter types given.
      * </p>
      *
@@ -795,80 +644,6 @@ public final class MethodUtils {
             throw new NoSuchMethodException("No such accessible method: " + methodName + "() on class: " + objectClass.getName());
         }
         return method.invoke(null, args);
-    }
-
-    /**
-     * <p>
-     * Invoke a named method whose parameter type matches the object type.
-     * </p>
-     *
-     * <p>
-     * The behavior of this method is less deterministic than {@code invokeExactMethod()}. It loops through all methods with names that match and then executes
-     * the first it finds with compatible parameters.
-     * </p>
-     *
-     * <p>
-     * This method supports calls to methods taking primitive parameters via passing in wrapping classes. So, for example, a {@code Boolean} class would match a
-     * {@code boolean} primitive.
-     * </p>
-     *
-     * <p>
-     * This is a convenient wrapper for {@link #invokeMethod(Object object,String methodName,Object [] args)}.
-     * </p>
-     *
-     * @param object     invoke method on this object
-     * @param methodName get method with this name
-     * @param arg        use this argument. May be null (this will result in calling the parameterless method with name {@code methodName}).
-     * @return The value returned by the invoked method
-     * @throws NoSuchMethodException     if there is no such accessible method
-     * @throws InvocationTargetException wraps an exception thrown by the method invoked
-     * @throws IllegalAccessException    if the requested method is not accessible via reflection
-     */
-    public static Object invokeMethod(final Object object, final String methodName, final Object arg)
-            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        final Object[] args = toArray(arg);
-        return invokeMethod(object, methodName, args);
-    }
-
-    /**
-     * <p>
-     * Invoke a named method whose parameter type matches the object type.
-     * </p>
-     *
-     * <p>
-     * The behavior of this method is less deterministic than {@link #invokeExactMethod(Object object,String methodName,Object [] args)}. It loops through all
-     * methods with names that match and then executes the first it finds with compatible parameters.
-     * </p>
-     *
-     * <p>
-     * This method supports calls to methods taking primitive parameters via passing in wrapping classes. So, for example, a {@code Boolean} class would match a
-     * {@code boolean} primitive.
-     * </p>
-     *
-     * <p>
-     * This is a convenient wrapper for {@link #invokeMethod(Object object, String methodName, Object[] args, Class[] parameterTypes)}.
-     * </p>
-     *
-     * @param object     invoke method on this object
-     * @param methodName get method with this name
-     * @param args       use these arguments - treat null as empty array (passing null will result in calling the parameterless method with name
-     *                   {@code methodName}).
-     * @return The value returned by the invoked method
-     * @throws NoSuchMethodException     if there is no such accessible method
-     * @throws InvocationTargetException wraps an exception thrown by the method invoked
-     * @throws IllegalAccessException    if the requested method is not accessible via reflection
-     */
-    public static Object invokeMethod(final Object object, final String methodName, Object[] args)
-            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        if (args == null) {
-            args = BeanUtils.EMPTY_OBJECT_ARRAY;
-        }
-        final int arguments = args.length;
-        final Class<?>[] parameterTypes = new Class[arguments];
-        for (int i = 0; i < arguments; i++) {
-            parameterTypes[i] = args[i].getClass();
-        }
-        return invokeMethod(object, methodName, args, parameterTypes);
     }
 
     /**
@@ -912,163 +687,6 @@ public final class MethodUtils {
             throw new NoSuchMethodException("No such accessible method: " + methodName + "() on object: " + object.getClass().getName());
         }
         return method.invoke(object, args);
-    }
-
-    /**
-     * <p>
-     * Invoke a named static method whose parameter type matches the object type.
-     * </p>
-     *
-     * <p>
-     * The behavior of this method is less deterministic than {@link #invokeExactMethod(Object, String, Object[], Class[])}. It loops through all methods with
-     * names that match and then executes the first it finds with compatible parameters.
-     * </p>
-     *
-     * <p>
-     * This method supports calls to methods taking primitive parameters via passing in wrapping classes. So, for example, a {@code Boolean} class would match a
-     * {@code boolean} primitive.
-     * </p>
-     *
-     * <p>
-     * This is a convenient wrapper for {@link #invokeStaticMethod(Class objectClass,String methodName,Object [] args)}.
-     * </p>
-     *
-     * @param objectClass invoke static method on this class
-     * @param methodName  get method with this name
-     * @param arg         use this argument. May be null (this will result in calling the parameterless method with name {@code methodName}).
-     * @return The value returned by the invoked method
-     * @throws NoSuchMethodException     if there is no such accessible method
-     * @throws InvocationTargetException wraps an exception thrown by the method invoked
-     * @throws IllegalAccessException    if the requested method is not accessible via reflection
-     * @since 1.8.0
-     */
-    public static Object invokeStaticMethod(final Class<?> objectClass, final String methodName, final Object arg)
-            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        final Object[] args = toArray(arg);
-        return invokeStaticMethod(objectClass, methodName, args);
-    }
-
-    /**
-     * <p>
-     * Invoke a named static method whose parameter type matches the object type.
-     * </p>
-     *
-     * <p>
-     * The behavior of this method is less deterministic than {@link #invokeExactMethod(Object object,String methodName,Object [] args)}. It loops through all
-     * methods with names that match and then executes the first it finds with compatible parameters.
-     * </p>
-     *
-     * <p>
-     * This method supports calls to methods taking primitive parameters via passing in wrapping classes. So, for example, a {@code Boolean} class would match a
-     * {@code boolean} primitive.
-     * </p>
-     *
-     * <p>
-     * This is a convenient wrapper for {@link #invokeStaticMethod(Class objectClass, String methodName, Object[] args, Class[] parameterTypes)}.
-     * </p>
-     *
-     * @param objectClass invoke static method on this class
-     * @param methodName  get method with this name
-     * @param args        use these arguments - treat null as empty array (passing null will result in calling the parameterless method with name
-     *                    {@code methodName}).
-     * @return The value returned by the invoked method
-     * @throws NoSuchMethodException     if there is no such accessible method
-     * @throws InvocationTargetException wraps an exception thrown by the method invoked
-     * @throws IllegalAccessException    if the requested method is not accessible via reflection
-     * @since 1.8.0
-     */
-    public static Object invokeStaticMethod(final Class<?> objectClass, final String methodName, Object[] args)
-            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        if (args == null) {
-            args = BeanUtils.EMPTY_OBJECT_ARRAY;
-        }
-        final int arguments = args.length;
-        final Class<?>[] parameterTypes = new Class[arguments];
-        for (int i = 0; i < arguments; i++) {
-            parameterTypes[i] = args[i].getClass();
-        }
-        return invokeStaticMethod(objectClass, methodName, args, parameterTypes);
-    }
-
-    /**
-     * <p>
-     * Invoke a named static method whose parameter type matches the object type.
-     * </p>
-     *
-     * <p>
-     * The behavior of this method is less deterministic than
-     * {@link #invokeExactStaticMethod(Class objectClass, String methodName, Object[] args, Class[] parameterTypes)}. It loops through all methods with names
-     * that match and then executes the first it finds with compatible parameters.
-     * </p>
-     *
-     * <p>
-     * This method supports calls to methods taking primitive parameters via passing in wrapping classes. So, for example, a {@code Boolean} class would match a
-     * {@code boolean} primitive.
-     * </p>
-     *
-     *
-     * @param objectClass    invoke static method on this class
-     * @param methodName     get method with this name
-     * @param args           use these arguments - treat null as empty array (passing null will result in calling the parameterless method with name
-     *                       {@code methodName}).
-     * @param parameterTypes match these parameters - treat null as empty array
-     * @return The value returned by the invoked method
-     * @throws NoSuchMethodException     if there is no such accessible method
-     * @throws InvocationTargetException wraps an exception thrown by the method invoked
-     * @throws IllegalAccessException    if the requested method is not accessible via reflection
-     * @since 1.8.0
-     */
-    public static Object invokeStaticMethod(final Class<?> objectClass, final String methodName, Object[] args, Class<?>[] parameterTypes)
-            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-
-        if (parameterTypes == null) {
-            parameterTypes = BeanUtils.EMPTY_CLASS_ARRAY;
-        }
-        if (args == null) {
-            args = BeanUtils.EMPTY_OBJECT_ARRAY;
-        }
-
-        final Method method = getMatchingAccessibleMethod(objectClass, methodName, parameterTypes);
-        if (method == null) {
-            throw new NoSuchMethodException("No such accessible method: " + methodName + "() on class: " + objectClass.getName());
-        }
-        return method.invoke(null, args);
-    }
-
-    /**
-     * <p>
-     * Determine whether a type can be used as a parameter in a method invocation. This method handles primitive conversions correctly.
-     * </p>
-     *
-     * <p>
-     * In order words, it will match a {@code Boolean</code> to a <code>boolean},
-     * a {@code Long</code> to a <code>long},
-     * a {@code Float</code> to a <code>float},
-     * a {@code Integer</code> to a <code>int},
-     * and a {@code Double</code> to a <code>double}.
-     * Now logic widening matches are allowed.
-     * For example, a {@code Long</code> will not match a <code>int}.
-     *
-     * @param parameterType    the type of parameter accepted by the method
-     * @param parameterization the type of parameter being tested
-     * @return true if the assignment is compatible.
-     */
-    public static boolean isAssignmentCompatible(final Class<?> parameterType, final Class<?> parameterization) {
-        // try plain assignment
-        if (parameterType.isAssignableFrom(parameterization)) {
-            return true;
-        }
-
-        if (parameterType.isPrimitive()) {
-            // this method does *not* do widening - you must specify exactly
-            // is this the right behavior?
-            final Class<?> parameterWrapperClazz = getPrimitiveWrapper(parameterType);
-            if (parameterWrapperClazz != null) {
-                return parameterWrapperClazz.equals(parameterization);
-            }
-        }
-
-        return false;
     }
 
     /**
@@ -1122,23 +740,6 @@ public final class MethodUtils {
             args = new Object[] { arg };
         }
         return args;
-    }
-
-    /**
-     * Find a non primitive representation for given primitive class.
-     *
-     * @param clazz the class to find a representation for, not null
-     * @return the original class if it not a primitive. Otherwise the wrapper class. Not null
-     */
-    public static Class<?> toNonPrimitiveClass(final Class<?> clazz) {
-        if (clazz.isPrimitive()) {
-            final Class<?> primitiveClazz = MethodUtils.getPrimitiveWrapper(clazz);
-            // the above method returns
-            if (primitiveClazz != null) {
-                return primitiveClazz;
-            }
-        }
-        return clazz;
     }
 
     private MethodUtils() {

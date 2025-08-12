@@ -31,12 +31,26 @@
       <!-- FIX -->
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Fix typo in log event message in org.apache.commons.beanutils2.MethodUtils.setMethodAccessible(Method).</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Fix typo in exception message throws from org.apache.commons.beanutils2.PropertyUtilsBean.setMappedProperty(Object, String, String, Object).</action>
+      <action type="fix" dev="ggregory" due-to="Basil Crow, Piotr P. Karwasz, Gary Gregory">Simplify FluentPropertyBeanIntrospector#propertyName (#363).</action>
       <!-- ADD -->
       <action type="add" dev="ggregory" due-to="SethFalco, Melloware, Gary Gregory">Add Instant converter and improve enum converter #49.</action>
       <!-- UPDATE -->
       <action type="update" dev="ggregory" due-to="Gary Gregory, Dependabot">Bump org.apache.commons:commons-lang3 from 3.17.0 to 3.18.0 #357.</action>
       <!-- REMOVE -->
-      <action dev="ggregory" type="remove" due-to="Gary Gregory">Remove ConstructorUtils in favor of Apache Commons Lang's ConstructorUtils. ConstructorUtils is unused in this component.</action>
+      <action dev="ggregory" type="remove" due-to="Gary Gregory">Remove unused ConstructorUtils in favor of Apache Commons Lang's org.apache.commons.lang3.ConstructorUtils. ConstructorUtils is unused in this component.</action>
+      <action dev="ggregory" type="remove" due-to="Gary Gregory">Remove unused org.apache.commons.beanutils2.MethodUtils.invokeExactMethod(Object, String, Object) in favor of Apache Commons Lang's org.apache.commons.lang3.reflect.MethodUtils.</action>
+      <action dev="ggregory" type="remove" due-to="Gary Gregory">Remove unused org.apache.commons.beanutils2.MethodUtils.invokeStaticMethod(Class, String, Object) in favor of Apache Commons Lang's org.apache.commons.lang3.reflect.MethodUtils.</action>
+      <action dev="ggregory" type="remove" due-to="Gary Gregory">Remove unused org.apache.commons.beanutils2.MethodUtils.invokeExactStaticMethod(Class, String, Object) in favor of Apache Commons Lang's org.apache.commons.lang3.reflect.MethodUtils.</action>
+      <action dev="ggregory" type="remove" due-to="Gary Gregory">Remove unused org.apache.commons.beanutils2.MethodUtils.invokeExactStaticMethod(Class, String, Object) in favor of Apache Commons Lang's org.apache.commons.lang3.reflect.MethodUtils.</action>
+      <action dev="ggregory" type="remove" due-to="Gary Gregory">Remove unused org.apache.commons.beanutils2.MethodUtils.invokeExactStaticMethod(Class, String, Object[]) in favor of Apache Commons Lang's org.apache.commons.lang3.reflect.MethodUtils.</action>
+      <action dev="ggregory" type="remove" due-to="Gary Gregory">Remove unused org.apache.commons.beanutils2.MethodUtils.invokeMethod(Object, String, Object) in favor of Apache Commons Lang's org.apache.commons.lang3.reflect.MethodUtils.</action>
+      <action dev="ggregory" type="remove" due-to="Gary Gregory">Remove unused org.apache.commons.beanutils2.MethodUtils.invokeMethod(Object, String, Object[]) in favor of Apache Commons Lang's org.apache.commons.lang3.reflect.MethodUtils.</action>
+      <action dev="ggregory" type="remove" due-to="Gary Gregory">Remove unused org.apache.commons.beanutils2.MethodUtils.invokeStaticMethod(Class, String, Object[]) in favor of Apache Commons Lang's org.apache.commons.lang3.reflect.MethodUtils.</action>
+      <action dev="ggregory" type="remove" due-to="Gary Gregory">Remove unused org.apache.commons.beanutils2.MethodUtils.invokeStaticMethod(Class, String, Object[], Class[]) in favor of Apache Commons Lang's org.apache.commons.lang3.reflect.MethodUtils.</action>
+      <action dev="ggregory" type="remove" due-to="Gary Gregory">Remove unused org.apache.commons.beanutils2.MethodUtils.toNonPrimitiveClass(Class) in favor of org.apache.commons.lang3.ClassUtils.primitiveToWrapper(Class).</action>
+      <action dev="ggregory" type="remove" due-to="Gary Gregory">Remove unused org.apache.commons.beanutils2.MethodUtils.getPrimitiveType(Class) in favor of org.apache.commons.lang3.ClassUtils.wrapperToPrimitive(Class).</action>
+      <action dev="ggregory" type="remove" due-to="Gary Gregory">Remove org.apache.commons.beanutils2.MethodUtils.getPrimitiveWrapper(Class) in favor of org.apache.commons.lang3.ClassUtils.primitiveToWrapper(Class).</action>
+      <action dev="ggregory" type="remove" due-to="Gary Gregory">Remove org.apache.commons.beanutils2.MethodUtils.isAssignmentCompatible(Class toClass, Class cls) in favor oforg.apache.commons.lang3.ClassUtils.isAssignable(Class cls, Class toClass).</action>
     </release>
     <release version="2.0.0-M2" date="2025-05-25" description="This is a major release and requires Java 8.">
       <!-- FIX -->
@@ -270,9 +284,14 @@
     </release>
     <release version="1.11.1" date="YYYY-MM-DD" description="This is a maintenance release and requires Java 8.">
       <!-- FIX -->
+      <action dev="ggregory" type="fix" due-to="Gary Gregory">Fix typo in exception message throws from org.apache.commons.beanutils.PropertyUtilsBean.setMappedProperty(Object, String, String, Object).</action>
+      <action dev="ggregory" type="fix" due-to="Basil Crow, Piotr P. Karwasz, Gary Gregory">Simplify FluentPropertyBeanIntrospector#propertyName (#363).</action>
       <!-- ADD -->
       <!-- UPDATE -->
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 84 to 85.</action>
+      <!-- REMOVE -->
+      <action dev="ggregory" type="remove" due-to="Gary Gregory">Remove pre-Java 1.4 code that will never run since we are on Java 8 or greater.</action>
+      <action dev="ggregory" type="remove" due-to="Gary Gregory">Deprecate ConstructorUtils in favor of Apache Commons Lang's ConstructorUtils. ConstructorUtils is unused in this component.</action>
     </release>
     <release version="1.11.0" date="2025-05-25" description="This is a maintenance release and requires Java 8.">
       <!-- FIX -->
