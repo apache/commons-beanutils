@@ -31,6 +31,7 @@
       <!-- FIX -->
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Fix typo in log event message in org.apache.commons.beanutils2.MethodUtils.setMethodAccessible(Method).</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Fix typo in exception message throws from org.apache.commons.beanutils2.PropertyUtilsBean.setMappedProperty(Object, String, String, Object).</action>
+      <action type="fix" dev="ggregory" due-to="Basil Crow, Piotr P. Karwasz, Gary Gregory">Simplify FluentPropertyBeanIntrospector#propertyName (#363).</action>
       <!-- ADD -->
       <action type="add" dev="ggregory" due-to="SethFalco, Melloware, Gary Gregory">Add Instant converter and improve enum converter #49.</action>
       <!-- UPDATE -->
