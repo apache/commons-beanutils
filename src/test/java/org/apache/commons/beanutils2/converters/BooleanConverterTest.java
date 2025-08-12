@@ -59,7 +59,8 @@ class BooleanConverterTest {
         }
 
         converter.setLocale(Locale.forLanguageTag("tr"));
-        for (final String falseValue : new String[] { "hayır", "Hayır" }) {
+        // "hayır" and "HAYIR"
+        for (final String falseValue : new String[] { "hay\u0131r", "Hayır" }) {
             assertEquals(Boolean.FALSE, converter.convert(Boolean.class, falseValue));
         }
         assertThrows(ConversionException.class, () -> converter.convert(Boolean.class, "hayir"));
