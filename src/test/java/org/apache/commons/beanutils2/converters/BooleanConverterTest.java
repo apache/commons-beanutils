@@ -48,8 +48,8 @@ class BooleanConverterTest {
 
     @Test
     void testAdditionalStringsLocale() {
-        final String[] trueStrings = { "ναι" };
-        final String[] falseStrings = { "hayır" };
+        final String[] trueStrings = { "\u03BD\u03B1\u03B9" }; // ναι
+        final String[] falseStrings = { "hay\u0131r" }; // hayır
         final BooleanConverter converter = new BooleanConverter(trueStrings, falseStrings);
 
         converter.setLocale(Locale.forLanguageTag("el"));
