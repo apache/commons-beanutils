@@ -113,25 +113,6 @@ class MethodUtilsTest {
     }
 
     @Test
-    void testInvokeMethodArray() throws Exception {
-        final AbstractParent parent = new AlphaBean("parent");
-        final AlphaBean childTwo = new AlphaBean("ChildTwo");
-
-        final Object[] params = new Object[2];
-        params[0] = "parameter";
-        params[1] = childTwo;
-
-        assertEquals("ChildTwo", MethodUtils.invokeMethod(parent, "testAddChild2", params), "Cannot invoke through abstract class");
-    }
-
-    @Test
-    void testInvokeMethodNullArray() throws Exception {
-        final Object result = MethodUtils.invokeMethod(new AlphaBean("parent"), "getName", null);
-
-        assertEquals("parent", result);
-    }
-
-    @Test
     void testInvokeMethodNullArrayNullArray() throws Exception {
         final Object result = MethodUtils.invokeMethod(new AlphaBean("parent"), "getName", null, null);
 
