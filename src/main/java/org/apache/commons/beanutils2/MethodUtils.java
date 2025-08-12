@@ -616,29 +616,6 @@ public final class MethodUtils {
 
     /**
      * <p>
-     * Invoke a method whose parameter type matches exactly the object type.
-     * </p>
-     *
-     * <p>
-     * This is a convenient wrapper for {@link #invokeExactMethod(Object object,String methodName,Object [] args)}.
-     * </p>
-     *
-     * @param object     invoke method on this object
-     * @param methodName get method with this name
-     * @param arg        use this argument. May be null (this will result in calling the parameterless method with name {@code methodName}).
-     * @return The value returned by the invoked method
-     * @throws NoSuchMethodException     if there is no such accessible method
-     * @throws InvocationTargetException wraps an exception thrown by the method invoked
-     * @throws IllegalAccessException    if the requested method is not accessible via reflection
-     */
-    public static Object invokeExactMethod(final Object object, final String methodName, final Object arg)
-            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        final Object[] args = toArray(arg);
-        return invokeExactMethod(object, methodName, args);
-    }
-
-    /**
-     * <p>
      * Invoke a method whose parameter types match exactly the object types.
      * </p>
      *
@@ -655,7 +632,7 @@ public final class MethodUtils {
      * @throws InvocationTargetException wraps an exception thrown by the method invoked
      * @throws IllegalAccessException    if the requested method is not accessible via reflection
      */
-    public static Object invokeExactMethod(final Object object, final String methodName, Object[] args)
+    public static Object invokeExactMethod(final Object object, final String methodName, Object... args)
             throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         if (args == null) {
             args = BeanUtils.EMPTY_OBJECT_ARRAY;
@@ -706,62 +683,6 @@ public final class MethodUtils {
 
     /**
      * <p>
-     * Invoke a static method whose parameter type matches exactly the object type.
-     * </p>
-     *
-     * <p>
-     * This is a convenient wrapper for {@link #invokeExactStaticMethod(Class objectClass,String methodName,Object [] args)}.
-     * </p>
-     *
-     * @param objectClass invoke static method on this class
-     * @param methodName  get method with this name
-     * @param arg         use this argument. May be null (this will result in calling the parameterless method with name {@code methodName}).
-     * @return The value returned by the invoked method
-     * @throws NoSuchMethodException     if there is no such accessible method
-     * @throws InvocationTargetException wraps an exception thrown by the method invoked
-     * @throws IllegalAccessException    if the requested method is not accessible via reflection
-     * @since 1.8.0
-     */
-    public static Object invokeExactStaticMethod(final Class<?> objectClass, final String methodName, final Object arg)
-            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        final Object[] args = toArray(arg);
-        return invokeExactStaticMethod(objectClass, methodName, args);
-    }
-
-    /**
-     * <p>
-     * Invoke a static method whose parameter types match exactly the object types.
-     * </p>
-     *
-     * <p>
-     * This uses reflection to invoke the method obtained from a call to {@link #getAccessibleMethod(Class, String, Class[])}.
-     * </p>
-     *
-     * @param objectClass invoke static method on this class
-     * @param methodName  get method with this name
-     * @param args        use these arguments - treat null as empty array (passing null will result in calling the parameterless method with name
-     *                    {@code methodName}).
-     * @return The value returned by the invoked method
-     * @throws NoSuchMethodException     if there is no such accessible method
-     * @throws InvocationTargetException wraps an exception thrown by the method invoked
-     * @throws IllegalAccessException    if the requested method is not accessible via reflection
-     * @since 1.8.0
-     */
-    public static Object invokeExactStaticMethod(final Class<?> objectClass, final String methodName, Object[] args)
-            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        if (args == null) {
-            args = BeanUtils.EMPTY_OBJECT_ARRAY;
-        }
-        final int arguments = args.length;
-        final Class<?>[] parameterTypes = new Class[arguments];
-        for (int i = 0; i < arguments; i++) {
-            parameterTypes[i] = args[i].getClass();
-        }
-        return invokeExactStaticMethod(objectClass, methodName, args, parameterTypes);
-    }
-
-    /**
-     * <p>
      * Invoke a static method whose parameter types match exactly the parameter types given.
      * </p>
      *
@@ -795,80 +716,6 @@ public final class MethodUtils {
             throw new NoSuchMethodException("No such accessible method: " + methodName + "() on class: " + objectClass.getName());
         }
         return method.invoke(null, args);
-    }
-
-    /**
-     * <p>
-     * Invoke a named method whose parameter type matches the object type.
-     * </p>
-     *
-     * <p>
-     * The behavior of this method is less deterministic than {@code invokeExactMethod()}. It loops through all methods with names that match and then executes
-     * the first it finds with compatible parameters.
-     * </p>
-     *
-     * <p>
-     * This method supports calls to methods taking primitive parameters via passing in wrapping classes. So, for example, a {@code Boolean} class would match a
-     * {@code boolean} primitive.
-     * </p>
-     *
-     * <p>
-     * This is a convenient wrapper for {@link #invokeMethod(Object object,String methodName,Object [] args)}.
-     * </p>
-     *
-     * @param object     invoke method on this object
-     * @param methodName get method with this name
-     * @param arg        use this argument. May be null (this will result in calling the parameterless method with name {@code methodName}).
-     * @return The value returned by the invoked method
-     * @throws NoSuchMethodException     if there is no such accessible method
-     * @throws InvocationTargetException wraps an exception thrown by the method invoked
-     * @throws IllegalAccessException    if the requested method is not accessible via reflection
-     */
-    public static Object invokeMethod(final Object object, final String methodName, final Object arg)
-            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        final Object[] args = toArray(arg);
-        return invokeMethod(object, methodName, args);
-    }
-
-    /**
-     * <p>
-     * Invoke a named method whose parameter type matches the object type.
-     * </p>
-     *
-     * <p>
-     * The behavior of this method is less deterministic than {@link #invokeExactMethod(Object object,String methodName,Object [] args)}. It loops through all
-     * methods with names that match and then executes the first it finds with compatible parameters.
-     * </p>
-     *
-     * <p>
-     * This method supports calls to methods taking primitive parameters via passing in wrapping classes. So, for example, a {@code Boolean} class would match a
-     * {@code boolean} primitive.
-     * </p>
-     *
-     * <p>
-     * This is a convenient wrapper for {@link #invokeMethod(Object object, String methodName, Object[] args, Class[] parameterTypes)}.
-     * </p>
-     *
-     * @param object     invoke method on this object
-     * @param methodName get method with this name
-     * @param args       use these arguments - treat null as empty array (passing null will result in calling the parameterless method with name
-     *                   {@code methodName}).
-     * @return The value returned by the invoked method
-     * @throws NoSuchMethodException     if there is no such accessible method
-     * @throws InvocationTargetException wraps an exception thrown by the method invoked
-     * @throws IllegalAccessException    if the requested method is not accessible via reflection
-     */
-    public static Object invokeMethod(final Object object, final String methodName, Object[] args)
-            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        if (args == null) {
-            args = BeanUtils.EMPTY_OBJECT_ARRAY;
-        }
-        final int arguments = args.length;
-        final Class<?>[] parameterTypes = new Class[arguments];
-        for (int i = 0; i < arguments; i++) {
-            parameterTypes[i] = args[i].getClass();
-        }
-        return invokeMethod(object, methodName, args, parameterTypes);
     }
 
     /**
@@ -912,127 +759,6 @@ public final class MethodUtils {
             throw new NoSuchMethodException("No such accessible method: " + methodName + "() on object: " + object.getClass().getName());
         }
         return method.invoke(object, args);
-    }
-
-    /**
-     * <p>
-     * Invoke a named static method whose parameter type matches the object type.
-     * </p>
-     *
-     * <p>
-     * The behavior of this method is less deterministic than {@link #invokeExactMethod(Object, String, Object[], Class[])}. It loops through all methods with
-     * names that match and then executes the first it finds with compatible parameters.
-     * </p>
-     *
-     * <p>
-     * This method supports calls to methods taking primitive parameters via passing in wrapping classes. So, for example, a {@code Boolean} class would match a
-     * {@code boolean} primitive.
-     * </p>
-     *
-     * <p>
-     * This is a convenient wrapper for {@link #invokeStaticMethod(Class objectClass,String methodName,Object [] args)}.
-     * </p>
-     *
-     * @param objectClass invoke static method on this class
-     * @param methodName  get method with this name
-     * @param arg         use this argument. May be null (this will result in calling the parameterless method with name {@code methodName}).
-     * @return The value returned by the invoked method
-     * @throws NoSuchMethodException     if there is no such accessible method
-     * @throws InvocationTargetException wraps an exception thrown by the method invoked
-     * @throws IllegalAccessException    if the requested method is not accessible via reflection
-     * @since 1.8.0
-     */
-    public static Object invokeStaticMethod(final Class<?> objectClass, final String methodName, final Object arg)
-            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        final Object[] args = toArray(arg);
-        return invokeStaticMethod(objectClass, methodName, args);
-    }
-
-    /**
-     * <p>
-     * Invoke a named static method whose parameter type matches the object type.
-     * </p>
-     *
-     * <p>
-     * The behavior of this method is less deterministic than {@link #invokeExactMethod(Object object,String methodName,Object [] args)}. It loops through all
-     * methods with names that match and then executes the first it finds with compatible parameters.
-     * </p>
-     *
-     * <p>
-     * This method supports calls to methods taking primitive parameters via passing in wrapping classes. So, for example, a {@code Boolean} class would match a
-     * {@code boolean} primitive.
-     * </p>
-     *
-     * <p>
-     * This is a convenient wrapper for {@link #invokeStaticMethod(Class objectClass, String methodName, Object[] args, Class[] parameterTypes)}.
-     * </p>
-     *
-     * @param objectClass invoke static method on this class
-     * @param methodName  get method with this name
-     * @param args        use these arguments - treat null as empty array (passing null will result in calling the parameterless method with name
-     *                    {@code methodName}).
-     * @return The value returned by the invoked method
-     * @throws NoSuchMethodException     if there is no such accessible method
-     * @throws InvocationTargetException wraps an exception thrown by the method invoked
-     * @throws IllegalAccessException    if the requested method is not accessible via reflection
-     * @since 1.8.0
-     */
-    public static Object invokeStaticMethod(final Class<?> objectClass, final String methodName, Object[] args)
-            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        if (args == null) {
-            args = BeanUtils.EMPTY_OBJECT_ARRAY;
-        }
-        final int arguments = args.length;
-        final Class<?>[] parameterTypes = new Class[arguments];
-        for (int i = 0; i < arguments; i++) {
-            parameterTypes[i] = args[i].getClass();
-        }
-        return invokeStaticMethod(objectClass, methodName, args, parameterTypes);
-    }
-
-    /**
-     * <p>
-     * Invoke a named static method whose parameter type matches the object type.
-     * </p>
-     *
-     * <p>
-     * The behavior of this method is less deterministic than
-     * {@link #invokeExactStaticMethod(Class objectClass, String methodName, Object[] args, Class[] parameterTypes)}. It loops through all methods with names
-     * that match and then executes the first it finds with compatible parameters.
-     * </p>
-     *
-     * <p>
-     * This method supports calls to methods taking primitive parameters via passing in wrapping classes. So, for example, a {@code Boolean} class would match a
-     * {@code boolean} primitive.
-     * </p>
-     *
-     *
-     * @param objectClass    invoke static method on this class
-     * @param methodName     get method with this name
-     * @param args           use these arguments - treat null as empty array (passing null will result in calling the parameterless method with name
-     *                       {@code methodName}).
-     * @param parameterTypes match these parameters - treat null as empty array
-     * @return The value returned by the invoked method
-     * @throws NoSuchMethodException     if there is no such accessible method
-     * @throws InvocationTargetException wraps an exception thrown by the method invoked
-     * @throws IllegalAccessException    if the requested method is not accessible via reflection
-     * @since 1.8.0
-     */
-    public static Object invokeStaticMethod(final Class<?> objectClass, final String methodName, Object[] args, Class<?>[] parameterTypes)
-            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-
-        if (parameterTypes == null) {
-            parameterTypes = BeanUtils.EMPTY_CLASS_ARRAY;
-        }
-        if (args == null) {
-            args = BeanUtils.EMPTY_OBJECT_ARRAY;
-        }
-
-        final Method method = getMatchingAccessibleMethod(objectClass, methodName, parameterTypes);
-        if (method == null) {
-            throw new NoSuchMethodException("No such accessible method: " + methodName + "() on class: " + objectClass.getName());
-        }
-        return method.invoke(null, args);
     }
 
     /**
