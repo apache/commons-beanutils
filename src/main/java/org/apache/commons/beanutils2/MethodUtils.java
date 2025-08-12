@@ -443,7 +443,7 @@ public final class MethodUtils {
                             LOG.trace("Param=" + parameterTypes[n].getName());
                             LOG.trace("Method=" + methodsParams[n].getName());
                         }
-                        if (!isAssignmentCompatible(methodsParams[n], parameterTypes[n])) {
+                        if (!ClassUtils.isAssignable(parameterTypes[n], methodsParams[n])) {
                             if (LOG.isTraceEnabled()) {
                                 LOG.trace(methodsParams[n] + " is not assignable from " + parameterTypes[n]);
                             }
@@ -500,7 +500,8 @@ public final class MethodUtils {
                     break;
                 }
             }
-            if (destClass.isInterface() && isAssignmentCompatible(destClass, srcClass)) {
+            final Class<?> cls = srcClass;
+            if (destClass.isInterface() && ClassUtils.isAssignable(cls, destClass)) {
                 // slight penalty for interface match.
                 // we still want an exact match to override an interface match, but
                 // an interface match should override anything where we have to get a
@@ -686,42 +687,6 @@ public final class MethodUtils {
             throw new NoSuchMethodException("No such accessible method: " + methodName + "() on object: " + object.getClass().getName());
         }
         return method.invoke(object, args);
-    }
-
-    /**
-     * <p>
-     * Determine whether a type can be used as a parameter in a method invocation. This method handles primitive conversions correctly.
-     * </p>
-     *
-     * <p>
-     * In order words, it will match a {@code Boolean</code> to a <code>boolean},
-     * a {@code Long</code> to a <code>long},
-     * a {@code Float</code> to a <code>float},
-     * a {@code Integer</code> to a <code>int},
-     * and a {@code Double</code> to a <code>double}.
-     * Now logic widening matches are allowed.
-     * For example, a {@code Long</code> will not match a <code>int}.
-     *
-     * @param parameterType    the type of parameter accepted by the method
-     * @param parameterization the type of parameter being tested
-     * @return true if the assignment is compatible.
-     */
-    public static boolean isAssignmentCompatible(final Class<?> parameterType, final Class<?> parameterization) {
-        // try plain assignment
-        if (parameterType.isAssignableFrom(parameterization)) {
-            return true;
-        }
-
-        if (parameterType.isPrimitive()) {
-            // this method does *not* do widening - you must specify exactly
-            // is this the right behavior?
-            final Class<?> parameterWrapperClazz = ClassUtils.wrapperToPrimitive(parameterType);
-            if (parameterWrapperClazz != null) {
-                return parameterWrapperClazz.equals(parameterization);
-            }
-        }
-
-        return false;
     }
 
     /**

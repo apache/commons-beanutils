@@ -67,13 +67,10 @@ class Jira381Test {
      */
     @Test
     void testIssue_BEANUTILS_381_getMatchingAccessibleMethod() {
-
         final Class<?> target = TestServiceBean.class;
         final String methodName = "performOp";
         final Class<?>[] runtimeClasses = { TestObjectSubclass.class };
-
         final Method returned = MethodUtils.getMatchingAccessibleMethod(target, methodName, runtimeClasses);
-
         assertEquals(target, returned.getDeclaringClass());
         assertEquals(methodName, returned.getName());
         assertEquals(TestObject.class, returned.getParameterTypes()[0]);
