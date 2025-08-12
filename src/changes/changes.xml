@@ -271,9 +271,14 @@
     </release>
     <release version="1.11.1" date="YYYY-MM-DD" description="This is a maintenance release and requires Java 8.">
       <!-- FIX -->
+      <action dev="ggregory" type="fix" due-to="Gary Gregory">Fix typo in exception message throws from org.apache.commons.beanutils.PropertyUtilsBean.setMappedProperty(Object, String, String, Object).</action>
+      <action dev="ggregory" type="fix" due-to="Basil Crow, Piotr P. Karwasz, Gary Gregory">Simplify FluentPropertyBeanIntrospector#propertyName (#363).</action>
       <!-- ADD -->
       <!-- UPDATE -->
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 84 to 85.</action>
+      <!-- REMOVE -->
+      <action dev="ggregory" type="remove" due-to="Gary Gregory">Remove pre-Java 1.4 code that will never run since we are on Java 8 or greater.</action>
+      <action dev="ggregory" type="remove" due-to="Gary Gregory">Deprecate ConstructorUtils in favor of Apache Commons Lang's ConstructorUtils. ConstructorUtils is unused in this component.</action>
     </release>
     <release version="1.11.0" date="2025-05-25" description="This is a maintenance release and requires Java 8.">
       <!-- FIX -->
