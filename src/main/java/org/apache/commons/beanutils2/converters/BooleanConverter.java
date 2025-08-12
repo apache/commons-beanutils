@@ -159,7 +159,7 @@ public final class BooleanConverter extends AbstractConverter<Boolean> {
             }
 
             for (final String falseString : falseStrings) {
-                if (collator.compare(falseString, stringValue) == 0) {
+                if (collator.equals(falseString, stringValue)) {
                     return type.cast(Boolean.FALSE);
                 }
             }
