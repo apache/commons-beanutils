@@ -19,7 +19,6 @@ package org.apache.commons.beanutils2;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.lang.reflect.Method;
@@ -65,7 +64,7 @@ class MethodUtilsTest {
     void testClearCache() throws Exception {
         MethodUtils.clearCache(); // make sure it starts empty
         final PublicSubBean bean = new PublicSubBean();
-        MethodUtils.invokeMethod(bean, "setFoo", "alpha");
+        MethodUtils.invokeExactMethod(bean, "setFoo", "alpha");
         assertEquals(1, MethodUtils.clearCache());
         assertEquals(0, MethodUtils.clearCache());
     }
@@ -113,18 +112,6 @@ class MethodUtilsTest {
         assertEquals("parent", result);
     }
 
-    /**
-     * <p>
-     * Test {@code invokeMethod}.
-     */
-    @Test
-    void testInvokeMethod() throws Exception {
-        final AbstractParent parent = new AlphaBean("parent");
-        final BetaBean childOne = new BetaBean("ChildOne");
-
-        assertEquals("ChildOne", MethodUtils.invokeMethod(parent, "testAddChild", childOne), "Cannot invoke through abstract class (1)");
-    }
-
     @Test
     void testInvokeMethodArray() throws Exception {
         final AbstractParent parent = new AlphaBean("parent");
@@ -135,13 +122,6 @@ class MethodUtilsTest {
         params[1] = childTwo;
 
         assertEquals("ChildTwo", MethodUtils.invokeMethod(parent, "testAddChild2", params), "Cannot invoke through abstract class");
-    }
-
-    @Test
-    void testInvokeMethodNull() throws Exception {
-        final Object object = new Object();
-        final Object result = MethodUtils.invokeMethod(object, "toString", (Object) null);
-        assertEquals(object.toString(), result);
     }
 
     @Test
@@ -159,76 +139,16 @@ class MethodUtilsTest {
     }
 
     @Test
-    void testInvokeMethodObject() throws Exception {
-        final AbstractParent parent = new AlphaBean("parent");
-        final Child childTwo = new AlphaBean("ChildTwo");
-
-        assertEquals("ChildTwo", MethodUtils.invokeMethod(parent, "testAddChild", childTwo), "Cannot invoke through interface (1)");
-    }
-
-    @Test
-    void testInvokeMethodPrimitiveBoolean() throws Exception {
-        final PrimitiveBean bean = new PrimitiveBean();
-        MethodUtils.invokeMethod(bean, "setBoolean", Boolean.FALSE);
-        assertEquals(false, bean.getBoolean(), "Call boolean property using invokeMethod");
-    }
-
-    @Test
-    void testInvokeMethodPrimitiveDouble() throws Exception {
-        final PrimitiveBean bean = new PrimitiveBean();
-        MethodUtils.invokeMethod(bean, "setDouble", Double.valueOf(25.5d));
-        assertEquals(25.5d, bean.getDouble(), 0.01d, "Set double property using invokeMethod");
-    }
-
-    @Test
-    void testInvokeMethodPrimitiveFloat() throws Exception {
-        final PrimitiveBean bean = new PrimitiveBean();
-        MethodUtils.invokeMethod(bean, "setFloat", Float.valueOf(20.0f));
-        assertEquals(20.0f, bean.getFloat(), 0.01f, "Call float property using invokeMethod");
-    }
-
-    @Test
-    void testInvokeMethodPrimitiveInt() throws Exception {
-        final PrimitiveBean bean = new PrimitiveBean();
-        MethodUtils.invokeMethod(bean, "setInt", Integer.valueOf(12));
-        assertEquals(12, bean.getInt(), "Set int property using invokeMethod");
-    }
-
-    @Test
-    void testInvokeMethodPrimitiveLong() throws Exception {
-        final PrimitiveBean bean = new PrimitiveBean();
-        MethodUtils.invokeMethod(bean, "setLong", Long.valueOf(10));
-        assertEquals(10, bean.getLong(), "Call long property using invokeMethod");
-    }
-
-    @Test
-    void testInvokeMethodUnknown() throws Exception {
-        // test that exception is correctly thrown when a method cannot be found with matching params
-        final AbstractParent parent = new AlphaBean("parent");
-        final BetaBean childOne = new BetaBean("ChildOne");
-        assertThrows(NoSuchMethodException.class, () -> MethodUtils.invokeMethod(parent, "bogus", childOne));
-    }
-
-    @Test
     void testNoCaching() throws Exception {
         // no caching
         MethodUtils.setCacheMethods(false);
 
         final PublicSubBean bean = new PublicSubBean();
-        MethodUtils.invokeMethod(bean, "setFoo", "alpha");
+        MethodUtils.invokeExactMethod(bean, "setFoo", "alpha");
         assertEquals(0, MethodUtils.clearCache());
 
         // reset default
         MethodUtils.setCacheMethods(true);
-    }
-
-    @Test
-    void testParentMethod() throws Exception {
-        final String a = "A";
-        final String actual1 = (String) MethodUtils.invokeMethod(a, "toLowerCase", null);
-        assertEquals("a", actual1);
-        final char actual2 = (char) MethodUtils.invokeMethod(a, "charAt", 0);
-        assertEquals('A', actual2);
     }
 
     @Test
@@ -244,9 +164,9 @@ class MethodUtilsTest {
 
         // see if we can access public methods in a default access superclass
         // from a public access subclass instance
-        MethodUtils.invokeMethod(bean, "setFoo", "alpha");
+        MethodUtils.invokeExactMethod(bean, "setFoo", "alpha");
         assertEquals(bean.getFoo(), "alpha", "Set value (foo:2)");
-        MethodUtils.invokeMethod(bean, "setBar", "beta");
+        MethodUtils.invokeExactMethod(bean, "setBar", "beta");
         assertEquals(bean.getBar(), "beta", "Set value (bar:2)");
 
         Method method = MethodUtils.getAccessibleMethod(PublicSubBean.class, "setFoo", String.class);
@@ -270,7 +190,7 @@ class MethodUtilsTest {
         MethodUtils.clearCache(); // make sure it starts empty
 
         final PublicSubBean bean = new PublicSubBean();
-        MethodUtils.invokeMethod(bean, "setFoo", "alpha");
+        MethodUtils.invokeExactMethod(bean, "setFoo", "alpha");
         assertEquals(1, MethodUtils.clearCache());
         assertEquals(0, MethodUtils.clearCache());
     }

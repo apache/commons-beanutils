@@ -632,7 +632,7 @@ public final class MethodUtils {
      * @throws InvocationTargetException wraps an exception thrown by the method invoked
      * @throws IllegalAccessException    if the requested method is not accessible via reflection
      */
-    public static Object invokeExactMethod(final Object object, final String methodName, Object[] args)
+    public static Object invokeExactMethod(final Object object, final String methodName, Object... args)
             throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         if (args == null) {
             args = BeanUtils.EMPTY_OBJECT_ARRAY;
@@ -716,39 +716,6 @@ public final class MethodUtils {
             throw new NoSuchMethodException("No such accessible method: " + methodName + "() on class: " + objectClass.getName());
         }
         return method.invoke(null, args);
-    }
-
-    /**
-     * <p>
-     * Invoke a named method whose parameter type matches the object type.
-     * </p>
-     *
-     * <p>
-     * The behavior of this method is less deterministic than {@code invokeExactMethod()}. It loops through all methods with names that match and then executes
-     * the first it finds with compatible parameters.
-     * </p>
-     *
-     * <p>
-     * This method supports calls to methods taking primitive parameters via passing in wrapping classes. So, for example, a {@code Boolean} class would match a
-     * {@code boolean} primitive.
-     * </p>
-     *
-     * <p>
-     * This is a convenient wrapper for {@link #invokeMethod(Object object,String methodName,Object [] args)}.
-     * </p>
-     *
-     * @param object     invoke method on this object
-     * @param methodName get method with this name
-     * @param arg        use this argument. May be null (this will result in calling the parameterless method with name {@code methodName}).
-     * @return The value returned by the invoked method
-     * @throws NoSuchMethodException     if there is no such accessible method
-     * @throws InvocationTargetException wraps an exception thrown by the method invoked
-     * @throws IllegalAccessException    if the requested method is not accessible via reflection
-     */
-    public static Object invokeMethod(final Object object, final String methodName, final Object arg)
-            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        final Object[] args = toArray(arg);
-        return invokeMethod(object, methodName, args);
     }
 
     /**
