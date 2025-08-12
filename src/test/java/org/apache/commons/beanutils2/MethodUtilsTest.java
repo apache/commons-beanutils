@@ -217,13 +217,6 @@ class MethodUtilsTest {
     }
 
     @Test
-    void testInvokeStaticMethodNull() throws Exception {
-        final int current = TestBean.currentCounter();
-        final Object value = MethodUtils.invokeStaticMethod(TestBean.class, "currentCounter", (Object) null);
-        assertEquals(current, ((Integer) value).intValue(), "currentCounter value");
-    }
-
-    @Test
     void testNoCaching() throws Exception {
         // no caching
         MethodUtils.setCacheMethods(false);

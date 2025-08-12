@@ -897,40 +897,6 @@ public final class MethodUtils {
      * </p>
      *
      * <p>
-     * The behavior of this method is less deterministic than {@link #invokeExactMethod(Object, String, Object[], Class[])}. It loops through all methods with
-     * names that match and then executes the first it finds with compatible parameters.
-     * </p>
-     *
-     * <p>
-     * This method supports calls to methods taking primitive parameters via passing in wrapping classes. So, for example, a {@code Boolean} class would match a
-     * {@code boolean} primitive.
-     * </p>
-     *
-     * <p>
-     * This is a convenient wrapper for {@link #invokeStaticMethod(Class objectClass,String methodName,Object [] args)}.
-     * </p>
-     *
-     * @param objectClass invoke static method on this class
-     * @param methodName  get method with this name
-     * @param arg         use this argument. May be null (this will result in calling the parameterless method with name {@code methodName}).
-     * @return The value returned by the invoked method
-     * @throws NoSuchMethodException     if there is no such accessible method
-     * @throws InvocationTargetException wraps an exception thrown by the method invoked
-     * @throws IllegalAccessException    if the requested method is not accessible via reflection
-     * @since 1.8.0
-     */
-    public static Object invokeStaticMethod(final Class<?> objectClass, final String methodName, final Object arg)
-            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        final Object[] args = toArray(arg);
-        return invokeStaticMethod(objectClass, methodName, args);
-    }
-
-    /**
-     * <p>
-     * Invoke a named static method whose parameter type matches the object type.
-     * </p>
-     *
-     * <p>
      * The behavior of this method is less deterministic than {@link #invokeExactMethod(Object object,String methodName,Object [] args)}. It loops through all
      * methods with names that match and then executes the first it finds with compatible parameters.
      * </p>
