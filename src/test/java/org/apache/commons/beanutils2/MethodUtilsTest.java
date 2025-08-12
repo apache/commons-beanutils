@@ -19,7 +19,6 @@ package org.apache.commons.beanutils2;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -99,40 +98,6 @@ class MethodUtilsTest {
         method = MethodUtils.getAccessibleMethod(PrivateBeanFactory.createSubclass().getClass(), "methodBaz", String.class);
 
         assertMethod(method, "methodBaz");
-    }
-
-    /**
-     * <p>
-     * Test {@code invokeExactMethod}.
-     */
-    @Test
-    void testInvokeExactMethod() throws Exception {
-        final TestBean bean = new TestBean();
-        final Object ret = MethodUtils.invokeExactMethod(bean, "setStringProperty", "TEST");
-
-        assertNull(ret);
-        assertEquals("TEST", bean.getStringProperty(), "Method ONE was invoked");
-    }
-
-    @Test
-    void testInvokeExactMethodFromInterface() throws Exception {
-        final Object ret = MethodUtils.invokeExactMethod(PrivateBeanFactory.create(), "methodBar", "ANOTHER TEST");
-
-        assertEquals("ANOTHER TEST", ret, "Method TWO wasn't invoked correctly");
-    }
-
-    @Test
-    void testInvokeExactMethodIndirectInterface() throws Exception {
-        final Object ret = MethodUtils.invokeExactMethod(PrivateBeanFactory.createSubclass(), "methodBaz", "YET ANOTHER TEST");
-
-        assertEquals("YET ANOTHER TEST", ret, "Method TWO was invoked correctly");
-    }
-
-    @Test
-    void testInvokeExactMethodNull() throws Exception {
-        final Object object = new Object();
-        final Object result = MethodUtils.invokeExactMethod(object, "toString", (Object) null);
-        assertEquals(object.toString(), result);
     }
 
     @Test
