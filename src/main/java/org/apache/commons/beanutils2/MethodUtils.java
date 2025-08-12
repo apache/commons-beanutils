@@ -763,51 +763,6 @@ public final class MethodUtils {
 
     /**
      * <p>
-     * Invoke a named static method whose parameter type matches the object type.
-     * </p>
-     *
-     * <p>
-     * The behavior of this method is less deterministic than
-     * {@link #invokeExactStaticMethod(Class objectClass, String methodName, Object[] args, Class[] parameterTypes)}. It loops through all methods with names
-     * that match and then executes the first it finds with compatible parameters.
-     * </p>
-     *
-     * <p>
-     * This method supports calls to methods taking primitive parameters via passing in wrapping classes. So, for example, a {@code Boolean} class would match a
-     * {@code boolean} primitive.
-     * </p>
-     *
-     *
-     * @param objectClass    invoke static method on this class
-     * @param methodName     get method with this name
-     * @param args           use these arguments - treat null as empty array (passing null will result in calling the parameterless method with name
-     *                       {@code methodName}).
-     * @param parameterTypes match these parameters - treat null as empty array
-     * @return The value returned by the invoked method
-     * @throws NoSuchMethodException     if there is no such accessible method
-     * @throws InvocationTargetException wraps an exception thrown by the method invoked
-     * @throws IllegalAccessException    if the requested method is not accessible via reflection
-     * @since 1.8.0
-     */
-    public static Object invokeStaticMethod(final Class<?> objectClass, final String methodName, Object[] args, Class<?>[] parameterTypes)
-            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-
-        if (parameterTypes == null) {
-            parameterTypes = BeanUtils.EMPTY_CLASS_ARRAY;
-        }
-        if (args == null) {
-            args = BeanUtils.EMPTY_OBJECT_ARRAY;
-        }
-
-        final Method method = getMatchingAccessibleMethod(objectClass, methodName, parameterTypes);
-        if (method == null) {
-            throw new NoSuchMethodException("No such accessible method: " + methodName + "() on class: " + objectClass.getName());
-        }
-        return method.invoke(null, args);
-    }
-
-    /**
-     * <p>
      * Determine whether a type can be used as a parameter in a method invocation. This method handles primitive conversions correctly.
      * </p>
      *
