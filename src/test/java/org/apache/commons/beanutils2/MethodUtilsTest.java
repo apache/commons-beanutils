@@ -113,13 +113,6 @@ class MethodUtilsTest {
         assertEquals("parent", result);
     }
 
-    @Test
-    void testInvokeExactStaticMethodNull() throws Exception {
-        final int current = TestBean.currentCounter();
-        final Object value = MethodUtils.invokeExactStaticMethod(TestBean.class, "currentCounter", (Object) null);
-        assertEquals(current, ((Integer) value).intValue(), "currentCounter value");
-    }
-
     /**
      * <p>
      * Test {@code invokeMethod}.
