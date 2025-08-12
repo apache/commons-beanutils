@@ -153,7 +153,7 @@ public final class BooleanConverter extends AbstractConverter<Boolean> {
             collator.setStrength(Collator.SECONDARY);
 
             for (final String trueString : trueStrings) {
-                if (collator.compare(trueString, stringValue) == 0) {
+                if (collator.equals(trueString, stringValue)) {
                     return type.cast(Boolean.TRUE);
                 }
             }
