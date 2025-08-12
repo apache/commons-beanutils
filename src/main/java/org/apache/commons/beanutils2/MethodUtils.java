@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.WeakHashMap;
 
+import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -493,7 +494,7 @@ public final class MethodUtils {
         float cost = 0.0f;
         while (srcClass != null && !destClass.equals(srcClass)) {
             if (destClass.isPrimitive()) {
-                final Class<?> destClassWrapperClazz = getPrimitiveWrapper(destClass);
+                final Class<?> destClassWrapperClazz = ClassUtils.wrapperToPrimitive(destClass);
                 if (destClassWrapperClazz != null && destClassWrapperClazz.equals(srcClass)) {
                     cost += 0.25f;
                     break;
@@ -519,41 +520,6 @@ public final class MethodUtils {
         }
 
         return cost;
-    }
-
-    /**
-     * Gets the wrapper object class for the given primitive type class. For example, passing {@code boolean.class</code> returns <code>Boolean.class}
-     *
-     * @param primitiveType the primitive type class for which a match is to be found
-     * @return the wrapper type associated with the given primitive or null if no match is found
-     */
-    public static Class<?> getPrimitiveWrapper(final Class<?> primitiveType) {
-        // does anyone know a better strategy than comparing names?
-        if (boolean.class.equals(primitiveType)) {
-            return Boolean.class;
-        }
-        if (float.class.equals(primitiveType)) {
-            return Float.class;
-        }
-        if (long.class.equals(primitiveType)) {
-            return Long.class;
-        }
-        if (int.class.equals(primitiveType)) {
-            return Integer.class;
-        }
-        if (short.class.equals(primitiveType)) {
-            return Short.class;
-        }
-        if (byte.class.equals(primitiveType)) {
-            return Byte.class;
-        }
-        if (double.class.equals(primitiveType)) {
-            return Double.class;
-        }
-        if (char.class.equals(primitiveType)) {
-            return Character.class;
-        }
-        return null;
     }
 
     /**
@@ -749,7 +715,7 @@ public final class MethodUtils {
         if (parameterType.isPrimitive()) {
             // this method does *not* do widening - you must specify exactly
             // is this the right behavior?
-            final Class<?> parameterWrapperClazz = getPrimitiveWrapper(parameterType);
+            final Class<?> parameterWrapperClazz = ClassUtils.wrapperToPrimitive(parameterType);
             if (parameterWrapperClazz != null) {
                 return parameterWrapperClazz.equals(parameterization);
             }
