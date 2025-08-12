@@ -683,38 +683,6 @@ public final class MethodUtils {
 
     /**
      * <p>
-     * Invoke a static method whose parameter types match exactly the object types.
-     * </p>
-     *
-     * <p>
-     * This uses reflection to invoke the method obtained from a call to {@link #getAccessibleMethod(Class, String, Class[])}.
-     * </p>
-     *
-     * @param objectClass invoke static method on this class
-     * @param methodName  get method with this name
-     * @param args        use these arguments - treat null as empty array (passing null will result in calling the parameterless method with name
-     *                    {@code methodName}).
-     * @return The value returned by the invoked method
-     * @throws NoSuchMethodException     if there is no such accessible method
-     * @throws InvocationTargetException wraps an exception thrown by the method invoked
-     * @throws IllegalAccessException    if the requested method is not accessible via reflection
-     * @since 1.8.0
-     */
-    public static Object invokeExactStaticMethod(final Class<?> objectClass, final String methodName, Object[] args)
-            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        if (args == null) {
-            args = BeanUtils.EMPTY_OBJECT_ARRAY;
-        }
-        final int arguments = args.length;
-        final Class<?>[] parameterTypes = new Class[arguments];
-        for (int i = 0; i < arguments; i++) {
-            parameterTypes[i] = args[i].getClass();
-        }
-        return invokeExactStaticMethod(objectClass, methodName, args, parameterTypes);
-    }
-
-    /**
-     * <p>
      * Invoke a static method whose parameter types match exactly the parameter types given.
      * </p>
      *
