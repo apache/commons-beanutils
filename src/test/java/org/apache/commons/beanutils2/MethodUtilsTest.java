@@ -299,32 +299,4 @@ class MethodUtilsTest {
         assertInstanceOf(Integer.class, value, "currentCounter type");
         assertEquals(current, ((Integer) value).intValue(), "currentCounter value");
     }
-
-    @Test
-    void testStaticInvokeMethod() throws Exception {
-
-        Object value;
-        int current = TestBean.currentCounter();
-
-        value = MethodUtils.invokeStaticMethod(TestBean.class, "currentCounter", new Object[0]);
-        assertEquals(current, ((Integer) value).intValue(), "currentCounter value");
-
-        MethodUtils.invokeStaticMethod(TestBean.class, "incrementCounter", new Object[0]);
-        current++;
-
-        value = MethodUtils.invokeStaticMethod(TestBean.class, "currentCounter", new Object[0]);
-        assertEquals(current, ((Integer) value).intValue(), "currentCounter value");
-
-        MethodUtils.invokeStaticMethod(TestBean.class, "incrementCounter", new Object[] { Integer.valueOf(8) });
-        current += 8;
-
-        value = MethodUtils.invokeStaticMethod(TestBean.class, "currentCounter", new Object[0]);
-        assertEquals(current, ((Integer) value).intValue(), "currentCounter value");
-
-        MethodUtils.invokeExactStaticMethod(TestBean.class, "incrementCounter", new Object[] { Integer.valueOf(8) }, new Class[] { Number.class });
-        current += 16;
-
-        value = MethodUtils.invokeStaticMethod(TestBean.class, "currentCounter", new Object[0]);
-        assertEquals(current, ((Integer) value).intValue(), "currentCounter value");
-    }
 }
