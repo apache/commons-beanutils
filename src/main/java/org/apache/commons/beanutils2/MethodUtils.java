@@ -522,45 +522,6 @@ public final class MethodUtils {
     }
 
     /**
-     * Gets the class for the primitive type corresponding to the primitive wrapper class given. For example, an instance of
-     * {@code Boolean.class</code> returns a <code>boolean.class}.
-     *
-     * @param wrapperType the
-     * @return the primitive type class corresponding to the given wrapper class, null if no match is found
-     */
-    public static Class<?> getPrimitiveType(final Class<?> wrapperType) {
-        // does anyone know a better strategy than comparing names?
-        if (Boolean.class.equals(wrapperType)) {
-            return boolean.class;
-        }
-        if (Float.class.equals(wrapperType)) {
-            return float.class;
-        }
-        if (Long.class.equals(wrapperType)) {
-            return long.class;
-        }
-        if (Integer.class.equals(wrapperType)) {
-            return int.class;
-        }
-        if (Short.class.equals(wrapperType)) {
-            return short.class;
-        }
-        if (Byte.class.equals(wrapperType)) {
-            return byte.class;
-        }
-        if (Double.class.equals(wrapperType)) {
-            return double.class;
-        }
-        if (Character.class.equals(wrapperType)) {
-            return char.class;
-        }
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Not a known primitive wrapper class: " + wrapperType);
-        }
-        return null;
-    }
-
-    /**
      * Gets the wrapper object class for the given primitive type class. For example, passing {@code boolean.class</code> returns <code>Boolean.class}
      *
      * @param primitiveType the primitive type class for which a match is to be found
