@@ -850,23 +850,6 @@ public final class MethodUtils {
         return args;
     }
 
-    /**
-     * Find a non primitive representation for given primitive class.
-     *
-     * @param clazz the class to find a representation for, not null
-     * @return the original class if it not a primitive. Otherwise the wrapper class. Not null
-     */
-    public static Class<?> toNonPrimitiveClass(final Class<?> clazz) {
-        if (clazz.isPrimitive()) {
-            final Class<?> primitiveClazz = MethodUtils.getPrimitiveWrapper(clazz);
-            // the above method returns
-            if (primitiveClazz != null) {
-                return primitiveClazz;
-            }
-        }
-        return clazz;
-    }
-
     private MethodUtils() {
         // empty
     }

@@ -47,6 +47,7 @@
       <action dev="ggregory" type="remove" due-to="Gary Gregory">Remove unused org.apache.commons.beanutils2.MethodUtils.invokeMethod(Object, String, Object[]) in favor of Apache Commons Lang's org.apache.commons.lang3.reflect.MethodUtils.</action>
       <action dev="ggregory" type="remove" due-to="Gary Gregory">Remove unused org.apache.commons.beanutils2.MethodUtils.invokeStaticMethod(Class, String, Object[]) in favor of Apache Commons Lang's org.apache.commons.lang3.reflect.MethodUtils.</action>
       <action dev="ggregory" type="remove" due-to="Gary Gregory">Remove unused org.apache.commons.beanutils2.MethodUtils.invokeStaticMethod(Class, String, Object[], Class[]) in favor of Apache Commons Lang's org.apache.commons.lang3.reflect.MethodUtils.</action>
+      <action dev="ggregory" type="remove" due-to="Gary Gregory">Remove unused org.apache.commons.beanutils2.MethodUtils.toNonPrimitiveClass(Class) in favor of org.apache.commons.lang3.ClassUtils.primitiveToWrapper(Class).</action>
     </release>
     <release version="2.0.0-M2" date="2025-05-25" description="This is a major release and requires Java 8.">
       <!-- FIX -->
