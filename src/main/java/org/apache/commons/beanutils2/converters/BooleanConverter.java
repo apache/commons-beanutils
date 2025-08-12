@@ -59,7 +59,7 @@ public final class BooleanConverter extends AbstractConverter<Boolean> {
     /**
      * The locale to use for string comparisons.
      */
-    private Locale locale = Locale.getDefault();
+    private Locale locale = Locale.ROOT;
 
     /**
      * Constructs a {@link org.apache.commons.beanutils2.Converter} that will throw a {@link org.apache.commons.beanutils2.ConversionException} if a conversion
