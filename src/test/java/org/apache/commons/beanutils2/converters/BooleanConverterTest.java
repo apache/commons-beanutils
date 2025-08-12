@@ -53,7 +53,8 @@ class BooleanConverterTest {
         final BooleanConverter converter = new BooleanConverter(trueStrings, falseStrings);
 
         converter.setLocale(Locale.forLanguageTag("el"));
-        for (final String trueValue : new String[] { "ναι", "Ναι" }) {
+        // "ναι" and "ΝΑΙ"
+        for (final String trueValue : new String[] { "\u03BD\u03B1\u03B9", "\u039D\u0391\u0399" }) {
             assertEquals(Boolean.TRUE, converter.convert(Boolean.class, trueValue));
         }
 
