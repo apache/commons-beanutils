@@ -295,7 +295,7 @@ public class PropertyUtilsBean {
         return new BeanIntrospectionData(ictx.getPropertyDescriptors());
     }
 
-    private Method getAccessibleMethod(final Object bean, Method writeMethod) {
+    private Method getAccessibleMethod(final Object bean, final Method writeMethod) {
         return MethodUtils.getAccessibleMethod(bean.getClass(), writeMethod);
     }
 
