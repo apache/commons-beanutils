@@ -295,6 +295,10 @@ public class PropertyUtilsBean {
         return new BeanIntrospectionData(ictx.getPropertyDescriptors());
     }
 
+    private Method getAccessibleMethod(final Object bean, Method writeMethod) {
+        return MethodUtils.getAccessibleMethod(bean.getClass(), writeMethod);
+    }
+
     /**
      * Gets the value of the specified indexed property of the specified bean, with no type conversions. The zero-relative index of the required value must be
      * included (in square brackets) as a suffix to the property name, or {@code IllegalArgumentException} will be thrown. In addition to supporting the
@@ -374,7 +378,7 @@ public class PropertyUtilsBean {
         // Call the indexed getter method if there is one
         if (descriptor instanceof IndexedPropertyDescriptor) {
             Method readMethod = ((IndexedPropertyDescriptor) descriptor).getIndexedReadMethod();
-            readMethod = MethodUtils.getAccessibleMethod(bean.getClass(), readMethod);
+            readMethod = getAccessibleMethod(bean, readMethod);
             if (readMethod != null) {
                 try {
                     return invokeMethod(readMethod, bean, Integer.valueOf(index));
@@ -497,7 +501,7 @@ public class PropertyUtilsBean {
         if (descriptor instanceof MappedPropertyDescriptor) {
             // Call the keyed getter method if there is one
             Method readMethod = ((MappedPropertyDescriptor) descriptor).getMappedReadMethod();
-            readMethod = MethodUtils.getAccessibleMethod(bean.getClass(), readMethod);
+            readMethod = getAccessibleMethod(bean, readMethod);
             if (readMethod == null) {
                 throw new NoSuchMethodException("Property '" + name + "' has no mapped getter method on bean class '" + bean.getClass() + "'");
             }
@@ -1107,7 +1111,7 @@ public class PropertyUtilsBean {
                     } else if (desc instanceof MappedPropertyDescriptor) {
                         readMethod = ((MappedPropertyDescriptor) desc).getMappedReadMethod();
                     }
-                    readMethod = MethodUtils.getAccessibleMethod(bean.getClass(), readMethod);
+                    readMethod = getAccessibleMethod(bean, readMethod);
                 }
                 return readMethod != null;
             }
@@ -1170,7 +1174,7 @@ public class PropertyUtilsBean {
                     } else if (desc instanceof MappedPropertyDescriptor) {
                         writeMethod = ((MappedPropertyDescriptor) desc).getMappedWriteMethod();
                     }
-                    writeMethod = MethodUtils.getAccessibleMethod(bean.getClass(), writeMethod);
+                    writeMethod = getAccessibleMethod(bean, writeMethod);
                 }
                 return writeMethod != null;
             }
@@ -1252,7 +1256,7 @@ public class PropertyUtilsBean {
         // Call the indexed setter method if there is one
         if (descriptor instanceof IndexedPropertyDescriptor) {
             Method writeMethod = ((IndexedPropertyDescriptor) descriptor).getIndexedWriteMethod();
-            writeMethod = MethodUtils.getAccessibleMethod(bean.getClass(), writeMethod);
+            writeMethod = getAccessibleMethod(bean, writeMethod);
             if (writeMethod != null) {
                 try {
                     if (LOG.isTraceEnabled()) {
@@ -1397,7 +1401,7 @@ public class PropertyUtilsBean {
         if (descriptor instanceof MappedPropertyDescriptor) {
             // Call the keyed setter method if there is one
             Method mappedWriteMethod = ((MappedPropertyDescriptor) descriptor).getMappedWriteMethod();
-            mappedWriteMethod = MethodUtils.getAccessibleMethod(bean.getClass(), mappedWriteMethod);
+            mappedWriteMethod = getAccessibleMethod(bean, mappedWriteMethod);
             if (mappedWriteMethod == null) {
                 throw new NoSuchMethodException("Property '" + name + "' has no mapped setter method on bean class '" + bean.getClass() + "'");
             }
