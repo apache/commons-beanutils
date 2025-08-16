@@ -55,7 +55,7 @@ public final class MethodUtils {
     /**
      * Represents the key to looking up a Method by reflection.
      */
-    private static final class MethodDescriptor {
+    private static final class MethodKey {
         private final Class<?> cls;
         private final String methodName;
         private final Class<?>[] paramTypes;
@@ -70,7 +70,7 @@ public final class MethodUtils {
          * @param paramTypes the array of classes representing the parameter types.
          * @param exact      whether the match has to be exact.
          */
-        public MethodDescriptor(final Class<?> cls, final String methodName, final Class<?>[] paramTypes, final boolean exact) {
+        public MethodKey(final Class<?> cls, final String methodName, final Class<?>[] paramTypes, final boolean exact) {
             this.cls = Objects.requireNonNull(cls, "cls");
             this.methodName = Objects.requireNonNull(methodName, "methodName");
             this.paramTypes = paramTypes != null ? paramTypes : BeanUtils.EMPTY_CLASS_ARRAY;
@@ -86,10 +86,10 @@ public final class MethodUtils {
          */
         @Override
         public boolean equals(final Object obj) {
-            if (!(obj instanceof MethodDescriptor)) {
+            if (!(obj instanceof MethodKey)) {
                 return false;
             }
-            final MethodDescriptor md = (MethodDescriptor) obj;
+            final MethodKey md = (MethodKey) obj;
 
             return exact == md.exact && methodName.equals(md.methodName) && cls.equals(md.cls) && Arrays.equals(paramTypes, md.paramTypes);
         }
@@ -131,17 +131,17 @@ public final class MethodUtils {
      * loaders will generate non-equal MethodDescriptor objects and hence end up with different entries in the map.
      * </p>
      */
-    private static final Map<MethodDescriptor, Reference<Method>> CACHE = Collections.synchronizedMap(new WeakHashMap<>());
+    private static final Map<MethodKey, Reference<Method>> CACHE = Collections.synchronizedMap(new WeakHashMap<>());
 
     /**
      * Add a method to the cache.
      *
-     * @param md     The method descriptor.
+     * @param key     The method descriptor.
      * @param method The method to cache.
      */
-    private static void cacheMethod(final MethodDescriptor md, final Method method) {
+    private static void cacheMethod(final MethodKey key, final Method method) {
         if (CACHE_METHODS && method != null) {
-            CACHE.put(md, new WeakReference<>(method));
+            CACHE.put(key, new WeakReference<>(method));
         }
     }
 
@@ -220,15 +220,15 @@ public final class MethodUtils {
      */
     public static Method getAccessibleMethod(final Class<?> clazz, final String methodName, final Class<?>... parameterTypes) {
         try {
-            final MethodDescriptor md = new MethodDescriptor(clazz, methodName, parameterTypes, true);
+            final MethodKey key = new MethodKey(clazz, methodName, parameterTypes, true);
             // Check the cache first
-            Method method = getCachedMethod(md);
+            Method method = getCachedMethod(key);
             if (method != null) {
                 return method;
             }
 
             method = getAccessibleMethod(clazz, clazz.getMethod(methodName, parameterTypes));
-            cacheMethod(md, method);
+            cacheMethod(key, method);
             return method;
         } catch (final NoSuchMethodException e) {
             return null;
@@ -331,12 +331,12 @@ public final class MethodUtils {
     /**
      * Gets the method from the cache, if present.
      *
-     * @param md The method descriptor.
+     * @param key The method descriptor.
      * @return The cached method.
      */
-    private static Method getCachedMethod(final MethodDescriptor md) {
+    private static Method getCachedMethod(final MethodKey key) {
         if (CACHE_METHODS) {
-            final Reference<Method> methodRef = CACHE.get(md);
+            final Reference<Method> methodRef = CACHE.get(key);
             if (methodRef != null) {
                 return methodRef.get();
             }
@@ -369,13 +369,13 @@ public final class MethodUtils {
         if (LOG.isTraceEnabled()) {
             LOG.trace("Matching name=" + methodName + " on " + clazz);
         }
-        final MethodDescriptor md = new MethodDescriptor(clazz, methodName, parameterTypes, false);
+        final MethodKey key = new MethodKey(clazz, methodName, parameterTypes, false);
 
         // see if we can find the method directly
         // most of the time this works and it's much faster
         try {
             // Check the cache first
-            Method method = getCachedMethod(md);
+            Method method = getCachedMethod(key);
             if (method != null) {
                 return method;
             }
@@ -388,7 +388,7 @@ public final class MethodUtils {
 
             setMethodAccessible(method); // Default access superclass workaround
 
-            cacheMethod(md, method);
+            cacheMethod(key, method);
             return method;
 
         } catch (final NoSuchMethodException e) {
@@ -448,7 +448,7 @@ public final class MethodUtils {
             }
         }
         if (bestMatch != null) {
-            cacheMethod(md, bestMatch);
+            cacheMethod(key, bestMatch);
         } else {
             // didn't find a match
             LOG.trace("No match found.");
