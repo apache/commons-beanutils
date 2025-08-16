@@ -353,9 +353,6 @@ public final class MethodUtils {
      * </p>
      *
      * <p>
-     * This method is used by {@link #invokeMethod(Object object, String methodName, Object[] args, Class[] parameterTypes)}.
-     *
-     * <p>
      * This method can match primitive parameter by passing in wrapper classes. For example, a {@code Boolean</code> will match a primitive <code>boolean}
      * parameter.
      *
