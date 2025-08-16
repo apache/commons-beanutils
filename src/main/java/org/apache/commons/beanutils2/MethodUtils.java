@@ -113,6 +113,7 @@ public final class MethodUtils {
      * <p>
      * Note that when this class is deployed via a shared classloader in a container, this will affect all webapps. However making this configurable per webapp
      * would mean having a map keyed by context classloader which may introduce memory-leak problems.
+     * </p>
      */
     private static boolean CACHE_METHODS = true;
 
@@ -123,12 +124,14 @@ public final class MethodUtils {
      * the WeakHashMap is used only as a mechanism for limiting the size of the cache, that is, a way to tell the garbage collector that the contents of the
      * cache can be completely garbage-collected whenever it needs the memory. Whether this is a good approach to this problem is doubtful; something like the
      * commons-collections LRUMap may be more appropriate (though of course selecting an appropriate size is an issue).
+     * </p>
      * <p>
      * This static variable is safe even when this code is deployed via a shared classloader because it is keyed via a MethodDescriptor object which has a Class
      * as one of its members and that member is used in the MethodDescriptor.equals method. So two components that load the same class via different class
      * loaders will generate non-equal MethodDescriptor objects and hence end up with different entries in the map.
+     * </p>
      */
-    private static final Map<MethodDescriptor, Reference<Method>> cache = Collections.synchronizedMap(new WeakHashMap<>());
+    private static final Map<MethodDescriptor, Reference<Method>> CACHE = Collections.synchronizedMap(new WeakHashMap<>());
 
     /**
      * Add a method to the cache.
@@ -138,7 +141,7 @@ public final class MethodUtils {
      */
     private static void cacheMethod(final MethodDescriptor md, final Method method) {
         if (CACHE_METHODS && method != null) {
-            cache.put(md, new WeakReference<>(method));
+            CACHE.put(md, new WeakReference<>(method));
         }
     }
 
@@ -149,16 +152,14 @@ public final class MethodUtils {
      * @since 1.8.0
      */
     public static synchronized int clearCache() {
-        final int size = cache.size();
-        cache.clear();
+        final int size = CACHE.size();
+        CACHE.clear();
         return size;
     }
 
     /**
-     * <p>
      * Return an accessible method (that is, one that can be invoked via reflection) that implements the specified Method. If no such method can be found,
      * return {@code null}.
-     * </p>
      *
      * @param clazz  The class of the object
      * @param method The method that we wish to call
@@ -209,10 +210,8 @@ public final class MethodUtils {
     }
 
     /**
-     * <p>
      * Return an accessible method (that is, one that can be invoked via reflection) with given name and parameters. If no such method can be found, return
      * {@code null}. This is just a convenient wrapper for {@link #getAccessibleMethod(Method method)}.
-     * </p>
      *
      * @param clazz          get method from this class
      * @param methodName     get method with this name
@@ -237,10 +236,8 @@ public final class MethodUtils {
     }
 
     /**
-     * <p>
      * Return an accessible method (that is, one that can be invoked via reflection) that implements the specified Method. If no such method can be found,
      * return {@code null}.
-     * </p>
      *
      * @param method The method that we wish to call
      * @return The accessible method
@@ -255,10 +252,8 @@ public final class MethodUtils {
     }
 
     /**
-     * <p>
      * Return an accessible method (that is, one that can be invoked via reflection) that implements the specified method, by scanning through all implemented
      * interfaces and subinterfaces. If no such method can be found, return {@code null}.
-     * </p>
      *
      * <p>
      * There isn't any good reason why this method must be private. It is because there doesn't seem any reason why other classes should call this rather than
@@ -311,10 +306,8 @@ public final class MethodUtils {
     }
 
     /**
-     * <p>
      * Return an accessible method (that is, one that can be invoked via reflection) by scanning through the superclasses. If no such method can be found,
      * return {@code null}.
-     * </p>
      *
      * @param clazz          Class to be checked
      * @param methodName     Method name of the method we wish to call
@@ -343,7 +336,7 @@ public final class MethodUtils {
      */
     private static Method getCachedMethod(final MethodDescriptor md) {
         if (CACHE_METHODS) {
-            final Reference<Method> methodRef = cache.get(md);
+            final Reference<Method> methodRef = CACHE.get(md);
             if (methodRef != null) {
                 return methodRef.get();
             }
@@ -352,10 +345,8 @@ public final class MethodUtils {
     }
 
     /**
-     * <p>
      * Find an accessible method that matches the given name and has compatible parameters. Compatible parameters mean that every method parameter is assignable
      * from the given parameters. In other words, it finds a method with the given name that will take the parameters given.
-     * </p>
      *
      * <p>
      * This method is slightly indeterministic since it loops through methods names and return the first matching method.
@@ -527,9 +518,7 @@ public final class MethodUtils {
     }
 
     /**
-     * <p>
      * Invoke a method whose parameter types match exactly the object types.
-     * </p>
      *
      * <p>
      * This uses reflection to invoke the method obtained from a call to {@code getAccessibleMethod()}.
@@ -558,9 +547,7 @@ public final class MethodUtils {
     }
 
     /**
-     * <p>
      * Invoke a method whose parameter types match exactly the parameter types given.
-     * </p>
      *
      * <p>
      * This uses reflection to invoke the method obtained from a call to {@code getAccessibleMethod()}.
@@ -594,9 +581,7 @@ public final class MethodUtils {
     }
 
     /**
-     * <p>
      * Invoke a static method whose parameter types match exactly the parameter types given.
-     * </p>
      *
      * <p>
      * This uses reflection to invoke the method obtained from a call to {@link #getAccessibleMethod(Class, String, Class[])}.
@@ -631,9 +616,7 @@ public final class MethodUtils {
     }
 
     /**
-     * <p>
      * Invoke a named method whose parameter type matches the object type.
-     * </p>
      *
      * <p>
      * The behavior of this method is less deterministic than
@@ -716,14 +699,6 @@ public final class MethodUtils {
             // log but continue just in case the method.invoke works anyway
             LOG.debug("Cannot setAccessible on method. Therefore cannot use jvm access bug workaround.", e);
         }
-    }
-
-    private static Object[] toArray(final Object arg) {
-        Object[] args = null;
-        if (arg != null) {
-            args = new Object[] { arg };
-        }
-        return args;
     }
 
     private MethodUtils() {
