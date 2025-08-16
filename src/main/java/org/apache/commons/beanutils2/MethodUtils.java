@@ -549,47 +549,6 @@ public final class MethodUtils {
     }
 
     /**
-     * Invoke a named method whose parameter type matches the object type.
-     *
-     * <p>
-     * The behavior of this method is less deterministic than
-     * {@link #invokeExactMethod(Object object, String methodName, Object[] args, Class[] parameterTypes)}. It loops through all methods with names that match
-     * and then executes the first it finds with compatible parameters.
-     * </p>
-     *
-     * <p>
-     * This method supports calls to methods taking primitive parameters via passing in wrapping classes. So, for example, a {@code Boolean} class would match a
-     * {@code boolean} primitive.
-     * </p>
-     *
-     *
-     * @param object         invoke method on this object.
-     * @param methodName     get method with this name.
-     * @param args           use these arguments - treat null as empty array (passing null will result in calling the parameterless method with name
-     *                       {@code methodName}).
-     * @param parameterTypes match these parameters - treat null as empty array.
-     * @return The value returned by the invoked method.
-     * @throws NoSuchMethodException     if there is no such accessible method.
-     * @throws InvocationTargetException wraps an exception thrown by the method invoked.
-     * @throws IllegalAccessException    if the requested method is not accessible via reflection.
-     */
-    public static Object invokeMethod(final Object object, final String methodName, Object[] args, Class<?>[] parameterTypes)
-            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        if (parameterTypes == null) {
-            parameterTypes = BeanUtils.EMPTY_CLASS_ARRAY;
-        }
-        if (args == null) {
-            args = BeanUtils.EMPTY_OBJECT_ARRAY;
-        }
-
-        final Method method = getMatchingAccessibleMethod(object.getClass(), methodName, parameterTypes);
-        if (method == null) {
-            throw new NoSuchMethodException("No such accessible method: " + methodName + "() on object: " + object.getClass().getName());
-        }
-        return method.invoke(object, args);
-    }
-
-    /**
      * Sets whether methods should be cached for greater performance or not, default is {@code true}.
      *
      * @param cacheMethods {@code true} if methods should be cached for greater performance, otherwise {@code false}

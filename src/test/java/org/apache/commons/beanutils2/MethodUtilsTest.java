@@ -107,13 +107,6 @@ class MethodUtilsTest {
     }
 
     @Test
-    void testInvokeMethodNullArrayNullArray() throws Exception {
-        final Object result = MethodUtils.invokeMethod(new AlphaBean("parent"), "getName", null, null);
-
-        assertEquals("parent", result);
-    }
-
-    @Test
     void testNoCaching() throws Exception {
         // no caching
         MethodUtils.setCacheMethods(false);
@@ -178,27 +171,27 @@ class MethodUtilsTest {
         Object value = null;
         int current = TestBean.currentCounter();
         // Return initial value of the counter
-        value = MethodUtils.invokeMethod(bean, "currentCounter", new Object[0], new Class[0]);
+        value = MethodUtils.invokeExactMethod(bean, "currentCounter", new Object[0], new Class[0]);
         assertNotNull(value, "currentCounter exists");
         assertInstanceOf(Integer.class, value, "currentCounter type");
         assertEquals(current, ((Integer) value).intValue(), "currentCounter value");
 
         // Increment via no-arguments version
-        MethodUtils.invokeMethod(bean, "incrementCounter", new Object[0], new Class[0]);
+        MethodUtils.invokeExactMethod(bean, "incrementCounter", new Object[0], new Class[0]);
 
         // Validate updated value
         current++;
-        value = MethodUtils.invokeMethod(bean, "currentCounter", new Object[0], new Class[0]);
+        value = MethodUtils.invokeExactMethod(bean, "currentCounter", new Object[0], new Class[0]);
         assertNotNull(value, "currentCounter exists");
         assertInstanceOf(Integer.class, value, "currentCounter type");
         assertEquals(current, ((Integer) value).intValue(), "currentCounter value");
 
         // Increment via specified-argument version
-        MethodUtils.invokeMethod(bean, "incrementCounter", new Object[] { Integer.valueOf(5) }, new Class[] { Integer.TYPE });
+        MethodUtils.invokeExactMethod(bean, "incrementCounter", new Object[] { Integer.valueOf(5) }, new Class[] { Integer.TYPE });
 
         // Validate updated value
         current += 5;
-        value = MethodUtils.invokeMethod(bean, "currentCounter", new Object[0], new Class[0]);
+        value = MethodUtils.invokeExactMethod(bean, "currentCounter", new Object[0], new Class[0]);
         assertNotNull(value, "currentCounter exists");
         assertInstanceOf(Integer.class, value, "currentCounter type");
         assertEquals(current, ((Integer) value).intValue(), "currentCounter value");
