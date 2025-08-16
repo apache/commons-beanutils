@@ -48,6 +48,8 @@ import org.apache.commons.logging.LogFactory;
  * method can be invoked as normal. This call will only succeed when the application has sufficient security privileges. If this call fails then a warning will
  * be logged and the method may fail.
  * </p>
+ *
+ * @see <a href="https://commons.apache.org/proper/commons-lang/apidocs/org/apache/commons/lang3/reflect/MethodUtils.html">Apache Commons Lang MethodUtils</a>
  */
 public final class MethodUtils {
 
@@ -89,7 +91,6 @@ public final class MethodUtils {
                 return false;
             }
             final MethodKey md = (MethodKey) obj;
-
             return exact == md.exact && methodName.equals(md.methodName) && cls.equals(md.cls) && Arrays.equals(paramTypes, md.paramTypes);
         }
 
@@ -157,7 +158,7 @@ public final class MethodUtils {
     }
 
     /**
-     * Return an accessible method (that is, one that can be invoked via reflection) that implements the specified Method. If no such method can be found,
+     * Gets an accessible method (that is, one that can be invoked via reflection) that implements the specified Method. If no such method can be found,
      * return {@code null}.
      *
      * @param clazz  The class of the object.
@@ -209,7 +210,7 @@ public final class MethodUtils {
     }
 
     /**
-     * Return an accessible method (that is, one that can be invoked via reflection) with given name and parameters. If no such method can be found, return
+     * Gets an accessible method (that is, one that can be invoked via reflection) with given name and parameters. If no such method can be found, return
      * {@code null}. This is just a convenient wrapper for {@link #getAccessibleMethod(Method method)}.
      *
      * @param clazz          get method from this class.
@@ -225,7 +226,6 @@ public final class MethodUtils {
             if (method != null) {
                 return method;
             }
-
             method = getAccessibleMethod(clazz, clazz.getMethod(methodName, parameterTypes));
             cacheMethod(key, method);
             return method;
@@ -235,23 +235,18 @@ public final class MethodUtils {
     }
 
     /**
-     * Return an accessible method (that is, one that can be invoked via reflection) that implements the specified Method. If no such method can be found,
+     * Gets an accessible method (that is, one that can be invoked via reflection) that implements the specified Method. If no such method can be found,
      * return {@code null}.
      *
      * @param method The method that we wish to call.
      * @return The accessible method.
      */
     public static Method getAccessibleMethod(final Method method) {
-        // Make sure we have a method to check
-        if (method == null) {
-            return null;
-        }
-
-        return getAccessibleMethod(method.getDeclaringClass(), method);
+        return method != null ? getAccessibleMethod(method.getDeclaringClass(), method) : null;
     }
 
     /**
-     * Return an accessible method (that is, one that can be invoked via reflection) that implements the specified method, by scanning through all implemented
+     * Gets an accessible method (that is, one that can be invoked via reflection) that implements the specified method, by scanning through all implemented
      * interfaces and subinterfaces. If no such method can be found, return {@code null}.
      *
      * <p>
@@ -265,19 +260,15 @@ public final class MethodUtils {
      */
     private static Method getAccessibleMethodFromInterfaceNest(Class<?> clazz, final String methodName, final Class<?>[] parameterTypes) {
         Method method = null;
-
         // Search up the superclass chain
         for (; clazz != null; clazz = clazz.getSuperclass()) {
-
             // Check the implemented interfaces of the parent class
             final Class<?>[] interfaces = clazz.getInterfaces();
             for (final Class<?> anInterface : interfaces) {
-
                 // Is this interface public?
                 if (!Modifier.isPublic(anInterface.getModifiers())) {
                     continue;
                 }
-
                 // Does the method exist on this interface?
                 try {
                     method = anInterface.getDeclaredMethod(methodName, parameterTypes);
@@ -289,23 +280,19 @@ public final class MethodUtils {
                 if (method != null) {
                     return method;
                 }
-
                 // Recursively check our parent interfaces
                 method = getAccessibleMethodFromInterfaceNest(anInterface, methodName, parameterTypes);
                 if (method != null) {
                     return method;
                 }
-
             }
-
         }
-
         // We did not find anything
         return null;
     }
 
     /**
-     * Return an accessible method (that is, one that can be invoked via reflection) by scanning through the superclasses. If no such method can be found,
+     * Gets an accessible method (that is, one that can be invoked via reflection) by scanning through the superclasses. If no such method can be found,
      * return {@code null}.
      *
      * @param clazz          Class to be checked.
@@ -344,7 +331,7 @@ public final class MethodUtils {
     }
 
     /**
-     * Find an accessible method that matches the given name and has compatible parameters. Compatible parameters mean that every method parameter is assignable
+     * Gets an accessible method that matches the given name and has compatible parameters. Compatible parameters mean that every method parameter is assignable
      * from the given parameters. In other words, it finds a method with the given name that will take the parameters given.
      *
      * <p>
@@ -366,7 +353,6 @@ public final class MethodUtils {
             LOG.trace("Matching name=" + methodName + " on " + clazz);
         }
         final MethodKey key = new MethodKey(clazz, methodName, parameterTypes, false);
-
         // see if we can find the method directly
         // most of the time this works and it's much faster
         try {
@@ -375,21 +361,16 @@ public final class MethodUtils {
             if (method != null) {
                 return method;
             }
-
             method = clazz.getMethod(methodName, parameterTypes);
             if (LOG.isTraceEnabled()) {
                 LOG.trace("Found straight match: " + method);
                 LOG.trace("isPublic:" + Modifier.isPublic(method.getModifiers()));
             }
-
             setMethodAccessible(method); // Default access superclass workaround
-
             cacheMethod(key, method);
             return method;
-
         } catch (final NoSuchMethodException e) {
             /* SWALLOW */ }
-
         // search through all methods
         final int paramSize = parameterTypes.length;
         Method bestMatch = null;
@@ -403,7 +384,6 @@ public final class MethodUtils {
                     LOG.trace("Found matching name:");
                     LOG.trace(method2);
                 }
-
                 // compare parameters
                 final Class<?>[] methodsParams = method2.getParameterTypes();
                 final int methodParamSize = methodsParams.length;
@@ -422,7 +402,6 @@ public final class MethodUtils {
                             break;
                         }
                     }
-
                     if (match) {
                         // get accessible version of method
                         final Method method = getAccessibleMethod(clazz, method2);
@@ -437,7 +416,6 @@ public final class MethodUtils {
                                 bestMatchCost = myCost;
                             }
                         }
-
                         LOG.trace("Couldn't find accessible method.");
                     }
                 }
@@ -449,7 +427,6 @@ public final class MethodUtils {
             // didn't find a match
             LOG.trace("No match found.");
         }
-
         return bestMatch;
     }
 
@@ -495,7 +472,7 @@ public final class MethodUtils {
     }
 
     /**
-     * Returns the sum of the object transformation cost for each class in the source argument list.
+     * Gets the sum of the object transformation cost for each class in the source argument list.
      *
      * @param srcArgs  The source arguments.
      * @param destArgs The destination arguments.
@@ -509,7 +486,6 @@ public final class MethodUtils {
             destClass = destArgs[i];
             totalCost += getObjectTransformationCost(srcClass, destClass);
         }
-
         return totalCost;
     }
 
