@@ -382,7 +382,7 @@ public class MemoryLeakTest {
 
         // if you comment the following line, the test will work, and the ClassLoader will be released.
         // That proves that nothing is wrong with the test, and MethodUtils is holding a reference
-        assertEquals("initialValue", MethodUtils.invokeExactMethod(bean, "getName", new Object[0], new Class[0]));
+        assertNotNull(MethodUtils.getAccessibleMethod(bean.getClass(), "getName", new Class[0]));
 
         // this should make the reference go away.
         loader = null;

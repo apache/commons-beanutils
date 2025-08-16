@@ -19,7 +19,6 @@ package org.apache.commons.beanutils2;
 
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
@@ -512,40 +511,6 @@ public final class MethodUtils {
         }
 
         return totalCost;
-    }
-
-    /**
-     * Invoke a method whose parameter types match exactly the parameter types given.
-     *
-     * <p>
-     * This uses reflection to invoke the method obtained from a call to {@code getAccessibleMethod()}.
-     * </p>
-     *
-     * @param object         invoke method on this object.
-     * @param methodName     get method with this name.
-     * @param args           use these arguments - treat null as empty array (passing null will result in calling the parameterless method with name
-     *                       {@code methodName}).
-     * @param parameterTypes match these parameters - treat null as empty array.
-     * @return The value returned by the invoked method.
-     * @throws NoSuchMethodException     if there is no such accessible method.
-     * @throws InvocationTargetException wraps an exception thrown by the method invoked.
-     * @throws IllegalAccessException    if the requested method is not accessible via reflection.
-     */
-    public static Object invokeExactMethod(final Object object, final String methodName, Object[] args, Class<?>[] parameterTypes)
-            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        if (args == null) {
-            args = BeanUtils.EMPTY_OBJECT_ARRAY;
-        }
-
-        if (parameterTypes == null) {
-            parameterTypes = BeanUtils.EMPTY_CLASS_ARRAY;
-        }
-
-        final Method method = getAccessibleMethod(object.getClass(), methodName, parameterTypes);
-        if (method == null) {
-            throw new NoSuchMethodException("No such accessible method: " + methodName + "() on object: " + object.getClass().getName());
-        }
-        return method.invoke(object, args);
     }
 
     /**
