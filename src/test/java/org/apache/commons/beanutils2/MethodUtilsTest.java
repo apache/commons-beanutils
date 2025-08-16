@@ -64,7 +64,7 @@ class MethodUtilsTest {
     void testClearCache() throws Exception {
         MethodUtils.clearCache(); // make sure it starts empty
         final PublicSubBean bean = new PublicSubBean();
-        MethodUtils.invokeExactMethod(bean, "setFoo", "alpha");
+        MethodUtils.invokeExactMethod(bean, "setFoo", new String[] { "alpha" }, new Class[] { String.class });
         assertEquals(1, MethodUtils.clearCache());
         assertEquals(0, MethodUtils.clearCache());
     }
@@ -100,12 +100,6 @@ class MethodUtilsTest {
     }
 
     @Test
-    void testInvokeExactMethodNullArray() throws Exception {
-        final Object result = MethodUtils.invokeExactMethod(new AlphaBean("parent"), "getName", null);
-        assertEquals("parent", result);
-    }
-
-    @Test
     void testInvokeExactMethodNullArrayNullArray() throws Exception {
         final Object result = MethodUtils.invokeExactMethod(new AlphaBean("parent"), "getName", null, null);
 
@@ -125,7 +119,7 @@ class MethodUtilsTest {
         MethodUtils.setCacheMethods(false);
 
         final PublicSubBean bean = new PublicSubBean();
-        MethodUtils.invokeExactMethod(bean, "setFoo", "alpha");
+        MethodUtils.invokeExactMethod(bean, "setFoo", new String[] { "alpha" }, new Class[] { String.class });
         assertEquals(0, MethodUtils.clearCache());
 
         // reset default
@@ -145,9 +139,9 @@ class MethodUtilsTest {
 
         // see if we can access public methods in a default access superclass
         // from a public access subclass instance
-        MethodUtils.invokeExactMethod(bean, "setFoo", "alpha");
+        MethodUtils.invokeExactMethod(bean, "setFoo", new String[] { "alpha" }, new Class[] { String.class });
         assertEquals(bean.getFoo(), "alpha", "Set value (foo:2)");
-        MethodUtils.invokeExactMethod(bean, "setBar", "beta");
+        MethodUtils.invokeExactMethod(bean, "setBar", new String[] { "beta" }, new Class[] { String.class });
         assertEquals(bean.getBar(), "beta", "Set value (bar:2)");
 
         Method method = MethodUtils.getAccessibleMethod(PublicSubBean.class, "setFoo", String.class);
@@ -169,9 +163,8 @@ class MethodUtilsTest {
     void testSetCacheMethods() throws Exception {
         MethodUtils.setCacheMethods(true);
         MethodUtils.clearCache(); // make sure it starts empty
-
         final PublicSubBean bean = new PublicSubBean();
-        MethodUtils.invokeExactMethod(bean, "setFoo", "alpha");
+        MethodUtils.invokeExactMethod(bean, "setFoo", new String[] { "alpha" }, new Class[] { String.class });
         assertEquals(1, MethodUtils.clearCache());
         assertEquals(0, MethodUtils.clearCache());
     }
