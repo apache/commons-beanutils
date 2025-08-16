@@ -210,22 +210,6 @@ public final class MethodUtils {
 
     /**
      * <p>
-     * Return an accessible method (that is, one that can be invoked via reflection) with given name and a single parameter. If no such method can be found,
-     * return {@code null}. Basically, a convenience wrapper that constructs a {@code Class} array for you.
-     * </p>
-     *
-     * @param clazz         get method from this class
-     * @param methodName    get method with this name
-     * @param parameterType taking this type of parameter
-     * @return The accessible method
-     */
-    public static Method getAccessibleMethod(final Class<?> clazz, final String methodName, final Class<?> parameterType) {
-        final Class<?>[] parameterTypes = { parameterType };
-        return getAccessibleMethod(clazz, methodName, parameterTypes);
-    }
-
-    /**
-     * <p>
      * Return an accessible method (that is, one that can be invoked via reflection) with given name and parameters. If no such method can be found, return
      * {@code null}. This is just a convenient wrapper for {@link #getAccessibleMethod(Method method)}.
      * </p>
@@ -235,7 +219,7 @@ public final class MethodUtils {
      * @param parameterTypes with these parameters types
      * @return The accessible method
      */
-    public static Method getAccessibleMethod(final Class<?> clazz, final String methodName, final Class<?>[] parameterTypes) {
+    public static Method getAccessibleMethod(final Class<?> clazz, final String methodName, final Class<?>... parameterTypes) {
         try {
             final MethodDescriptor md = new MethodDescriptor(clazz, methodName, parameterTypes, true);
             // Check the cache first
