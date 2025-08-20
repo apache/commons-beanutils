@@ -90,42 +90,38 @@ public class ColorConverter extends AbstractConverter<Color> {
         if (Color.class.isAssignableFrom(type)) {
             final String stringValue = toString(value);
 
-            switch (toLowerCase(stringValue)) {
-            case "black":
+            if (stringValue.equalsIgnoreCase("black")) {
                 return type.cast(Color.BLACK);
-            case "blue":
+            } else if (stringValue.equalsIgnoreCase("blue")) {
                 return type.cast(Color.BLUE);
-            case "cyan":
+            } else if (stringValue.equalsIgnoreCase("cyan")) {
                 return type.cast(Color.CYAN);
-            case "darkgray":
-            case "darkgrey":
-            case "dark_gray":
-            case "dark_grey":
+            } else if (stringValue.equalsIgnoreCase("darkgray")
+                    || stringValue.equalsIgnoreCase("darkgrey")
+                    || stringValue.equalsIgnoreCase("dark_gray")
+                    || stringValue.equalsIgnoreCase("dark_grey")) {
                 return type.cast(Color.DARK_GRAY);
-            case "gray":
-            case "grey":
+            } else if (stringValue.equalsIgnoreCase("gray") || stringValue.equalsIgnoreCase("grey")) {
                 return type.cast(Color.GRAY);
-            case "green":
+            } else if (stringValue.equalsIgnoreCase("green")) {
                 return type.cast(Color.GREEN);
-            case "lightgray":
-            case "lightgrey":
-            case "light_gray":
-            case "light_grey":
+            } else if (stringValue.equalsIgnoreCase("lightgray")
+                    || stringValue.equalsIgnoreCase("lightgrey")
+                    || stringValue.equalsIgnoreCase("light_gray")
+                    || stringValue.equalsIgnoreCase("light_grey")) {
                 return type.cast(Color.LIGHT_GRAY);
-            case "magenta":
+            } else if (stringValue.equalsIgnoreCase("magenta")) {
                 return type.cast(Color.MAGENTA);
-            case "orange":
+            } else if (stringValue.equalsIgnoreCase("orange")) {
                 return type.cast(Color.ORANGE);
-            case "pink":
+            } else if (stringValue.equalsIgnoreCase("pink")) {
                 return type.cast(Color.PINK);
-            case "red":
+            } else if (stringValue.equalsIgnoreCase("red")) {
                 return type.cast(Color.RED);
-            case "white":
+            } else if (stringValue.equalsIgnoreCase("white")) {
                 return type.cast(Color.WHITE);
-            case "yellow":
+            } else if (stringValue.equalsIgnoreCase("yellow")) {
                 return type.cast(Color.YELLOW);
-            default:
-                // Do nothing.
             }
 
             if (stringValue.startsWith(HEX_COLOR_PREFIX)) {
