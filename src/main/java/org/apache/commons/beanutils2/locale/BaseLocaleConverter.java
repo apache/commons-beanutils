@@ -67,7 +67,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
         /**
          * Returns this instance cast as the exact subclass type.
          *
-         * @return this instance cast as the exact subclass type.
+         * @return {@code this} instance cast as the exact subclass type.
          */
         @SuppressWarnings("unchecked")
         protected B asThis() {
