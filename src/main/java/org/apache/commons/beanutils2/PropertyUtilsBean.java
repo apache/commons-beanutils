@@ -296,7 +296,7 @@ public class PropertyUtilsBean {
     }
 
     private Method getAccessibleMethod(final Object bean, final Method writeMethod) {
-        return MethodUtils.getAccessibleMethod(bean.getClass(), writeMethod);
+        return org.apache.commons.lang3.reflect.MethodUtils.getAccessibleMethod(bean.getClass(), writeMethod);
     }
 
     /**
@@ -888,7 +888,7 @@ public class PropertyUtilsBean {
      * @since 2.0.0
      */
     public Method getReadMethod(final Class<?> clazz, final PropertyDescriptor descriptor) {
-        return MethodUtils.getAccessibleMethod(clazz, descriptor.getReadMethod());
+        return org.apache.commons.lang3.reflect.MethodUtils.getAccessibleMethod(clazz, descriptor.getReadMethod());
     }
 
     /**
@@ -904,7 +904,7 @@ public class PropertyUtilsBean {
      * @return The read method
      */
     public Method getReadMethod(final PropertyDescriptor descriptor) {
-        return MethodUtils.getAccessibleMethod(descriptor.getReadMethod());
+        return org.apache.commons.lang3.reflect.MethodUtils.getAccessibleMethod(descriptor.getReadMethod());
     }
 
     /**
@@ -993,7 +993,7 @@ public class PropertyUtilsBean {
      */
     public Method getWriteMethod(final Class<?> clazz, final PropertyDescriptor descriptor) {
         final BeanIntrospectionData data = getIntrospectionData(clazz);
-        return MethodUtils.getAccessibleMethod(clazz, data.getWriteMethod(clazz, descriptor));
+        return org.apache.commons.lang3.reflect.MethodUtils.getAccessibleMethod(clazz, data.getWriteMethod(clazz, descriptor));
     }
 
     /**
@@ -1013,7 +1013,7 @@ public class PropertyUtilsBean {
      * @return The write method
      */
     public Method getWriteMethod(final PropertyDescriptor descriptor) {
-        return MethodUtils.getAccessibleMethod(descriptor.getWriteMethod());
+        return org.apache.commons.lang3.reflect.MethodUtils.getAccessibleMethod(descriptor.getWriteMethod());
     }
 
     /**

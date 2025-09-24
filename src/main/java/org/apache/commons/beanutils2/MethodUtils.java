@@ -18,7 +18,6 @@
 package org.apache.commons.beanutils2;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
@@ -170,41 +169,11 @@ public final class MethodUtils {
      * @param method The method that we wish to call.
      * @return The accessible method.
      * @since 1.8.0
+     * @deprecated Use {@link org.apache.commons.lang3.reflect.MethodUtils#getAccessibleMethod(Class, Method)}.
      */
+    @Deprecated
     public static Method getAccessibleMethod(Class<?> clazz, Method method) {
-        // Make sure we have a method to check
-        if (method == null) {
-            return null;
-        }
-        // If the requested method is not public we cannot call it
-        if (!Modifier.isPublic(method.getModifiers())) {
-            return null;
-        }
-        boolean sameClass = true;
-        if (clazz == null) {
-            clazz = method.getDeclaringClass();
-        } else {
-            if (!method.getDeclaringClass().isAssignableFrom(clazz)) {
-                throw new IllegalArgumentException(clazz.getName() + " is not assignable from " + method.getDeclaringClass().getName());
-            }
-            sameClass = clazz.equals(method.getDeclaringClass());
-        }
-        // If the class is public, we are done
-        if (Modifier.isPublic(clazz.getModifiers())) {
-            if (!sameClass && !Modifier.isPublic(method.getDeclaringClass().getModifiers())) {
-                setMethodAccessible(method); // Default access superclass workaround
-            }
-            return method;
-        }
-        final String methodName = method.getName();
-        final Class<?>[] parameterTypes = method.getParameterTypes();
-        // Check the implemented interfaces and subinterfaces
-        method = getAccessibleMethodFromInterfaceNest(clazz, methodName, parameterTypes);
-        // Check the superclass chain
-        if (method == null) {
-            method = getAccessibleMethodFromSuperclass(clazz, methodName, parameterTypes);
-        }
-        return method;
+        return org.apache.commons.lang3.reflect.MethodUtils.getAccessibleMethod(clazz, method);
     }
 
     /**
@@ -219,7 +188,7 @@ public final class MethodUtils {
     public static Method getAccessibleMethod(final Class<?> clazz, final String methodName, final Class<?>... parameterTypes) {
         return computeIfAbsent(new MethodKey(clazz, methodName, parameterTypes, true), k -> {
             try {
-                return getAccessibleMethod(clazz, clazz.getMethod(methodName, parameterTypes));
+                return org.apache.commons.lang3.reflect.MethodUtils.getAccessibleMethod(clazz, clazz.getMethod(methodName, parameterTypes));
             } catch (final NoSuchMethodException e) {
                 return null;
             }
@@ -232,78 +201,11 @@ public final class MethodUtils {
      *
      * @param method The method that we wish to call.
      * @return The accessible method.
+     * @deprecated Use {@link org.apache.commons.lang3.reflect.MethodUtils#getAccessibleMethod(Method)}.
      */
+    @Deprecated
     public static Method getAccessibleMethod(final Method method) {
-        return method != null ? getAccessibleMethod(method.getDeclaringClass(), method) : null;
-    }
-
-    /**
-     * Gets an accessible method (that is, one that can be invoked via reflection) that implements the specified method, by scanning through all implemented
-     * interfaces and subinterfaces. If no such method can be found, return {@code null}.
-     *
-     * <p>
-     * There isn't any good reason why this method must be private. It is because there doesn't seem any reason why other classes should call this rather than
-     * the higher level methods.
-     * </p>
-     *
-     * @param clazz          Parent class for the interfaces to be checked.
-     * @param methodName     Method name of the method we wish to call.
-     * @param parameterTypes The parameter type signatures.
-     */
-    private static Method getAccessibleMethodFromInterfaceNest(Class<?> clazz, final String methodName, final Class<?>[] parameterTypes) {
-        Method method = null;
-        // Search up the superclass chain
-        for (; clazz != null; clazz = clazz.getSuperclass()) {
-            // Check the implemented interfaces of the parent class
-            final Class<?>[] interfaces = clazz.getInterfaces();
-            for (final Class<?> anInterface : interfaces) {
-                // Is this interface public?
-                if (!Modifier.isPublic(anInterface.getModifiers())) {
-                    continue;
-                }
-                // Does the method exist on this interface?
-                try {
-                    method = anInterface.getDeclaredMethod(methodName, parameterTypes);
-                } catch (final NoSuchMethodException e) {
-                    /*
-                     * Swallow, if no method is found after the loop then this method returns null.
-                     */
-                }
-                if (method != null) {
-                    return method;
-                }
-                // Recursively check our parent interfaces
-                method = getAccessibleMethodFromInterfaceNest(anInterface, methodName, parameterTypes);
-                if (method != null) {
-                    return method;
-                }
-            }
-        }
-        // We did not find anything
-        return null;
-    }
-
-    /**
-     * Gets an accessible method (that is, one that can be invoked via reflection) by scanning through the superclasses. If no such method can be found, return
-     * {@code null}.
-     *
-     * @param clazz          Class to be checked.
-     * @param methodName     Method name of the method we wish to call.
-     * @param parameterTypes The parameter type signatures.
-     */
-    private static Method getAccessibleMethodFromSuperclass(final Class<?> clazz, final String methodName, final Class<?>[] parameterTypes) {
-        Class<?> parentClazz = clazz.getSuperclass();
-        while (parentClazz != null) {
-            if (Modifier.isPublic(parentClazz.getModifiers())) {
-                try {
-                    return parentClazz.getMethod(methodName, parameterTypes);
-                } catch (final NoSuchMethodException e) {
-                    return null;
-                }
-            }
-            parentClazz = parentClazz.getSuperclass();
-        }
-        return null;
+        return org.apache.commons.lang3.reflect.MethodUtils.getAccessibleMethod(method);
     }
 
     /**
