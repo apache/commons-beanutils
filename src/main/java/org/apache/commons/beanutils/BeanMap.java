@@ -93,7 +93,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     private static final Map<Class<? extends Object>, Transformer> typeTransformers = Collections.unmodifiableMap(createTypeTransformers());
 
     /**
-     * This HashMap has been made unmodifiable to prevent issues when loaded in a shared ClassLoader enviroment.
+     * This HashMap has been made unmodifiable to prevent issues when loaded in a shared ClassLoader environment.
      *
      * @see "http://issues.apache.org/jira/browse/BEANUTILS-112"
      * @deprecated Use {@link BeanMap#getTypeTransformer(Class)} method
