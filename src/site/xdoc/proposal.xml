@@ -65,7 +65,7 @@ of the JDK are required, so the use of this package is very lightweight.</p>
 <p>In addition to wrapping the reflection and introspection APIs of the
 standard JDK, <em>BeanUtils</em> components shall support a syntax for directly
 accessing <strong>nested</strong> and <strong>indexed</strong> properties, in a
-manner that will be familar to users of scripting languages like JavaScript.
+manner that will be familiar to users of scripting languages like JavaScript.
 For example, the following property accessor expressions are supported:</p>
 <ul>
 <li><strong>customer</strong> - Equivalent to <code>getCustomer()</code>.</li>
