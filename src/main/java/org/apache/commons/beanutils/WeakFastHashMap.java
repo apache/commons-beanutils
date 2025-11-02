@@ -55,7 +55,7 @@ import java.util.WeakHashMap;
  * unexpectedly, as it may be reading the state of the internal collection
  * before the internal collection is fully formed.
  * For more information on the double-checked locking idiom, see the
- * <a href="http://www.cs.umd.edu/~pugh/java/memoryModel/DoubleCheckedLocking.html">
+ * <a href="https://www.cs.umd.edu/~pugh/java/memoryModel/DoubleCheckedLocking.html">
  * Double-Checked Locking Idiom Is Broken Declaration</a>.</p>
  *
  * @param <K> the type of keys maintained by this map

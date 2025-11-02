@@ -79,7 +79,7 @@
  * <h2>1.1 Background</h2>
  *
  * <p>The <em>JavaBeans</em> name comes from a
- * <a href="http://java.sun.com/products/javabeans/">Java API</a>
+ * <a href="https://java.sun.com/products/javabeans/">Java API</a>
  * for a component architecture for the Java language.  Writing Java classes that
  * conform to the JavaBeans design patterns makes it easier for Java developers
  * to understand the functionality provided by your class, as well as allowing
@@ -87,7 +87,7 @@
  * learn about the properties and operations provided by your class, and present
  * them in a visually appealing manner in development tools.</p>
  *
- * <p>The <a href="http://java.sun.com/products/javabeans/docs/spec.html">JavaBeans
+ * <p>The <a href="https://java.sun.com/products/javabeans/docs/spec.html">JavaBeans
  * Specification</a> describes the complete set of characteristics that makes
  * an arbitrary Java class a JavaBean or not -- and you should consider reading
  * this document to be an important part of developing your Java programming
@@ -174,9 +174,9 @@
  * additional packages be available in the application's class path at runtime:
  * </p>
  * <ul>
- * <li><a href="http://commons.apache.org/downloads/download_logging.cgi">
+ * <li><a href="https://commons.apache.org/downloads/download_logging.cgi">
  * Logging Package (Apache Commons)</a>, version 1.0 or later</li>
- * <li><a href="http://commons.apache.org/downloads/download_collections.cgi">
+ * <li><a href="https://commons.apache.org/downloads/download_collections.cgi">
  * Collections Package (Apache Commons)</a>, version 1.0 or later</li>
  * </ul>
  *
@@ -578,7 +578,7 @@
  * rows are being processed by your application.  This hinders the ability to use
  * {@code ResultSetDynaClass} as a means of communicating information from
  * the model layer to the view layer in a model-view-controller architecture
- * such as that provided by the <a href="http://struts.apache.org/">Struts
+ * such as that provided by the <a href="https://struts.apache.org/">Struts
  * Framework</a>, because there is no easy mechanism to assure that the result set
  * is finally closed (and the underlying {@code Connection} returned to its
  * connection pool, if you are using one).</p>
@@ -802,7 +802,7 @@
  * {@code javax.servlet.HttpServletRequest} received by a web application
  * into a set of corresponding property setter calls on an arbitrary JavaBean.
  * (This is one of the fundamental services provided by the
- * <a href="http://struts.apache.org/">Struts Framework</a>, which uses
+ * <a href="https://struts.apache.org/">Struts Framework</a>, which uses
  * <em>BeanUtils</em> internally to implement this functionality.)</p>
  *
  * <p>In an HTTP request, the set of included parameters is made available as a

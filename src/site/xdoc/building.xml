@@ -26,19 +26,19 @@ limitations under the License.
     <section name="Overview">
       <p>
         Commons BeanUtils can be built using
-        <a href="http://maven.apache.org">Maven 3</a>
+        <a href="https://maven.apache.org">Maven 3</a>
         (Recommended: Maven 3.9.9)
         and JDK 8 / OpenJDK 8 or later (recommended: JDK 21).
       </p>
       <p>
         Further details can be found in the
-        <a href="http://commons.apache.org/building.html">commons build instructions</a>.
+        <a href="https://commons.apache.org/building.html">commons build instructions</a>.
       </p>
     </section>
     <section name="Maven 3 Goals">
       <p>
         Build using
-        <a href="http://maven.apache.org">Maven 3</a>
+        <a href="https://maven.apache.org">Maven 3</a>
         is the preferred build method.
         The compiled BeanUtils JAR should work with Java 6 or later.
       </p>
