@@ -589,7 +589,7 @@ src/test/java/org/apache/commons/beanutils/bugs/Jira520TestCase.java.">
 
     <release version="1.7.0" date="2004-08-02">
       <action type="update">
-        See href="http://commons.apache.org/beanutils/commons-beanutils-1.7.0/RELEASE-NOTES.txt
+        See http://commons.apache.org/beanutils/commons-beanutils-1.7.0/RELEASE-NOTES.txt
       </action>
     </release>
 
