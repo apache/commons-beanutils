@@ -95,7 +95,7 @@ several future proposed components for the Jakarta Commons subproject.</p>
 
 <p>The three original Java classes (<code>BeanUtils</code>,
 <code>ConvertUtils</code>, and <code>PropertyUtils</code>) are an integral
-part of the <a href="http://jakarta.apache.org/struts">Struts Framework</a>.
+part of the <a href="https://jakarta.apache.org/struts">Struts Framework</a>.
 However, they have very few dependencies on other aspects of Struts, and
 those dependencies have been removed in the proposed code base.
 Once accepted and released as a Jakarta Commons component, Struts will
