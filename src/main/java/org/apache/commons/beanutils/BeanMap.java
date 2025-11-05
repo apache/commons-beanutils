@@ -313,14 +313,14 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
      * Converts the given value to the given type. First, reflection is is used to find a public constructor declared by the given class that takes one
      * argument, which must be the precise type of the given value. If such a constructor is found, a new object is created by passing the given value to that
      * constructor, and the newly constructed object is returned.
-     * <P>
-     *
+     * <p>
      * If no such constructor exists, and the given type is a primitive type, then the given value is converted to a string using its {@link Object#toString()
      * toString()} method, and that string is parsed into the correct primitive type using, for instance, {@link Integer#valueOf(String)} to convert the string
      * into an {@code int}.
-     * <P>
-     *
+     * </p>
+     * <p>
      * If no special constructor exists and the given type is not a primitive type, this method returns the original value.
+     * </p>
      *
      * @param newType the type to convert the value to
      * @param value   the value to convert
