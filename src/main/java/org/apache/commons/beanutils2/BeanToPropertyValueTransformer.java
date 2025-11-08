@@ -119,8 +119,8 @@ public class BeanToPropertyValueTransformer<T, R> implements Function<T, R> {
      * {@code IllegalArgumentException} if an object in the property path leading up to the
      * target property is {@code null}.
      *
-     * &#64;param object The object to be transformed.
-     * &#64;return The value of the property named in the transformer's constructor for the object
+     * @param object The object to be transformed.
+     * @return The value of the property named in the transformer's constructor for the object
      * provided.
      * @throws IllegalArgumentException If an IllegalAccessException, InvocationTargetException, or
      * NoSuchMethodException is thrown when trying to access the property specified on the object

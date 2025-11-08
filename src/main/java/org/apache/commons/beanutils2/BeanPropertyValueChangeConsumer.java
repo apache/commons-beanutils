@@ -130,7 +130,7 @@ public class BeanPropertyValueChangeConsumer<T, V> implements Consumer<T> {
      * {@code false</code> and would result in an <code>IllegalArgumentException} if an object
      * in the property path leading up to the target property is {@code null}.
      *
-     * &#64;param object The object to be updated.
+     * @param object The object to be updated.
      * @throws IllegalArgumentException If an IllegalAccessException, InvocationTargetException, or
      * NoSuchMethodException is thrown when trying to access the property specified on the object
      * provided. Or if an object in the property path provided is {@code null} and

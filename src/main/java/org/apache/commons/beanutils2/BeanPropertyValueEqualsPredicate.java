@@ -209,8 +209,8 @@ public class BeanPropertyValueEqualsPredicate<T, V> implements Predicate<T> {
      * {@code IllegalArgumentException} if an object in the property path leading up to the
      * target property is {@code null}.
      *
-     * &#64;param object The object to be evaluated.
-     * &#64;return True if the object provided meets all the criteria for this {@code Predicate};
+     * @param object The object to be evaluated.
+     * @return True if the object provided meets all the criteria for this {@code Predicate};
      * false otherwise.
      * @throws IllegalArgumentException If an IllegalAccessException, InvocationTargetException, or
      * NoSuchMethodException is thrown when trying to access the property specified on the object
