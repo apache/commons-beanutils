@@ -59,7 +59,6 @@
   </properties>
 
   <issueManagement>
-    <system>jira</system>
     <url>https://issues.apache.org/jira/browse/BEANUTILS</url>
   </issueManagement>
 
