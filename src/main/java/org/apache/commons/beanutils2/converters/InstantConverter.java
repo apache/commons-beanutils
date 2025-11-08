@@ -21,7 +21,7 @@ import java.time.Instant;
 /**
  * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion to and from {@link Instant} objects.
  * <p>
- * Can be configured to either return a <i>default value</i> or throw a {@code ConversionException} if a conversion error occurs.
+ * Can be configured to either return a <em>default value</em> or throw a {@code ConversionException} if a conversion error occurs.
  * </p>
  *
  * @since 2.0
@@ -30,14 +30,14 @@ import java.time.Instant;
 public final class InstantConverter extends DateTimeConverter<Instant> {
 
     /**
-     * Constructs a {@link Instant} <i>Converter</i> that throws a {@code ConversionException} if an error occurs.
+     * Constructs a {@link Instant} <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
      */
     public InstantConverter() {
         super();
     }
 
     /**
-     * Constructs a {@link Instant} <i>Converter</i> that returns a default value if an error occurs.
+     * Constructs a {@link Instant} <em>Converter</em> that returns a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
      */
