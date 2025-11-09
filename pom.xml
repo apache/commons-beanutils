@@ -212,23 +212,6 @@
         <artifactId>maven-javadoc-plugin</artifactId>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-changes-plugin</artifactId>
-        <version>${commons.changes.version}</version>
-        <configuration>
-          <issueLinkTemplatePerSystem>
-            <default>%URL%/%ISSUE%</default>
-          </issueLinkTemplatePerSystem>
-        </configuration>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>changes-report</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
-      <plugin>
         <artifactId>maven-pmd-plugin</artifactId>
         <configuration>
           <targetJdk>${maven.compiler.target}</targetJdk>
