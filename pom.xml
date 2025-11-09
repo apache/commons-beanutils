@@ -74,10 +74,6 @@
     <commons.japicmp.breakBuildOnBinaryIncompatibleModifications>false</commons.japicmp.breakBuildOnBinaryIncompatibleModifications>
   </properties>
 
-  <issueManagement>
-    <url>https://issues.apache.org/jira/browse/BEANUTILS</url>
-  </issueManagement>
-
   <scm>
     <connection>scm:git:https://gitbox.apache.org/repos/asf/commons-beanutils.git</connection>
     <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/commons-beanutils.git</developerConnection>
