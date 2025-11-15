@@ -94,10 +94,10 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
      *
      * Private & unmodifiable replacement for the (public & static) defaultTransformers instance.
      */
-    private static final Map<Class<? extends Object>, Function<?, ?>> typeTransformers = Collections.unmodifiableMap(createTypeTransformers());
+    private static final Map<Class<?>, Function<?, ?>> typeTransformers = Collections.unmodifiableMap(createTypeTransformers());
 
-    private static Map<Class<? extends Object>, Function<?, ?>> createTypeTransformers() {
-        final Map<Class<? extends Object>, Function<?, ?>> defTransformers = new HashMap<>();
+    private static Map<Class<?>, Function<?, ?>> createTypeTransformers() {
+        final Map<Class<?>, Function<?, ?>> defTransformers = new HashMap<>();
         defTransformers.put(Boolean.TYPE, input -> Boolean.valueOf(input.toString()));
         defTransformers.put(Character.TYPE, input -> Character.valueOf(input.toString().charAt(0)));
         defTransformers.put(Byte.TYPE, input -> Byte.valueOf(input.toString()));
@@ -115,7 +115,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
 
     private final transient HashMap<String, Method> writeMethods = new HashMap<>();
 
-    private final transient HashMap<String, Class<? extends Object>> types = new HashMap<>();
+    private final transient HashMap<String, Class<?>> types = new HashMap<>();
 
     /**
      * Constructs a new empty {@code BeanMap}.
@@ -145,7 +145,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
         if (bean == null) {
             return;
         }
-        Class<? extends Object> beanClass = null;
+        Class<?> beanClass = null;
         try {
             beanClass = bean.getClass();
             bean = beanClass.newInstance();
@@ -178,7 +178,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
             return newMap;
         }
         Object newBean = null;
-        final Class<? extends Object> beanClass = bean.getClass(); // Cannot throw Exception
+        final Class<?> beanClass = bean.getClass(); // Cannot throw Exception
         try {
             newBean = beanClass.newInstance();
         } catch (final Exception e) {
@@ -285,9 +285,9 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
     protected Object[] createWriteMethodArguments(final Method method, Object value) throws IllegalAccessException, ClassCastException {
         try {
             if (value != null) {
-                final Class<? extends Object>[] paramTypes = method.getParameterTypes();
+                final Class<?>[] paramTypes = method.getParameterTypes();
                 if (paramTypes != null && paramTypes.length > 0) {
-                    final Class<? extends Object> paramType = paramTypes[0];
+                    final Class<?> paramType = paramTypes[0];
                     if (!paramType.isAssignableFrom(value.getClass())) {
                         value = convertType(paramType, value);
                     }
@@ -470,7 +470,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
             return;
         }
 
-        final Class<? extends Object> beanClass = getBean().getClass();
+        final Class<?> beanClass = getBean().getClass();
         try {
             // BeanInfo beanInfo = Introspector.getBeanInfo( bean, null );
             final BeanInfo beanInfo = Introspector.getBeanInfo(beanClass);
@@ -481,7 +481,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
                         final String name = propertyDescriptor.getName();
                         final Method readMethod = propertyDescriptor.getReadMethod();
                         final Method writeMethod = propertyDescriptor.getWriteMethod();
-                        final Class<? extends Object> aType = propertyDescriptor.getPropertyType();
+                        final Class<?> aType = propertyDescriptor.getPropertyType();
 
                         if (readMethod != null) {
                             readMethods.put(name, readMethod);
