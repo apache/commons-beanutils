@@ -40,7 +40,7 @@ import org.apache.commons.collections.keyvalue.AbstractMapEntry;
  * An implementation of Map for JavaBeans which uses introspection to get and put properties in the bean.
  * <p>
  * If an exception occurs during attempts to get or set a property then the property is considered non existent in the Map
- *
+ * </p>
  */
 public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
 
@@ -90,7 +90,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
      *
      * Private & unmodifiable replacement for the (public & static) defaultTransformers instance.
      */
-    private static final Map<Class<? extends Object>, Transformer> typeTransformers = Collections.unmodifiableMap(createTypeTransformers());
+    private static final Map<Class<?>, Transformer> typeTransformers = Collections.unmodifiableMap(createTypeTransformers());
 
     /**
      * This HashMap has been made unmodifiable to prevent issues when loaded in a shared ClassLoader environment.
@@ -163,8 +163,8 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
         }
     };
 
-    private static Map<Class<? extends Object>, Transformer> createTypeTransformers() {
-        final Map<Class<? extends Object>, Transformer> defaultTransformers = new HashMap<>();
+    private static Map<Class<?>, Transformer> createTypeTransformers() {
+        final Map<Class<?>, Transformer> defaultTransformers = new HashMap<>();
         defaultTransformers.put(Boolean.TYPE, input -> Boolean.valueOf(input.toString()));
         defaultTransformers.put(Character.TYPE, input -> Character.valueOf(input.toString().charAt(0)));
         defaultTransformers.put(Byte.TYPE, input -> Byte.valueOf(input.toString()));
@@ -184,7 +184,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
 
     // Constructors
 
-    private transient HashMap<String, Class<? extends Object>> types = new HashMap<>();
+    private transient HashMap<String, Class<?>> types = new HashMap<>();
 
     /**
      * Constructs a new empty {@code BeanMap}.
@@ -214,7 +214,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
         if (bean == null) {
             return;
         }
-        Class<? extends Object> beanClass = null;
+        Class<?> beanClass = null;
         try {
             beanClass = bean.getClass();
             bean = beanClass.getConstructor().newInstance();
@@ -247,7 +247,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
             return newMap;
         }
         Object newBean = null;
-        final Class<? extends Object> beanClass = bean.getClass(); // Cannot throw Exception
+        final Class<?> beanClass = bean.getClass(); // Cannot throw Exception
         try {
             newBean = beanClass.getConstructor().newInstance();
         } catch (final Exception e) {
@@ -364,9 +364,9 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     protected Object[] createWriteMethodArguments(final Method method, Object value) throws IllegalAccessException, ClassCastException {
         try {
             if (value != null) {
-                final Class<? extends Object>[] types = method.getParameterTypes();
+                final Class<?>[] types = method.getParameterTypes();
                 if (types != null && types.length > 0) {
-                    final Class<? extends Object> paramType = types[0];
+                    final Class<?> paramType = types[0];
                     if (!paramType.isAssignableFrom(value.getClass())) {
                         value = convertType(paramType, value);
                     }
@@ -548,7 +548,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
             return;
         }
 
-        final Class<? extends Object> beanClass = getBean().getClass();
+        final Class<?> beanClass = getBean().getClass();
         try {
             // BeanInfo beanInfo = Introspector.getBeanInfo( bean, null );
             final BeanInfo beanInfo = Introspector.getBeanInfo(beanClass);
@@ -559,7 +559,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
                         final String name = propertyDescriptor.getName();
                         final Method readMethod = propertyDescriptor.getReadMethod();
                         final Method writeMethod = propertyDescriptor.getWriteMethod();
-                        final Class<? extends Object> aType = propertyDescriptor.getPropertyType();
+                        final Class<?> aType = propertyDescriptor.getPropertyType();
 
                         if (readMethod != null) {
                             readMethods.put(name, readMethod);
