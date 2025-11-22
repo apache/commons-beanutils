@@ -36,7 +36,7 @@
       <!-- ADD -->
       <action type="add" dev="ggregory" due-to="SethFalco, Melloware, Gary Gregory">Add Instant converter and improve enum converter #49.</action>
       <!-- UPDATE -->
-      <action type="update" dev="ggregory" due-to="Gary Gregory, Dependabot">Bump org.apache.commons:commons-parent from 85 to 92 #378, #387, #394.</action>
+      <action type="update" dev="ggregory" due-to="Gary Gregory, Dependabot">Bump org.apache.commons:commons-parent from 85 to 93 #378, #387, #394, #395.</action>
       <action type="update" dev="ggregory" due-to="Gary Gregory, Dependabot">Bump org.apache.commons:commons-lang3 from 3.17.0 to 3.20.0 #357.</action>
       <!-- REMOVE -->
       <action dev="ggregory" type="remove" due-to="Gary Gregory">Remove unused ConstructorUtils in favor of Apache Commons Lang's org.apache.commons.lang3.ConstructorUtils. ConstructorUtils is unused in this component (org.apache.commons:commons-lang3).</action>
