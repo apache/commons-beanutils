@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.LazyDynaBean;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test setting indexed properties on dynabeans

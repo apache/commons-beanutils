@@ -26,7 +26,7 @@ import java.util.concurrent.Future;
 
 import org.apache.commons.beanutils.FluentPropertyBeanIntrospector;
 import org.apache.commons.beanutils.PropertyUtilsBean;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Fix BEANUTILS-541

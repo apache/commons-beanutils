@@ -26,7 +26,7 @@ import java.lang.ref.WeakReference;
 
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * This class provides a number of unit tests related to classloaders and

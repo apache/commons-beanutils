@@ -19,7 +19,7 @@ package org.apache.commons.beanutils.bugs;
 import static org.junit.Assert.assertEquals;
 
 import org.apache.commons.beanutils.PropertyUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 class FirstChildBeanB extends RootBeanB {
 }

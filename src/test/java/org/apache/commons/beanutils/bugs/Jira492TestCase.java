@@ -29,8 +29,8 @@ import java.util.Map;
 import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.PropertyUtilsBean;
 import org.apache.commons.beanutils.bugs.other.Jira492IndexedListsSupport.IndexedBean;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * This test verifies that although BEANUTILS-492
@@ -105,7 +105,7 @@ public class Jira492TestCase {
         assertTrue("Did not retrieve list", someList instanceof List);
     }
 
-    @Before
+    @BeforeEach
     public void makeBean() {
         bean = new IndexedBean();
         bean.setSomeList(Arrays.asList("item0", "item1"));
