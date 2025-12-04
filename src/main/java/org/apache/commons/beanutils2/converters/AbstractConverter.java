@@ -23,7 +23,6 @@ import java.util.Objects;
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.ConvertUtils;
 import org.apache.commons.beanutils2.Converter;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -58,16 +57,6 @@ public abstract class AbstractConverter<D> implements Converter<D> {
     // getPackage() below returns null on some platforms/jvm versions during the unit tests.
     // private static final String PACKAGE = AbstractConverter.class.getPackage().getName() + ".";
     private static final String PACKAGE = "org.apache.commons.beanutils2.converters.";
-
-    /**
-     * Converts the given object to a lower-case string.
-     *
-     * @param value the input string.
-     * @return the given string trimmed and converter to lower-case.
-     */
-    protected static String toLowerCase(final Object value) {
-        return StringUtils.toRootLowerCase(toString(value));
-    }
 
     /**
      * Converts the given object to a lower-case string.
