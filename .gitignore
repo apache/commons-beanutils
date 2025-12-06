@@ -4,3 +4,7 @@
 .settings/
 /.idea/
 /commons-beanutils2.iml
+
+# NetBeans files
+nb-configuration.xml
+nbactions.xml
