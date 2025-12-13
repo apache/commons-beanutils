@@ -31,9 +31,9 @@ import java.util.WeakHashMap;
  * in "fast" mode, read calls are non-synchronized and write calls perform the
  * following steps:</p>
  * <ul>
- * <li>Clone the existing collection
- * <li>Perform the modification on the clone
- * <li>Replace the existing collection with the (modified) clone
+ * <li>Clone the existing collection</li>
+ * <li>Perform the modification on the clone</li>
+ * <li>Replace the existing collection with the (modified) clone</li>
  * </ul>
  * <p>When first created, objects of this class default to "slow" mode, where
  * all accesses of any type are synchronized but no cloning takes place.  This

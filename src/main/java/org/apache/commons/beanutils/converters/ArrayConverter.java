@@ -93,7 +93,7 @@ import org.apache.commons.beanutils.Converter;
  *         the delimiter to be configured [default is a comma].</li>
  *     <li>{@code setAllowedChars(char[])} - adds additional characters
  *         (to the default alphabetic/numeric) to those considered to be
- *         valid token characters.
+ *         valid token characters.</li>
  * </ul>
  *
  * <h2>Multi Dimensional Arrays</h2>
