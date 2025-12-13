@@ -68,7 +68,7 @@ import org.apache.commons.beanutils2.Converter;
  * it uses a comma as the delimiter but the following methods can be used to configure parsing:
  * <ul>
  * <li>{@code setDelimiter(char)} - allows the character used as the delimiter to be configured [default is a comma].</li>
- * <li>{@code setAllowedChars(char[])} - adds additional characters (to the default alphabetic/numeric) to those considered to be valid token characters.
+ * <li>{@code setAllowedChars(char[])} - adds additional characters (to the default alphabetic/numeric) to those considered to be valid token characters.</li>
  * </ul>
  *
  * <h2>Multi Dimensional Arrays</h2> It is possible to convert a {@code String} to multi-dimensional arrays by using {@link ArrayConverter} as the element

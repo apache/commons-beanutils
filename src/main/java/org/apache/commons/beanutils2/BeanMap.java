@@ -158,12 +158,12 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
      * Clone this bean map using the following process:
      *
      * <ul>
-     * <li>If there is no underlying bean, return a cloned BeanMap without a bean.
-     * <li>Since there is an underlying bean, try to instantiate a new bean of the same type using Class.newInstance().
-     * <li>If the instantiation fails, throw a CloneNotSupportedException
-     * <li>Clone the bean map and set the newly instantiated bean as the underlying bean for the bean map.
-     * <li>Copy each property that is both readable and writable from the existing object to a cloned bean map.
-     * <li>If anything fails along the way, throw a CloneNotSupportedException.
+     * <li>If there is no underlying bean, return a cloned BeanMap without a bean.</li>
+     * <li>Since there is an underlying bean, try to instantiate a new bean of the same type using Class.newInstance().</li>
+     * <li>If the instantiation fails, throw a CloneNotSupportedException</li>
+     * <li>Clone the bean map and set the newly instantiated bean as the underlying bean for the bean map.</li>
+     * <li>Copy each property that is both readable and writable from the existing object to a cloned bean map.</li>
+     * <li>If anything fails along the way, throw a CloneNotSupportedException.</li>
      * </ul>
      *
      * @return a cloned instance of this bean map
