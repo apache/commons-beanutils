@@ -32,7 +32,7 @@
       <!-- FIX -->
       <action dev="ggregory" type="fix" due-to="Gary Gregory">Fix typo in exception message throws from org.apache.commons.beanutils.PropertyUtilsBean.setMappedProperty(Object, String, String, Object).</action>
       <action dev="ggregory" type="fix" due-to="Basil Crow, Piotr P. Karwasz, Gary Gregory">Simplify FluentPropertyBeanIntrospector#propertyName (#363).</action>
-      <action type="fix" dev="ggregory" due-to="Gary Gregory">Fix malformed Javadoc comments.</action>
+      <action dev="ggregory" type="fix" due-to="Gary Gregory">Fix malformed Javadoc comments.</action>
       <!-- ADD -->
       <!-- UPDATE -->
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 84 to 91.</action>
