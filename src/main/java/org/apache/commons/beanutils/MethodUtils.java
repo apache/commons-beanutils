@@ -549,7 +549,7 @@ public class MethodUtils {
                     break;
                 }
             }
-            if (destClass.isInterface() && isAssignmentCompatible(destClass,srcClass)) {
+            if (destClass.isInterface() && isAssignmentCompatible(destClass, srcClass)) {
                 // slight penalty for interface match.
                 // we still want an exact match to override an interface match, but
                 // an interface match should override anything where we have to get a
