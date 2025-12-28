@@ -33,6 +33,7 @@
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Fix typo in exception message throws from org.apache.commons.beanutils2.PropertyUtilsBean.setMappedProperty(Object, String, String, Object).</action>
       <action type="fix" dev="ggregory" due-to="Basil Crow, Piotr P. Karwasz, Gary Gregory">Simplify FluentPropertyBeanIntrospector#propertyName (#363).</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Fix malformed Javadoc comments.</action>
+      <action type="fix" dev="sebb">Static fields should be final or protected by synch.</action>
       <!-- ADD -->
       <action type="add" dev="ggregory" due-to="Gary Gregory">Use varargs for org.apache.commons.beanutils2.MethodUtils.getAccessibleMethod(Class, String, Class...), and remove last argument variants using Class[] and Class.</action>
       <action type="add" dev="ggregory" due-to="SethFalco, Melloware, Gary Gregory">Add Instant converter and improve enum converter #49.</action>

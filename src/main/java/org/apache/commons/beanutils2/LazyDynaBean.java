@@ -129,7 +129,7 @@ public class LazyDynaBean implements DynaBean {
     /**
      * Commons Logging
      */
-    private static transient Log LOG = LogFactory.getLog(LazyDynaBean.class);
+    private static final transient Log LOG = LogFactory.getLog(LazyDynaBean.class);
 
     /** BigInteger Zero */
     protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
@@ -673,9 +673,6 @@ public class LazyDynaBean implements DynaBean {
      * Returns the {@code Log}.
      */
     private Log logger() {
-        if (LOG == null) {
-            LOG = LogFactory.getLog(LazyDynaBean.class);
-        }
         return LOG;
     }
 
