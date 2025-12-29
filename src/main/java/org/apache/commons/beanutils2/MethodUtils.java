@@ -118,7 +118,7 @@ public final class MethodUtils {
      * would mean having a map keyed by context classloader which may introduce memory-leak problems.
      * </p>
      */
-    private static boolean CACHE_ENABLED = true;
+    private static boolean CACHE_ENABLED = true; //NOPMD @GuardedBy("this")
 
     /**
      * Stores a cache of MethodKey -> Method.
