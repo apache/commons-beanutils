@@ -575,9 +575,9 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     /**
-     *  Returns true if this map is operating in fast mode.
+     * Returns true if this map is operating in fast mode.
      *
-     *  @return true if this map is operating in fast mode
+     * @return true if this map is operating in fast mode
      */
     public boolean getFast() {
         return this.fast;
@@ -704,9 +704,9 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     /**
-     *  Sets whether this map is operating in fast mode.
+     * Sets whether this map is operating in fast mode.
      *
-     *  @param fast true if this map should operate in fast mode
+     * @param fast true if this map should operate in fast mode
      */
     public void setFast(final boolean fast) {
         this.fast = fast;
