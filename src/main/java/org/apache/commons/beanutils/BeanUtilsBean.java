@@ -489,6 +489,7 @@ public class BeanUtilsBean {
      * is called. It is recommended that such methods are given alternative
      * names (for example, {@code parametersMap}).
      * </p>
+     *
      * @param bean Bean whose properties are to be extracted
      * @return Map of property descriptors
      * @throws IllegalAccessException if the caller does not have

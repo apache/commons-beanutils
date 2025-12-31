@@ -50,6 +50,7 @@ public class ConstructorUtils {
 
     /**
      * Returns a constructor with single argument.
+     *
      * @param <T> the type of the constructor
      * @param klass the class to be constructed
      * @param parameterType The constructor parameter type
@@ -67,6 +68,7 @@ public class ConstructorUtils {
 
     /**
      * Returns a constructor given a class and signature.
+     *
      * @param <T> the type to be constructed
      * @param klass the class to be constructed
      * @param parameterTypes the parameter array
@@ -88,6 +90,7 @@ public class ConstructorUtils {
 
     /**
      * Returns accessible version of the given constructor.
+     *
      * @param <T> the type of the constructor
      * @param ctor prototype constructor object.
      * @return {@code null} if accessible constructor cannot be found.

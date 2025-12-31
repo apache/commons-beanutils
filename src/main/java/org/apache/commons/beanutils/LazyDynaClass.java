@@ -268,6 +268,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * <p>Is this DynaClass currently restricted.</p>
      * <p>If restricted, no changes to the existing registration of
      *  property names, data types, readability, or writeability are allowed.</p>
+     *
      * @return {@code true} if this {@link MutableDynaClass} cannot be changed
      * otherwise {@code false}
      */
@@ -337,6 +338,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * <p>Set whether this DynaClass is currently restricted.</p>
      * <p>If restricted, no changes to the existing registration of
      *  property names, data types, readability, or writeability are allowed.</p>
+     *
      * @param restricted {@code true} if this {@link MutableDynaClass} cannot
      * be changed otherwise {@code false}
      */
@@ -349,6 +351,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * Set whether this DynaClass should return a {@code null} from
      * the {@code getDynaProperty(name)} method if the property
      * doesn't exist.
+     *
      * @param returnNull {@code true} if a {@code null} {@link DynaProperty}
      * should be returned if the property doesn't exist, otherwise
      * {@code false} if a new {@link DynaProperty} should be created.

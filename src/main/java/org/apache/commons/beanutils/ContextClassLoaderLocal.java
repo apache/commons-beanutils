@@ -115,6 +115,7 @@ public class ContextClassLoaderLocal<T> {
      * Gets the instance which provides the functionality for {@link BeanUtils}.
      * This is a pseudo-singleton - an single instance is provided per (thread) context classloader.
      * This mechanism provides isolation for web apps deployed in the same container.
+     *
      * @return the object currently associated with the context-classloader of the current thread.
      */
     public synchronized T get() {
@@ -197,6 +198,7 @@ public class ContextClassLoaderLocal<T> {
 
     /**
      * Unsets the value associated with the given classloader
+     *
      * @param classLoader The classloader to <em>unset</em> for
      */
     public synchronized void unset(final ClassLoader classLoader) {

@@ -488,6 +488,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
     /**
      * Return a collection view of the mappings contained in this map.  Each
      * element in the returned collection is a {@code Map.Entry}.
+     *
      * @return the set of map Map entries
      */
     @Override
@@ -627,6 +628,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
 
     /**
      * Return a set view of the keys contained in this map.
+     *
      * @return the set of the Map's keys
      */
     @Override
@@ -729,6 +731,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
 
     /**
      * Return a collection view of the values contained in this map.
+     *
      * @return the set of the Map's values
      */
     @Override

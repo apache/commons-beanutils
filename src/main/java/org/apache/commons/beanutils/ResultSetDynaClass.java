@@ -188,6 +188,7 @@ public class ResultSetDynaClass extends JDBCDynaClass {
      * each row of the wrapped {@code ResultSet}, in "forward" order.
      * Unless the underlying result set supports scrolling, this method
      * should be called only once.</p>
+     *
      * @return An {@code Iterator} of {@link DynaBean} instances
      */
     public Iterator<DynaBean> iterator() {
@@ -202,6 +203,7 @@ public class ResultSetDynaClass extends JDBCDynaClass {
      * Dervations of this class could implement alternative class loading policies such as
      * using custom ClassLoader or using the Threads's context class loader etc.
      * </p>
+     *
      * @param className The name of the class to load
      * @return The loaded class
      * @throws SQLException if the class cannot be loaded

@@ -112,6 +112,7 @@ public class ConvertUtils {
 
     /**
      * Gets the default value for Boolean conversions.
+     *
      * @return The default Boolean value
      * @deprecated Register replacement converters for Boolean.TYPE and
      *  Boolean.class instead
@@ -123,6 +124,7 @@ public class ConvertUtils {
 
     /**
      * Gets the default value for Byte conversions.
+     *
      * @return The default Byte value
      * @deprecated Register replacement converters for Byte.TYPE and
      *  Byte.class instead
@@ -134,6 +136,7 @@ public class ConvertUtils {
 
     /**
      * Gets the default value for Character conversions.
+     *
      * @return The default Character value
      * @deprecated Register replacement converters for Character.TYPE and
      *  Character.class instead
@@ -145,6 +148,7 @@ public class ConvertUtils {
 
     /**
      * Gets the default value for Double conversions.
+     *
      * @return The default Double value
      * @deprecated Register replacement converters for Double.TYPE and
      *  Double.class instead
@@ -156,6 +160,7 @@ public class ConvertUtils {
 
     /**
      * Get the default value for Float conversions.
+     *
      * @return The default Float value
      * @deprecated Register replacement converters for Float.TYPE and
      *  Float.class instead
@@ -167,6 +172,7 @@ public class ConvertUtils {
 
     /**
      * Gets the default value for Integer conversions.
+     *
      * @return The default Integer value
      * @deprecated Register replacement converters for Integer.TYPE and
      *  Integer.class instead
@@ -178,6 +184,7 @@ public class ConvertUtils {
 
     /**
      * Gets the default value for Long conversions.
+     *
      * @return The default Long value
      * @deprecated Register replacement converters for Long.TYPE and
      *  Long.class instead
@@ -189,6 +196,7 @@ public class ConvertUtils {
 
     /**
      * Gets the default value for Short conversions.
+     *
      * @return The default Short value
      * @deprecated Register replacement converters for Short.TYPE and
      *  Short.class instead
@@ -287,6 +295,7 @@ public class ConvertUtils {
 
     /**
      * Sets the default value for Boolean conversions.
+     *
      * @param newDefaultBoolean The default Boolean value
      * @deprecated Register replacement converters for Boolean.TYPE and
      *  Boolean.class instead
@@ -298,6 +307,7 @@ public class ConvertUtils {
 
     /**
      * Sets the default value for Byte conversions.
+     *
      * @param newDefaultByte The default Byte value
      * @deprecated Register replacement converters for Byte.TYPE and
      *  Byte.class instead
@@ -309,6 +319,7 @@ public class ConvertUtils {
 
     /**
      * Sets the default value for Character conversions.
+     *
      * @param newDefaultCharacter The default Character value
      * @deprecated Register replacement converters for Character.TYPE and
      *  Character.class instead
@@ -320,6 +331,7 @@ public class ConvertUtils {
 
     /**
      * Sets the default value for Double conversions.
+     *
      * @param newDefaultDouble The default Double value
      * @deprecated Register replacement converters for Double.TYPE and
      *  Double.class instead
@@ -331,6 +343,7 @@ public class ConvertUtils {
 
     /**
      * Sets the default value for Float conversions.
+     *
      * @param newDefaultFloat The default Float value
      * @deprecated Register replacement converters for Float.TYPE and
      *  Float.class instead
@@ -342,6 +355,7 @@ public class ConvertUtils {
 
     /**
      * Sets the default value for Integer conversions.
+     *
      * @param newDefaultInteger The default Integer value
      * @deprecated Register replacement converters for Integer.TYPE and
      *  Integer.class instead
@@ -353,6 +367,7 @@ public class ConvertUtils {
 
     /**
      * Sets the default value for Long conversions.
+     *
      * @param newDefaultLong The default Long value
      * @deprecated Register replacement converters for Long.TYPE and
      *  Long.class instead
@@ -364,6 +379,7 @@ public class ConvertUtils {
 
     /**
      * Sets the default value for Short conversions.
+     *
      * @param newDefaultShort The default Short value
      * @deprecated Register replacement converters for Short.TYPE and
      *  Short.class instead

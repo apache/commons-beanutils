@@ -277,6 +277,7 @@ public abstract class NumberConverter extends AbstractConverter {
 
     /**
      * Convert a String into a {@code Number} object.
+     *
      * @param sourceType the source type of the conversion
      * @param targetType The type to convert the value to
      * @param value The String date value.
@@ -352,6 +353,7 @@ public abstract class NumberConverter extends AbstractConverter {
      *     <li>{@code java.math.BigDecimal}</li>
      *     <li>{@code java.math.BigInteger}</li>
      * </ul>
+     *
      * @param sourceType The type being converted from
      * @param targetType The Number type to convert to
      * @param value The String value to convert.
@@ -422,6 +424,7 @@ public abstract class NumberConverter extends AbstractConverter {
      *     <li>{@code java.math.BigDecimal}</li>
      *     <li>{@code java.math.BigInteger}</li>
      * </ul>
+     *
      * @param sourceType The type being converted from
      * @param targetType The Number type to convert to
      * @param value The Number to convert.

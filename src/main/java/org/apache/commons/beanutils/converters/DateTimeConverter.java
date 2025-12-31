@@ -248,6 +248,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
 
     /**
      * Return a {@code DateFormat} for the Locale.
+     *
      * @param locale The Locale to create the Format with (may be null)
      * @param timeZone The Time Zone create the Format with (may be null)
      * @return A Date Format.
@@ -313,6 +314,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
 
     /**
      * Log the <code>DateFormat<code> creation.
+     *
      * @param action The action the format is being used for
      * @param format The Date format
      */

@@ -37,6 +37,7 @@ import java.util.Objects;
  * <p>{@code set<strong>Property</strong>(String key, Object value)},
  * <p>where {@code <strong>Property</strong>} must be replaced
  * by the name of the property.
+ *
  * @see java.beans.PropertyDescriptor
  *
  */

@@ -42,6 +42,7 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
     /**
      * Type which this class converts its input to. This value can be
      * used as a parameter to the ConvertUtils.register method.
+     *
      * @since 1.8.0
      */
     public static final Class MODEL = new boolean[0].getClass();

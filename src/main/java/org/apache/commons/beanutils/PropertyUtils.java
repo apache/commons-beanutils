@@ -184,6 +184,7 @@ public class PropertyUtils {
 
     /**
      * The {@code debug} static property is no longer used
+     *
      * @return debug property
      * @deprecated The {@code debug} static property is no longer used
      */
@@ -656,6 +657,7 @@ public class PropertyUtils {
 
     /**
      * The {@code debug} static property is no longer used
+     *
      * @param newDebug debug property
      * @deprecated The {@code debug} static property is no longer used
      */

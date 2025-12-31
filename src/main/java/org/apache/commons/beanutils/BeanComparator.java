@@ -147,6 +147,7 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
      * Two {@code BeanComparator}'s are equals if and only if
      * the wrapped comparators and the property names to be compared
      * are equal.
+     *
      * @param  o Comparator to compare to
      * @return whether the comparators are equal or not
      */
@@ -195,6 +196,7 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
 
     /**
      * Hash code compatible with equals.
+     *
      * @return the hash code for this comparator
      */
     @Override

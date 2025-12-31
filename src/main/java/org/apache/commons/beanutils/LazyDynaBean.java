@@ -225,6 +225,7 @@ protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
 
     /**
      * Create a new Instance of a 'DynaBean' Property.
+     *
      * @param name The name of the property
      * @param type The class of the property
      * @return The new value
@@ -244,6 +245,7 @@ protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
 
     /**
      * Create a new Instance of an 'Indexed' Property
+     *
      * @param name The name of the property
      * @param type The class of the property
      * @return The new value
@@ -286,6 +288,7 @@ protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
 
     /**
      * Create a new Instance of a 'Mapped' Property
+     *
      * @param name The name of the property
      * @param type The class of the property
      * @return The new value
@@ -320,6 +323,7 @@ protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
 
     /**
      * Create a new Instance of a {@code java.lang.Number} Property.
+     *
      * @param name The name of the property
      * @param type The class of the property
      * @return The new value
@@ -332,6 +336,7 @@ protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
 
     /**
      * Create a new Instance of other Property types
+     *
      * @param name The name of the property
      * @param type The class of the property
      * @return The new value
@@ -361,6 +366,7 @@ protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
 
     /**
      * Create a new Instance of a 'Primitive' Property.
+     *
      * @param name The name of the property
      * @param type The class of the property
      * @return The new value
@@ -395,6 +401,7 @@ protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
 
     /**
      * Create a new Instance of a Property
+     *
      * @param name The name of the property
      * @param type The class of the property
      * @return The new value
@@ -690,6 +697,7 @@ protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
 
     /**
      * Indicates if there is a property with the specified name.
+     *
      * @param name The name of the property to check
      * @return {@code true} if there is a property of the
      * specified name, otherwise {@code false}
@@ -722,6 +730,7 @@ protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
 
     /**
      * <p>Creates a new instance of the {@code Map}.</p>
+     *
      * @return a new Map instance
      */
     protected Map<String, Object> newMap() {

@@ -97,6 +97,7 @@ public class PropertyUtilsBean {
 
     /**
      * Return the PropertyUtils bean instance.
+     *
      * @return The PropertyUtils bean instance
      */
     protected static PropertyUtilsBean getInstance() {

@@ -197,6 +197,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
     /**
      * Return the {@code DynaClass} instance that describes the set of
      * properties available for this DynaBean.
+     *
      * @return The associated DynaClass
      */
     @Override

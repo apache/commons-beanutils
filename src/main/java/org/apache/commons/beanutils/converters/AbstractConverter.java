@@ -255,6 +255,7 @@ public abstract class AbstractConverter implements Converter {
     /**
      * Return the default value for conversions to the specified
      * type.
+     *
      * @param type Data type to which this value should be converted.
      * @return The default value for the specified type.
      */
@@ -430,6 +431,7 @@ public abstract class AbstractConverter implements Converter {
 
     /**
      * Provide a String representation of a {@code java.lang.Class}.
+     *
      * @param type The {@code java.lang.Class}.
      * @return The String representation.
      */

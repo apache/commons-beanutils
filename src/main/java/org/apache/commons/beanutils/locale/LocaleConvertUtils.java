@@ -252,6 +252,7 @@ public class LocaleConvertUtils {
      * no {@code Locale} is passed to a method.</p>
      *
      * <p>For more details see {@code LocaleConvertUtilsBean}</p>
+     *
      * @return the default locale
      * @see LocaleConvertUtilsBean#getDefaultLocale()
      */

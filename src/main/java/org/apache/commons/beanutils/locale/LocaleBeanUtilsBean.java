@@ -450,6 +450,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
 
     /**
      * Gets the default Locale
+     *
      * @return the default locale
      */
     public Locale getDefaultLocale() {

@@ -115,6 +115,7 @@ public class BeanUtils {
 
     /**
      * Create a cache.
+     *
      * @param <K> the key type of the cache
      * @param <V> the value type of the cache
      * @return a new cache
@@ -185,6 +186,7 @@ public class BeanUtils {
 
     /**
      * The {@code debug} static property is no longer used
+     *
      * @return debug property
      * @deprecated BeanUtils now uses commons-logging for all log messages.
      *             Use your favorite logging tool to configure logging for
@@ -408,6 +410,7 @@ public class BeanUtils {
 
     /**
      * Set whether fast on a Map
+     *
      * @param map The map
      * @param fast Whether it should be fast or not.
      * @since 1.8.0
@@ -420,6 +423,7 @@ public class BeanUtils {
 
     /**
      * The {@code debug} static property is no longer used
+     *
      * @param newDebug debug property
      * @deprecated BeanUtils now uses commons-logging for all log messages.
      *             Use your favorite logging tool to configure logging for

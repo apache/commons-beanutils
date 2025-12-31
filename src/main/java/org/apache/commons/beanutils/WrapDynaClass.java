@@ -228,6 +228,7 @@ public class WrapDynaClass implements DynaClass {
      * {@code PropertyUtilsBean} instance can be hooked into the introspection
      * mechanism of the managed bean. The argument is optional; if no
      * {@code PropertyUtilsBean} object is provided, the default instance is used.
+     *
      * @param beanClass Bean class for which a WrapDynaClass is requested
      * @param pu the optional {@code PropertyUtilsBean} to be used for introspection
      * @return A new <em>Wrap</em> {@link DynaClass}
@@ -248,6 +249,7 @@ public class WrapDynaClass implements DynaClass {
      * Returns the cache for the already created class instances. For each
      * combination of bean class and {@code PropertyUtilsBean} instance an
      * entry is created in the cache.
+     *
      * @return the cache for already created {@code WrapDynaClass} instances
      */
     private static Map<CacheKey, WrapDynaClass> getClassesCache() {

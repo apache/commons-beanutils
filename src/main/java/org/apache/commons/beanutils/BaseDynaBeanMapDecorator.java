@@ -342,6 +342,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     /**
      * Returns the number properties in the decorated
      * {@link DynaBean}.
+     *
      * @return The number of properties.
      */
     @Override

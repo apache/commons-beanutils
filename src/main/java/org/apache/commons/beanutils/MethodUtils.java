@@ -85,6 +85,7 @@ public class MethodUtils {
         }
         /**
          * Checks for equality.
+         *
          * @param obj object to be tested for equality
          * @return true, if the object describes the same Method.
          */
@@ -105,6 +106,7 @@ public class MethodUtils {
          * hashcodes are different, the objects are different. If the
          * hashcodes are the same, need to use the equals method to
          * determine equality.
+         *
          * @return the string length of method name.
          */
         @Override
@@ -169,6 +171,7 @@ public class MethodUtils {
 
     /**
      * Clear the method cache.
+     *
      * @return the number of cached methods cleared
      * @since 1.8.0
      */
@@ -535,6 +538,7 @@ public class MethodUtils {
      * Gets the number of steps required needed to turn the source class into the
      * destination class. This represents the number of steps in the object hierarchy
      * graph.
+     *
      * @param srcClass The source class
      * @param destClass The destination class
      * @return The cost of transforming an object
@@ -575,6 +579,7 @@ public class MethodUtils {
     /**
      * Gets the class for the primitive type corresponding to the primitive wrapper class given.
      * For example, an instance of {@code Boolean.class} returns a {@code boolean.class}.
+     *
      * @param wrapperType the
      * @return the primitive type class corresponding to the given wrapper class,
      * null if no match is found
@@ -615,6 +620,7 @@ public class MethodUtils {
     /**
      * Gets the wrapper object class for the given primitive type class.
      * For example, passing {@code boolean.class} returns {@code Boolean.class}
+     *
      * @param primitiveType the primitive type class for which a match is to be found
      * @return the wrapper type associated with the given primitive
      * or null if no match is found
@@ -651,6 +657,7 @@ public class MethodUtils {
     /**
      * Returns the sum of the object transformation cost for each class in the source
      * argument list.
+     *
      * @param srcArgs The source arguments
      * @param destArgs The destination arguments
      * @return The total transformation cost
@@ -1243,6 +1250,7 @@ public class MethodUtils {
 
     /**
      * Try to make the method accessible
+     *
      * @param method The source arguments
      */
     private static void setMethodAccessible(final Method method) {

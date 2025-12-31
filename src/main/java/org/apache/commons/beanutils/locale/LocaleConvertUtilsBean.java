@@ -171,6 +171,7 @@ public class LocaleConvertUtilsBean {
     /**
      * Gets singleton instance.
      * This is the same as the instance used by the default {@link LocaleBeanUtilsBean} singleton.
+     *
      * @return the singleton instance
      */
     public static LocaleConvertUtilsBean getInstance() {
@@ -469,6 +470,7 @@ public void deregister() {
 
     /**
      * getter for defaultLocale.
+     *
      * @return the default locale
      */
     public Locale getDefaultLocale() {
@@ -550,6 +552,7 @@ public void deregister() {
 
     /**
      * setter for defaultLocale.
+     *
      * @param locale the default locale
      */
     public void setDefaultLocale(final Locale locale) {

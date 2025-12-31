@@ -225,6 +225,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * <p><strong>FIXME</strong> - Should we really be implementing
      * {@code getBeanInfo()} instead, which returns property descriptors
      * and a bunch of other stuff?</p>
+     *
      * @return the set of properties for this DynaClass
      */
     @Override
@@ -289,6 +290,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
 
     /**
      * Return the underlying Map backing this {@code DynaBean}
+     *
      * @return the underlying Map
      * @since 1.8.0
      */
@@ -361,6 +363,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     /**
      * Instantiate and return a new DynaBean instance, associated
      * with this DynaClass.
+     *
      * @return A new {@code DynaBean} instance
      */
     @Override

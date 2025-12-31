@@ -57,6 +57,7 @@ public final class BooleanConverter extends AbstractConverter {
      * to the constructor to indicate that no default is desired. Note that
      * the value 'null' cannot be used for this purpose, as the caller may
      * want a null to be returned as the default.
+     *
      * @deprecated Use constructors without default value.
      */
     @Deprecated
