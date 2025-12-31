@@ -155,7 +155,6 @@ public class LocaleBeanUtils extends BeanUtils {
     /**
      * Resolve any nested expression to get the actual target bean.
      *
-     * @deprecated moved into {@code LocaleBeanUtilsBean}
      * @param bean The bean
      * @param name The property name
      * @return The property's descriptor
@@ -163,6 +162,7 @@ public class LocaleBeanUtils extends BeanUtils {
      *  access to the property accessor method
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
+     * @deprecated moved into {@code LocaleBeanUtilsBean}
      */
     @Deprecated
     protected static Descriptor calculate(final Object bean, final String name)

@@ -764,8 +764,8 @@ public class BeanUtilsBean {
      * @param  cause     The cause of the throwable.
      * @return  always true in 1.10.0.
      * @since 1.8.0
-     * @deprecated Use {@link Throwable#initCause(Throwable)}.
      * @see Throwable#initCause(Throwable)
+     * @deprecated Use {@link Throwable#initCause(Throwable)}.
      */
     @Deprecated
     public boolean initCause(final Throwable throwable, final Throwable cause) {
