@@ -31,13 +31,6 @@ import junit.framework.TestSuite;
  *
  */
 public class LazyDynaBeanTest extends TestCase {
-
-    /**
-     * Run thus Test
-     */
-    public static void main(final String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
     /**
      * Return the tests included in this test suite.
      */

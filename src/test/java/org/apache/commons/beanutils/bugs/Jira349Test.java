@@ -54,16 +54,6 @@ public class Jira349Test extends TestCase {
             this.testProperty = testProperty;
         }
     }
-
-    /**
-     * Run the Test.
-     *
-     * @param args Arguments
-     */
-    public static void main(final String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
-
     /**
      * Create a test suite for this test.
      *

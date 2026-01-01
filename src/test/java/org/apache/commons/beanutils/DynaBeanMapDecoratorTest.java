@@ -49,14 +49,6 @@ public class DynaBeanMapDecoratorTest extends TestCase {
     private static Integer intVal    = Integer.valueOf(5);
     private static Date    dateVal   = new Date();
     private static final Map<Object, Object> emptyMap = new DynaBeanMapDecorator(new BasicDynaBean(new BasicDynaClass()));
-
-    /**
-     * Run thus Test
-     */
-    public static void main(final String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
-
     /**
      * Return the tests included in this test suite.
      */

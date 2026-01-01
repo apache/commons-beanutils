@@ -33,16 +33,6 @@ import junit.framework.TestSuite;
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-298">https://issues.apache.org/jira/browse/BEANUTILS-298</a>
  */
 public class Jira298Test extends TestCase {
-
-    /**
-     * Run the Test.
-     *
-     * @param args Arguments
-     */
-    public static void main(final String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
-
     /**
      * Create a test suite for this test.
      *

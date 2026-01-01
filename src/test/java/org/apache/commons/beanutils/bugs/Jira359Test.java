@@ -41,16 +41,6 @@ public class Jira359Test extends TestCase {
             this.jcrMixinTypes = mixinTypes;
         }
     }
-
-    /**
-     * Run the Test.
-     *
-     * @param args Arguments
-     */
-    public static void main(final String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
-
     /**
      * Create a test suite for this test.
      *

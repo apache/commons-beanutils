@@ -28,7 +28,6 @@ import org.apache.commons.collections.Transformer;
 import org.apache.commons.collections.map.AbstractTestMap;
 
 import junit.framework.Test;
-import junit.textui.TestRunner;
 
 /**
  * Test cases for BeanMap
@@ -155,10 +154,6 @@ public class BeanMapTest extends AbstractTestMap {
 
   Also note:  The sample keys and mappings were generated manually.
 */
-
-    public static void main(final String[] args) {
-        TestRunner.run(suite());
-    }
 
     public static Test suite() {
         return BulkTest.makeSuite(BeanMapTest.class);

@@ -43,15 +43,6 @@ import junit.framework.TestSuite;
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-61">https://issues.apache.org/jira/browse/BEANUTILS-61</a>
  */
 public class Jira61Test extends TestCase {
-
-    /**
-     * Run the Test.
-     *
-     * @param args Arguments
-     */
-    public static void main(final String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
     /**
      * Create a test suite for this test.
      *
