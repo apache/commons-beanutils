@@ -16,22 +16,13 @@
  */
 package org.apache.commons.beanutils;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * <p>Test Case for the {@code MappedPropertyDescriptor}.</p>
  *
  */
 public class MappedPropertyTest extends TestCase {
-    /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(MappedPropertyTest.class);
-    }
-
     /**
      * Construct a new instance of this test case.
      *

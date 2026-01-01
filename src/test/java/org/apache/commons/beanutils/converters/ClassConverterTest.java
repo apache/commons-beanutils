@@ -20,22 +20,12 @@ import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.Converter;
 
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * Test Case for the ClassConverter class.
  *
  */
 public class ClassConverterTest extends TestCase {
-
-    /**
-     * Create Test Suite
-     * @return test suite
-     */
-    public static TestSuite suite() {
-        return new TestSuite(ClassConverterTest.class);
-    }
-
     /**
      * Construct a new Class Converter test case.
      * @param name Test Name

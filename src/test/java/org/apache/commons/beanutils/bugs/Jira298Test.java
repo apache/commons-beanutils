@@ -25,23 +25,12 @@ import org.apache.commons.beanutils.bugs.other.Jira298BeanFactory.IX;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-298">https://issues.apache.org/jira/browse/BEANUTILS-298</a>
  */
 public class Jira298Test extends TestCase {
-    /**
-     * Create a test suite for this test.
-     *
-     * @return a test suite
-     */
-    public static Test suite() {
-        return new TestSuite(Jira298Test.class);
-    }
-
     private final Log log = LogFactory.getLog(Jira298Test.class);
 
     /**

@@ -19,19 +19,12 @@ package org.apache.commons.beanutils.converters;
 
 import org.apache.commons.beanutils.Converter;
 
-import junit.framework.TestSuite;
-
 /**
  * Test Case for the LongConverter class.
  *
  */
 
 public class LongConverterTest extends NumberConverterTest {
-
-    public static TestSuite suite() {
-        return new TestSuite(LongConverterTest.class);
-    }
-
     private Converter converter;
 
     public LongConverterTest(final String name) {

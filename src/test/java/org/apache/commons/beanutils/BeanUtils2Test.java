@@ -16,22 +16,11 @@
  */
 package org.apache.commons.beanutils;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
-
 /**
  * Test Case for the {@link BeanUtilsBean2}.
  *
  */
 public class BeanUtils2Test extends BeanUtilsTest {
-
-    /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(BeanUtils2Test.class);
-    }
-
     /**
      * Construct a new instance of this test case.
      *

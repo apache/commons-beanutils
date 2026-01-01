@@ -20,9 +20,7 @@ package org.apache.commons.beanutils;
 import java.math.BigDecimal;
 import java.util.Iterator;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * Test accessing ResultSets via DynaBeans.
@@ -30,16 +28,6 @@ import junit.framework.TestSuite;
  */
 
 public class DynaResultSetTest extends TestCase {
-
-    /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-
-        return new TestSuite(DynaResultSetTest.class);
-
-    }
-
     /**
      * The mock result set DynaClass to be tested.
      */

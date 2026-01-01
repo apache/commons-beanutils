@@ -18,23 +18,12 @@ package org.apache.commons.beanutils.bugs;
 
 import org.apache.commons.beanutils.BeanUtils;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-368">https://issues.apache.org/jira/browse/BEANUTILS-368</a>
  */
 public class Jira368Test extends TestCase {
-    /**
-     * Create a test suite for this test.
-     *
-     * @return a test suite
-     */
-    public static Test suite() {
-        return new TestSuite(Jira368Test.class);
-    }
-
     /**
      * Create a test case with the specified name.
      *

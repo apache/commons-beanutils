@@ -23,7 +23,6 @@ import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.Converter;
 
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * Test Case for the URLConverter class.
@@ -31,11 +30,6 @@ import junit.framework.TestSuite;
  */
 
 public class URLConverterTest extends TestCase {
-
-    public static TestSuite suite() {
-        return new TestSuite(URLConverterTest.class);
-    }
-
     private Converter converter;
 
     public URLConverterTest(final String name) {

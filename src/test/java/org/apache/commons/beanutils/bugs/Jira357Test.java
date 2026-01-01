@@ -20,9 +20,7 @@ import java.beans.PropertyDescriptor;
 
 import org.apache.commons.beanutils.PropertyUtils;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-357">https://issues.apache.org/jira/browse/BEANUTILS-357</a>
@@ -87,15 +85,6 @@ public class Jira357Test extends TestCase {
             this.innerClassProperty = innerClassProperty;
         }
     }
-    /**
-     * Create a test suite for this test.
-     *
-     * @return a test suite
-     */
-    public static Test suite() {
-        return new TestSuite(Jira357Test.class);
-    }
-
     /**
      * Create a test case with the specified name.
      *

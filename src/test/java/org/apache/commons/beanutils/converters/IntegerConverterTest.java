@@ -20,19 +20,12 @@ package org.apache.commons.beanutils.converters;
 import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.Converter;
 
-import junit.framework.TestSuite;
-
 /**
  * Test Case for the IntegerConverter class.
  *
  */
 
 public class IntegerConverterTest extends NumberConverterTest {
-
-    public static TestSuite suite() {
-        return new TestSuite(IntegerConverterTest.class);
-    }
-
     private Converter converter;
 
     public IntegerConverterTest(final String name) {

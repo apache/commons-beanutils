@@ -23,9 +23,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.List;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * Test accessing RowSets via DynaBeans.
@@ -96,16 +94,6 @@ public class DynaRowSetTest extends TestCase {
             return super.getColumnClassName(columnIndex);
         }
     }
-
-    /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-
-        return new TestSuite(DynaRowSetTest.class);
-
-    }
-
     /**
      * The mock result set DynaClass to be tested.
      */

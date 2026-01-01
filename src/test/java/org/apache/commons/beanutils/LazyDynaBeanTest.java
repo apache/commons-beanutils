@@ -22,21 +22,13 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.TreeMap;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * <p>Test Case for the {@code LazyDynaBean} implementation class.</p>
  *
  */
 public class LazyDynaBeanTest extends TestCase {
-    /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(LazyDynaBeanTest.class);
-    }
     protected LazyDynaBean  bean;
     protected LazyDynaClass dynaClass;
     protected String testProperty     = "myProperty";

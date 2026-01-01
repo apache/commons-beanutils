@@ -26,9 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * <p>Test Case for the {@code LazyDynaList}class.</p>
@@ -38,12 +36,6 @@ public class LazyDynaListTest extends TestCase {
 
     private static final String BASIC_PROP1 = "BasicDynaClass_Property1";
     private static final String BASIC_PROP2 = "BasicDynaClass_Property2";
-    /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(LazyDynaListTest.class);
-    }
     protected DynaProperty[] properties = {
                                                new DynaProperty(BASIC_PROP1, String.class),
                                                new DynaProperty(BASIC_PROP2, HashMap.class)};

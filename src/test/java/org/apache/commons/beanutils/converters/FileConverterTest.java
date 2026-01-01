@@ -23,7 +23,6 @@ import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.Converter;
 
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * Test Case for the FileConverter class.
@@ -31,11 +30,6 @@ import junit.framework.TestSuite;
  */
 
 public class FileConverterTest extends TestCase {
-
-    public static TestSuite suite() {
-        return new TestSuite(FileConverterTest.class);
-    }
-
     private Converter converter;
 
     public FileConverterTest(final String name) {

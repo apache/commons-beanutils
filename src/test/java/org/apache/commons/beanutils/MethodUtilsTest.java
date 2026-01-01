@@ -24,9 +24,7 @@ import java.lang.reflect.Modifier;
 import org.apache.commons.beanutils.priv.PrivateBeanFactory;
 import org.apache.commons.beanutils.priv.PublicSubBean;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * <p> Test case for {@code MethodUtils} </p>
@@ -41,14 +39,6 @@ public class MethodUtilsTest extends TestCase {
         assertTrue("Method is not public",
                 Modifier.isPublic(method.getModifiers()));
     }
-
-    /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(MethodUtilsTest.class);
-    }
-
     /**
      * Construct a new instance of this test case.
      *

@@ -18,9 +18,7 @@ package org.apache.commons.beanutils.bugs;
 
 import org.apache.commons.beanutils.BeanUtils;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-369">https://issues.apache.org/jira/browse/BEANUTILS-369</a>
@@ -50,15 +48,6 @@ public class Jira369Test extends TestCase {
             this.bproperty = bproperty;
         }
     }
-    /**
-     * Create a test suite for this test.
-     *
-     * @return a test suite
-     */
-    public static Test suite() {
-        return new TestSuite(Jira369Test.class);
-    }
-
     /**
      * Create a test case with the specified name.
      *

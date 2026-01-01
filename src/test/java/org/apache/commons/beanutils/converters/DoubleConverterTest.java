@@ -19,19 +19,12 @@ package org.apache.commons.beanutils.converters;
 
 import org.apache.commons.beanutils.Converter;
 
-import junit.framework.TestSuite;
-
 /**
  * Test Case for the DoubleConverter class.
  *
  */
 
 public class DoubleConverterTest extends NumberConverterTest {
-
-    public static TestSuite suite() {
-        return new TestSuite(DoubleConverterTest.class);
-    }
-
     private Converter converter;
 
     public DoubleConverterTest(final String name) {

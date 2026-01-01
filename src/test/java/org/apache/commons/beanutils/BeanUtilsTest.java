@@ -26,9 +26,7 @@ import java.util.Map;
 import org.apache.commons.beanutils.converters.ArrayConverter;
 import org.apache.commons.beanutils.converters.DateConverter;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * <p>
@@ -58,14 +56,6 @@ import junit.framework.TestSuite;
  */
 
 public class BeanUtilsTest extends TestCase {
-
-    /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(BeanUtilsTest.class);
-    }
-
     /**
      * The test bean for each test.
      */

@@ -16,22 +16,13 @@
  */
 package org.apache.commons.beanutils;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * <p>Test Case for the {@code LazyDynaClass} implementation class.</p>
  *
  */
 public class LazyDynaClassTest extends TestCase {
-    /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(LazyDynaClassTest.class);
-    }
-
     protected LazyDynaClass dynaClass;
 
     protected String testProperty     = "myProperty";

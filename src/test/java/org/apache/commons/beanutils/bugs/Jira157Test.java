@@ -25,9 +25,7 @@ import org.apache.commons.beanutils.SuppressPropertiesBeanIntrospector;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * Beanutils's describe() method cannot determine reader methods for anonymous
@@ -58,15 +56,6 @@ public class Jira157Test extends TestCase {
         String getX();
         String getY();
     }
-    /**
-     * Create a test suite for this test.
-     *
-     * @return a test suite
-     */
-    public static Test suite() {
-        return new TestSuite(Jira157Test.class);
-    }
-
     private final Log log = LogFactory.getLog(Jira157Test.class);
 
     /**

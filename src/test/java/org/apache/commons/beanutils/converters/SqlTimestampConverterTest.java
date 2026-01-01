@@ -24,21 +24,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import junit.framework.TestSuite;
-
 /**
  * Test Case for the {@link SqlTimestampConverter} class.
  */
 public class SqlTimestampConverterTest extends DateConverterTestBase {
-
-    /**
-     * Create Test Suite
-     * @return test suite
-     */
-    public static TestSuite suite() {
-        return new TestSuite(SqlTimestampConverterTest.class);
-    }
-
     /**
      * Construct a new Date test case.
      * @param name Test Name

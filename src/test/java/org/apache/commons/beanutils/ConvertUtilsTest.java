@@ -27,22 +27,12 @@ import java.util.Objects;
 
 import org.apache.commons.beanutils.converters.DateConverter;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * Test Case for the ConvertUtils class.
  */
 public class ConvertUtilsTest extends TestCase {
-
-    /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(ConvertUtilsTest.class);
-    }
-
     /**
      * Construct a new instance of this test case.
      *

@@ -20,9 +20,7 @@ import org.apache.commons.beanutils.TestBean;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * Test Case for {@link LocaleBeanUtils}.
@@ -31,15 +29,6 @@ import junit.framework.TestSuite;
 public class LocaleBeanUtilsTest extends TestCase {
 
     private static Log log = LogFactory.getLog(LocaleBeanUtilsTest.class);
-
-    /**
-     * Return the tests included in this test suite.
-     * @return Test Suite
-     */
-    public static Test suite() {
-        return new TestSuite(LocaleBeanUtilsTest.class);
-    }
-
     /**
      * Construct a new instance of this test case.
      *

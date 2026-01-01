@@ -33,9 +33,7 @@ import org.apache.commons.beanutils.priv.PrivateBeanFactory;
 import org.apache.commons.beanutils.priv.PrivateDirect;
 import org.apache.commons.beanutils.priv.PublicSubBean;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * <p>Test Case for the PropertyUtils class.  The majority of these tests use
@@ -127,16 +125,6 @@ public class PropertyUtilsTest extends TestCase {
         }
         return null;
     }
-
-    /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-
-        return new TestSuite(PropertyUtilsTest.class);
-
-    }
-
     /**
      * The basic test bean for each test.
      */

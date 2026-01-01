@@ -20,22 +20,12 @@ import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.Converter;
 
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * Test Case for the CharacterConverter class.
  *
  */
 public class CharacterConverterTest extends TestCase {
-
-    /**
-     * Create Test Suite
-     * @return test suite
-     */
-    public static TestSuite suite() {
-        return new TestSuite(CharacterConverterTest.class);
-    }
-
     /**
      * Construct a new Character Converter test case.
      * @param name Test Name

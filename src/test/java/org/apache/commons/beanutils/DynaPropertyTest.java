@@ -18,25 +18,13 @@ package org.apache.commons.beanutils;
 
 import java.util.Collection;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * Test case for {@link DynaProperty}.
  *
  */
 public class DynaPropertyTest extends TestCase {
-
-    /**
-     * Return the tests included in this test suite.
-     * @return a test suite
-     */
-    public static Test suite() {
-
-        return new TestSuite(DynaPropertyTest.class);
-
-    }
     private DynaProperty testPropertyWithName;
     private DynaProperty testProperty1Duplicate;
     private DynaProperty testPropertyWithNameAndType;

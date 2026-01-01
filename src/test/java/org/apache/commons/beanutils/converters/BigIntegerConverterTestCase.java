@@ -21,18 +21,11 @@ import java.math.BigInteger;
 
 import org.apache.commons.beanutils.Converter;
 
-import junit.framework.TestSuite;
-
 /**
  * Test Case for the BigInteger class.
  *
  */
 public class BigIntegerConverterTestCase extends NumberConverterTest {
-
-    public static TestSuite suite() {
-        return new TestSuite(BigIntegerConverterTestCase.class);
-    }
-
     private Converter converter;
 
     public BigIntegerConverterTestCase(final String name) {

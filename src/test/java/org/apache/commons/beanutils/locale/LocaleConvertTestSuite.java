@@ -17,19 +17,6 @@
 
 package org.apache.commons.beanutils.locale;
 
-import org.apache.commons.beanutils.locale.converters.BigDecimalLocaleConverterTest;
-import org.apache.commons.beanutils.locale.converters.BigIntegerLocaleConverterTest;
-import org.apache.commons.beanutils.locale.converters.ByteLocaleConverterTest;
-import org.apache.commons.beanutils.locale.converters.DateLocaleConverterTest;
-import org.apache.commons.beanutils.locale.converters.DoubleLocaleConverterTest;
-import org.apache.commons.beanutils.locale.converters.FloatLocaleConverterTest;
-import org.apache.commons.beanutils.locale.converters.IntegerLocaleConverterTest;
-import org.apache.commons.beanutils.locale.converters.LongLocaleConverterTest;
-import org.apache.commons.beanutils.locale.converters.ShortLocaleConverterTest;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
-
 /**
  * <p>
  * Created a test suite so that new test cases can be added here without having to
@@ -39,24 +26,5 @@ import junit.framework.TestSuite;
  */
 
 public class LocaleConvertTestSuite {
-
-    /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-        final TestSuite testSuite = new TestSuite();
-        testSuite.addTestSuite(LocaleConvertUtilsTest.class);
-        testSuite.addTestSuite(LocaleBeanificationTest.class);
-        testSuite.addTestSuite(BigDecimalLocaleConverterTest.class);
-        testSuite.addTestSuite(BigIntegerLocaleConverterTest.class);
-        testSuite.addTestSuite(ByteLocaleConverterTest.class);
-        testSuite.addTestSuite(DateLocaleConverterTest.class);
-        testSuite.addTestSuite(DoubleLocaleConverterTest.class);
-        testSuite.addTestSuite(FloatLocaleConverterTest.class);
-        testSuite.addTestSuite(IntegerLocaleConverterTest.class);
-        testSuite.addTestSuite(LongLocaleConverterTest.class);
-        testSuite.addTestSuite(ShortLocaleConverterTest.class);
-        return testSuite;
-    }
 }
 

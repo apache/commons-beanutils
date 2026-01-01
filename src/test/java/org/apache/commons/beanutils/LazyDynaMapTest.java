@@ -24,21 +24,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * <p>Test Case for the {@code LazyDynaMap} implementation class.</p>
  *
  */
 public class LazyDynaMapTest extends TestCase {
-    /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(LazyDynaMapTest.class);
-    }
     protected LazyDynaMap  dynaMap;
     protected String testProperty     = "myProperty";
     protected String testPropertyA    = "myProperty-A";

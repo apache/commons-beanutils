@@ -19,22 +19,11 @@ package org.apache.commons.beanutils.converters;
 import java.util.Calendar;
 import java.util.Date;
 
-import junit.framework.TestSuite;
-
 /**
  * Test Case for the DateConverter class.
  *
  */
 public class DateConverterTest extends DateConverterTestBase {
-
-    /**
-     * Create Test Suite
-     * @return test suite
-     */
-    public static TestSuite suite() {
-        return new TestSuite(DateConverterTest.class);
-    }
-
     /**
      * Construct a new Date test case.
      * @param name Test Name

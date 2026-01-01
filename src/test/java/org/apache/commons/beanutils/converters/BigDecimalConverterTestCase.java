@@ -21,8 +21,6 @@ import java.math.BigDecimal;
 
 import org.apache.commons.beanutils.Converter;
 
-import junit.framework.TestSuite;
-
 /**
  * Test Case for the DoubleConverter class.
  *
@@ -41,11 +39,6 @@ public class BigDecimalConverterTestCase extends NumberConverterTest {
             super(val);
         }
     }
-
-    public static TestSuite suite() {
-        return new TestSuite(BigDecimalConverterTestCase.class);
-    }
-
     private Converter converter;
 
     public BigDecimalConverterTestCase(final String name) {

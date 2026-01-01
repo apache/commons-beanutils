@@ -27,9 +27,7 @@ import org.apache.commons.beanutils.bugs.other.Jira61BeanFactory.TestBean;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * Test case for Jira issue# BEANUTILS-61.
@@ -43,14 +41,6 @@ import junit.framework.TestSuite;
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-61">https://issues.apache.org/jira/browse/BEANUTILS-61</a>
  */
 public class Jira61Test extends TestCase {
-    /**
-     * Create a test suite for this test.
-     *
-     * @return a test suite
-     */
-    public static Test suite() {
-        return new TestSuite(Jira61Test.class);
-    }
     private final Log log = LogFactory.getLog(Jira61Test.class);
 
     private Jira61BeanFactory.TestBean testBean;

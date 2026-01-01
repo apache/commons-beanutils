@@ -25,9 +25,7 @@ import java.util.Locale;
 
 import org.apache.commons.beanutils.ConversionException;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * <p>
@@ -38,14 +36,6 @@ import junit.framework.TestSuite;
  */
 
 public class LocaleConvertUtilsTest extends TestCase {
-
-    /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(LocaleConvertUtilsTest.class);
-    }
-
     private char m_decimalSeparator;
 
     /**

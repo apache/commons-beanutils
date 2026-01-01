@@ -22,22 +22,12 @@ import java.util.Collections;
 import java.util.Locale;
 
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * Test Case for the ArrayConverter class.
  *
  */
 public class ArrayConverterTestCase extends TestCase {
-
-    /**
-     * Create Test Suite
-     * @return test suite
-     */
-    public static TestSuite suite() {
-        return new TestSuite(ArrayConverterTestCase.class);
-    }
-
     /**
      * Construct a new Array Converter test case.
      * @param name Test Name

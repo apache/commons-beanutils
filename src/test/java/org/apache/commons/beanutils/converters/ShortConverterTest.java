@@ -19,19 +19,12 @@ package org.apache.commons.beanutils.converters;
 
 import org.apache.commons.beanutils.Converter;
 
-import junit.framework.TestSuite;
-
 /**
  * Test Case for the ShortConverter class.
  *
  */
 
 public class ShortConverterTest extends NumberConverterTest {
-
-    public static TestSuite suite() {
-        return new TestSuite(ShortConverterTest.class);
-    }
-
     private Converter converter;
 
     public ShortConverterTest(final String name) {

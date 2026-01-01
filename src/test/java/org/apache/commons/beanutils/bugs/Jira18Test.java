@@ -21,9 +21,7 @@ import org.apache.commons.beanutils.bugs.other.Jira18BeanFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * Test case for Jira issue# BEANUTILS-18.
@@ -33,14 +31,6 @@ import junit.framework.TestSuite;
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-18">https://issues.apache.org/jira/browse/BEANUTILS-18</a>
  */
 public class Jira18Test extends TestCase {
-    /**
-     * Create a test suite for this test.
-     *
-     * @return a test suite
-     */
-    public static Test suite() {
-        return new TestSuite(Jira18Test.class);
-    }
 
     private final Log log = LogFactory.getLog(Jira18Test.class);
 

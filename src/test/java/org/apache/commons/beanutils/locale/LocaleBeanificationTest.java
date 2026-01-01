@@ -31,9 +31,7 @@ import org.apache.commons.beanutils.PrimitiveBean;
 import org.apache.commons.beanutils.locale.converters.LongLocaleConverter;
 import org.apache.commons.logging.LogFactory;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * <p>
@@ -102,14 +100,6 @@ public class LocaleBeanificationTest extends TestCase {
 
     /** Maximum number of iterations before our test fails */
     public static final int MAX_GC_ITERATIONS = 50;
-
-    /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(LocaleBeanificationTest.class);
-    }
-
     /**
      * Construct a new instance of this test case.
      *

@@ -19,19 +19,12 @@ package org.apache.commons.beanutils.converters;
 
 import org.apache.commons.beanutils.Converter;
 
-import junit.framework.TestSuite;
-
 /**
  * Test Case for the FloatConverter class.
  *
  */
 
 public class FloatConverterTest extends NumberConverterTest {
-
-    public static TestSuite suite() {
-        return new TestSuite(FloatConverterTest.class);
-    }
-
     private Converter converter;
 
     public FloatConverterTest(final String name) {
