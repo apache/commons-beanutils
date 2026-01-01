@@ -19,10 +19,10 @@ package org.apache.commons.beanutils.bugs.other;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.beanutils.bugs.Jira61TestCase;
+import org.apache.commons.beanutils.bugs.Jira61Test;
 
 /**
- * Factory which creates beans for {@link Jira61TestCase}.
+ * Factory which creates beans for {@link Jira61Test}.
  *
  */
 public class Jira61BeanFactory {

@@ -26,7 +26,7 @@ import junit.framework.TestSuite;
  *
  */
 
-public class ByteConverterTestCase extends NumberConverterTestBase {
+public class ByteConverterTestCase extends NumberConverterTest {
 
     public static TestSuite suite() {
         return new TestSuite(ByteConverterTestCase.class);

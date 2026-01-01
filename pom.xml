@@ -26,11 +26,9 @@
   <artifactId>commons-beanutils</artifactId>
   <version>1.11.1-SNAPSHOT</version>
   <name>Apache Commons BeanUtils</name>
-
   <inceptionYear>2000</inceptionYear>
   <description>Apache Commons BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.</description>
   <url>https://commons.apache.org/proper/commons-beanutils</url>
-
   <properties>
       <maven.compiler.source>1.8</maven.compiler.source>
       <maven.compiler.target>1.8</maven.compiler.target>
@@ -57,13 +55,11 @@
       <commons.release.isDistModule>true</commons.release.isDistModule>
       <commons.distSvnStagingUrl>scm:svn:https://dist.apache.org/repos/dist/dev/commons/${commons.componentid}</commons.distSvnStagingUrl>
   </properties>
-
   <scm>
     <connection>scm:git:https://gitbox.apache.org/repos/asf?p=commons-beanutils.git</connection>
     <developerConnection>scm:git:https://gitbox.apache.org/repos/asf?p=commons-beanutils.git</developerConnection>
     <url>https://gitbox.apache.org/repos/asf?p=commons-beanutils.git</url>
   </scm>
-
   <distributionManagement>
     <site>
       <id>apache.website</id>
@@ -75,7 +71,6 @@
     <system>GitHub</system>
     <url>https://github.com/apache/commons-beanutils/actions</url>
   </ciManagement>
-
   <dependencies>
     <dependency>
       <groupId>commons-logging</groupId>
@@ -104,7 +99,6 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
   <build>
       <defaultGoal>clean apache-rat:check verify japicmp:cmp javadoc:javadoc checkstyle:check</defaultGoal>
       <plugins>
@@ -116,15 +110,16 @@
               <!-- limit memory size see BEANUTILS-291 -->
               <argLine>${surefire.argLine}</argLine>
               <includes>
+                <include>**/*Test.java</include>
                 <include>**/*TestCase.java</include>
               </includes>
               <excludes>
                 <!-- This test case is known to fail, and there isn't any proposed fix
                   -  so we will just exclude it until someone comes up with a solution.
                 -->
+                <exclude>**/*MemoryTest.java</exclude>
                 <exclude>**/*MemoryTestCase.java</exclude>
               </excludes>
-
               <!-- Configure Logging -->
               <redirectTestOutputToFile>true</redirectTestOutputToFile>
               <systemPropertyVariables>
@@ -132,7 +127,6 @@
                   <org.apache.commons.logging.Log>org.apache.commons.logging.impl.SimpleLog</org.apache.commons.logging.Log>
                   <org.apache.commons.logging.simplelog.defaultlog>WARN</org.apache.commons.logging.simplelog.defaultlog>
               </systemPropertyVariables>
-
           </configuration>
         </plugin>
         <plugin>
@@ -173,7 +167,6 @@
         </plugins>
       </pluginManagement>
     </build>
-
     <reporting>
         <plugins>
             <plugin>

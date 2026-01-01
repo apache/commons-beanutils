@@ -16,10 +16,10 @@
  */
 package org.apache.commons.beanutils.bugs.other;
 
-import org.apache.commons.beanutils.bugs.Jira273TestCase;
+import org.apache.commons.beanutils.bugs.Jira273Test;
 
 /**
- * Factory which creates beans for {@link Jira273TestCase}.
+ * Factory which creates beans for {@link Jira273Test}.
  *
  */
 public class Jira273BeanFactory {

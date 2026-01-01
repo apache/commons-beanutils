@@ -17,15 +17,15 @@
 
 package org.apache.commons.beanutils.locale;
 
-import org.apache.commons.beanutils.locale.converters.BigDecimalLocaleConverterTestCase;
-import org.apache.commons.beanutils.locale.converters.BigIntegerLocaleConverterTestCase;
-import org.apache.commons.beanutils.locale.converters.ByteLocaleConverterTestCase;
-import org.apache.commons.beanutils.locale.converters.DateLocaleConverterTestCase;
-import org.apache.commons.beanutils.locale.converters.DoubleLocaleConverterTestCase;
-import org.apache.commons.beanutils.locale.converters.FloatLocaleConverterTestCase;
-import org.apache.commons.beanutils.locale.converters.IntegerLocaleConverterTestCase;
-import org.apache.commons.beanutils.locale.converters.LongLocaleConverterTestCase;
-import org.apache.commons.beanutils.locale.converters.ShortLocaleConverterTestCase;
+import org.apache.commons.beanutils.locale.converters.BigDecimalLocaleConverterTest;
+import org.apache.commons.beanutils.locale.converters.BigIntegerLocaleConverterTest;
+import org.apache.commons.beanutils.locale.converters.ByteLocaleConverterTest;
+import org.apache.commons.beanutils.locale.converters.DateLocaleConverterTest;
+import org.apache.commons.beanutils.locale.converters.DoubleLocaleConverterTest;
+import org.apache.commons.beanutils.locale.converters.FloatLocaleConverterTest;
+import org.apache.commons.beanutils.locale.converters.IntegerLocaleConverterTest;
+import org.apache.commons.beanutils.locale.converters.LongLocaleConverterTest;
+import org.apache.commons.beanutils.locale.converters.ShortLocaleConverterTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -45,17 +45,17 @@ public class LocaleConvertTestSuite {
      */
     public static Test suite() {
         final TestSuite testSuite = new TestSuite();
-        testSuite.addTestSuite(LocaleConvertUtilsTestCase.class);
-        testSuite.addTestSuite(LocaleBeanificationTestCase.class);
-        testSuite.addTestSuite(BigDecimalLocaleConverterTestCase.class);
-        testSuite.addTestSuite(BigIntegerLocaleConverterTestCase.class);
-        testSuite.addTestSuite(ByteLocaleConverterTestCase.class);
-        testSuite.addTestSuite(DateLocaleConverterTestCase.class);
-        testSuite.addTestSuite(DoubleLocaleConverterTestCase.class);
-        testSuite.addTestSuite(FloatLocaleConverterTestCase.class);
-        testSuite.addTestSuite(IntegerLocaleConverterTestCase.class);
-        testSuite.addTestSuite(LongLocaleConverterTestCase.class);
-        testSuite.addTestSuite(ShortLocaleConverterTestCase.class);
+        testSuite.addTestSuite(LocaleConvertUtilsTest.class);
+        testSuite.addTestSuite(LocaleBeanificationTest.class);
+        testSuite.addTestSuite(BigDecimalLocaleConverterTest.class);
+        testSuite.addTestSuite(BigIntegerLocaleConverterTest.class);
+        testSuite.addTestSuite(ByteLocaleConverterTest.class);
+        testSuite.addTestSuite(DateLocaleConverterTest.class);
+        testSuite.addTestSuite(DoubleLocaleConverterTest.class);
+        testSuite.addTestSuite(FloatLocaleConverterTest.class);
+        testSuite.addTestSuite(IntegerLocaleConverterTest.class);
+        testSuite.addTestSuite(LongLocaleConverterTest.class);
+        testSuite.addTestSuite(ShortLocaleConverterTest.class);
         return testSuite;
     }
 }

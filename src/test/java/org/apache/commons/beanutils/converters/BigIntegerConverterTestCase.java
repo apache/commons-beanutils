@@ -27,7 +27,7 @@ import junit.framework.TestSuite;
  * Test Case for the BigInteger class.
  *
  */
-public class BigIntegerConverterTestCase extends NumberConverterTestBase {
+public class BigIntegerConverterTestCase extends NumberConverterTest {
 
     public static TestSuite suite() {
         return new TestSuite(BigIntegerConverterTestCase.class);

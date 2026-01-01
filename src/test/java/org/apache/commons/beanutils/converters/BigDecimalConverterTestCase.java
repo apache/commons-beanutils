@@ -28,7 +28,7 @@ import junit.framework.TestSuite;
  *
  */
 
-public class BigDecimalConverterTestCase extends NumberConverterTestBase {
+public class BigDecimalConverterTestCase extends NumberConverterTest {
 
     /**
      * A class derived from {@code BigDecimal} used for testing whether
