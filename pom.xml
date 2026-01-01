@@ -54,6 +54,8 @@
       <commons.rc.version>RC1</commons.rc.version>
       <commons.release.isDistModule>true</commons.release.isDistModule>
       <commons.distSvnStagingUrl>scm:svn:https://dist.apache.org/repos/dist/dev/commons/${commons.componentid}</commons.distSvnStagingUrl>
+      <!-- Other -->
+      <commons.collections.version>4.5.0</commons.collections.version>
   </properties>
   <scm>
     <connection>scm:git:https://gitbox.apache.org/repos/asf?p=commons-beanutils.git</connection>
@@ -86,6 +88,19 @@
       <groupId>commons-collections</groupId>
       <artifactId>commons-collections-testframework</artifactId>
       <version>3.2.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-collections4</artifactId>
+      <version>${commons.collections.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-collections4</artifactId>
+      <version>${commons.collections.version}</version>
+      <classifier>tests</classifier>
       <scope>test</scope>
     </dependency>
     <dependency>
