@@ -39,6 +39,7 @@ import java.util.Map;
  * @since 1.9.1
  */
 final class BeanIntrospectionData {
+
     /**
      * Initializes the map with the names of the write methods for the supported properties. The method names - if defined - need to be stored separately
      * because they may get lost when the GC claims soft references used by the {@code PropertyDescriptor} objects.

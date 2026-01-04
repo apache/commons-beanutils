@@ -68,6 +68,7 @@ import org.apache.commons.logging.LogFactory;
  * @since 1.9
  */
 public class FluentPropertyBeanIntrospector implements BeanIntrospector {
+
     /** The default prefix for write methods. */
     public static final String DEFAULT_WRITE_METHOD_PREFIX = "set";
 

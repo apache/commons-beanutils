@@ -30,6 +30,7 @@ import org.junit.jupiter.api.Test;
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-458">https://issues.apache.org/jira/browse/BEANUTILS-458</a>
  */
 class Jira458Test {
+
     /**
      * Helper method for testing a conversion with null as default.
      *

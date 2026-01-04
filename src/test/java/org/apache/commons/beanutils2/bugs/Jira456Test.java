@@ -32,6 +32,7 @@ import org.junit.jupiter.api.Test;
  * issue BEANUTILS-456</a>.
  */
 class Jira456Test {
+
     /** Constant for the name of the test property. */
     private static final String TEST_PROP = "fluentGetProperty";
 

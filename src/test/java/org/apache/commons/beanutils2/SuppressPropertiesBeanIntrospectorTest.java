@@ -38,6 +38,7 @@ class SuppressPropertiesBeanIntrospectorTest {
      * A test implementation of IntrospectionContext which collects the properties which have been removed.
      */
     private static class IntrospectionContextTestImpl implements IntrospectionContext {
+
         /** Stores the names of properties which have been removed. */
         private final Set<String> removedProperties = new HashSet<>();
 
