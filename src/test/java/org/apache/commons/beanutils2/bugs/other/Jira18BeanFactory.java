@@ -26,7 +26,7 @@ import org.apache.commons.beanutils2.bugs.Jira18Test;
  */
 public class Jira18BeanFactory {
 
-    /* =============== Package Friendly Bean =============== */
+    /** Package Friendly Bean. */
     static class PackageFriendlyBean {
 
         private final String[] indexed = { "one", "two", "three" };

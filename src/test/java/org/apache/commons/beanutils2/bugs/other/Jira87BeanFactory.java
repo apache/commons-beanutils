@@ -23,7 +23,7 @@ import org.apache.commons.beanutils2.bugs.Jira87Test;
  */
 public class Jira87BeanFactory {
 
-    /* =============== Package Friendly implementation of public interface =============== */
+    /** Package Friendly implementation of public interface. */
     static class PackageMappedImpl implements PublicMappedInterface {
 
         /**
@@ -39,7 +39,6 @@ public class Jira87BeanFactory {
 
     }
 
-    /* =================== Public interface with Mapped Property ========================= */
     /**
      * Public interface with a mapped property.
      */
