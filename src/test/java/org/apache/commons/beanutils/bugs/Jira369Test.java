@@ -48,6 +48,7 @@ public class Jira369Test extends TestCase {
             this.bproperty = bproperty;
         }
     }
+
     /**
      * Create a test case with the specified name.
      *

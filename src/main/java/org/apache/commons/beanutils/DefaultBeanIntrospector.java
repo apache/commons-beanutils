@@ -46,6 +46,7 @@ import org.apache.commons.logging.LogFactory;
  * @since 1.9
  */
 public class DefaultBeanIntrospector implements BeanIntrospector {
+
     /** The singleton instance of this class. */
     public static final BeanIntrospector INSTANCE = new DefaultBeanIntrospector();
 

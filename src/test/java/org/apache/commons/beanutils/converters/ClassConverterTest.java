@@ -26,6 +26,7 @@ import junit.framework.TestCase;
  *
  */
 public class ClassConverterTest extends TestCase {
+
     /**
      * Construct a new Class Converter test case.
      * @param name Test Name

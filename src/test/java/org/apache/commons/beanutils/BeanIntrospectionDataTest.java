@@ -28,6 +28,7 @@ import junit.framework.TestCase;
  *
  */
 public class BeanIntrospectionDataTest extends TestCase {
+
     /** Constant for the test bean class. */
     private static final Class<?> BEAN_CLASS = FluentIntrospectionTestBean.class;
 

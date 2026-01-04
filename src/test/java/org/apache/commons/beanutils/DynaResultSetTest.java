@@ -28,6 +28,7 @@ import junit.framework.TestCase;
  */
 
 public class DynaResultSetTest extends TestCase {
+
     /**
      * The mock result set DynaClass to be tested.
      */

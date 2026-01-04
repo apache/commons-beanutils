@@ -29,6 +29,7 @@ import junit.framework.TestCase;
 public class LocaleBeanUtilsTest extends TestCase {
 
     private static Log log = LogFactory.getLog(LocaleBeanUtilsTest.class);
+
     /**
      * Construct a new instance of this test case.
      *

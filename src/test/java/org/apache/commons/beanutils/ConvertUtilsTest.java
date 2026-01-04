@@ -33,6 +33,7 @@ import junit.framework.TestCase;
  * Test Case for the ConvertUtils class.
  */
 public class ConvertUtilsTest extends TestCase {
+
     /**
      * Construct a new instance of this test case.
      *

@@ -23,6 +23,7 @@ import junit.framework.TestCase;
  *
  */
 public class MappedPropertyTest extends TestCase {
+
     /**
      * Construct a new instance of this test case.
      *

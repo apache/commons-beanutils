@@ -50,6 +50,7 @@ public class WrapDynaClass implements DynaClass {
      * {@code PropertyUtilsBean}. Instances are immutable.
      */
     private static class CacheKey {
+
         /** The bean class. */
         private final Class<?> beanClass;
 

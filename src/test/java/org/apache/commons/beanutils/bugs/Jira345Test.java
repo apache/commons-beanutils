@@ -48,6 +48,7 @@ public class Jira345Test extends TestCase {
             this.matr3D = matr3D;
         }
     }
+
     /**
      * Create a test case with the specified name.
      *

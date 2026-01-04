@@ -28,6 +28,7 @@ import java.util.Locale;
  * Test Case for the {@link SqlTimestampConverter} class.
  */
 public class SqlTimestampConverterTest extends DateConverterTestBase {
+
     /**
      * Construct a new Date test case.
      * @param name Test Name

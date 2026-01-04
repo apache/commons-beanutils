@@ -25,6 +25,7 @@ import junit.framework.TestCase;
  *
  */
 public class StringConverterTest extends TestCase {
+
     /** The converter to be tested. */
     private StringConverter converter;
 

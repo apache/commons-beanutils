@@ -28,6 +28,7 @@ import junit.framework.TestCase;
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-463">https://issues.apache.org/jira/browse/BEANUTILS-463</a>
  */
 public class Jira463Test extends TestCase {
+
     /**
      * Tests that with a specialized {@code BeanIntrospector} implementation the class
      * property can be suppressed.

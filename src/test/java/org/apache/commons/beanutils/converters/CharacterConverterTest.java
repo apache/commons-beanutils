@@ -26,6 +26,7 @@ import junit.framework.TestCase;
  *
  */
 public class CharacterConverterTest extends TestCase {
+
     /**
      * Construct a new Character Converter test case.
      * @param name Test Name

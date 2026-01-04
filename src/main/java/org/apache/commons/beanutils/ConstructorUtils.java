@@ -45,6 +45,7 @@ public class ConstructorUtils {
 
     /** An empty class array */
     private static final Class<?>[] EMPTY_CLASS_PARAMETERS = {};
+
     /** An empty object array */
     private static final Object[] EMPTY_OBJECT_ARRAY = {};
 

@@ -36,6 +36,7 @@ import java.beans.IntrospectionException;
  * @since 1.9
  */
 public interface BeanIntrospector {
+
     /**
      * Performs introspection on a Java class. The current class to be inspected
      * can be queried from the passed in {@code IntrospectionContext}

@@ -76,6 +76,7 @@ public class DynaProperty implements Serializable {
         this(name, Object.class);
 
     }
+
     /**
      * Construct a property of the specified data type.
      *
@@ -107,6 +108,7 @@ public class DynaProperty implements Serializable {
         this.contentType = contentType;
 
     }
+
     /**
      * Checks this instance against the specified Object for equality. Overrides the
      * default refererence test for equality provided by {@link Object#equals(Object)}
@@ -148,6 +150,7 @@ public class DynaProperty implements Serializable {
     public Class<?> getContentType() {
         return contentType;
     }
+
     /**
      * Get the name of this property.
      *

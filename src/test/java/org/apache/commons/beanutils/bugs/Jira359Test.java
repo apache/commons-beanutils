@@ -39,6 +39,7 @@ public class Jira359Test extends TestCase {
             this.jcrMixinTypes = mixinTypes;
         }
     }
+
     /**
      * Create a test case with the specified name.
      *

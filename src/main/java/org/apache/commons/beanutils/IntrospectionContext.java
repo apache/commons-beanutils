@@ -36,6 +36,7 @@ import java.util.Set;
  * @since 1.9
  */
 public interface IntrospectionContext {
+
     /**
      * Adds the given property descriptor to this context. This method is called
      * by a {@code BeanIntrospector} during introspection for each detected

@@ -35,6 +35,7 @@ public class BeanPredicate implements Predicate {
 
     /** Name of the property whose value will be predicated */
     private String propertyName;
+
     /** {@code Predicate} to be applied to the property value */
     private Predicate predicate;
 

@@ -31,6 +31,7 @@ import junit.framework.TestCase;
  *
  */
 public class Jira456Test extends TestCase {
+
     /** Constant for the name of the test property. */
     private static final String TEST_PROP = "fluentGetProperty";
 

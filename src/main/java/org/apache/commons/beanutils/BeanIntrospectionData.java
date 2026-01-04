@@ -42,6 +42,7 @@ import java.util.Map;
  * @since 1.9.1
  */
 class BeanIntrospectionData {
+
     /**
      * Initializes the map with the names of the write methods for the supported
      * properties. The method names - if defined - need to be stored separately because

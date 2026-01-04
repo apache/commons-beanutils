@@ -115,6 +115,7 @@ public class PropertyUtilsBean {
     private static List<Object> toObjectList(final Object obj) {
         return (List<Object>) obj;
     }
+
     /**
      * Converts an object to a map with property values. This method is used
      * when dealing with mapped properties. It assumes that mapped properties

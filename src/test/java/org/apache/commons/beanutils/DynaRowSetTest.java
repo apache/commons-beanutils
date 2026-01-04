@@ -50,6 +50,7 @@ public class DynaRowSetTest extends TestCase {
         public TestResultSetInconsistent(final ResultSetMetaData metaData) {
             super(metaData);
         }
+
         /**
          * Get an columns's value
          * @param columnName Name of the column
@@ -94,6 +95,7 @@ public class DynaRowSetTest extends TestCase {
             return super.getColumnClassName(columnIndex);
         }
     }
+
     /**
      * The mock result set DynaClass to be tested.
      */

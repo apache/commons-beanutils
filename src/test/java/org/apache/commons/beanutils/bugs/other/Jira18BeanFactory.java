@@ -28,7 +28,7 @@ import org.apache.commons.beanutils.bugs.Jira18Test;
  */
 public class Jira18BeanFactory {
 
-    /* =============== Package Friendly Bean =============== */
+    /** Package Friendly Bean. */
     static class PackageFriendlyBean {
 
         private final String[] indexed = {"one", "two", "three"};
@@ -40,6 +40,7 @@ public class Jira18BeanFactory {
             mapped.put("foo-key", "foo-value");
             mapped.put("bar-key", "bar-value");
         }
+
         /**
          * Return indexed property.
          *

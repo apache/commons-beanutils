@@ -85,6 +85,7 @@ public class Jira357Test extends TestCase {
             this.innerClassProperty = innerClassProperty;
         }
     }
+
     /**
      * Create a test case with the specified name.
      *

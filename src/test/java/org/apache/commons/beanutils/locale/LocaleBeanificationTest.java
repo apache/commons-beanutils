@@ -100,6 +100,7 @@ public class LocaleBeanificationTest extends TestCase {
 
     /** Maximum number of iterations before our test fails */
     public static final int MAX_GC_ITERATIONS = 50;
+
     /**
      * Construct a new instance of this test case.
      *

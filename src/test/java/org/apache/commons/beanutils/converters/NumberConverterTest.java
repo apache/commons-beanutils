@@ -80,6 +80,7 @@ public abstract class NumberConverterTest extends TestCase {
         }
 
     }
+
     /**
      * Assumes ConversionException in response to covert(getExpectedType(),null).
      */

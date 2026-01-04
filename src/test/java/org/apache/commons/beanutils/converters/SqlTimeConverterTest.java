@@ -29,6 +29,7 @@ import java.util.Locale;
  */
 
 public class SqlTimeConverterTest extends DateConverterTestBase {
+
     /**
      * Construct a new Date test case.
      * @param name Test Name

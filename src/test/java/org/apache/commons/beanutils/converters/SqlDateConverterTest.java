@@ -26,6 +26,7 @@ import java.util.Calendar;
  */
 
 public class SqlDateConverterTest extends DateConverterTestBase {
+
     /**
      * Construct a new Date test case.
      * @param name Test Name

@@ -125,6 +125,7 @@ public class PropertyUtilsTest extends TestCase {
         }
         return null;
     }
+
     /**
      * The basic test bean for each test.
      */

@@ -35,6 +35,7 @@ import java.util.Set;
  * @since 1.9
  */
 class DefaultIntrospectionContext implements IntrospectionContext {
+
     /** Constant for an empty array of property descriptors. */
     private static final PropertyDescriptor[] EMPTY_DESCRIPTORS = {};
 

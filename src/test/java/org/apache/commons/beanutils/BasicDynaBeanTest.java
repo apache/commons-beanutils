@@ -52,6 +52,7 @@ public class BasicDynaBeanTest {
     protected final static String[] properties = { "booleanProperty", "booleanSecond", "doubleProperty", "floatProperty", "intArray", "intIndexed",
             "intProperty", "listIndexed", "longProperty", "mappedProperty", "mappedIntProperty", "nullProperty", "shortProperty", "stringArray",
             "stringIndexed", "stringProperty", };
+
     /**
      * The basic test bean for each test.
      */

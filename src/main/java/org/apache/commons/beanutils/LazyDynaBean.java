@@ -123,20 +123,28 @@ protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
 
     /** BigDecimal Zero */
     protected static final BigDecimal BigDecimal_ZERO = new BigDecimal("0");
+
     /** Character Space */
     protected static final Character  Character_SPACE = Character.valueOf(' ');
+
     /** Byte Zero */
     protected static final Byte       Byte_ZERO       = Byte.valueOf((byte)0);
+
     /** Short Zero */
     protected static final Short      Short_ZERO      = Short.valueOf((short)0);
+
     /** Integer Zero */
     protected static final Integer    Integer_ZERO    = Integer.valueOf(0);
+
     /** Long Zero */
     protected static final Long       Long_ZERO       = Long.valueOf(0);
+
     /** Float Zero */
     protected static final Float      Float_ZERO      = Float.valueOf((byte)0);
+
     /** Double Zero */
     protected static final Double     Double_ZERO     = Double.valueOf((byte)0);
+
     /**
         * Commons Logging
         */

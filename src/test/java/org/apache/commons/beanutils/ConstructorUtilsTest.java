@@ -27,6 +27,7 @@ import junit.framework.TestCase;
  */
 @SuppressWarnings("deprecation")
 public class ConstructorUtilsTest extends TestCase {
+
     /**
      * Construct a new instance of this test case.
      *

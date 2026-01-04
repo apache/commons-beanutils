@@ -39,6 +39,7 @@ public class MethodUtilsTest extends TestCase {
         assertTrue("Method is not public",
                 Modifier.isPublic(method.getModifiers()));
     }
+
     /**
      * Construct a new instance of this test case.
      *

@@ -67,6 +67,7 @@ public class DynaBeanUtilsTest extends TestCase {
                         });
 
     }
+
     /**
      * The basic test bean for each test.
      */

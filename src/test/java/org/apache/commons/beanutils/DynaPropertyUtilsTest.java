@@ -31,6 +31,7 @@ import junit.framework.TestCase;
  */
 
 public class DynaPropertyUtilsTest extends TestCase {
+
     /**
      * The basic test bean for each test.
      */

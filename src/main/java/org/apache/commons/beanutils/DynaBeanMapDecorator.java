@@ -68,6 +68,7 @@ package org.apache.commons.beanutils;
  */
 @Deprecated
 public class DynaBeanMapDecorator extends BaseDynaBeanMapDecorator<Object> {
+
     /**
      * Constructs a read only Map for the specified
      * {@link DynaBean}.

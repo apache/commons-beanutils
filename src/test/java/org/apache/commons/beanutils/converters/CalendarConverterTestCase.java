@@ -23,6 +23,7 @@ import java.util.Calendar;
  *
  */
 public class CalendarConverterTestCase extends DateConverterTestBase {
+
     /**
      * Construct a new Calendar test case.
      * @param name Test Name

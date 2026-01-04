@@ -25,6 +25,7 @@ import junit.framework.TestCase;
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-358">https://issues.apache.org/jira/browse/BEANUTILS-358</a>
  */
 public class Jira358Test extends TestCase {
+
     /**
      * Create a test case with the specified name.
      *

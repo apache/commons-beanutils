@@ -30,6 +30,7 @@ import junit.framework.TestCase;
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-458">https://issues.apache.org/jira/browse/BEANUTILS-458</a>
  */
 public class Jira458Test extends TestCase {
+
     /**
      * Helper method for testing a conversion with null as default.
      *

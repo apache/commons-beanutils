@@ -21,6 +21,7 @@ package org.apache.commons.beanutils;
  *
  */
 public class BeanUtils2Test extends BeanUtilsTest {
+
     /**
      * Construct a new instance of this test case.
      *

@@ -28,6 +28,7 @@ import junit.framework.TestCase;
  *
  */
 public class ArrayConverterTestCase extends TestCase {
+
     /**
      * Construct a new Array Converter test case.
      * @param name Test Name

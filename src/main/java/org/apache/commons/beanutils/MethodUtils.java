@@ -83,6 +83,7 @@ public class MethodUtils {
 
             this.hashCode = methodName.length();
         }
+
         /**
          * Checks for equality.
          *
@@ -101,6 +102,7 @@ public class MethodUtils {
             cls.equals(md.cls) &&
             Arrays.equals(paramTypes, md.paramTypes);
         }
+
         /**
          * Returns the string length of method name. I.e. if the
          * hashcodes are different, the objects are different. If the
