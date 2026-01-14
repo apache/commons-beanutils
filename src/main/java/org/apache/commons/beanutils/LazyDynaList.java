@@ -38,7 +38,7 @@ import java.util.Map;
  * <p>All elements added to the List are stored as {@code DynaBean}'s:</p>
  * <ul>
  *    <li>{@code java.util.Map} elements are "wrapped" in a {@code LazyDynaMap}.</li>
- *    <li>POJO Bean elements are "wrapped" in a {@code WrapDynaBean.}</li>
+ *    <li>POJO Bean elements are "wrapped" in a {@code WrapDynaBean}.</li>
  *    <li>{@code DynaBean}'s are stored un-changed.</li>
  * </ul>
  *
