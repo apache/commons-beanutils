@@ -47,7 +47,9 @@ import java.util.WeakHashMap;
  * member variable to store the data, because Thread.getContextClassLoader
  * always returns the same classloader (the system classloader).</p>
  *
- * <p>Expected usage is as follows:<br>
+ * <p>
+ * Expected usage is as follows:
+ * </p>
  * <pre>
  *  public class SomeClass {
  *    private static final ContextClassLoaderLocal&lt;String&gt; global
