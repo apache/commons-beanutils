@@ -100,7 +100,7 @@ Bean Collections has an additional dependency on
    </p>
    <ul>
       <li><a href="https://commons.apache.org/beanutils/javadocs/v1.9.4/RELEASE-NOTES.txt">Release Notes</a></li>
-      <li><a href="https://commons.apache.org/beanutils/javadocs/v1.9.4/apidocs/index.html">JavaDoc</a></li>
+      <li><a href="https://commons.apache.org/beanutils/javadocs/v1.9.4/apidocs/index.html">Javadoc</a></li>
     </ul>
    <p>
    <strong>CVE-2019-10086.</strong> Apache Commons Beanutils does not suppresses
@@ -160,43 +160,43 @@ public void testAllowAccessToClassProperty() throws Exception {
     <li>1.10.1
       <ul>
         <li><a href="/changes.html#a1.10.1">Release Notes</a></li>
-        <li><a href="https://javadoc.io/doc/commons-beanutils/commons-beanutils/latest/index.html">JavaDoc</a></li>
+        <li><a href="https://javadoc.io/doc/commons-beanutils/commons-beanutils/latest/index.html">Javadoc</a></li>
       </ul>
     </li>
     <li>1.10.0
       <ul>
         <li><a href="/changes.html#a1.10.0">Release Notes</a></li>
-        <li><a href="https://javadoc.io/doc/commons-beanutils/commons-beanutils/1.9.4/index.html#package_description">JavaDoc</a></li>
+        <li><a href="https://javadoc.io/doc/commons-beanutils/commons-beanutils/1.9.4/index.html#package_description">Javadoc</a></li>
       </ul>
     </li>
     <li>1.9.4
       <ul>
         <li><a href="https://commons.apache.org/beanutils/javadocs/v1.9.4/RELEASE-NOTES.txt">Release Notes</a></li>
-        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.9.4/apidocs/index.html">JavaDoc</a></li>
+        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.9.4/apidocs/index.html">Javadoc</a></li>
       </ul>
     </li>
     <li>1.9.3
       <ul>
         <li><a href="https://commons.apache.org/beanutils/javadocs/v1.9.3/RELEASE-NOTES.txt">Release Notes</a></li>
-        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.9.3/apidocs/index.html">JavaDoc</a></li>
+        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.9.3/apidocs/index.html">Javadoc</a></li>
       </ul>
     </li>
     <li>1.9.2
       <ul>
         <li><a href="https://commons.apache.org/beanutils/javadocs/v1.9.2/RELEASE-NOTES.txt">Release Notes</a></li>
-        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.9.2/apidocs/index.html">JavaDoc</a></li>
+        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.9.2/apidocs/index.html">Javadoc</a></li>
       </ul>
     </li>
     <li>1.9.1
       <ul>
         <li><a href="https://commons.apache.org/beanutils/javadocs/v1.9.1/RELEASE-NOTES.txt">Release Notes</a></li>
-        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.9.1/apidocs/index.html">JavaDoc</a></li>
+        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.9.1/apidocs/index.html">Javadoc</a></li>
       </ul>
     </li>
     <li>1.9.0
       <ul>
         <li><a href="https://commons.apache.org/beanutils/javadocs/v1.9.0/RELEASE-NOTES.txt">Release Notes</a></li>
-        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.9.0/apidocs/index.html">JavaDoc</a></li>
+        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.9.0/apidocs/index.html">Javadoc</a></li>
       </ul>
     </li>
   </ul>
@@ -210,25 +210,25 @@ public void testAllowAccessToClassProperty() throws Exception {
     <li>1.8.3
       <ul>
         <li><a href="https://commons.apache.org/beanutils/javadocs/v1.8.3/RELEASE-NOTES.txt">Release Notes</a></li>
-        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.8.3/apidocs/index.html">JavaDoc</a></li>
+        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.8.3/apidocs/index.html">Javadoc</a></li>
       </ul>
     </li>
     <li>1.8.2
       <ul>
         <li><a href="https://commons.apache.org/beanutils/javadocs/v1.8.2/RELEASE-NOTES.txt">Release Notes</a></li>
-        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.8.2/apidocs/index.html">JavaDoc</a></li>
+        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.8.2/apidocs/index.html">Javadoc</a></li>
       </ul>
     </li>
     <li>1.8.1
       <ul>
         <li><a href="https://commons.apache.org/beanutils/javadocs/v1.8.1/RELEASE-NOTES.txt">Release Notes</a></li>
-        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.8.1/apidocs/index.html">JavaDoc</a></li>
+        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.8.1/apidocs/index.html">Javadoc</a></li>
       </ul>
     </li>
     <li>1.8.0
       <ul>
         <li><a href="https://commons.apache.org/beanutils/javadocs/v1.8.0/RELEASE-NOTES.txt">Release Notes</a></li>
-        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.8.0/apidocs/index.html">JavaDoc</a></li>
+        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.8.0/apidocs/index.html">Javadoc</a></li>
       </ul>
     </li>
   </ul>
