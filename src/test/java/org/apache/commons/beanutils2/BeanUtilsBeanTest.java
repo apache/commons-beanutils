@@ -24,13 +24,12 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 import org.apache.commons.beanutils2.converters.ArrayConverter;
 import org.apache.commons.beanutils2.converters.DateConverter;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -1260,9 +1259,168 @@ class BeanUtilsBeanTest {
     }
 
     /**
+     * Test copying a new value to a write-only property, make sure the trace level log output correct.
+     */
+    @Test
+    public void testCopyPropertyLogTrace() throws Exception {
+        LogSpy logSpy = new LogSpy(LogFactory.getLog(BeanUtilsBean.class));
+        final BeanUtilsBean beanUtils = new BeanUtilsBean(new ConvertUtilsBean(), new PropertyUtilsBean());
+        BeanUtilsBean.setLOG(logSpy);
+        beanUtils.copyProperty(bean, "writeOnlyProperty", "New value");
+        assertEquals("  copyProperty(" + bean.toString() + ", writeOnlyProperty, New value)", logSpy.getTraceMessages().get(0));
+    }
+
+    /**
+     * Test copying a null value to a write-only property, make sure the trace level log output correct.
+     */
+    @Test
+    public void testCopyPropertyLogTraceWithNull() throws Exception {
+        LogSpy logSpy = new LogSpy(LogFactory.getLog(BeanUtilsBean.class));
+        final BeanUtilsBean beanUtils = new BeanUtilsBean(new ConvertUtilsBean(), new PropertyUtilsBean());
+        BeanUtilsBean.setLOG(logSpy);
+        beanUtils.copyProperty(bean, "writeOnlyProperty", null);
+        assertEquals("  copyProperty(" + bean.toString() + ", writeOnlyProperty, <NULL>)", logSpy.getTraceMessages().get(0));
+    }
+
+    /**
+     * Test copying a new value to a write-only property, which the bean to be writen has {@code @Override toString()} method,
+     * make sure the trace level log output correct.
+     */
+    @Test
+    public void testCopyPropertyLogTraceWhenBeanOverRidesToString() throws Exception {
+        final TestBean2 bean = new TestBean2();
+        LogSpy logSpy = new LogSpy(LogFactory.getLog(BeanUtilsBean.class));
+        final BeanUtilsBean beanUtils = new BeanUtilsBean(new ConvertUtilsBean(), new PropertyUtilsBean());
+        BeanUtilsBean.setLOG(logSpy);
+        beanUtils.copyProperty(bean, "writeOnlyProperty", "New value");
+        assertEquals("  copyProperty(" + bean.toString() + ", writeOnlyProperty, has been set)", logSpy.getTraceMessages().get(0));
+    }
+
+    /**
      * Throw an exception with the specified message.
      */
     private void throwException(final String msg) throws Throwable {
         throw new Exception(msg);
+    }
+
+    /**
+     * Build a minimum implement of Log, contains log output
+     * <strong>Only use for test</strong>
+     */
+    private class LogSpy implements Log {
+        private final Log originalLog;
+        private final List<Object> traceMessages = new ArrayList<>();
+
+        public List<Object> getTraceMessages() {
+            return traceMessages;
+        }
+
+        public LogSpy(Log originalLog) {
+            this.originalLog = originalLog;
+        }
+
+        @Override
+        public void debug(Object message) {
+            originalLog.debug(message);
+        }
+
+        // Implement or delegate other methods in the Log interface
+        @Override
+        public void debug(Object message, Throwable t) {
+            originalLog.debug(message, t);
+        }
+
+        @Override
+        public void error(Object message) {
+            originalLog.error(message);
+        }
+
+        @Override
+        public void error(Object message, Throwable t) {
+            originalLog.error(message, t);
+        }
+
+        @Override
+        public void fatal(Object message) {
+            originalLog.fatal(message);
+        }
+
+        @Override
+        public void fatal(Object message, Throwable t) {
+            originalLog.fatal(message, t);
+        }
+
+        @Override
+        public void info(Object message) {
+            originalLog.info(message);
+        }
+
+        @Override
+        public void info(Object message, Throwable t) {
+            originalLog.info(message, t);
+        }
+
+        @Override
+        public boolean isDebugEnabled() {
+            return originalLog.isDebugEnabled();
+        }
+
+        @Override
+        public boolean isErrorEnabled() {
+            return originalLog.isErrorEnabled();
+        }
+
+        @Override
+        public boolean isFatalEnabled() {
+            return originalLog.isFatalEnabled();
+        }
+
+        @Override
+        public boolean isInfoEnabled() {
+            return originalLog.isInfoEnabled();
+        }
+
+        @Override
+        public boolean isTraceEnabled() {
+            return true;
+//            return originalLog.isTraceEnabled();
+        }
+
+        @Override
+        public boolean isWarnEnabled() {
+            return originalLog.isWarnEnabled();
+        }
+
+        @Override
+        public void trace(Object message) {
+            traceMessages.add(message);
+            originalLog.trace(message);
+        }
+
+        @Override
+        public void trace(Object message, Throwable t) {
+            originalLog.trace(message, t);
+        }
+
+        @Override
+        public void warn(Object message) {
+            originalLog.warn(message);
+        }
+
+        @Override
+        public void warn(Object message, Throwable t) {
+            originalLog.warn(message, t);
+        }
+    }
+
+    /**
+     * A testBean has {@code @Override toString()},
+     * <strong>only use for test</strong>
+     */
+    class TestBean2 extends TestBean {
+        @Override
+        public String toString() {
+            return super.toString();
+        }
     }
 }
