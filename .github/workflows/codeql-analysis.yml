@@ -14,7 +14,11 @@
 # limitations under the License.
 
 name: "CodeQL"
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - 'master'
+  pull_request: {}
 
 permissions:
   contents: read
