@@ -18,6 +18,7 @@
 package org.apache.commons.beanutils.bugs;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.beans.BeanInfo;
 import java.beans.IndexedPropertyDescriptor;
@@ -27,7 +28,6 @@ import java.beans.PropertyDescriptor;
 import java.util.List;
 
 import org.apache.commons.beanutils.PropertyUtils;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -60,7 +60,7 @@ public class Jira422Test {
                 return;
             }
         }
-        Assertions.fail("Could not find PropertyDescriptor for 'file'");
+       fail("Could not find PropertyDescriptor for 'file'");
     }
 
     @Test
