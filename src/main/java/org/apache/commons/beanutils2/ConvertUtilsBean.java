@@ -532,8 +532,9 @@ public class ConvertUtilsBean {
 
     /**
      * Registers the converters for other types.
-     * </p>
+     * <p>
      * This method registers the following converters:
+     * </p>
      * <ul>
      * <li>{@code Class.class} - {@link ClassConverter}</li>
      * <li>{@code Enum.class} - {@link EnumConverter}</li>
@@ -605,8 +606,9 @@ public class ConvertUtilsBean {
 
     /**
      * Registers the converters for primitive types.
-     * </p>
+     * <p>
      * This method registers the following converters:
+     * </p>
      * <ul>
      * <li>{@code Boolean.TYPE} - {@link BooleanConverter}</li>
      * <li>{@code Byte.TYPE} - {@link ByteConverter}</li>
@@ -634,8 +636,9 @@ public class ConvertUtilsBean {
 
     /**
      * Registers the converters for standard types.
-     * </p>
+     * <p>
      * This method registers the following converters:
+     * </p>
      * <ul>
      * <li>{@code BigDecimal.class} - {@link BigDecimalConverter}</li>
      * <li>{@code BigInteger.class} - {@link BigIntegerConverter}</li>

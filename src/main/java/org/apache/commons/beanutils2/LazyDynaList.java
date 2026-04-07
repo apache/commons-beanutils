@@ -596,14 +596,12 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
     /**
-     * <p>
      * Transform the element into a DynaBean:
-     * </p>
-     *
      * <ul>
      * <li>Map elements are turned into LazyDynaMap's.</li>
      * <li>POJO Beans are "wrapped" in a WrapDynaBean.</li>
-     * <li>DynaBeans are unchanged.</li></li>
+     * <li>DynaBeans are unchanged.</li>
+     * </ul>
      *
      * @param element The element to transformed.
      * @return The DynaBean to store in the List.
