@@ -23,7 +23,7 @@ import java.lang.reflect.Modifier;
 import junit.framework.TestCase;
 
 /**
- * Tests {@link ConstructorUtils} </p>
+ * Tests {@link ConstructorUtils}.
  */
 @SuppressWarnings("deprecation")
 public class ConstructorUtilsTest extends TestCase {
@@ -31,7 +31,7 @@ public class ConstructorUtilsTest extends TestCase {
     /**
      * Construct a new instance of this test case.
      *
-     * @param name Name of the test case
+     * @param name Name of the test case.
      */
     public ConstructorUtilsTest(final String name) {
         super(name);
