@@ -42,17 +42,17 @@ public class SuppressPropertiesBeanIntrospectorTest extends TestCase {
 
         @Override
         public void addPropertyDescriptor(final PropertyDescriptor desc) {
-            throw new UnsupportedOperationException("Unexpected method call!");
+            throw new UnsupportedOperationException("Unexpected method call.");
         }
 
         @Override
         public void addPropertyDescriptors(final PropertyDescriptor[] descriptors) {
-            throw new UnsupportedOperationException("Unexpected method call!");
+            throw new UnsupportedOperationException("Unexpected method call.");
         }
 
         @Override
         public PropertyDescriptor getPropertyDescriptor(final String name) {
-            throw new UnsupportedOperationException("Unexpected method call!");
+            throw new UnsupportedOperationException("Unexpected method call.");
         }
 
         /**
@@ -66,17 +66,17 @@ public class SuppressPropertiesBeanIntrospectorTest extends TestCase {
 
         @Override
         public Class<?> getTargetClass() {
-            throw new UnsupportedOperationException("Unexpected method call!");
+            throw new UnsupportedOperationException("Unexpected method call.");
         }
 
         @Override
         public boolean hasProperty(final String name) {
-            throw new UnsupportedOperationException("Unexpected method call!");
+            throw new UnsupportedOperationException("Unexpected method call.");
         }
 
         @Override
         public Set<String> propertyNames() {
-            throw new UnsupportedOperationException("Unexpected method call!");
+            throw new UnsupportedOperationException("Unexpected method call.");
         }
 
         @Override

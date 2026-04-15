@@ -69,7 +69,7 @@ public class SuppressPropertiesBeanIntrospector implements BeanIntrospector {
      */
     public SuppressPropertiesBeanIntrospector(final Collection<String> propertiesToSuppress) {
         if (propertiesToSuppress == null) {
-            throw new IllegalArgumentException("Property names must not be null!");
+            throw new IllegalArgumentException("Property names must not be null.");
         }
 
         propertyNames = Collections.unmodifiableSet(new HashSet<>(
