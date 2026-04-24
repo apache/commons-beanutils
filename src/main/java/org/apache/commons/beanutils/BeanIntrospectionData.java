@@ -93,10 +93,10 @@ class BeanIntrospectionData {
 
     /**
      * Returns the {@code PropertyDescriptor} for the property with the specified name. If
-     * this property is unknown, result is <strong>null</strong>.
+     * this property is unknown, result is {@code null}.
      *
      * @param name the name of the property in question
-     * @return the {@code PropertyDescriptor} for this property or <strong>null</strong>
+     * @return the {@code PropertyDescriptor} for this property or {@code null}
      */
     public PropertyDescriptor getDescriptor(final String name) {
         for (final PropertyDescriptor pd : getDescriptors()) {
@@ -127,7 +127,7 @@ class BeanIntrospectionData {
      *
      * @param beanCls the class of the affected bean
      * @param desc the {@code PropertyDescriptor} of the desired property
-     * @return the write method for this property or <strong>null</strong> if there is none
+     * @return the write method for this property or {@code null} if there is none
      */
     public Method getWriteMethod(final Class<?> beanCls, final PropertyDescriptor desc) {
         Method method = desc.getWriteMethod();

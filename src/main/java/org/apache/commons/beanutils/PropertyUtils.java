@@ -107,8 +107,8 @@ public class PropertyUtils {
      * property descriptors of a class need to be obtained.
      *
      * @param introspector the {@code BeanIntrospector} to be added (must
-     *        not be <strong>null</strong>
-     * @throws IllegalArgumentException if the argument is <strong>null</strong>
+     *        not be {@code null}
+     * @throws IllegalArgumentException if the argument is {@code null}
      * @since 1.9
      */
     public static void addBeanIntrospector(final BeanIntrospector introspector) {

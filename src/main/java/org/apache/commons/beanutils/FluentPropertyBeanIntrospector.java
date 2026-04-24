@@ -101,8 +101,8 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
      * initializes it with the prefix for write methods used by the classes to
      * be inspected.
      *
-     * @param writePrefix the prefix for write methods (must not be <strong>null</strong>)
-     * @throws IllegalArgumentException if the prefix is <strong>null</strong>
+     * @param writePrefix the prefix for write methods (must not be {@code null})
+     * @throws IllegalArgumentException if the prefix is {@code null}
      */
     public FluentPropertyBeanIntrospector(final String writePrefix) {
         if (writePrefix == null) {

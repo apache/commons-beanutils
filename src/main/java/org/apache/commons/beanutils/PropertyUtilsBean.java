@@ -159,8 +159,8 @@ public class PropertyUtilsBean {
      * property descriptors of a class need to be obtained.
      *
      * @param introspector the {@code BeanIntrospector} to be added (must
-     *        not be <strong>null</strong>
-     * @throws IllegalArgumentException if the argument is <strong>null</strong>
+     *        not be {@code null}
+     * @throws IllegalArgumentException if the argument is {@code null}
      * @since 1.9
      */
     public void addBeanIntrospector(final BeanIntrospector introspector) {
@@ -531,7 +531,7 @@ public class PropertyUtilsBean {
      *
      * @param beanClass the bean class in question
      * @return the {@code BeanIntrospectionData} object for this class
-     * @throws IllegalArgumentException if the bean class is <strong>null</strong>
+     * @throws IllegalArgumentException if the bean class is {@code null}
      */
     private BeanIntrospectionData getIntrospectionData(final Class<?> beanClass) {
         if (beanClass == null) {
