@@ -20,6 +20,7 @@ package org.apache.commons.beanutils2.locale.converters;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.text.ParsePosition;
 import java.util.Locale;
 
 import org.apache.commons.beanutils2.ConversionException;
@@ -129,6 +130,12 @@ public class DecimalLocaleConverter<T extends Number> extends BaseLocaleConverte
             LOG.debug("No pattern provided, using default.");
         }
 
-        return (T) formatter.parse((String) value);
+        final String strValue = (String) value;
+        final ParsePosition pos = new ParsePosition(0);
+        final Number parsed = formatter.parse(strValue, pos);
+        if (parsed == null || pos.getErrorIndex() >= 0 || pos.getIndex() != strValue.length()) {
+            throw new ParseException("Error parsing '" + strValue + "' as a number", pos.getIndex());
+        }
+        return (T) parsed;
     }
 }
