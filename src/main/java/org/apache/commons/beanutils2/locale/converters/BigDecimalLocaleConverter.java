@@ -88,4 +88,9 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter<BigDecimal
         }
     }
 
+    @Override
+    protected boolean isParseBigDecimal() {
+        return true;
+    }
+
 }
