@@ -87,10 +87,10 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
     /**
      * Create a {@link LocaleConverter} that will throw a {@link ConversionException}
      * if a conversion error occurs.
-     * An unlocalized pattern is used for the convertion.
+     * An unlocalized pattern is used for the conversion.
      *
      * @param locale        The locale
-     * @param pattern       The convertion pattern
+     * @param pattern       The conversion pattern
      */
     protected BaseLocaleConverter(final Locale locale, final String pattern) {
 
@@ -102,7 +102,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * if a conversion error occurs.
      *
      * @param locale        The locale
-     * @param pattern       The convertion pattern
+     * @param pattern       The conversion pattern
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     protected BaseLocaleConverter(final Locale locale, final String pattern, final boolean locPattern) {
@@ -113,11 +113,11 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
     /**
      * Create a {@link LocaleConverter} that will return the specified default value
      * if a conversion error occurs.
-     * An unlocalized pattern is used for the convertion.
+     * An unlocalized pattern is used for the conversion.
      *
      * @param defaultValue  The default value to be returned
      * @param locale        The locale
-     * @param pattern       The convertion pattern
+     * @param pattern       The conversion pattern
      */
     protected BaseLocaleConverter(final Object defaultValue, final Locale locale, final String pattern) {
 
@@ -130,7 +130,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      *
      * @param defaultValue  The default value to be returned
      * @param locale        The locale
-     * @param pattern       The convertion pattern
+     * @param pattern       The conversion pattern
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     protected BaseLocaleConverter(final Object defaultValue, final Locale locale, final String pattern, final boolean locPattern) {
@@ -144,7 +144,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      *
      * @param defaultValue  The default value to be returned
      * @param locale        The locale
-     * @param pattern       The convertion pattern
+     * @param pattern       The conversion pattern
      * @param useDefault    Indicate whether the default value is used or not
      * @param locPattern    Indicate whether the pattern is localized or not
      */
@@ -166,7 +166,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
 
     /**
      * Convert the specified locale-sensitive input object into an output object of the
-     * specified type. The default pattern is used for the convertion.
+     * specified type. The default pattern is used for the conversion.
      *
      * @param <T> The desired target type of the conversion
      * @param type Data type to which this value should be converted
@@ -269,7 +269,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * specified type.
      *
      * @param value The input object to be converted
-     * @param pattern The pattern is used for the convertion
+     * @param pattern The pattern is used for the conversion
      * @return The converted value
      * @throws ParseException if conversion cannot be performed
      *  successfully

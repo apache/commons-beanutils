@@ -32,162 +32,140 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <p>Standard {@link org.apache.commons.beanutils.locale.LocaleConverter}
- * implementation that converts an incoming
- * locale-sensitive object into a {@code java.lang.String} object,
- * optionally using a default value or throwing a
- * {@link org.apache.commons.beanutils.ConversionException}
- * if a conversion error occurs.</p>
+ * Standard {@link org.apache.commons.beanutils.locale.LocaleConverter} implementation that converts an incoming locale-sensitive object into a
+ * {@code java.lang.String} object, optionally using a default value or throwing a {@link org.apache.commons.beanutils.ConversionException} if a conversion
+ * error occurs.
  */
 public class StringLocaleConverter extends BaseLocaleConverter {
 
-    /** All logging goes through this logger */
-    private final Log log = LogFactory.getLog(StringLocaleConverter.class);     //msz fix
+    /** All logging goes through this logger. */
+    private final Log log = LogFactory.getLog(StringLocaleConverter.class); // msz fix
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will throw a {@link org.apache.commons.beanutils.ConversionException}
-     * if a conversion error occurs. The locale is the default locale for
-     * this instance of the Java Virtual Machine and an unlocalized pattern is used
-     * for the convertion.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will throw a {@link org.apache.commons.beanutils.ConversionException} if a
+     * conversion error occurs. The locale is the default locale for this instance of the Java Virtual Machine and an unlocalized pattern is used for the
+     * conversion.
      */
     public StringLocaleConverter() {
         this(false);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will throw a {@link org.apache.commons.beanutils.ConversionException}
-     * if a conversion error occurs. The locale is the default locale for
-     * this instance of the Java Virtual Machine.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will throw a {@link org.apache.commons.beanutils.ConversionException} if a
+     * conversion error occurs. The locale is the default locale for this instance of the Java Virtual Machine.
      *
-     * @param locPattern    Indicate whether the pattern is localized or not
+     * @param locPattern Indicate whether the pattern is localized or not.
      */
     public StringLocaleConverter(final boolean locPattern) {
         this(Locale.getDefault(), locPattern);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will throw a {@link org.apache.commons.beanutils.ConversionException}
-     * if a conversion error occurs. An unlocalized pattern is used for the convertion.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will throw a {@link org.apache.commons.beanutils.ConversionException} if a
+     * conversion error occurs. An unlocalized pattern is used for the conversion.
      *
-     * @param locale        The locale
+     * @param locale The locale.
      */
     public StringLocaleConverter(final Locale locale) {
         this(locale, false);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will throw a {@link org.apache.commons.beanutils.ConversionException}
-     * if a conversion error occurs.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will throw a {@link org.apache.commons.beanutils.ConversionException} if a
+     * conversion error occurs.
      *
-     * @param locale        The locale
-     * @param locPattern    Indicate whether the pattern is localized or not
+     * @param locale     The locale.
+     * @param locPattern Indicate whether the pattern is localized or not.
      */
     public StringLocaleConverter(final Locale locale, final boolean locPattern) {
         this(locale, (String) null, locPattern);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will throw a {@link org.apache.commons.beanutils.ConversionException}
-     * if a conversion error occurs. An unlocalized pattern is used for the convertion.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will throw a {@link org.apache.commons.beanutils.ConversionException} if a
+     * conversion error occurs. An unlocalized pattern is used for the conversion.
      *
-     * @param locale        The locale
-     * @param pattern       The convertion pattern
+     * @param locale  The locale.
+     * @param pattern The conversion pattern.
      */
     public StringLocaleConverter(final Locale locale, final String pattern) {
         this(locale, pattern, false);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will throw a {@link org.apache.commons.beanutils.ConversionException}
-     * if a conversion error occurs.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will throw a {@link org.apache.commons.beanutils.ConversionException} if a
+     * conversion error occurs.
      *
-     * @param locale        The locale
-     * @param pattern       The convertion pattern
-     * @param locPattern    Indicate whether the pattern is localized or not
+     * @param locale     The locale.
+     * @param pattern    The conversion pattern.
+     * @param locPattern Indicate whether the pattern is localized or not.
      */
     public StringLocaleConverter(final Locale locale, final String pattern, final boolean locPattern) {
         super(locale, pattern, locPattern);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will return the specified default value
-     * if a conversion error occurs. The locale is the default locale for
-     * this instance of the Java Virtual Machine and an unlocalized pattern is used
-     * for the convertion.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will return the specified default value if a conversion error occurs. The
+     * locale is the default locale for this instance of the Java Virtual Machine and an unlocalized pattern is used for the conversion.
      *
-     * @param defaultValue  The default value to be returned
+     * @param defaultValue The default value to be returned.
      */
     public StringLocaleConverter(final Object defaultValue) {
         this(defaultValue, false);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will return the specified default value
-     * if a conversion error occurs. The locale is the default locale for
-     * this instance of the Java Virtual Machine.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will return the specified default value if a conversion error occurs. The
+     * locale is the default locale for this instance of the Java Virtual Machine.
      *
-     * @param defaultValue  The default value to be returned
-     * @param locPattern    Indicate whether the pattern is localized or not
+     * @param defaultValue The default value to be returned.
+     * @param locPattern   Indicate whether the pattern is localized or not.
      */
     public StringLocaleConverter(final Object defaultValue, final boolean locPattern) {
         this(defaultValue, Locale.getDefault(), locPattern);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will return the specified default value
-     * if a conversion error occurs. An unlocalized pattern is used for the convertion.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will return the specified default value if a conversion error occurs. An
+     * unlocalized pattern is used for the conversion.
      *
-     * @param defaultValue  The default value to be returned
-     * @param locale        The locale
+     * @param defaultValue The default value to be returned.
+     * @param locale       The locale.
      */
     public StringLocaleConverter(final Object defaultValue, final Locale locale) {
         this(defaultValue, locale, false);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will return the specified default value
-     * if a conversion error occurs.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will return the specified default value if a conversion error occurs.
      *
-     * @param defaultValue  The default value to be returned
-     * @param locale        The locale
-     * @param locPattern    Indicate whether the pattern is localized or not
+     * @param defaultValue The default value to be returned.
+     * @param locale       The locale.
+     * @param locPattern   Indicate whether the pattern is localized or not.
      */
     public StringLocaleConverter(final Object defaultValue, final Locale locale, final boolean locPattern) {
         this(defaultValue, locale, null, locPattern);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will return the specified default value
-     * if a conversion error occurs. An unlocalized pattern is used for the convertion.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will return the specified default value if a conversion error occurs. An
+     * unlocalized pattern is used for the conversion.
      *
-     * @param defaultValue  The default value to be returned
-     * @param locale        The locale
-     * @param pattern       The convertion pattern
+     * @param defaultValue The default value to be returned.
+     * @param locale       The locale.
+     * @param pattern      The conversion pattern.
      */
     public StringLocaleConverter(final Object defaultValue, final Locale locale, final String pattern) {
         this(defaultValue, locale, pattern, false);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will return the specified default value
-     * if a conversion error occurs.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will return the specified default value if a conversion error occurs.
      *
-     * @param defaultValue  The default value to be returned
-     * @param locale        The locale
-     * @param pattern       The convertion pattern
-     * @param locPattern    Indicate whether the pattern is localized or not
+     * @param defaultValue The default value to be returned.
+     * @param locale       The locale.
+     * @param pattern      The conversion pattern.
+     * @param locPattern   Indicate whether the pattern is localized or not.
      */
     public StringLocaleConverter(final Object defaultValue, final Locale locale, final String pattern, final boolean locPattern) {
         super(defaultValue, locale, pattern, locPattern);
@@ -196,17 +174,14 @@ public class StringLocaleConverter extends BaseLocaleConverter {
     /**
      * Make an instance of DecimalFormat.
      *
-     * @param locale The locale
-     * @param pattern The pattern is used for the convertion
-     * @return The format for the locale and pattern
-     * @throws ConversionException if conversion cannot be performed
-     *  successfully
-     * @throws ParseException if an error occurs parsing a String to a Number
+     * @param locale  The locale.
+     * @param pattern The pattern is used for the conversion.
+     * @return The format for the locale and pattern.
+     * @throws ConversionException if conversion cannot be performed successfully.
+     * @throws ParseException      if an error occurs parsing a String to a Number.
      */
     private DecimalFormat getDecimalFormat(final Locale locale, final String pattern) {
-
         final DecimalFormat numberFormat = (DecimalFormat) NumberFormat.getInstance(locale);
-
         // if some constructors default pattern to null, it makes only sense to handle null pattern gracefully
         if (pattern != null) {
             if (locPattern) {
@@ -217,51 +192,31 @@ public class StringLocaleConverter extends BaseLocaleConverter {
         } else {
             log.debug("No pattern provided, using default.");
         }
-
         return numberFormat;
     }
 
     /**
-     * Convert the specified locale-sensitive input object into an output object of the
-     * specified type.
+     * Convert the specified locale-sensitive input object into an output object of the specified type.
      *
-     * @param value The input object to be converted
-     * @param pattern The pattern is used for the convertion
-     * @return The converted value
-     * @throws org.apache.commons.beanutils.ConversionException if conversion
-     * cannot be performed successfully
-     * @throws ParseException if an error occurs
+     * @param value   The input object to be converted.
+     * @param pattern The pattern is used for the conversion.
+     * @return The converted value.
+     * @throws org.apache.commons.beanutils.ConversionException if conversion cannot be performed successfully.
+     * @throws ParseException                                   if an error occurs.
      */
     @Override
     protected Object parse(final Object value, final String pattern) throws ParseException {
-
         String result = null;
-
-        if (value instanceof Integer ||
-                value instanceof Long ||
-                value instanceof BigInteger ||
-                value instanceof Byte ||
-                value instanceof Short) {
-
+        if (value instanceof Integer || value instanceof Long || value instanceof BigInteger || value instanceof Byte || value instanceof Short) {
             result = getDecimalFormat(locale, pattern).format(((Number) value).longValue());
-        }
-        else if (value instanceof Double ||
-                value instanceof BigDecimal ||
-                value instanceof Float) {
-
+        } else if (value instanceof Double || value instanceof BigDecimal || value instanceof Float) {
             result = getDecimalFormat(locale, pattern).format(((Number) value).doubleValue());
-        }
-        else if (value instanceof Date) { // java.util.Date, java.sql.Date, java.sql.Time, java.sql.Timestamp
-
-            final SimpleDateFormat dateFormat =
-                    new SimpleDateFormat(pattern, locale);
-
+        } else if (value instanceof Date) { // java.util.Date, java.sql.Date, java.sql.Time, java.sql.Timestamp
+            final SimpleDateFormat dateFormat = new SimpleDateFormat(pattern, locale);
             result = dateFormat.format(value);
-        }
-        else {
+        } else {
             result = value.toString();
         }
-
         return result;
     }
 }

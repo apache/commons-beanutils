@@ -32,13 +32,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <p>Standard {@link org.apache.commons.beanutils.locale.LocaleConverter}
- * implementation that converts an incoming
- * locale-sensitive String into a {@code java.util.Date} object,
- * optionally using a default value or throwing a
- * {@link org.apache.commons.beanutils.ConversionException}
- * if a conversion error occurs.</p>
- *
+ * Standard {@link org.apache.commons.beanutils.locale.LocaleConverter} implementation that converts an incoming locale-sensitive String into a
+ * {@code java.util.Date} object, optionally using a default value or throwing a {@link org.apache.commons.beanutils.ConversionException} if a conversion error
+ * occurs.
  */
 public class DateLocaleConverter extends BaseLocaleConverter {
 
@@ -48,177 +44,157 @@ public class DateLocaleConverter extends BaseLocaleConverter {
     private static final String DEFAULT_PATTERN_CHARS = DateLocaleConverter.initDefaultChars();
 
     /**
-     * This method is called at class initialization time to define the
-     * value for constant member DEFAULT_PATTERN_CHARS. All other methods needing
-     * this data should just read that constant.
+     * This method is called at class initialization time to define the value for constant member DEFAULT_PATTERN_CHARS. All other methods needing this data
+     * should just read that constant.
      */
     private static String initDefaultChars() {
         final DateFormatSymbols defaultSymbols = new DateFormatSymbols(Locale.US);
         return defaultSymbols.getLocalPatternChars();
     }
 
-    /** All logging goes through this logger */
+    /** All logging goes through this logger. */
     private final Log log = LogFactory.getLog(DateLocaleConverter.class);
 
-    /** Should the date conversion be lenient? */
+    /** Should the date conversion be lenient. */
     boolean isLenient;
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will throw a {@link org.apache.commons.beanutils.ConversionException}
-     * if a conversion error occurs. The locale is the default locale for
-     * this instance of the Java Virtual Machine and an unlocalized pattern is used
-     * for the convertion.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will throw a {@link org.apache.commons.beanutils.ConversionException} if a
+     * conversion error occurs. The locale is the default locale for this instance of the Java Virtual Machine and an unlocalized pattern is used for the
+     * conversion.
      */
     public DateLocaleConverter() {
         this(false);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will throw a {@link org.apache.commons.beanutils.ConversionException}
-     * if a conversion error occurs. The locale is the default locale for
-     * this instance of the Java Virtual Machine.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will throw a {@link org.apache.commons.beanutils.ConversionException} if a
+     * conversion error occurs. The locale is the default locale for this instance of the Java Virtual Machine.
      *
-     * @param locPattern    Indicate whether the pattern is localized or not
+     * @param locPattern Indicate whether the pattern is localized or not.
      */
     public DateLocaleConverter(final boolean locPattern) {
         this(Locale.getDefault(), locPattern);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will throw a {@link org.apache.commons.beanutils.ConversionException}
-     * if a conversion error occurs. An unlocalized pattern is used for the convertion.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will throw a {@link org.apache.commons.beanutils.ConversionException} if a
+     * conversion error occurs. An unlocalized pattern is used for the conversion.
      *
-     * @param locale        The locale
+     * @param locale The locale.
      */
     public DateLocaleConverter(final Locale locale) {
         this(locale, false);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will throw a {@link org.apache.commons.beanutils.ConversionException}
-     * if a conversion error occurs.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will throw a {@link org.apache.commons.beanutils.ConversionException} if a
+     * conversion error occurs.
      *
-     * @param locale        The locale
-     * @param locPattern    Indicate whether the pattern is localized or not
+     * @param locale     The locale.
+     * @param locPattern Indicate whether the pattern is localized or not.
      */
     public DateLocaleConverter(final Locale locale, final boolean locPattern) {
         this(locale, (String) null, locPattern);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will throw a {@link org.apache.commons.beanutils.ConversionException}
-     * if a conversion error occurs. An unlocalized pattern is used for the convertion.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will throw a {@link org.apache.commons.beanutils.ConversionException} if a
+     * conversion error occurs. An unlocalized pattern is used for the conversion.
      *
-     * @param locale        The locale
-     * @param pattern       The convertion pattern
+     * @param locale  The locale.
+     * @param pattern The conversion pattern.
      */
     public DateLocaleConverter(final Locale locale, final String pattern) {
         this(locale, pattern, false);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will throw a {@link org.apache.commons.beanutils.ConversionException}
-     * if a conversion error occurs.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will throw a {@link org.apache.commons.beanutils.ConversionException} if a
+     * conversion error occurs.
      *
-     * @param locale        The locale
-     * @param pattern       The convertion pattern
-     * @param locPattern    Indicate whether the pattern is localized or not
+     * @param locale     The locale.
+     * @param pattern    The conversion pattern.
+     * @param locPattern Indicate whether the pattern is localized or not.
      */
     public DateLocaleConverter(final Locale locale, final String pattern, final boolean locPattern) {
         super(locale, pattern, locPattern);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will return the specified default value
-     * if a conversion error occurs. The locale is the default locale for
-     * this instance of the Java Virtual Machine and an unlocalized pattern is used
-     * for the convertion.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will return the specified default value if a conversion error occurs. The
+     * locale is the default locale for this instance of the Java Virtual Machine and an unlocalized pattern is used for the conversion.
      *
-     * @param defaultValue  The default value to be returned
+     * @param defaultValue The default value to be returned.
      */
     public DateLocaleConverter(final Object defaultValue) {
         this(defaultValue, false);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will return the specified default value
-     * if a conversion error occurs. The locale is the default locale for
-     * this instance of the Java Virtual Machine.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will return the specified default value if a conversion error occurs. The
+     * locale is the default locale for this instance of the Java Virtual Machine.
      *
-     * @param defaultValue  The default value to be returned
-     * @param locPattern    Indicate whether the pattern is localized or not
+     * @param defaultValue The default value to be returned.
+     * @param locPattern   Indicate whether the pattern is localized or not.
      */
     public DateLocaleConverter(final Object defaultValue, final boolean locPattern) {
         this(defaultValue, Locale.getDefault(), locPattern);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will return the specified default value
-     * if a conversion error occurs. An unlocalized pattern is used for the convertion.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will return the specified default value if a conversion error occurs. An
+     * unlocalized pattern is used for the conversion.
      *
-     * @param defaultValue  The default value to be returned
-     * @param locale        The locale
+     * @param defaultValue The default value to be returned.
+     * @param locale       The locale.
      */
     public DateLocaleConverter(final Object defaultValue, final Locale locale) {
         this(defaultValue, locale, false);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will return the specified default value
-     * if a conversion error occurs.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will return the specified default value if a conversion error occurs.
      *
-     * @param defaultValue  The default value to be returned
-     * @param locale        The locale
-     * @param locPattern    Indicate whether the pattern is localized or not
+     * @param defaultValue The default value to be returned.
+     * @param locale       The locale.
+     * @param locPattern   Indicate whether the pattern is localized or not.
      */
     public DateLocaleConverter(final Object defaultValue, final Locale locale, final boolean locPattern) {
         this(defaultValue, locale, null, locPattern);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will return the specified default value
-     * if a conversion error occurs. An unlocalized pattern is used for the convertion.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will return the specified default value if a conversion error occurs. An
+     * unlocalized pattern is used for the conversion.
      *
-     * @param defaultValue  The default value to be returned
-     * @param locale        The locale
-     * @param pattern       The convertion pattern
+     * @param defaultValue The default value to be returned.
+     * @param locale       The locale.
+     * @param pattern      The conversion pattern.
      */
     public DateLocaleConverter(final Object defaultValue, final Locale locale, final String pattern) {
         this(defaultValue, locale, pattern, false);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will return the specified default value
-     * if a conversion error occurs.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will return the specified default value if a conversion error occurs.
      *
-     * @param defaultValue  The default value to be returned
-     * @param locale        The locale
-     * @param pattern       The convertion pattern
-     * @param locPattern    Indicate whether the pattern is localized or not
+     * @param defaultValue The default value to be returned.
+     * @param locale       The locale.
+     * @param pattern      The conversion pattern.
+     * @param locPattern   Indicate whether the pattern is localized or not.
      */
     public DateLocaleConverter(final Object defaultValue, final Locale locale, final String pattern, final boolean locPattern) {
         super(defaultValue, locale, pattern, locPattern);
     }
 
     /**
-      * Convert a pattern from a localized format to the default format.
-      *
-      * @param locale   The locale
-      * @param localizedPattern The pattern in 'local' symbol format
-      * @return pattern in 'default' symbol format
-      */
+     * Convert a pattern from a localized format to the default format.
+     *
+     * @param locale           The locale.
+     * @param localizedPattern The pattern in 'local' symbol format.
+     * @return pattern in 'default' symbol format.
+     */
     private String convertLocalizedPattern(final String localizedPattern, final Locale locale) {
         if (localizedPattern == null) {
             return null;
@@ -243,7 +219,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
     }
 
     /**
-     * <p>Converts a Pattern from one character set to another.</p>
+     * Converts a Pattern from one character set to another.
      */
     private String convertPattern(final String pattern, final String fromChars, final String toChars) {
         final StringBuilder converted = new StringBuilder();
@@ -271,10 +247,10 @@ public class DateLocaleConverter extends BaseLocaleConverter {
         return converted.toString();
     }
 
-     /**
+    /**
      * Returns whether date formatting is lenient.
      *
-     * @return true if the {@code DateFormat} used for formatting is lenient
+     * @return true if the {@code DateFormat} used for formatting is lenient.
      * @see java.text.DateFormat#isLenient
      */
     public boolean isLenient() {
@@ -282,62 +258,50 @@ public class DateLocaleConverter extends BaseLocaleConverter {
     }
 
     /**
-     * Convert the specified locale-sensitive input object into an output object of the
-     * specified type.
+     * Convert the specified locale-sensitive input object into an output object of the specified type.
      *
-     * @param value The input object to be converted
-     * @param pattern The pattern is used for the convertion
-     * @return the converted Date value
-     * @throws org.apache.commons.beanutils.ConversionException
-     * if conversion cannot be performed successfully
-     * @throws ParseException if an error occurs parsing
+     * @param value   The input object to be converted.
+     * @param pattern The pattern is used for the conversion.
+     * @return the converted Date value.
+     * @throws org.apache.commons.beanutils.ConversionException if conversion cannot be performed successfully.
+     * @throws ParseException                                   if an error occurs parsing.
      */
     @Override
     protected Object parse(final Object value, String pattern) throws ParseException {
-
         // Handle Date
         if (value instanceof Date) {
             return value;
         }
-
         // Handle Calendar
         if (value instanceof Calendar) {
             return ((Calendar) value).getTime();
         }
-
-         if (locPattern) {
-             pattern = convertLocalizedPattern(pattern, locale);
-         }
-
-         // Create Formatter - use default if pattern is null
-         final DateFormat formatter = pattern == null ? DateFormat.getDateInstance(DateFormat.SHORT, locale)
-                                                : new SimpleDateFormat(pattern, locale);
-         formatter.setLenient(isLenient);
-
-         // Parse the Date
+        if (locPattern) {
+            pattern = convertLocalizedPattern(pattern, locale);
+        }
+        // Create Formatter - use default if pattern is null
+        final DateFormat formatter = pattern == null ? DateFormat.getDateInstance(DateFormat.SHORT, locale) : new SimpleDateFormat(pattern, locale);
+        formatter.setLenient(isLenient);
+        // Parse the Date
         final ParsePosition pos = new ParsePosition(0);
         final String strValue = value.toString();
         final Object parsedValue = formatter.parseObject(strValue, pos);
         if (pos.getErrorIndex() > -1) {
-            throw new ConversionException("Error parsing date '" + value +
-                    "' at position="+ pos.getErrorIndex());
+            throw new ConversionException("Error parsing date '" + value + "' at position=" + pos.getErrorIndex());
         }
         if (pos.getIndex() < strValue.length()) {
-            throw new ConversionException("Date '" + value +
-                    "' contains unparsed characters from position=" + pos.getIndex());
+            throw new ConversionException("Date '" + value + "' contains unparsed characters from position=" + pos.getIndex());
         }
-
         return parsedValue;
-     }
+    }
 
     /**
      * Specify whether or not date-time parsing should be lenient.
      *
-     * @param lenient true if the {@code DateFormat} used for formatting should be lenient
+     * @param lenient true if the {@code DateFormat} used for formatting should be lenient.
      * @see java.text.DateFormat#setLenient
      */
     public void setLenient(final boolean lenient) {
         isLenient = lenient;
     }
-
 }

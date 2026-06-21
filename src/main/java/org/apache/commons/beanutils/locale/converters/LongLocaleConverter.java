@@ -21,186 +21,158 @@ import java.text.ParseException;
 import java.util.Locale;
 
 /**
- * <p>Standard {@link org.apache.commons.beanutils.locale.LocaleConverter}
- * implementation that converts an incoming
- * locale-sensitive String into a {@code java.lang.Long} object,
- * optionally using a default value or throwing a
- * {@link org.apache.commons.beanutils.ConversionException}
- * if a conversion error occurs.</p>
+ * Standard {@link org.apache.commons.beanutils.locale.LocaleConverter} implementation that converts an incoming locale-sensitive String into a
+ * {@code java.lang.Long} object, optionally using a default value or throwing a {@link org.apache.commons.beanutils.ConversionException} if a conversion error
+ * occurs.
  */
 public class LongLocaleConverter extends DecimalLocaleConverter {
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will throw a {@link org.apache.commons.beanutils.ConversionException}
-     * if a conversion error occurs. The locale is the default locale for
-     * this instance of the Java Virtual Machine and an unlocalized pattern is used
-     * for the convertion.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will throw a {@link org.apache.commons.beanutils.ConversionException} if a
+     * conversion error occurs. The locale is the default locale for this instance of the Java Virtual Machine and an unlocalized pattern is used for the
+     * conversion.
      */
     public LongLocaleConverter() {
         this(false);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will throw a {@link org.apache.commons.beanutils.ConversionException}
-     * if a conversion error occurs. The locale is the default locale for
-     * this instance of the Java Virtual Machine.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will throw a {@link org.apache.commons.beanutils.ConversionException} if a
+     * conversion error occurs. The locale is the default locale for this instance of the Java Virtual Machine.
      *
-     * @param locPattern    Indicate whether the pattern is localized or not
+     * @param locPattern Indicate whether the pattern is localized or not.
      */
     public LongLocaleConverter(final boolean locPattern) {
         this(Locale.getDefault(), locPattern);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will throw a {@link org.apache.commons.beanutils.ConversionException}
-     * if a conversion error occurs. An unlocalized pattern is used for the convertion.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will throw a {@link org.apache.commons.beanutils.ConversionException} if a
+     * conversion error occurs. An unlocalized pattern is used for the conversion.
      *
-     * @param locale        The locale
+     * @param locale The locale.
      */
     public LongLocaleConverter(final Locale locale) {
         this(locale, false);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will throw a {@link org.apache.commons.beanutils.ConversionException}
-     * if a conversion error occurs.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will throw a {@link org.apache.commons.beanutils.ConversionException} if a
+     * conversion error occurs.
      *
-     * @param locale        The locale
-     * @param locPattern    Indicate whether the pattern is localized or not
+     * @param locale     The locale.
+     * @param locPattern Indicate whether the pattern is localized or not.
      */
     public LongLocaleConverter(final Locale locale, final boolean locPattern) {
         this(locale, (String) null, locPattern);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will throw a {@link org.apache.commons.beanutils.ConversionException}
-     * if a conversion error occurs. An unlocalized pattern is used for the convertion.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will throw a {@link org.apache.commons.beanutils.ConversionException} if a
+     * conversion error occurs. An unlocalized pattern is used for the conversion.
      *
-     * @param locale        The locale
-     * @param pattern       The convertion pattern
+     * @param locale  The locale.
+     * @param pattern The conversion pattern.
      */
     public LongLocaleConverter(final Locale locale, final String pattern) {
         this(locale, pattern, false);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will throw a {@link org.apache.commons.beanutils.ConversionException}
-     * if a conversion error occurs.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will throw a {@link org.apache.commons.beanutils.ConversionException} if a
+     * conversion error occurs.
      *
-     * @param locale        The locale
-     * @param pattern       The convertion pattern
-     * @param locPattern    Indicate whether the pattern is localized or not
+     * @param locale     The locale.
+     * @param pattern    The conversion pattern.
+     * @param locPattern Indicate whether the pattern is localized or not.
      */
     public LongLocaleConverter(final Locale locale, final String pattern, final boolean locPattern) {
         super(locale, pattern, locPattern);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will return the specified default value
-     * if a conversion error occurs. The locale is the default locale for
-     * this instance of the Java Virtual Machine and an unlocalized pattern is used
-     * for the convertion.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will return the specified default value if a conversion error occurs. The
+     * locale is the default locale for this instance of the Java Virtual Machine and an unlocalized pattern is used for the conversion.
      *
-     * @param defaultValue  The default value to be returned
+     * @param defaultValue The default value to be returned.
      */
     public LongLocaleConverter(final Object defaultValue) {
         this(defaultValue, false);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will return the specified default value
-     * if a conversion error occurs. The locale is the default locale for
-     * this instance of the Java Virtual Machine.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will return the specified default value if a conversion error occurs. The
+     * locale is the default locale for this instance of the Java Virtual Machine.
      *
-     * @param defaultValue  The default value to be returned
-     * @param locPattern    Indicate whether the pattern is localized or not
+     * @param defaultValue The default value to be returned.
+     * @param locPattern   Indicate whether the pattern is localized or not.
      */
     public LongLocaleConverter(final Object defaultValue, final boolean locPattern) {
         this(defaultValue, Locale.getDefault(), locPattern);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will return the specified default value
-     * if a conversion error occurs. An unlocalized pattern is used for the convertion.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will return the specified default value if a conversion error occurs. An
+     * unlocalized pattern is used for the conversion.
      *
-     * @param defaultValue  The default value to be returned
-     * @param locale        The locale
+     * @param defaultValue The default value to be returned.
+     * @param locale       The locale.
      */
     public LongLocaleConverter(final Object defaultValue, final Locale locale) {
         this(defaultValue, locale, false);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will return the specified default value
-     * if a conversion error occurs.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will return the specified default value if a conversion error occurs.
      *
-     * @param defaultValue  The default value to be returned
-     * @param locale        The locale
-     * @param locPattern    Indicate whether the pattern is localized or not
+     * @param defaultValue The default value to be returned.
+     * @param locale       The locale.
+     * @param locPattern   Indicate whether the pattern is localized or not.
      */
     public LongLocaleConverter(final Object defaultValue, final Locale locale, final boolean locPattern) {
         this(defaultValue, locale, null, locPattern);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will return the specified default value
-     * if a conversion error occurs. An unlocalized pattern is used for the convertion.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will return the specified default value if a conversion error occurs. An
+     * unlocalized pattern is used for the conversion.
      *
-     * @param defaultValue  The default value to be returned
-     * @param locale        The locale
-     * @param pattern       The convertion pattern
+     * @param defaultValue The default value to be returned.
+     * @param locale       The locale.
+     * @param pattern      The conversion pattern.
      */
     public LongLocaleConverter(final Object defaultValue, final Locale locale, final String pattern) {
         this(defaultValue, locale, pattern, false);
     }
 
     /**
-     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter}
-     * that will return the specified default value
-     * if a conversion error occurs.
+     * Constructs a {@link org.apache.commons.beanutils.locale.LocaleConverter} that will return the specified default value if a conversion error occurs.
      *
-     * @param defaultValue  The default value to be returned
-     * @param locale        The locale
-     * @param pattern       The convertion pattern
-     * @param locPattern    Indicate whether the pattern is localized or not
+     * @param defaultValue The default value to be returned.
+     * @param locale       The locale.
+     * @param pattern      The conversion pattern.
+     * @param locPattern   Indicate whether the pattern is localized or not.
      */
     public LongLocaleConverter(final Object defaultValue, final Locale locale, final String pattern, final boolean locPattern) {
         super(defaultValue, locale, pattern, locPattern);
     }
 
     /**
-     * Convert the specified locale-sensitive input object into an output object of the
-     * specified type. This method will return a Long type.
+     * Convert the specified locale-sensitive input object into an output object of the specified type. This method will return a Long type.
      *
-     * @param value The input object to be converted
-     * @param pattern The pattern is used for the convertion
-     * @return The converted value
-     * @throws org.apache.commons.beanutils.ConversionException if conversion
-     * cannot be performed successfully
-     * @throws ParseException if an error occurs parsing a String to a Number
+     * @param value   The input object to be converted.
+     * @param pattern The pattern is used for the conversion.
+     * @return The converted value.
+     * @throws org.apache.commons.beanutils.ConversionException if conversion cannot be performed successfully.
+     * @throws ParseException                                   if an error occurs parsing a String to a Number.
      * @since 1.8.0
      */
     @Override
     protected Object parse(final Object value, final String pattern) throws ParseException {
-
         final Object result = super.parse(value, pattern);
-
         if (result == null || result instanceof Long) {
             return result;
         }
-
-        return Long.valueOf(((Number)result).longValue());
-
+        return Long.valueOf(((Number) result).longValue());
     }
 }

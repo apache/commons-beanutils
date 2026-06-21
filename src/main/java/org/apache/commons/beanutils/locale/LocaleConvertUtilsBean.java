@@ -178,7 +178,7 @@ public class LocaleConvertUtilsBean {
         return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getLocaleConvertUtils();
     }
 
-    /** The locale - default for convertion. */
+    /** The locale - default for conversion. */
     private Locale defaultLocale = Locale.getDefault();
 
     /** Indicate whether the pattern is localized or not */
@@ -217,11 +217,11 @@ public class LocaleConvertUtilsBean {
 
     /**
      * Convert the specified locale-sensitive value into a String
-     * using the paticular convertion pattern.
+     * using the paticular conversion pattern.
      *
      * @param value The Value to be converted
      * @param locale The locale
-     * @param pattern The convertion pattern
+     * @param pattern The conversion pattern
      * @return the converted value
      * @throws org.apache.commons.beanutils.ConversionException if thrown by an
      * underlying Converter
@@ -238,7 +238,7 @@ public class LocaleConvertUtilsBean {
      * using the conversion pattern.
      *
      * @param value The Value to be converted
-     * @param pattern       The convertion pattern
+     * @param pattern       The conversion pattern
      * @return the converted value
      * @throws org.apache.commons.beanutils.ConversionException if thrown by an
      * underlying Converter
@@ -264,13 +264,13 @@ public class LocaleConvertUtilsBean {
 
     /**
      * Convert the specified value to an object of the specified class (if
-     * possible) using the convertion pattern. Otherwise, return a String
+     * possible) using the conversion pattern. Otherwise, return a String
      * representation of the value.
      *
      * @param value The String scalar value to be converted
      * @param clazz The Data type to which this value should be converted.
      * @param locale The locale
-     * @param pattern The convertion pattern
+     * @param pattern The conversion pattern
      * @return the converted value
      * @throws org.apache.commons.beanutils.ConversionException if thrown by an
      * underlying Converter
@@ -299,12 +299,12 @@ public class LocaleConvertUtilsBean {
 
     /**
      * Convert the specified value to an object of the specified class (if
-     * possible) using the convertion pattern. Otherwise, return a String
+     * possible) using the conversion pattern. Otherwise, return a String
      * representation of the value.
      *
      * @param value The String scalar value to be converted
      * @param clazz The Data type to which this value should be converted.
-     * @param pattern The convertion pattern
+     * @param pattern The conversion pattern
      * @return the converted value
      * @throws org.apache.commons.beanutils.ConversionException if thrown by an
      * underlying Converter
@@ -328,12 +328,12 @@ public class LocaleConvertUtilsBean {
 
     /**
      * Convert an array of specified values to an array of objects of the
-     * specified class (if possible) using the convertion pattern.
+     * specified class (if possible) using the conversion pattern.
      *
      * @param values Value to be converted (may be null)
      * @param clazz Java array or element class to be converted to
      * @param locale The locale
-     * @param pattern The convertion pattern
+     * @param pattern The conversion pattern
      * @return the converted value
      * @throws org.apache.commons.beanutils.ConversionException if thrown by an
      * underlying Converter
@@ -360,11 +360,11 @@ public class LocaleConvertUtilsBean {
 
     /**
      * Convert an array of specified values to an array of objects of the
-     * specified class (if possible) using the convertion pattern.
+     * specified class (if possible) using the conversion pattern.
      *
      * @param values Value to be converted (may be null)
      * @param clazz Java array or element class to be converted to
-     * @param pattern The convertion pattern
+     * @param pattern The conversion pattern
      * @return the converted value
      * @throws org.apache.commons.beanutils.ConversionException if thrown by an
      * underlying Converter
