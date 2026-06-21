@@ -17,6 +17,7 @@
 
 package org.apache.commons.beanutils2.locale.converters;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.ParseException;
 import java.util.Locale;
@@ -81,7 +82,16 @@ public class BigIntegerLocaleConverter extends DecimalLocaleConverter<BigInteger
             return (BigInteger) result;
         }
 
+        if (result instanceof BigDecimal) {
+            return ((BigDecimal) result).toBigInteger();
+        }
+
         return BigInteger.valueOf(result.longValue());
+    }
+
+    @Override
+    protected boolean isParseBigDecimal() {
+        return true;
     }
 
 }
