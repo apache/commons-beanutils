@@ -33,6 +33,7 @@
       <action dev="ggregory" type="fix" due-to="Gary Gregory">Fix typo in exception message throws from org.apache.commons.beanutils.PropertyUtilsBean.setMappedProperty(Object, String, String, Object).</action>
       <action dev="ggregory" type="fix" due-to="Basil Crow, Piotr P. Karwasz, Gary Gregory">Simplify FluentPropertyBeanIntrospector#propertyName (#363).</action>
       <action dev="ggregory" type="fix" due-to="Gary Gregory">Fix malformed Javadoc comments.</action>
+      <action dev="ggregory" type="fix" due-to="Dexter.k, Gary Gregory">Reject trailing characters in DecimalLocaleConverter.parse (1.X) (#400).</action>
       <!-- ADD -->
       <!-- UPDATE -->
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 84 to 102.</action>
