@@ -56,11 +56,8 @@ class FileConverterTest {
     @Test
     void testSimpleConversion() throws Exception {
         final String[] message = { "from String", "from String", "from String" };
-
         final Object[] input = { "/tmp", "/tmp/foo.txt", "/tmp/does/not/exist.foo" };
-
         final File[] expected = { new File("/tmp"), new File("/tmp/foo.txt"), new File("/tmp/does/not/exist.foo") };
-
         for (int i = 0; i < expected.length; i++) {
             assertEquals(expected[i], converter.convert(File.class, input[i]), message[i] + " to File");
             assertEquals(expected[i], converter.convert(null, input[i]), message[i] + " to null type");

@@ -16,6 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 package org.apache.commons.beanutils2.converters;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -55,7 +56,6 @@ class ColorConverterTest {
     void testConvertingColorName() {
         final Color expected = Color.WHITE;
         final Color actual = converter.convert(Color.class, "white");
-
         assertEquals(expected, actual);
     }
 
@@ -63,7 +63,6 @@ class ColorConverterTest {
     void testConvertingColorNameCaps() {
         final Color expected = Color.LIGHT_GRAY;
         final Color actual = converter.convert(Color.class, "LIGHTGRAY");
-
         assertEquals(expected, actual);
     }
 
@@ -71,7 +70,6 @@ class ColorConverterTest {
     void testConvertingJavaColorStringFull() {
         final Color expected = Color.WHITE;
         final Color actual = converter.convert(Color.class, "java.awt.Color[r=255,g=255,b=255]");
-
         assertEquals(expected, actual);
     }
 
@@ -79,7 +77,6 @@ class ColorConverterTest {
     void testConvertingJavaColorStringWithoutBrackets() {
         final Color expected = Color.DARK_GRAY;
         final Color actual = converter.convert(Color.class, "r=64,g=64,b=64");
-
         assertEquals(expected, actual);
     }
 
@@ -87,7 +84,6 @@ class ColorConverterTest {
     void testConvertingJavaColorStringWithoutColorPrefixes() {
         final Color expected = Color.PINK;
         final Color actual = converter.convert(Color.class, "255,175,175");
-
         assertEquals(expected, actual);
     }
 
@@ -95,7 +91,6 @@ class ColorConverterTest {
     void testConvertingJavaColorStringWithoutPackage() {
         final Color expected = Color.GREEN;
         final Color actual = converter.convert(Color.class, "[r=0,g=255,b=0]");
-
         assertEquals(expected, actual);
     }
 
@@ -107,7 +102,6 @@ class ColorConverterTest {
     void testConvertingJavaExtendsColorString() {
         final Color expected = Color.MAGENTA;
         final Color actual = converter.convert(Color.class, "org.apache.ExtendedColor[r=255,g=0,b=255]");
-
         assertEquals(expected, actual);
     }
 
@@ -115,7 +109,6 @@ class ColorConverterTest {
     void testConvertingLiteralHex() {
         final Color expected = Color.BLUE;
         final Color actual = converter.convert(Color.class, "0x0000FF");
-
         assertEquals(expected, actual);
     }
 
@@ -123,7 +116,6 @@ class ColorConverterTest {
     void testConvertingPattern() {
         final Color expected = Color.BLACK;
         final Color actual = converter.convert(Color.class, "#000000");
-
         assertEquals(expected, actual);
     }
 
@@ -131,7 +123,6 @@ class ColorConverterTest {
     void testConvertingPattern3Digit() {
         final Color expected = Color.WHITE;
         final Color actual = converter.convert(Color.class, "#FFF");
-
         assertEquals(expected, actual);
     }
 
@@ -139,7 +130,6 @@ class ColorConverterTest {
     void testConvertingPattern4Digit() {
         final Color expected = Color.YELLOW;
         final Color actual = converter.convert(Color.class, "#FF0F");
-
         assertEquals(expected, actual);
     }
 
@@ -147,7 +137,6 @@ class ColorConverterTest {
     void testConvertingPatternWithAlpha() {
         final Color expected = Color.LIGHT_GRAY;
         final Color actual = converter.convert(Color.class, "#C0C0C0FF");
-
         assertEquals(expected, actual);
     }
 

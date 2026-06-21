@@ -56,16 +56,12 @@ class YearConverterTest {
     @Test
     void testSimpleConversion() throws Exception {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from String", };
-
         final Object[] input = { "2019", "1974", "2112" };
-
         final Year[] expected = { Year.parse("2019"), Year.parse("1974"), Year.parse("2112") };
-
         for (int i = 0; i < expected.length; i++) {
             assertEquals(expected[i], converter.convert(Year.class, input[i]), message[i] + " to URI");
             assertEquals(expected[i], converter.convert(null, input[i]), message[i] + " to null type");
         }
-
         for (int i = 0; i < expected.length; i++) {
             assertEquals(input[i], converter.convert(String.class, expected[i]), input[i] + " to String");
         }

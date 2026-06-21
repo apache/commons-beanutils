@@ -16,6 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 package org.apache.commons.beanutils2.converters;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -46,7 +47,6 @@ class InetAddressConverterTest {
     void testConvertingIpv4() throws UnknownHostException {
         final InetAddress expected = InetAddress.getByName("192.168.0.1");
         final InetAddress actual = converter.convert(InetAddress.class, "192.168.0.1");
-
         assertEquals(expected, actual);
     }
 
@@ -54,7 +54,6 @@ class InetAddressConverterTest {
     void testConvertingIpv6() throws UnknownHostException {
         final InetAddress expected = InetAddress.getByName("2001:db8:0:1234:0:567:8:1");
         final InetAddress actual = converter.convert(InetAddress.class, "2001:db8:0:1234:0:567:8:1");
-
         assertEquals(expected, actual);
     }
 
@@ -62,7 +61,6 @@ class InetAddressConverterTest {
     void testConvertingLocalhost() throws UnknownHostException {
         final InetAddress expected = InetAddress.getByName("127.0.0.1");
         final InetAddress actual = converter.convert(InetAddress.class, "localhost");
-
         assertEquals(expected, actual);
     }
 

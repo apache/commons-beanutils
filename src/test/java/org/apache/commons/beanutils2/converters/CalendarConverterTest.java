@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.converters;
 
 import java.util.Calendar;
@@ -64,5 +65,4 @@ class CalendarConverterTest extends AbstractDateConverterTest<Calendar> {
     protected Calendar toType(final Calendar value) {
         return value;
     }
-
 }

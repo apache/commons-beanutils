@@ -56,16 +56,12 @@ class ZoneIdConverterTest {
     @Test
     void testSimpleConversion() throws Exception {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from String", };
-
         final Object[] input = { "America/New_York", "-05:00", "Australia/Sydney" };
-
         final ZoneId[] expected = { ZoneId.of("America/New_York"), ZoneId.of("-05:00"), ZoneId.of("Australia/Sydney") };
-
         for (int i = 0; i < expected.length; i++) {
             assertEquals(expected[i], converter.convert(ZoneId.class, input[i]), message[i] + " to URI");
             assertEquals(expected[i], converter.convert(null, input[i]), message[i] + " to null type");
         }
-
         for (int i = 0; i < expected.length; i++) {
             assertEquals(input[i], converter.convert(String.class, expected[i]), input[i] + " to String");
         }

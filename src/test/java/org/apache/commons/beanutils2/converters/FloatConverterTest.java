@@ -69,13 +69,10 @@ class FloatConverterTest extends AbstractNumberConverterTest<Float> {
     void testInvalidAmount() {
         final Converter<Float> converter = makeConverter();
         final Class<?> clazz = Float.class;
-
         final Double max = Double.valueOf(Float.MAX_VALUE);
         final Double tooBig = Double.valueOf(Double.MAX_VALUE);
-
         // Maximum
         assertEquals(Float.valueOf(Float.MAX_VALUE), converter.convert(clazz, max), "Maximum");
-
         // Too Large
         assertThrows(ConversionException.class, () -> converter.convert(clazz, tooBig), "More than maximum, expected ConversionException");
     }
@@ -84,14 +81,11 @@ class FloatConverterTest extends AbstractNumberConverterTest<Float> {
     void testSimpleConversion() {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from Byte",
                 "from Short", "from Integer", "from Long", "from Float", "from Double" };
-
         final Object[] input = { String.valueOf(Float.MIN_VALUE), "-17.2", "-1.1", "0.0", "1.1", "17.2", String.valueOf(Float.MAX_VALUE),
                 Byte.valueOf((byte) 7), Short.valueOf((short) 8), Integer.valueOf(9), Long.valueOf(10), Float.valueOf((float) 11.1), Double.valueOf(12.2), };
-
         final Float[] expected = { Float.valueOf(Float.MIN_VALUE), Float.valueOf((float) -17.2), Float.valueOf((float) -1.1), Float.valueOf((float) 0.0),
                 Float.valueOf((float) 1.1), Float.valueOf((float) 17.2), Float.valueOf(Float.MAX_VALUE), Float.valueOf(7), Float.valueOf(8), Float.valueOf(9),
                 Float.valueOf(10), Float.valueOf((float) 11.1), Float.valueOf((float) 12.2) };
-
         for (int i = 0; i < expected.length; i++) {
             assertEquals(expected[i].floatValue(), converter.convert(Float.class, input[i]).floatValue(), 0.00001, message[i] + " to Float");
             assertEquals(expected[i].floatValue(), converter.convert(Float.TYPE, input[i]).floatValue(), 0.00001, message[i] + " to float");

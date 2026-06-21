@@ -38,26 +38,20 @@ class ClassReloaderTest {
     void testBasicOperation() throws Exception {
         final ClassLoader sharedLoader = this.getClass().getClassLoader();
         final ClassReloader componentLoader = new ClassReloader(sharedLoader);
-
         final Class<?> sharedClass = DummyClass.class;
         final Class<?> componentClass = componentLoader.reload(sharedClass);
-
         // the two Class objects contain the same bytecode, but are not equal
         assertTrue(sharedClass != componentClass);
-
         // the two class objects have different class loaders
         assertSame(sharedLoader, sharedClass.getClassLoader());
         assertSame(componentLoader, componentClass.getClassLoader());
         assertTrue(sharedLoader != componentLoader);
-
         // verify that objects of these two types are not assignment-compatible
         final Object obj1 = sharedClass.newInstance();
         final Object obj2 = componentClass.newInstance();
-
         assertTrue(sharedClass.isInstance(obj1), "Obj1 class incorrect");
         assertFalse(componentClass.isInstance(obj1), "Obj1 class incorrect");
         assertFalse(sharedClass.isInstance(obj2), "Obj2 class incorrect");
         assertTrue(componentClass.isInstance(obj2), "Obj2 class incorrect");
     }
-
 }

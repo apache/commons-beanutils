@@ -16,6 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 package org.apache.commons.beanutils2.converters;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -43,7 +44,6 @@ class LocaleConverterTest {
     void testConvertCustomLocale() {
         final Locale expected = Locale.forLanguageTag("en-owo");
         final Locale actual = converter.convert(Locale.class, "en-owo");
-
         assertEquals(expected, actual);
     }
 
@@ -51,7 +51,6 @@ class LocaleConverterTest {
     void testConvertStandardLocale() {
         final Locale expected = Locale.ENGLISH;
         final Locale actual = converter.convert(Locale.class, "en");
-
         assertEquals(expected, actual);
     }
 }

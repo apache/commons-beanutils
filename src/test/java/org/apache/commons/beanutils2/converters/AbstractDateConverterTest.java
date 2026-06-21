@@ -67,31 +67,24 @@ public abstract class AbstractDateConverterTest<T> {
         if (date instanceof java.sql.Date) {
             return ((java.sql.Date) date).getTime();
         }
-
         if (date instanceof java.sql.Timestamp) {
             return ((java.sql.Timestamp) date).getTime();
         }
-
         if (date instanceof LocalDate) {
             return ((LocalDate) date).atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
         }
-
         if (date instanceof LocalDateTime) {
             return ((LocalDateTime) date).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
         }
-
         if (date instanceof ZonedDateTime) {
             return ((ZonedDateTime) date).toInstant().toEpochMilli();
         }
-
         if (date instanceof OffsetDateTime) {
             return ((OffsetDateTime) date).toInstant().toEpochMilli();
         }
-
         if (date instanceof Calendar) {
             return ((Calendar) date).getTime().getTime();
         }
-
         if (date instanceof Date) {
             return ((Date) date).getTime();
         }
@@ -158,31 +151,25 @@ public abstract class AbstractDateConverterTest<T> {
     void testConvertDate() {
         final String[] message = { "from Date", "from Calendar", "from SQL Date", "from SQL Time", "from SQL Timestamp", "from LocalDate", "from LocalDateTime",
                 "from ZonedDateTime", "from OffsetDateTime" };
-
         final long nowMillis = System.currentTimeMillis();
-
         final Object[] date = { new Date(nowMillis), new java.util.GregorianCalendar(), new java.sql.Date(nowMillis), new java.sql.Time(nowMillis),
                 new java.sql.Timestamp(nowMillis),
                 Instant.ofEpochMilli(nowMillis).atZone(ZoneId.systemDefault()).toLocalDate().atStartOfDay(ZoneId.systemDefault()).toLocalDate(),
                 Instant.ofEpochMilli(nowMillis).atZone(ZoneId.systemDefault()).toLocalDateTime(),
                 ZonedDateTime.ofInstant(Instant.ofEpochMilli(nowMillis), ZoneId.systemDefault()),
                 OffsetDateTime.ofInstant(Instant.ofEpochMilli(nowMillis), ZoneId.systemDefault()) };
-
         // Initialize calendar also with same ms to avoid a failing test in a new time slice
         ((GregorianCalendar) date[1]).setTime(new Date(nowMillis));
-
         for (int i = 0; i < date.length; i++) {
             final Class<T> expectedType = getExpectedType();
             final Object val = makeConverter().convert(expectedType, date[i]);
             assertNotNull(val, "Convert " + message[i] + " should not be null");
             assertInstanceOf(expectedType, val, "Convert " + message[i] + " should return a " + expectedType.getName());
-
             long test = nowMillis;
             if (date[i] instanceof LocalDate || val instanceof LocalDate) {
                 test = Instant.ofEpochMilli(nowMillis).atZone(ZoneId.systemDefault()).toLocalDate().atStartOfDay(ZoneId.systemDefault()).toInstant()
                         .toEpochMilli();
             }
-
             assertEquals(test, getTimeInMillis(val), "Convert " + message[i] + " should return a " + date[0]);
         }
     }
@@ -192,26 +179,18 @@ public abstract class AbstractDateConverterTest<T> {
      */
     @Test
     void testConvertNull() {
-        assertThrows(ConversionException.class,
-                     () -> makeConverter().convert(getExpectedType(), null),
-                     "Expected ConversionException");
+        assertThrows(ConversionException.class, () -> makeConverter().convert(getExpectedType(), null), "Expected ConversionException");
     }
 
     /**
-     * Test default String to type conversion
-     *
-     * This method is overridden by test case implementations for java.sql.Date/Time/Timestamp
+     * Test default String to type conversion This method is overridden by test case implementations for java.sql.Date/Time/Timestamp
      */
     @Test
     public void testDefaultStringToTypeConvert() {
-
         // Create & Configure the Converter
         final DateTimeConverter<T> converter = makeConverter();
         converter.setUseLocaleFormat(false);
-        assertThrows(ConversionException.class,
-                     () -> converter.convert(getExpectedType(), "2006-10-23"),
-                     "Expected Conversion exception");
-
+        assertThrows(ConversionException.class, () -> converter.convert(getExpectedType(), "2006-10-23"), "Expected Conversion exception");
     }
 
     /**
@@ -220,16 +199,13 @@ public abstract class AbstractDateConverterTest<T> {
     @Test
     void testDefaultType() {
         final String pattern = "yyyy-MM-dd";
-
         // Create & Configure the Converter
         final DateTimeConverter<T> converter = makeConverter();
         converter.setPattern(pattern);
-
         // Valid String --> Type Conversion
         final String testString = "2006-10-29";
         final Calendar calendar = toCalendar(testString, pattern, null);
         final Object expected = toType(calendar);
-
         final Object result = converter.convert(null, testString);
         final Class<T> expectedType = getExpectedType();
         if (expectedType.equals(Calendar.class)) {
@@ -245,15 +221,12 @@ public abstract class AbstractDateConverterTest<T> {
      */
     @Test
     void testInvalidType() {
-
         // Create & Configure the Converter
         @SuppressWarnings("unchecked") // we are creating a mismatch to assert a failure
         final DateTimeConverter<Character> converter = (DateTimeConverter<Character>) makeConverter();
-
         // Invalid Class Type
-        assertThrows(ConversionException.class,
-                     ()-> converter.convert(Character.class, new Date()),
-                     "Requested Character.class conversion, expected ConversionException");
+        assertThrows(ConversionException.class, () -> converter.convert(Character.class, new Date()),
+                "Requested Character.class conversion, expected ConversionException");
     }
 
     /**
@@ -261,22 +234,17 @@ public abstract class AbstractDateConverterTest<T> {
      */
     @Test
     public void testLocale() {
-
         // Re-set the default Locale to Locale.US
         final Locale defaultLocale = Locale.getDefault();
         Locale.setDefault(Locale.US);
-
         final String pattern = "M/d/yy"; // SHORT style date format for US Locale
-
         // Create & Configure the Converter
         final DateTimeConverter<T> converter = makeConverter();
         converter.setUseLocaleFormat(true);
-
         // Valid String --> Type Conversion
         final String testString = "10/28/06";
         final Object expected = toType(testString, pattern, null);
         validConversion(converter, expected, testString);
-
         // Invalid Conversions
         invalidConversion(converter, null);
         invalidConversion(converter, "");
@@ -284,10 +252,8 @@ public abstract class AbstractDateConverterTest<T> {
         invalidConversion(converter, "10.28.06");
         invalidConversion(converter, "10-28-06");
         invalidConversion(converter, Integer.valueOf(2));
-
         // Restore the default Locale
         Locale.setDefault(defaultLocale);
-
     }
 
     /**
@@ -297,26 +263,21 @@ public abstract class AbstractDateConverterTest<T> {
     void testMultiplePatterns() {
         String testString;
         Object expected;
-
         // Create & Configure the Converter
         final String[] patterns = { "yyyy-MM-dd", "yyyy/MM/dd" };
         final DateTimeConverter<T> converter = makeConverter();
         converter.setPatterns(patterns);
-
         // First Pattern
         testString = "2006-10-28";
         expected = toType(testString, patterns[0], null);
         validConversion(converter, expected, testString);
-
         // Second pattern
         testString = "2006/10/18";
         expected = toType(testString, patterns[1], null);
         validConversion(converter, expected, testString);
-
         // Invalid Conversion
         invalidConversion(converter, "17/03/2006");
         invalidConversion(converter, "17.03.2006");
-
     }
 
     /**
@@ -324,20 +285,16 @@ public abstract class AbstractDateConverterTest<T> {
      */
     @Test
     void testPatternDefault() {
-
         final String pattern = "yyyy-MM-dd";
-
         // Create & Configure the Converter
         final T defaultValue = toType("2000-01-01", pattern, null);
         assertNotNull(defaultValue, "Check default date");
         final DateTimeConverter<T> converter = makeConverter(defaultValue);
         converter.setPattern(pattern);
-
         // Valid String --> Type Conversion
         final String testString = "2006-10-29";
         final Object expected = toType(testString, pattern, null);
         validConversion(converter, expected, testString);
-
         // Invalid Values, expect default value
         validConversion(converter, defaultValue, null);
         validConversion(converter, defaultValue, "");
@@ -345,7 +302,6 @@ public abstract class AbstractDateConverterTest<T> {
         validConversion(converter, defaultValue, "2006/10/01");
         validConversion(converter, defaultValue, "02/10/06");
         validConversion(converter, defaultValue, Integer.valueOf(2));
-
     }
 
     /**
@@ -353,34 +309,25 @@ public abstract class AbstractDateConverterTest<T> {
      */
     @Test
     void testPatternNoDefault() {
-
         final String pattern = "yyyy-MM-dd";
-
         // Create & Configure the Converter
         final DateTimeConverter<T> converter = makeConverter();
         converter.setPattern(pattern);
-
         // Valid String --> Type Conversion
         final String testString = "2006-10-29";
         final Calendar calendar = toCalendar(testString, pattern, null);
         final Object expected = toType(calendar);
         validConversion(converter, expected, testString);
-
         // Valid java.util.Date --> Type Conversion
         validConversion(converter, expected, calendar);
-
         // Valid Calendar --> Type Conversion
         validConversion(converter, expected, toDate(calendar));
-
         // Test java.sql.Date --> Type Conversion
         validConversion(converter, expected, toSqlDate(calendar));
-
         // java.sql.Timestamp --> String Conversion
         validConversion(converter, expected, toSqlTimestamp(calendar));
-
         // java.sql.Time --> String Conversion
         validConversion(converter, expected, toSqlTime(calendar));
-
         // Invalid Conversions
         invalidConversion(converter, null);
         invalidConversion(converter, "");
@@ -389,7 +336,6 @@ public abstract class AbstractDateConverterTest<T> {
         invalidConversion(converter, "02/10/2006");
         invalidConversion(converter, "02/10/06");
         invalidConversion(converter, Integer.valueOf(2));
-
     }
 
     /**
@@ -397,19 +343,15 @@ public abstract class AbstractDateConverterTest<T> {
      */
     @Test
     void testPatternNullDefault() {
-
         final String pattern = "yyyy-MM-dd";
-
         // Create & Configure the Converter
         final T defaultValue = null;
         final DateTimeConverter<T> converter = makeConverter(defaultValue);
         converter.setPattern(pattern);
-
         // Valid String --> Type Conversion
         final String testString = "2006-10-29";
         final Object expected = toType(testString, pattern, null);
         validConversion(converter, expected, testString);
-
         // Invalid Values, expect default --> null
         validConversion(converter, defaultValue, null);
         validConversion(converter, defaultValue, "");
@@ -417,7 +359,6 @@ public abstract class AbstractDateConverterTest<T> {
         validConversion(converter, defaultValue, "2006/10/01");
         validConversion(converter, defaultValue, "02/10/06");
         validConversion(converter, defaultValue, Integer.valueOf(2));
-
     }
 
     /**
@@ -425,41 +366,29 @@ public abstract class AbstractDateConverterTest<T> {
      */
     @Test
     void testStringConversion() {
-
         final String pattern = "yyyy-MM-dd";
-
         // Create & Configure the Converter
         final DateTimeConverter<T> converter = makeConverter();
         converter.setPattern(pattern);
-
         // Create Values
         final String expected = "2006-10-29";
         final Calendar calendar = toCalendar(expected, pattern, null);
-
         // Type --> String Conversion
         stringConversion(converter, expected, toType(calendar));
-
         // Calendar --> String Conversion
         stringConversion(converter, expected, calendar);
-
         // java.util.Date --> String Conversion
         stringConversion(converter, expected, toDate(calendar));
-
         // java.sql.Date --> String Conversion
         stringConversion(converter, expected, toSqlDate(calendar));
-
         // java.sql.Timestamp --> String Conversion
         stringConversion(converter, expected, toSqlTimestamp(calendar));
-
         // java.sql.Time --> String Conversion
         stringConversion(converter, expected, toSqlTime(calendar));
-
         // java.time.LocalDateTime --> String Conversion
         stringConversion(converter, expected, toLocalDateTime(calendar));
-
         stringConversion(converter, null, null);
         stringConversion(converter, "", "");
-
     }
 
     /**

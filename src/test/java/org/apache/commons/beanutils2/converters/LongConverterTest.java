@@ -64,18 +64,14 @@ class LongConverterTest extends AbstractNumberConverterTest<Long> {
     void testSimpleConversion() throws Exception {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from Byte",
                 "from Short", "from Integer", "from Long", "from Float", "from Double" };
-
         final Object[] input = { String.valueOf(Long.MIN_VALUE), "-17", "-1", "0", "1", "17", String.valueOf(Long.MAX_VALUE), Byte.valueOf((byte) 7),
                 Short.valueOf((short) 8), Integer.valueOf(9), Long.valueOf(10), Float.valueOf((float) 11.1), Double.valueOf(12.2) };
-
         final Long[] expected = { Long.valueOf(Long.MIN_VALUE), Long.valueOf(-17), Long.valueOf(-1), Long.valueOf(0), Long.valueOf(1), Long.valueOf(17),
                 Long.valueOf(Long.MAX_VALUE), Long.valueOf(7), Long.valueOf(8), Long.valueOf(9), Long.valueOf(10), Long.valueOf(11), Long.valueOf(12) };
-
         for (int i = 0; i < expected.length; i++) {
             assertEquals(expected[i], converter.convert(Long.class, input[i]), message[i] + " to Long");
             assertEquals(expected[i], converter.convert(Long.TYPE, input[i]), message[i] + " to long");
             assertEquals(expected[i], converter.convert(null, input[i]), message[i] + " to null type");
         }
     }
-
 }

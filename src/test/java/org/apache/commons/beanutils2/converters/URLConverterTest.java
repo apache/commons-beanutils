@@ -42,11 +42,9 @@ class URLConverterTest {
                 "http://www.apache.org:9999/test/thing", "http://user:admin@www.apache.org:50/one/two.three", "http://notreal.apache.org",
                 "http://notreal.apache.org/test/file.xml#计算机图形学",
                 "http://notreal.apache.org/test/file.xml#%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6" };
-
         for (final String urlString : input) {
             assertEquals(urlString, converter.convert(URL.class, urlString).toString(), "from String to URL");
             assertEquals(urlString, converter.convert(null, urlString).toString(), "from String to null type");
         }
     }
-
 }

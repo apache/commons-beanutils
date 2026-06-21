@@ -56,16 +56,12 @@ class PeriodConverterTest {
     @Test
     void testSimpleConversion() throws Exception {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from String", };
-
         final Object[] input = { "P2Y", "P5D", "P1Y2M3D" };
-
         final Period[] expected = { Period.parse("P2Y"), Period.parse("P5D"), Period.parse("P1Y2M3D") };
-
         for (int i = 0; i < expected.length; i++) {
             assertEquals(expected[i], converter.convert(Period.class, input[i]), message[i] + " to URI");
             assertEquals(expected[i], converter.convert(null, input[i]), message[i] + " to null type");
         }
-
         for (int i = 0; i < expected.length; i++) {
             assertEquals(input[i], converter.convert(String.class, expected[i]), input[i] + " to String");
         }

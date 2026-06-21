@@ -56,16 +56,12 @@ class MonthDayConverterTest {
     @Test
     void testSimpleConversion() throws Exception {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from String", };
-
         final Object[] input = { "--12-03", "--05-30", "--01-01" };
-
         final MonthDay[] expected = { MonthDay.parse("--12-03"), MonthDay.parse("--05-30"), MonthDay.parse("--01-01") };
-
         for (int i = 0; i < expected.length; i++) {
             assertEquals(expected[i], converter.convert(MonthDay.class, input[i]), message[i] + " to URI");
             assertEquals(expected[i], converter.convert(null, input[i]), message[i] + " to null type");
         }
-
         for (int i = 0; i < expected.length; i++) {
             assertEquals(input[i], converter.convert(String.class, expected[i]), input[i] + " to String");
         }

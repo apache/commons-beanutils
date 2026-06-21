@@ -56,16 +56,12 @@ class OffsetTimeConverterTest {
     @Test
     void testSimpleConversion() throws Exception {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from String", };
-
         final Object[] input = { "10:15+01:00", "08:45:30+14:00" };
-
         final OffsetTime[] expected = { OffsetTime.parse("10:15+01:00"), OffsetTime.parse("08:45:30+14:00") };
-
         for (int i = 0; i < expected.length; i++) {
             assertEquals(expected[i], converter.convert(OffsetTime.class, input[i]), message[i] + " to URI");
             assertEquals(expected[i], converter.convert(null, input[i]), message[i] + " to null type");
         }
-
         for (int i = 0; i < expected.length; i++) {
             assertEquals(input[i], converter.convert(String.class, expected[i]), input[i] + " to String");
         }

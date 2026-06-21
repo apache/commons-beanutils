@@ -56,16 +56,12 @@ class ZoneOffsetConverterTest {
     @Test
     void testSimpleConversion() throws Exception {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from String", };
-
         final Object[] input = { "-12:00", "+14:00", "+02:00" };
-
         final ZoneOffset[] expected = { ZoneOffset.of("-12:00"), ZoneOffset.of("+14:00"), ZoneOffset.of("+02:00") };
-
         for (int i = 0; i < expected.length; i++) {
             assertEquals(expected[i], converter.convert(ZoneOffset.class, input[i]), message[i] + " to URI");
             assertEquals(expected[i], converter.convert(null, input[i]), message[i] + " to null type");
         }
-
         for (int i = 0; i < expected.length; i++) {
             assertEquals(input[i], converter.convert(String.class, expected[i]), input[i] + " to String");
         }

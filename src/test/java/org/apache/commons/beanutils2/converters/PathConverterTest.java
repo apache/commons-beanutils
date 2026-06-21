@@ -58,19 +58,14 @@ class PathConverterTest {
     @Test
     void testSimpleConversion() throws Exception {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from String", };
-
         // get the separator so test works on Windows or *nix
         final String separator = File.pathSeparator;
-
         final Object[] input = { separator + "foo" + separator + "bar" + separator + "baz", separator };
-
         final Path[] expected = { Paths.get(separator + "foo" + separator + "bar" + separator + "baz"), Paths.get(separator) };
-
         for (int i = 0; i < expected.length; i++) {
             assertEquals(expected[i], converter.convert(Path.class, input[i]), message[i] + " to URI");
             assertEquals(expected[i], converter.convert(null, input[i]), message[i] + " to null type");
         }
-
         for (int i = 0; i < expected.length; i++) {
             assertEquals(input[i], converter.convert(String.class, expected[i]), input[i] + " to String");
         }

@@ -64,19 +64,15 @@ class DoubleConverterTest extends AbstractNumberConverterTest<Double> {
     void testSimpleConversion() {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from Byte",
                 "from Short", "from Integer", "from Long", "from Float", "from Double" };
-
         final Object[] input = { String.valueOf(Double.MIN_VALUE), "-17.2", "-1.1", "0.0", "1.1", "17.2", String.valueOf(Double.MAX_VALUE),
                 Byte.valueOf((byte) 7), Short.valueOf((short) 8), Integer.valueOf(9), Long.valueOf(10), Float.valueOf((float) 11.1), Double.valueOf(12.2) };
-
         final Double[] expected = { Double.valueOf(Double.MIN_VALUE), Double.valueOf(-17.2), Double.valueOf(-1.1), Double.valueOf(0.0), Double.valueOf(1.1),
                 Double.valueOf(17.2), Double.valueOf(Double.MAX_VALUE), Double.valueOf(7), Double.valueOf(8), Double.valueOf(9), Double.valueOf(10),
                 Double.valueOf(11.1), Double.valueOf(12.2) };
-
         for (int i = 0; i < expected.length; i++) {
             assertEquals(expected[i].doubleValue(), converter.convert(Double.class, input[i]).doubleValue(), 0.00001D, message[i] + " to Double");
             assertEquals(expected[i].doubleValue(), converter.convert(Double.TYPE, input[i]).doubleValue(), 0.00001D, message[i] + " to double");
             assertEquals(expected[i].doubleValue(), converter.convert((Class<Double>) null, input[i]).doubleValue(), 0.00001D, message[i] + " to null type");
         }
     }
-
 }

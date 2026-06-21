@@ -16,6 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 package org.apache.commons.beanutils2.converters;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -43,7 +44,6 @@ class PatternConverterTest {
     void testConvertingPattern() {
         final String expected = "(?i)Ow.+O";
         final String actual = converter.convert(Pattern.class, "(?i)Ow.+O").toString();
-
         assertEquals(expected, actual);
     }
 }

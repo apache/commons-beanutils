@@ -32,50 +32,37 @@ class DoubleLocaleConverterTest extends AbstractLocaleConverterTest<Double> {
     @Override
     @BeforeEach
     public void setUp() throws Exception {
-
         super.setUp();
-
         defaultValue = Double.valueOf("9.99");
         expectedValue = Double.valueOf(expectedDecimalValue);
-
     }
 
     /**
-     * Test Converter() constructor
-     *
-     * Uses the default locale, no default value
+     * Test Converter() constructor Uses the default locale, no default value
      */
     @Test
     void testConstructor_2() {
-
         // Construct using default locale
         converter = DoubleLocaleConverter.builder().get();
-
         // Perform Tests
         convertValueNoPattern(converter, defaultDecimalValue, expectedValue);
         convertValueWithPattern(converter, defaultDecimalValue, defaultDecimalPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
-     * Test Converter(locPattern) constructor
-     *
-     * Uses the default locale, no default value
+     * Test Converter(locPattern) constructor Uses the default locale, no default value
      */
     @Test
     void testConstructor_3() {
-
         // Construct using localized pattern (default locale)
         converter = DoubleLocaleConverter.builder().setLocalizedPattern(true).get();
-
         // Perform Tests
         convertValueNoPattern(converter, defaultDecimalValue, expectedValue);
         convertValueWithPattern(converter, defaultDecimalValue, defaultDecimalPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
@@ -83,16 +70,13 @@ class DoubleLocaleConverterTest extends AbstractLocaleConverterTest<Double> {
      */
     @Test
     void testConstructor_4() {
-
         // Construct using specified Locale
         converter = DoubleLocaleConverter.builder().setLocale(localizedLocale).get();
-
         // Perform Tests
         convertValueNoPattern(converter, localizedDecimalValue, expectedValue);
         convertValueWithPattern(converter, localizedDecimalValue, defaultDecimalPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
@@ -100,16 +84,13 @@ class DoubleLocaleConverterTest extends AbstractLocaleConverterTest<Double> {
      */
     @Test
     void testConstructor_5() {
-
         // Construct using specified Locale
         converter = DoubleLocaleConverter.builder().setLocale(localizedLocale).setLocalizedPattern(true).get();
-
         // Perform Tests
         convertValueNoPattern(converter, localizedDecimalValue, expectedValue);
         convertValueWithPattern(converter, localizedDecimalValue, localizedDecimalPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
@@ -117,16 +98,13 @@ class DoubleLocaleConverterTest extends AbstractLocaleConverterTest<Double> {
      */
     @Test
     void testConstructor_6() {
-
         // Construct using specified Locale
         converter = DoubleLocaleConverter.builder().setLocale(localizedLocale).setPattern(defaultDecimalPattern).get();
-
         // Perform Tests
         convertValueNoPattern(converter, localizedDecimalValue, expectedValue);
         convertValueWithPattern(converter, localizedDecimalValue, defaultDecimalPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
@@ -134,16 +112,13 @@ class DoubleLocaleConverterTest extends AbstractLocaleConverterTest<Double> {
      */
     @Test
     void testConstructor_7() {
-
         // Construct using specified Locale
         converter = DoubleLocaleConverter.builder().setLocale(localizedLocale).setPattern(localizedDecimalPattern).setLocalizedPattern(true).get();
-
         // Perform Tests
         convertValueNoPattern(converter, localizedDecimalValue, expectedValue);
         convertValueWithPattern(converter, localizedDecimalValue, localizedDecimalPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
@@ -151,16 +126,13 @@ class DoubleLocaleConverterTest extends AbstractLocaleConverterTest<Double> {
      */
     @Test
     void testConstructor_8() {
-
         // Construct using specified Locale
         converter = DoubleLocaleConverter.builder().setDefault(defaultValue).get();
-
         // Perform Tests
         convertValueNoPattern(converter, defaultDecimalValue, expectedValue);
         convertValueWithPattern(converter, defaultDecimalValue, defaultDecimalPattern, expectedValue);
         convertInvalid(converter, defaultValue);
         convertNull(converter, defaultValue);
-
     }
 
     /**
@@ -168,16 +140,13 @@ class DoubleLocaleConverterTest extends AbstractLocaleConverterTest<Double> {
      */
     @Test
     void testConstructor_9() {
-
         // Construct using specified Locale
         converter = DoubleLocaleConverter.builder().setDefault(defaultValue).setLocalizedPattern(true).get();
-
         // Perform Tests
         convertValueNoPattern(converter, defaultDecimalValue, expectedValue);
         convertValueWithPattern(converter, defaultDecimalValue, defaultDecimalPattern, expectedValue);
         convertInvalid(converter, defaultValue);
         convertNull(converter, defaultValue);
-
     }
 
     /**
@@ -185,22 +154,18 @@ class DoubleLocaleConverterTest extends AbstractLocaleConverterTest<Double> {
      */
     @Test
     void testConstructorMain() {
-
         // Construct with localized pattern
         converter = DoubleLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(localizedDecimalPattern)
                 .setLocalizedPattern(true).get();
-
         convertValueNoPattern(converter, "(A)", localizedDecimalValue, expectedValue);
         convertValueWithPattern(converter, "(A)", localizedDecimalValue, localizedDecimalPattern, expectedValue);
         convertInvalid(converter, "(A)", defaultValue);
         convertNull(converter, "(A)", defaultValue);
-
         // **************************************************************************
         // Convert value in the wrong format - the trailing characters left after the
         // partial parse are now rejected, so the converter returns the default.
         // **************************************************************************
         convertValueNoPattern(converter, "(B)", defaultDecimalValue, defaultValue);
-
         // **************************************************************************
         // Convert with non-localized pattern - this causes an exception in parse()
         // but it gets swallowed in convert() method and returns default.
@@ -209,7 +174,6 @@ class DoubleLocaleConverterTest extends AbstractLocaleConverterTest<Double> {
         // than just returning the default value.
         // **************************************************************************
         convertValueWithPattern(converter, "(B)", localizedDecimalValue, defaultDecimalPattern, defaultValue);
-
         // **************************************************************************
         // Convert with specified type
         //
@@ -218,16 +182,12 @@ class DoubleLocaleConverterTest extends AbstractLocaleConverterTest<Double> {
         // **** This has been changed due to BEANUTILS-449 ****
         // **************************************************************************
         // convertValueToType(converter, "(B)", Integer.class, localizedDecimalValue, localizedDecimalPattern, expectedValue);
-
         // Construct with non-localized pattern
         converter = DoubleLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(defaultDecimalPattern)
                 .setLocalizedPattern(false).get();
-
         convertValueNoPattern(converter, "(C)", localizedDecimalValue, expectedValue);
         convertValueWithPattern(converter, "(C)", localizedDecimalValue, defaultDecimalPattern, expectedValue);
         convertInvalid(converter, "(C)", defaultValue);
         convertNull(converter, "(C)", defaultValue);
-
     }
-
 }

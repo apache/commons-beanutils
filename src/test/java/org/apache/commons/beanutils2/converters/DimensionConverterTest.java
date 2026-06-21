@@ -16,6 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 package org.apache.commons.beanutils2.converters;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -45,7 +46,6 @@ class DimensionConverterTest {
     void testConvertingDimension() {
         final Dimension expected = new Dimension(1920, 1080);
         final Dimension actual = converter.convert(Dimension.class, "1920x1080");
-
         assertEquals(expected, actual);
     }
 
@@ -53,7 +53,6 @@ class DimensionConverterTest {
     void testConvertingSquare() {
         final Dimension expected = new Dimension(512, 512);
         final Dimension actual = converter.convert(Dimension.class, "512");
-
         assertEquals(expected, actual);
     }
 

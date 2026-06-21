@@ -41,26 +41,38 @@ public abstract class AbstractLocaleConverterTest<T> {
 
     // Converter
     protected BaseLocaleConverter<T> converter;
+
     protected Object result;
+
     protected T defaultValue;
+
     protected Object expectedValue;
 
     // Localized values
     protected Locale localizedLocale;
+
     protected String localizedDecimalPattern;
+
     protected String localizedIntegerPattern;
+
     protected String localizedDecimalValue;
+
     protected String localizedIntegerValue;
 
     // Locale values
     protected Locale defaultLocale;
+
     protected String defaultDecimalPattern;
+
     protected String defaultIntegerPattern;
+
     protected String defaultDecimalValue;
+
     protected String defaultIntegerValue;
 
     // Expected values
     protected String expectedDecimalValue;
+
     protected String expectedIntegerValue;
 
     /**
@@ -85,7 +97,6 @@ public abstract class AbstractLocaleConverterTest<T> {
                 fail("Expected default value '" + msgId + "' threw " + e + ", expectedValue = '" + expectedValue + "'");
             }
         }
-
         if (expectedValue != null) {
             assertEquals(expectedValue, result, () -> "Check invalid conversion is default " + msgId);
         }
@@ -104,7 +115,6 @@ public abstract class AbstractLocaleConverterTest<T> {
     protected void convertNull(final BaseLocaleConverter<T> converter, final String msgId, final Object expectedValue) {
         // Convert value with no pattern
         result = assertDoesNotThrow(() -> converter.convert(null), () -> "Null conversion threw '" + msgId + "'");
-
         if (expectedValue == null) {
             assertNull(result, () -> "Check null conversion is null '" + msgId + "' result=" + result);
         } else {
@@ -126,7 +136,6 @@ public abstract class AbstractLocaleConverterTest<T> {
         // Convert value with no pattern
         result = assertDoesNotThrow(() -> converter.convert(value), () -> "No Pattern conversion threw '" + msgId + "'");
         assertEquals(expectedValue, result, () -> "Check conversion value without pattern " + msgId);
-
     }
 
     /**
@@ -151,34 +160,28 @@ public abstract class AbstractLocaleConverterTest<T> {
      */
     @BeforeEach
     public void setUp() throws Exception {
-
         // Default Locale (Use US)
         defaultLocale = Locale.US;
         defaultDecimalPattern = "#,###.00";
         defaultIntegerPattern = "#,###";
         defaultDecimalValue = "1,234.56";
         defaultIntegerValue = "1,234";
-
         // Use German Locale (uses different separators to US)
         localizedLocale = Locale.GERMAN;
         localizedDecimalPattern = "#.###,00";
         localizedIntegerPattern = "#.###";
         localizedDecimalValue = "1.234,56";
         localizedIntegerValue = "1.234";
-
         // Expected Values
         expectedDecimalValue = "1234.56";
         expectedIntegerValue = "1234";
-
         // Reset default to the one specified
         origLocale = Locale.getDefault();
-
         // Initialize
         converter = null;
         result = null;
         defaultValue = null;
         expectedValue = null;
-
         if (defaultLocale.equals(origLocale)) {
             origLocale = null;
         } else {
@@ -196,7 +199,6 @@ public abstract class AbstractLocaleConverterTest<T> {
         result = null;
         defaultValue = null;
         expectedValue = null;
-
         // Set the Default Locale back to the original value
         if (origLocale != null) {
             // System.out.println("Restoring default locale to " + origLocale);

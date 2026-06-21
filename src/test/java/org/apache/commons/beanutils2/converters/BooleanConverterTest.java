@@ -39,7 +39,6 @@ class BooleanConverterTest {
         final String[] falseStrings = { "nope" };
         final AbstractConverter<Boolean> converter = new BooleanConverter(trueStrings, falseStrings);
         testConversionValues(converter, new String[] { "sure", "Sure" }, new String[] { "nope", "nOpE" });
-
         assertThrows(ConversionException.class, () -> converter.convert(Boolean.class, "true"));
         assertThrows(ConversionException.class, () -> converter.convert(Boolean.class, "bogus"));
     }
@@ -60,7 +59,6 @@ class BooleanConverterTest {
     }
 
     protected void testConversionValues(final AbstractConverter<Boolean> converter, final String[] trueValues, final String[] falseValues) {
-
         for (final String trueValue : trueValues) {
             assertEquals(Boolean.TRUE, converter.convert(Boolean.class, trueValue));
         }
@@ -73,7 +71,6 @@ class BooleanConverterTest {
     void testDefaultValue() {
         final Boolean defaultValue = Boolean.TRUE;
         final AbstractConverter<Boolean> converter = new BooleanConverter(defaultValue);
-
         assertSame(defaultValue, converter.convert(Boolean.class, "bogus"));
         testConversionValues(converter, STANDARD_TRUES, STANDARD_FALSES);
     }
@@ -98,5 +95,4 @@ class BooleanConverterTest {
         final AbstractConverter<Boolean> converter = new BooleanConverter();
         testConversionValues(converter, STANDARD_TRUES, STANDARD_FALSES);
     }
-
 }

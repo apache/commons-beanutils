@@ -16,6 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 package org.apache.commons.beanutils2.converters;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -43,7 +44,6 @@ class PointConverterTest {
     void testConvertingNoSpace() {
         final Point expected = new Point(100, 200);
         final Point actual = converter.convert(Point.class, "(100,200)");
-
         assertEquals(expected, actual);
     }
 
@@ -51,7 +51,6 @@ class PointConverterTest {
     void testConvertingPoint() {
         final Point expected = new Point(100, 200);
         final Point actual = converter.convert(Point.class, "(100, 200)");
-
         assertEquals(expected, actual);
     }
 }

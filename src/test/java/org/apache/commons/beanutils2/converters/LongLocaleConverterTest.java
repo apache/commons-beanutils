@@ -32,50 +32,37 @@ class LongLocaleConverterTest extends AbstractLocaleConverterTest<Long> {
     @Override
     @BeforeEach
     public void setUp() throws Exception {
-
         super.setUp();
-
         defaultValue = Long.valueOf("999");
         expectedValue = Long.valueOf(expectedIntegerValue);
-
     }
 
     /**
-     * Test Converter() constructor
-     *
-     * Uses the default locale, no default value
+     * Test Converter() constructor Uses the default locale, no default value
      */
     @Test
     void testConstructor_2() {
-
         // Construct using default locale
         converter = LongLocaleConverter.builder().get();
-
         // Perform Tests
         convertValueNoPattern(converter, defaultIntegerValue, expectedValue);
         convertValueWithPattern(converter, defaultIntegerValue, defaultIntegerPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
-     * Test Converter(locPattern) constructor
-     *
-     * Uses the default locale, no default value
+     * Test Converter(locPattern) constructor Uses the default locale, no default value
      */
     @Test
     void testConstructor_3() {
-
         // Construct using localized pattern (default locale)
         converter = LongLocaleConverter.builder().setLocalizedPattern(true).get();
-
         // Perform Tests
         convertValueNoPattern(converter, defaultIntegerValue, expectedValue);
         convertValueWithPattern(converter, defaultIntegerValue, defaultIntegerPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
@@ -83,16 +70,13 @@ class LongLocaleConverterTest extends AbstractLocaleConverterTest<Long> {
      */
     @Test
     void testConstructor_4() {
-
         // Construct using specified Locale
         converter = LongLocaleConverter.builder().setLocale(localizedLocale).get();
-
         // Perform Tests
         convertValueNoPattern(converter, localizedIntegerValue, expectedValue);
         convertValueWithPattern(converter, localizedIntegerValue, defaultIntegerPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
@@ -100,16 +84,13 @@ class LongLocaleConverterTest extends AbstractLocaleConverterTest<Long> {
      */
     @Test
     void testConstructor_5() {
-
         // Construct using specified Locale
         converter = LongLocaleConverter.builder().setLocale(localizedLocale).setLocalizedPattern(true).get();
-
         // Perform Tests
         convertValueNoPattern(converter, localizedIntegerValue, expectedValue);
         convertValueWithPattern(converter, localizedIntegerValue, localizedIntegerPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
@@ -117,16 +98,13 @@ class LongLocaleConverterTest extends AbstractLocaleConverterTest<Long> {
      */
     @Test
     void testConstructor_6() {
-
         // Construct using specified Locale
         converter = LongLocaleConverter.builder().setLocale(localizedLocale).setPattern(defaultIntegerPattern).get();
-
         // Perform Tests
         convertValueNoPattern(converter, localizedIntegerValue, expectedValue);
         convertValueWithPattern(converter, localizedIntegerValue, defaultIntegerPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
@@ -134,16 +112,13 @@ class LongLocaleConverterTest extends AbstractLocaleConverterTest<Long> {
      */
     @Test
     void testConstructor_7() {
-
         // Construct using specified Locale
         converter = LongLocaleConverter.builder().setLocale(localizedLocale).setPattern(localizedIntegerPattern).setLocalizedPattern(true).get();
-
         // Perform Tests
         convertValueNoPattern(converter, localizedIntegerValue, expectedValue);
         convertValueWithPattern(converter, localizedIntegerValue, localizedIntegerPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
@@ -151,16 +126,13 @@ class LongLocaleConverterTest extends AbstractLocaleConverterTest<Long> {
      */
     @Test
     void testConstructor_8() {
-
         // Construct using specified Locale
         converter = LongLocaleConverter.builder().setDefault(defaultValue).get();
-
         // Perform Tests
         convertValueNoPattern(converter, defaultIntegerValue, expectedValue);
         convertValueWithPattern(converter, defaultIntegerValue, defaultIntegerPattern, expectedValue);
         convertInvalid(converter, defaultValue);
         convertNull(converter, defaultValue);
-
     }
 
     /**
@@ -168,16 +140,13 @@ class LongLocaleConverterTest extends AbstractLocaleConverterTest<Long> {
      */
     @Test
     void testConstructor_9() {
-
         // Construct using specified Locale
         converter = LongLocaleConverter.builder().setDefault(defaultValue).setLocalizedPattern(true).get();
-
         // Perform Tests
         convertValueNoPattern(converter, defaultIntegerValue, expectedValue);
         convertValueWithPattern(converter, defaultIntegerValue, defaultIntegerPattern, expectedValue);
         convertInvalid(converter, defaultValue);
         convertNull(converter, defaultValue);
-
     }
 
     /**
@@ -185,16 +154,13 @@ class LongLocaleConverterTest extends AbstractLocaleConverterTest<Long> {
      */
     @Test
     void testConstructorMain() {
-
         // Construct with localized pattern
         converter = LongLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(localizedIntegerPattern)
                 .setLocalizedPattern(true).get();
-
         convertValueNoPattern(converter, "(A)", localizedIntegerValue, expectedValue);
         convertValueWithPattern(converter, "(A)", localizedIntegerValue, localizedIntegerPattern, expectedValue);
         convertInvalid(converter, "(A)", defaultValue);
         convertNull(converter, "(A)", defaultValue);
-
         // **************************************************************************
         // Convert value in the wrong format - maybe you would expect it to throw an
         // exception and return the default - it doesn't, DecimalFormat parses it
@@ -202,13 +168,11 @@ class LongLocaleConverterTest extends AbstractLocaleConverterTest<Long> {
         // I guess this is one of the limitations of DecimalFormat
         // **************************************************************************
         convertValueNoPattern(converter, "(B)", defaultIntegerValue, Long.valueOf("1"));
-
         // **************************************************************************
         // Convert with non-localized pattern - the trailing characters left after the
         // partial parse are now rejected, so the converter returns the default.
         // **************************************************************************
         convertValueWithPattern(converter, "(B)", localizedIntegerValue, defaultIntegerPattern, defaultValue);
-
         // **************************************************************************
         // Convert with specified type
         //
@@ -217,16 +181,12 @@ class LongLocaleConverterTest extends AbstractLocaleConverterTest<Long> {
         // **** This has been changed due to BEANUTILS-449 ****
         // **************************************************************************
         // convertValueToType(converter, "(B)", Double.class, localizedIntegerValue, localizedIntegerPattern, expectedValue);
-
         // Construct with non-localized pattern
         converter = LongLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(defaultIntegerPattern)
                 .setLocalizedPattern(false).get();
-
         convertValueNoPattern(converter, "(C)", localizedIntegerValue, expectedValue);
         convertValueWithPattern(converter, "(C)", localizedIntegerValue, defaultIntegerPattern, expectedValue);
         convertInvalid(converter, "(C)", defaultValue);
         convertNull(converter, "(C)", defaultValue);
-
     }
-
 }

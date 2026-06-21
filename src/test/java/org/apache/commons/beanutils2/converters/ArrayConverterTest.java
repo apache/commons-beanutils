@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.converters;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -74,14 +75,12 @@ class ArrayConverterTest {
      */
     @Test
     void testComponentIntegerConverter() {
-
         final IntegerConverter intConverter = new IntegerConverter(Integer.valueOf(0));
         intConverter.setPattern("#,###");
         intConverter.setLocale(Locale.US);
         final ArrayConverter arrayConverter = new ArrayConverter(int[].class, intConverter, 0);
         arrayConverter.setAllowedChars(new char[] { ',', '-' });
         arrayConverter.setDelimiter(';');
-
         // Expected results
         final int[] intArray = { 1111, 2222, 3333, 4444 };
         final String stringA = "1,111; 2,222; 3,333; 4,444";
@@ -97,62 +96,47 @@ class ArrayConverterTest {
             strList.add(strArray[i]);
             longList.add(LONGArray[i]);
         }
-
         String msg = null;
-
         // String --> int[]
         msg = "String --> int[]";
         checkArray(msg, intArray, arrayConverter.convert(int[].class, stringA));
-
         // String --> int[] (with braces)
         msg = "String --> Integer[] (with braces)";
         checkArray(msg, IntegerArray, arrayConverter.convert(Integer[].class, "{" + stringA + "}"));
-
         // String[] --> int[]
         msg = "String[] --> int[]";
         checkArray(msg, intArray, arrayConverter.convert(int[].class, strArray));
-
         // String[] --> Integer[]
         msg = "String[] --> Integer[]";
         checkArray(msg, IntegerArray, arrayConverter.convert(Integer[].class, strArray));
-
         // long[] --> int[]
         msg = "long[] --> int[]";
         checkArray(msg, intArray, arrayConverter.convert(int[].class, longArray));
-
         // Long --> int[]
         msg = "Long --> int[]";
         checkArray(msg, new int[] { LONGArray[0].intValue() }, arrayConverter.convert(int[].class, LONGArray[0]));
-
         // LONG[] --> int[]
         msg = "LONG[] --> int[]";
         checkArray(msg, intArray, arrayConverter.convert(int[].class, LONGArray));
-
         // Long --> String
         msg = "Long --> String";
         assertEquals(LONGArray[0] + "", arrayConverter.convert(String.class, LONGArray[0]), msg);
-
         // LONG[] --> String (first)
         msg = "LONG[] --> String (first)";
         assertEquals(LONGArray[0] + "", arrayConverter.convert(String.class, LONGArray), msg);
-
         // LONG[] --> String (all)
         msg = "LONG[] --> String (all)";
         arrayConverter.setOnlyFirstToString(false);
         assertEquals(stringB, arrayConverter.convert(String.class, LONGArray), msg);
-
         // Collection of Long --> String
         msg = "Collection of Long --> String";
         assertEquals(stringB, arrayConverter.convert(String.class, longList), msg);
-
         // LONG[] --> String[]
         msg = "long[] --> String[]";
         checkArray(msg, strArray, arrayConverter.convert(String[].class, LONGArray));
-
         // Collection of String --> Integer[]
         msg = "Collection of String --> Integer[]";
         checkArray(msg, IntegerArray, arrayConverter.convert(Integer[].class, strList));
-
         // Collection of Long --> int[]
         msg = "Collection of Long --> int[]";
         checkArray(msg, intArray, arrayConverter.convert(int[].class, longList));
@@ -165,7 +149,6 @@ class ArrayConverterTest {
     void testEmptyString() {
         final int[] zeroArray = {};
         final IntegerConverter intConverter = new IntegerConverter();
-
         checkArray("Empty String", zeroArray, new ArrayConverter(int[].class, intConverter, -1).convert(int[].class, ""));
         assertEquals(null, new ArrayConverter(int[].class, intConverter).convert(String.class, null), "Default String");
     }
@@ -188,7 +171,6 @@ class ArrayConverterTest {
         final int[] zeroArray = {};
         final int[] oneArray = new int[1];
         final IntegerConverter intConverter = new IntegerConverter();
-
         assertEquals(null, new ArrayConverter(int[].class, intConverter, -1).convert(int[].class, null), "Null Default");
         checkArray("Zero Length", zeroArray, new ArrayConverter(int[].class, intConverter, 0).convert(int[].class, null));
         checkArray("One Length", oneArray, new ArrayConverter(Integer[].class, intConverter, 1).convert(int[].class, null));
@@ -199,34 +181,27 @@ class ArrayConverterTest {
      */
     @Test
     void testStringArrayToNumber() {
-
         // Configure Converter
         final IntegerConverter intConverter = new IntegerConverter();
         final ArrayConverter arrayConverter = new ArrayConverter(int[].class, intConverter);
-
         // Test Data
         final String[] array = { "10", "  11", "12  ", "  13  " };
         final ArrayList<String> list = new ArrayList<>();
         Collections.addAll(list, array);
-
         // Expected results
         String msg = null;
         final int[] expectedInt = { 10, 11, 12, 13 };
         final Integer[] expectedInteger = { Integer.valueOf(expectedInt[0]), Integer.valueOf(expectedInt[1]), Integer.valueOf(expectedInt[2]),
                 Integer.valueOf(expectedInt[3]) };
-
         // Test String[] --> int[]
         msg = "String[] --> int[]";
         checkArray(msg, expectedInt, arrayConverter.convert(int[].class, array));
-
         // Test String[] --> Integer[]
         msg = "String[] --> Integer[]";
         checkArray(msg, expectedInteger, arrayConverter.convert(Integer[].class, array));
-
         // Test List --> int[]
         msg = "List --> int[]";
         checkArray(msg, expectedInt, arrayConverter.convert(int[].class, list));
-
         // Test List --> Integer[]
         msg = "List --> Integer[]";
         checkArray(msg, expectedInteger, arrayConverter.convert(Integer[].class, list));
@@ -237,22 +212,18 @@ class ArrayConverterTest {
      */
     @Test
     void testTheMatrix() {
-
         // Test Date - create the Matrix!!
         // Following String uses two delimiter:
         // - comma (",") to separate individual numbers
         // - semicolon (";") to separate lists of numbers
         final String matrixString = "11,12,13 ; 21,22,23 ; 31,32,33 ; 41,42,43";
         final int[][] expected = { new int[] { 11, 12, 13 }, new int[] { 21, 22, 23 }, new int[] { 31, 32, 33 }, new int[] { 41, 42, 43 } };
-
         // Construct an Integer Converter
         final IntegerConverter integerConverter = new IntegerConverter();
-
         // Construct an array Converter for an integer array (i.e. int[]) using
         // an IntegerConverter as the element converter.
         // Uses the default comma (i.e. ",") as the delimiter between individual numbers
         final ArrayConverter arrayConverter = new ArrayConverter(int[].class, integerConverter);
-
         // Construct a "Matrix" Converter which converts arrays of integer arrays using
         // the first (int[]) Converter as the element Converter.
         // Uses a semicolon (i.e. ";") as the delimiter to separate the different sets of numbers.
@@ -261,10 +232,8 @@ class ArrayConverterTest {
         final ArrayConverter matrixConverter = new ArrayConverter(int[][].class, arrayConverter);
         matrixConverter.setDelimiter(';');
         matrixConverter.setAllowedChars(new char[] { ',' });
-
         // Do the Conversion
         final Object result = matrixConverter.convert(int[][].class, matrixString);
-
         // Check it actually worked OK
         assertEquals(int[][].class, result.getClass(), "Check int[][].class");
         final int[][] matrix = (int[][]) result;
@@ -286,7 +255,6 @@ class ArrayConverterTest {
     void testUnderscore_BEANUTILS_302() {
         final String value = "first_value,second_value";
         final ArrayConverter<String[]> converter = new ArrayConverter(String[].class, new StringConverter());
-
         // test underscore not allowed (the default)
         String[] result = converter.convert(String[].class, value);
         assertNotNull(result, "result.null");
@@ -295,10 +263,8 @@ class ArrayConverterTest {
         assertEquals("value", result[1], "result[1]");
         assertEquals("second", result[2], "result[2]");
         assertEquals("value", result[3], "result[3]");
-
         // configure the converter to allow underscore
         converter.setAllowedChars(new char[] { '.', '-', '_' });
-
         // test underscore allowed
         result = converter.convert(String[].class, value);
         assertNotNull(result, "result.null");
