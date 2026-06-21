@@ -204,12 +204,10 @@ class FloatLocaleConverterTest extends AbstractLocaleConverterTest<Float> {
         convertNull(converter, "(A)", defaultValue);
 
         // **************************************************************************
-        // Convert value in the wrong format - maybe you would expect it to throw an
-        // exception and return the default - it doesn't, DecimalFormat parses it
-        // quite happily turning "1,234.56" into "1.234"
-        // I guess this is one of the limitations of DecimalFormat
+        // Convert value in the wrong format - the trailing characters left after the
+        // partial parse are now rejected, so the converter returns the default.
         // **************************************************************************
-        convertValueNoPattern(converter, "(B)", defaultDecimalValue, Float.valueOf("1.234"));
+        convertValueNoPattern(converter, "(B)", defaultDecimalValue, defaultValue);
 
         // **************************************************************************
         // Convert with non-localized pattern - this causes an exception in parse()

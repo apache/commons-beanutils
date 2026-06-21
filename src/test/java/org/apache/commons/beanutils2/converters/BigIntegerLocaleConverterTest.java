@@ -203,12 +203,10 @@ class BigIntegerLocaleConverterTest extends AbstractLocaleConverterTest<BigInteg
         convertValueNoPattern(converter, "(B)", defaultIntegerValue, new BigInteger("1"));
 
         // **************************************************************************
-        // Convert with non-localized pattern - unlike the equivalent BigDecimal Test Case
-        // it doesn't causes an exception in parse() - DecimalFormat parses it
-        // quite happily turning "1,234" into "1"
-        // Again this is one of the limitations of DecimalFormat
+        // Convert with non-localized pattern - the trailing characters left after the
+        // partial parse are now rejected, so the converter returns the default.
         // **************************************************************************
-        convertValueWithPattern(converter, "(B)", localizedIntegerValue, defaultIntegerPattern, new BigInteger("1"));
+        convertValueWithPattern(converter, "(B)", localizedIntegerValue, defaultIntegerPattern, defaultValue);
 
         // **************************************************************************
         // Convert with specified type
