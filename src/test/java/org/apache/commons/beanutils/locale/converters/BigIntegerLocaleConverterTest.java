@@ -230,6 +230,15 @@ public class BigIntegerLocaleConverterTest extends BaseLocaleConverterTest {
     }
 
     /**
+     * Test that a value beyond {@code long} range keeps its full magnitude instead of being clamped to {@code Long.MAX_VALUE}.
+     */
+    public void testConvertLargeValueKeepsMagnitude() {
+        converter = new BigIntegerLocaleConverter();
+        convertValueNoPattern(converter, "9999999999999999999", new BigInteger("9999999999999999999"));
+        convertValueNoPattern(converter, "123456789012345678901234567890", new BigInteger("123456789012345678901234567890"));
+    }
+
+    /**
      * Tries to convert to an unsupported type. This tests behavior of the base
      * class. All locale converters should react in the same way.
      */
