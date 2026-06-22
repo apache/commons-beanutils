@@ -228,5 +228,13 @@ public class BigDecimalLocaleConverterTest extends BaseLocaleConverterTest {
 
     }
 
+    /**
+     * Test that a value beyond {@code double} precision is preserved instead of being rounded to a lossy {@code 1.0E+19}.
+     */
+    public void testConvertLargeValueKeepsPrecision() {
+        converter = new BigDecimalLocaleConverter();
+        convertValueNoPattern(converter, "9999999999999999999", new BigDecimal("9999999999999999999"));
+    }
+
 }
 

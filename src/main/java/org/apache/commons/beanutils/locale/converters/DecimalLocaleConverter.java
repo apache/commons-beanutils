@@ -178,6 +178,18 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
      * @throws org.apache.commons.beanutils.ConversionException if conversion cannot be performed successfully.
      * @throws ParseException                                   if an error occurs parsing a String to a Number.
      */
+    /**
+     * Tests whether the underlying {@link DecimalFormat} should parse into a {@link java.math.BigDecimal} so that magnitude and precision are preserved.
+     * Subclasses that build {@link java.math.BigInteger} or {@link java.math.BigDecimal} values override this to return {@code true}; the narrowing converters
+     * keep the default {@code Long} / {@code Double} result.
+     *
+     * @return {@code true} to parse into a {@link java.math.BigDecimal}, {@code false} otherwise.
+     * @since 1.11.1
+     */
+    protected boolean isParseBigDecimal() {
+        return false;
+    }
+
     @Override
     protected Object parse(final Object value, final String pattern) throws ParseException {
         if (value instanceof Number) {
@@ -188,6 +200,7 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
         // representation, each call to getInstance actually returns a new
         // object.
         final DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(locale);
+        formatter.setParseBigDecimal(isParseBigDecimal());
         // if some constructors default pattern to null, it makes only sense
         // to handle null pattern gracefully
         if (pattern != null) {

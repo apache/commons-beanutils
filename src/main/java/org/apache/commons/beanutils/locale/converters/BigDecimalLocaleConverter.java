@@ -182,4 +182,9 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter {
             throw new ConversionException("Suplied number is not of type BigDecimal: " + result);
         }
     }
+
+    @Override
+    protected boolean isParseBigDecimal() {
+        return true;
+    }
 }
