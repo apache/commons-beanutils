@@ -70,11 +70,17 @@ class FloatConverterTest extends AbstractNumberConverterTest<Float> {
         final Converter<Float> converter = makeConverter();
         final Class<?> clazz = Float.class;
         final Double max = Double.valueOf(Float.MAX_VALUE);
+        final Double min = Double.valueOf(-Float.MAX_VALUE);
         final Double tooBig = Double.valueOf(Double.MAX_VALUE);
+        final Double tooSmall = Double.valueOf(-Double.MAX_VALUE);
         // Maximum
         assertEquals(Float.valueOf(Float.MAX_VALUE), converter.convert(clazz, max), "Maximum");
+        // Minimum
+        assertEquals(Float.valueOf(-Float.MAX_VALUE), converter.convert(clazz, min), "Minimum");
         // Too Large
         assertThrows(ConversionException.class, () -> converter.convert(clazz, tooBig), "More than maximum, expected ConversionException");
+        // Too Small
+        assertThrows(ConversionException.class, () -> converter.convert(clazz, tooSmall), "Less than minimum, expected ConversionException");
     }
 
     @Test

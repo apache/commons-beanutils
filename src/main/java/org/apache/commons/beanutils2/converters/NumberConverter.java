@@ -449,6 +449,12 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
 
         // Long
         if (targetType.equals(Long.class)) {
+            if (value.doubleValue() > Long.MAX_VALUE) {
+                throw ConversionException.format("%s value '%s' is too large for %s", toString(sourceType), value, toString(targetType));
+            }
+            if (value.doubleValue() < Long.MIN_VALUE) {
+                throw ConversionException.format("%s value '%s' is too small %s", toString(sourceType), value, toString(targetType));
+            }
             return targetType.cast(Long.valueOf(value.longValue()));
         }
 
@@ -456,6 +462,9 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
         if (targetType.equals(Float.class)) {
             if (value.doubleValue() > Float.MAX_VALUE) {
                 throw ConversionException.format("%s value '%s' is too large for %s", toString(sourceType), value, toString(targetType));
+            }
+            if (value.doubleValue() < -Float.MAX_VALUE) {
+                throw ConversionException.format("%s value '%s' is too small %s", toString(sourceType), value, toString(targetType));
             }
             return targetType.cast(Float.valueOf(value.floatValue()));
         }

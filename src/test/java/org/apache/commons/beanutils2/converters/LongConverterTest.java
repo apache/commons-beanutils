@@ -18,7 +18,12 @@
 package org.apache.commons.beanutils2.converters;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.math.BigInteger;
+import java.util.Locale;
+
+import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -58,6 +63,34 @@ class LongConverterTest extends AbstractNumberConverterTest<Long> {
     @AfterEach
     public void tearDown() throws Exception {
         converter = null;
+    }
+
+    /**
+     * Test Invalid Amounts (too big/small)
+     */
+    @Test
+    void testInvalidAmount() {
+        final Converter<Long> converter = makeConverter();
+        final Class<?> clazz = Long.class;
+        // Boundaries still convert
+        assertEquals(Long.valueOf(Long.MIN_VALUE), converter.convert(clazz, Long.valueOf(Long.MIN_VALUE)), "Minimum");
+        assertEquals(Long.valueOf(Long.MAX_VALUE), converter.convert(clazz, Long.valueOf(Long.MAX_VALUE)), "Maximum");
+        // Out of range Number values must be rejected, not silently truncated/clamped
+        final BigInteger tooSmall = BigInteger.valueOf(Long.MIN_VALUE).multiply(BigInteger.TEN);
+        final BigInteger tooBig = BigInteger.valueOf(Long.MAX_VALUE).multiply(BigInteger.TEN);
+        assertThrows(ConversionException.class, () -> converter.convert(clazz, tooSmall), "Less than minimum, expected ConversionException");
+        assertThrows(ConversionException.class, () -> converter.convert(clazz, tooBig), "More than maximum, expected ConversionException");
+    }
+
+    /**
+     * A locale-parsed String beyond long range comes back from {@link java.text.DecimalFormat} as a {@link Double} and must be rejected rather than clamped to
+     * {@link Long#MAX_VALUE}.
+     */
+    @Test
+    void testLocaleStringOutOfRange() {
+        final LongConverter converter = makeConverter();
+        converter.setLocale(Locale.US);
+        assertThrows(ConversionException.class, () -> converter.convert(Long.class, "99999999999999999999"), "More than maximum, expected ConversionException");
     }
 
     @Test
