@@ -17,6 +17,9 @@
 
 package org.apache.commons.beanutils.converters;
 
+import java.math.BigInteger;
+import java.util.Locale;
+
 import org.apache.commons.beanutils.Converter;
 
 /**
@@ -58,6 +61,53 @@ public class LongConverterTest extends NumberConverterTest {
     @Override
     public void tearDown() throws Exception {
         converter = null;
+    }
+
+    /**
+     * Test Invalid Amounts (too big/small)
+     */
+    public void testInvalidAmount() {
+        final Converter converter = makeConverter();
+        final Class<?> clazz = Long.class;
+
+        // Boundaries still convert
+        assertEquals("Minimum", Long.valueOf(Long.MIN_VALUE), converter.convert(clazz, Long.valueOf(Long.MIN_VALUE)));
+        assertEquals("Maximum", Long.valueOf(Long.MAX_VALUE), converter.convert(clazz, Long.valueOf(Long.MAX_VALUE)));
+
+        // Out of range values must be rejected, not silently truncated/clamped
+        final BigInteger tooSmall = BigInteger.valueOf(Long.MIN_VALUE).multiply(BigInteger.TEN);
+        final BigInteger tooBig   = BigInteger.valueOf(Long.MAX_VALUE).multiply(BigInteger.TEN);
+
+        // Too Small
+        try {
+            converter.convert(clazz, tooSmall);
+            fail("Less than minimum, expected ConversionException");
+        } catch (final Exception e) {
+            // expected result
+        }
+
+        // Too Large
+        try {
+            converter.convert(clazz, tooBig);
+            fail("More than maximum, expected ConversionException");
+        } catch (final Exception e) {
+            // expected result
+        }
+    }
+
+    /**
+     * A locale-parsed String beyond long range comes back from DecimalFormat as a Double and must be
+     * rejected rather than clamped to Long.MAX_VALUE.
+     */
+    public void testLocaleStringOutOfRange() {
+        final NumberConverter converter = makeConverter();
+        converter.setLocale(Locale.US);
+        try {
+            converter.convert(Long.class, "99999999999999999999");
+            fail("More than maximum, expected ConversionException");
+        } catch (final Exception e) {
+            // expected result
+        }
     }
 
     public void testSimpleConversion() throws Exception {

@@ -67,16 +67,29 @@ public class FloatConverterTest extends NumberConverterTest {
         final Converter converter = makeConverter();
         final Class<?> clazz = Float.class;
 
-        final Double max     = Double.valueOf(Float.MAX_VALUE);
-        final Double tooBig  = Double.valueOf(Double.MAX_VALUE);
+        final Double max      = Double.valueOf(Float.MAX_VALUE);
+        final Double min      = Double.valueOf(-Float.MAX_VALUE);
+        final Double tooBig   = Double.valueOf(Double.MAX_VALUE);
+        final Double tooSmall = Double.valueOf(-Double.MAX_VALUE);
 
         // Maximum
         assertEquals("Maximum", Float.valueOf(Float.MAX_VALUE), converter.convert(clazz, max));
+
+        // Minimum
+        assertEquals("Minimum", Float.valueOf(-Float.MAX_VALUE), converter.convert(clazz, min));
 
         // Too Large
         try {
             assertEquals("Too Big", null, converter.convert(clazz, tooBig));
             fail("More than maximum, expected ConversionException");
+        } catch (final Exception e) {
+            // expected result
+        }
+
+        // Too Small
+        try {
+            assertEquals("Too Small", null, converter.convert(clazz, tooSmall));
+            fail("Less than minimum, expected ConversionException");
         } catch (final Exception e) {
             // expected result
         }
