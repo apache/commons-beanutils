@@ -161,6 +161,11 @@ public class BigIntegerLocaleConverter extends DecimalLocaleConverter {
         super(defaultValue, locale, pattern, locPattern);
     }
 
+    @Override
+    protected boolean isParseBigDecimal() {
+        return true;
+    }
+
     /**
      * Convert the specified locale-sensitive input object into an output object of BigInteger type.
      *
@@ -188,10 +193,5 @@ public class BigIntegerLocaleConverter extends DecimalLocaleConverter {
         } catch (final NumberFormatException ex) {
             throw new ConversionException("Suplied number is not of type BigInteger: " + result);
         }
-    }
-
-    @Override
-    protected boolean isParseBigDecimal() {
-        return true;
     }
 }
