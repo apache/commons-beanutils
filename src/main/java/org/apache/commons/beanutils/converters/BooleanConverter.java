@@ -40,7 +40,7 @@ package org.apache.commons.beanutils.converters;
  * </pre>
  * <p>
  * In addition, it is recommended that the BooleanArrayConverter also be
- * modified to recognise the same set of values:
+ * modified to recognize the same set of values:
  * </p>
  * <pre>
  *   Converter bac = new BooleanArrayConverter(bc, BooleanArrayConverter.NO_DEFAULT);
