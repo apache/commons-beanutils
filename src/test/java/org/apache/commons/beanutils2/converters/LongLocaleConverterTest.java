@@ -18,7 +18,7 @@
 package org.apache.commons.beanutils2.converters;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.text.DecimalFormat;
 
@@ -205,17 +205,7 @@ class LongLocaleConverterTest extends AbstractLocaleConverterTest<Long> {
         final DecimalFormat fmt = new DecimalFormat("#");
         assertEquals(Long.valueOf(Long.MAX_VALUE), converter.convert(fmt.format(Long.MAX_VALUE)), "Long.MAX_VALUE");
         assertEquals(Long.valueOf(Long.MIN_VALUE), converter.convert(fmt.format(Long.MIN_VALUE)), "Long.MIN_VALUE");
-        try {
-            converter.convert("99999999999999999999");
-            fail("Positive out of range should throw ConversionException");
-        } catch (final ConversionException e) {
-            // expected result
-        }
-        try {
-            converter.convert("-99999999999999999999");
-            fail("Negative out of range should throw ConversionException");
-        } catch (final ConversionException e) {
-            // expected result
-        }
+        assertThrows(ConversionException.class, () -> converter.convert("99999999999999999999"));
+        assertThrows(ConversionException.class, () -> converter.convert("-99999999999999999999"));
     }
 }
