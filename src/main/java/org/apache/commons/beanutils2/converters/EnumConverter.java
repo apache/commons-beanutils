@@ -73,7 +73,7 @@ public final class EnumConverter<E extends Enum<E>> extends AbstractConverter<En
             final String enumValue = stringValue.substring(Math.max(lastHash, lastDot) + 1);
             final String className = stringValue.substring(0, stringValue.length() - enumValue.length() - 1);
             try {
-                final Class classForName = Class.forName(className);
+                final Class classForName = Class.forName(className, false, getClass().getClassLoader());
                 if (!classForName.isEnum()) {
                     throw new IllegalArgumentException("Value isn't an enumerated type.");
                 }

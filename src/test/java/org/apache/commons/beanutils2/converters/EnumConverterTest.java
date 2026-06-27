@@ -18,6 +18,7 @@
 package org.apache.commons.beanutils2.converters;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.DayOfWeek;
@@ -36,6 +37,16 @@ class EnumConverterTest {
 
     public enum PizzaStatus {
         ORDERED, READY, DELIVERED;
+    }
+
+    /** Set from {@link StaticInitProbe}'s static initializer; read without touching the probe class. */
+    static volatile boolean probeInitialized;
+
+    /** Non-enum helper whose static initializer records that it ran. */
+    public static final class StaticInitProbe {
+        static {
+            probeInitialized = true;
+        }
     }
 
     private Converter<Enum<PizzaStatus>> converter;
@@ -107,5 +118,12 @@ class EnumConverterTest {
     @Test
     void testNonExistingClasses() {
         assertThrows(ConversionException.class, () -> converter.convert(Enum.class, "java.lang.does.not.exist#MONDAY"));
+    }
+
+    @Test
+    void testNonEnumClassIsNotInitialized() {
+        final String name = StaticInitProbe.class.getName() + "#VALUE";
+        assertThrows(ConversionException.class, () -> converter.convert(Enum.class, name));
+        assertFalse(probeInitialized, "Resolving a non-enum class must not run its static initializer");
     }
 }
