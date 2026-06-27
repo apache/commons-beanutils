@@ -20,6 +20,8 @@ package org.apache.commons.beanutils.locale.converters;
 import java.text.ParseException;
 import java.util.Locale;
 
+import org.apache.commons.beanutils.ConversionException;
+
 /**
  * Standard {@link org.apache.commons.beanutils.locale.LocaleConverter} implementation that converts an incoming locale-sensitive String into a
  * {@code java.lang.Long} object, optionally using a default value or throwing a {@link org.apache.commons.beanutils.ConversionException} if a conversion error
@@ -172,6 +174,10 @@ public class LongLocaleConverter extends DecimalLocaleConverter {
         final Object result = super.parse(value, pattern);
         if (result == null || result instanceof Long) {
             return result;
+        }
+        final double doubleValue = ((Number) result).doubleValue();
+        if (doubleValue < Long.MIN_VALUE || doubleValue > Long.MAX_VALUE) {
+            throw new ConversionException("Supplied number is not of type Long: " + result);
         }
         return Long.valueOf(((Number) result).longValue());
     }
