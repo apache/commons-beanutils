@@ -18,6 +18,9 @@
 package org.apache.commons.beanutils2;
 
 /**
+ * Represents a child interface for testing purposes in Apache Commons BeanUtils.
+ * This interface provides a method to retrieve the name of a child object,
+ * used for testing bean property access and manipulation.
  */
 public interface Child {
 
