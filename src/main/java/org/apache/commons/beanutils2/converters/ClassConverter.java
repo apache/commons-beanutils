@@ -23,7 +23,7 @@ package org.apache.commons.beanutils2.converters;
  * <p>
  * Can be configured to either return a <em>default value</em> or throw a {@code ConversionException} if a conversion error occurs.
  *
- * @param <T> the type of the class.
+ * @param <T> The type of the class.
  * @since 1.4
  */
 public final class ClassConverter<T> extends AbstractConverter<Class<T>> {

@@ -44,7 +44,7 @@ import java.util.Set;
  * compatible parameters.
  * </p>
  *
- * @param <K> the type of the keys in the decorated map
+ * @param <K> The type of the keys in the decorated map
  * @since 1.9.0
  */
 public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {

@@ -56,8 +56,8 @@ import org.apache.commons.logging.LogFactory;
  * <li>The address object has a {@code getCity()} method which returns an object which represents the city in which a person lives.</li>
  * </ul>
  *
- * @param <T> the type of the input to the function
- * @param <R> the type of the result of the function
+ * @param <T> The type of the input to the function
+ * @param <R> The type of the result of the function
  * @see org.apache.commons.beanutils2.PropertyUtils
  * @see java.util.function.Function
  */

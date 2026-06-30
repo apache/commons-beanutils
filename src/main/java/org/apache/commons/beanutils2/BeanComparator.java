@@ -33,8 +33,8 @@ import java.util.Comparator;
  * {@code ClassCastException} exceptions can be thrown if unexpected property values occur.
  * </p>
  *
- * @param <T> the type of beans to be compared by this {@code Comparator}
- * @param <V> the type of property to compare
+ * @param <T> The type of beans to be compared by this {@code Comparator}
+ * @param <V> The type of property to compare
  */
 public class BeanComparator<T, V> implements Comparator<T> {
 
@@ -45,7 +45,7 @@ public class BeanComparator<T, V> implements Comparator<T> {
      * {@link java.util.SortedMap SortedMap}.
      * </p>
      *
-     * @param <E> the type of objects compared by this comparator
+     * @param <E> The type of objects compared by this comparator
      * @see java.util.Collections#reverseOrder()
      */
     private static final class NaturalOrderComparator<E extends Comparable<? super E>> implements Comparator<E> {

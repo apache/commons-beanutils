@@ -28,7 +28,7 @@ import org.apache.commons.logging.LogFactory;
  * Predicate implementation that applies the given {@code Predicate} to the result of calling the given property getter.
  * </p>
  *
- * @param <T> the type of the input to the predicate
+ * @param <T> The type of the input to the predicate
  */
 public class BeanPredicate<T> implements Predicate<T> {
 

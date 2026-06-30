@@ -33,7 +33,7 @@ package org.apache.commons.beanutils2;
  * recommended that they be written in a thread-safe manner anyway.
  * </p>
  *
- * @param <T> the convert type.
+ * @param <T> The convert type.
  * @since 1.3
  */
 @FunctionalInterface

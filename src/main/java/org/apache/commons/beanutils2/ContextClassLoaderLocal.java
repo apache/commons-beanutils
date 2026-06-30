@@ -90,7 +90,7 @@ import java.util.WeakHashMap;
  * avoided providing classes loaded via a "shared" classloader.
  * </p>
  *
- * @param <T> the type of data stored in an instance
+ * @param <T> The type of data stored in an instance
  * @see Thread#getContextClassLoader
  */
 public class ContextClassLoaderLocal<T> {
