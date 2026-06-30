@@ -116,8 +116,8 @@ public class BeanUtils {
     /**
      * Create a cache.
      *
-     * @param <K> the key type of the cache
-     * @param <V> the value type of the cache
+     * @param <K> The key type of the cache
+     * @param <V> The value type of the cache
      * @return a new cache
      * @since 1.8.0
      */

@@ -39,7 +39,7 @@ public interface Converter {
      * Convert the specified input object into an output object of the
      * specified type.
      *
-     * @param <T> the desired result type
+     * @param <T> The desired result type
      * @param type Data type to which this value should be converted
      * @param value The input value to be converted
      * @return The converted value

@@ -58,8 +58,8 @@ import java.util.WeakHashMap;
  * <a href="https://www.cs.umd.edu/~pugh/java/memoryModel/DoubleCheckedLocking.html">
  * Double-Checked Locking Idiom Is Broken Declaration</a>.</p>
  *
- * @param <K> the type of keys maintained by this map
- * @param <V> the type of mapped values
+ * @param <K> The type of keys maintained by this map
+ * @param <V> The type of mapped values
  * @since Commons Collections 1.0
  */
 class WeakFastHashMap<K, V> extends HashMap<K, V> {
@@ -67,7 +67,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
     /**
      * Abstract collection implementation shared by keySet(), values() and entrySet().
      *
-     * @param <E> the element type
+     * @param <E> The element type
      */
     private abstract class CollectionView<E> implements Collection<E> {
 

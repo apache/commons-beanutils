@@ -116,7 +116,7 @@ public abstract class AbstractConverter implements Converter {
      * Convert the input object into an output object of the
      * specified type.
      *
-     * @param <T> the target type of the conversion
+     * @param <T> The target type of the conversion
      * @param type Data type to which this value should be converted
      * @param value The input value to be converted
      * @return The converted value.
@@ -212,7 +212,7 @@ public abstract class AbstractConverter implements Converter {
      * Therefore, we can cast to it (which is required to fulfill the contract
      * of the method signature).
      *
-     * @param <T> the type of the result object
+     * @param <T> The type of the result object
      * @param targetClass the target class of the conversion
      * @param value the value to be converted
      * @return the converted value
@@ -327,7 +327,7 @@ public abstract class AbstractConverter implements Converter {
      * If a default value has been specified, then it is returned (after a cast
      * to the desired target class); otherwise a ConversionException is thrown.
      *
-     * @param <T> the desired target type
+     * @param <T> The desired target type
      * @param type Data type to which this value should be converted.
      * @return The default value.
      * @throws ConversionException if no default value has been

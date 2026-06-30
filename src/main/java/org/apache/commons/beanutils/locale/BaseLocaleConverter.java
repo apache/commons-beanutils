@@ -41,7 +41,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * target type. If this is the case, the passed in result object is cast to
      * the correct target type. Otherwise, an exception is thrown.
      *
-     * @param <T> the desired result type
+     * @param <T> The desired result type
      * @param type the target class of the conversion
      * @param result the conversion result object
      * @return the result cast to the target class
@@ -254,7 +254,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * given target type. If the default value is not conform to the given type,
      * an exception is thrown.
      *
-     * @param <T> the desired target type
+     * @param <T> The desired target type
      * @param type the target class of the conversion
      * @return the default value in the given target type
      * @throws ConversionException if the default object is not compatible with

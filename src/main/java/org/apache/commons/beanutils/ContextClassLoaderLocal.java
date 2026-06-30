@@ -99,7 +99,7 @@ import java.util.WeakHashMap;
  * containers required each component to load the full set of classes it
  * needs, ie avoided providing classes loaded via a "shared" classloader.</p>
  *
- * @param <T> the type of data stored in an instance
+ * @param <T> The type of data stored in an instance
  * @see Thread#getContextClassLoader
  */
 public class ContextClassLoaderLocal<T> {

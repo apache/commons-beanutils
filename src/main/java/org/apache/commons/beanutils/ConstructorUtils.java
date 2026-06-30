@@ -52,7 +52,7 @@ public class ConstructorUtils {
     /**
      * Returns a constructor with single argument.
      *
-     * @param <T> the type of the constructor
+     * @param <T> The type of the constructor
      * @param klass the class to be constructed
      * @param parameterType The constructor parameter type
      * @return null if matching accessible constructor cannot be found.
@@ -70,7 +70,7 @@ public class ConstructorUtils {
     /**
      * Returns a constructor given a class and signature.
      *
-     * @param <T> the type to be constructed
+     * @param <T> The type to be constructed
      * @param klass the class to be constructed
      * @param parameterTypes the parameter array
      * @return null if matching accessible constructor cannot be found
@@ -92,7 +92,7 @@ public class ConstructorUtils {
     /**
      * Returns accessible version of the given constructor.
      *
-     * @param <T> the type of the constructor
+     * @param <T> The type of the constructor
      * @param ctor prototype constructor object.
      * @return {@code null} if accessible constructor cannot be found.
      * @see SecurityManager
@@ -126,7 +126,7 @@ public class ConstructorUtils {
      * are assignment compatible with the parameter types.
      * The first matching constructor is returned.</p>
      *
-     * @param <T> the type of the class to be inspected
+     * @param <T> The type of the class to be inspected
      * @param clazz find constructor for this class
      * @param parameterTypes find method with compatible parameters
      * @return a valid Constructor object. If there's no matching constructor, returns {@code null}.
@@ -215,7 +215,7 @@ public class ConstructorUtils {
      *
      * <p>The signatures should be assignment compatible.</p>
      *
-     * @param <T> the type of the object to be constructed
+     * @param <T> The type of the object to be constructed
      * @param klass the class to be constructed.
      * @param arg the actual argument. May be null (this will result in calling the default constructor).
      * @return new instance of {@code klazz}
@@ -243,7 +243,7 @@ public class ConstructorUtils {
      *
      * <p>The signatures should be assignment compatible.</p>
      *
-     * @param <T> the type of the object to be constructed
+     * @param <T> The type of the object to be constructed
      * @param klass the class to be constructed.
      * @param args actual argument array. May be null (this will result in calling the default constructor).
      * @return new instance of {@code klazz}
@@ -277,7 +277,7 @@ public class ConstructorUtils {
      *
      * <p>The signatures should be assignment compatible.</p>
      *
-     * @param <T> the type of the object to be constructed
+     * @param <T> The type of the object to be constructed
      * @param klass the class to be constructed.
      * @param args actual argument array. May be null (this will result in calling the default constructor).
      * @param parameterTypes parameter types array
@@ -321,7 +321,7 @@ public class ConstructorUtils {
      *
      * <p>The signatures should match exactly.</p>
      *
-     * @param <T> the type of the object to be constructed
+     * @param <T> The type of the object to be constructed
      * @param klass the class to be constructed.
      * @param arg the actual argument. May be null (this will result in calling the default constructor).
      * @return new instance of {@code klazz}
@@ -349,7 +349,7 @@ public class ConstructorUtils {
      *
      * <p>The signatures should match exactly.</p>
      *
-     * @param <T> the type of the object to be constructed
+     * @param <T> The type of the object to be constructed
      * @param klass the class to be constructed.
      * @param args actual argument array. May be null (this will result in calling the default constructor).
      * @return new instance of {@code klazz}
@@ -384,7 +384,7 @@ public class ConstructorUtils {
      *
      * <p>The signatures should match exactly.</p>
      *
-     * @param <T> the type of the object to be constructed
+     * @param <T> The type of the object to be constructed
      * @param klass the class to be constructed.
      * @param args actual argument array. May be null (this will result in calling the default constructor).
      * @param parameterTypes parameter types array

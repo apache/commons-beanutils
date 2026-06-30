@@ -42,7 +42,7 @@ import org.apache.commons.collections.comparators.ComparableComparator;
  * property values occur.
  * </p>
  *
- * @param <T> the type of beans to be compared by this {@code Comparator}
+ * @param <T> The type of beans to be compared by this {@code Comparator}
  */
 public class BeanComparator<T> implements Comparator<T>, Serializable {
 
