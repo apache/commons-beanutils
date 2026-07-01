@@ -121,9 +121,11 @@ public class StringLocaleConverter extends BaseLocaleConverter<String> {
     protected String parse(final Object value, final String pattern) throws ParseException {
         String result = null;
 
-        if (value instanceof Integer || value instanceof Long || value instanceof BigInteger || value instanceof Byte || value instanceof Short) {
+        if (value instanceof BigInteger || value instanceof BigDecimal) {
+            result = getDecimalFormat(locale, pattern).format(value);
+        } else if (value instanceof Integer || value instanceof Long || value instanceof Byte || value instanceof Short) {
             result = getDecimalFormat(locale, pattern).format(((Number) value).longValue());
-        } else if (value instanceof Double || value instanceof BigDecimal || value instanceof Float) {
+        } else if (value instanceof Double || value instanceof Float) {
             result = getDecimalFormat(locale, pattern).format(((Number) value).doubleValue());
         } else if (value instanceof Date) { // java.util.Date, java.sql.Date, java.sql.Time, java.sql.Timestamp
             result = new SimpleDateFormat(pattern, locale).format(value);
