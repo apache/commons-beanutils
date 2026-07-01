@@ -17,6 +17,12 @@
 
 package org.apache.commons.beanutils2.converters;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.text.DecimalFormat;
+
+import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.locale.converters.LongLocaleConverter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -188,5 +194,18 @@ class LongLocaleConverterTest extends AbstractLocaleConverterTest<Long> {
         convertValueWithPattern(converter, "(C)", localizedIntegerValue, defaultIntegerPattern, expectedValue);
         convertInvalid(converter, "(C)", defaultValue);
         convertNull(converter, "(C)", defaultValue);
+    }
+
+    /**
+     * Test Long limits
+     */
+    @Test
+    void testLongLimits() {
+        converter = LongLocaleConverter.builder().setLocale(defaultLocale).get();
+        final DecimalFormat fmt = new DecimalFormat("#");
+        assertEquals(Long.valueOf(Long.MAX_VALUE), converter.convert(fmt.format(Long.MAX_VALUE)), "Long.MAX_VALUE");
+        assertEquals(Long.valueOf(Long.MIN_VALUE), converter.convert(fmt.format(Long.MIN_VALUE)), "Long.MIN_VALUE");
+        assertThrows(ConversionException.class, () -> converter.convert("99999999999999999999"));
+        assertThrows(ConversionException.class, () -> converter.convert("-99999999999999999999"));
     }
 }
