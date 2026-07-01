@@ -78,6 +78,11 @@ public class LongLocaleConverter extends DecimalLocaleConverter<Long> {
             return (Long) result;
         }
 
+        final double doubleValue = result.doubleValue();
+        if (doubleValue < Long.MIN_VALUE || doubleValue > Long.MAX_VALUE) {
+            throw new ConversionException("Supplied number is not of type Long: " + result);
+        }
+
         return Long.valueOf(result.longValue());
     }
 }
