@@ -40,13 +40,13 @@ package org.apache.commons.beanutils2;
 public interface Converter<T> {
 
     /**
-     * Convert the specified input object into an output object of the specified type.
+     * Converts the specified input object into an output object of the specified type.
      *
      * @param <R>   the result type.
-     * @param type  Data type to which this value should be converted
-     * @param value The input value to be converted
-     * @return The converted value
-     * @throws ConversionException if conversion cannot be performed successfully
+     * @param type  Data type to which this value should be converted.
+     * @param value The input value to be converted.
+     * @return The converted value.
+     * @throws ConversionException if conversion cannot be performed successfully.
      */
     <R> R convert(Class<R> type, Object value);
 

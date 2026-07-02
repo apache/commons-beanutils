@@ -105,13 +105,13 @@ public abstract class AbstractConverter<D> implements Converter<D> {
     private D defaultValue;
 
     /**
-     * Constructs a <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
+     * Constructs an instance that throws a {@code ConversionException} if an error occurs.
      */
     public AbstractConverter() {
     }
 
     /**
-     * Constructs a <em>Converter</em> that returns a default value if an error occurs.
+     * Constructs an instance that returns a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
      */
@@ -120,11 +120,11 @@ public abstract class AbstractConverter<D> implements Converter<D> {
     }
 
     /**
-     * Creates a standard conversion exception with a message indicating that the passed in value cannot be converted to the desired target type.
+     * Creates a {@link ConversionException} with a message indicating that the passed in value cannot be converted to the desired target type.
      *
-     * @param type  the target type
-     * @param value the value to be converted
-     * @return a {@code ConversionException} with a standard message
+     * @param type  the target type.
+     * @param value the value to be converted.
+     * @return a {@code ConversionException} with a standard message.
      * @since 1.9
      */
     protected ConversionException conversionException(final Class<?> type, final Object value) {
@@ -134,8 +134,8 @@ public abstract class AbstractConverter<D> implements Converter<D> {
     /**
      * Converts the input object into an output object of the specified type.
      *
-     * @param type  Data type to which this value should be converted
-     * @param value The input value to be converted
+     * @param type  Data type to which this value should be converted.
+     * @param value The input value to be converted.
      * @return The converted value.
      * @throws ConversionException if conversion cannot be performed successfully and no default is specified.
      */
@@ -184,8 +184,8 @@ public abstract class AbstractConverter<D> implements Converter<D> {
      *
      * This needs to be overridden for array/Collection converters.
      *
-     * @param value The value to convert
-     * @return The first element in an Array (or Collection) or the value unchanged if not an Array (or Collection)
+     * @param value The value to convert.
+     * @return The first element in an Array (or Collection) or the value unchanged if not an Array (or Collection).
      */
     protected Object convertArray(final Object value) {
         if (value == null) {
@@ -211,9 +211,9 @@ public abstract class AbstractConverter<D> implements Converter<D> {
      * Converts to the default type. This method is called if we do not have a target class. In this case, the T parameter is not set. Therefore, we can cast to
      * it (which is required to fulfill the contract of the method signature).
      *
-     * @param value the value to be converted
-     * @param <T>   the type of the result object
-     * @return the converted value
+     * @param value the value to be converted.
+     * @param <T>   the type of the result object.
+     * @return the converted value.
      */
     @SuppressWarnings("unchecked")
     private <T> T convertToDefaultType(final Object value) {
@@ -229,7 +229,7 @@ public abstract class AbstractConverter<D> implements Converter<D> {
      *
      * @param value The input value to be converted.
      * @return the converted String value.
-     * @throws IllegalArgumentException if an error occurs converting to a String
+     * @throws IllegalArgumentException if an error occurs converting to a String.
      */
     protected String convertToString(final Object value) {
         return value.toString();
@@ -245,7 +245,7 @@ public abstract class AbstractConverter<D> implements Converter<D> {
      * @param type  Data type to which this value should be converted.
      * @param value The input value to be converted.
      * @return The converted value.
-     * @throws Throwable if an error occurs converting to the specified type
+     * @throws Throwable if an error occurs converting to the specified type.
      */
     protected abstract <R> R convertToType(Class<R> type, Object value) throws Throwable;
 
@@ -277,8 +277,8 @@ public abstract class AbstractConverter<D> implements Converter<D> {
      *
      * @param <T>   Target type of the conversion.
      * @param type  Data type to which this value should be converted.
-     * @param value The input value to be converted
-     * @param cause The exception thrown by the {@code convert} method
+     * @param value The input value to be converted.
+     * @param cause The exception thrown by the {@code convert} method.
      * @return The default value.
      * @throws ConversionException if no default value has been specified for this {@link Converter}.
      */
@@ -317,7 +317,7 @@ public abstract class AbstractConverter<D> implements Converter<D> {
      * If a default value has been specified, then it is returned (after a cast to the desired target class); otherwise a ConversionException is thrown.
      * </p>
      *
-     * @param <T>  the desired target type
+     * @param <T>  the desired target type.
      * @param type Data type to which this value should be converted.
      * @return The default value.
      * @throws ConversionException if no default value has been specified for this {@link Converter}.
@@ -377,7 +377,7 @@ public abstract class AbstractConverter<D> implements Converter<D> {
      * </p>
      *
      * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
-     * @throws ConversionException if an error occurs converting the default value
+     * @throws ConversionException if an error occurs converting the default value.
      */
     protected void setDefaultValue(final D defaultValue) {
         useDefault = false;

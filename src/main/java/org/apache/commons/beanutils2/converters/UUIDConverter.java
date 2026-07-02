@@ -14,27 +14,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.converters;
 
 import java.util.UUID;
 
+import org.apache.commons.beanutils2.ConversionException;
+import org.apache.commons.beanutils2.Converter;
+
 /**
- * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion to and from <strong>java.util.UUID</strong> objects.
+ * {@link Converter} implementation that handles conversion to {@link UUID} objects.
  * <p>
- * Can be configured to either return a <em>default value</em> or throw a {@code ConversionException} if a conversion error occurs.
+ * Can be configured to either return a <em>default value</em> or throw a {@link ConversionException} if a conversion error occurs.
+ * </p>
  *
  * @since 2.0
  */
 public final class UUIDConverter extends AbstractConverter<UUID> {
 
     /**
-     * Constructs a <strong>java.util.UUID</strong> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
+     * Constructs a {@link UUID} an instance that throws a {@link ConversionException} if an error occurs.
      */
     public UUIDConverter() {
     }
 
     /**
-     * Constructs a <strong>java.util.UUID</strong> <em>Converter</em> that returns a default value if an error occurs.
+     * Constructs a {@link UUID} an instance that returns a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned if the value to be converted is missing or an error occurs converting the value.
      */
@@ -43,15 +48,17 @@ public final class UUIDConverter extends AbstractConverter<UUID> {
     }
 
     /**
+     * Converts an object to a {@link UUID}.
      * <p>
-     * Converts a java.util.UUID or object into a String.
+     * This implementation converts the input value to a {@link String} and then calls {@link UUID#fromString(String)} to perform the conversion.
      * </p>
      *
      * @param <T>   Target type of the conversion.
      * @param type  Data type to which this value should be converted.
      * @param value The input value to be converted.
      * @return The converted value.
-     * @throws Throwable if an error occurs converting to the specified type
+     * @throws IllegalArgumentException Thrown if an error occurs {@link UUID#fromString(String) converting} to the {@link UUID} type.
+     * @throws ConversionException      Thrown if the given type is not {@link UUID}.
      * @since 2.0
      */
     @Override
@@ -59,7 +66,6 @@ public final class UUIDConverter extends AbstractConverter<UUID> {
         if (UUID.class.equals(type)) {
             return type.cast(UUID.fromString(String.valueOf(value)));
         }
-
         throw conversionException(type, value);
     }
 
@@ -73,5 +79,4 @@ public final class UUIDConverter extends AbstractConverter<UUID> {
     protected Class<UUID> getDefaultType() {
         return UUID.class;
     }
-
 }
