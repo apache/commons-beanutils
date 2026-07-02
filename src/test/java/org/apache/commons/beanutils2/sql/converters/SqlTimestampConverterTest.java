@@ -32,15 +32,6 @@ import org.junit.jupiter.api.Test;
 class SqlTimestampConverterTest extends AbstractDateConverterTest<Timestamp> {
 
     /**
-     * Gets the separator that precedes the AM/PM field in the US SHORT time format. Java 20 and up (CLDR) use a narrow no-break space (U+202F) here,
-     * earlier versions use a regular space.
-     */
-    private static String amPmSeparator() {
-        final String formatted = DateFormat.getTimeInstance(DateFormat.SHORT, Locale.US).format(new Date());
-        return formatted.contains("\u202f") ? "\u202f" : " ";
-    }
-
-    /**
      * Gets the expected type
      *
      * @return The expected type

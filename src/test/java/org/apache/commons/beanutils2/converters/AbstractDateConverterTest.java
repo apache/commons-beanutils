@@ -50,6 +50,18 @@ import org.junit.jupiter.api.Test;
  */
 public abstract class AbstractDateConverterTest<T> {
 
+    private static final String NB_SPACE = "\u202f";
+
+    /**
+     * Gets the separator that precedes the AM/PM field in the US SHORT time format. Java 20 and up (CLDR) use a narrow no-break space (U+202F) here,
+     * earlier versions use a regular space.
+     *
+     * @return the separator that precedes the AM/PM field in the US SHORT time format.
+     */
+    protected static String amPmSeparator() {
+        return DateFormat.getTimeInstance(DateFormat.SHORT, Locale.US).format(new Date()).contains(NB_SPACE) ? NB_SPACE : " ";
+    }
+
     /**
      * Gets the expected type
      *
