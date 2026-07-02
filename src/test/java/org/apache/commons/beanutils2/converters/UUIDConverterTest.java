@@ -68,6 +68,25 @@ class UUIDConverterTest {
     }
 
     /**
+     * Non-canonical strings accepted by {@link UUID#fromString(String)} (abbreviated groups) must be rejected.
+     */
+    @Test
+    void testNonCanonicalStringRejected() {
+        assertThrows(ConversionException.class, () -> converter.convert(UUID.class, "1-1-1-1-1"));
+        assertThrows(ConversionException.class, () -> converter.convert(UUID.class, "0-0-0-0-0"));
+    }
+
+    /**
+     * Canonical strings, including upper case, must still convert.
+     */
+    @Test
+    void testCanonicalStringAccepted() {
+        final UUID expected = UUID.fromString("123e4567-e89b-12d3-a456-556642440000");
+        assertEquals(expected, converter.convert(UUID.class, "123e4567-e89b-12d3-a456-556642440000"));
+        assertEquals(expected, converter.convert(UUID.class, "123E4567-E89B-12D3-A456-556642440000"));
+    }
+
+    /**
      * Tests a conversion to an unsupported type.
      */
     @Test

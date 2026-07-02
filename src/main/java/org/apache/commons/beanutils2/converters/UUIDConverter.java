@@ -57,7 +57,14 @@ public final class UUIDConverter extends AbstractConverter<UUID> {
     @Override
     protected <T> T convertToType(final Class<T> type, final Object value) throws Throwable {
         if (UUID.class.equals(type)) {
-            return type.cast(UUID.fromString(String.valueOf(value)));
+            final String stringValue = String.valueOf(value);
+            final UUID uuid = UUID.fromString(stringValue);
+            // UUID.fromString accepts abbreviated groups (e.g. "1-1-1-1-1"), so
+            // reject anything that is not the canonical 8-4-4-4-12 representation.
+            if (!uuid.toString().equalsIgnoreCase(stringValue)) {
+                throw new IllegalArgumentException("Invalid UUID string: " + stringValue);
+            }
+            return type.cast(uuid);
         }
 
         throw conversionException(type, value);
