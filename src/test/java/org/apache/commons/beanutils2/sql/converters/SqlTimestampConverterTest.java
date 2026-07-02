@@ -32,6 +32,15 @@ import org.junit.jupiter.api.Test;
 class SqlTimestampConverterTest extends AbstractDateConverterTest<Timestamp> {
 
     /**
+     * Gets the separator that precedes the AM/PM field in the US SHORT time format. Java 20 and up (CLDR) use a narrow no-break space (U+202F) here,
+     * earlier versions use a regular space.
+     */
+    private static String amPmSeparator() {
+        final String formatted = DateFormat.getTimeInstance(DateFormat.SHORT, Locale.US).format(new Date());
+        return formatted.contains("\u202f") ? "\u202f" : " ";
+    }
+
+    /**
      * Gets the expected type
      *
      * @return The expected type
@@ -108,12 +117,12 @@ class SqlTimestampConverterTest extends AbstractDateConverterTest<Timestamp> {
         String pattern; // SHORT style Date & Time format for US Locale
         String testString;
         if (isUSFormatWithComma()) {
-            pattern = "M/d/yy, h:mm a";
-            testString = "3/21/06, 3:06 PM";
+            pattern = "M/d/yy, h:mm" + amPmSeparator() + "a";
+            testString = "3/21/06, 3:06" + amPmSeparator() + "PM";
         } else {
             // More regular pattern for Java 8 and earlier
-            pattern = "M/d/yy h:mm a";
-            testString = "3/21/06 3:06 PM";
+            pattern = "M/d/yy h:mm" + amPmSeparator() + "a";
+            testString = "3/21/06 3:06" + amPmSeparator() + "PM";
         }
 
         // Valid String --> Type Conversion

@@ -18,7 +18,9 @@
 package org.apache.commons.beanutils2.sql.converters;
 
 import java.sql.Time;
+import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import org.apache.commons.beanutils2.converters.AbstractDateConverterTest;
@@ -28,6 +30,15 @@ import org.junit.jupiter.api.Test;
  * Test Case for the {@link SqlTimeConverter} class.
  */
 class SqlTimeConverterTest extends AbstractDateConverterTest<Time> {
+
+    /**
+     * Gets the separator that precedes the AM/PM field in the US SHORT time format. Java 20 and up (CLDR) use a narrow no-break space (U+202F) here,
+     * earlier versions use a regular space.
+     */
+    private static String amPmSeparator() {
+        final String formatted = DateFormat.getTimeInstance(DateFormat.SHORT, Locale.US).format(new Date());
+        return formatted.contains("\u202f") ? "\u202f" : " ";
+    }
 
     /**
      * Gets the expected type
@@ -89,14 +100,14 @@ class SqlTimeConverterTest extends AbstractDateConverterTest<Time> {
         final Locale defaultLocale = Locale.getDefault();
         Locale.setDefault(Locale.US);
 
-        final String pattern = "h:mm a"; // SHORT style time format for US Locale
+        final String pattern = "h:mm" + amPmSeparator() + "a"; // SHORT style time format for US Locale
 
         // Create & Configure the Converter
         final SqlTimeConverter converter = makeConverter();
         converter.setUseLocaleFormat(true);
 
         // Valid String --> Type Conversion
-        final String testString = "3:06 pm";
+        final String testString = "3:06" + amPmSeparator() + "pm";
         final Object expected = toType(testString, pattern, null);
         validConversion(converter, expected, testString);
 
