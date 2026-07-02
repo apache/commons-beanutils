@@ -49,7 +49,6 @@ public class ShortLocaleConverter extends DecimalLocaleConverter<Short> {
         public ShortLocaleConverter get() {
             return new ShortLocaleConverter(defaultValue, locale, pattern, useDefault || defaultValue != null, localizedPattern);
         }
-
     }
 
     /**
@@ -68,28 +67,24 @@ public class ShortLocaleConverter extends DecimalLocaleConverter<Short> {
     /**
      * Parses the specified locale-sensitive input object into an output object of the specified type. This method will return values of type Short.
      *
-     * @param value   The input object to be converted
-     * @param pattern The pattern is used for the conversion
-     * @return The converted value
-     * @throws ConversionException if conversion cannot be performed successfully
-     * @throws ParseException      if an error occurs parsing a String to a Number
+     * @param value   The input object to be converted.
+     * @param pattern The pattern is used for the conversion.
+     * @return The converted value.
+     * @throws ConversionException if conversion cannot be performed successfully.
+     * @throws ParseException      if an error occurs parsing a String to a Number.
      * @since 1.8.0
      */
     @Override
     protected Short parse(final Object value, final String pattern) throws ParseException {
         final Object result = super.parse(value, pattern);
-
         if (result == null || result instanceof Short) {
             return (Short) result;
         }
-
         final Number parsed = (Number) result;
         if (parsed.longValue() != parsed.shortValue()) {
             throw new ConversionException("Supplied number is not of type Short: " + parsed.longValue());
         }
-
         // now returns property Short
         return Short.valueOf(parsed.shortValue());
     }
-
 }

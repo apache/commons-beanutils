@@ -44,7 +44,6 @@ public class LongLocaleConverter extends DecimalLocaleConverter<Long> {
         public LongLocaleConverter get() {
             return new LongLocaleConverter(defaultValue, locale, pattern, useDefault || defaultValue != null, localizedPattern);
         }
-
     }
 
     /**
@@ -63,26 +62,23 @@ public class LongLocaleConverter extends DecimalLocaleConverter<Long> {
     /**
      * Parses the specified locale-sensitive input object into an output object of the specified type. This method will return a Long type.
      *
-     * @param value   The input object to be converted
-     * @param pattern The pattern is used for the conversion
-     * @return The converted value
-     * @throws ConversionException if conversion cannot be performed successfully
-     * @throws ParseException      if an error occurs parsing a String to a Number
+     * @param value   The input object to be converted.
+     * @param pattern The pattern is used for the conversion.
+     * @return The converted value.
+     * @throws ConversionException if conversion cannot be performed successfully.
+     * @throws ParseException      if an error occurs parsing a String to a Number.
      * @since 1.8.0
      */
     @Override
     protected Long parse(final Object value, final String pattern) throws ParseException {
         final Number result = super.parse(value, pattern);
-
         if (result == null || result instanceof Long) {
             return (Long) result;
         }
-
         final double doubleValue = result.doubleValue();
         if (doubleValue < Long.MIN_VALUE || doubleValue > Long.MAX_VALUE) {
             throw new ConversionException("Supplied number is not of type Long: " + result);
         }
-
         return Long.valueOf(result.longValue());
     }
 }

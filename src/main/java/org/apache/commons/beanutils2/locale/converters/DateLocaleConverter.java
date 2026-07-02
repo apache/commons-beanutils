@@ -76,7 +76,7 @@ public class DateLocaleConverter<D extends Date> extends BaseLocaleConverter<D> 
         /**
          * Tests whether date formatting is lenient.
          *
-         * @return true if the {@code DateFormat} used for formatting is lenient
+         * @return true if the {@code DateFormat} used for formatting is lenient.
          * @see java.text.DateFormat#isLenient()
          */
         public boolean isLenient() {
@@ -93,7 +93,6 @@ public class DateLocaleConverter<D extends Date> extends BaseLocaleConverter<D> 
             this.lenient = lenient;
             return asThis();
         }
-
     }
 
     /**
@@ -146,27 +145,23 @@ public class DateLocaleConverter<D extends Date> extends BaseLocaleConverter<D> 
     /**
      * Converts a pattern from a localized format to the default format.
      *
-     * @param locale           The locale
-     * @param localizedPattern The pattern in 'local' symbol format
-     * @return pattern in 'default' symbol format
+     * @param locale           The locale.
+     * @param localizedPattern The pattern in 'local' symbol format.
+     * @return pattern in 'default' symbol format.
      */
     private String convertLocalizedPattern(final String localizedPattern, final Locale locale) {
         if (localizedPattern == null) {
             return null;
         }
-
         // Note that this is a little obtuse.
         // However, it is the best way that anyone can come up with
         // that works with some 1.4 series JVM.
-
         // Get the symbols for the localized pattern
         final DateFormatSymbols localizedSymbols = new DateFormatSymbols(locale);
         final String localChars = localizedSymbols.getLocalPatternChars();
-
         if (DEFAULT_PATTERN_CHARS.equals(localChars)) {
             return localizedPattern;
         }
-
         // Convert the localized pattern to default
         String convertedPattern = null;
         try {
@@ -185,7 +180,6 @@ public class DateLocaleConverter<D extends Date> extends BaseLocaleConverter<D> 
     private String convertPattern(final String pattern, final String fromChars, final String toChars) {
         final StringBuilder converted = new StringBuilder();
         boolean quoted = false;
-
         for (int i = 0; i < pattern.length(); ++i) {
             char thisChar = pattern.charAt(i);
             if (quoted) {
@@ -203,18 +197,16 @@ public class DateLocaleConverter<D extends Date> extends BaseLocaleConverter<D> 
             }
             converted.append(thisChar);
         }
-
         if (quoted) {
             throw new IllegalArgumentException("Unfinished quote in pattern");
         }
-
         return converted.toString();
     }
 
     /**
      * Tests whether date formatting is lenient.
      *
-     * @return true if the {@code DateFormat} used for formatting is lenient
+     * @return true if the {@code DateFormat} used for formatting is lenient.
      * @see java.text.DateFormat#isLenient()
      */
     public boolean isLenient() {
@@ -224,11 +216,11 @@ public class DateLocaleConverter<D extends Date> extends BaseLocaleConverter<D> 
     /**
      * Convert the specified locale-sensitive input object into an output object of the specified type.
      *
-     * @param value   The input object to be converted
-     * @param pattern The pattern is used for the conversion
-     * @return the converted Date value
-     * @throws ConversionException if conversion cannot be performed successfully
-     * @throws ParseException      if an error occurs parsing
+     * @param value   The input object to be converted.
+     * @param pattern The pattern is used for the conversion.
+     * @return the converted Date value.
+     * @throws ConversionException if conversion cannot be performed successfully.
+     * @throws ParseException      if an error occurs parsing.
      */
     @Override
     protected D parse(final Object value, String pattern) throws ParseException {
@@ -236,20 +228,16 @@ public class DateLocaleConverter<D extends Date> extends BaseLocaleConverter<D> 
         if (value instanceof Date) {
             return (D) value;
         }
-
         // Handle Calendar
         if (value instanceof Calendar) {
             return (D) ((Calendar) value).getTime();
         }
-
         if (localizedPattern) {
             pattern = convertLocalizedPattern(pattern, locale);
         }
-
         // Create Formatter - use default if pattern is null
         final DateFormat formatter = pattern == null ? DateFormat.getDateInstance(DateFormat.SHORT, locale) : new SimpleDateFormat(pattern, locale);
         formatter.setLenient(isLenient);
-
         // Parse the Date
         final ParsePosition pos = new ParsePosition(0);
         final String strValue = value.toString();
@@ -260,8 +248,6 @@ public class DateLocaleConverter<D extends Date> extends BaseLocaleConverter<D> 
         if (pos.getIndex() < strValue.length()) {
             throw ConversionException.format("Date '%s' contains unparsed characters from position = %s", value, pos.getIndex());
         }
-
         return (D) parsedValue;
     }
-
 }

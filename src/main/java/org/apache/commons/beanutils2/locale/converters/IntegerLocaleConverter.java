@@ -44,7 +44,6 @@ public class IntegerLocaleConverter extends DecimalLocaleConverter<Integer> {
         public IntegerLocaleConverter get() {
             return new IntegerLocaleConverter(defaultValue, locale, pattern, useDefault || defaultValue != null, localizedPattern);
         }
-
     }
 
     /**
@@ -63,11 +62,11 @@ public class IntegerLocaleConverter extends DecimalLocaleConverter<Integer> {
     /**
      * Parses the specified locale-sensitive input object into an output object of the specified type. This method will return Integer type.
      *
-     * @param value   The input object to be converted
-     * @param pattern The pattern is used for the conversion
-     * @return The converted value
-     * @throws ConversionException if conversion cannot be performed successfully
-     * @throws ParseException      if an error occurs parsing a String to a Number
+     * @param value   The input object to be converted.
+     * @param pattern The pattern is used for the conversion.
+     * @return The converted value.
+     * @throws ConversionException if conversion cannot be performed successfully.
+     * @throws ParseException      if an error occurs parsing a String to a Number.
      */
     @Override
     protected Integer parse(final Object value, final String pattern) throws ParseException {

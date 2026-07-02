@@ -66,7 +66,6 @@ public class DecimalLocaleConverter<T extends Number> extends BaseLocaleConverte
         public DecimalLocaleConverter<?> get() {
             return new DecimalLocaleConverter<>(defaultValue, locale, pattern, useDefault || defaultValue != null, localizedPattern);
         }
-
     }
 
     /** All logging goes through this logger */
@@ -99,8 +98,8 @@ public class DecimalLocaleConverter<T extends Number> extends BaseLocaleConverte
 
     /**
      * Tests whether the underlying {@link DecimalFormat} should parse into a {@link java.math.BigDecimal} so that magnitude and precision are preserved.
-     * Subclasses that build {@link java.math.BigInteger} or {@link java.math.BigDecimal} values override this to return {@code true}; the narrowing
-     * converters keep the default {@code Long} / {@code Double} result.
+     * Subclasses that build {@link java.math.BigInteger} or {@link java.math.BigDecimal} values override this to return {@code true}; the narrowing converters
+     * keep the default {@code Long} / {@code Double} result.
      *
      * @return {@code true} to parse into a {@link java.math.BigDecimal}, {@code false} otherwise.
      */
@@ -111,25 +110,23 @@ public class DecimalLocaleConverter<T extends Number> extends BaseLocaleConverte
     /**
      * Converts the specified locale-sensitive input object into an output object of the specified type.
      *
-     * @param value   The input object to be converted
-     * @param pattern The pattern is used for the conversion
-     * @return The converted value
-     * @throws ConversionException if conversion cannot be performed successfully
-     * @throws ParseException      if an error occurs parsing a String to a Number
+     * @param value   The input object to be converted.
+     * @param pattern The pattern is used for the conversion.
+     * @return The converted value.
+     * @throws ConversionException if conversion cannot be performed successfully.
+     * @throws ParseException      if an error occurs parsing a String to a Number.
      */
     @Override
     protected T parse(final Object value, final String pattern) throws ParseException {
         if (value instanceof Number) {
             return (T) value;
         }
-
         // Note that despite the ambiguous "getInstance" name, and despite the
         // fact that objects returned from this method have the same toString
         // representation, each call to getInstance actually returns a new
         // object.
         final DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(locale);
         formatter.setParseBigDecimal(isParseBigDecimal());
-
         // if some constructors default pattern to null, it makes only sense
         // to handle null pattern gracefully
         if (pattern != null) {
@@ -141,7 +138,6 @@ public class DecimalLocaleConverter<T extends Number> extends BaseLocaleConverte
         } else {
             LOG.debug("No pattern provided, using default.");
         }
-
         final String strValue = (String) value;
         final ParsePosition pos = new ParsePosition(0);
         final Number parsed = formatter.parse(strValue, pos);

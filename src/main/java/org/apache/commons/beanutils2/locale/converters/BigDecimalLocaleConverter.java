@@ -46,7 +46,6 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter<BigDecimal
         public BigDecimalLocaleConverter get() {
             return new BigDecimalLocaleConverter(defaultValue, locale, pattern, useDefault || defaultValue != null, localizedPattern);
         }
-
     }
 
     /**
@@ -66,21 +65,19 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter<BigDecimal
     /**
      * Parses the specified locale-sensitive input object into an output object of BigDecimal type.
      *
-     * @param value   The input object to be converted
-     * @param pattern The pattern is used for the conversion
-     * @return The converted value
-     * @throws ConversionException if conversion cannot be performed successfully
-     * @throws ParseException      if an error occurs parsing a String to a Number
+     * @param value   The input object to be converted.
+     * @param pattern The pattern is used for the conversion.
+     * @return The converted value.
+     * @throws ConversionException if conversion cannot be performed successfully.
+     * @throws ParseException      if an error occurs parsing a String to a Number.
      * @since 1.8.0
      */
     @Override
     protected BigDecimal parse(final Object value, final String pattern) throws ParseException {
         final Number result = super.parse(value, pattern);
-
         if (result == null || result instanceof BigDecimal) {
             return (BigDecimal) result;
         }
-
         try {
             return new BigDecimal(result.toString());
         } catch (final NumberFormatException ex) {
@@ -92,5 +89,4 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter<BigDecimal
     protected boolean isParseBigDecimal() {
         return true;
     }
-
 }

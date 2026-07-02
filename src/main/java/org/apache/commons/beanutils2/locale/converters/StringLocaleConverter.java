@@ -63,7 +63,6 @@ public class StringLocaleConverter extends BaseLocaleConverter<String> {
         public StringLocaleConverter get() {
             return new StringLocaleConverter(defaultValue, locale, pattern, useDefault || defaultValue != null, localizedPattern);
         }
-
     }
 
     /** All logging goes through this logger */
@@ -85,15 +84,14 @@ public class StringLocaleConverter extends BaseLocaleConverter<String> {
     /**
      * Gets an instance of DecimalFormat.
      *
-     * @param locale  The locale
-     * @param pattern The pattern is used for the conversion
-     * @return The format for the locale and pattern
-     * @throws ConversionException      if conversion cannot be performed successfully
-     * @throws IllegalArgumentException if an error occurs parsing a String to a Number
+     * @param locale  The locale.
+     * @param pattern The pattern is used for the conversion.
+     * @return The format for the locale and pattern.
+     * @throws ConversionException      if conversion cannot be performed successfully.
+     * @throws IllegalArgumentException if an error occurs parsing a String to a Number.
      */
     private DecimalFormat getDecimalFormat(final Locale locale, final String pattern) {
         final DecimalFormat numberFormat = (DecimalFormat) NumberFormat.getInstance(locale);
-
         // if some constructors default pattern to null, it makes only sense to handle null pattern gracefully
         if (pattern != null) {
             if (localizedPattern) {
@@ -104,23 +102,21 @@ public class StringLocaleConverter extends BaseLocaleConverter<String> {
         } else {
             LOG.debug("No pattern provided, using default.");
         }
-
         return numberFormat;
     }
 
     /**
      * Parses the specified locale-sensitive input object into an output object of the specified type.
      *
-     * @param value   The input object to be converted
-     * @param pattern The pattern is used for the conversion
-     * @return The converted value
-     * @throws ConversionException if conversion cannot be performed successfully
-     * @throws ParseException      if an error occurs
+     * @param value   The input object to be converted.
+     * @param pattern The pattern is used for the conversion.
+     * @return The converted value.
+     * @throws ConversionException if conversion cannot be performed successfully.
+     * @throws ParseException      if an error occurs.
      */
     @Override
     protected String parse(final Object value, final String pattern) throws ParseException {
         String result = null;
-
         if (value instanceof BigInteger || value instanceof BigDecimal) {
             result = getDecimalFormat(locale, pattern).format(value);
         } else if (value instanceof Integer || value instanceof Long || value instanceof Byte || value instanceof Short) {
@@ -132,7 +128,6 @@ public class StringLocaleConverter extends BaseLocaleConverter<String> {
         } else {
             result = value.toString();
         }
-
         return result;
     }
 }

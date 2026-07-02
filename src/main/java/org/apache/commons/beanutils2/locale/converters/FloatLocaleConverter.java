@@ -45,7 +45,6 @@ public class FloatLocaleConverter extends DecimalLocaleConverter<Float> {
         public FloatLocaleConverter get() {
             return new FloatLocaleConverter(defaultValue, locale, pattern, useDefault || defaultValue != null, localizedPattern);
         }
-
     }
 
     /**
@@ -65,11 +64,11 @@ public class FloatLocaleConverter extends DecimalLocaleConverter<Float> {
      * Parses the specified locale-sensitive input object into an output object of the specified type. This method will return Float value or throw exception if
      * value cannot be stored in the Float.
      *
-     * @param value   The input object to be converted
-     * @param pattern The pattern is used for the conversion
-     * @return The converted value
-     * @throws ConversionException if conversion cannot be performed successfully
-     * @throws ParseException      if an error occurs parsing a String to a Number
+     * @param value   The input object to be converted.
+     * @param pattern The pattern is used for the conversion.
+     * @return The converted value.
+     * @throws ConversionException if conversion cannot be performed successfully.
+     * @throws ParseException      if an error occurs parsing a String to a Number.
      */
     @Override
     protected Float parse(final Object value, final String pattern) throws ParseException {
