@@ -17,6 +17,12 @@
 
 package org.apache.commons.beanutils.locale.converters;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.text.DecimalFormat;
+
+import org.apache.commons.beanutils.ConversionException;
+
 /**
  * Test Case for the LongLocaleConverter class.
  *
@@ -223,6 +229,18 @@ public class LongLocaleConverterTest extends BaseLocaleConverterTest {
         convertInvalid(converter, "(C)", defaultValue);
         convertNull(converter, "(C)", defaultValue);
 
+    }
+
+    /**
+     * Test Long limits
+     */
+    public void testLongLimits() {
+        converter = new LongLocaleConverter();
+        final DecimalFormat fmt = new DecimalFormat("#");
+        assertEquals(Long.valueOf(Long.MAX_VALUE), converter.convert(fmt.format(Long.MAX_VALUE)));
+        assertEquals(Long.valueOf(Long.MIN_VALUE), converter.convert(fmt.format(Long.MIN_VALUE)));
+        assertThrows(ConversionException.class, () -> converter.convert("99999999999999999999"));
+        assertThrows(ConversionException.class, () -> converter.convert("-99999999999999999999"));
     }
 
 }
