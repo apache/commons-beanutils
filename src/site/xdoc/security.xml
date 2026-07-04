@@ -74,7 +74,7 @@ public void testSuppressClassPropertyByDefault() throws Exception {
 
 /**
  * Example showing how by which one would use to revert to the 
- * behaviour prior to the 1.9.4 release where class level properties were accessible by
+ * behavior prior to the 1.9.4 release where class level properties were accessible by
  * the BeanUtilsBean and the PropertyUtilsBean.
  */
 public void testAllowAccessToClassProperty() throws Exception {
