@@ -119,7 +119,7 @@ Bean Collections has an additional dependency on
     <strong>Credit.</strong> This was discovered by Melloware (https://melloware.com/).<br/><br/>
     <strong>Example.</strong>
     <source>/**
-* Example displaying the new default behaviour such that
+* Example displaying the new default behavior such that
 * it is not possible to access class level properties utilizing the
 * BeanUtilsBean, which in turn utilizes the PropertyUtilsBean.
 */
@@ -136,7 +136,7 @@ public void testSuppressClassPropertyByDefault() throws Exception {
 
 /**
 * Example showing how by which one would use to revert to the
-* behaviour prior to the 1.9.4 release where class level properties were accessible by
+* behavior prior to the 1.9.4 release where class level properties were accessible by
 * the BeanUtilsBean and the PropertyUtilsBean.
 */
 public void testAllowAccessToClassProperty() throws Exception {

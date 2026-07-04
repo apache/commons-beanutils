@@ -159,11 +159,11 @@ The Apache Commons BeanUtils team is pleased to announce the release of Apache C
 Apache Commons BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.
 
 The primary reason for this release is a bugfix for CVE-2014-0114. More specifically, our goal with
-BEANUTILS-520 is to set the default behaviour of the BeanUtilsBean to not allow class level access. The goal
-in doing this now is to bring 1.9.X into alignment with the same behaviour of the 2.X version line in
+BEANUTILS-520 is to set the default behavior of the BeanUtilsBean to not allow class level access. The goal
+in doing this now is to bring 1.9.X into alignment with the same behavior of the 2.X version line in
 regards to security.
 
-If one would like to opt out of the default behaviour, one could follow the example set out in the
+If one would like to opt out of the default behavior, one could follow the example set out in the
 test class available in src/test/java/org/apache/commons/beanutils/bugs/Jira520TestCase.java.
 
 Changes in this version include:
