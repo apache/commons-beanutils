@@ -260,7 +260,7 @@ public class ConstructorUtils {
             InvocationTargetException,
             InstantiationException {
 
-        if (null == args) {
+        if (args == null) {
             args = EMPTY_OBJECT_ARRAY;
         }
         final int arguments = args.length;
@@ -307,7 +307,7 @@ public class ConstructorUtils {
 
         final Constructor<T> ctor =
             getMatchingAccessibleConstructor(klass, parameterTypes);
-        if (null == ctor) {
+        if (ctor == null) {
             throw new NoSuchMethodException(
                 "No such accessible constructor on object: " + klass.getName());
         }
@@ -366,7 +366,7 @@ public class ConstructorUtils {
             InvocationTargetException,
             InstantiationException {
 
-        if (null == args) {
+        if (args == null) {
             args = EMPTY_OBJECT_ARRAY;
         }
         final int arguments = args.length;
@@ -414,7 +414,7 @@ public class ConstructorUtils {
         }
 
         final Constructor<T> ctor = getAccessibleConstructor(klass, parameterTypes);
-        if (null == ctor) {
+        if (ctor == null) {
             throw new NoSuchMethodException(
                 "No such accessible constructor on object: " + klass.getName());
         }
