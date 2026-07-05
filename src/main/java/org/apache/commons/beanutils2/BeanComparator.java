@@ -74,7 +74,7 @@ public class BeanComparator<T, V> implements Comparator<T> {
 
         @Override
         public boolean equals(final Object object) {
-            return this == object || null != object && object.getClass().equals(this.getClass());
+            return this == object || object != null && object.getClass().equals(this.getClass());
         }
 
         @Override
