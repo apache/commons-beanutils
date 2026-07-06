@@ -84,6 +84,10 @@ public class ShortLocaleConverter extends DecimalLocaleConverter<Short> {
         if (parsed.longValue() != parsed.shortValue()) {
             throw new ConversionException("Supplied number is not of type Short: " + parsed.longValue());
         }
+        final double doubleValue = parsed.doubleValue();
+        if (doubleValue != Math.rint(doubleValue)) {
+            throw new ConversionException("Supplied number is not an integer: " + parsed);
+        }
         // now returns property Short
         return Short.valueOf(parsed.shortValue());
     }

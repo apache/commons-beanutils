@@ -169,12 +169,12 @@ class ByteLocaleConverterTest extends AbstractLocaleConverterTest<Byte> {
         convertInvalid(converter, "(A)", defaultValue);
         convertNull(converter, "(A)", defaultValue);
         // **************************************************************************
-        // Convert value in the wrong format - maybe you would expect it to throw an
-        // exception and return the default - it doesn't, DecimalFormat parses it
-        // quite happily turning ",123" into "0"
-        // I guess this is one of the limitations of DecimalFormat
+        // Convert value in the wrong format - the localized (German) converter reads
+        // ',' as the decimal separator, so ",123" parses to the fractional value
+        // 0.123; the integer converter now rejects a non-integer result and returns
+        // the default.
         // **************************************************************************
-        convertValueNoPattern(converter, "(B)", defaultIntegerValue, Byte.valueOf("0"));
+        convertValueNoPattern(converter, "(B)", defaultIntegerValue, defaultValue);
         // **************************************************************************
         // Convert with non-localized pattern
         // **************************************************************************
@@ -195,5 +195,14 @@ class ByteLocaleConverterTest extends AbstractLocaleConverterTest<Byte> {
         convertValueWithPattern(converter, "(C)", localizedIntegerValue, defaultIntegerPattern, expectedValue);
         convertInvalid(converter, "(C)", defaultValue);
         convertNull(converter, "(C)", defaultValue);
+    }
+
+    /**
+     * Tests that a non-integer value is rejected rather than silently truncated to an integer.
+     */
+    @Test
+    void testNonIntegerRejected() {
+        converter = ByteLocaleConverter.builder().setDefault(defaultValue).setLocale(defaultLocale).get();
+        convertValueNoPattern(converter, "non-integer", "5.5", defaultValue);
     }
 }

@@ -74,6 +74,10 @@ public class IntegerLocaleConverter extends DecimalLocaleConverter<Integer> {
         if (parsed.longValue() != parsed.intValue()) {
             throw new ConversionException("Supplied number is not of type Integer: " + parsed.longValue());
         }
+        final double doubleValue = parsed.doubleValue();
+        if (doubleValue != Math.rint(doubleValue)) {
+            throw new ConversionException("Supplied number is not an integer: " + parsed);
+        }
         return Integer.valueOf(parsed.intValue()); // unlike superclass it will return proper Integer
     }
 }

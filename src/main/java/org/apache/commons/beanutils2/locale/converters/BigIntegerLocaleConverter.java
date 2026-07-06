@@ -80,7 +80,11 @@ public class BigIntegerLocaleConverter extends DecimalLocaleConverter<BigInteger
             return (BigInteger) result;
         }
         if (result instanceof BigDecimal) {
-            return ((BigDecimal) result).toBigInteger();
+            try {
+                return ((BigDecimal) result).toBigIntegerExact();
+            } catch (final ArithmeticException e) {
+                throw new ConversionException("Supplied number is not an integer: " + result, e);
+            }
         }
         return BigInteger.valueOf(result.longValue());
     }

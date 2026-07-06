@@ -162,12 +162,12 @@ class ShortLocaleConverterTest extends AbstractLocaleConverterTest<Short> {
         convertInvalid(converter, "(A)", defaultValue);
         convertNull(converter, "(A)", defaultValue);
         // **************************************************************************
-        // Convert value in the wrong format - maybe you would expect it to throw an
-        // exception and return the default - it doesn't, DecimalFormat parses it
-        // quite happily turning "1,234" into "1"
-        // I guess this is one of the limitations of DecimalFormat
+        // Convert value in the wrong format - the localized (German) converter reads
+        // ',' as the decimal separator, so "1,234" parses to the fractional value
+        // 1.234; the integer converter now rejects a non-integer result and returns
+        // the default.
         // **************************************************************************
-        convertValueNoPattern(converter, "(B)", defaultIntegerValue, Short.valueOf("1"));
+        convertValueNoPattern(converter, "(B)", defaultIntegerValue, defaultValue);
         // **************************************************************************
         // Convert with non-localized pattern - the trailing characters left after the
         // partial parse are now rejected, so the converter returns the default.
@@ -188,5 +188,14 @@ class ShortLocaleConverterTest extends AbstractLocaleConverterTest<Short> {
         convertValueWithPattern(converter, "(C)", localizedIntegerValue, defaultIntegerPattern, expectedValue);
         convertInvalid(converter, "(C)", defaultValue);
         convertNull(converter, "(C)", defaultValue);
+    }
+
+    /**
+     * Tests that a non-integer value is rejected rather than silently truncated to an integer.
+     */
+    @Test
+    void testNonIntegerRejected() {
+        converter = ShortLocaleConverter.builder().setDefault(defaultValue).setLocale(defaultLocale).get();
+        convertValueNoPattern(converter, "non-integer", "5.5", defaultValue);
     }
 }
