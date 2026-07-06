@@ -79,6 +79,9 @@ public class LongLocaleConverter extends DecimalLocaleConverter<Long> {
         if (doubleValue < Long.MIN_VALUE || doubleValue > Long.MAX_VALUE) {
             throw new ConversionException("Supplied number is not of type Long: " + result);
         }
+        if (doubleValue != Math.rint(doubleValue)) {
+            throw new ConversionException("Supplied number is not an integer: " + result);
+        }
         return Long.valueOf(result.longValue());
     }
 }

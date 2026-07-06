@@ -74,6 +74,10 @@ public class ByteLocaleConverter extends DecimalLocaleConverter<Byte> {
         if (parsed.longValue() != parsed.byteValue()) {
             throw new ConversionException("Supplied number is not of type Byte: " + parsed.longValue());
         }
+        final double doubleValue = parsed.doubleValue();
+        if (doubleValue != Math.rint(doubleValue)) {
+            throw new ConversionException("Supplied number is not an integer: " + parsed);
+        }
         // now returns property Byte
         return Byte.valueOf(parsed.byteValue());
     }

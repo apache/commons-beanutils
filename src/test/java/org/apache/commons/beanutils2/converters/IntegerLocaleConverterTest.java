@@ -164,12 +164,12 @@ class IntegerLocaleConverterTest extends AbstractLocaleConverterTest<Integer> {
         convertInvalid(converter, "(A)", defaultValue);
         convertNull(converter, "(A)", defaultValue);
         // **************************************************************************
-        // Convert value in the wrong format - maybe you would expect it to throw an
-        // exception and return the default - it doesn't, DecimalFormat parses it
-        // quite happily turning "1,234" into "1"
-        // I guess this is one of the limitations of DecimalFormat
+        // Convert value in the wrong format - the localized (German) converter reads
+        // ',' as the decimal separator, so "1,234" parses to the fractional value
+        // 1.234; the integer converter now rejects a non-integer result and returns
+        // the default.
         // **************************************************************************
-        convertValueNoPattern(converter, "(B)", defaultIntegerValue, Integer.valueOf("1"));
+        convertValueNoPattern(converter, "(B)", defaultIntegerValue, defaultValue);
         // **************************************************************************
         // Convert with non-localized pattern - the trailing characters left after the
         // partial parse are now rejected, so the converter returns the default.
@@ -214,5 +214,14 @@ class IntegerLocaleConverterTest extends AbstractLocaleConverterTest<Integer> {
         final Class<Integer> target = Integer.TYPE;
         final int result = converter.convert(target, (Object) value.toString());
         assertEquals(value.intValue(), result, "Wrong result");
+    }
+
+    /**
+     * Tests that a non-integer value is rejected rather than silently truncated to an integer.
+     */
+    @Test
+    void testNonIntegerRejected() {
+        converter = IntegerLocaleConverter.builder().setDefault(defaultValue).setLocale(defaultLocale).get();
+        convertValueNoPattern(converter, "non-integer", "5.5", defaultValue);
     }
 }
