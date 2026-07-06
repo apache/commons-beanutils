@@ -39,15 +39,15 @@ class EnumConverterTest {
         ORDERED, READY, DELIVERED;
     }
 
-    /** Set from {@link StaticInitProbe}'s static initializer; read without touching the probe class. */
-    static volatile boolean probeInitialized;
-
     /** Non-enum helper whose static initializer records that it ran. */
     public static final class StaticInitProbe {
         static {
             probeInitialized = true;
         }
     }
+
+    /** Set from {@link StaticInitProbe}'s static initializer; read without touching the probe class. */
+    static volatile boolean probeInitialized;
 
     private Converter<Enum<PizzaStatus>> converter;
 
@@ -70,6 +70,43 @@ class EnumConverterTest {
     }
 
     @Test
+    void testBrokenNamingConvention() {
+        assertThrows(ConversionException.class, () -> converter.convert(Enum.class, "JAVA-TIME-DAYOFWEEK#MONDAY"));
+    }
+
+    @Test
+    void testConvertDayOfWeek() {
+        assertEquals(DayOfWeek.MONDAY, converter.convert(DayOfWeek.class, "java.time.DayOfWeek#MONDAY"));
+    }
+
+    @Test
+    void testConvertMismatchingEnumType() {
+        assertThrows(ConversionException.class, () -> converter.convert(TimeUnit.class, "java.time.DayOfWeek#MONDAY"));
+    }
+
+    @Test
+    void testConvertTimeUnit() {
+        assertEquals(TimeUnit.NANOSECONDS, converter.convert(Enum.class, "java.util.concurrent.TimeUnit.NANOSECONDS"));
+    }
+
+    @Test
+    void testNonEnumClasses() {
+        assertThrows(ConversionException.class, () -> converter.convert(Enum.class, "java.lang.String#MONDAY"));
+    }
+
+    @Test
+    void testNonEnumClassIsNotInitialized() {
+        final String name = StaticInitProbe.class.getName() + "#VALUE";
+        assertThrows(ConversionException.class, () -> converter.convert(Enum.class, name));
+        assertFalse(probeInitialized, "Resolving a non-enum class must not run its static initializer");
+    }
+
+    @Test
+    void testNonExistingClasses() {
+        assertThrows(ConversionException.class, () -> converter.convert(Enum.class, "java.lang.does.not.exist#MONDAY"));
+    }
+
+    @Test
     void testSimpleConversion() throws Exception {
         final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from String", };
         final Object[] input = { "DELIVERED", "ORDERED", "READY" };
@@ -88,42 +125,5 @@ class EnumConverterTest {
     @Test
     void testUnsupportedType() {
         assertThrows(ConversionException.class, () -> converter.convert(Integer.class, "http://www.apache.org"));
-    }
-
-    @Test
-    void testConvertTimeUnit() {
-        assertEquals(TimeUnit.NANOSECONDS, converter.convert(Enum.class, "java.util.concurrent.TimeUnit.NANOSECONDS"));
-    }
-
-    @Test
-    void testConvertDayOfWeek() {
-        assertEquals(DayOfWeek.MONDAY, converter.convert(DayOfWeek.class, "java.time.DayOfWeek#MONDAY"));
-    }
-
-    @Test
-    void testConvertMismatchingEnumType() {
-        assertThrows(ConversionException.class, () -> converter.convert(TimeUnit.class, "java.time.DayOfWeek#MONDAY"));
-    }
-
-    @Test
-    void testBrokenNamingConvention() {
-        assertThrows(ConversionException.class, () -> converter.convert(Enum.class, "JAVA-TIME-DAYOFWEEK#MONDAY"));
-    }
-
-    @Test
-    void testNonEnumClasses() {
-        assertThrows(ConversionException.class, () -> converter.convert(Enum.class, "java.lang.String#MONDAY"));
-    }
-
-    @Test
-    void testNonExistingClasses() {
-        assertThrows(ConversionException.class, () -> converter.convert(Enum.class, "java.lang.does.not.exist#MONDAY"));
-    }
-
-    @Test
-    void testNonEnumClassIsNotInitialized() {
-        final String name = StaticInitProbe.class.getName() + "#VALUE";
-        assertThrows(ConversionException.class, () -> converter.convert(Enum.class, name));
-        assertFalse(probeInitialized, "Resolving a non-enum class must not run its static initializer");
     }
 }

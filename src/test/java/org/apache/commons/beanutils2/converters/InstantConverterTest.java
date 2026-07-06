@@ -55,13 +55,6 @@ class InstantConverterTest {
     }
 
     @Test
-    void testConvertingMilliseconds() {
-        final Instant expected = Instant.ofEpochMilli(1596500083605L);
-        final Instant actual = converter.convert(Instant.class, 1596500083605L);
-        assertEquals(expected, actual);
-    }
-
-    @Test
     void testConvertingInstantString() {
         final Instant expected = Instant.ofEpochMilli(1196676930000L);
         final Instant actual = converter.convert(Instant.class, "2007-12-03T10:15:30.00Z");
@@ -69,12 +62,19 @@ class InstantConverterTest {
     }
 
     @Test
-    void testText() {
-        assertThrows(ConversionException.class, () -> converter.convert(Instant.class, "Hello, world!"));
+    void testConvertingMilliseconds() {
+        final Instant expected = Instant.ofEpochMilli(1596500083605L);
+        final Instant actual = converter.convert(Instant.class, 1596500083605L);
+        assertEquals(expected, actual);
     }
 
     @Test
     void testLocalizedNumber() {
         assertThrows(ConversionException.class, () -> converter.convert(Instant.class, "200,000,000,000"));
+    }
+
+    @Test
+    void testText() {
+        assertThrows(ConversionException.class, () -> converter.convert(Instant.class, "Hello, world!"));
     }
 }

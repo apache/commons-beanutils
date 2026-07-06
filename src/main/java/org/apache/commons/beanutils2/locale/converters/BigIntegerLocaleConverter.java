@@ -63,6 +63,11 @@ public class BigIntegerLocaleConverter extends DecimalLocaleConverter<BigInteger
         super(defaultValue, locale, pattern, useDefault, locPattern);
     }
 
+    @Override
+    protected boolean isParseBigDecimal() {
+        return true;
+    }
+
     /**
      * Parses the specified locale-sensitive input object into an output object of BigInteger type.
      *
@@ -87,10 +92,5 @@ public class BigIntegerLocaleConverter extends DecimalLocaleConverter<BigInteger
             }
         }
         return BigInteger.valueOf(result.longValue());
-    }
-
-    @Override
-    protected boolean isParseBigDecimal() {
-        return true;
     }
 }

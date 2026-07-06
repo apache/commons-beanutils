@@ -193,6 +193,15 @@ class IntegerLocaleConverterTest extends AbstractLocaleConverterTest<Integer> {
     }
 
     /**
+     * Tests that a non-integer value is rejected rather than silently truncated to an integer.
+     */
+    @Test
+    void testNonIntegerRejected() {
+        converter = IntegerLocaleConverter.builder().setDefault(defaultValue).setLocale(defaultLocale).get();
+        convertValueNoPattern(converter, "non-integer", "5.5", defaultValue);
+    }
+
+    /**
      * Test Converting a number
      */
     @Test
@@ -214,14 +223,5 @@ class IntegerLocaleConverterTest extends AbstractLocaleConverterTest<Integer> {
         final Class<Integer> target = Integer.TYPE;
         final int result = converter.convert(target, (Object) value.toString());
         assertEquals(value.intValue(), result, "Wrong result");
-    }
-
-    /**
-     * Tests that a non-integer value is rejected rather than silently truncated to an integer.
-     */
-    @Test
-    void testNonIntegerRejected() {
-        converter = IntegerLocaleConverter.builder().setDefault(defaultValue).setLocale(defaultLocale).get();
-        convertValueNoPattern(converter, "non-integer", "5.5", defaultValue);
     }
 }

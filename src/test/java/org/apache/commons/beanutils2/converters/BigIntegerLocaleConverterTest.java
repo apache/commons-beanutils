@@ -152,18 +152,6 @@ class BigIntegerLocaleConverterTest extends AbstractLocaleConverterTest<BigInteg
     }
 
     /**
-     * A value with more digits than fit in a {@code long} must keep its full magnitude instead of saturating to {@link Long#MAX_VALUE}.
-     */
-    @Test
-    void testConvertLargeValueKeepsMagnitude() {
-        converter = BigIntegerLocaleConverter.builder().get();
-        final String big = "9999999999999999999";
-        convertValueNoPattern(converter, big, new BigInteger(big));
-        final String huge = "123456789012345678901234567890";
-        convertValueNoPattern(converter, huge, new BigInteger(huge));
-    }
-
-    /**
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
      */
     @Test
@@ -202,6 +190,18 @@ class BigIntegerLocaleConverterTest extends AbstractLocaleConverterTest<BigInteg
         convertValueWithPattern(converter, "(C)", localizedIntegerValue, defaultIntegerPattern, expectedValue);
         convertInvalid(converter, "(C)", defaultValue);
         convertNull(converter, "(C)", defaultValue);
+    }
+
+    /**
+     * A value with more digits than fit in a {@code long} must keep its full magnitude instead of saturating to {@link Long#MAX_VALUE}.
+     */
+    @Test
+    void testConvertLargeValueKeepsMagnitude() {
+        converter = BigIntegerLocaleConverter.builder().get();
+        final String big = "9999999999999999999";
+        convertValueNoPattern(converter, big, new BigInteger(big));
+        final String huge = "123456789012345678901234567890";
+        convertValueNoPattern(converter, huge, new BigInteger(huge));
     }
 
     /**

@@ -152,16 +152,6 @@ class BigDecimalLocaleConverterTest extends AbstractLocaleConverterTest<BigDecim
     }
 
     /**
-     * A value with more significant digits than a {@code double} can hold must not be rounded through {@code double}.
-     */
-    @Test
-    void testConvertLargeValueKeepsPrecision() {
-        converter = BigDecimalLocaleConverter.builder().get();
-        final String big = "9999999999999999999";
-        convertValueNoPattern(converter, big, new BigDecimal(big));
-    }
-
-    /**
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
      */
     @Test
@@ -195,5 +185,15 @@ class BigDecimalLocaleConverterTest extends AbstractLocaleConverterTest<BigDecim
         convertValueWithPattern(converter, "(C)", localizedDecimalValue, defaultDecimalPattern, expectedValue);
         convertInvalid(converter, "(C)", defaultValue);
         convertNull(converter, "(C)", defaultValue);
+    }
+
+    /**
+     * A value with more significant digits than a {@code double} can hold must not be rounded through {@code double}.
+     */
+    @Test
+    void testConvertLargeValueKeepsPrecision() {
+        converter = BigDecimalLocaleConverter.builder().get();
+        final String big = "9999999999999999999";
+        convertValueNoPattern(converter, big, new BigDecimal(big));
     }
 }
