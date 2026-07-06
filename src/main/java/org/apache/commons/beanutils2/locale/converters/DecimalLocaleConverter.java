@@ -96,6 +96,14 @@ public class DecimalLocaleConverter<T extends Number> extends BaseLocaleConverte
         super(defaultValue, locale, pattern, useDefault, locPattern);
     }
 
+    Number checkInteger(final Number number) {
+        final double doubleValue = number.doubleValue();
+        if (doubleValue != Math.rint(doubleValue)) {
+            throw new ConversionException("Supplied number is not an integer: " + number);
+        }
+        return number;
+    }
+
     /**
      * Tests whether the underlying {@link DecimalFormat} should parse into a {@link java.math.BigDecimal} so that magnitude and precision are preserved.
      * Subclasses that build {@link java.math.BigInteger} or {@link java.math.BigDecimal} values override this to return {@code true}; the narrowing converters
