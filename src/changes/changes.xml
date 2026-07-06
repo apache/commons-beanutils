@@ -39,7 +39,7 @@
       <action type="fix" dev="ggregory" due-to="Digiscrypt Technologies, Gary Gregory">Do not initialize arbitrary classes in EnumConverter (#398).</action>
       <action type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Stop narrowing BigInteger and BigDecimal in StringLocaleConverter (#408).</action>
       <action type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Reject out-of-range values in LongLocaleConverter (#406).</action>
-      <action type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Fix sql time and timestamp locale tests on java 20+ (#410).</action>
+      <action type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Fix SQL time and timestamp locale tests on java 20+ (#410).</action>
       <action type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Reject non-integer strings in integer locale converters (#411).</action>
       <!-- ADD -->
       <action type="add" dev="ggregory" due-to="Gary Gregory">Use varargs for org.apache.commons.beanutils2.MethodUtils.getAccessibleMethod(Class, String, Class...), and remove last argument variants using Class[] and Class.</action>
