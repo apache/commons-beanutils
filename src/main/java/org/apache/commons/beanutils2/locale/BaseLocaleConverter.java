@@ -145,11 +145,11 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
      * Checks whether the result of a conversion is conform to the specified target type. If this is the case, the passed in result object is cast to the
      * correct target type. Otherwise, an exception is thrown.
      *
-     * @param <T>    the desired result type
-     * @param type   the target class of the conversion
-     * @param result the conversion result object
-     * @return the result cast to the target class
-     * @throws ConversionException if the result object is not compatible with the target type
+     * @param <T>    the desired result type.
+     * @param type   the target class of the conversion.
+     * @param result the conversion result object.
+     * @return the result cast to the target class.
+     * @throws ConversionException if the result object is not compatible with the target type.
      */
     private static <R> R checkConversionResult(final Class<R> type, final Object result) {
         if (type == null) {
@@ -184,11 +184,11 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
     /**
      * Constructs a {@link LocaleConverter} that will return the specified default value or throw a {@link ConversionException} if a conversion error occurs.
      *
-     * @param defaultValue The default value to be returned
-     * @param locale       The locale
-     * @param pattern      The conversion pattern
-     * @param useDefault   Indicate whether the default value is used or not
-     * @param locPattern   Indicate whether the pattern is localized or not
+     * @param defaultValue The default value to be returned.
+     * @param locale       The locale.
+     * @param pattern      The conversion pattern.
+     * @param useDefault   Indicate whether the default value is used or not.
+     * @param locPattern   Indicate whether the pattern is localized or not.
      */
     protected BaseLocaleConverter(final T defaultValue, final Locale locale, final String pattern, final boolean useDefault, final boolean locPattern) {
         this.defaultValue = useDefault ? defaultValue : null;
@@ -201,10 +201,10 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
     /**
      * Converts the specified locale-sensitive input object into an output object of the specified type. The default pattern is used for the conversion.
      *
-     * @param type  Data type to which this value should be converted
-     * @param value The input object to be converted
-     * @return The converted value
-     * @throws ConversionException if conversion cannot be performed successfully
+     * @param type  Data type to which this value should be converted.
+     * @param value The input object to be converted.
+     * @return The converted value.
+     * @throws ConversionException if conversion cannot be performed successfully.
      */
     @Override
     public <R> R convert(final Class<R> type, final Object value) {
@@ -214,11 +214,11 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
     /**
      * Converts the specified locale-sensitive input object into an output object of the specified type.
      *
-     * @param type    Data is type to which this value should be converted
-     * @param value   is the input object to be converted
+     * @param type    Data is type to which this value should be converted.
+     * @param value   is the input object to be converted.
      * @param pattern is the pattern is used for the conversion; if null is passed then the default pattern associated with the converter object will be used.
-     * @return The converted value
-     * @throws ConversionException if conversion cannot be performed successfully
+     * @return The converted value.
+     * @throws ConversionException if conversion cannot be performed successfully.
      */
     @Override
     public <R> R convert(final Class<R> type, final Object value, final String pattern) {
@@ -252,9 +252,9 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
     /**
      * Converts the specified locale-sensitive input object into an output object. The default pattern is used for the conversion.
      *
-     * @param value The input object to be converted
-     * @return The converted value
-     * @throws ConversionException if conversion cannot be performed successfully
+     * @param value The input object to be converted.
+     * @return The converted value.
+     * @throws ConversionException if conversion cannot be performed successfully.
      */
     public Object convert(final Object value) {
         return convert(value, null);
@@ -263,22 +263,22 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
     /**
      * Converts the specified locale-sensitive input object into an output object.
      *
-     * @param value   The input object to be converted
-     * @param pattern The pattern is used for the conversion
-     * @return The converted value
-     * @throws ConversionException if conversion cannot be performed successfully
+     * @param value   The input object to be converted.
+     * @param pattern The pattern is used for the conversion.
+     * @return The converted value.
+     * @throws ConversionException if conversion cannot be performed successfully.
      */
     public T convert(final Object value, final String pattern) {
         return convert(null, value, pattern);
     }
 
     /**
-     * Gets the default object specified for this converter cast for the given target type. If the default value is not conform to the given type, an exception
-     * is thrown.
+     * Gets the default object specified for this converter cast for the given target type. If the default value is not conform to the given type,
+     * a ConversionException is thrown.
      *
-     * @param type the target class of the conversion
-     * @return the default value in the given target type
-     * @throws ConversionException if the default object is not compatible with the target type
+     * @param type the target class of the conversion.
+     * @return the default value in the given target type.
+     * @throws ConversionException if the default object is not compatible with the target type.
      */
     private <R> R getDefaultAs(final Class<R> type) {
         return checkConversionResult(type, defaultValue);
@@ -287,10 +287,10 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
     /**
      * Converts the specified locale-sensitive input object into an output object of the specified type.
      *
-     * @param value   The input object to be converted
-     * @param pattern The pattern is used for the conversion
-     * @return The converted value
-     * @throws ParseException if conversion cannot be performed successfully
+     * @param value   The input object to be converted.
+     * @param pattern The pattern is used for the conversion.
+     * @return The converted value.
+     * @throws ParseException if conversion cannot be performed successfully.
      */
     protected abstract T parse(Object value, String pattern) throws ParseException;
 }
