@@ -42,7 +42,7 @@ public class Jira456Test extends TestCase {
      * Clears the reference to the write method in the property descriptor of the test
      * property. This simulates that the write method reference is freed by the GC.
      *
-     * @return the bean instance used for testing
+     * @return The bean instance used for testing
      * @throws Exception if an error occurs
      */
     private FluentIntrospectionTestBean clearWriteMethodRef() throws Exception {

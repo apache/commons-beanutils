@@ -41,7 +41,7 @@ public class Jira339Test extends TestCase {
         /**
          * Return the comparator.
          *
-         * @return the comparator
+         * @return The comparator
          */
         public Comparator<?> getComparator() {
             return comparator;

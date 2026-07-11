@@ -109,7 +109,7 @@ public class MethodUtils {
          * hashcodes are the same, need to use the equals method to
          * determine equality.
          *
-         * @return the string length of method name.
+         * @return The string length of method name.
          */
         @Override
         public int hashCode() {
@@ -174,7 +174,7 @@ public class MethodUtils {
     /**
      * Clear the method cache.
      *
-     * @return the number of cached methods cleared
+     * @return The number of cached methods cleared
      * @since 1.8.0
      */
     public static synchronized int clearCache() {
@@ -583,7 +583,7 @@ public class MethodUtils {
      * For example, an instance of {@code Boolean.class} returns a {@code boolean.class}.
      *
      * @param wrapperType the
-     * @return the primitive type class corresponding to the given wrapper class,
+     * @return The primitive type class corresponding to the given wrapper class,
      * null if no match is found
      */
     public static Class<?> getPrimitiveType(final Class<?> wrapperType) {
@@ -624,7 +624,7 @@ public class MethodUtils {
      * For example, passing {@code boolean.class} returns {@code Boolean.class}
      *
      * @param primitiveType the primitive type class for which a match is to be found
-     * @return the wrapper type associated with the given primitive
+     * @return The wrapper type associated with the given primitive
      * or null if no match is found
      */
     public static Class<?> getPrimitiveWrapper(final Class<?> primitiveType) {
@@ -1296,7 +1296,7 @@ public class MethodUtils {
      * Find a non primitive representation for given primitive class.
      *
      * @param clazz the class to find a representation for, not null
-     * @return the original class if it not a primitive. Otherwise the wrapper class. Not null
+     * @return The original class if it not a primitive. Otherwise the wrapper class. Not null
      */
     public static Class<?> toNonPrimitiveClass(final Class<?> clazz) {
         if (!clazz.isPrimitive()) {

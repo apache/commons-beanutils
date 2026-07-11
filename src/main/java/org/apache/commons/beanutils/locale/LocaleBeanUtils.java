@@ -73,7 +73,7 @@ public class LocaleBeanUtils extends BeanUtils {
         /**
          * Return the mapped property key.
          *
-         * @return the mapped property key (if any)
+         * @return The mapped property key (if any)
          */
         public String getKey() {
             return key;
@@ -253,7 +253,7 @@ public class LocaleBeanUtils extends BeanUtils {
      *
      * <p>For more details see {@code LocaleBeanUtilsBean}</p>
      *
-     * @return the default locale
+     * @return The default locale
      * @see LocaleBeanUtilsBean#getDefaultLocale()
      */
     public static Locale getDefaultLocale() {

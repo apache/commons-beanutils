@@ -58,7 +58,7 @@ public class BeanPredicate implements Predicate {
      * to a property value named by {@link #getPropertyName()}.
      *
      * @param object The object being evaluated
-     * @return the result of the predicate evaluation
+     * @return The result of the predicate evaluation
      * @throws IllegalArgumentException when the property cannot be evaluated
      */
     @Override
@@ -104,7 +104,7 @@ public class BeanPredicate implements Predicate {
      * Gets the name of the property whose value is to be predicated.
      * in the evaluation.
      *
-     * @return the property name, not null
+     * @return The property name, not null
      */
     public String getPropertyName() {
         return propertyName;

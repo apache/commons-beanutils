@@ -97,7 +97,7 @@ public final class StringArrayConverter extends AbstractArrayConverter {
      * @param value is the input value to be converted. If null then the
      * default value is returned or an exception thrown if no default value
      * exists.
-     * @return the converted value
+     * @return The converted value
      * @throws ConversionException if conversion cannot be performed
      * successfully, or the input is null and there is no default value set
      * for this object.

@@ -489,7 +489,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
      * Return a collection view of the mappings contained in this map.  Each
      * element in the returned collection is a {@code Map.Entry}.
      *
-     * @return the set of map Map entries
+     * @return The set of map Map entries
      */
     @Override
     public Set<Map.Entry<K, V>> entrySet() {
@@ -563,7 +563,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
      * {@code containsKey()} method to disambiguate these cases.
      *
      * @param key  the key whose value is to be returned
-     * @return the value mapped to that key, or null
+     * @return The value mapped to that key, or null
      */
     @Override
     public V get(final Object key) {
@@ -629,7 +629,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
     /**
      * Return a set view of the keys contained in this map.
      *
-     * @return the set of the Map's keys
+     * @return The set of the Map's keys
      */
     @Override
     public Set<K> keySet() {
@@ -643,7 +643,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
      *
      * @param key  the key with which the value is to be associated
      * @param value  the value to be associated with this key
-     * @return the value previously mapped to the key, or null
+     * @return The value previously mapped to the key, or null
      */
     @Override
     public V put(final K key, final V value) {
@@ -688,7 +688,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
      * mapped value.
      *
      * @param key  the key whose mapping is to be removed
-     * @return the value removed, or null
+     * @return The value removed, or null
      */
     @Override
     public V remove(final Object key) {
@@ -717,7 +717,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
     /**
      * Return the number of key-value mappings in this map.
      *
-     * @return the current size of the map
+     * @return The current size of the map
      */
     @Override
     public int size() {
@@ -732,7 +732,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
     /**
      * Return a collection view of the values contained in this map.
      *
-     * @return the set of the Map's values
+     * @return The set of the Map's values
      */
     @Override
     public Collection<V> values() {

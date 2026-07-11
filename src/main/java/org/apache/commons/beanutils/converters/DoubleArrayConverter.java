@@ -69,7 +69,7 @@ public final class DoubleArrayConverter extends AbstractArrayConverter {
      *
      * @param type Data type to which this value should be converted
      * @param value The input value to be converted
-     * @return the converted value
+     * @return The converted value
      * @throws ConversionException if conversion cannot be performed
      *  successfully
      */

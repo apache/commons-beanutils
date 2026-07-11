@@ -35,7 +35,7 @@ public interface DynaClass {
      * {@code getBeanInfo()} instead, which returns property descriptors
      * and a bunch of other stuff?</p>
      *
-     * @return the set of properties for this DynaClass
+     * @return The set of properties for this DynaClass
      */
     DynaProperty[] getDynaProperties();
 
@@ -56,7 +56,7 @@ public interface DynaClass {
      * allows the same {@code DynaClass} implementation class to support
      * different dynamic classes, with different sets of properties.
      *
-     * @return the name of the DynaClass
+     * @return The name of the DynaClass
      */
     String getName();
 

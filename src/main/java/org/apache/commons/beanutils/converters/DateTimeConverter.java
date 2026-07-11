@@ -118,7 +118,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
      * (and <em>style</em> if configured) will be used.
      *
      * @param value The input value to be converted
-     * @return the converted String value.
+     * @return The converted String value.
      * @throws Throwable if an error occurs converting to a String
      */
     @Override

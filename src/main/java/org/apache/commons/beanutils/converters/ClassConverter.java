@@ -54,7 +54,7 @@ public final class ClassConverter extends AbstractConverter {
      * <p>Convert a java.lang.Class or object into a String.</p>
      *
      * @param value The input value to be converted
-     * @return the converted String value.
+     * @return The converted String value.
      * @since 1.8.0
      */
     @Override

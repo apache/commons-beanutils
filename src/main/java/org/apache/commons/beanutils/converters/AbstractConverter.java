@@ -215,7 +215,7 @@ public abstract class AbstractConverter implements Converter {
      * @param <T> The type of the result object
      * @param targetClass the target class of the conversion
      * @param value the value to be converted
-     * @return the converted value
+     * @return The converted value
      */
     private <T> T convertToDefaultType(final Class<T> targetClass, final Object value) {
         return (T) convert(getDefaultType(), value);
@@ -230,7 +230,7 @@ public abstract class AbstractConverter implements Converter {
      * is required.
      *
      * @param value The input value to be converted.
-     * @return the converted String value.
+     * @return The converted String value.
      * @throws Throwable if an error occurs converting to a String
      */
     protected String convertToString(final Object value) throws Throwable {

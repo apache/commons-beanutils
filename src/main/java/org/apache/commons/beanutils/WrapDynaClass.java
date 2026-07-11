@@ -251,7 +251,7 @@ public class WrapDynaClass implements DynaClass {
      * combination of bean class and {@code PropertyUtilsBean} instance an
      * entry is created in the cache.
      *
-     * @return the cache for already created {@code WrapDynaClass} instances
+     * @return The cache for already created {@code WrapDynaClass} instances
      */
     private static Map<CacheKey, WrapDynaClass> getClassesCache() {
         return CLASSLOADER_CACHE.get();
@@ -334,7 +334,7 @@ public class WrapDynaClass implements DynaClass {
     /**
      * Return the class of the underlying wrapped bean.
      *
-     * @return the class of the underlying wrapped bean
+     * @return The class of the underlying wrapped bean
      * @since 1.8.0
      */
     protected Class<?> getBeanClass() {
@@ -350,7 +350,7 @@ public class WrapDynaClass implements DynaClass {
      * {@code getBeanInfo()} instead, which returns property descriptors
      * and a bunch of other stuff?</p>
      *
-     * @return the set of properties for this DynaClass
+     * @return The set of properties for this DynaClass
      */
     @Override
     public DynaProperty[] getDynaProperties() {
@@ -381,7 +381,7 @@ public class WrapDynaClass implements DynaClass {
      * allows the same {@code DynaClass} implementation class to support
      * different dynamic classes, with different sets of properties.
      *
-     * @return the name of the DynaClass
+     * @return The name of the DynaClass
      */
     @Override
     public String getName() {
@@ -403,7 +403,7 @@ public class WrapDynaClass implements DynaClass {
      * Returns the {@code PropertyUtilsBean} instance associated with this class. This
      * bean is used for introspection.
      *
-     * @return the associated {@code PropertyUtilsBean} instance
+     * @return The associated {@code PropertyUtilsBean} instance
      * @since 1.9
      */
     protected PropertyUtilsBean getPropertyUtilsBean() {

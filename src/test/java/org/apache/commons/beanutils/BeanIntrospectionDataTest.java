@@ -38,7 +38,7 @@ public class BeanIntrospectionDataTest extends TestCase {
     /**
      * Creates an array with property descriptors for the test bean class.
      *
-     * @return the array with property descriptors
+     * @return The array with property descriptors
      */
     private static PropertyDescriptor[] fetchDescriptors() {
         final PropertyUtilsBean pub = new PropertyUtilsBean();
@@ -51,7 +51,7 @@ public class BeanIntrospectionDataTest extends TestCase {
      * Returns the property descriptor for the test property.
      *
      * @param bid the data object
-     * @return the test property descriptor
+     * @return The test property descriptor
      */
     private static PropertyDescriptor fetchTestDescriptor(final BeanIntrospectionData bid) {
         return bid.getDescriptor(TEST_PROP);
@@ -60,7 +60,7 @@ public class BeanIntrospectionDataTest extends TestCase {
     /**
      * Creates a test instance which is initialized with default property descriptors.
      *
-     * @return the test instance
+     * @return The test instance
      */
     private static BeanIntrospectionData setUpData() {
         return new BeanIntrospectionData(fetchDescriptors());

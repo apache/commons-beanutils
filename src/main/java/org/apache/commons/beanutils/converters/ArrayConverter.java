@@ -235,7 +235,7 @@ public class ArrayConverter extends AbstractConverter {
      * Handles conversion to a String.
      *
      * @param value The value to be converted.
-     * @return the converted String value.
+     * @return The converted String value.
      * @throws Throwable if an error occurs converting to a String
      */
     @Override

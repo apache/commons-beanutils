@@ -96,7 +96,7 @@ public class Jira347Test extends TestCase {
      * Method object outside of this method as otherwise the garbage collector will not
      * clean up the soft reference within the MappedPropertyDescriptor.
      *
-     * @return the string representation or null if mapped write method does not exist
+     * @return The string representation or null if mapped write method does not exist
      */
     private String getMappedWriteMethod(final MappedPropertyDescriptor descriptor) {
         final Method m = descriptor.getMappedWriteMethod();

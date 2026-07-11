@@ -226,7 +226,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * {@code getBeanInfo()} instead, which returns property descriptors
      * and a bunch of other stuff?</p>
      *
-     * @return the set of properties for this DynaClass
+     * @return The set of properties for this DynaClass
      */
     @Override
     public DynaProperty[] getDynaProperties() {
@@ -291,7 +291,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     /**
      * Return the underlying Map backing this {@code DynaBean}
      *
-     * @return the underlying Map
+     * @return The underlying Map
      * @since 1.8.0
      */
     @Override
@@ -303,7 +303,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * Return the name of this DynaClass (analogous to the
      * {@code getName()} method of {@code java.lang.Class})
      *
-     * @return the name of the DynaClass
+     * @return The name of the DynaClass
      */
     @Override
     public String getName() {

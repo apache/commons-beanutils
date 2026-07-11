@@ -53,7 +53,7 @@ public class BeanUtils {
      * <p>For more details see {@code BeanUtilsBean}.</p>
      *
      * @param bean Bean to be cloned
-     * @return the cloned bean
+     * @return The cloned bean
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @throws InstantiationException if a new instance of the bean's

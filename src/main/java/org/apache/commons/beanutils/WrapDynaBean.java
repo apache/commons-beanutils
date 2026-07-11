@@ -238,7 +238,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
      * But some creators of frameworks using {@code DynaBean}'s may
      * find this useful.
      *
-     * @return the java bean Object wrapped by this {@code DynaBean}
+     * @return The java bean Object wrapped by this {@code DynaBean}
      */
     public Object getInstance() {
         return instance;
@@ -248,7 +248,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
      * Returns the {@code PropertyUtilsBean} instance to be used for accessing properties.
      * If available, this object is obtained from the associated {@code WrapDynaClass}.
      *
-     * @return the associated {@code PropertyUtilsBean}
+     * @return The associated {@code PropertyUtilsBean}
      */
     private PropertyUtilsBean getPropertyUtils() {
 

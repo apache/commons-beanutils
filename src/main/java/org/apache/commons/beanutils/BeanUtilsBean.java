@@ -62,7 +62,7 @@ public class BeanUtilsBean {
      *
      * @param dynaProperty the property descriptor
      * @param value the value object to be set for this property
-     * @return the type of this property
+     * @return The type of this property
      */
     private static Class<?> dynaPropertyType(final DynaProperty dynaProperty,
             final Object value) {
@@ -150,7 +150,7 @@ public class BeanUtilsBean {
      * </p>
      *
      * @param bean Bean to be cloned
-     * @return the cloned bean
+     * @return The cloned bean
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @throws InstantiationException if a new instance of the bean's
@@ -200,7 +200,7 @@ public class BeanUtilsBean {
      *
      * @param value the value to be converted and copied
      * @param type the target type of the conversion
-     * @return the converted value
+     * @return The converted value
      */
     private Object convertForCopy(final Object value, final Class<?> type) {
         return value != null ? convert(value, type) : value;

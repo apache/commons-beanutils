@@ -178,7 +178,7 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
     /**
      * Gets the Comparator being used to compare beans.
      *
-     * @return the Comparator being used to compare beans
+     * @return The Comparator being used to compare beans
      */
     public Comparator<?> getComparator() {
         return comparator;
@@ -197,7 +197,7 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
     /**
      * Hash code compatible with equals.
      *
-     * @return the hash code for this comparator
+     * @return The hash code for this comparator
      */
     @Override
     public int hashCode() {
@@ -211,7 +211,7 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
      *
      * @param val1 the first value to be compared
      * @param val2 the second value to be compared
-     * @return the result of the comparison
+     * @return The result of the comparison
      */
     private int internalCompare(final Object val1, final Object val2) {
         @SuppressWarnings("rawtypes")
