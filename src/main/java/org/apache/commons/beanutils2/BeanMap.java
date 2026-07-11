@@ -479,6 +479,11 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
                 for (final PropertyDescriptor propertyDescriptor : propertyDescriptors) {
                     if (propertyDescriptor != null) {
                         final String name = propertyDescriptor.getName();
+                        if ("class".equals(name) || "declaringClass".equals(name)) {
+                            // These pseudo-properties expose the bean's ClassLoader; skip them to match the
+                            // suppression PropertyUtilsBean applies by default (see SuppressPropertiesBeanIntrospector).
+                            continue;
+                        }
                         final Method readMethod = propertyDescriptor.getReadMethod();
                         final Method writeMethod = propertyDescriptor.getWriteMethod();
                         final Class<?> aType = propertyDescriptor.getPropertyType();
