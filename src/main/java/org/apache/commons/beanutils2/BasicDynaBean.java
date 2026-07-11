@@ -221,7 +221,7 @@ public class BasicDynaBean implements DynaBean {
      * <li>{@code ${myDynaBean.<strong>map</strong>.fooProperty}}</li>
      * </ul>
      *
-     * @return a Map representation of this DynaBean
+     * @return A Map representation of this DynaBean
      * @since 1.8.0
      */
     public Map<String, Object> getMap() {

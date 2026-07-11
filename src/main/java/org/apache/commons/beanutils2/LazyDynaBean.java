@@ -585,7 +585,7 @@ public class LazyDynaBean implements DynaBean {
      * <li>{@code ${myDynaBean.<strong>map</strong>.fooProperty}}</li>
      * </ul>
      *
-     * @return a Map representation of this DynaBean
+     * @return A Map representation of this DynaBean
      */
     public Map<String, Object> getMap() {
         // cache the Map
@@ -689,7 +689,7 @@ public class LazyDynaBean implements DynaBean {
      * Creates a new instance of the {@code Map}.
      * </p>
      *
-     * @return a new Map instance
+     * @return A new Map instance
      */
     protected Map<String, Object> newMap() {
         return new HashMap<>();

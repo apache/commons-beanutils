@@ -104,7 +104,7 @@ public class Jira61BeanFactory {
     /**
      * Factory method which creates a new {@link TestBean}.
      *
-     * @return a new {@link TestBean}.
+     * @return A new {@link TestBean}.
      */
     public static TestBean createBean() {
         return new TestBean();

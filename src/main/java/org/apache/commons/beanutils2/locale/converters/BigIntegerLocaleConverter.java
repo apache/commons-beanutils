@@ -52,7 +52,7 @@ public class BigIntegerLocaleConverter extends DecimalLocaleConverter<BigInteger
     /**
      * Constructs a new builder.
      *
-     * @return a new builder.
+     * @return A new builder.
      */
     public static Builder builder() {
         return new Builder();

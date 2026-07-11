@@ -49,7 +49,7 @@ public class ByteLocaleConverter extends DecimalLocaleConverter<Byte> {
     /**
      * Constructs a new builder.
      *
-     * @return a new builder.
+     * @return A new builder.
      */
     public static Builder builder() {
         return new Builder();

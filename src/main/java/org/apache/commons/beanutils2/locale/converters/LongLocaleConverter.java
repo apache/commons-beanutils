@@ -49,7 +49,7 @@ public class LongLocaleConverter extends DecimalLocaleConverter<Long> {
     /**
      * Constructs a new builder.
      *
-     * @return a new builder.
+     * @return A new builder.
      */
     public static Builder builder() {
         return new Builder();

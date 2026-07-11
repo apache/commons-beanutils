@@ -60,7 +60,7 @@ public class DecimalLocaleConverter<T extends Number> extends BaseLocaleConverte
          * locale for this instance of the Java Virtual Machine and an unlocalized pattern is used for the conversion.
          * </p>
          *
-         * @return a new instance.
+         * @return A new instance.
          */
         @Override
         public DecimalLocaleConverter<?> get() {
@@ -76,7 +76,7 @@ public class DecimalLocaleConverter<T extends Number> extends BaseLocaleConverte
      *
      * @param <B> The builder type.
      * @param <T> The Number type.
-     * @return a new builder.
+     * @return A new builder.
      */
     @SuppressWarnings("unchecked")
     public static <B extends Builder<B, T>, T extends Number> B builder() {

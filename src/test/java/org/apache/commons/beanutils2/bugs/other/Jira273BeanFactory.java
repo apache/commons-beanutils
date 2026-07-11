@@ -58,7 +58,7 @@ public class Jira273BeanFactory {
     /**
      * Factory method which creates anonymous {@link PublicBeanWithMethod} with method overridden.
      *
-     * @return a new anonymous {@link PublicBeanWithMethod}.
+     * @return A new anonymous {@link PublicBeanWithMethod}.
      */
     public static Object createAnonymousNotOverridden() {
         return new PublicBeanWithMethod() {
@@ -68,7 +68,7 @@ public class Jira273BeanFactory {
     /**
      * Factory method which creates anonymous {@link PublicBeanWithMethod} with method NOT overridden.
      *
-     * @return a new anonymous {@link PublicBeanWithMethod}.
+     * @return A new anonymous {@link PublicBeanWithMethod}.
      */
     public static Object createAnonymousOverridden() {
         return new PublicBeanWithMethod() {
@@ -82,7 +82,7 @@ public class Jira273BeanFactory {
     /**
      * Factory method which creates a PrivatePrivatePublicNotOverridden bean.
      *
-     * @return a new a PrivatePrivatePublicNotOverridden bean.
+     * @return A new a PrivatePrivatePublicNotOverridden bean.
      */
     public static Object createPrivatePrivatePublicNotOverridden() {
         return new PrivatePrivatePublicNotOverridden();
@@ -91,7 +91,7 @@ public class Jira273BeanFactory {
     /**
      * Factory method which creates a PrivatePrivatePublicOverridden bean.
      *
-     * @return a new a PrivatePrivatePublicOverridden bean.
+     * @return A new a PrivatePrivatePublicOverridden bean.
      */
     public static Object createPrivatePrivatePublicOverridden() {
         return new PrivatePrivatePublicOverridden();
@@ -100,7 +100,7 @@ public class Jira273BeanFactory {
     /**
      * Factory method which creates a PrivatePublicNotOverridden bean.
      *
-     * @return a new a PrivatePublicNotOverridden bean.
+     * @return A new a PrivatePublicNotOverridden bean.
      */
     public static Object createPrivatePublicNotOverridden() {
         return new PrivatePublicNotOverridden();
@@ -109,7 +109,7 @@ public class Jira273BeanFactory {
     /**
      * Factory method which creates a PrivatePublicOverridden bean.
      *
-     * @return a new a PrivatePublicOverridden bean.
+     * @return A new a PrivatePublicOverridden bean.
      */
     public static Object createPrivatePublicOverridden() {
         return new PrivatePublicOverridden();

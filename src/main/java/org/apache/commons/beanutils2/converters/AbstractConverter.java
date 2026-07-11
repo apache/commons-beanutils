@@ -124,7 +124,7 @@ public abstract class AbstractConverter<D> implements Converter<D> {
      *
      * @param type  the target type.
      * @param value the value to be converted.
-     * @return a {@code ConversionException} with a standard message.
+     * @return A {@code ConversionException} with a standard message.
      * @since 1.9
      */
     protected ConversionException conversionException(final Class<?> type, final Object value) {

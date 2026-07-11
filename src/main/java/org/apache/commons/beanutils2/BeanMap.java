@@ -166,7 +166,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
      * <li>If anything fails along the way, throw a CloneNotSupportedException.</li>
      * </ul>
      *
-     * @return a cloned instance of this bean map
+     * @return A cloned instance of this bean map
      * @throws CloneNotSupportedException if the underlying bean cannot be cloned
      */
     @Override
@@ -277,7 +277,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
      *
      * @param method the mutator method
      * @param value  the value to pass to the mutator method
-     * @return an array containing one object that is either the given value or a transformed value
+     * @return An array containing one object that is either the given value or a transformed value
      * @throws IllegalAccessException   if {@link #convertType(Class,Object)} raises it
      * @throws IllegalArgumentException if any other exception is raised by {@link #convertType(Class,Object)}
      * @throws ClassCastException       if an error occurs creating the method args
@@ -303,7 +303,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
     /**
      * Convenience method for getting an iterator over the entries.
      *
-     * @return an iterator over the entries
+     * @return An iterator over the entries
      */
     public Iterator<Map.Entry<String, Object>> entryIterator() {
         final Iterator<String> iter = keyIterator();
@@ -438,7 +438,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
      *
      * @param <R>  The transformer result type.
      * @param type the primitive type whose transformer to return
-     * @return a transformer that will convert strings into that type, or null if the given type is not a primitive type
+     * @return A transformer that will convert strings into that type, or null if the given type is not a primitive type
      */
     protected <R> Function<Object, R> getTypeTransformer(final Class<R> type) {
         return (Function<Object, R>) typeTransformers.get(type);
@@ -509,7 +509,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
      * Write-only properties will not be returned in the iterator.
      * </p>
      *
-     * @return an iterator over the keys
+     * @return An iterator over the keys
      */
     public Iterator<String> keyIterator() {
         return readMethods.keySet().iterator();
@@ -635,7 +635,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
     /**
      * Renders a string representation of this object.
      *
-     * @return a {@code String} representation of this object
+     * @return A {@code String} representation of this object
      */
     @Override
     public String toString() {
@@ -645,7 +645,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
     /**
      * Convenience method for getting an iterator over the values.
      *
-     * @return an iterator over the values
+     * @return An iterator over the values
      */
     public Iterator<Object> valueIterator() {
         final Iterator<?> iter = keyIterator();

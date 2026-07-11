@@ -57,7 +57,7 @@ public class StringLocaleConverter extends BaseLocaleConverter<String> {
          * locale for this instance of the Java Virtual Machine and an unlocalized pattern is used for the conversion.
          * </p>
          *
-         * @return a new instance.
+         * @return A new instance.
          */
         @Override
         public StringLocaleConverter get() {
@@ -71,7 +71,7 @@ public class StringLocaleConverter extends BaseLocaleConverter<String> {
     /**
      * Constructs a new builder.
      *
-     * @return a new builder.
+     * @return A new builder.
      */
     public static Builder builder() {
         return new Builder();

@@ -47,7 +47,7 @@ public class Jira298BeanFactory {
     /**
      * Factory method which creates ImplX.
      *
-     * @return a new ImplX.
+     * @return A new ImplX.
      */
     public static IX createImplX() {
         return new ImplX();

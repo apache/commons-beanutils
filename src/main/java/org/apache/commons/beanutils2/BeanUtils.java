@@ -109,7 +109,7 @@ public final class BeanUtils {
      *
      * @param <K> The key type of the cache
      * @param <V> The value type of the cache
-     * @return a new cache
+     * @return A new cache
      * @since 1.8.0
      */
     public static <K, V> Map<K, V> createCache() {

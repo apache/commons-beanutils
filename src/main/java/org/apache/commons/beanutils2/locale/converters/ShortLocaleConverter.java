@@ -43,7 +43,7 @@ public class ShortLocaleConverter extends DecimalLocaleConverter<Short> {
         /**
          * Gets a new instance.
          *
-         * @return a new instance.
+         * @return A new instance.
          */
         @Override
         public ShortLocaleConverter get() {
@@ -54,7 +54,7 @@ public class ShortLocaleConverter extends DecimalLocaleConverter<Short> {
     /**
      * Constructs a new builder.
      *
-     * @return a new builder.
+     * @return A new builder.
      */
     public static Builder builder() {
         return new Builder();

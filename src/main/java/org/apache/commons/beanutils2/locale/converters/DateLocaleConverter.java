@@ -66,7 +66,7 @@ public class DateLocaleConverter<D extends Date> extends BaseLocaleConverter<D> 
          * locale for this instance of the Java Virtual Machine and an unlocalized pattern is used for the conversion.
          * </p>
          *
-         * @return a new instance.
+         * @return A new instance.
          */
         @Override
         public DateLocaleConverter<D> get() {
@@ -108,7 +108,7 @@ public class DateLocaleConverter<D extends Date> extends BaseLocaleConverter<D> 
      *
      * @param <B> The builder type.
      * @param <D> The Date type.
-     * @return a new builder.
+     * @return A new builder.
      */
     @SuppressWarnings("unchecked")
     public static <B extends Builder<B, D>, D extends Date> B builder() {

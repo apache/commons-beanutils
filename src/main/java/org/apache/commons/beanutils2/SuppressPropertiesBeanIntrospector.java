@@ -71,7 +71,7 @@ public class SuppressPropertiesBeanIntrospector implements BeanIntrospector {
     /**
      * Returns a (unmodifiable) set with the names of the properties which are suppressed by this {@code BeanIntrospector}.
      *
-     * @return a set with the names of the suppressed properties
+     * @return A set with the names of the suppressed properties
      */
     public Set<String> getSuppressedProperties() {
         return propertyNames;

@@ -77,7 +77,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
         /**
          * Gets a newly built instance.
          *
-         * @return a newly built instance.
+         * @return A newly built instance.
          */
         public abstract BaseLocaleConverter<?> get();
 

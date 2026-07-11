@@ -50,7 +50,7 @@ public class FloatLocaleConverter extends DecimalLocaleConverter<Float> {
     /**
      * Constructs a new builder.
      *
-     * @return a new builder.
+     * @return A new builder.
      */
     public static Builder builder() {
         return new Builder();

@@ -31,7 +31,7 @@ public class ConversionException extends RuntimeException {
      *
      * @param format See {@link String#format(String, Object...)}.
      * @param args   See {@link String#format(String, Object...)}.
-     * @return a new instance with a message formatted using {@link String#format(String, Object...)}.
+     * @return A new instance with a message formatted using {@link String#format(String, Object...)}.
      * @since 2.0.0
      */
     public static ConversionException format(final String format, final Object... args) {
