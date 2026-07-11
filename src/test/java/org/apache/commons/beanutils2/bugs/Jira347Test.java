@@ -103,7 +103,7 @@ class Jira347Test {
      * Gets the string representation of the mapped write method for the given descriptor. This conversion is needed as there must not be strong reference
      * to the Method object outside of this method as otherwise the garbage collector will not clean up the soft reference within the MappedPropertyDescriptor.
      *
-     * @return the string representation or null if mapped write method does not exist
+     * @return The string representation or null if mapped write method does not exist
      */
     private String getMappedWriteMethod(final MappedPropertyDescriptor descriptor) {
         final Method m = descriptor.getMappedWriteMethod();

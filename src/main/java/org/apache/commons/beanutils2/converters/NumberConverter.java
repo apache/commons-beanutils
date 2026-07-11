@@ -112,7 +112,7 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
      * Convert an input Number object into a String.
      *
      * @param value The input value to be converted
-     * @return the converted String value.
+     * @return The converted String value.
      * @throws IllegalArgumentException if an error occurs converting to a String
      */
     @Override

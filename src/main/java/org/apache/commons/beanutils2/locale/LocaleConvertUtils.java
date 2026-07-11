@@ -42,7 +42,7 @@ public final class LocaleConvertUtils {
      * </p>
      *
      * @param value The Value to be converted
-     * @return the converted value
+     * @return The converted value
      * @see LocaleConvertUtilsBean#convert(Object)
      */
     public static String convert(final Object value) {
@@ -61,7 +61,7 @@ public final class LocaleConvertUtils {
      * @param value   The Value to be converted
      * @param locale  The locale
      * @param pattern The conversion pattern
-     * @return the converted value
+     * @return The converted value
      * @see LocaleConvertUtilsBean#convert(Object, Locale, String)
      */
     public static String convert(final Object value, final Locale locale, final String pattern) {
@@ -79,7 +79,7 @@ public final class LocaleConvertUtils {
      *
      * @param value   The Value to be converted
      * @param pattern The conversion pattern
-     * @return the converted value
+     * @return The converted value
      * @see LocaleConvertUtilsBean#convert(Object, String)
      */
     public static String convert(final Object value, final String pattern) {
@@ -97,7 +97,7 @@ public final class LocaleConvertUtils {
      *
      * @param value The String scalar value to be converted
      * @param clazz The Data type to which this value should be converted.
-     * @return the converted value
+     * @return The converted value
      * @see LocaleConvertUtilsBean#convert(String, Class)
      */
     public static Object convert(final String value, final Class<?> clazz) {
@@ -118,7 +118,7 @@ public final class LocaleConvertUtils {
      * @param clazz   The Data type to which this value should be converted.
      * @param locale  The locale
      * @param pattern The conversion pattern
-     * @return the converted value
+     * @return The converted value
      * @see LocaleConvertUtilsBean#convert(String, Class, Locale, String)
      */
     public static Object convert(final String value, final Class<?> clazz, final Locale locale, final String pattern) {
@@ -138,7 +138,7 @@ public final class LocaleConvertUtils {
      * @param value   The String scalar value to be converted
      * @param clazz   The Data type to which this value should be converted.
      * @param pattern The conversion pattern
-     * @return the converted value
+     * @return The converted value
      * @see LocaleConvertUtilsBean#convert(String, Class, String)
      */
     public static Object convert(final String value, final Class<?> clazz, final String pattern) {
@@ -156,7 +156,7 @@ public final class LocaleConvertUtils {
      *
      * @param values Value to be converted (may be null)
      * @param clazz  Java array or element class to be converted to
-     * @return the converted value
+     * @return The converted value
      * @see LocaleConvertUtilsBean#convert(String[], Class)
      */
     public static Object convert(final String[] values, final Class<?> clazz) {
@@ -176,7 +176,7 @@ public final class LocaleConvertUtils {
      * @param clazz   Java array or element class to be converted to
      * @param locale  The locale
      * @param pattern The conversion pattern
-     * @return the converted value
+     * @return The converted value
      * @see LocaleConvertUtilsBean#convert(String[], Class, Locale, String)
      */
     public static Object convert(final String[] values, final Class<?> clazz, final Locale locale, final String pattern) {
@@ -195,7 +195,7 @@ public final class LocaleConvertUtils {
      * @param values  Value to be converted (may be null)
      * @param clazz   Java array or element class to be converted to
      * @param pattern The conversion pattern
-     * @return the converted value
+     * @return The converted value
      * @see LocaleConvertUtilsBean#convert(String[], Class, String)
      */
     public static Object convert(final String[] values, final Class<?> clazz, final String pattern) {
@@ -275,7 +275,7 @@ public final class LocaleConvertUtils {
      * For more details see {@code LocaleConvertUtilsBean}
      * </p>
      *
-     * @return the default locale
+     * @return The default locale
      * @see LocaleConvertUtilsBean#getDefaultLocale()
      */
     public static Locale getDefaultLocale() {

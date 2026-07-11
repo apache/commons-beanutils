@@ -334,7 +334,7 @@ public class LazyDynaList extends ArrayList<Object> {
      * Creates a new {@code LazyDynaMap} object for the given property value.
      *
      * @param value the property value
-     * @return the newly created {@code LazyDynaMap}
+     * @return The newly created {@code LazyDynaMap}
      */
     private LazyDynaMap createDynaBeanForMapProperty(final Object value) {
         @SuppressWarnings("unchecked")

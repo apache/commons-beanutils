@@ -64,7 +64,7 @@ class FluentPropertyBeanIntrospectorTest {
      *
      * @param props the map with property descriptors
      * @param name  the name of the desired descriptor
-     * @return the descriptor from the map
+     * @return The descriptor from the map
      */
     private static PropertyDescriptor fetchDescriptor(final Map<String, PropertyDescriptor> props, final String name) {
         assertTrue(props.containsKey(name), "Property not found: " + name);

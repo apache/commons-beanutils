@@ -44,7 +44,7 @@ class Jira339Test {
         /**
          * Gets the comparator.
          *
-         * @return the comparator
+         * @return The comparator
          */
         public Comparator<?> getComparator() {
             return comparator;

@@ -63,7 +63,7 @@ public abstract class AbstractConverter<D> implements Converter<D> {
      * Converts the given object to a lower-case string.
      *
      * @param value the input string.
-     * @return the given string trimmed and converter to lower-case.
+     * @return The given string trimmed and converter to lower-case.
      */
     protected static String toLowerCase(final Object value) {
         return StringUtils.toRootLowerCase(toString(value));
@@ -73,7 +73,7 @@ public abstract class AbstractConverter<D> implements Converter<D> {
      * Converts the given object to a lower-case string.
      *
      * @param value the input string.
-     * @return the given string trimmed and converter to lower-case.
+     * @return The given string trimmed and converter to lower-case.
      */
     protected static String toString(final Object value) {
         return Objects.requireNonNull(value, "value").toString();
@@ -83,7 +83,7 @@ public abstract class AbstractConverter<D> implements Converter<D> {
      * Converts the given object to a lower-case string.
      *
      * @param value the input string.
-     * @return the given string trimmed and converter to lower-case.
+     * @return The given string trimmed and converter to lower-case.
      */
     protected static String toTrim(final Object value) {
         return toString(value).trim();
@@ -213,7 +213,7 @@ public abstract class AbstractConverter<D> implements Converter<D> {
      *
      * @param value the value to be converted.
      * @param <T>   the type of the result object.
-     * @return the converted value.
+     * @return The converted value.
      */
     @SuppressWarnings("unchecked")
     private <T> T convertToDefaultType(final Object value) {
@@ -228,7 +228,7 @@ public abstract class AbstractConverter<D> implements Converter<D> {
      * </p>
      *
      * @param value The input value to be converted.
-     * @return the converted String value.
+     * @return The converted String value.
      * @throws IllegalArgumentException if an error occurs converting to a String.
      */
     protected String convertToString(final Object value) {

@@ -148,7 +148,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
      * @param <T>    the desired result type.
      * @param type   the target class of the conversion.
      * @param result the conversion result object.
-     * @return the result cast to the target class.
+     * @return The result cast to the target class.
      * @throws ConversionException if the result object is not compatible with the target type.
      */
     private static <R> R checkConversionResult(final Class<R> type, final Object result) {
@@ -277,7 +277,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
      * a ConversionException is thrown.
      *
      * @param type the target class of the conversion.
-     * @return the default value in the given target type.
+     * @return The default value in the given target type.
      * @throws ConversionException if the default object is not compatible with the target type.
      */
     private <R> R getDefaultAs(final Class<R> type) {

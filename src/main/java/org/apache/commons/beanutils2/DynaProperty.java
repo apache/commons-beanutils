@@ -128,7 +128,7 @@ public class DynaProperty {
      * serialized using the standard methods</strong>.
      * </p>
      *
-     * @return the Class for the content type if this is an indexed {@code DynaProperty} and this feature is supported. Otherwise null.
+     * @return The Class for the content type if this is an indexed {@code DynaProperty} and this feature is supported. Otherwise null.
      */
     public Class<?> getContentType() {
         return contentType;
@@ -137,7 +137,7 @@ public class DynaProperty {
     /**
      * Gets the name of this property.
      *
-     * @return the name of the property
+     * @return The name of the property
      */
     public String getName() {
         return this.name;
@@ -157,14 +157,14 @@ public class DynaProperty {
      * <strong>Please leave this field as {@code transient}</strong>
      * </p>
      *
-     * @return the property type
+     * @return The property type
      */
     public Class<?> getType() {
         return this.type;
     }
 
     /**
-     * @return the hash code for this dyna property
+     * @return The hash code for this dyna property
      * @see Object#hashCode
      * @since 1.8.0
      */

@@ -191,7 +191,7 @@ public class BeanComparator<T, V> implements Comparator<T> {
     /**
      * Gets the Comparator being used to compare beans.
      *
-     * @return the Comparator being used to compare beans
+     * @return The Comparator being used to compare beans
      */
     public Comparator<V> getComparator() {
         return comparator;
@@ -209,7 +209,7 @@ public class BeanComparator<T, V> implements Comparator<T> {
     /**
      * Hashcode compatible with equals.
      *
-     * @return the hash code for this comparator
+     * @return The hash code for this comparator
      */
     @Override
     public int hashCode() {
@@ -222,7 +222,7 @@ public class BeanComparator<T, V> implements Comparator<T> {
      *
      * @param val1 the first value to be compared
      * @param val2 the second value to be compared
-     * @return the result of the comparison
+     * @return The result of the comparison
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
     private int internalCompare(final Object val1, final Object val2) {

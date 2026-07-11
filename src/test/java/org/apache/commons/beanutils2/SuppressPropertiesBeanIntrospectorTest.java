@@ -60,7 +60,7 @@ class SuppressPropertiesBeanIntrospectorTest {
         /**
          * Returns the names of properties which have been removed.
          *
-         * @return the set with removed properties
+         * @return The set with removed properties
          */
         public Set<String> getRemovedProperties() {
             return removedProperties;

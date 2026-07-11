@@ -128,7 +128,7 @@ public class BasicDynaClass implements DynaClass {
      * <strong>FIXME</strong> - Should we really be implementing {@code getBeanInfo()} instead, which returns property descriptors and a bunch of other stuff?
      * </p>
      *
-     * @return the set of properties for this DynaClass
+     * @return The set of properties for this DynaClass
      */
     @Override
     public DynaProperty[] getDynaProperties() {
@@ -151,7 +151,7 @@ public class BasicDynaClass implements DynaClass {
      * Gets the name of this DynaClass (analogous to the {@code getName()} method of {@link Class}, which allows the same {@code DynaClass} implementation class
      * to support different dynamic classes, with different sets of properties.
      *
-     * @return the name of the DynaClass
+     * @return The name of the DynaClass
      */
     @Override
     public String getName() {

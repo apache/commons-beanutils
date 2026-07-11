@@ -86,7 +86,7 @@ public class PropertyUtilsBean {
      * of objects.
      *
      * @param obj the object to be converted
-     * @return the resulting list of objects
+     * @return The resulting list of objects
      */
     @SuppressWarnings("unchecked")
     private static List<Object> toObjectList(final Object obj) {
@@ -99,7 +99,7 @@ public class PropertyUtilsBean {
      * in a Map&lt;String, Object&gt;.
      *
      * @param obj the object to be converted
-     * @return the resulting properties map
+     * @return The resulting properties map
      */
     @SuppressWarnings("unchecked")
     private static Map<String, Object> toPropertyMap(final Object obj) {
@@ -306,7 +306,7 @@ public class PropertyUtilsBean {
      *
      * @param bean Bean whose property is to be extracted
      * @param name {@code propertyname[index]} of the property value to be extracted
-     * @return the indexed property value
+     * @return The indexed property value
      * @throws IndexOutOfBoundsException if the specified index is outside the valid range for the underlying array or List
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws IllegalArgumentException  if {@code bean} or {@code name} is null
@@ -341,7 +341,7 @@ public class PropertyUtilsBean {
      * @param bean  Bean whose property is to be extracted
      * @param name  Simple property name of the property value to be extracted
      * @param index Index of the property value to be extracted
-     * @return the indexed property value
+     * @return The indexed property value
      * @throws IndexOutOfBoundsException if the specified index is outside the valid range for the underlying property
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws IllegalArgumentException  if {@code bean} or {@code name} is null
@@ -419,7 +419,7 @@ public class PropertyUtilsBean {
      * introspection is performed now on the affected bean class, and the results object is created.
      *
      * @param beanClass the bean class in question
-     * @return the {@code BeanIntrospectionData} object for this class
+     * @return The {@code BeanIntrospectionData} object for this class
      * @throws IllegalArgumentException if the bean class is {@code null}
      */
     private BeanIntrospectionData getIntrospectionData(final Class<?> beanClass) {
@@ -439,7 +439,7 @@ public class PropertyUtilsBean {
      *
      * @param bean Bean whose property is to be extracted
      * @param name {@code propertyname(key)} of the property value to be extracted
-     * @return the mapped property value
+     * @return The mapped property value
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws InvocationTargetException if the property accessor method throws an exception
      * @throws NoSuchMethodException     if an accessor method for this property cannot be found
@@ -471,7 +471,7 @@ public class PropertyUtilsBean {
      * @param bean Bean whose property is to be extracted
      * @param name Mapped property name of the property value to be extracted
      * @param key  Key of the property value to be extracted
-     * @return the mapped property value
+     * @return The mapped property value
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws InvocationTargetException if the property accessor method throws an exception
      * @throws NoSuchMethodException     if an accessor method for this property cannot be found
@@ -531,7 +531,7 @@ public class PropertyUtilsBean {
      * </p>
      *
      * @param beanClass Bean class to be introspected
-     * @return the mapped property descriptors
+     * @return The mapped property descriptors
      */
     Map<Class<?>, Map> getMappedPropertyDescriptors(final Class<?> beanClass) {
         if (beanClass == null) {
@@ -551,7 +551,7 @@ public class PropertyUtilsBean {
      * </p>
      *
      * @param bean Bean to be introspected
-     * @return the mapped property descriptors
+     * @return The mapped property descriptors
      */
     Map getMappedPropertyDescriptors(final Object bean) {
         if (bean == null) {
@@ -565,7 +565,7 @@ public class PropertyUtilsBean {
      *
      * @param bean Bean whose property is to be extracted
      * @param name Possibly nested name of the property to be extracted
-     * @return the nested property value
+     * @return The nested property value
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws IllegalArgumentException  if {@code bean} or {@code name} is null
      * @throws NestedNullException       if a nested reference to a property returns null
@@ -612,7 +612,7 @@ public class PropertyUtilsBean {
      *
      * @param bean Bean whose property is to be extracted
      * @param name Possibly indexed and/or nested name of the property to be extracted
-     * @return the property value
+     * @return The property value
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws IllegalArgumentException  if {@code bean} or {@code name} is null
      * @throws InvocationTargetException if the property accessor method throws an exception
@@ -639,7 +639,7 @@ public class PropertyUtilsBean {
      *
      * @param bean Bean for which a property descriptor is requested
      * @param name Possibly indexed and/or nested name of the property for which a property descriptor is requested
-     * @return the property descriptor
+     * @return The property descriptor
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws IllegalArgumentException  if {@code bean} or {@code name} is null
      * @throws IllegalArgumentException  if a nested reference to a property returns null
@@ -708,7 +708,7 @@ public class PropertyUtilsBean {
      * </p>
      *
      * @param beanClass Bean class for which property descriptors are requested
-     * @return the property descriptors
+     * @return The property descriptors
      * @throws IllegalArgumentException if {@code beanClass} is null
      */
     public PropertyDescriptor[] getPropertyDescriptors(final Class<?> beanClass) {
@@ -725,7 +725,7 @@ public class PropertyUtilsBean {
      * </p>
      *
      * @param bean Bean for which property descriptors are requested
-     * @return the property descriptors
+     * @return The property descriptors
      * @throws IllegalArgumentException if {@code bean} is null
      */
     public PropertyDescriptor[] getPropertyDescriptors(final Object bean) {
@@ -751,7 +751,7 @@ public class PropertyUtilsBean {
      *
      * @param bean Bean for which a property descriptor is requested
      * @param name Possibly indexed and/or nested name of the property for which a property descriptor is requested
-     * @return the property editor class
+     * @return The property editor class
      * @throws IllegalAccessException    if the caller does not have access to the property accessor method
      * @throws IllegalArgumentException  if {@code bean} or {@code name} is null
      * @throws IllegalArgumentException  if a nested reference to a property returns null
@@ -775,7 +775,7 @@ public class PropertyUtilsBean {
      *
      * @param bean         Map bean
      * @param propertyName The property name
-     * @return the property value
+     * @return The property value
      * @throws IllegalArgumentException  when the propertyName is regarded as being invalid.
      * @throws IllegalAccessException    just in case subclasses override this method to try to access real getter methods and find permission is denied.
      * @throws InvocationTargetException just in case subclasses override this method to try to access real getter methods, and find it throws an exception when

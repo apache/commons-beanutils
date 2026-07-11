@@ -70,7 +70,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
          * Sets the value.
          *
          * @param value the new value for the entry
-         * @return the old value for the entry
+         * @return The old value for the entry
          */
         @Override
         public Object setValue(final Object value) {
@@ -247,7 +247,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
      * @param <R>     The return type.
      * @param newType the type to convert the value to
      * @param value   the value to convert
-     * @return the converted value
+     * @return The converted value
      * @throws NumberFormatException     if newType is a primitive type, and the string representation of the given value cannot be converted to that type
      * @throws InstantiationException    if the constructor found with reflection raises it
      * @throws InvocationTargetException if the constructor found with reflection raises it
@@ -335,7 +335,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
      * Each MapEntry can be set but not removed.
      * </p>
      *
-     * @return the unmodifiable set of mappings
+     * @return The unmodifiable set of mappings
      */
     @Override
     public Set<Map.Entry<String, Object>> entrySet() {
@@ -375,7 +375,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
      * </p>
      *
      * @param name the name of the property whose value to return
-     * @return the value of the property with that name
+     * @return The value of the property with that name
      */
     @Override
     public Object get(final Object name) {
@@ -395,7 +395,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
     /**
      * Gets the bean currently being operated on. The return value may be null if this map is empty.
      *
-     * @return the bean being operated on by this map
+     * @return The bean being operated on by this map
      */
     public Object getBean() {
         return bean;
@@ -417,7 +417,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
      * Gets the accessor for the property with the given name.
      *
      * @param name the name of the property
-     * @return the accessor method for the property, or null
+     * @return The accessor method for the property, or null
      */
     public Method getReadMethod(final String name) {
         return readMethods.get(name);
@@ -427,7 +427,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
      * Gets the type of the property with the given name.
      *
      * @param name the name of the property
-     * @return the type of the property, or {@code null} if no such property exists
+     * @return The type of the property, or {@code null} if no such property exists
      */
     public Class<?> getType(final String name) {
         return types.get(name);
@@ -459,7 +459,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
      * Gets the mutator for the property with the given name.
      *
      * @param name the name of the property
-     * @return the mutator method for the property, or null
+     * @return The mutator method for the property, or null
      */
     public Method getWriteMethod(final String name) {
         return writeMethods.get(name);
@@ -560,7 +560,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
      *
      * @param name  the name of the property to set
      * @param value the value to set that property to
-     * @return the previous value of that property
+     * @return The previous value of that property
      * @throws IllegalArgumentException if the given name is null; if the given name is not a {@link String}; if the bean doesn't define a property with that
      *                                  name; or if the bean property with that name is read-only
      * @throws ClassCastException       if an error occurs creating the method args
@@ -625,7 +625,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
     /**
      * Returns the number of properties defined by the bean.
      *
-     * @return the number of properties defined by the bean
+     * @return The number of properties defined by the bean
      */
     @Override
     public int size() {

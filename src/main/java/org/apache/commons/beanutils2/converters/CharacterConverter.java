@@ -55,7 +55,7 @@ public final class CharacterConverter extends AbstractConverter<Character> {
      * </p>
      *
      * @param value The input value to be converted
-     * @return the converted String value.
+     * @return The converted String value.
      * @since 1.8.0
      */
     @Override

@@ -117,7 +117,7 @@ public final class LocaleBeanUtils {
      * For more details see {@code LocaleBeanUtilsBean}
      * </p>
      *
-     * @return the default locale
+     * @return The default locale
      * @see LocaleBeanUtilsBean#getDefaultLocale()
      */
     public static Locale getDefaultLocale() {

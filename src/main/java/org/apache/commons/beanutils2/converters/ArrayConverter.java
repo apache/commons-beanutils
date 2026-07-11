@@ -188,7 +188,7 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
      * Handles conversion to a String.
      *
      * @param value The value to be converted.
-     * @return the converted String value.
+     * @return The converted String value.
      * @throws IllegalArgumentException if an error occurs converting to a String
      */
     @Override

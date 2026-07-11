@@ -87,7 +87,7 @@ public class LocaleConvertUtilsBean {
     /**
      * Gets singleton instance. This is the same as the instance used by the default {@link LocaleBeanUtilsBean} singleton.
      *
-     * @return the singleton instance
+     * @return The singleton instance
      */
     public static LocaleConvertUtilsBean getInstance() {
         return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getLocaleConvertUtils();
@@ -120,7 +120,7 @@ public class LocaleConvertUtilsBean {
      * Convert the specified locale-sensitive value into a String.
      *
      * @param value The Value to be converted
-     * @return the converted value
+     * @return The converted value
      * @throws ConversionException if thrown by an underlying Converter
      */
     public String convert(final Object value) {
@@ -133,7 +133,7 @@ public class LocaleConvertUtilsBean {
      * @param value   The Value to be converted
      * @param locale  The locale
      * @param pattern The conversion pattern
-     * @return the converted value
+     * @return The converted value
      * @throws ConversionException if thrown by an underlying Converter
      */
     public String convert(final Object value, final Locale locale, final String pattern) {
@@ -146,7 +146,7 @@ public class LocaleConvertUtilsBean {
      *
      * @param value   The Value to be converted
      * @param pattern The conversion pattern
-     * @return the converted value
+     * @return The converted value
      * @throws ConversionException if thrown by an underlying Converter
      */
     public String convert(final Object value, final String pattern) {
@@ -158,7 +158,7 @@ public class LocaleConvertUtilsBean {
      *
      * @param value The String scalar value to be converted
      * @param clazz The Data type to which this value should be converted.
-     * @return the converted value
+     * @return The converted value
      * @throws ConversionException if thrown by an underlying Converter
      */
     public Object convert(final String value, final Class<?> clazz) {
@@ -173,7 +173,7 @@ public class LocaleConvertUtilsBean {
      * @param clazz   The Data type to which this value should be converted.
      * @param locale  The locale
      * @param pattern The conversion pattern
-     * @return the converted value
+     * @return The converted value
      * @throws ConversionException if thrown by an underlying Converter
      */
     public Object convert(final String value, final Class<?> clazz, final Locale locale, final String pattern) {
@@ -202,7 +202,7 @@ public class LocaleConvertUtilsBean {
      * @param value   The String scalar value to be converted
      * @param clazz   The Data type to which this value should be converted.
      * @param pattern The conversion pattern
-     * @return the converted value
+     * @return The converted value
      * @throws ConversionException if thrown by an underlying Converter
      */
     public Object convert(final String value, final Class<?> clazz, final String pattern) {
@@ -214,7 +214,7 @@ public class LocaleConvertUtilsBean {
      *
      * @param values Value to be converted (may be null)
      * @param clazz  Java array or element class to be converted to
-     * @return the converted value
+     * @return The converted value
      * @throws ConversionException if thrown by an underlying Converter
      */
     public Object convert(final String[] values, final Class<?> clazz) {
@@ -229,7 +229,7 @@ public class LocaleConvertUtilsBean {
      * @param clazz   Java array or element class to be converted to
      * @param locale  The locale
      * @param pattern The conversion pattern
-     * @return the converted value
+     * @return The converted value
      * @throws ConversionException if thrown by an underlying Converter
      */
     public <T> T[] convert(final String[] values, final Class<T> clazz, final Locale locale, final String pattern) {
@@ -255,7 +255,7 @@ public class LocaleConvertUtilsBean {
      * @param values  Value to be converted (may be null)
      * @param clazz   Java array or element class to be converted to
      * @param pattern The conversion pattern
-     * @return the converted value
+     * @return The converted value
      * @throws ConversionException if thrown by an underlying Converter
      */
     public <T> T[] convert(final String[] values, final Class<T> clazz, final String pattern) {
@@ -343,7 +343,7 @@ public class LocaleConvertUtilsBean {
     /**
      * getter for defaultLocale.
      *
-     * @return the default locale
+     * @return The default locale
      */
     public Locale getDefaultLocale() {
         return defaultLocale;

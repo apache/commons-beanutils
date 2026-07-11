@@ -45,7 +45,7 @@ final class BeanIntrospectionData {
      * because they may get lost when the GC claims soft references used by the {@code PropertyDescriptor} objects.
      *
      * @param descs the array with the descriptors of the available properties
-     * @return the map with the names of write methods for properties
+     * @return The map with the names of write methods for properties
      */
     private static Map<String, String> setUpWriteMethodNames(final PropertyDescriptor[] descs) {
         final Map<String, String> methods = new HashMap<>();
@@ -89,7 +89,7 @@ final class BeanIntrospectionData {
      * Returns the {@code PropertyDescriptor} for the property with the specified name. If this property is unknown, result is {@code null}.
      *
      * @param name the name of the property in question
-     * @return the {@code PropertyDescriptor} for this property or {@code null}
+     * @return The {@code PropertyDescriptor} for this property or {@code null}
      */
     public PropertyDescriptor getDescriptor(final String name) {
         for (final PropertyDescriptor pd : getDescriptors()) {
@@ -103,7 +103,7 @@ final class BeanIntrospectionData {
     /**
      * Returns the array with property descriptors.
      *
-     * @return the property descriptors for the associated bean class
+     * @return The property descriptors for the associated bean class
      */
     public PropertyDescriptor[] getDescriptors() {
         return descriptors;
@@ -117,7 +117,7 @@ final class BeanIntrospectionData {
      *
      * @param beanCls the class of the affected bean
      * @param desc    the {@code PropertyDescriptor} of the desired property
-     * @return the write method for this property or {@code null} if there is none
+     * @return The write method for this property or {@code null} if there is none
      */
     public Method getWriteMethod(final Class<?> beanCls, final PropertyDescriptor desc) {
         Method method = desc.getWriteMethod();

@@ -172,7 +172,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
      * Converts the name of a property to the key type of this decorator.
      *
      * @param propertyName the name of a property
-     * @return the converted key to be used in the decorated map
+     * @return The converted key to be used in the decorated map
      */
     protected abstract K convertKey(String propertyName);
 
@@ -213,7 +213,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     /**
      * Provide access to the underlying {@link DynaBean} this Map decorates.
      *
-     * @return the decorated {@link DynaBean}.
+     * @return The decorated {@link DynaBean}.
      */
     public DynaBean getDynaBean() {
         return dynaBean;
@@ -320,7 +320,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
      * remove() operation is not supported.
      *
      * @param key The {@link DynaBean}'s property name
-     * @return the value removed
+     * @return The value removed
      * @throws UnsupportedOperationException This operation is not yet supported
      */
     @Override

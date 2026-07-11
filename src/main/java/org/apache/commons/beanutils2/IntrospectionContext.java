@@ -52,14 +52,14 @@ public interface IntrospectionContext {
      * Returns the descriptor for the property with the given name or {@code null} if this property is unknown.
      *
      * @param name the name of the property in question
-     * @return the descriptor for this property or {@code null} if this property is unknown
+     * @return The descriptor for this property or {@code null} if this property is unknown
      */
     PropertyDescriptor getPropertyDescriptor(String name);
 
     /**
      * Returns the class that is subject of introspection.
      *
-     * @return the current class
+     * @return The current class
      */
     Class<?> getTargetClass();
 

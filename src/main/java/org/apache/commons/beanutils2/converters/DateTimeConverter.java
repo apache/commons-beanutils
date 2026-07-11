@@ -113,7 +113,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
      * to format the date into a String. Otherwise the default {@code DateFormat} for the default locale (and <em>style</em> if configured) will be used.
      *
      * @param value The input value to be converted
-     * @return the converted String value.
+     * @return The converted String value.
      * @throws IllegalArgumentException if an error occurs converting to a String
      */
     @Override
@@ -331,7 +331,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
     /**
      * Gets the {@code java.time.ZoneId</code> from the <code>java.util.Timezone} set or use the system default if no time zone is set.
      *
-     * @return the {@code ZoneId}
+     * @return The {@code ZoneId}
      */
     private ZoneId getZoneId() {
         return timeZone == null ? ZoneId.systemDefault() : timeZone.toZoneId();

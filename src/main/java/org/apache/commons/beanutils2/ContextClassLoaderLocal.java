@@ -108,7 +108,7 @@ public class ContextClassLoaderLocal<T> {
      * Gets the instance which provides the functionality for {@link BeanUtils}. This is a pseudo-singleton - an single instance is provided per (thread)
      * context classloader. This mechanism provides isolation for web apps deployed in the same container.
      *
-     * @return the object currently associated with the context-classloader of the current thread.
+     * @return The object currently associated with the context-classloader of the current thread.
      */
     public synchronized T get() {
         // synchronizing the whole method is a bit slower

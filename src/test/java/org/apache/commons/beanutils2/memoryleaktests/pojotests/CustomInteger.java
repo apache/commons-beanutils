@@ -44,7 +44,7 @@ public class CustomInteger extends Number {
     /**
      * Gets the double value.
      *
-     * @return the double value
+     * @return The double value
      */
     @Override
     public double doubleValue() {
@@ -54,7 +54,7 @@ public class CustomInteger extends Number {
     /**
      * Gets the float value.
      *
-     * @return the float value
+     * @return The float value
      */
     @Override
     public float floatValue() {
@@ -64,7 +64,7 @@ public class CustomInteger extends Number {
     /**
      * Gets the integer value.
      *
-     * @return the integer value
+     * @return The integer value
      */
     @Override
     public int intValue() {
@@ -74,7 +74,7 @@ public class CustomInteger extends Number {
     /**
      * Gets the long value.
      *
-     * @return the long value
+     * @return The long value
      */
     @Override
     public long longValue() {

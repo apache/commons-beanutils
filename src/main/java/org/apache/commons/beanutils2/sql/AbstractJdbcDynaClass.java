@@ -80,7 +80,7 @@ abstract class AbstractJdbcDynaClass implements DynaClass {
      *
      * @param metadata is the result set metadata
      * @param i        is the column index in the metadata
-     * @return the newly created DynaProperty instance
+     * @return The newly created DynaProperty instance
      * @throws SQLException If an error occurs accessing the SQL metadata
      */
     protected DynaProperty createDynaProperty(final ResultSetMetaData metadata, final int i) throws SQLException {

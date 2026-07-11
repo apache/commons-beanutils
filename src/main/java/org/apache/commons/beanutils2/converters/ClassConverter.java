@@ -49,7 +49,7 @@ public final class ClassConverter<T> extends AbstractConverter<Class<T>> {
      * </p>
      *
      * @param value The input value to be converted
-     * @return the converted String value.
+     * @return The converted String value.
      * @since 1.8.0
      */
     @Override

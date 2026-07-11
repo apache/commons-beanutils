@@ -66,7 +66,7 @@ class DynaRowSetTest {
          * Gets an columns's value
          *
          * @param columnName Name of the column
-         * @return the column value
+         * @return The column value
          * @throws SQLException if an error occurs
          */
         @Override

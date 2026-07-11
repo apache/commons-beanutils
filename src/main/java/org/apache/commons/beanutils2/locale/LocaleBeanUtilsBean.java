@@ -61,7 +61,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     /**
      * Gets singleton instance
      *
-     * @return the singleton instance
+     * @return The singleton instance
      */
     public static LocaleBeanUtilsBean getLocaleBeanUtilsInstance() {
         return LOCALE_BEANS_BY_CLASSLOADER.get();
@@ -244,7 +244,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     /**
      * Gets the default Locale
      *
-     * @return the default locale
+     * @return The default locale
      */
     public Locale getDefaultLocale() {
         return getLocaleConvertUtils().getDefaultLocale();
@@ -325,7 +325,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     /**
      * Gets the bean instance used for conversions
      *
-     * @return the locale converter bean instance
+     * @return The locale converter bean instance
      */
     public LocaleConvertUtilsBean getLocaleConvertUtils() {
         return localeConvertUtils;

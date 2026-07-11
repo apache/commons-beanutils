@@ -140,7 +140,7 @@ public class MemoryLeakTest {
     /**
      * Gets the total, free, used memory stats.
      *
-     * @return the total, free, used memory stats
+     * @return The total, free, used memory stats
      */
     private String getMemoryStats() {
         final java.text.DecimalFormat fmt = new java.text.DecimalFormat("#,##0");

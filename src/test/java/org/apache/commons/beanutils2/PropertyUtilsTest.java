@@ -102,7 +102,7 @@ class PropertyUtilsTest {
      * Finds the descriptor of the name property.
      *
      * @param desc the array with descriptors
-     * @return the found descriptor or null
+     * @return The found descriptor or null
      */
     private static PropertyDescriptor findNameDescriptor(final PropertyDescriptor[] desc) {
         for (final PropertyDescriptor element : desc) {

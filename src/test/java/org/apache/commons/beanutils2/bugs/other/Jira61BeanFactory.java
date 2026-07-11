@@ -64,7 +64,7 @@ public class Jira61BeanFactory {
         /**
          * Gets simpleReadOnly
          *
-         * @return the simple value
+         * @return The simple value
          */
         public String getSimpleReadOnly() {
             return simple;

@@ -96,7 +96,7 @@ public final class MethodUtils {
          * Returns the string length of method name. I.e. if the hash codes are different, the objects are different. If the hash codes are the same, need to
          * use the equals method to determine equality.
          *
-         * @return the string length of method name.
+         * @return The string length of method name.
          */
         @Override
         public int hashCode() {
@@ -144,7 +144,7 @@ public final class MethodUtils {
     /**
      * Clear the method cache.
      *
-     * @return the number of cached methods cleared.
+     * @return The number of cached methods cleared.
      * @since 1.8.0
      */
     public static synchronized int clearCache() {
