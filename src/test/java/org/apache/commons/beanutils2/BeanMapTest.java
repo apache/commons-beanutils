@@ -26,6 +26,7 @@ import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.time.DayOfWeek;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -295,7 +296,7 @@ class BeanMapTest extends AbstractMapTest<BeanMap, String, Object> {
         assertNull(map.get("class"));
         assertNull(map.getReadMethod("class"));
 
-        final BeanMap enumMap = new BeanMap(java.time.DayOfWeek.MONDAY);
+        final BeanMap enumMap = new BeanMap(DayOfWeek.MONDAY);
         assertFalse(enumMap.containsKey("class"), "class must not be exposed as a property");
         assertFalse(enumMap.containsKey("declaringClass"), "declaringClass must not be exposed as a property");
         assertNull(enumMap.get("declaringClass"));
