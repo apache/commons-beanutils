@@ -53,7 +53,7 @@ class Jira339Test {
         /**
          * Sets the comparator.
          *
-         * @param comparator the comparator
+         * @param comparator The comparator
          */
         public void setComparator(final Comparator<?> comparator) {
             this.comparator = comparator;

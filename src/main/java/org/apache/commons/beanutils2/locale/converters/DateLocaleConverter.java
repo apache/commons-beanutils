@@ -86,7 +86,7 @@ public class DateLocaleConverter<D extends Date> extends BaseLocaleConverter<D> 
         /**
          * Sets the leniency policy.
          *
-         * @param lenient the leniency policy.
+         * @param lenient The leniency policy.
          * @return {@code this} instance.
          */
         public B setLenient(final boolean lenient) {

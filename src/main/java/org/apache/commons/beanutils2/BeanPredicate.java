@@ -43,8 +43,8 @@ public class BeanPredicate<T> implements Predicate<T> {
     /**
      * Constructs a {@code BeanPredicate} that applies the given {@code Predicate} to the named property value.
      *
-     * @param propertyName the name of the property whose value is to be predicated, not null
-     * @param predicate    the {@code Predicate} to be applied, not null
+     * @param propertyName The name of the property whose value is to be predicated, not null
+     * @param predicate    The {@code Predicate} to be applied, not null
      */
     public BeanPredicate(final String propertyName, final Predicate<T> predicate) {
         this.propertyName = propertyName;
@@ -81,7 +81,7 @@ public class BeanPredicate<T> implements Predicate<T> {
     /**
      * Sets the name of the property whose value is to be predicated.
      *
-     * @param propertyName the name of the property whose value is to be predicated, not null
+     * @param propertyName The name of the property whose value is to be predicated, not null
      */
     public void setPropertyName(final String propertyName) {
         this.propertyName = propertyName;

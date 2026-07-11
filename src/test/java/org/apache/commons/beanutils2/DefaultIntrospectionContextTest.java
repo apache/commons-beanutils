@@ -42,7 +42,7 @@ class DefaultIntrospectionContextTest {
     /**
      * Creates a property descriptor object for a property with the given name.
      *
-     * @param propName the property name
+     * @param propName The property name
      * @return The descriptor for this property
      */
     private static PropertyDescriptor createDescriptor(final String propName) {

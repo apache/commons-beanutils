@@ -260,7 +260,7 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
     /**
      * Convert a String into a {@code Number} object.
      *
-     * @param sourceType the source type of the conversion
+     * @param sourceType The source type of the conversion
      * @param targetType The type to convert the value to
      * @param value      The String date value.
      * @param format     The NumberFormat to parse the String value.

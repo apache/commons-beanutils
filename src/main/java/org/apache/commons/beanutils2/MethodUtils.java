@@ -64,9 +64,9 @@ public final class MethodUtils {
         /**
          * The sole constructor.
          *
-         * @param cls        the class to reflect, must not be null.
-         * @param methodName the method name to obtain.
-         * @param paramTypes the array of classes representing the parameter types.
+         * @param cls        The class to reflect, must not be null.
+         * @param methodName The method name to obtain.
+         * @param paramTypes The array of classes representing the parameter types.
          * @param exact      whether the match has to be exact.
          */
         public MethodKey(final Class<?> cls, final String methodName, final Class<?>[] paramTypes, final boolean exact) {

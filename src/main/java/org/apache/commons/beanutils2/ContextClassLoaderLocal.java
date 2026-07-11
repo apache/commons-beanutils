@@ -157,7 +157,7 @@ public class ContextClassLoaderLocal<T> {
     /**
      * Sets the value - a value is provided per (thread) context classloader. This mechanism provides isolation for web apps deployed in the same container.
      *
-     * @param value the object to be associated with the entrant thread's context classloader
+     * @param value The object to be associated with the entrant thread's context classloader
      */
     public synchronized void set(final T value) {
         // synchronizing the whole method is a bit slower

@@ -70,7 +70,7 @@ public class WrapDynaBean implements DynaBean {
      * provided, a new one is created using a standard mechanism.
      *
      * @param instance JavaBean instance to be wrapped
-     * @param cls      the optional {@code WrapDynaClass} to be used for this bean
+     * @param cls      The optional {@code WrapDynaClass} to be used for this bean
      * @since 1.9
      */
     public WrapDynaBean(final Object instance, final WrapDynaClass cls) {

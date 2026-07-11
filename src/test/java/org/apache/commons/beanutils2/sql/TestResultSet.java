@@ -454,7 +454,7 @@ public class TestResultSet implements InvocationHandler {
      * Handles method invocation on the ResultSet proxy.
      *
      * @param proxy  The proxy ResultSet object
-     * @param method the method being invoked
+     * @param method The method being invoked
      * @param args   The method arguments
      * @return The result of invoking the method.
      * @throws Throwable if an error occurs.

@@ -84,7 +84,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
         /**
          * Sets the default value.
          *
-         * @param defaultValue the default value.
+         * @param defaultValue The default value.
          * @return {@code this} instance.
          */
         public B setDefault(final T defaultValue) {
@@ -95,7 +95,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
         /**
          * Sets the locale.
          *
-         * @param locale the locale.
+         * @param locale The locale.
          * @return {@code this} instance.
          */
         public B setLocale(final Locale locale) {
@@ -106,7 +106,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
         /**
          * Sets the localized pattern.
          *
-         * @param localizedPattern the localized pattern.
+         * @param localizedPattern The localized pattern.
          * @return {@code this} instance.
          */
         public B setLocalizedPattern(final boolean localizedPattern) {
@@ -117,7 +117,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
         /**
          * Sets the pattern.
          *
-         * @param pattern the pattern.
+         * @param pattern The pattern.
          * @return {@code this} instance.
          */
         public B setPattern(final String pattern) {
@@ -128,7 +128,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
         /**
          * Sets the use of default.
          *
-         * @param useDefault the use of default.
+         * @param useDefault The use of default.
          * @return {@code this} instance.
          */
         public B setUseDefault(final boolean useDefault) {
@@ -146,8 +146,8 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
      * correct target type. Otherwise, an exception is thrown.
      *
      * @param <T>    the desired result type.
-     * @param type   the target class of the conversion.
-     * @param result the conversion result object.
+     * @param type   The target class of the conversion.
+     * @param result The conversion result object.
      * @return The result cast to the target class.
      * @throws ConversionException if the result object is not compatible with the target type.
      */
@@ -276,7 +276,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
      * Gets the default object specified for this converter cast for the given target type. If the default value is not conform to the given type,
      * a ConversionException is thrown.
      *
-     * @param type the target class of the conversion.
+     * @param type The target class of the conversion.
      * @return The default value in the given target type.
      * @throws ConversionException if the default object is not compatible with the target type.
      */

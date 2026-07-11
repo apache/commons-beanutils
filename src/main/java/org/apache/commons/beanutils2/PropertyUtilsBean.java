@@ -85,7 +85,7 @@ public class PropertyUtilsBean {
      * Converts an object to a list of objects. This method is used when dealing with indexed properties. It assumes that indexed properties are stored as lists
      * of objects.
      *
-     * @param obj the object to be converted
+     * @param obj The object to be converted
      * @return The resulting list of objects
      */
     @SuppressWarnings("unchecked")
@@ -98,7 +98,7 @@ public class PropertyUtilsBean {
      * Converts an object to a map with property values. This method is used when dealing with mapped properties. It assumes that mapped properties are stored
      * in a Map&lt;String, Object&gt;.
      *
-     * @param obj the object to be converted
+     * @param obj The object to be converted
      * @return The resulting properties map
      */
     @SuppressWarnings("unchecked")
@@ -130,7 +130,7 @@ public class PropertyUtilsBean {
     /**
      * Adds a {@code BeanIntrospector}. This object is invoked when the property descriptors of a class need to be obtained.
      *
-     * @param introspector the {@code BeanIntrospector} to be added (must not be {@code null}
+     * @param introspector The {@code BeanIntrospector} to be added (must not be {@code null}
      * @throws IllegalArgumentException if the argument is {@code null}
      * @since 1.9
      */
@@ -278,7 +278,7 @@ public class PropertyUtilsBean {
     /**
      * Performs introspection on the specified class. This method invokes all {@code BeanIntrospector} objects that were added to this instance.
      *
-     * @param beanClass the class to be inspected
+     * @param beanClass The class to be inspected
      * @return A data object with the results of introspection
      */
     private BeanIntrospectionData fetchIntrospectionData(final Class<?> beanClass) {
@@ -418,7 +418,7 @@ public class PropertyUtilsBean {
      * Obtains the {@code BeanIntrospectionData} object describing the specified bean class. This object is looked up in the internal cache. If necessary,
      * introspection is performed now on the affected bean class, and the results object is created.
      *
-     * @param beanClass the bean class in question
+     * @param beanClass The bean class in question
      * @return The {@code BeanIntrospectionData} object for this class
      * @throws IllegalArgumentException if the bean class is {@code null}
      */
@@ -1187,7 +1187,7 @@ public class PropertyUtilsBean {
     /**
      * Removes the specified {@code BeanIntrospector}.
      *
-     * @param introspector the {@code BeanIntrospector} to be removed
+     * @param introspector The {@code BeanIntrospector} to be removed
      * @return <strong>true</strong> if the {@code BeanIntrospector} existed and could be removed, <strong>false</strong> otherwise
      * @since 1.9
      */
@@ -1521,7 +1521,7 @@ public class PropertyUtilsBean {
      *
      * @param bean         Map bean
      * @param propertyName The property name
-     * @param value        the property value
+     * @param value        The property value
      * @throws IllegalArgumentException  when the propertyName is regarded as being invalid.
      * @throws IllegalAccessException    just in case subclasses override this method to try to access real setter methods and find permission is denied.
      * @throws InvocationTargetException just in case subclasses override this method to try to access real setter methods, and find it throws an exception when

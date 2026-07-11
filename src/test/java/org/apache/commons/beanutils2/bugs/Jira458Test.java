@@ -34,7 +34,7 @@ class Jira458Test {
     /**
      * Helper method for testing a conversion with null as default.
      *
-     * @param input the input string
+     * @param input The input string
      */
     private void checkConversionWithNullDefault(final String input) {
         // final Converter<Integer> converter = new IntegerLocaleConverter(null, Locale.US);

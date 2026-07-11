@@ -62,7 +62,7 @@ public abstract class AbstractConverter<D> implements Converter<D> {
     /**
      * Converts the given object to a lower-case string.
      *
-     * @param value the input string.
+     * @param value The input string.
      * @return The given string trimmed and converter to lower-case.
      */
     protected static String toLowerCase(final Object value) {
@@ -72,7 +72,7 @@ public abstract class AbstractConverter<D> implements Converter<D> {
     /**
      * Converts the given object to a lower-case string.
      *
-     * @param value the input string.
+     * @param value The input string.
      * @return The given string trimmed and converter to lower-case.
      */
     protected static String toString(final Object value) {
@@ -82,7 +82,7 @@ public abstract class AbstractConverter<D> implements Converter<D> {
     /**
      * Converts the given object to a lower-case string.
      *
-     * @param value the input string.
+     * @param value The input string.
      * @return The given string trimmed and converter to lower-case.
      */
     protected static String toTrim(final Object value) {
@@ -122,8 +122,8 @@ public abstract class AbstractConverter<D> implements Converter<D> {
     /**
      * Creates a {@link ConversionException} with a message indicating that the passed in value cannot be converted to the desired target type.
      *
-     * @param type  the target type.
-     * @param value the value to be converted.
+     * @param type  The target type.
+     * @param value The value to be converted.
      * @return A {@code ConversionException} with a standard message.
      * @since 1.9
      */
@@ -211,7 +211,7 @@ public abstract class AbstractConverter<D> implements Converter<D> {
      * Converts to the default type. This method is called if we do not have a target class. In this case, the T parameter is not set. Therefore, we can cast to
      * it (which is required to fulfill the contract of the method signature).
      *
-     * @param value the value to be converted.
+     * @param value The value to be converted.
      * @param <T>   the type of the result object.
      * @return The converted value.
      */

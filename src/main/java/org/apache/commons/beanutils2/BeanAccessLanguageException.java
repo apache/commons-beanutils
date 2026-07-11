@@ -36,7 +36,7 @@ public class BeanAccessLanguageException extends IllegalArgumentException {
     /**
      * Constructs a {@code BeanAccessLanguageException} without a detail message.
      *
-     * @param message the detail message explaining this exception
+     * @param message The detail message explaining this exception
      */
     public BeanAccessLanguageException(final String message) {
         super(message);

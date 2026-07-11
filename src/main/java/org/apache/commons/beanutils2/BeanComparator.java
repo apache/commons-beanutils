@@ -220,8 +220,8 @@ public class BeanComparator<T, V> implements Comparator<T> {
      * Compares the given values using the internal {@code Comparator}. <em>Note</em>: This comparison cannot be performed in a type-safe way; so
      * {@code ClassCastException} exceptions may be thrown.
      *
-     * @param val1 the first value to be compared
-     * @param val2 the second value to be compared
+     * @param val1 The first value to be compared
+     * @param val2 The second value to be compared
      * @return The result of the comparison
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })

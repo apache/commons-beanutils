@@ -171,7 +171,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     /**
      * Converts the name of a property to the key type of this decorator.
      *
-     * @param propertyName the name of a property
+     * @param propertyName The name of a property
      * @return The converted key to be used in the decorated map
      */
     protected abstract K convertKey(String propertyName);

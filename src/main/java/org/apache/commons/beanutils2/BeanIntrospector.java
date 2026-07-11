@@ -38,7 +38,7 @@ public interface BeanIntrospector {
      * typical implementation has to obtain this class, determine its properties according to the rules it implements, and add them to the passed in context
      * object.
      *
-     * @param icontext the context object for interaction with the initiator of the introspection request
+     * @param icontext The context object for interaction with the initiator of the introspection request
      * @throws IntrospectionException if an error occurs during introspection
      */
     void introspect(IntrospectionContext icontext) throws IntrospectionException;

@@ -402,7 +402,7 @@ public class LocaleConvertUtilsBean {
     /**
      * setter for defaultLocale.
      *
-     * @param locale the default locale
+     * @param locale The default locale
      */
     public void setDefaultLocale(final Locale locale) {
         if (locale == null) {

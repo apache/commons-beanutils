@@ -45,7 +45,7 @@ final class DefaultIntrospectionContext implements IntrospectionContext {
      *
      * Creates a new instance of {@code DefaultIntrospectionContext} and sets the current class for introspection.
      *
-     * @param cls the current class
+     * @param cls The current class
      */
     public DefaultIntrospectionContext(final Class<?> cls) {
         currentClass = cls;
