@@ -295,6 +295,27 @@ class PropertyUtilsTest {
     }
 
     /**
+     * A mapped property removed by a {@link SuppressPropertiesBeanIntrospector} must stay hidden. The mapped-descriptor fallback in
+     * {@code getPropertyDescriptor} rebuilt the descriptor directly from the class methods without consulting the introspectors, so a suppressed mapped
+     * property was still readable and writable through {@code name(key)} access.
+     */
+    @Test
+    void testCustomIntrospectionSuppressedMappedProperty() throws Exception {
+        final PropertyUtilsBean pub = new PropertyUtilsBean();
+        pub.addBeanIntrospector(new SuppressPropertiesBeanIntrospector(Arrays.asList("mappedProperty")));
+
+        assertNull(pub.getPropertyDescriptor(bean, "mappedProperty"), "Suppressed mapped property should have no descriptor");
+        assertThrows(NoSuchMethodException.class, () -> pub.getProperty(bean, "mappedProperty(First Key)"), "Suppressed mapped property must not be readable");
+        assertThrows(NoSuchMethodException.class, () -> pub.setProperty(bean, "mappedProperty(First Key)", "changed"),
+                "Suppressed mapped property must not be writable");
+        assertEquals("First Value", bean.getMappedProperty("First Key"), "Suppressed mapped property must be unchanged");
+
+        // A mapped property that is not suppressed is still accessible.
+        final PropertyUtilsBean unsuppressed = new PropertyUtilsBean();
+        assertEquals("First Value", unsuppressed.getProperty(bean, "mappedProperty(First Key)"), "Mapped property should be readable when not suppressed");
+    }
+
+    /**
      * Test the describe() method.
      */
     @Test

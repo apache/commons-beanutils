@@ -675,6 +675,13 @@ public class PropertyUtilsBean {
             return result;
         }
 
+        // A name removed by a SuppressPropertiesBeanIntrospector is absent from data above, but the
+        // mapped-descriptor fallback below rebuilds descriptors straight from the class methods and never
+        // consults the introspectors, so a suppressed mapped property would still be resolved. Keep it hidden.
+        if (isPropertySuppressed(name)) {
+            return null;
+        }
+
         Map mappedDescriptors = getMappedPropertyDescriptors(bean);
         if (mappedDescriptors == null) {
             mappedDescriptors = new ConcurrentHashMap<Class<?>, Map>();
@@ -696,6 +703,23 @@ public class PropertyUtilsBean {
         }
 
         return result;
+    }
+
+    /**
+     * Tests whether a property name has been removed by a registered {@link SuppressPropertiesBeanIntrospector}. The mapped-descriptor fallback in
+     * {@link #getPropertyDescriptor(Object, String)} bypasses the introspection pipeline, so suppressed mapped property names must be filtered explicitly.
+     *
+     * @param name The property name to test.
+     * @return {@code true} if the name is suppressed by an introspector.
+     */
+    private boolean isPropertySuppressed(final String name) {
+        for (final BeanIntrospector introspector : introspectors) {
+            if (introspector instanceof SuppressPropertiesBeanIntrospector
+                    && ((SuppressPropertiesBeanIntrospector) introspector).getSuppressedProperties().contains(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
