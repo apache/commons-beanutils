@@ -41,6 +41,7 @@
       <action type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Reject out-of-range values in LongLocaleConverter (#406).</action>
       <action type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Fix SQL time and timestamp locale tests on java 20+ (#410).</action>
       <action type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Reject non-integer strings in integer locale converters (#411).</action>
+      <action type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Suppress class and declaringClass pseudo-properties in BeanMap (#412).</action>
       <!-- ADD -->
       <action type="add" dev="ggregory" due-to="Gary Gregory">Use varargs for org.apache.commons.beanutils2.MethodUtils.getAccessibleMethod(Class, String, Class...), and remove last argument variants using Class[] and Class.</action>
       <action type="add" dev="ggregory" due-to="SethFalco, Melloware, Gary Gregory">Add Instant converter and improve enum converter #49.</action>
