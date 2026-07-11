@@ -53,7 +53,7 @@ public class ConstructorUtils {
      * Returns a constructor with single argument.
      *
      * @param <T> The type of the constructor
-     * @param klass the class to be constructed
+     * @param klass The class to be constructed
      * @param parameterType The constructor parameter type
      * @return null if matching accessible constructor cannot be found.
      * @see Class#getConstructor
@@ -71,8 +71,8 @@ public class ConstructorUtils {
      * Returns a constructor given a class and signature.
      *
      * @param <T> The type to be constructed
-     * @param klass the class to be constructed
-     * @param parameterTypes the parameter array
+     * @param klass The class to be constructed
+     * @param parameterTypes The parameter array
      * @return null if matching accessible constructor cannot be found
      * @see Class#getConstructor
      * @see #getAccessibleConstructor(java.lang.reflect.Constructor)
@@ -216,8 +216,8 @@ public class ConstructorUtils {
      * <p>The signatures should be assignment compatible.</p>
      *
      * @param <T> The type of the object to be constructed
-     * @param klass the class to be constructed.
-     * @param arg the actual argument. May be null (this will result in calling the default constructor).
+     * @param klass The class to be constructed.
+     * @param arg The actual argument. May be null (this will result in calling the default constructor).
      * @return new instance of {@code klazz}
      * @throws NoSuchMethodException If the constructor cannot be found
      * @throws IllegalAccessException If an error occurs accessing the constructor
@@ -244,7 +244,7 @@ public class ConstructorUtils {
      * <p>The signatures should be assignment compatible.</p>
      *
      * @param <T> The type of the object to be constructed
-     * @param klass the class to be constructed.
+     * @param klass The class to be constructed.
      * @param args actual argument array. May be null (this will result in calling the default constructor).
      * @return new instance of {@code klazz}
      * @throws NoSuchMethodException If the constructor cannot be found
@@ -278,7 +278,7 @@ public class ConstructorUtils {
      * <p>The signatures should be assignment compatible.</p>
      *
      * @param <T> The type of the object to be constructed
-     * @param klass the class to be constructed.
+     * @param klass The class to be constructed.
      * @param args actual argument array. May be null (this will result in calling the default constructor).
      * @param parameterTypes parameter types array
      * @return new instance of {@code klazz}
@@ -322,8 +322,8 @@ public class ConstructorUtils {
      * <p>The signatures should match exactly.</p>
      *
      * @param <T> The type of the object to be constructed
-     * @param klass the class to be constructed.
-     * @param arg the actual argument. May be null (this will result in calling the default constructor).
+     * @param klass The class to be constructed.
+     * @param arg The actual argument. May be null (this will result in calling the default constructor).
      * @return new instance of {@code klazz}
      * @throws NoSuchMethodException If the constructor cannot be found
      * @throws IllegalAccessException If an error occurs accessing the constructor
@@ -350,7 +350,7 @@ public class ConstructorUtils {
      * <p>The signatures should match exactly.</p>
      *
      * @param <T> The type of the object to be constructed
-     * @param klass the class to be constructed.
+     * @param klass The class to be constructed.
      * @param args actual argument array. May be null (this will result in calling the default constructor).
      * @return new instance of {@code klazz}
      * @throws NoSuchMethodException If the constructor cannot be found
@@ -385,7 +385,7 @@ public class ConstructorUtils {
      * <p>The signatures should match exactly.</p>
      *
      * @param <T> The type of the object to be constructed
-     * @param klass the class to be constructed.
+     * @param klass The class to be constructed.
      * @param args actual argument array. May be null (this will result in calling the default constructor).
      * @param parameterTypes parameter types array
      * @return new instance of {@code klazz}

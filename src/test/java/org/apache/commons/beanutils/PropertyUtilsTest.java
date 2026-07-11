@@ -113,7 +113,7 @@ public class PropertyUtilsTest extends TestCase {
     /**
      * Finds the descriptor of the name property.
      *
-     * @param desc the array with descriptors
+     * @param desc The array with descriptors
      * @return The found descriptor or null
      */
     private static PropertyDescriptor findNameDescriptor(

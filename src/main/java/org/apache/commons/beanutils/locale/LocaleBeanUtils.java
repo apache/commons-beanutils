@@ -681,7 +681,7 @@ public class LocaleBeanUtils extends BeanUtils {
      *
      * <p>For more details see {@code LocaleBeanUtilsBean}</p>
      *
-     * @param locale the default locale
+     * @param locale The default locale
      * @see LocaleBeanUtilsBean#setDefaultLocale(Locale)
      */
     public static void setDefaultLocale(final Locale locale) {

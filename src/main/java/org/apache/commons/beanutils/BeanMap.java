@@ -53,9 +53,9 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
         /**
          * Constructs a new {@code Entry}.
          *
-         * @param owner the BeanMap this entry belongs to
-         * @param key   the key for this entry
-         * @param value the value for this entry
+         * @param owner The BeanMap this entry belongs to
+         * @param key   The key for this entry
+         * @param value The value for this entry
          */
         protected Entry(final BeanMap owner, final Object key, final Object value) {
             super(key, value);
@@ -65,7 +65,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
         /**
          * Sets the value.
          *
-         * @param value the new value for the entry
+         * @param value The new value for the entry
          * @return The old value for the entry
          */
         @Override
@@ -197,7 +197,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     /**
      * Constructs a new {@code BeanMap} that operates on the specified bean. If the given bean is {@code null}, then this map will be empty.
      *
-     * @param bean the bean for this map to operate on
+     * @param bean The bean for this map to operate on
      */
     public BeanMap(final Object bean) {
         this.bean = bean;
@@ -287,7 +287,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
      * <p>
      * Write-only properties will not be matched as the test operates against property read methods.
      *
-     * @param name the name of the property to check
+     * @param name The name of the property to check
      * @return false if the given name is null or is not a {@code String}; false if the bean does not define a property with that name; or true if the bean
      *         does define a property with that name
      */
@@ -300,7 +300,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     /**
      * Returns true if the bean defines a property whose current value is the given object.
      *
-     * @param value the value to check
+     * @param value The value to check
      * @return false true if the bean has at least one property whose current value is that object, false otherwise
      */
     @Override
@@ -322,8 +322,8 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
      * If no special constructor exists and the given type is not a primitive type, this method returns the original value.
      * </p>
      *
-     * @param newType the type to convert the value to
-     * @param value   the value to convert
+     * @param newType The type to convert the value to
+     * @param value   The value to convert
      * @return The converted value
      * @throws NumberFormatException     if newType is a primitive type, and the string representation of the given value cannot be converted to that type
      * @throws InstantiationException    if the constructor found with reflection raises it
@@ -354,8 +354,8 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
      * Creates an array of parameters to pass to the given mutator method. If the given object is not the right type to pass to the method directly, it will be
      * converted using {@link #convertType(Class,Object)}.
      *
-     * @param method the mutator method
-     * @param value  the value to pass to the mutator method
+     * @param method The mutator method
+     * @param value  The value to pass to the mutator method
      * @return An array containing one object that is either the given value or a transformed value
      * @throws IllegalAccessException   if {@link #convertType(Class,Object)} raises it
      * @throws IllegalArgumentException if any other exception is raised by {@link #convertType(Class,Object)}
@@ -436,9 +436,9 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
      * Called during a successful {@link #put(Object,Object)} operation. Default implementation does nothing. Override to be notified of property changes in the
      * bean caused by this map.
      *
-     * @param key      the name of the property that changed
-     * @param oldValue the old value for that property
-     * @param newValue the new value for that property
+     * @param key      The name of the property that changed
+     * @param oldValue The old value for that property
+     * @param newValue The new value for that property
      */
     protected void firePropertyChange(final Object key, final Object oldValue, final Object newValue) {
     }
@@ -451,7 +451,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
      * <p>
      * Write-only properties will not be matched as the test operates against property read methods.
      *
-     * @param name the name of the property whose value to return
+     * @param name The name of the property whose value to return
      * @return The value of the property with that name
      */
     @Override
@@ -483,7 +483,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     /**
      * Returns the accessor for the property with the given name.
      *
-     * @param name the name of the property
+     * @param name The name of the property
      * @return null if the name is null; null if the name is not a {@link String}; null if no such property exists; or the accessor method for that property
      */
     protected Method getReadMethod(final Object name) {
@@ -493,7 +493,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     /**
      * Returns the accessor for the property with the given name.
      *
-     * @param name the name of the property
+     * @param name The name of the property
      * @return The accessor method for the property, or null
      */
     public Method getReadMethod(final String name) {
@@ -503,7 +503,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     /**
      * Returns the type of the property with the given name.
      *
-     * @param name the name of the property
+     * @param name The name of the property
      * @return The type of the property, or {@code null} if no such property exists
      */
     public Class<?> getType(final String name) {
@@ -513,7 +513,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     /**
      * Returns a transformer for the given primitive type.
      *
-     * @param aType the primitive type whose transformer to return
+     * @param aType The primitive type whose transformer to return
      * @return A transformer that will convert strings into that type, or null if the given type is not a primitive type
      */
     protected Transformer getTypeTransformer(final Class<?> aType) {
@@ -525,7 +525,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     /**
      * Returns the mutator for the property with the given name.
      *
-     * @param name the name of the
+     * @param name The name of the
      * @return null if the name is null; null if the name is not a {@link String}; null if no such property exists; null if the property is read-only; or the
      *         mutator method for that property
      */
@@ -536,7 +536,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     /**
      * Returns the mutator for the property with the given name.
      *
-     * @param name the name of the property
+     * @param name The name of the property
      * @return The mutator method for the property, or null
      */
     public Method getWriteMethod(final String name) {
@@ -608,7 +608,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     /**
      * Logs the given exception to {@code System.out}. Used to display warnings while accessing/mutating the bean.
      *
-     * @param ex the exception to log
+     * @param ex The exception to log
      */
     protected void logInfo(final Exception ex) {
         // Deliberately do not use LOG4J or Commons Logging to avoid dependencies
@@ -618,7 +618,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     /**
      * Logs the given exception to {@code System.err}. Used to display errors while accessing/mutating the bean.
      *
-     * @param ex the exception to log
+     * @param ex The exception to log
      */
     protected void logWarn(final Exception ex) {
         // Deliberately do not use LOG4J or Commons Logging to avoid dependencies
@@ -629,8 +629,8 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     /**
      * Sets the bean property with the given name to the given value.
      *
-     * @param name  the name of the property to set
-     * @param value the value to set that property to
+     * @param name  The name of the property to set
+     * @param value The value to set that property to
      * @return The previous value of that property
      * @throws IllegalArgumentException if the given name is null; if the given name is not a {@link String}; if the bean doesn't define a property with that
      *                                  name; or if the bean property with that name is read-only
@@ -661,7 +661,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     /**
      * Puts all of the writable properties from the given BeanMap into this BeanMap. Read-only and Write-only properties will be ignored.
      *
-     * @param map the BeanMap whose properties to put
+     * @param map The BeanMap whose properties to put
      */
     public void putAllWriteable(final BeanMap map) {
         for (final Object key : map.readMethods.keySet()) {
@@ -686,7 +686,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     /**
      * Sets the bean to be operated on by this map. The given value may be null, in which case this map will be empty.
      *
-     * @param newBean the new bean to operate on
+     * @param newBean The new bean to operate on
      */
     public void setBean(final Object newBean) {
         bean = newBean;

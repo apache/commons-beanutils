@@ -62,7 +62,7 @@ public class SuppressPropertiesBeanIntrospector implements BeanIntrospector {
      * Creates a new instance of {@code SuppressPropertiesBeanIntrospector} and sets the
      * names of the properties to be suppressed.
      *
-     * @param propertiesToSuppress the names of the properties to be suppressed (must not
+     * @param propertiesToSuppress The names of the properties to be suppressed (must not
      * be {@code null})
      * @throws IllegalArgumentException if the collection with property names is
      * {@code null}

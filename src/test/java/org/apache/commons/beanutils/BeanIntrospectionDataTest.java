@@ -50,7 +50,7 @@ public class BeanIntrospectionDataTest extends TestCase {
     /**
      * Returns the property descriptor for the test property.
      *
-     * @param bid the data object
+     * @param bid The data object
      * @return The test property descriptor
      */
     private static PropertyDescriptor fetchTestDescriptor(final BeanIntrospectionData bid) {

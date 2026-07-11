@@ -209,8 +209,8 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
      * <em>Note</em>: This comparison cannot be performed in a type-safe way; so
      * {@code ClassCastException} exceptions may be thrown.
      *
-     * @param val1 the first value to be compared
-     * @param val2 the second value to be compared
+     * @param val1 The first value to be compared
+     * @param val2 The second value to be compared
      * @return The result of the comparison
      */
     private int internalCompare(final Object val1, final Object val2) {

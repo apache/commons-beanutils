@@ -60,8 +60,8 @@ public class WrapDynaClass implements DynaClass {
         /**
          * Creates a new instance of {@code CacheKey}.
          *
-         * @param beanCls the bean class
-         * @param pu the instance of {@code PropertyUtilsBean}
+         * @param beanCls The bean class
+         * @param pu The instance of {@code PropertyUtilsBean}
          */
         public CacheKey(final Class<?> beanCls, final PropertyUtilsBean pu) {
             beanClass = beanCls;
@@ -231,7 +231,7 @@ public class WrapDynaClass implements DynaClass {
      * {@code PropertyUtilsBean} object is provided, the default instance is used.
      *
      * @param beanClass Bean class for which a WrapDynaClass is requested
-     * @param pu the optional {@code PropertyUtilsBean} to be used for introspection
+     * @param pu The optional {@code PropertyUtilsBean} to be used for introspection
      * @return A new <em>Wrap</em> {@link DynaClass}
      * @since 1.9
      */
@@ -321,7 +321,7 @@ public class WrapDynaClass implements DynaClass {
      * needed via calls to the {@code createDynaClass(Class)} method.
      *
      * @param beanClass JavaBean class to be introspected around
-     * @param propUtils the {@code PropertyUtilsBean} associated with this class
+     * @param propUtils The {@code PropertyUtilsBean} associated with this class
      */
     private WrapDynaClass(final Class<?> beanClass, final PropertyUtilsBean propUtils) {
         // Compiler needs generic.

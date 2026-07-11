@@ -553,7 +553,7 @@ public void deregister() {
     /**
      * setter for defaultLocale.
      *
-     * @param locale the default locale
+     * @param locale The default locale
      */
     public void setDefaultLocale(final Locale locale) {
 

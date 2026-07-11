@@ -102,8 +102,8 @@ public abstract class AbstractConverter implements Converter {
      * Generates a standard conversion exception with a message indicating that
      * the passed in value cannot be converted to the desired target type.
      *
-     * @param type the target type
-     * @param value the value to be converted
+     * @param type The target type
+     * @param value The value to be converted
      * @return A {@code ConversionException} with a standard message
      * @since 1.9
      */
@@ -213,8 +213,8 @@ public abstract class AbstractConverter implements Converter {
      * of the method signature).
      *
      * @param <T> The type of the result object
-     * @param targetClass the target class of the conversion
-     * @param value the value to be converted
+     * @param targetClass The target class of the conversion
+     * @param value The value to be converted
      * @return The converted value
      */
     private <T> T convertToDefaultType(final Class<T> targetClass, final Object value) {

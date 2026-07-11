@@ -193,7 +193,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * This is a pseudo-singleton - an single instance is provided per (thread) context classloader.
      * This mechanism provides isolation for web apps deployed in the same container.
      *
-     * @param newInstance a new singleton instance
+     * @param newInstance A new singleton instance
      */
     public static void setInstance(final LocaleBeanUtilsBean newInstance) {
         LOCALE_BEANS_BY_CLASSLOADER.set(newInstance);
@@ -911,7 +911,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     /**
      * Sets the default Locale.
      *
-     * @param locale the default locale
+     * @param locale The default locale
      */
     public void setDefaultLocale(final Locale locale) {
 

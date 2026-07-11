@@ -60,8 +60,8 @@ public class BeanUtilsBean {
      * Determines the type of a {@code DynaProperty}. Here a special treatment
      * is needed for mapped properties.
      *
-     * @param dynaProperty the property descriptor
-     * @param value the value object to be set for this property
+     * @param dynaProperty The property descriptor
+     * @param value The value object to be set for this property
      * @return The type of this property
      */
     private static Class<?> dynaPropertyType(final DynaProperty dynaProperty,
@@ -198,8 +198,8 @@ public class BeanUtilsBean {
      * bean. This method delegates to {@link #convert(Object, Class)}, but {@code null}
      * values are not converted. This causes {@code null} values to be copied verbatim.
      *
-     * @param value the value to be converted and copied
-     * @param type the target type of the conversion
+     * @param value The value to be converted and copied
+     * @param type The target type of the conversion
      * @return The converted value
      */
     private Object convertForCopy(final Object value, final Class<?> type) {

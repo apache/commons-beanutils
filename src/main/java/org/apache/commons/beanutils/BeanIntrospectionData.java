@@ -49,7 +49,7 @@ class BeanIntrospectionData {
      * they may get lost when the GC claims soft references used by the
      * {@code PropertyDescriptor} objects.
      *
-     * @param descs the array with the descriptors of the available properties
+     * @param descs The array with the descriptors of the available properties
      * @return The map with the names of write methods for properties
      */
     private static Map<String, String> setUpWriteMethodNames(final PropertyDescriptor[] descs) {
@@ -73,7 +73,7 @@ class BeanIntrospectionData {
      * Creates a new instance of {@code BeanIntrospectionData} and initializes its
      * completely.
      *
-     * @param descs the array with the descriptors of the available properties
+     * @param descs The array with the descriptors of the available properties
      */
     public BeanIntrospectionData(final PropertyDescriptor[] descs) {
         this(descs, setUpWriteMethodNames(descs));
@@ -83,8 +83,8 @@ class BeanIntrospectionData {
      * Creates a new instance of {@code BeanIntrospectionData} and allows setting the map
      * with write method names. This constructor is mainly used for testing purposes.
      *
-     * @param descs the array with the descriptors of the available properties
-     * @param writeMethNames the map with the names of write methods
+     * @param descs The array with the descriptors of the available properties
+     * @param writeMethNames The map with the names of write methods
      */
     BeanIntrospectionData(final PropertyDescriptor[] descs, final Map<String, String> writeMethNames) {
         descriptors = descs;
@@ -95,7 +95,7 @@ class BeanIntrospectionData {
      * Returns the {@code PropertyDescriptor} for the property with the specified name. If
      * this property is unknown, result is {@code null}.
      *
-     * @param name the name of the property in question
+     * @param name The name of the property in question
      * @return The {@code PropertyDescriptor} for this property or {@code null}
      */
     public PropertyDescriptor getDescriptor(final String name) {
@@ -125,8 +125,8 @@ class BeanIntrospectionData {
      * additional information stored in this object is necessary to obtain the method
      * again.
      *
-     * @param beanCls the class of the affected bean
-     * @param desc the {@code PropertyDescriptor} of the desired property
+     * @param beanCls The class of the affected bean
+     * @param desc The {@code PropertyDescriptor} of the desired property
      * @return The write method for this property or {@code null} if there is none
      */
     public Method getWriteMethod(final Class<?> beanCls, final PropertyDescriptor desc) {

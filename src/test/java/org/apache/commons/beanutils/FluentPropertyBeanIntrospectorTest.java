@@ -44,7 +44,7 @@ public class FluentPropertyBeanIntrospectorTest extends TestCase {
     /**
      * Puts all property descriptors into a map so that they can be accessed by property name.
      *
-     * @param descs the array with descriptors
+     * @param descs The array with descriptors
      * @return A map with property names as keys
      */
     private static Map<String, PropertyDescriptor> createDescriptorMap(final PropertyDescriptor[] descs) {
@@ -58,8 +58,8 @@ public class FluentPropertyBeanIntrospectorTest extends TestCase {
     /**
      * Convenience method for obtaining a specific property descriptor and checking whether it exists.
      *
-     * @param props the map with property descriptors
-     * @param name  the name of the desired descriptor
+     * @param props The map with property descriptors
+     * @param name  The name of the desired descriptor
      * @return The descriptor from the map
      */
     private static PropertyDescriptor fetchDescriptor(final Map<String, PropertyDescriptor> props, final String name) {

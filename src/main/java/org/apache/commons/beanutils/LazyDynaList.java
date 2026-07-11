@@ -348,7 +348,7 @@ public class LazyDynaList extends ArrayList<Object> {
     /**
      * Creates a new {@code LazyDynaMap} object for the given property value.
      *
-     * @param value the property value
+     * @param value The property value
      * @return The newly created {@code LazyDynaMap}
      */
     private LazyDynaMap createDynaBeanForMapProperty(final Object value) {
@@ -390,7 +390,7 @@ public class LazyDynaList extends ArrayList<Object> {
      *    to the appropriate size, populating with
      *    DynaBeans.</p>
      *
-     * @param requiredSize the required size of the List.
+     * @param requiredSize The required size of the List.
      */
     private void growList(final int requiredSize) {
 

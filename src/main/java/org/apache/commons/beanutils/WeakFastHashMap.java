@@ -359,7 +359,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
     /**
      * Construct an empty map with the specified capacity.
      *
-     * @param capacity  the initial capacity of the empty map
+     * @param capacity  The initial capacity of the empty map
      */
     public WeakFastHashMap(final int capacity) {
         this.map = createMap(capacity);
@@ -372,8 +372,8 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
     /**
      * Construct an empty map with the specified capacity and load factor.
      *
-     * @param capacity  the initial capacity of the empty map
-     * @param factor  the load factor of the new map
+     * @param capacity  The initial capacity of the empty map
+     * @param factor  The load factor of the new map
      */
     public WeakFastHashMap(final int capacity, final float factor) {
         this.map = createMap(capacity, factor);
@@ -382,7 +382,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
     /**
      * Construct a new map with the same mappings as the specified map.
      *
-     * @param map  the map whose mappings are to be copied
+     * @param map  The map whose mappings are to be copied
      */
     public WeakFastHashMap(final Map<? extends K, ? extends V> map) {
         this.map = createMap(map);
@@ -437,7 +437,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
      * Return {@code true} if this map contains a mapping for the
      * specified key.
      *
-     * @param key  the key to be searched for
+     * @param key  The key to be searched for
      * @return true if the map contains the key
      */
     @Override
@@ -454,7 +454,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
      * Return {@code true} if this map contains one or more keys mapping
      * to the specified value.
      *
-     * @param value  the value to be searched for
+     * @param value  The value to be searched for
      * @return true if the map contains the value
      */
     @Override
@@ -504,7 +504,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
      * list equals function in the documentation for the
      * {@code Map.equals} method.
      *
-     * @param o  the object to be compared to this list
+     * @param o  The object to be compared to this list
      * @return true if the two maps are equal
      */
     @Override
@@ -562,7 +562,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
      * there is a mapping with a value of {@code null}.  Use the
      * {@code containsKey()} method to disambiguate these cases.
      *
-     * @param key  the key whose value is to be returned
+     * @param key  The key whose value is to be returned
      * @return The value mapped to that key, or null
      */
     @Override
@@ -641,8 +641,8 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
      * If the map previously contained a mapping for this key, the old
      * value is replaced and returned.
      *
-     * @param key  the key with which the value is to be associated
-     * @param value  the value to be associated with this key
+     * @param key  The key with which the value is to be associated
+     * @param value  The value to be associated with this key
      * @return The value previously mapped to the key, or null
      */
     @Override
@@ -664,7 +664,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
      * Copy all of the mappings from the specified map to this one, replacing
      * any mappings with the same keys.
      *
-     * @param in  the map whose mappings are to be copied
+     * @param in  The map whose mappings are to be copied
      */
     @Override
     public void putAll(final Map<? extends K, ? extends V> in) {
@@ -687,7 +687,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
      * Remove any mapping for this key, and return any previously
      * mapped value.
      *
-     * @param key  the key whose mapping is to be removed
+     * @param key  The key whose mapping is to be removed
      * @return The value removed, or null
      */
     @Override

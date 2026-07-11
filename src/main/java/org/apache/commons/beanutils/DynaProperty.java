@@ -257,7 +257,7 @@ public class DynaProperty implements Serializable {
      * Reads field values for this object safely. There are issues with serializing primitive class types on certain JVM versions (including java 1.3). This
      * method provides a workaround.
      *
-     * @param in the content source.
+     * @param in The content source.
      * @throws IOException            when the stream data values are outside expected range
      * @throws ClassNotFoundException Class of a serialized object cannot be found.
      */

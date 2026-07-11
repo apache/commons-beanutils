@@ -91,7 +91,7 @@ public class Jira465Test extends TestCase {
     /**
      * Changes the value of the test property.
      *
-     * @param bean the bean to be updated
+     * @param bean The bean to be updated
      */
     private static void changeValue(final Object bean) {
         try {

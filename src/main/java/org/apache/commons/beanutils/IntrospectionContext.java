@@ -43,7 +43,7 @@ public interface IntrospectionContext {
      * property. If this context already contains a descriptor for the affected
      * property, it is overridden.
      *
-     * @param desc the property descriptor
+     * @param desc The property descriptor
      */
     void addPropertyDescriptor(PropertyDescriptor desc);
 
@@ -51,7 +51,7 @@ public interface IntrospectionContext {
      * Adds an array of property descriptors to this context. Using this method
      * multiple descriptors can be added at once.
      *
-     * @param descriptors the array of descriptors to be added
+     * @param descriptors The array of descriptors to be added
      */
     void addPropertyDescriptors(PropertyDescriptor[] descriptors);
 
@@ -59,7 +59,7 @@ public interface IntrospectionContext {
      * Returns the descriptor for the property with the given name or
      * {@code null} if this property is unknown.
      *
-     * @param name the name of the property in question
+     * @param name The name of the property in question
      * @return The descriptor for this property or {@code null} if this property
      *         is unknown
      */
@@ -77,7 +77,7 @@ public interface IntrospectionContext {
      * already contained in this context. This method can be used for instance
      * to prevent that an already existing property descriptor is overridden.
      *
-     * @param name the name of the property in question
+     * @param name The name of the property in question
      * @return <strong>true</strong> if a descriptor for this property has already been
      *         added, <strong>false</strong> otherwise
      */
@@ -93,7 +93,7 @@ public interface IntrospectionContext {
     /**
      * Removes the descriptor for the property with the given name.
      *
-     * @param name the name of the affected property
+     * @param name The name of the affected property
      */
     void removePropertyDescriptor(String name);
 }

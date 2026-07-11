@@ -106,7 +106,7 @@ public class PropertyUtils {
      * Adds a {@code BeanIntrospector}. This object is invoked when the
      * property descriptors of a class need to be obtained.
      *
-     * @param introspector the {@code BeanIntrospector} to be added (must
+     * @param introspector The {@code BeanIntrospector} to be added (must
      *        not be {@code null}
      * @throws IllegalArgumentException if the argument is {@code null}
      * @since 1.9
@@ -635,7 +635,7 @@ public class PropertyUtils {
     /**
      * Removes the specified {@code BeanIntrospector}.
      *
-     * @param introspector the {@code BeanIntrospector} to be removed
+     * @param introspector The {@code BeanIntrospector} to be removed
      * @return <strong>true</strong> if the {@code BeanIntrospector} existed and
      *         could be removed, <strong>false</strong> otherwise
      * @since 1.9

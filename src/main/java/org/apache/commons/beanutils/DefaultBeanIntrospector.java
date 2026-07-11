@@ -86,8 +86,8 @@ public class DefaultBeanIntrospector implements BeanIntrospector {
      * <li>JDK 1.4.2_05: returns null from these methods.</li>
      * </ul>
      *
-     * @param beanClass the current class to be inspected
-     * @param descriptors the array with property descriptors
+     * @param beanClass The current class to be inspected
+     * @param descriptors The array with property descriptors
      */
     private void handleIndexedPropertyDescriptors(final Class<?> beanClass,
             final PropertyDescriptor[] descriptors) {
@@ -155,7 +155,7 @@ public class DefaultBeanIntrospector implements BeanIntrospector {
      * all property descriptors for the current class and adds them to the
      * passed in introspection context.
      *
-     * @param icontext the introspection context
+     * @param icontext The introspection context
      */
     @Override
     public void introspect(final IntrospectionContext icontext) {

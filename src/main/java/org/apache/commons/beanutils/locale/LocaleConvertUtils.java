@@ -329,7 +329,7 @@ public class LocaleConvertUtils {
      *
      * <p>For more details see {@code LocaleConvertUtilsBean}</p>
      *
-     * @param locale the default locale
+     * @param locale The default locale
      * @see LocaleConvertUtilsBean#setDefaultLocale(Locale)
      */
     public static void setDefaultLocale(final Locale locale) {

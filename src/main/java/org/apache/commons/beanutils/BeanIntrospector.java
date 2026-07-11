@@ -44,7 +44,7 @@ public interface BeanIntrospector {
      * properties according to the rules it implements, and add them to the
      * passed in context object.
      *
-     * @param icontext the context object for interaction with the initiator of
+     * @param icontext The context object for interaction with the initiator of
      *        the introspection request
      * @throws IntrospectionException if an error occurs during introspection
      */

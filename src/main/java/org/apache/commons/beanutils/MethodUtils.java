@@ -60,9 +60,9 @@ public class MethodUtils {
         /**
          * The sole constructor.
          *
-         * @param cls  the class to reflect, must not be null
-         * @param methodName  the method name to obtain
-         * @param paramTypes the array of classes representing the parameter types
+         * @param cls  The class to reflect, must not be null
+         * @param methodName  The method name to obtain
+         * @param paramTypes The array of classes representing the parameter types
          * @param exact whether the match has to be exact.
          */
         public MethodDescriptor(final Class<?> cls, final String methodName, Class<?>[] paramTypes, final boolean exact) {
@@ -582,7 +582,7 @@ public class MethodUtils {
      * Gets the class for the primitive type corresponding to the primitive wrapper class given.
      * For example, an instance of {@code Boolean.class} returns a {@code boolean.class}.
      *
-     * @param wrapperType the
+     * @param wrapperType The
      * @return The primitive type class corresponding to the given wrapper class,
      * null if no match is found
      */
@@ -623,7 +623,7 @@ public class MethodUtils {
      * Gets the wrapper object class for the given primitive type class.
      * For example, passing {@code boolean.class} returns {@code Boolean.class}
      *
-     * @param primitiveType the primitive type class for which a match is to be found
+     * @param primitiveType The primitive type class for which a match is to be found
      * @return The wrapper type associated with the given primitive
      * or null if no match is found
      */
@@ -1213,8 +1213,8 @@ public class MethodUtils {
      * Now logic widening matches are allowed.
      * For example, a {@code Long} will not match a {@code int}.
      *
-     * @param parameterType the type of parameter accepted by the method
-     * @param parameterization the type of parameter being tested
+     * @param parameterType The type of parameter accepted by the method
+     * @param parameterization The type of parameter being tested
      * @return true if the assignment is compatible.
      */
     public static final boolean isAssignmentCompatible(final Class<?> parameterType, final Class<?> parameterization) {
@@ -1295,7 +1295,7 @@ public class MethodUtils {
     /**
      * Find a non primitive representation for given primitive class.
      *
-     * @param clazz the class to find a representation for, not null
+     * @param clazz The class to find a representation for, not null
      * @return The original class if it not a primitive. Otherwise the wrapper class. Not null
      */
     public static Class<?> toNonPrimitiveClass(final Class<?> clazz) {

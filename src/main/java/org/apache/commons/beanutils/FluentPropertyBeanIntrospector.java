@@ -101,7 +101,7 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
      * initializes it with the prefix for write methods used by the classes to
      * be inspected.
      *
-     * @param writePrefix the prefix for write methods (must not be {@code null})
+     * @param writePrefix The prefix for write methods (must not be {@code null})
      * @throws IllegalArgumentException if the prefix is {@code null}
      */
     public FluentPropertyBeanIntrospector(final String writePrefix) {
@@ -115,8 +115,8 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
     /**
      * Creates a property descriptor for a fluent API property.
      *
-     * @param m the set method for the fluent API property
-     * @param propertyName the name of the corresponding property
+     * @param m The set method for the fluent API property
+     * @param propertyName The name of the corresponding property
      * @return The descriptor
      * @throws IntrospectionException if an error occurs
      */
@@ -139,7 +139,7 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
      * property write methods which have not been discovered by default
      * introspection.
      *
-     * @param icontext the introspection context
+     * @param icontext The introspection context
      * @throws IntrospectionException if an error occurs
      */
     @Override
@@ -175,7 +175,7 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
     /**
      * Derives the name of a property from the given set method.
      *
-     * @param m the method
+     * @param m The method
      * @return The corresponding property name
      */
     private String propertyName(final Method m) {
