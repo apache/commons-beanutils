@@ -618,7 +618,7 @@ protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
      * </p>
      * <ul><li>{@code ${myDynaBean.<strong>map</strong>.fooProperty}}</li></ul>
      *
-     * @return a Map representation of this DynaBean
+     * @return A Map representation of this DynaBean
      */
     public Map<String, Object> getMap() {
         // cache the Map
@@ -739,7 +739,7 @@ protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
     /**
      * <p>Creates a new instance of the {@code Map}.</p>
      *
-     * @return a new Map instance
+     * @return A new Map instance
      */
     protected Map<String, Object> newMap() {
         return new HashMap<>();

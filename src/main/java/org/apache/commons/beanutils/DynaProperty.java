@@ -273,7 +273,7 @@ public class DynaProperty implements Serializable {
     /**
      * Return a String representation of this Object.
      *
-     * @return a String representation of the dyna property
+     * @return A String representation of the dyna property
      */
     @Override
     public String toString() {

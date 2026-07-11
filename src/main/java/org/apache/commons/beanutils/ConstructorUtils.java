@@ -129,7 +129,7 @@ public class ConstructorUtils {
      * @param <T> The type of the class to be inspected
      * @param clazz find constructor for this class
      * @param parameterTypes find method with compatible parameters
-     * @return a valid Constructor object. If there's no matching constructor, returns {@code null}.
+     * @return A valid Constructor object. If there's no matching constructor, returns {@code null}.
      */
     private static <T> Constructor<T> getMatchingAccessibleConstructor(
         final Class<T> clazz,

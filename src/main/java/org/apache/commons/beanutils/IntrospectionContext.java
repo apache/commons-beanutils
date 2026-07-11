@@ -86,7 +86,7 @@ public interface IntrospectionContext {
     /**
      * Returns a set with the names of all properties known to this context.
      *
-     * @return a set with the known property names
+     * @return A set with the known property names
      */
     Set<String> propertyNames();
 

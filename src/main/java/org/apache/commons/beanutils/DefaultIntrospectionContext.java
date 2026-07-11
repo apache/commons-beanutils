@@ -87,7 +87,7 @@ class DefaultIntrospectionContext implements IntrospectionContext {
      * Returns an array with all descriptors added to this context. This method
      * is used to obtain the results of introspection.
      *
-     * @return an array with all known property descriptors
+     * @return An array with all known property descriptors
      */
     public PropertyDescriptor[] getPropertyDescriptors() {
         return descriptors.values().toArray(EMPTY_DESCRIPTORS);

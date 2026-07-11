@@ -341,7 +341,7 @@ public class PropertyUtilsBean {
      * added to this instance.
      *
      * @param beanClass the class to be inspected
-     * @return a data object with the results of introspection
+     * @return A data object with the results of introspection
      */
     private BeanIntrospectionData fetchIntrospectionData(final Class<?> beanClass) {
         final DefaultIntrospectionContext ictx = new DefaultIntrospectionContext(beanClass);

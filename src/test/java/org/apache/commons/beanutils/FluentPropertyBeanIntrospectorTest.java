@@ -45,7 +45,7 @@ public class FluentPropertyBeanIntrospectorTest extends TestCase {
      * Puts all property descriptors into a map so that they can be accessed by property name.
      *
      * @param descs the array with descriptors
-     * @return a map with property names as keys
+     * @return A map with property names as keys
      */
     private static Map<String, PropertyDescriptor> createDescriptorMap(final PropertyDescriptor[] descs) {
         final Map<String, PropertyDescriptor> map = new HashMap<>();

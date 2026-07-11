@@ -408,7 +408,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
      * Return a shallow copy of this {@code FastHashMap} instance.
      * The keys and values themselves are not copied.
      *
-     * @return a clone of this map
+     * @return A clone of this map
      */
     @Override
     public Object clone() {

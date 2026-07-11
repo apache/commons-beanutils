@@ -157,7 +157,7 @@ public class ContextClassLoaderLocal<T> {
      * will call an appropriate constructor and return the newly constructed
      * object.
      *
-     * @return a new Object to be used as an initial value for this ContextClassLoaderLocal
+     * @return A new Object to be used as an initial value for this ContextClassLoaderLocal
      */
     protected T initialValue() {
         return null;
