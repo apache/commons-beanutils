@@ -26,6 +26,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -91,7 +92,7 @@ abstract class AbstractJdbcDynaClass implements DynaClass {
         if (columnName == null || columnName.trim().isEmpty()) {
             columnName = metadata.getColumnName(i);
         }
-        final String name = lowerCase ? columnName.toLowerCase() : columnName;
+        final String name = lowerCase ? columnName.toLowerCase(Locale.ROOT) : columnName;
         if (!name.equals(columnName)) {
             if (columnNameXref == null) {
                 columnNameXref = new HashMap<>();
