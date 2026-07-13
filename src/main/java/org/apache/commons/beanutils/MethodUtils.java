@@ -126,7 +126,7 @@ public class MethodUtils {
      * which may introduce memory-leak problems.
      * </p>
      */
-    private static boolean CACHE_METHODS = true;
+    private static volatile boolean CACHE_METHODS = true;
 
     /** An empty class array */
     private static final Class<?>[] EMPTY_CLASS_PARAMETERS = new Class[0];
