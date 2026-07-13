@@ -113,6 +113,13 @@
       <artifactId>junit-jupiter</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.junit-pioneer</groupId>
+      <artifactId>junit-pioneer</artifactId>
+      <!-- 2.x requires Java 11 -->
+      <version>1.9.1</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <build>
       <defaultGoal>clean apache-rat:check verify japicmp:cmp javadoc:javadoc checkstyle:check</defaultGoal>
