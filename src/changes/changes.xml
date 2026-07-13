@@ -37,6 +37,7 @@
       <action dev="ggregory" type="fix" due-to="Dexter.k, Gary Gregory">Preserve magnitude in BigInteger and BigDecimal locale converters (#403).</action>
       <action dev="ggregory" type="fix" due-to="Dexter.k, Gary Gregory">Reject out-of-range long and float values in NumberConverter (1.X) (#405).</action>
       <action dev="ggregory" type="fix" due-to="Dexter.k, Gary Gregory">Reject out-of-range values in LongLocaleConverter (1.X) (#407).</action>
+      <action dev="ggregory" type="fix" due-to="Naveed Khan, Gary Gregory">Make MethodUtils CACHE_METHODS volatile (1.X) (#416).</action>
       <!-- ADD -->
       <!-- UPDATE -->
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 84 to 102.</action>
