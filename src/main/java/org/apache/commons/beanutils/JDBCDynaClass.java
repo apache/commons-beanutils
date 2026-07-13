@@ -26,6 +26,7 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -89,7 +90,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
         if (columnName == null || columnName.trim().length() == 0) {
             columnName = metadata.getColumnName(i);
         }
-        final String name = lowerCase ? columnName.toLowerCase() : columnName;
+        final String name = lowerCase ? columnName.toLowerCase(Locale.ROOT) : columnName;
         if (!name.equals(columnName)) {
             if (columnNameXref == null) {
                 columnNameXref = new HashMap<>();

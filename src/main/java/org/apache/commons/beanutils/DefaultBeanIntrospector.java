@@ -23,6 +23,7 @@ import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -95,7 +96,7 @@ public class DefaultBeanIntrospector implements BeanIntrospector {
             if (pd instanceof IndexedPropertyDescriptor) {
                 final IndexedPropertyDescriptor descriptor = (IndexedPropertyDescriptor) pd;
                 final String propName = descriptor.getName().substring(0, 1)
-                        .toUpperCase()
+                        .toUpperCase(Locale.ROOT)
                         + descriptor.getName().substring(1);
 
                 if (descriptor.getReadMethod() == null) {
