@@ -23,7 +23,6 @@ import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.WeakHashMap;
 
 /**
  * Implements {@link DynaClass} to wrap standard JavaBean instances.
@@ -88,7 +87,7 @@ public class WrapDynaClass implements DynaClass {
     private static final ContextClassLoaderLocal<Map<CacheKey, WrapDynaClass>> CLASSLOADER_CACHE = new ContextClassLoaderLocal<Map<CacheKey, WrapDynaClass>>() {
         @Override
         protected Map<CacheKey, WrapDynaClass> initialValue() {
-            return new WeakHashMap<>();
+            return BeanUtils.createCache();
         }
     };
 
