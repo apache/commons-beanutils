@@ -39,6 +39,7 @@
       <action dev="ggregory" type="fix" due-to="Dexter.k, Gary Gregory">Reject out-of-range values in LongLocaleConverter (1.X) (#407).</action>
       <action dev="ggregory" type="fix" due-to="Naveed Khan, Gary Gregory">Make MethodUtils CACHE_METHODS volatile (1.X) (#416).</action>
       <action dev="ggregory" type="fix" due-to="Naveed Khan, Gary Gregory">Case-fold column and bean property names with Locale.ROOT (1.X) (#417).</action>
+      <action dev="ggregory" type="fix" due-to="Naveed Khan, Gary Gregory">Make WrapDynaClass instance cache thread-safe (1.X) (#419).</action>
       <!-- ADD -->
       <!-- UPDATE -->
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 84 to 102.</action>
