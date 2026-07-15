@@ -26,7 +26,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import java.util.WeakHashMap;
 
 /**
  * <p>Implements {@code DynaClass} for DynaBeans that wrap
@@ -94,7 +93,7 @@ public class WrapDynaClass implements DynaClass {
         new ContextClassLoaderLocal<Map<CacheKey, WrapDynaClass>>() {
             @Override
             protected Map<CacheKey, WrapDynaClass> initialValue() {
-                return new WeakHashMap<>();
+                return BeanUtils.createCache();
         }
     };
 
@@ -238,12 +237,17 @@ public class WrapDynaClass implements DynaClass {
     public static WrapDynaClass createDynaClass(final Class<?> beanClass, final PropertyUtilsBean pu) {
         final PropertyUtilsBean propUtils = pu != null ? pu : PropertyUtilsBean.getInstance();
         final CacheKey key = new CacheKey(beanClass, propUtils);
-        WrapDynaClass dynaClass = getClassesCache().get(key);
-        if (dynaClass == null) {
-            dynaClass = new WrapDynaClass(beanClass, propUtils);
-            getClassesCache().put(key, dynaClass);
+        final Map<CacheKey, WrapDynaClass> cache = getClassesCache();
+        // The get/create/put sequence must be atomic so that concurrent callers
+        // cannot create and return distinct instances for the same key.
+        synchronized (cache) {
+            WrapDynaClass dynaClass = cache.get(key);
+            if (dynaClass == null) {
+                dynaClass = new WrapDynaClass(beanClass, propUtils);
+                cache.put(key, dynaClass);
+            }
+            return dynaClass;
         }
-        return dynaClass;
     }
 
     /**
