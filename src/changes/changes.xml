@@ -46,6 +46,7 @@
       <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Make MethodUtils CACHE_ENABLED volatile (#414).</action>
       <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Case-fold column and bean property names with Locale.ROOT (#415).</action>
       <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Make WrapDynaClass instance cache thread-safe (#418).</action>
+      <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Reject out-of-range color components in ColorConverter (#420).</action>
       <!-- ADD -->
       <action type="add" dev="ggregory" due-to="Gary Gregory">Use varargs for org.apache.commons.beanutils2.MethodUtils.getAccessibleMethod(Class, String, Class...), and remove last argument variants using Class[] and Class.</action>
       <action type="add" dev="ggregory" due-to="SethFalco, Melloware, Gary Gregory">Add Instant converter and improve enum converter #49.</action>

@@ -110,6 +110,8 @@ class ColorConverterTest {
         assertThrows(ConversionException.class, () -> converter.convert(Color.class, "1234,5,6"));
         assertThrows(ConversionException.class, () -> converter.convert(Color.class, "1000,0,0"));
         assertThrows(ConversionException.class, () -> converter.convert(Color.class, "2550,0,0"));
+        assertThrows(ConversionException.class, () -> converter.convert(Color.class, "0,2550,0"));
+        assertThrows(ConversionException.class, () -> converter.convert(Color.class, "0,0,2550"));
     }
 
     @Test
