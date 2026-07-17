@@ -269,6 +269,27 @@ public abstract class AbstractDateConverterTest<T> {
     }
 
     /**
+     * Test that a configured Locale is honored when a pattern is also set.
+     */
+    @Test
+    void testLocaleWithPattern() {
+        // Pin the default Locale to one whose month names differ from the configured Locale.
+        final Locale defaultLocale = Locale.getDefault();
+        Locale.setDefault(Locale.US);
+        try {
+            final String pattern = "dd MMMM yyyy"; // month name is Locale-sensitive
+            final DateTimeConverter<T> converter = makeConverter();
+            converter.setLocale(Locale.GERMANY);
+            converter.setPattern(pattern);
+            final String testString = "28 Oktober 2006";
+            final Object expected = toType(testString, pattern, Locale.GERMANY);
+            validConversion(converter, expected, testString);
+        } finally {
+            Locale.setDefault(defaultLocale);
+        }
+    }
+
+    /**
      * Test Converter with multiple patterns
      */
     @Test
