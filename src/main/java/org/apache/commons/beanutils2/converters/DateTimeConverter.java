@@ -293,7 +293,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
      * @return The DateFormat
      */
     private DateFormat getFormat(final String pattern) {
-        final DateFormat format = new SimpleDateFormat(pattern);
+        final DateFormat format = locale == null ? new SimpleDateFormat(pattern) : new SimpleDateFormat(pattern, locale);
         if (timeZone != null) {
             format.setTimeZone(timeZone);
         }

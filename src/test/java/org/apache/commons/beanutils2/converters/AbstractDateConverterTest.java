@@ -42,6 +42,7 @@ import java.util.Objects;
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
 import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.DefaultLocale;
 
 /**
  * Abstract base for &lt;Date&gt;Converter classes.
@@ -266,6 +267,22 @@ public abstract class AbstractDateConverterTest<T> {
         invalidConversion(converter, Integer.valueOf(2));
         // Restore the default Locale
         Locale.setDefault(defaultLocale);
+    }
+
+    /**
+     * Test that a configured Locale is honored when a pattern is also set.
+     */
+    @Test
+    @DefaultLocale(language = "en", country = "US")
+    void testLocaleWithPattern() {
+        // The default Locale's month names differ from the configured Locale's.
+        final String pattern = "dd MMMM yyyy"; // month name is Locale-sensitive
+        final DateTimeConverter<T> converter = makeConverter();
+        converter.setLocale(Locale.GERMANY);
+        converter.setPattern(pattern);
+        final String testString = "28 Oktober 2006";
+        final Object expected = toType(testString, pattern, Locale.GERMANY);
+        validConversion(converter, expected, testString);
     }
 
     /**
