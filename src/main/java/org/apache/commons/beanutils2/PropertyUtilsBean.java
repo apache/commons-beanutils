@@ -706,23 +706,6 @@ public class PropertyUtilsBean {
     }
 
     /**
-     * Tests whether a property name has been removed by a registered {@link SuppressPropertiesBeanIntrospector}. The mapped-descriptor fallback in
-     * {@link #getPropertyDescriptor(Object, String)} bypasses the introspection pipeline, so suppressed mapped property names must be filtered explicitly.
-     *
-     * @param name The property name to test.
-     * @return {@code true} if the name is suppressed by an introspector.
-     */
-    private boolean isPropertySuppressed(final String name) {
-        for (final BeanIntrospector introspector : introspectors) {
-            if (introspector instanceof SuppressPropertiesBeanIntrospector
-                    && ((SuppressPropertiesBeanIntrospector) introspector).getSuppressedProperties().contains(name)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * <p>
      * Retrieve the property descriptors for the specified class, introspecting and caching them the first time a particular bean class is encountered.
      * </p>
@@ -1080,6 +1063,23 @@ public class PropertyUtilsBean {
                     // as per https://issues.apache.org/jira/browse/BEANUTILS-224
                     + " - had objects of type \"" + valueString + "\" but expected signature \"" + expectedString + "\"", cause);
         }
+    }
+
+    /**
+     * Tests whether a property name has been removed by a registered {@link SuppressPropertiesBeanIntrospector}. The mapped-descriptor fallback in
+     * {@link #getPropertyDescriptor(Object, String)} bypasses the introspection pipeline, so suppressed mapped property names must be filtered explicitly.
+     *
+     * @param name The property name to test.
+     * @return {@code true} if the name is suppressed by an introspector.
+     */
+    private boolean isPropertySuppressed(final String name) {
+        for (final BeanIntrospector introspector : introspectors) {
+            if (introspector instanceof SuppressPropertiesBeanIntrospector
+                    && ((SuppressPropertiesBeanIntrospector) introspector).getSuppressedProperties().contains(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

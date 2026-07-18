@@ -37,6 +37,22 @@ import org.junit.jupiter.api.Test;
 class WrapDynaClassTest {
 
     /**
+     * Simple bean used as a cache key.
+     */
+    public static final class ConcurrentBean {
+
+        private String value;
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(final String value) {
+            this.value = value;
+        }
+    }
+
+    /**
      * The cache key is one bean class, so {@code createDynaClass} must hand back a single instance no matter how many threads race to populate the
      * per-classloader cache. With a plain {@code WeakHashMap} the non-atomic {@code computeIfAbsent} let concurrent callers build and return distinct
      * instances for one key; this drives that race and fails if more than one instance escapes.
@@ -82,21 +98,5 @@ class WrapDynaClassTest {
         final WrapDynaClass first = WrapDynaClass.createDynaClass(ConcurrentBean.class);
         assertSame(first, WrapDynaClass.createDynaClass(ConcurrentBean.class));
         WrapDynaClass.clear();
-    }
-
-    /**
-     * Simple bean used as a cache key.
-     */
-    public static final class ConcurrentBean {
-
-        private String value;
-
-        public String getValue() {
-            return value;
-        }
-
-        public void setValue(final String value) {
-            this.value = value;
-        }
     }
 }

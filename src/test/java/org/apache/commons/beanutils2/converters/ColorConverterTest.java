@@ -106,19 +106,19 @@ class ColorConverterTest {
     }
 
     @Test
+    void testConvertingLiteralHex() {
+        final Color expected = Color.BLUE;
+        final Color actual = converter.convert(Color.class, "0x0000FF");
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testConvertingOutOfRangeComponentRejected() {
         assertThrows(ConversionException.class, () -> converter.convert(Color.class, "1234,5,6"));
         assertThrows(ConversionException.class, () -> converter.convert(Color.class, "1000,0,0"));
         assertThrows(ConversionException.class, () -> converter.convert(Color.class, "2550,0,0"));
         assertThrows(ConversionException.class, () -> converter.convert(Color.class, "0,2550,0"));
         assertThrows(ConversionException.class, () -> converter.convert(Color.class, "0,0,2550"));
-    }
-
-    @Test
-    void testConvertingLiteralHex() {
-        final Color expected = Color.BLUE;
-        final Color actual = converter.convert(Color.class, "0x0000FF");
-        assertEquals(expected, actual);
     }
 
     @Test

@@ -285,6 +285,15 @@ class BeanMapTest extends AbstractMapTest<BeanMap, String, Object> {
         }
     }
 
+    @Test
+    void testBeanMapPutAllWriteable() {
+        final BeanMap map1 = (BeanMap) makeFullMap();
+        final BeanMap map2 = (BeanMap) makeFullMap();
+        map2.put("someIntValue", Integer.valueOf(0));
+        map1.putAllWriteable(map2);
+        assertEquals(map1.get("someIntValue"), Integer.valueOf(0));
+    }
+
     /**
      * The {@code class} and (for enums) {@code declaringClass} pseudo-properties expose the bean's {@link ClassLoader} and must not be reachable through the map,
      * matching the suppression {@link PropertyUtilsBean} applies by default.
@@ -300,15 +309,6 @@ class BeanMapTest extends AbstractMapTest<BeanMap, String, Object> {
         assertFalse(enumMap.containsKey("class"), "class must not be exposed as a property");
         assertFalse(enumMap.containsKey("declaringClass"), "declaringClass must not be exposed as a property");
         assertNull(enumMap.get("declaringClass"));
-    }
-
-    @Test
-    void testBeanMapPutAllWriteable() {
-        final BeanMap map1 = (BeanMap) makeFullMap();
-        final BeanMap map2 = (BeanMap) makeFullMap();
-        map2.put("someIntValue", Integer.valueOf(0));
-        map1.putAllWriteable(map2);
-        assertEquals(map1.get("someIntValue"), Integer.valueOf(0));
     }
 
     /**
