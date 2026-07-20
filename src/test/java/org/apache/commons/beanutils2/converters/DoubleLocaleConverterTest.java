@@ -40,17 +40,6 @@ class DoubleLocaleConverterTest extends AbstractLocaleConverterTest<Double> {
     }
 
     /**
-     * Passing a non-Double Number directly (e.g. Integer) must return a Double, not throw ClassCastException.
-     */
-    @Test
-    void testConvertFromNonDoubleNumber() {
-        final DoubleLocaleConverter c = DoubleLocaleConverter.builder().get();
-        assertEquals(Double.valueOf(42.0), c.convert(Double.class, Integer.valueOf(42), null));
-        assertEquals(Double.valueOf(3.14f), c.convert(Double.class, Float.valueOf(3.14f), null));
-        assertEquals(Double.valueOf(100L), c.convert(Double.class, Long.valueOf(100L), null));
-    }
-
-    /**
      * Test Converter() constructor Uses the default locale, no default value
      */
     @Test
@@ -202,5 +191,16 @@ class DoubleLocaleConverterTest extends AbstractLocaleConverterTest<Double> {
         convertValueWithPattern(converter, "(C)", localizedDecimalValue, defaultDecimalPattern, expectedValue);
         convertInvalid(converter, "(C)", defaultValue);
         convertNull(converter, "(C)", defaultValue);
+    }
+
+    /**
+     * Passing a non-Double Number directly (e.g. Integer) must return a Double, not throw ClassCastException.
+     */
+    @Test
+    void testConvertFromNonDoubleNumber() {
+        final DoubleLocaleConverter c = DoubleLocaleConverter.builder().get();
+        assertEquals(Double.valueOf(42.0), c.convert(Double.class, Integer.valueOf(42), null));
+        assertEquals(Double.valueOf(3.14f), c.convert(Double.class, Float.valueOf(3.14f), null));
+        assertEquals(Double.valueOf(100L), c.convert(Double.class, Long.valueOf(100L), null));
     }
 }
