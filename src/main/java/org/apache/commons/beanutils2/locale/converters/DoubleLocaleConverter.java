@@ -71,9 +71,9 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter<Double> {
     @Override
     protected Double parse(final Object value, final String pattern) throws ParseException {
         final Number result = super.parse(value, pattern);
-        if (result instanceof Long) {
-            return Double.valueOf(result.doubleValue());
+        if (result == null || result instanceof Double) {
+            return (Double) result;
         }
-        return (Double) result;
+        return Double.valueOf(result.doubleValue());
     }
 }

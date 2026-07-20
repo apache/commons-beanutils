@@ -17,6 +17,8 @@
 
 package org.apache.commons.beanutils2.converters;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.apache.commons.beanutils2.locale.converters.DoubleLocaleConverter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,6 +37,17 @@ class DoubleLocaleConverterTest extends AbstractLocaleConverterTest<Double> {
         super.setUp();
         defaultValue = Double.valueOf("9.99");
         expectedValue = Double.valueOf(expectedDecimalValue);
+    }
+
+    /**
+     * Passing a non-Double Number directly (e.g. Integer) must return a Double, not throw ClassCastException.
+     */
+    @Test
+    void testConvertFromNonDoubleNumber() {
+        final DoubleLocaleConverter c = DoubleLocaleConverter.builder().get();
+        assertEquals(Double.valueOf(42.0), c.convert(Double.class, Integer.valueOf(42), null));
+        assertEquals(Double.valueOf(3.14f), c.convert(Double.class, Float.valueOf(3.14f), null));
+        assertEquals(Double.valueOf(100L), c.convert(Double.class, Long.valueOf(100L), null));
     }
 
     /**
