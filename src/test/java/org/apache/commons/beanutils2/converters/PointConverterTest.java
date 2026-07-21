@@ -20,9 +20,11 @@
 package org.apache.commons.beanutils2.converters;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.awt.Point;
 
+import org.apache.commons.beanutils2.ConversionException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -52,5 +54,11 @@ class PointConverterTest {
         final Point expected = new Point(100, 200);
         final Point actual = converter.convert(Point.class, "(100, 200)");
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void testTrailingSeparatorRejected() {
+        assertThrows(ConversionException.class, () -> converter.convert(Point.class, "(100,200,)"));
+        assertThrows(ConversionException.class, () -> converter.convert(Point.class, "(100,200,,)"));
     }
 }
