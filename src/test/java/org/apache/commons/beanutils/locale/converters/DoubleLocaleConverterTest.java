@@ -50,6 +50,19 @@ public class DoubleLocaleConverterTest extends BaseLocaleConverterTest {
     }
 
     /**
+     * Passing a non-Double Number directly (e.g. Integer) must return a Double, not fail the conversion.
+     */
+    public void testConvertFromNonDoubleNumber() {
+
+        converter = new DoubleLocaleConverter();
+
+        assertEquals(Double.valueOf(42.0), converter.convert(Double.class, Integer.valueOf(42), null));
+        assertEquals(Double.valueOf(3.14f), converter.convert(Double.class, Float.valueOf(3.14f), null));
+        assertEquals(Double.valueOf(100L), converter.convert(Double.class, Long.valueOf(100L), null));
+
+    }
+
+    /**
      * Test Converter() constructor
      *
      * Uses the default locale, no default value
