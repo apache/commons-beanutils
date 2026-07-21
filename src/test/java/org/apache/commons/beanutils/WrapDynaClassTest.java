@@ -20,6 +20,7 @@ package org.apache.commons.beanutils;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
+import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.IdentityHashMap;
 import java.util.Set;
@@ -56,6 +57,10 @@ class WrapDynaClassTest {
      * The cache key is one bean class, so {@code createDynaClass} must hand back a single instance no matter how many threads race to populate the
      * per-classloader cache. With a plain {@code WeakHashMap} and an unsynchronized get/create/put sequence, concurrent callers could build and return
      * distinct instances for one key; this drives that race and fails if more than one instance escapes.
+     * <p>
+     * The cache holds its keys weakly and nothing else references them, so a GC that runs while a round is in flight may evict the freshly cached entry
+     * and a late thread then builds a second instance without any race. Each round therefore only asserts when a GC canary shows no collection happened
+     * during the round; rounds invalidated by a GC are skipped.
      */
     @Test
     void testConcurrentCreateDynaClassReturnsSameInstance() throws Exception {
@@ -65,6 +70,8 @@ class WrapDynaClassTest {
         try {
             for (int r = 0; r < rounds; r++) {
                 WrapDynaClass.clear();
+                // Cleared only if a GC ran after this point, which is the only way a cache entry can disappear mid-round.
+                final WeakReference<Object> gcCanary = new WeakReference<>(new Object());
                 final CyclicBarrier barrier = new CyclicBarrier(threads);
                 final Set<WrapDynaClass> results = Collections.newSetFromMap(new IdentityHashMap<>());
                 final Future<?>[] futures = new Future<?>[threads];
@@ -81,6 +88,9 @@ class WrapDynaClassTest {
                 for (final Future<?> f : futures) {
                     f.get();
                 }
+                if (results.size() > 1 && gcCanary.get() == null) {
+                    continue;
+                }
                 assertEquals(1, results.size(), "createDynaClass returned more than one instance for one key");
             }
         } finally {
@@ -90,13 +100,21 @@ class WrapDynaClassTest {
     }
 
     /**
-     * The single-threaded cache contract: repeated calls for one bean class return the same instance until the cache is cleared.
+     * The single-threaded cache contract: repeated calls for one bean class return the same instance until the cache is cleared. A GC between the two
+     * calls may legitimately evict the weakly held cache entry, so such attempts are retried.
      */
     @Test
     void testCreateDynaClassIsCached() {
         WrapDynaClass.clear();
-        final WrapDynaClass first = WrapDynaClass.createDynaClass(ConcurrentBean.class);
-        assertSame(first, WrapDynaClass.createDynaClass(ConcurrentBean.class));
+        WeakReference<Object> gcCanary;
+        WrapDynaClass first;
+        WrapDynaClass second;
+        do {
+            gcCanary = new WeakReference<>(new Object());
+            first = WrapDynaClass.createDynaClass(ConcurrentBean.class);
+            second = WrapDynaClass.createDynaClass(ConcurrentBean.class);
+        } while (first != second && gcCanary.get() == null);
+        assertSame(first, second);
         WrapDynaClass.clear();
     }
 }
