@@ -43,7 +43,7 @@
       <action dev="ggregory" type="fix" due-to="Naveed Khan, Gary Gregory">Fix failed conversion in DoubleLocaleConverter when input is non-Double Number (1.X) (#424).</action>
       <!-- ADD -->
       <!-- UPDATE -->
-      <action dev="ggregory" type="update" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 84 to 102.</action>
+      <action dev="ggregory" type="update" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 84 to 103.</action>
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump commons-logging:commons-logging from 1.3.5 to 1.4.0.</action>
       <!-- REMOVE -->
       <action dev="ggregory" type="remove" due-to="Gary Gregory">Remove pre-Java 1.4 code that will never run since we are on Java 8 or greater.</action>
