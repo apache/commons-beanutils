@@ -72,7 +72,7 @@ public class PointConverter extends AbstractConverter<Point> {
             }
 
             final String coordinates = stringValue.substring(1, lastCharIndex);
-            final String[] xy = POINT_SPLIT.split(coordinates);
+            final String[] xy = POINT_SPLIT.split(coordinates, -1);
 
             if (xy.length != 2) {
                 throw new IllegalArgumentException("Point must have an x coordinate, and y coordinate only, expecting the following format: (40, 200)");
