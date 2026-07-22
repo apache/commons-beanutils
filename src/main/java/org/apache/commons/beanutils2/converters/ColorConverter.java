@@ -161,8 +161,7 @@ public class ColorConverter extends AbstractConverter<Color> {
      * @throws NumberFormatException If the hexadecimal input contains non parsable characters.
      */
     private Color parseHexadecimalColor(final String value) {
-        Objects.requireNonNull(value);
-
+        Objects.requireNonNull(value, "value");
         switch (value.length()) {
         case 4:
             return new Color(Integer.parseInt(value.substring(1, 2), 16) * 17, Integer.parseInt(value.substring(2, 3), 16) * 17,
@@ -198,22 +197,17 @@ public class ColorConverter extends AbstractConverter<Color> {
      * @throws IllegalArgumentException If the input can't be matches by the {@link #JAVA_COLOR_PATTERN} or a {@link Color} component specified is over 255.
      */
     private Color parseToStringColor(final String value) {
-        Objects.requireNonNull(value);
-
+        Objects.requireNonNull(value, "value");
         final Matcher matcher = JAVA_COLOR_PATTERN.matcher(value);
-
         if (!matcher.matches()) {
             throw new IllegalArgumentException("Invalid Color String provided. Could not parse.");
         }
-
         final int red = Integer.parseInt(matcher.group(1));
         final int green = Integer.parseInt(matcher.group(2));
         final int blue = Integer.parseInt(matcher.group(3));
-
         if (red > 255 || green > 255 || blue > 255) {
             throw new IllegalArgumentException("Color component integers must be between 0 and 255.");
         }
-
         return new Color(red, green, blue);
     }
 }
