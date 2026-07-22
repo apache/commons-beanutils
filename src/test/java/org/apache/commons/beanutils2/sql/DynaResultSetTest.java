@@ -25,6 +25,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Iterator;
 
 import org.apache.commons.beanutils2.DynaBean;
@@ -94,6 +96,26 @@ class DynaResultSetTest {
     @Test
     void testGetName() {
         assertEquals("org.apache.commons.beanutils2.sql.ResultSetDynaClass", dynaClass.getName(), "DynaClass name");
+    }
+
+    /**
+     * With the default {@code lowerCase} option the property name differs from the real column name, and the read path resolves it through
+     * {@code getColumnName}. Verify that {@code set} resolves it the same way, so the update targets the real column name and not the lower-cased property
+     * name.
+     */
+    @Test
+    void testSetUsesColumnName() throws Exception {
+        final String[] updatedColumn = new String[1];
+        final ResultSet resultSet = TestResultSet.createProxy(new TestResultSet() {
+            @Override
+            public void updateObject(final String columnName, final Object value) throws SQLException {
+                updatedColumn[0] = columnName;
+            }
+        });
+        final ResultSetDynaClass rsdc = new ResultSetDynaClass(resultSet);
+        final DynaBean row = rsdc.iterator().next();
+        row.set("stringproperty", "new value");
+        assertEquals("stringProperty", updatedColumn[0], "update targets the real column name");
     }
 
     @Test
