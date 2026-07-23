@@ -39,9 +39,9 @@ class ArrayConverterTest {
     /**
      * Check that two arrays are the same.
      *
-     * @param msg      Test prefix msg
-     * @param expected Expected Array value
-     * @param result   Result array value
+     * @param msg      Test prefix msg.
+     * @param expected Expected Array value.
+     * @param result   Result array value.
      */
     private void checkArray(final String msg, final Object expected, final Object result) {
         assertNotNull(expected, msg + " Expected Null");
@@ -58,20 +58,20 @@ class ArrayConverterTest {
         }
     }
 
-    /** Sets Up */
+    /** Sets Up. */
     @BeforeEach
     public void setUp() throws Exception {
         // empty
     }
 
-    /** Tear Down */
+    /** Tear Down. */
     @AfterEach
     public void tearDown() throws Exception {
         // empty
     }
 
     /**
-     * Test Converting using the IntegerConverter as the component Converter
+     * Test Converting using the IntegerConverter as the component Converter.
      */
     @Test
     void testComponentIntegerConverter() {
@@ -143,7 +143,7 @@ class ArrayConverterTest {
     }
 
     /**
-     * Test Empty String
+     * Test Empty String.
      */
     @Test
     void testEmptyString() {
@@ -154,7 +154,7 @@ class ArrayConverterTest {
     }
 
     /**
-     * Test Errors creating the converter
+     * Test Errors creating the converter.
      */
     @Test
     void testErrors() {
@@ -164,7 +164,7 @@ class ArrayConverterTest {
     }
 
     /**
-     * Test Converting using the IntegerConverter as the component Converter
+     * Test Converting using the IntegerConverter as the component Converter.
      */
     @Test
     void testInvalidWithDefault() {
@@ -177,7 +177,7 @@ class ArrayConverterTest {
     }
 
     /**
-     * Test Converting a String[] to integer array (with leading/trailing whitespace)
+     * Test Converting a String[] to integer array (with leading/trailing whitespace).
      */
     @Test
     void testStringArrayToNumber() {
@@ -208,7 +208,7 @@ class ArrayConverterTest {
     }
 
     /**
-     * Test the Matrix!!!! (parses a String into a 2 dimensional integer array or matrix)
+     * Test the Matrix (parses a String into a 2 dimensional integer array or matrix).
      */
     @Test
     void testTheMatrix() {
@@ -249,7 +249,7 @@ class ArrayConverterTest {
     }
 
     /**
-     * Test for BEANUTILS-302 - throwing a NPE when underscore used
+     * Test for BEANUTILS-302 throwing a NPE when underscore used.
      */
     @Test
     void testUnderscore_BEANUTILS_302() {
