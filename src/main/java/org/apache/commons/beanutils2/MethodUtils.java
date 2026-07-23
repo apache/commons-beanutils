@@ -172,7 +172,7 @@ public final class MethodUtils {
      * @deprecated Use {@link org.apache.commons.lang3.reflect.MethodUtils#getAccessibleMethod(Class, Method)}.
      */
     @Deprecated
-    public static Method getAccessibleMethod(Class<?> clazz, Method method) {
+    public static Method getAccessibleMethod(final Class<?> clazz, final Method method) {
         return org.apache.commons.lang3.reflect.MethodUtils.getAccessibleMethod(clazz, method);
     }
 
