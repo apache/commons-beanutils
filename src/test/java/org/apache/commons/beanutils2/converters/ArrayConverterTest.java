@@ -249,6 +249,23 @@ class ArrayConverterTest {
     }
 
     /**
+     * A forward slash is not an allowed character, so it must split like any other separator (see {@link #testUnderscore_BEANUTILS_302()}) instead of commenting
+     * out the rest of the input and dropping the remaining elements.
+     */
+    @Test
+    void testForwardSlashSeparator() {
+        final String value = "first/value,second/value";
+        final ArrayConverter<String[]> converter = new ArrayConverter(String[].class, new StringConverter());
+        final String[] result = converter.convert(String[].class, value);
+        assertNotNull(result, "result.null");
+        assertEquals(4, result.length, "result.length");
+        assertEquals("first", result[0], "result[0]");
+        assertEquals("value", result[1], "result[1]");
+        assertEquals("second", result[2], "result[2]");
+        assertEquals("value", result[3], "result[3]");
+    }
+
+    /**
      * Test for BEANUTILS-302 - throwing a NPE when underscore used
      */
     @Test
