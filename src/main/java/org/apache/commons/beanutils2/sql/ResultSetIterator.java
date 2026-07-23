@@ -249,7 +249,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
             throw new IllegalArgumentException(name);
         }
         try {
-            dynaClass.getResultSet().updateObject(name, value);
+            dynaClass.getResultSet().updateObject(dynaClass.getColumnName(name), value);
         } catch (final SQLException e) {
             throw new IllegalArgumentException("set(" + name + "): SQLException: " + e);
         }
