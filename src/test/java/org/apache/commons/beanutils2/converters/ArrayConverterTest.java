@@ -255,7 +255,7 @@ class ArrayConverterTest {
     @Test
     void testForwardSlashSeparator() {
         final String value = "first/value,second/value";
-        final ArrayConverter<String[]> converter = new ArrayConverter(String[].class, new StringConverter());
+        final ArrayConverter<String[]> converter = new ArrayConverter<>(String[].class, new StringConverter());
         final String[] result = converter.convert(String[].class, value);
         assertNotNull(result, "result.null");
         assertEquals(4, result.length, "result.length");
