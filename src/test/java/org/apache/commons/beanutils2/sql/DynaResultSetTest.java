@@ -28,6 +28,7 @@ import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Iterator;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.commons.beanutils2.DynaBean;
 import org.apache.commons.beanutils2.DynaProperty;
@@ -105,17 +106,17 @@ class DynaResultSetTest {
      */
     @Test
     void testSetUsesColumnName() throws Exception {
-        final String[] updatedColumn = new String[1];
+        final AtomicReference<String> updatedColumn = new AtomicReference<>();
         final ResultSet resultSet = TestResultSet.createProxy(new TestResultSet() {
             @Override
             public void updateObject(final String columnName, final Object value) throws SQLException {
-                updatedColumn[0] = columnName;
+                updatedColumn.set(columnName);
             }
         });
         final ResultSetDynaClass rsdc = new ResultSetDynaClass(resultSet);
         final DynaBean row = rsdc.iterator().next();
         row.set("stringproperty", "new value");
-        assertEquals("stringProperty", updatedColumn[0], "update targets the real column name");
+        assertEquals("stringProperty", updatedColumn.get(), "update targets the real column name");
     }
 
     @Test
