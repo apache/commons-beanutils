@@ -99,26 +99,6 @@ class DynaResultSetTest {
         assertEquals("org.apache.commons.beanutils2.sql.ResultSetDynaClass", dynaClass.getName(), "DynaClass name");
     }
 
-    /**
-     * With the default {@code lowerCase} option the property name differs from the real column name, and the read path resolves it through
-     * {@code getColumnName}. Verify that {@code set} resolves it the same way, so the update targets the real column name and not the lower-cased property
-     * name.
-     */
-    @Test
-    void testSetUsesColumnName() throws Exception {
-        final AtomicReference<String> updatedColumn = new AtomicReference<>();
-        final ResultSet resultSet = TestResultSet.createProxy(new TestResultSet() {
-            @Override
-            public void updateObject(final String columnName, final Object value) throws SQLException {
-                updatedColumn.set(columnName);
-            }
-        });
-        final ResultSetDynaClass rsdc = new ResultSetDynaClass(resultSet);
-        final DynaBean row = rsdc.iterator().next();
-        row.set("stringproperty", "new value");
-        assertEquals("stringProperty", updatedColumn.get(), "update targets the real column name");
-    }
-
     @Test
     void testIteratorCount() {
 
@@ -209,6 +189,26 @@ class DynaResultSetTest {
     @Test
     void testNewInstance() {
         assertThrows(UnsupportedOperationException.class, () -> dynaClass.newInstance());
+    }
+
+    /**
+     * With the default {@code lowerCase} option the property name differs from the real column name, and the read path resolves it through
+     * {@code getColumnName}. Verify that {@code set} resolves it the same way, so the update targets the real column name and not the lower-cased property
+     * name.
+     */
+    @Test
+    void testSetUsesColumnName() throws Exception {
+        final AtomicReference<String> updatedColumn = new AtomicReference<>();
+        final ResultSet resultSet = TestResultSet.createProxy(new TestResultSet() {
+            @Override
+            public void updateObject(final String columnName, final Object value) throws SQLException {
+                updatedColumn.set(columnName);
+            }
+        });
+        final ResultSetDynaClass rsdc = new ResultSetDynaClass(resultSet);
+        final DynaBean row = rsdc.iterator().next();
+        row.set("stringproperty", "new value");
+        assertEquals("stringProperty", updatedColumn.get(), "update targets the real column name");
     }
 
 }
