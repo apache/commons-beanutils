@@ -27,9 +27,7 @@ import junit.framework.TestCase;
 
 /**
  * Test accessing ResultSets via DynaBeans.
- *
  */
-
 public class DynaResultSetTest extends TestCase {
 
     /**
@@ -38,17 +36,10 @@ public class DynaResultSetTest extends TestCase {
     protected ResultSetDynaClass dynaClass;
 
     /**
-     * Names of the columns for this test.  Must match the order they are
-     * defined in {@link TestResultSetMetaData}, and must be all lower case.
+     * Names of the columns for this test. Must match the order they are defined in {@link TestResultSetMetaData}, and must be all lower case.
      */
-    protected String columns[] =
-    { "bigdecimalproperty", "booleanproperty",
-      "byteproperty", "dateproperty",
-      "doubleproperty", "floatproperty",
-      "intproperty", "longproperty",
-      "nullproperty", "shortproperty",
-      "stringproperty", "timeproperty",
-      "timestampproperty" };
+    protected String columns[] = { "bigdecimalproperty", "booleanproperty", "byteproperty", "dateproperty", "doubleproperty", "floatproperty", "intproperty",
+            "longproperty", "nullproperty", "shortproperty", "stringproperty", "timeproperty", "timestampproperty" };
 
     /**
      * Construct a new instance of this test case.
@@ -56,9 +47,7 @@ public class DynaResultSetTest extends TestCase {
      * @param name Name of the test case
      */
     public DynaResultSetTest(final String name) {
-
         super(name);
-
     }
 
     /**
@@ -66,9 +55,7 @@ public class DynaResultSetTest extends TestCase {
      */
     @Override
     public void setUp() throws Exception {
-
         dynaClass = new ResultSetDynaClass(TestResultSet.createProxy());
-
     }
 
     /**
@@ -76,25 +63,19 @@ public class DynaResultSetTest extends TestCase {
      */
     @Override
     public void tearDown() {
-
         dynaClass = null;
-
     }
 
     public void testGetDynaProperties() {
-
         final DynaProperty dynaProps[] = dynaClass.getDynaProperties();
         assertNotNull("dynaProps exists", dynaProps);
         assertEquals("dynaProps length", columns.length, dynaProps.length);
         for (int i = 0; i < columns.length; i++) {
-            assertEquals("Property " + columns[i],
-                         columns[i], dynaProps[i].getName());
+            assertEquals("Property " + columns[i], columns[i], dynaProps[i].getName());
         }
-
     }
 
     public void testGetDynaProperty() {
-
         // Invalid argument test
         try {
             dynaClass.getDynaProperty(null);
@@ -102,54 +83,21 @@ public class DynaResultSetTest extends TestCase {
         } catch (final IllegalArgumentException e) {
             // Expected result
         }
-
         // Negative test
         DynaProperty dynaProp = dynaClass.getDynaProperty("unknownProperty");
-        assertTrue("unknown property returns null",
-                   dynaProp == null);
-
+        assertTrue("unknown property returns null", dynaProp == null);
         // Positive test
         dynaProp = dynaClass.getDynaProperty("stringproperty");
         assertNotNull("string property exists", dynaProp);
-        assertEquals("string property name", "stringproperty",
-                     dynaProp.getName());
-        assertEquals("string property class", String.class,
-                     dynaProp.getType());
-
+        assertEquals("string property name", "stringproperty", dynaProp.getName());
+        assertEquals("string property class", String.class, dynaProp.getType());
     }
 
     public void testGetName() {
-
-        assertEquals("DynaClass name",
-                     "org.apache.commons.beanutils.ResultSetDynaClass",
-                     dynaClass.getName());
-
-    }
-
-    /**
-     * With the default {@code lowerCase} option the property name differs from the real column name, and the read path resolves it through
-     * {@code getColumnName}. Verify that {@code set} resolves it the same way, so the update targets the real column name and not the lower-cased property
-     * name.
-     */
-    public void testSetUsesColumnName() throws Exception {
-
-        final AtomicReference<String> updatedColumn = new AtomicReference<String>();
-        final ResultSet resultSet = TestResultSet.createProxy(new TestResultSet() {
-            @Override
-            public void updateObject(final String columnName, final Object value) throws SQLException {
-                updatedColumn.set(columnName);
-            }
-        });
-        final ResultSetDynaClass rsdc = new ResultSetDynaClass(resultSet);
-        final DynaBean row = rsdc.iterator().next();
-        row.set("stringproperty", "new value");
-        assertEquals("update targets the real column name",
-                     "stringProperty", updatedColumn.get());
-
+        assertEquals("DynaClass name", "org.apache.commons.beanutils.ResultSetDynaClass", dynaClass.getName());
     }
 
     public void testIteratorCount() {
-
         final Iterator<?> rows = dynaClass.iterator();
         assertNotNull("iterator exists", rows);
         int n = 0;
@@ -161,17 +109,14 @@ public class DynaResultSetTest extends TestCase {
             }
         }
         assertEquals("iterator rows", 5, n);
-
     }
 
     public void testIteratorResults() {
-
         // Grab the third row
         final Iterator<DynaBean> rows = dynaClass.iterator();
         rows.next();
         rows.next();
         final DynaBean row = rows.next();
-
         // Invalid argument test
         try {
             row.get("unknownProperty");
@@ -179,37 +124,21 @@ public class DynaResultSetTest extends TestCase {
         } catch (final IllegalArgumentException e) {
             // Expected result
         }
-
         // Verify property values
-
         final Object bigDecimalProperty = row.get("bigdecimalproperty");
         assertNotNull("bigDecimalProperty exists", bigDecimalProperty);
-        assertTrue("bigDecimalProperty type",
-                   bigDecimalProperty instanceof BigDecimal);
-        assertEquals("bigDecimalProperty value",
-                     123.45,
-                     ((BigDecimal) bigDecimalProperty).doubleValue(),
-                     0.005);
-
+        assertTrue("bigDecimalProperty type", bigDecimalProperty instanceof BigDecimal);
+        assertEquals("bigDecimalProperty value", 123.45, ((BigDecimal) bigDecimalProperty).doubleValue(), 0.005);
         final Object intProperty = row.get("intproperty");
         assertNotNull("intProperty exists", intProperty);
-        assertTrue("intProperty type",
-                   intProperty instanceof Integer);
-        assertEquals("intProperty value",
-                     103,
-                     ((Integer) intProperty).intValue());
-
+        assertTrue("intProperty type", intProperty instanceof Integer);
+        assertEquals("intProperty value", 103, ((Integer) intProperty).intValue());
         final Object nullProperty = row.get("nullproperty");
         assertNull("nullProperty null", nullProperty);
-
         final Object stringProperty = row.get("stringproperty");
         assertNotNull("stringProperty exists", stringProperty);
-        assertTrue("stringProperty type",
-                   stringProperty instanceof String);
-        assertEquals("stringProperty value",
-                     "This is a string",
-                     (String) stringProperty);
-
+        assertTrue("stringProperty type", stringProperty instanceof String);
+        assertEquals("stringProperty value", "This is a string", (String) stringProperty);
     }
 
     /**
@@ -222,13 +151,11 @@ public class DynaResultSetTest extends TestCase {
         } catch (final Exception e) {
             fail("Error creating ResultSetDynaClass: " + e);
         }
-
         // Grab the third row
         final Iterator<DynaBean> rows = dynaClass.iterator();
         rows.next();
         rows.next();
         final DynaBean row = rows.next();
-
         // Invalid argument test
         try {
             row.get("unknownProperty");
@@ -236,41 +163,24 @@ public class DynaResultSetTest extends TestCase {
         } catch (final IllegalArgumentException e) {
             // Expected result
         }
-
         // Verify property values
-
         final Object bigDecimalProperty = row.get("bigDecimalProperty");
         assertNotNull("bigDecimalProperty exists", bigDecimalProperty);
-        assertTrue("bigDecimalProperty type",
-                   bigDecimalProperty instanceof BigDecimal);
-        assertEquals("bigDecimalProperty value",
-                     123.45,
-                     ((BigDecimal) bigDecimalProperty).doubleValue(),
-                     0.005);
-
+        assertTrue("bigDecimalProperty type", bigDecimalProperty instanceof BigDecimal);
+        assertEquals("bigDecimalProperty value", 123.45, ((BigDecimal) bigDecimalProperty).doubleValue(), 0.005);
         final Object intProperty = row.get("intProperty");
         assertNotNull("intProperty exists", intProperty);
-        assertTrue("intProperty type",
-                   intProperty instanceof Integer);
-        assertEquals("intProperty value",
-                     103,
-                     ((Integer) intProperty).intValue());
-
+        assertTrue("intProperty type", intProperty instanceof Integer);
+        assertEquals("intProperty value", 103, ((Integer) intProperty).intValue());
         final Object nullProperty = row.get("nullProperty");
         assertNull("nullProperty null", nullProperty);
-
         final Object stringProperty = row.get("stringProperty");
         assertNotNull("stringProperty exists", stringProperty);
-        assertTrue("stringProperty type",
-                   stringProperty instanceof String);
-        assertEquals("stringProperty value",
-                     "This is a string",
-                     (String) stringProperty);
-
+        assertTrue("stringProperty type", stringProperty instanceof String);
+        assertEquals("stringProperty value", "This is a string", (String) stringProperty);
     }
 
     public void testNewInstance() {
-
         try {
             dynaClass.newInstance();
             fail("Did not throw UnsupportedOperationException()");
@@ -279,7 +189,25 @@ public class DynaResultSetTest extends TestCase {
         } catch (final Exception e) {
             fail("Threw exception " + e);
         }
-
     }
 
+    /**
+     * With the default {@code lowerCase} option the property name differs from the real column name, and the read path resolves it through
+     * {@code getColumnName}. Verify that {@code set} resolves it the same way, so the update targets the real column name and not the lower-cased property
+     * name.
+     */
+    public void testSetUsesColumnName() throws Exception {
+        final AtomicReference<String> updatedColumn = new AtomicReference<>();
+        final ResultSet resultSet = TestResultSet.createProxy(new TestResultSet() {
+
+            @Override
+            public void updateObject(final String columnName, final Object value) throws SQLException {
+                updatedColumn.set(columnName);
+            }
+        });
+        final ResultSetDynaClass rsdc = new ResultSetDynaClass(resultSet);
+        final DynaBean row = rsdc.iterator().next();
+        row.set("stringproperty", "new value");
+        assertEquals("update targets the real column name", "stringProperty", updatedColumn.get());
+    }
 }
