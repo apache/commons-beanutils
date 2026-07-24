@@ -18,7 +18,10 @@
 package org.apache.commons.beanutils;
 
 import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Iterator;
+import java.util.concurrent.atomic.AtomicReference;
 
 import junit.framework.TestCase;
 
@@ -120,6 +123,28 @@ public class DynaResultSetTest extends TestCase {
         assertEquals("DynaClass name",
                      "org.apache.commons.beanutils.ResultSetDynaClass",
                      dynaClass.getName());
+
+    }
+
+    /**
+     * With the default {@code lowerCase} option the property name differs from the real column name, and the read path resolves it through
+     * {@code getColumnName}. Verify that {@code set} resolves it the same way, so the update targets the real column name and not the lower-cased property
+     * name.
+     */
+    public void testSetUsesColumnName() throws Exception {
+
+        final AtomicReference<String> updatedColumn = new AtomicReference<String>();
+        final ResultSet resultSet = TestResultSet.createProxy(new TestResultSet() {
+            @Override
+            public void updateObject(final String columnName, final Object value) throws SQLException {
+                updatedColumn.set(columnName);
+            }
+        });
+        final ResultSetDynaClass rsdc = new ResultSetDynaClass(resultSet);
+        final DynaBean row = rsdc.iterator().next();
+        row.set("stringproperty", "new value");
+        assertEquals("update targets the real column name",
+                     "stringProperty", updatedColumn.get());
 
     }
 
