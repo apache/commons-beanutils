@@ -443,7 +443,7 @@ public class PropertyUtilsBean {
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
         }
-        if (name == null || name.length() == 0) {
+        if (name == null || name.isEmpty()) {
             if (bean.getClass().isArray()) {
                 return Array.get(bean, index);
             }
@@ -1027,7 +1027,7 @@ public class PropertyUtilsBean {
 
         if (resolver.isMapped(propertyName)) {
             final String name = resolver.getProperty(propertyName);
-            if (name == null || name.length() == 0) {
+            if (name == null || name.isEmpty()) {
                 propertyName = resolver.getKey(propertyName);
             }
         }
@@ -1503,7 +1503,7 @@ public class PropertyUtilsBean {
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
         }
-        if (name == null || name.length() == 0) {
+        if (name == null || name.isEmpty()) {
             if (bean.getClass().isArray()) {
                 Array.set(bean, index, value);
                 return;
@@ -1856,7 +1856,7 @@ public class PropertyUtilsBean {
 
         if (resolver.isMapped(propertyName)) {
             final String name = resolver.getProperty(propertyName);
-            if (name == null || name.length() == 0) {
+            if (name == null || name.isEmpty()) {
                 propertyName = resolver.getKey(propertyName);
             }
         }
