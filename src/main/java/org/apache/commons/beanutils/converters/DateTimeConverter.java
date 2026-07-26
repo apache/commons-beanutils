@@ -222,7 +222,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
 
         // Convert all other types to String & handle
         final String stringValue = value.toString().trim();
-        if (stringValue.length() == 0) {
+        if (stringValue.isEmpty()) {
             return handleMissing(targetType);
         }
 
