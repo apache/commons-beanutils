@@ -4,6 +4,7 @@
 .settings/
 /site-content/
 /.idea/
+*.iml
 
 # NetBeans files
 nb-configuration.xml
