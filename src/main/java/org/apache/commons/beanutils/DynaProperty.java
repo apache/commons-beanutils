@@ -247,8 +247,7 @@ public class DynaProperty implements Serializable {
             default:
                 // something's gone wrong
                 throw new StreamCorruptedException(
-                    "Invalid primitive type. "
-                    + "Check version of beanutils used to serialize is compatible.");
+                    "Invalid primitive type. Check version of beanutils used to serialize is compatible.");
 
         }
     }
@@ -262,8 +261,10 @@ public class DynaProperty implements Serializable {
      * @throws ClassNotFoundException Class of a serialized object cannot be found.
      */
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
+        // read default values
         in.defaultReadObject();
 
+        // read custom values
         this.type = readAnyClass(in);
         if (isMapped() || isIndexed()) {
             this.contentType = readAnyClass(in);
@@ -333,11 +334,13 @@ public class DynaProperty implements Serializable {
      * @throws IOException if I/O errors occur while writing to the underlying stream.
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {
+        // write out default
         out.defaultWriteObject();
 
-        writeAnyClass(this.type,out);
+        // write custom values
+        writeAnyClass(this.type, out);
         if (isMapped() || isIndexed()) {
-            writeAnyClass(this.contentType,out);
+            writeAnyClass(this.contentType, out);
         }
     }
 }

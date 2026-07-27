@@ -104,6 +104,12 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>org.wildfly</groupId>
+      <artifactId>wildfly-ejb3</artifactId>
+      <version>9.0.2.Final</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>org.junit.vintage</groupId>
       <artifactId>junit-vintage-engine</artifactId>
       <scope>test</scope>
