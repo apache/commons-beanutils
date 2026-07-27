@@ -17,7 +17,7 @@
 
 package org.apache.commons.beanutils;
 
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -68,7 +68,6 @@ public class DynaPropertyTest extends TestCase {
         testProperty1Duplicate = new DynaProperty("test1");
         testPropertyWithNameAndType = new DynaProperty("test2", Integer.class);
         testProperty2Duplicate = new DynaProperty("test2", Integer.class);
-
         testPropertyWithNameAndTypeAndContentType = new DynaProperty("test3", List.class, Short.class);
         testProperty3Duplicate = new DynaProperty("test3", List.class, Short.class);
     }
