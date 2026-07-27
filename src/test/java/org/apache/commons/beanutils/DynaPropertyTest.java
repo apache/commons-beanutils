@@ -16,7 +16,18 @@
  */
 package org.apache.commons.beanutils;
 
-import java.util.Collection;
+import static org.junit.Assert.assertNotEquals;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.List;
+
+import org.jboss.marshalling.cloner.ClassLoaderClassCloner;
+import org.jboss.marshalling.cloner.ClonerConfiguration;
+import org.jboss.marshalling.cloner.ObjectCloner;
+import org.jboss.marshalling.cloner.ObjectCloners;
 
 import junit.framework.TestCase;
 
@@ -56,8 +67,8 @@ public class DynaPropertyTest extends TestCase {
         testPropertyWithNameAndType = new DynaProperty("test2", Integer.class);
         testProperty2Duplicate = new DynaProperty("test2", Integer.class);
 
-        testPropertyWithNameAndTypeAndContentType = new DynaProperty("test3", Collection.class, Short.class);
-        testProperty3Duplicate = new DynaProperty("test3", Collection.class, Short.class);
+        testPropertyWithNameAndTypeAndContentType = new DynaProperty("test3", List.class, Short.class);
+        testProperty3Duplicate = new DynaProperty("test3", List.class, Short.class);
     }
 
     /**
@@ -80,9 +91,9 @@ public class DynaPropertyTest extends TestCase {
         assertEquals(testPropertyWithName, testProperty1Duplicate);
         assertEquals(testPropertyWithNameAndType, testProperty2Duplicate);
         assertEquals(testPropertyWithNameAndTypeAndContentType, testProperty3Duplicate);
-        assertFalse(testPropertyWithName.equals(testPropertyWithNameAndType));
-        assertFalse(testPropertyWithNameAndType.equals(testPropertyWithNameAndTypeAndContentType));
-        assertFalse(testPropertyWithName.equals(null));
+        assertNotEquals(testPropertyWithName, testPropertyWithNameAndType);
+        assertNotEquals(testPropertyWithNameAndType, testPropertyWithNameAndTypeAndContentType);
+        assertNotEquals(null, testPropertyWithName);
     }
 
     /**
@@ -97,4 +108,32 @@ public class DynaPropertyTest extends TestCase {
         assertEquals(initialHashCode, testPropertyWithNameAndTypeAndContentType.hashCode());
     }
 
+    /**
+     * Tests basic serialization and deserialization mechanism.
+     */
+    public void testSerialization() throws Exception {
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(buffer);
+        oos.writeObject(testPropertyWithNameAndTypeAndContentType);
+        oos.flush();
+        oos.close();
+
+        ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(buffer.toByteArray()));
+        Object obj = ois.readObject();
+
+        assertEquals(testPropertyWithNameAndTypeAndContentType, obj);
+    }
+
+    /**
+     * Tests cloning mechanism via Wildfly Object Cloner.
+     */
+    public void testCloneViaWildflyObjectCloner() throws Exception {
+        final ClonerConfiguration paramConfig = new ClonerConfiguration();
+        paramConfig.setClassCloner(new ClassLoaderClassCloner(DynaPropertyTest.class.getClassLoader()));
+        final ObjectCloner objectCloner = ObjectCloners.getSerializingObjectClonerFactory().createCloner(paramConfig);
+
+        final Object cloned = objectCloner.clone(testPropertyWithNameAndTypeAndContentType);
+
+        assertEquals(testPropertyWithNameAndTypeAndContentType, cloned);
+    }
 }
