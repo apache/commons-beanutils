@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils;
 
 import static org.junit.Assert.assertNotEquals;
@@ -33,13 +34,17 @@ import junit.framework.TestCase;
 
 /**
  * Test case for {@link DynaProperty}.
- *
  */
 public class DynaPropertyTest extends TestCase {
+
     private DynaProperty testPropertyWithName;
+
     private DynaProperty testProperty1Duplicate;
+
     private DynaProperty testPropertyWithNameAndType;
+
     private DynaProperty testProperty2Duplicate;
+
     private DynaProperty testPropertyWithNameAndTypeAndContentType;
 
     private DynaProperty testProperty3Duplicate;
@@ -58,12 +63,9 @@ public class DynaPropertyTest extends TestCase {
      */
     @Override
     protected void setUp() throws Exception {
-
         super.setUp();
-
         testPropertyWithName = new DynaProperty("test1");
         testProperty1Duplicate = new DynaProperty("test1");
-
         testPropertyWithNameAndType = new DynaProperty("test2", Integer.class);
         testProperty2Duplicate = new DynaProperty("test2", Integer.class);
 
@@ -76,7 +78,6 @@ public class DynaPropertyTest extends TestCase {
      */
     @Override
     protected void tearDown() throws Exception {
-
         testPropertyWithName = testProperty1Duplicate = null;
         testPropertyWithNameAndType = testProperty2Duplicate = null;
         testPropertyWithNameAndTypeAndContentType = testProperty3Duplicate = null;
@@ -87,20 +88,18 @@ public class DynaPropertyTest extends TestCase {
      * Class under test for boolean equals(Object)
      */
     public void testEqualsObject() {
-
         assertEquals(testPropertyWithName, testProperty1Duplicate);
         assertEquals(testPropertyWithNameAndType, testProperty2Duplicate);
         assertEquals(testPropertyWithNameAndTypeAndContentType, testProperty3Duplicate);
         assertNotEquals(testPropertyWithName, testPropertyWithNameAndType);
         assertNotEquals(testPropertyWithNameAndType, testPropertyWithNameAndTypeAndContentType);
-        assertNotEquals(null, testPropertyWithName);
+        assertNotNull(testPropertyWithName);
     }
 
     /**
      * Class under test for int hashCode(Object)
      */
     public void testHashCode() {
-
         final int initialHashCode = testPropertyWithNameAndTypeAndContentType.hashCode();
         assertEquals(testPropertyWithName.hashCode(), testProperty1Duplicate.hashCode());
         assertEquals(testPropertyWithNameAndType.hashCode(), testProperty2Duplicate.hashCode());
