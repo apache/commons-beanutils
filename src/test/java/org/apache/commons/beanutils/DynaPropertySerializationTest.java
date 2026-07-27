@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -30,6 +31,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -339,5 +341,144 @@ class DynaPropertySerializationTest {
         final IOException thrown = assertThrows(IOException.class, () -> deserialize(corrupted),
                 "Expected StreamCorruptedException for unrecognised primitive contentType constant");
         assertInstanceOf(StreamCorruptedException.class, thrown, "Root cause must be StreamCorruptedException");
+    }
+
+    /**
+     * Returns the byte-offset of the first occurrence of {@code needle} inside {@code haystack}, or {@code -1} if not found.
+     */
+    private static int findSequence(final byte[] haystack, final byte[] needle) {
+        outer: for (int i = 0; i <= haystack.length - needle.length; i++) {
+            for (int j = 0; j < needle.length; j++) {
+                if (haystack[i + j] != needle[j]) {
+                    continue outer;
+                }
+            }
+            return i;
+        }
+        return -1;
+    }
+
+    /**
+     * Proves that {@link DynaProperty#writeObject(ObjectOutputStream)} calls {@code writeAnyClass} (which encodes the {@code type} field) <em>before</em>
+     * {@code defaultWriteObject} (which encodes the {@code name} field) for <strong>primitive types</strong>.
+     * <p>
+     * Strategy: serialise two {@link DynaProperty} instances that have an identical {@code name} but different primitive types. Because the name is identical,
+     * both byte streams are the same from the class-descriptor through to the end of the default-field data. The streams diverge only at the
+     * {@code writeAnyClass} output (the primitive-type integer constant). If that divergence point is located <em>before</em> the name bytes in the stream, it
+     * proves that {@code writeAnyClass} is called first.
+     * </p>
+     */
+    @Test
+    void testWireFormatPrimitiveTypeDataPrecedesNameField() throws Exception {
+        final String sharedName = "sharedPrimitiveName";
+        // Boolean.TYPE encodes as writeBoolean(true) + writeInt(BOOLEAN_TYPE=1).
+        // Byte.TYPE encodes as writeBoolean(true) + writeInt(BYTE_TYPE=2).
+        // The two streams are byte-for-byte identical except at the primitive-type int.
+        final byte[] boolBytes = serialize(new DynaProperty(sharedName, Boolean.TYPE));
+        final byte[] byteBytes = serialize(new DynaProperty(sharedName, Byte.TYPE));
+        // Locate the shared name in the boolean-type stream.
+        final byte[] nameBytes = sharedName.getBytes(StandardCharsets.UTF_8);
+        final int namePosition = findSequence(boolBytes, nameBytes);
+        assertTrue(namePosition > 0, "Property name must be present in the serialized stream");
+        // The name must occupy the same position in both streams (identical name, identical class).
+        assertEquals(namePosition, findSequence(byteBytes, nameBytes), "Name must be at the same byte position in both streams");
+        // Find the first byte where the two streams diverge: this is inside the
+        // writeAnyClass output (the primitive-type integer constant differs: 1 vs 2).
+        int firstDiff = -1;
+        for (int i = 0; i < boolBytes.length; i++) {
+            if (boolBytes[i] != byteBytes[i]) {
+                firstDiff = i;
+                break;
+            }
+        }
+        assertTrue(firstDiff >= 0, "Streams must diverge at the primitive-type constant");
+        // CRITICAL assertion: the divergence point (type data from writeAnyClass) must
+        // come BEFORE the name field (from defaultWriteObject).
+        assertTrue(firstDiff < namePosition, "writeAnyClass must be invoked before defaultWriteObject: " + "type-data divergence at byte " + firstDiff
+                + " must precede name field at byte " + namePosition);
+        // Sanity-check: both properties still round-trip correctly.
+        assertRoundTrip(new DynaProperty(sharedName, Boolean.TYPE));
+        assertRoundTrip(new DynaProperty(sharedName, Byte.TYPE));
+    }
+
+    /**
+     * Same proof as {@link #testWireFormatPrimitiveTypeDataPrecedesNameField()} but for <strong>object (non-primitive) types</strong>.
+     * <p>
+     * For object types {@code writeAnyClass} emits {@code writeBoolean(false)} followed by {@code writeObject(clazz)}. Two properties with the same name but
+     * different object types ({@code String.class} vs {@code Integer.class}) differ in the class object written by {@code writeAnyClass}; the shared name is
+     * written later by {@code defaultWriteObject}.
+     * </p>
+     */
+    @Test
+    void testWireFormatObjectTypeDataPrecedesNameField() throws Exception {
+        final String sharedName = "sharedObjectName";
+        // writeAnyClass for object type: writeBoolean(false) + writeObject(clazz).
+        // String.class and Integer.class are serialised differently, so streams diverge
+        // at the class-object position (inside writeAnyClass output).
+        final byte[] stringTypeBytes = serialize(new DynaProperty(sharedName, String.class));
+        final byte[] integerTypeBytes = serialize(new DynaProperty(sharedName, Integer.class));
+        // Find the shared name in both streams.
+        final byte[] nameBytes = sharedName.getBytes(StandardCharsets.UTF_8);
+        final int namePositionInString = findSequence(stringTypeBytes, nameBytes);
+        final int namePositionInInteger = findSequence(integerTypeBytes, nameBytes);
+        assertTrue(namePositionInString > 0, "Name must be present in the String-type stream");
+        assertTrue(namePositionInInteger > 0, "Name must be present in the Integer-type stream");
+        // Find the first byte where the streams diverge (inside writeAnyClass output,
+        // where the serialised form of String.class differs from Integer.class).
+        int firstDiff = -1;
+        for (int i = 0; i < stringTypeBytes.length; i++) {
+            if (stringTypeBytes[i] != integerTypeBytes[i]) {
+                firstDiff = i;
+                break;
+            }
+        }
+        assertTrue(firstDiff >= 0, "Streams must diverge where the class objects differ");
+        // The divergence (type class data from writeAnyClass) must precede the name
+        // (from defaultWriteObject) in BOTH streams.
+        assertTrue(firstDiff < namePositionInString, "writeAnyClass must be invoked before defaultWriteObject (String-type stream): "
+                + "type divergence at byte " + firstDiff + " must precede name at byte " + namePositionInString);
+        assertTrue(firstDiff < namePositionInInteger, "writeAnyClass must be invoked before defaultWriteObject (Integer-type stream): "
+                + "type divergence at byte " + firstDiff + " must precede name at byte " + namePositionInInteger);
+        assertRoundTrip(new DynaProperty(sharedName, String.class));
+        assertRoundTrip(new DynaProperty(sharedName, Integer.class));
+    }
+
+    /**
+     * Proves that for <strong>indexed and mapped properties</strong> the second {@code writeAnyClass} call (for {@code contentType}) also appears in the byte
+     * stream <em>before</em> the {@code name} field written by {@code defaultWriteObject}.
+     * <p>
+     * Two mapped properties share the same name and the same {@code Map.class} type but differ in their {@code contentType} ({@code Boolean.TYPE} vs
+     * {@code Byte.TYPE}). Because the type ({@code Map.class}) is identical, the streams are the same through the first {@code writeAnyClass} call. They
+     * diverge at the second {@code writeAnyClass} call (contentType constant), which must still precede the name.
+     * </p>
+     */
+    @Test
+    void testWireFormatContentTypeDataPrecedesNameFieldForMappedProperty() throws Exception {
+        final String sharedName = "sharedMappedName";
+        // Both use Map.class as the type (identical first writeAnyClass output).
+        // They differ only in contentType: Boolean.TYPE (constant 1) vs Byte.TYPE (constant 2).
+        final byte[] boolContentBytes = serialize(new DynaProperty(sharedName, Map.class, Boolean.TYPE));
+        final byte[] byteContentBytes = serialize(new DynaProperty(sharedName, Map.class, Byte.TYPE));
+        final byte[] nameBytes = sharedName.getBytes(StandardCharsets.UTF_8);
+        final int namePosition = findSequence(boolContentBytes, nameBytes);
+        assertTrue(namePosition > 0, "Name must be present in the serialized stream");
+        assertEquals(namePosition, findSequence(byteContentBytes, nameBytes), "Name must be at the same byte position in both streams");
+        // The streams are identical up to (and including) the type encoding of Map.class.
+        // They diverge at the contentType constant written by the second writeAnyClass call.
+        int firstDiff = -1;
+        for (int i = 0; i < boolContentBytes.length; i++) {
+            if (boolContentBytes[i] != byteContentBytes[i]) {
+                firstDiff = i;
+                break;
+            }
+        }
+        assertTrue(firstDiff >= 0, "Streams must diverge at the contentType primitive-type constant");
+        // The second writeAnyClass output (contentType) must still precede the name
+        // (defaultWriteObject), confirming that both writeAnyClass calls happen before
+        // defaultWriteObject is invoked.
+        assertTrue(firstDiff < namePosition, "The second writeAnyClass call (contentType) must precede defaultWriteObject: "
+                + "content-type divergence at byte " + firstDiff + " must precede name at byte " + namePosition);
+        assertRoundTrip(new DynaProperty(sharedName, Map.class, Boolean.TYPE));
+        assertRoundTrip(new DynaProperty(sharedName, Map.class, Byte.TYPE));
     }
 }
