@@ -14,10 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Collection;
 
@@ -31,9 +34,13 @@ import org.junit.jupiter.api.Test;
 class DynaPropertyTest {
 
     private DynaProperty testPropertyWithName;
+
     private DynaProperty testProperty1Duplicate;
+
     private DynaProperty testPropertyWithNameAndType;
+
     private DynaProperty testProperty2Duplicate;
+
     private DynaProperty testPropertyWithNameAndTypeAndContentType;
 
     private DynaProperty testProperty3Duplicate;
@@ -43,13 +50,10 @@ class DynaPropertyTest {
      */
     @BeforeEach
     protected void setUp() throws Exception {
-
         testPropertyWithName = new DynaProperty("test1");
         testProperty1Duplicate = new DynaProperty("test1");
-
         testPropertyWithNameAndType = new DynaProperty("test2", Integer.class);
         testProperty2Duplicate = new DynaProperty("test2", Integer.class);
-
         testPropertyWithNameAndTypeAndContentType = new DynaProperty("test3", Collection.class, Short.class);
         testProperty3Duplicate = new DynaProperty("test3", Collection.class, Short.class);
     }
@@ -59,7 +63,6 @@ class DynaPropertyTest {
      */
     @AfterEach
     protected void tearDown() throws Exception {
-
         testPropertyWithName = testProperty1Duplicate = null;
         testPropertyWithNameAndType = testProperty2Duplicate = null;
         testPropertyWithNameAndTypeAndContentType = testProperty3Duplicate = null;
@@ -70,12 +73,12 @@ class DynaPropertyTest {
      */
     @Test
     void testEqualsObject() {
-
         assertEquals(testPropertyWithName, testProperty1Duplicate);
         assertEquals(testPropertyWithNameAndType, testProperty2Duplicate);
         assertEquals(testPropertyWithNameAndTypeAndContentType, testProperty3Duplicate);
-        assertFalse(testPropertyWithName.equals(testPropertyWithNameAndType));
-        assertFalse(testPropertyWithNameAndType.equals(testPropertyWithNameAndTypeAndContentType));
+        assertNotEquals(testPropertyWithName, testPropertyWithNameAndType);
+        assertNotEquals(testPropertyWithNameAndType, testPropertyWithNameAndTypeAndContentType);
+        assertNotNull(testPropertyWithName);
         assertFalse(testPropertyWithName.equals(null));
     }
 
@@ -84,12 +87,10 @@ class DynaPropertyTest {
      */
     @Test
     void testHashCode() {
-
         final int initialHashCode = testPropertyWithNameAndTypeAndContentType.hashCode();
         assertEquals(testPropertyWithName.hashCode(), testProperty1Duplicate.hashCode());
         assertEquals(testPropertyWithNameAndType.hashCode(), testProperty2Duplicate.hashCode());
         assertEquals(testPropertyWithNameAndTypeAndContentType.hashCode(), testProperty3Duplicate.hashCode());
         assertEquals(initialHashCode, testPropertyWithNameAndTypeAndContentType.hashCode());
     }
-
 }

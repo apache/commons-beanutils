@@ -32,16 +32,16 @@ jobs:
     strategy:
       max-parallel: 20
       matrix:
-        java: [ 8, 11, 17, 21 ]
+        java: [ 8, 11, 17, 21, 25, 26 ]
         experimental: [false]
         include:
-            - java: 25
+            - java: 27-ea
               experimental: true
-            - java: 26-ea
+            - java: 28-ea
               experimental: true
         
     steps:
-    - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
         persist-credentials: false
     - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 #v6.1.0

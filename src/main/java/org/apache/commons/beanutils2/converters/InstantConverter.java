@@ -33,7 +33,6 @@ public final class InstantConverter extends DateTimeConverter<Instant> {
      * Constructs a {@link Instant} <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
      */
     public InstantConverter() {
-        super();
     }
 
     /**

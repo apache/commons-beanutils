@@ -163,6 +163,27 @@ class ArrayConverterTest {
         assertThrows(NullPointerException.class, () -> new ArrayConverter(int[].class, null));
     }
 
+    void testForwardSlashSeparator() {
+        final String value = "first/value,second/value";
+        final ArrayConverter<String[]> converter = new ArrayConverter<>(String[].class, new StringConverter());
+        // test forward slash not allowed (the default)
+        String[] result = converter.convert(String[].class, value);
+        assertNotNull(result, "result.null");
+        assertEquals(4, result.length, "result.length");
+        assertEquals("first", result[0], "result[0]");
+        assertEquals("value", result[1], "result[1]");
+        assertEquals("second", result[2], "result[2]");
+        assertEquals("value", result[3], "result[3]");
+        // configure the converter to allow forward slash
+        converter.setAllowedChars(new char[] { '.', '-', '/' });
+        // test forward slash allowed
+        result = converter.convert(String[].class, value);
+        assertNotNull(result, "result.null");
+        assertEquals(2, result.length, "result.length");
+        assertEquals("first/value", result[0], "result[0]");
+        assertEquals("second/value", result[1], "result[1]");
+    }
+
     /**
      * Test Converting using the IntegerConverter as the component Converter.
      */
