@@ -163,6 +163,7 @@ class ArrayConverterTest {
         assertThrows(NullPointerException.class, () -> new ArrayConverter(int[].class, null));
     }
 
+    @Test
     void testForwardSlashSeparator() {
         final String value = "first/value,second/value";
         final ArrayConverter<String[]> converter = new ArrayConverter<>(String[].class, new StringConverter());
