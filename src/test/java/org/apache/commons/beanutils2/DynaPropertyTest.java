@@ -19,6 +19,7 @@ package org.apache.commons.beanutils2;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Collection;
 
@@ -76,6 +77,7 @@ class DynaPropertyTest {
         assertEquals(testPropertyWithNameAndTypeAndContentType, testProperty3Duplicate);
         assertFalse(testPropertyWithName.equals(testPropertyWithNameAndType));
         assertFalse(testPropertyWithNameAndType.equals(testPropertyWithNameAndTypeAndContentType));
+        assertNotNull(testPropertyWithName);
         assertFalse(testPropertyWithName.equals(null));
     }
 
