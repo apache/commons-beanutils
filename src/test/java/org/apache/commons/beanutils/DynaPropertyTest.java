@@ -17,16 +17,20 @@
 
 package org.apache.commons.beanutils;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.util.Collection;
+import java.util.List;
 
-import junit.framework.TestCase;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link DynaProperty}.
  */
-public class DynaPropertyTest extends TestCase {
+public class DynaPropertyTest {
 
     private DynaProperty testPropertyWithName;
 
@@ -41,42 +45,32 @@ public class DynaPropertyTest extends TestCase {
     private DynaProperty testProperty3Duplicate;
 
     /**
-     * Construct a new instance of this test case.
-     *
-     * @param name Name of the test case
-     */
-    public DynaPropertyTest(final String name) {
-        super(name);
-    }
-
-    /**
      * Set up instance variables required by this test case.
      */
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @BeforeEach
+    public void setUp() {
         testPropertyWithName = new DynaProperty("test1");
         testProperty1Duplicate = new DynaProperty("test1");
         testPropertyWithNameAndType = new DynaProperty("test2", Integer.class);
         testProperty2Duplicate = new DynaProperty("test2", Integer.class);
-        testPropertyWithNameAndTypeAndContentType = new DynaProperty("test3", Collection.class, Short.class);
-        testProperty3Duplicate = new DynaProperty("test3", Collection.class, Short.class);
+        testPropertyWithNameAndTypeAndContentType = new DynaProperty("test3", List.class, Short.class);
+        testProperty3Duplicate = new DynaProperty("test3", List.class, Short.class);
     }
 
     /**
      * Tear down instance variables required by this test case.
      */
-    @Override
-    protected void tearDown() throws Exception {
+    @AfterEach
+    public void tearDown() {
         testPropertyWithName = testProperty1Duplicate = null;
         testPropertyWithNameAndType = testProperty2Duplicate = null;
         testPropertyWithNameAndTypeAndContentType = testProperty3Duplicate = null;
-        super.tearDown();
     }
 
     /**
      * Class under test for boolean equals(Object)
      */
+    @Test
     public void testEqualsObject() {
         assertEquals(testPropertyWithName, testProperty1Duplicate);
         assertEquals(testPropertyWithNameAndType, testProperty2Duplicate);
@@ -89,6 +83,7 @@ public class DynaPropertyTest extends TestCase {
     /**
      * Class under test for int hashCode(Object)
      */
+    @Test
     public void testHashCode() {
         final int initialHashCode = testPropertyWithNameAndTypeAndContentType.hashCode();
         assertEquals(testPropertyWithName.hashCode(), testProperty1Duplicate.hashCode());

@@ -32,14 +32,14 @@ import java.util.Map;
  * for use by mapped and iterated properties.
  * A mapped or iterated property may choose to indicate the type it expects.
  * The DynaBean implementation may choose to enforce this type on its entries.
- * Alternatively, an implementatin may choose to ignore this property.
- * All keys for maps must be of type String so no meta data is needed for map keys.</p>
+ * Alternatively, an implementation may choose to ignore this property.
+ * All keys for maps must be of type String so no metadata is needed for map keys.</p>
  *
  */
 
 public class DynaProperty implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
     /*
      * There are issues with serializing primitive class types on certain JVM versions
      * (including java 1.3).
@@ -111,7 +111,7 @@ public class DynaProperty implements Serializable {
 
     /**
      * Checks this instance against the specified Object for equality. Overrides the
-     * default refererence test for equality provided by {@link Object#equals(Object)}
+     * default reference test for equality provided by {@link Object#equals(Object)}
      *
      * @param obj The object to compare to
      * @return {@code true} if object is a dyna property with the same name
@@ -121,9 +121,7 @@ public class DynaProperty implements Serializable {
     @Override
     public boolean equals(final Object obj) {
 
-        boolean result = false;
-
-        result = obj == this;
+        boolean result = obj == this;
 
         if (!result && obj instanceof DynaProperty) {
             final DynaProperty that = (DynaProperty) obj;
@@ -145,7 +143,7 @@ public class DynaProperty implements Serializable {
      * Therefore, this field <strong>must not be serialized using the standard methods</strong>.</p>
      *
      * @return The Class for the content type if this is an indexed {@code DynaProperty}
-     * and this feature is supported. Otherwise null.
+     * and this feature is supported. Otherwise, null.
      */
     public Class<?> getContentType() {
         return contentType;
@@ -247,8 +245,7 @@ public class DynaProperty implements Serializable {
             default:
                 // something's gone wrong
                 throw new StreamCorruptedException(
-                    "Invalid primitive type. "
-                    + "Check version of beanutils used to serialize is compatible.");
+                    "Invalid primitive type. Check version of beanutils used to serialize is compatible.");
 
         }
     }
@@ -262,12 +259,14 @@ public class DynaProperty implements Serializable {
      * @throws ClassNotFoundException Class of a serialized object cannot be found.
      */
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
+        // read default first (as defined by the Java Object Serialization Specification)
+        in.defaultReadObject();
+
+        // read custom values
         this.type = readAnyClass(in);
         if (isMapped() || isIndexed()) {
             this.contentType = readAnyClass(in);
         }
-        // read other values
-        in.defaultReadObject();
     }
 
     /**
@@ -333,11 +332,13 @@ public class DynaProperty implements Serializable {
      * @throws IOException if I/O errors occur while writing to the underlying stream.
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {
-        writeAnyClass(this.type,out);
-        if (isMapped() || isIndexed()) {
-            writeAnyClass(this.contentType,out);
-        }
-        // write out other values
+        // write out default first (as defined by the Java Object Serialization Specification)
         out.defaultWriteObject();
+
+        // write custom values
+        writeAnyClass(this.type, out);
+        if (isMapped() || isIndexed()) {
+            writeAnyClass(this.contentType, out);
+        }
     }
 }
