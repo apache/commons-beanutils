@@ -17,25 +17,20 @@
 
 package org.apache.commons.beanutils;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.List;
 
-import org.jboss.marshalling.cloner.ClassLoaderClassCloner;
-import org.jboss.marshalling.cloner.ClonerConfiguration;
-import org.jboss.marshalling.cloner.ObjectCloner;
-import org.jboss.marshalling.cloner.ObjectCloners;
-
-import junit.framework.TestCase;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link DynaProperty}.
  */
-public class DynaPropertyTest extends TestCase {
+public class DynaPropertyTest {
 
     private DynaProperty testPropertyWithName;
 
@@ -50,20 +45,10 @@ public class DynaPropertyTest extends TestCase {
     private DynaProperty testProperty3Duplicate;
 
     /**
-     * Construct a new instance of this test case.
-     *
-     * @param name Name of the test case
-     */
-    public DynaPropertyTest(final String name) {
-        super(name);
-    }
-
-    /**
      * Set up instance variables required by this test case.
      */
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @BeforeEach
+    public void setUp() {
         testPropertyWithName = new DynaProperty("test1");
         testProperty1Duplicate = new DynaProperty("test1");
         testPropertyWithNameAndType = new DynaProperty("test2", Integer.class);
@@ -75,17 +60,17 @@ public class DynaPropertyTest extends TestCase {
     /**
      * Tear down instance variables required by this test case.
      */
-    @Override
-    protected void tearDown() throws Exception {
+    @AfterEach
+    public void tearDown() {
         testPropertyWithName = testProperty1Duplicate = null;
         testPropertyWithNameAndType = testProperty2Duplicate = null;
         testPropertyWithNameAndTypeAndContentType = testProperty3Duplicate = null;
-        super.tearDown();
     }
 
     /**
      * Class under test for boolean equals(Object)
      */
+    @Test
     public void testEqualsObject() {
         assertEquals(testPropertyWithName, testProperty1Duplicate);
         assertEquals(testPropertyWithNameAndType, testProperty2Duplicate);
@@ -98,40 +83,12 @@ public class DynaPropertyTest extends TestCase {
     /**
      * Class under test for int hashCode(Object)
      */
+    @Test
     public void testHashCode() {
         final int initialHashCode = testPropertyWithNameAndTypeAndContentType.hashCode();
         assertEquals(testPropertyWithName.hashCode(), testProperty1Duplicate.hashCode());
         assertEquals(testPropertyWithNameAndType.hashCode(), testProperty2Duplicate.hashCode());
         assertEquals(testPropertyWithNameAndTypeAndContentType.hashCode(), testProperty3Duplicate.hashCode());
         assertEquals(initialHashCode, testPropertyWithNameAndTypeAndContentType.hashCode());
-    }
-
-    /**
-     * Tests basic serialization and deserialization mechanism.
-     */
-    public void testSerialization() throws Exception {
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        ObjectOutputStream oos = new ObjectOutputStream(buffer);
-        oos.writeObject(testPropertyWithNameAndTypeAndContentType);
-        oos.flush();
-        oos.close();
-
-        ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(buffer.toByteArray()));
-        Object obj = ois.readObject();
-
-        assertEquals(testPropertyWithNameAndTypeAndContentType, obj);
-    }
-
-    /**
-     * Tests cloning mechanism via Wildfly Object Cloner.
-     */
-    public void testCloneViaWildflyObjectCloner() throws Exception {
-        final ClonerConfiguration paramConfig = new ClonerConfiguration();
-        paramConfig.setClassCloner(new ClassLoaderClassCloner(DynaPropertyTest.class.getClassLoader()));
-        final ObjectCloner objectCloner = ObjectCloners.getSerializingObjectClonerFactory().createCloner(paramConfig);
-
-        final Object cloned = objectCloner.clone(testPropertyWithNameAndTypeAndContentType);
-
-        assertEquals(testPropertyWithNameAndTypeAndContentType, cloned);
     }
 }
