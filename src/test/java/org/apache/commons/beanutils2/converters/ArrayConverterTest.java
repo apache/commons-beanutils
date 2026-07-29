@@ -163,22 +163,14 @@ class ArrayConverterTest {
         assertThrows(NullPointerException.class, () -> new ArrayConverter(int[].class, null));
     }
 
+    /**
+     * A forward slash must be kept as part of an element instead of starting a comment and dropping the rest of the input.
+     */
     @Test
     void testForwardSlashSeparator() {
         final String value = "first/value,second/value";
         final ArrayConverter<String[]> converter = new ArrayConverter<>(String[].class, new StringConverter());
-        // test forward slash not allowed (the default)
-        String[] result = converter.convert(String[].class, value);
-        assertNotNull(result, "result.null");
-        assertEquals(4, result.length, "result.length");
-        assertEquals("first", result[0], "result[0]");
-        assertEquals("value", result[1], "result[1]");
-        assertEquals("second", result[2], "result[2]");
-        assertEquals("value", result[3], "result[3]");
-        // configure the converter to allow forward slash
-        converter.setAllowedChars(new char[] { '.', '-', '/' });
-        // test forward slash allowed
-        result = converter.convert(String[].class, value);
+        final String[] result = converter.convert(String[].class, value);
         assertNotNull(result, "result.null");
         assertEquals(2, result.length, "result.length");
         assertEquals("first/value", result[0], "result[0]");
@@ -249,11 +241,8 @@ class ArrayConverterTest {
         // Construct a "Matrix" Converter which converts arrays of integer arrays using
         // the first (int[]) Converter as the element Converter.
         // Uses a semicolon (i.e. ";") as the delimiter to separate the different sets of numbers.
-        // Also the delimiter for the above array Converter needs to be added to this
-        // array Converter's "allowed characters"
         final ArrayConverter matrixConverter = new ArrayConverter(int[][].class, arrayConverter);
         matrixConverter.setDelimiter(';');
-        matrixConverter.setAllowedChars(new char[] { ',' });
         // Do the Conversion
         final Object result = matrixConverter.convert(int[][].class, matrixString);
         // Check it actually worked OK
@@ -271,24 +260,13 @@ class ArrayConverterTest {
     }
 
     /**
-     * Test for BEANUTILS-302 throwing a NPE when underscore used.
+     * Test for BEANUTILS-302 throwing a NPE when underscore used. The underscore is kept as part of the element.
      */
     @Test
     void testUnderscore_BEANUTILS_302() {
         final String value = "first_value,second_value";
-        final ArrayConverter<String[]> converter = new ArrayConverter(String[].class, new StringConverter());
-        // test underscore not allowed (the default)
-        String[] result = converter.convert(String[].class, value);
-        assertNotNull(result, "result.null");
-        assertEquals(4, result.length, "result.length");
-        assertEquals("first", result[0], "result[0]");
-        assertEquals("value", result[1], "result[1]");
-        assertEquals("second", result[2], "result[2]");
-        assertEquals("value", result[3], "result[3]");
-        // configure the converter to allow underscore
-        converter.setAllowedChars(new char[] { '.', '-', '_' });
-        // test underscore allowed
-        result = converter.convert(String[].class, value);
+        final ArrayConverter<String[]> converter = new ArrayConverter<>(String[].class, new StringConverter());
+        final String[] result = converter.convert(String[].class, value);
         assertNotNull(result, "result.null");
         assertEquals(2, result.length, "result.length");
         assertEquals("first_value", result[0], "result[0]");
