@@ -316,6 +316,23 @@ class PropertyUtilsTest {
     }
 
     /**
+     * {@link MappedPropertyDescriptor} capitalizes the first character of the property name to build the accessor names, so {@code MappedProperty(key)}
+     * resolves the same {@code getMappedProperty}/{@code setMappedProperty} pair as {@code mappedProperty(key)} and must be suppressed with it.
+     */
+    @Test
+    void testCustomIntrospectionSuppressedMappedPropertyCaseVariant() throws Exception {
+        final PropertyUtilsBean pub = new PropertyUtilsBean();
+        pub.addBeanIntrospector(new SuppressPropertiesBeanIntrospector(Arrays.asList("mappedProperty")));
+
+        assertNull(pub.getPropertyDescriptor(bean, "MappedProperty"), "Case variant of a suppressed mapped property should have no descriptor");
+        assertThrows(NoSuchMethodException.class, () -> pub.getProperty(bean, "MappedProperty(First Key)"),
+                "Case variant of a suppressed mapped property must not be readable");
+        assertThrows(NoSuchMethodException.class, () -> pub.setProperty(bean, "MappedProperty(First Key)", "changed"),
+                "Case variant of a suppressed mapped property must not be writable");
+        assertEquals("First Value", bean.getMappedProperty("First Key"), "Suppressed mapped property must be unchanged");
+    }
+
+    /**
      * Test the describe() method.
      */
     @Test
