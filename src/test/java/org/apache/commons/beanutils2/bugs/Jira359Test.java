@@ -105,11 +105,9 @@ class Jira359Test {
         final SimplePojoData simplePojo = new SimplePojoData();
         BeanUtils.setProperty(simplePojo, "jcrMixinTypes", "mix:rereferencible,mix:simple");
         showArray("Default WithColonValue", simplePojo.getJcrMixinTypes());
-        assertEquals(4, simplePojo.getJcrMixinTypes().length, "array size");
-        assertEquals("mix", simplePojo.getJcrMixinTypes()[0]);
-        assertEquals("rereferencible", simplePojo.getJcrMixinTypes()[1]);
-        assertEquals("mix", simplePojo.getJcrMixinTypes()[2]);
-        assertEquals("simple", simplePojo.getJcrMixinTypes()[3]);
+        assertEquals(2, simplePojo.getJcrMixinTypes().length, "array size");
+        assertEquals("mix:rereferencible", simplePojo.getJcrMixinTypes()[0]);
+        assertEquals("mix:simple", simplePojo.getJcrMixinTypes()[1]);
     }
 
     /**

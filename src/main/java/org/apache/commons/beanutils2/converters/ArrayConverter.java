@@ -64,11 +64,12 @@ import org.apache.commons.beanutils2.Converter;
  * </li>
  * </ul>
  *
- * <h2>Parsing Delimited Lists</h2> This implementation can convert a delimited list in {@code String} format into an array of the appropriate type. By default,
- * it uses a comma as the delimiter but the following methods can be used to configure parsing:
+ * <h2>Parsing Delimited Lists</h2> This implementation can convert a delimited list in {@code String} format into an array of the appropriate type. The
+ * String is split on the delimiter and on whitespace; every other character is kept as part of an element, and elements may be quoted with single or double
+ * quotes to protect embedded whitespace or delimiters. By default, it uses a comma as the delimiter but the following method can be used to configure
+ * parsing:
  * <ul>
  * <li>{@code setDelimiter(char)} - allows the character used as the delimiter to be configured [default is a comma].</li>
- * <li>{@code setAllowedChars(char[])} - adds additional characters (to the default alphabetic/numeric) to those considered to be valid token characters.</li>
  * </ul>
  *
  * <h2>Multi Dimensional Arrays</h2> It is possible to convert a {@code String} to multi-dimensional arrays by using {@link ArrayConverter} as the element
@@ -89,11 +90,8 @@ import org.apache.commons.beanutils2.Converter;
  * // Construct a "Matrix" Converter which converts arrays of integer arrays using
  * // the preceding ArrayConverter as the element Converter.
  * // Uses a semicolon (i.e. ";") as the delimiter to separate the different sets of numbers.
- * // Also the delimiter used by the first ArrayConverter needs to be added to the
- * // "allowed characters" for this one.
  * ArrayConverter matrixConverter = new ArrayConverter(int[][].class, arrayConverter);
  * matrixConverter.setDelimiter(';');
- * matrixConverter.setAllowedChars(new char[] { ',' });
  *
  * // Do the Conversion
  * String matrixString = "11,12,13 ; 21,22,23 ; 31,32,33 ; 41,42,43";
@@ -310,10 +308,10 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
      * according to the following rules.
      * </p>
      * <ul>
-     * <li>The string is expected to be a comma-separated list of values.</li>
+     * <li>The string is split on the delimiter [default is a comma] and on whitespace; every other character is kept as part of an element.</li>
      * <li>The string may optionally have matching '{' and '}' delimiters around the list.</li>
-     * <li>Whitespace before and after each element is stripped.</li>
-     * <li>Elements in the list may be delimited by single or double quotes. Within a quoted elements, the normal Java escape sequences are valid.</li>
+     * <li>Elements in the list may be delimited by single or double quotes. A quoted element may contain whitespace and the delimiter, and within a quoted
+     * element the normal Java escape sequences are valid.</li>
      * </ul>
      *
      * @param value String value to be parsed
@@ -335,17 +333,18 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
         final String typeName = toString(String.class);
         try {
 
-            // Set up a StreamTokenizer on the characters in this String
+            // Set up a StreamTokenizer on the characters in this String. Every character is part of a token except whitespace, the quote characters and the
+            // delimiter, so elements are only split on those. The default syntax table would also split on any other non-alphanumeric character and treat
+            // '/' as a comment start, silently dropping the rest of the input.
             final StreamTokenizer st = new StreamTokenizer(new StringReader(value));
-            st.whitespaceChars(delimiter, delimiter); // Set the delimiters
-            st.ordinaryChars('0', '9'); // Needed to turn off numeric flag
-            st.wordChars('0', '9'); // Needed to make part of tokens
-            for (final char allowedChar : allowedChars) {
-                st.ordinaryChars(allowedChar, allowedChar);
-                st.wordChars(allowedChar, allowedChar);
-            }
+            st.resetSyntax();
+            st.wordChars(0, 255); // Everything is part of a token...
+            st.whitespaceChars(0, ' '); // ...except whitespace...
+            st.quoteChar('"'); // ...quoted elements, which may contain whitespace and the delimiter...
+            st.quoteChar('\'');
+            st.whitespaceChars(delimiter, delimiter); // ...and the delimiter, which separates elements.
 
-            // Split comma-delimited tokens into a List
+            // Split the tokens into a List
             List<String> list = null;
             while (true) {
                 final int ttype = st.nextToken();
@@ -382,7 +381,10 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
      * Sets the allowed characters to be used for parsing a delimited String.
      *
      * @param allowedChars Characters which are to be considered as part of the tokens when parsing a delimited String [default is '.' and '-']
+     * @deprecated Since 1.12.0: No longer has any effect: every character apart from whitespace, the delimiter and the quote characters is kept
+     * as part of an element.
      */
+    @Deprecated
     public void setAllowedChars(final char[] allowedChars) {
         this.allowedChars = Objects.requireNonNull(allowedChars, "allowedChars").clone();
     }
