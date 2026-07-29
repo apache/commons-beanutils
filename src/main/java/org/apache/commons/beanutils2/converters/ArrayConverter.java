@@ -382,6 +382,7 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
      *
      * @param allowedChars Characters which are to be considered as part of the tokens when parsing a delimited String [default is '.' and '-']
      * @deprecated No longer has any effect: every character apart from whitespace, the delimiter and the quote characters is kept as part of an element.
+     * Will be removed in version 2.0.0.
      */
     @Deprecated
     public void setAllowedChars(final char[] allowedChars) {
