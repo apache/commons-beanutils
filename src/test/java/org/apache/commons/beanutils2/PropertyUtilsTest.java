@@ -333,6 +333,20 @@ class PropertyUtilsTest {
     }
 
     /**
+     * {@link SuppressPropertiesBeanIntrospector} only rejects a null collection, so the set of suppressed names may hold null entries. Those must be skipped
+     * rather than capitalized when the mapped-descriptor fallback is checked.
+     */
+    @Test
+    void testCustomIntrospectionSuppressedMappedPropertyNullEntry() throws Exception {
+        final PropertyUtilsBean pub = new PropertyUtilsBean();
+        pub.addBeanIntrospector(new SuppressPropertiesBeanIntrospector(Arrays.asList(null, "mappedProperty")));
+
+        assertNull(pub.getPropertyDescriptor(bean, "MappedProperty"), "Case variant of a suppressed mapped property should have no descriptor");
+        assertNull(pub.getPropertyDescriptor(bean, "mappedProperty"), "Suppressed mapped property should have no descriptor");
+        assertNotNull(pub.getPropertyDescriptor(bean, "stringProperty"), "A null suppressed entry must not hide unrelated properties");
+    }
+
+    /**
      * Test the describe() method.
      */
     @Test

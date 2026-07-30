@@ -1079,7 +1079,7 @@ public class PropertyUtilsBean {
         for (final BeanIntrospector introspector : introspectors) {
             if (introspector instanceof SuppressPropertiesBeanIntrospector) {
                 for (final String suppressed : ((SuppressPropertiesBeanIntrospector) introspector).getSuppressedProperties()) {
-                    if (base.equals(MappedPropertyDescriptor.capitalizePropertyName(suppressed))) {
+                    if (suppressed != null && base.equals(MappedPropertyDescriptor.capitalizePropertyName(suppressed))) {
                         return true;
                     }
                 }
