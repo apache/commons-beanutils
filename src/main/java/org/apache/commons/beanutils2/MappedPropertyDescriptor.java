@@ -162,7 +162,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      *
      * @param s The property name
      */
-    private static String capitalizePropertyName(final String s) {
+    static String capitalizePropertyName(final String s) {
         if (s.isEmpty()) {
             return s;
         }

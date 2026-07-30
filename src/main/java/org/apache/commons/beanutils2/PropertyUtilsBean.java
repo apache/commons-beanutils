@@ -1068,15 +1068,21 @@ public class PropertyUtilsBean {
     /**
      * Tests whether a property name has been removed by a registered {@link SuppressPropertiesBeanIntrospector}. The mapped-descriptor fallback in
      * {@link #getPropertyDescriptor(Object, String)} bypasses the introspection pipeline, so suppressed mapped property names must be filtered explicitly.
+     * {@link MappedPropertyDescriptor} derives its accessor names from the capitalized property name, so names differing only in the case of their first
+     * character resolve the same accessors and are compared on that capitalized form here.
      *
      * @param name The property name to test.
      * @return {@code true} if the name is suppressed by an introspector.
      */
     private boolean isPropertySuppressed(final String name) {
+        final String base = MappedPropertyDescriptor.capitalizePropertyName(name);
         for (final BeanIntrospector introspector : introspectors) {
-            if (introspector instanceof SuppressPropertiesBeanIntrospector
-                    && ((SuppressPropertiesBeanIntrospector) introspector).getSuppressedProperties().contains(name)) {
-                return true;
+            if (introspector instanceof SuppressPropertiesBeanIntrospector) {
+                for (final String suppressed : ((SuppressPropertiesBeanIntrospector) introspector).getSuppressedProperties()) {
+                    if (suppressed != null && base.equals(MappedPropertyDescriptor.capitalizePropertyName(suppressed))) {
+                        return true;
+                    }
+                }
             }
         }
         return false;
