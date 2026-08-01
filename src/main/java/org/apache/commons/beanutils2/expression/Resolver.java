@@ -91,7 +91,7 @@ public interface Resolver {
      *
      * @param expression The property expression
      * @return The index value or -1 if the property is not indexed
-     * @throws IllegalArgumentException If the indexed property is illegally formed or has an invalid (non-numeric) value
+     * @throws IllegalArgumentException If the indexed property is illegally formed or has an invalid (non-numeric or negative) value
      */
     int getIndex(String expression);
 
