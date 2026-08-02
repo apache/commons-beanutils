@@ -292,7 +292,7 @@ public class DynaProperty implements Serializable {
     /**
      * Writes a class using safe encoding to workaround java 1.3 serialization bug.
      *
-     * @throws IOException if I/O errors occur while writing to the underlying stream.
+     * @throws IOException Thrown if I/O errors occur while writing to the underlying stream.
      */
     private void writeAnyClass(final Class<?> clazz, final ObjectOutputStream out) throws IOException {
         // safely write out any class
@@ -330,7 +330,7 @@ public class DynaProperty implements Serializable {
      * workaround.
      *
      * @param out Where to write.
-     * @throws IOException if I/O errors occur while writing to the underlying stream.
+     * @throws IOException Thrown if I/O errors occur while writing to the underlying stream.
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {
         writeAnyClass(this.type,out);

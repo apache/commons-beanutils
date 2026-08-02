@@ -163,7 +163,7 @@ class DynaPropertySerializationReadVersion1Test {
      * </p>
      *
      * @param args ignored.
-     * @throws IOException if any I/O error occurs.
+     * @throws IOException Thrown if any I/O error occurs.
      */
     public static void main(final String[] args) throws IOException {
         final File dir = checkDir(new File(TARGET_DIR));
