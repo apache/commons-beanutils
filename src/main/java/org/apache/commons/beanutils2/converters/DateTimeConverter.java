@@ -189,7 +189,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
      * @param targetType Data type to which this value should be converted.
      * @param value      The input value to be converted.
      * @return The converted value.
-     * @throws Exception if conversion cannot be performed successfully
+     * @throws Exception Thrown if conversion cannot be performed successfully
      */
     @Override
     protected <T> T convertToType(final Class<T> targetType, final Object value) throws Exception {
@@ -378,7 +378,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
      * @param targetType The type to convert the value to.
      * @param value      The String date value.
      * @return The converted Date object.
-     * @throws Exception if an error occurs parsing the date.
+     * @throws Exception Thrown if an error occurs parsing the date.
      */
     private Calendar parse(final Class<?> sourceType, final Class<?> targetType, final String value) throws Exception {
         Exception firstEx = null;

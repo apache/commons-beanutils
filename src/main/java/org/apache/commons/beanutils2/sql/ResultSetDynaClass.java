@@ -154,7 +154,7 @@ public class ResultSetDynaClass extends AbstractJdbcDynaClass {
      *
      * @param name The property name
      * @return The value
-     * @throws SQLException if an error occurs
+     * @throws SQLException Thrown if an error occurs
      * @since 1.8.0
      */
     @SuppressWarnings("resource") // getResultSet() does not allocate.
@@ -191,7 +191,7 @@ public class ResultSetDynaClass extends AbstractJdbcDynaClass {
      *
      * @param className The name of the class to load
      * @return The loaded class
-     * @throws SQLException if the class cannot be loaded
+     * @throws SQLException Thrown if the class cannot be loaded
      */
     @Override
     protected Class<?> loadClass(final String className) throws SQLException {

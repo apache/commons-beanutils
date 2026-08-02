@@ -210,7 +210,7 @@ public class RowSetDynaClass extends AbstractJdbcDynaClass {
      * </p>
      *
      * @param resultSet The {@code ResultSet} whose data is to be copied
-     * @throws SQLException if an error is encountered copying the data
+     * @throws SQLException Thrown if an error is encountered copying the data
      */
     protected void copy(final ResultSet resultSet) throws SQLException {
         int cnt = 0;
