@@ -43,7 +43,7 @@ public class Jira456Test extends TestCase {
      * property. This simulates that the write method reference is freed by the GC.
      *
      * @return The bean instance used for testing
-     * @throws Exception if an error occurs
+     * @throws Exception Thrown if an error occurs
      */
     private FluentIntrospectionTestBean clearWriteMethodRef() throws Exception {
         final FluentIntrospectionTestBean bean = new FluentIntrospectionTestBean();

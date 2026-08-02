@@ -94,7 +94,7 @@ public class ResultSetDynaClass extends JDBCDynaClass {
      * @param resultSet The result set to be wrapped
      * @throws NullPointerException if {@code resultSet}
      *  is {@code null}
-     * @throws SQLException if the metadata for this result set
+     * @throws SQLException Thrown if the metadata for this result set
      *  cannot be introspected
      */
     public ResultSetDynaClass(final ResultSet resultSet) throws SQLException {
@@ -120,7 +120,7 @@ public class ResultSetDynaClass extends JDBCDynaClass {
      * @param lowerCase Should property names be lower cased?
      * @throws NullPointerException if {@code resultSet}
      *  is {@code null}
-     * @throws SQLException if the metadata for this result set
+     * @throws SQLException Thrown if the metadata for this result set
      *  cannot be introspected
      */
     public ResultSetDynaClass(final ResultSet resultSet, final boolean lowerCase)
@@ -148,7 +148,7 @@ public class ResultSetDynaClass extends JDBCDynaClass {
      * @param useColumnLabel true if the column label should be used, otherwise false
      * @throws NullPointerException if {@code resultSet}
      *  is {@code null}
-     * @throws SQLException if the metadata for this result set
+     * @throws SQLException Thrown if the metadata for this result set
      *  cannot be introspected
      * @since 1.8.3
      */
@@ -167,7 +167,7 @@ public class ResultSetDynaClass extends JDBCDynaClass {
      *
      * @param name The property name
      * @return The value
-     * @throws SQLException if an error occurs
+     * @throws SQLException Thrown if an error occurs
      * @since 1.8.0
      */
     public Object getObjectFromResultSet(final String name) throws SQLException {
@@ -206,7 +206,7 @@ public class ResultSetDynaClass extends JDBCDynaClass {
      *
      * @param className The name of the class to load
      * @return The loaded class
-     * @throws SQLException if the class cannot be loaded
+     * @throws SQLException Thrown if the class cannot be loaded
      */
     @Override
     protected Class<?> loadClass(final String className) throws SQLException {

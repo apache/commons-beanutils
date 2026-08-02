@@ -82,7 +82,7 @@ class DynaPropertySerializationReadVersion1Test {
      *
      * @param dir         directory containing {@code *.ser} files.
      * @param description human-readable label used in assertion messages.
-     * @throws Exception if deserialization fails or an assertion is violated.
+     * @throws Exception Thrown if deserialization fails or an assertion is violated.
      */
     private static void assertDeserializeFromDirectory(final File dir, final String description) throws Exception {
         assertTrue(dir.isDirectory(), () -> description + ": directory must exist: " + dir.getAbsolutePath());

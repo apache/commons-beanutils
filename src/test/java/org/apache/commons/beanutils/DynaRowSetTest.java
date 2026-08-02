@@ -55,7 +55,7 @@ public class DynaRowSetTest extends TestCase {
          * Get an columns's value
          * @param columnName Name of the column
          * @return The column value
-         * @throws SQLException if an error occurs
+         * @throws SQLException Thrown if an error occurs
          */
         @Override
         public Object getObject(final String columnName) throws SQLException {
@@ -81,7 +81,7 @@ public class DynaRowSetTest extends TestCase {
          *
          * @param columnIndex The column index
          * @return The column class name
-         * @throws SQLException if an error occurs
+         * @throws SQLException Thrown if an error occurs
          */
         @Override
         public String getColumnClassName(final int columnIndex) throws SQLException {
@@ -195,7 +195,7 @@ public class DynaRowSetTest extends TestCase {
      *
      * See issue# https://issues.apache.org/jira/browse/BEANUTILS-142
      *
-     * @throws Exception if an error occurs
+     * @throws Exception Thrown if an error occurs
      */
     public void testInconsistentOracleDriver() throws Exception {
 

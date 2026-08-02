@@ -189,7 +189,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      * @param resultSet The result set
      * @param name The property name
      * @return The value
-     * @throws SQLException if an error occurs
+     * @throws SQLException Thrown if an error occurs
      */
     protected Object getObject(final ResultSet resultSet, final String name) throws SQLException {
 
@@ -226,7 +226,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      * @param resultSet The {@code resultSet} whose metadata is to
      *  be introspected
      *
-     * @throws SQLException if an error is encountered processing the
+     * @throws SQLException Thrown if an error is encountered processing the
      *  result set metadata
      */
     protected void introspect(final ResultSet resultSet) throws SQLException {
@@ -259,7 +259,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      *
      * @param className The name of the class to load
      * @return The loaded class
-     * @throws SQLException if an exception was thrown trying to load
+     * @throws SQLException Thrown if an exception was thrown trying to load
      *  the specified class
      */
     protected Class<?> loadClass(final String className) throws SQLException {

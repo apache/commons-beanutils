@@ -66,7 +66,7 @@ public final class CharacterConverter extends AbstractConverter {
      * @param type Data type to which this value should be converted.
      * @param value The input value to be converted.
      * @return The converted value.
-     * @throws Exception if conversion cannot be performed successfully
+     * @throws Exception Thrown if conversion cannot be performed successfully
      * @since 1.8.0
      */
     @Override

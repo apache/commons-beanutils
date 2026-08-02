@@ -62,7 +62,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      * <p>Advance the result set to the next row, if there is not a current
      * row (and if we are not already at eof).</p>
      *
-     * @throws SQLException if the result set throws an exception
+     * @throws SQLException Thrown if the result set throws an exception
      */
     protected void advance() throws SQLException {
         if (!current && !eof) {
