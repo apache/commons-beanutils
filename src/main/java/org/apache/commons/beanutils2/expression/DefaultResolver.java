@@ -81,7 +81,7 @@ public class DefaultResolver implements Resolver {
                 int index = 0;
                 try {
                     index = Integer.parseInt(value, 10);
-                } catch (final Exception e) {
+                } catch (final NumberFormatException e) {
                     throw new IllegalArgumentException("Invalid index value '" + value + "'");
                 }
                 if (index < 0) {
