@@ -105,6 +105,12 @@ class DefaultResolverTest {
         label = "Malformed";
         final IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> resolver.getIndex("foo[BAR]"));
         assertEquals("Invalid index value 'BAR'", e.getMessage(), label + " Error Message");
+
+        // Negative
+        label = "Negative";
+        final IllegalArgumentException negative = assertThrows(IllegalArgumentException.class, () -> resolver.getIndex("foo[-1]"));
+        assertEquals("Invalid index value '-1'", negative.getMessage(), label + " Error Message");
+        assertThrows(IllegalArgumentException.class, () -> resolver.getIndex("foo[-12]"));
     }
 
     /**

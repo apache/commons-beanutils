@@ -57,7 +57,7 @@ public class DefaultResolver implements Resolver {
      *
      * @param expression The property expression
      * @return The index value or -1 if the property is not indexed
-     * @throws IllegalArgumentException If the indexed property is illegally formed or has an invalid (non-numeric) value.
+     * @throws IllegalArgumentException If the indexed property is illegally formed or has an invalid (non-numeric or negative) value.
      */
     @Override
     public int getIndex(final String expression) {
@@ -81,7 +81,10 @@ public class DefaultResolver implements Resolver {
                 int index = 0;
                 try {
                     index = Integer.parseInt(value, 10);
-                } catch (final Exception e) {
+                } catch (final NumberFormatException e) {
+                    throw new IllegalArgumentException("Invalid index value '" + value + "'");
+                }
+                if (index < 0) {
                     throw new IllegalArgumentException("Invalid index value '" + value + "'");
                 }
                 return index;
