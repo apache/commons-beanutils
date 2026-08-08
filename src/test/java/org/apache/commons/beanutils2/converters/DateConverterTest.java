@@ -17,8 +17,13 @@
 
 package org.apache.commons.beanutils2.converters;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * Test Case for the DateConverter class.
@@ -65,5 +70,17 @@ class DateConverterTest extends AbstractDateConverterTest<Date> {
     @Override
     protected Date toType(final Calendar value) {
         return value.getTime();
+    }
+
+    /**
+     * A pre-epoch {@link Timestamp} carries a non-negative sub-second part in {@code getNanos()}, so decomposing
+     * {@code getTime()} into whole seconds must floor: integer division truncates toward zero for negative values and
+     * gains a whole second.
+     */
+    @Test
+    void testConvertPreEpochSqlTimestamp() {
+        // 1969-12-31T23:59:59.500Z: getTime() == -500, getNanos() == 500_000_000
+        final Timestamp timestamp = new Timestamp(-500L);
+        assertEquals(-500L, makeConverter().convert(getExpectedType(), timestamp).getTime());
     }
 }
