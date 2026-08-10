@@ -54,6 +54,7 @@
       <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Split ArrayConverter list elements on whitespace, quotes and the delimiter only (#427).</action>
       <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Suppress case variants of mapped names in isPropertySuppressed (#431).</action>
       <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Reject negative index values in DefaultResolver.getIndex (#432).</action>
+      <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Floor pre-epoch Timestamp seconds in DateTimeConverter.convertToType (#433).</action>
       <!-- ADD -->
       <action type="add" dev="ggregory" due-to="Gary Gregory">Use varargs for org.apache.commons.beanutils2.MethodUtils.getAccessibleMethod(Class, String, Class...), and remove last argument variants using Class[] and Class.</action>
       <action type="add" dev="ggregory" due-to="SethFalco, Melloware, Gary Gregory">Add Instant converter and improve enum converter #49.</action>
