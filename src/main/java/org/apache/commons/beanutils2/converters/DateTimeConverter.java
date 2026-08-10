@@ -200,7 +200,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
             // didn't include the milliseconds. The following code
             // ensures it works consistently across JDK versions
             final java.sql.Timestamp timestamp = (java.sql.Timestamp) value;
-            long timeInMillis = timestamp.getTime() / 1000 * 1000;
+            long timeInMillis = Math.floorDiv(timestamp.getTime(), 1000) * 1000;
             timeInMillis += timestamp.getNanos() / 1000000;
             return toDate(targetType, timeInMillis);
         }
