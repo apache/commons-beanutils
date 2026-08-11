@@ -375,6 +375,29 @@ class LazyDynaListTest {
     }
 
     /**
+     * Test that the element type is set from the first element populated on an untyped List: a later
+     * element of a different type is rejected, and toArray() returns an array of the element type.
+     */
+    @Test
+    void testFirstElementSetsElementType() {
+        final LazyDynaList lazyList = new LazyDynaList();
+        lazyList.add(new HashMap<>());
+        assertThrows(IllegalArgumentException.class, () -> lazyList.add("a POJO String"),
+                "Element of a different type must be rejected once the type is set");
+
+        final TreeMap<String, Object>[] source = new TreeMap[2];
+        source[0] = new TreeMap<>();
+        source[0].put("key0", "val0");
+        source[1] = new TreeMap<>();
+        source[1].put("key1", "val1");
+        final LazyDynaList mapList = new LazyDynaList(source);
+        final TreeMap<?, ?>[] array = (TreeMap[]) mapList.toArray();
+        assertEquals(2, array.length);
+        assertEquals("val0", array[0].get("key0"));
+        assertEquals("val1", array[1].get("key1"));
+    }
+
+    /**
      * Test Pojo Create
      */
     @Test
