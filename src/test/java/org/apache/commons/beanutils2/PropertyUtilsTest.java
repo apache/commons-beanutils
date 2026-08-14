@@ -347,6 +347,30 @@ class PropertyUtilsTest {
     }
 
     /**
+     * Registering a {@link SuppressPropertiesBeanIntrospector} must take effect for classes already introspected. The per-class descriptor cache was populated
+     * before the introspector was added and was never invalidated, so a property suppressed for hardening stayed readable and writable when its class had been
+     * introspected earlier (the common case with the shared {@code PropertyUtils} singleton).
+     */
+    @Test
+    void testAddBeanIntrospectorInvalidatesCache() throws Exception {
+        final PropertyUtilsBean pub = new PropertyUtilsBean();
+
+        // Warm the descriptor cache for TestBean before the suppression is configured.
+        assertNotNull(pub.getPropertyDescriptor(bean, "stringProperty"), "Property should be visible before suppression");
+
+        final SuppressPropertiesBeanIntrospector suppressor = new SuppressPropertiesBeanIntrospector(Arrays.asList("stringProperty"));
+        pub.addBeanIntrospector(suppressor);
+
+        assertNull(pub.getPropertyDescriptor(bean, "stringProperty"), "Suppressed property should have no descriptor after the introspector is added");
+        assertThrows(NoSuchMethodException.class, () -> pub.getProperty(bean, "stringProperty"), "Suppressed property must not be readable");
+        assertThrows(NoSuchMethodException.class, () -> pub.setProperty(bean, "stringProperty", "changed"), "Suppressed property must not be writable");
+
+        // Removing the introspector must likewise invalidate the cache so the property becomes visible again.
+        pub.removeBeanIntrospector(suppressor);
+        assertNotNull(pub.getPropertyDescriptor(bean, "stringProperty"), "Property should be visible again after the introspector is removed");
+    }
+
+    /**
      * Test the describe() method.
      */
     @Test
