@@ -31,7 +31,7 @@ import java.io.InputStream;
  *
  * <p>Normally this is done by having certain jars or class-file-directories
  * in the classpath of some classloaders but not others. This is quite
- * difficult difficult to integrate with the build process for the unit
+ * difficult to integrate with the build process for the unit
  * tests though; compiling certain classes and having the output go into
  * places that is not in the default classpath for the unit tests would be
  * a major pain.</p>
