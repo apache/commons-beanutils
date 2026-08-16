@@ -413,6 +413,27 @@ class BeanMapTest extends AbstractMapTest<BeanMap, String, Object> {
         assertEquals(Double.valueOf("6"), beanMap.getTypeTransformer(Double.TYPE).apply("6"), "Double.TYPE");
     }
 
+    /**
+     * Need to override this method because the "clear()" method on the bean map just returns the bean properties to their default states. It does not actually
+     * remove the mappings as per the map contract. The default testClear() methods checks that the clear method throws an UnsupportedOperationException since
+     * this class is not add/remove modifiable. In our case though, we do not always throw that exception.
+     */
+    @Override
+    @Test
+    public void testMapClear() {
+        // TODO: make sure a call to BeanMap.clear returns the bean to its
+        // default initialization values.
+    }
+
+    /**
+     * Need to override this method because the "put()" method on the bean doesn't work for this type of Map.
+     */
+    @Override
+    @Test
+    public void testMapPut() {
+        // see testBeanMapPutAllWriteable
+    }
+
     @Test
     void testMethodAccessor() throws Exception {
         final BeanMap map = (BeanMap) makeFullMap();
@@ -427,9 +448,11 @@ class BeanMapTest extends AbstractMapTest<BeanMap, String, Object> {
         assertEquals(method, map.getWriteMethod("someIntegerValue"));
     }
 
-    @Test
+    @Override
+    // TODO @Test
     public void testReplaceAll() {
         assumeFalse(getMap().keySet().stream().anyMatch(k -> getMap().getWriteMethod(k) == null));
+        super.testReplaceAll();
     }
 
     /**
