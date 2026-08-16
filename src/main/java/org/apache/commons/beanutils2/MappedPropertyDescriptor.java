@@ -42,7 +42,7 @@ import java.util.Objects;
 public class MappedPropertyDescriptor extends PropertyDescriptor {
 
     /**
-     * Holds a {@link Method} in a {@link SoftReference} so that it it doesn't prevent any ClassLoader being garbage collected, but tries to re-create the
+     * Holds a {@link Method} in a {@link SoftReference} so that it doesn't prevent any ClassLoader being garbage collected, but tries to re-create the
      * method if the method reference has been released.
      *
      * See https://issues.apache.org/jira/browse/BEANUTILS-291
