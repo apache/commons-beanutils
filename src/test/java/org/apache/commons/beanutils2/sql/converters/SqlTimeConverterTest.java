@@ -77,6 +77,10 @@ class SqlTimeConverterTest extends AbstractDateConverterTest<Time> {
 
         // Invalid String --> java.sql.Time Conversion
         invalidConversion(converter, "15:36");
+
+        // Out-of-range fields must be rejected, not silently rolled over (25:70:90 -> 02:11:30)
+        invalidConversion(converter, "25:70:90");
+        invalidConversion(converter, "-1:-1:-1");
     }
 
     /**

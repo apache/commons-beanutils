@@ -22,10 +22,16 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
+import java.time.format.SignStyle;
+import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAccessor;
 import java.util.Calendar;
 import java.util.Date;
@@ -84,6 +90,23 @@ import org.apache.commons.beanutils2.ConversionException;
  * @since 1.8.0
  */
 public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
+
+    /** Strict validator for the JDBC {@code java.sql.Date} escape format, rejecting out-of-range fields that {@code valueOf} would roll over. */
+    private static final DateTimeFormatter SQL_DATE_FORMAT = new DateTimeFormatterBuilder().appendValue(ChronoField.YEAR, 4, 10, SignStyle.EXCEEDS_PAD)
+            .appendLiteral('-').appendValue(ChronoField.MONTH_OF_YEAR).appendLiteral('-').appendValue(ChronoField.DAY_OF_MONTH).toFormatter()
+            .withResolverStyle(ResolverStyle.STRICT);
+
+    /** Strict validator for the JDBC {@code java.sql.Time} escape format, rejecting out-of-range fields that {@code valueOf} would roll over. */
+    private static final DateTimeFormatter SQL_TIME_FORMAT = new DateTimeFormatterBuilder().appendValue(ChronoField.HOUR_OF_DAY).appendLiteral(':')
+            .appendValue(ChronoField.MINUTE_OF_HOUR).appendLiteral(':').appendValue(ChronoField.SECOND_OF_MINUTE).toFormatter()
+            .withResolverStyle(ResolverStyle.STRICT);
+
+    /** Strict validator for the JDBC {@code java.sql.Timestamp} escape format, rejecting out-of-range fields that {@code valueOf} would roll over. */
+    private static final DateTimeFormatter SQL_TIMESTAMP_FORMAT = new DateTimeFormatterBuilder().appendValue(ChronoField.YEAR, 4, 10, SignStyle.EXCEEDS_PAD)
+            .appendLiteral('-').appendValue(ChronoField.MONTH_OF_YEAR).appendLiteral('-').appendValue(ChronoField.DAY_OF_MONTH).appendLiteral(' ')
+            .appendValue(ChronoField.HOUR_OF_DAY).appendLiteral(':').appendValue(ChronoField.MINUTE_OF_HOUR).appendLiteral(':')
+            .appendValue(ChronoField.SECOND_OF_MINUTE).optionalStart().appendFraction(ChronoField.NANO_OF_SECOND, 0, 9, true).optionalEnd().toFormatter()
+            .withResolverStyle(ResolverStyle.STRICT);
 
     private String[] patterns;
     private String displayPatterns;
@@ -590,24 +613,27 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
         // java.sql.Date
         if (type.equals(java.sql.Date.class)) {
             try {
+                LocalDate.parse(value, SQL_DATE_FORMAT);
                 return type.cast(java.sql.Date.valueOf(value));
-            } catch (final IllegalArgumentException e) {
+            } catch (final IllegalArgumentException | DateTimeParseException e) {
                 throw new ConversionException("String must be in JDBC format [yyyy-MM-dd] to create a java.sql.Date");
             }
         }
         // java.sql.Time
         if (type.equals(java.sql.Time.class)) {
             try {
+                LocalTime.parse(value, SQL_TIME_FORMAT);
                 return type.cast(java.sql.Time.valueOf(value));
-            } catch (final IllegalArgumentException e) {
+            } catch (final IllegalArgumentException | DateTimeParseException e) {
                 throw new ConversionException("String must be in JDBC format [HH:mm:ss] to create a java.sql.Time");
             }
         }
         // java.sql.Timestamp
         if (type.equals(java.sql.Timestamp.class)) {
             try {
+                LocalDateTime.parse(value, SQL_TIMESTAMP_FORMAT);
                 return type.cast(java.sql.Timestamp.valueOf(value));
-            } catch (final IllegalArgumentException e) {
+            } catch (final IllegalArgumentException | DateTimeParseException e) {
                 throw new ConversionException("String must be in JDBC format [yyyy-MM-dd HH:mm:ss.fffffffff] to create a java.sql.Timestamp");
             }
         }

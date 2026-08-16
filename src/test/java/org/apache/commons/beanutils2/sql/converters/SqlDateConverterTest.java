@@ -80,6 +80,10 @@ class SqlDateConverterTest extends AbstractDateConverterTest<Date> {
 
         // Invalid String --> java.sql.Date Conversion
         invalidConversion(converter, "01/01/2006");
+
+        // Out-of-range fields must be rejected, not silently rolled over (2006-02-31 -> 2006-03-03)
+        invalidConversion(converter, "2006-02-31");
+        invalidConversion(converter, "2006-13-01");
     }
 
     /**

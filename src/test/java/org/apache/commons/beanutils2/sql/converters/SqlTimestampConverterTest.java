@@ -88,6 +88,10 @@ class SqlTimestampConverterTest extends AbstractDateConverterTest<Timestamp> {
         invalidConversion(converter, "2006/09/21 15:36:01.0");
         invalidConversion(converter, "2006-10-22");
         invalidConversion(converter, "15:36:01");
+
+        // Out-of-range fields must be rejected, not silently rolled over (2006-02-31 25:70:90 -> 2006-03-04 02:11:30)
+        invalidConversion(converter, "2006-02-31 15:36:01.0");
+        invalidConversion(converter, "2006-10-23 25:70:90.0");
     }
 
     /**
