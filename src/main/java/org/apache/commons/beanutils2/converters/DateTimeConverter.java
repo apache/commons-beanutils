@@ -602,6 +602,9 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
      * <li>{@link java.time.Instant}</li>
      * </ul>
      * <p>
+     * For the {@code java.sql} types the String must be in the JDBC escape format and validation is strict: out-of-range fields (for example
+     * {@code 2006-02-31} or {@code 25:70:90}) are rejected with a {@link ConversionException} instead of being rolled over.
+     * <p>
      * <strong>N.B.</strong> No default String conversion mechanism is provided for {@link java.util.Date} and {@link java.util.Calendar} type.
      *
      * @param <T>   The target type
@@ -616,7 +619,8 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
                 LocalDate.parse(value, SQL_DATE_FORMAT);
                 return type.cast(java.sql.Date.valueOf(value));
             } catch (final IllegalArgumentException | DateTimeParseException e) {
-                throw new ConversionException("String must be in JDBC format [yyyy-MM-dd] to create a java.sql.Date");
+                throw new ConversionException(
+                        "String must be in JDBC format [yyyy-MM-dd] to create a java.sql.Date; validation is strict, out-of-range fields are rejected");
             }
         }
         // java.sql.Time
@@ -625,7 +629,8 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
                 LocalTime.parse(value, SQL_TIME_FORMAT);
                 return type.cast(java.sql.Time.valueOf(value));
             } catch (final IllegalArgumentException | DateTimeParseException e) {
-                throw new ConversionException("String must be in JDBC format [HH:mm:ss] to create a java.sql.Time");
+                throw new ConversionException(
+                        "String must be in JDBC format [HH:mm:ss] to create a java.sql.Time; validation is strict, out-of-range fields are rejected");
             }
         }
         // java.sql.Timestamp
@@ -634,7 +639,8 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
                 LocalDateTime.parse(value, SQL_TIMESTAMP_FORMAT);
                 return type.cast(java.sql.Timestamp.valueOf(value));
             } catch (final IllegalArgumentException | DateTimeParseException e) {
-                throw new ConversionException("String must be in JDBC format [yyyy-MM-dd HH:mm:ss.fffffffff] to create a java.sql.Timestamp");
+                throw new ConversionException("String must be in JDBC format [yyyy-MM-dd HH:mm:ss.fffffffff] to create a java.sql.Timestamp; "
+                        + "validation is strict, out-of-range fields are rejected");
             }
         }
         // java.time.Instant
