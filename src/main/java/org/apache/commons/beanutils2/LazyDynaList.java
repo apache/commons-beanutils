@@ -659,7 +659,18 @@ public class LazyDynaList extends ArrayList<Object> {
 
         // Check the new element type, matches all the
         // other elements in the List
-        if (elementType != null && !newElementType.equals(elementType)) {
+        if (elementType == null) {
+            // The first element populated defines the element type (see class
+            // Javadoc). Record it so later elements are type-checked and
+            // toArray()/toDynaBeanArray() know the element type.
+            this.elementType = newElementType;
+            this.elementDynaBeanType = newDynaBeanType;
+            if (WrapDynaBean.class.isAssignableFrom(newDynaBeanType)) {
+                this.wrapDynaClass = (WrapDynaClass) dynaBean.getDynaClass();
+            } else {
+                this.elementDynaClass = dynaBean.getDynaClass();
+            }
+        } else if (!newElementType.equals(elementType)) {
             throw new IllegalArgumentException("Element Type " + newElementType + " doesn't match other elements " + elementType);
         }
 
