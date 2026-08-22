@@ -136,6 +136,7 @@ public class PropertyUtilsBean {
      */
     public void addBeanIntrospector(final BeanIntrospector introspector) {
         introspectors.add(Objects.requireNonNull(introspector, "introspector"));
+        clearDescriptorCaches();
     }
 
     /**
@@ -146,6 +147,15 @@ public class PropertyUtilsBean {
         descriptorsCache.clear();
         mappedDescriptorsCache.clear();
         Introspector.flushCaches();
+    }
+
+    /**
+     * Discards the memoized introspection results after the registered {@link BeanIntrospector} set has changed. Unlike {@link #clearDescriptors()} this leaves
+     * the JVM-global {@link Introspector} cache untouched.
+     */
+    private void clearDescriptorCaches() {
+        descriptorsCache.clear();
+        mappedDescriptorsCache.clear();
     }
 
     /**
@@ -1222,7 +1232,11 @@ public class PropertyUtilsBean {
      * @since 1.9
      */
     public boolean removeBeanIntrospector(final BeanIntrospector introspector) {
-        return introspectors.remove(introspector);
+        final boolean removed = introspectors.remove(introspector);
+        if (removed) {
+            clearDescriptorCaches();
+        }
+        return removed;
     }
 
     /**
@@ -1236,6 +1250,7 @@ public class PropertyUtilsBean {
         introspectors.add(DefaultBeanIntrospector.INSTANCE);
         introspectors.add(SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
         introspectors.add(SuppressPropertiesBeanIntrospector.SUPPRESS_DECLARING_CLASS);
+        clearDescriptorCaches();
     }
 
     /**

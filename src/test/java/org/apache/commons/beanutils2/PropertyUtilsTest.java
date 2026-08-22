@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -344,6 +345,104 @@ class PropertyUtilsTest {
         assertNull(pub.getPropertyDescriptor(bean, "MappedProperty"), "Case variant of a suppressed mapped property should have no descriptor");
         assertNull(pub.getPropertyDescriptor(bean, "mappedProperty"), "Suppressed mapped property should have no descriptor");
         assertNotNull(pub.getPropertyDescriptor(bean, "stringProperty"), "A null suppressed entry must not hide unrelated properties");
+    }
+
+    /**
+     * Registering a {@link SuppressPropertiesBeanIntrospector} must take effect for classes already introspected. The per-class descriptor cache was populated
+     * before the introspector was added and was never invalidated, so a property suppressed for hardening stayed readable and writable when its class had been
+     * introspected earlier (the common case with the shared {@code PropertyUtils} singleton).
+     */
+    @Test
+    void testAddBeanIntrospectorInvalidatesCache() throws Exception {
+        final PropertyUtilsBean pub = new PropertyUtilsBean();
+
+        // Warm the descriptor cache for TestBean before the suppression is configured.
+        assertNotNull(pub.getPropertyDescriptor(bean, "stringProperty"), "Property should be visible before suppression");
+
+        final SuppressPropertiesBeanIntrospector suppressor = new SuppressPropertiesBeanIntrospector(Arrays.asList("stringProperty"));
+        pub.addBeanIntrospector(suppressor);
+
+        assertNull(pub.getPropertyDescriptor(bean, "stringProperty"), "Suppressed property should have no descriptor after the introspector is added");
+        assertThrows(NoSuchMethodException.class, () -> pub.getProperty(bean, "stringProperty"), "Suppressed property must not be readable");
+        assertThrows(NoSuchMethodException.class, () -> pub.setProperty(bean, "stringProperty", "changed"), "Suppressed property must not be writable");
+
+        // Removing the introspector must likewise invalidate the cache so the property becomes visible again.
+        pub.removeBeanIntrospector(suppressor);
+        assertNotNull(pub.getPropertyDescriptor(bean, "stringProperty"), "Property should be visible again after the introspector is removed");
+    }
+
+    /**
+     * {@code resetBeanIntrospectors()} must invalidate the descriptor caches so that introspection results produced by a previously registered custom
+     * introspector are re-evaluated against the restored default set.
+     */
+    @Test
+    void testResetBeanIntrospectorsInvalidatesCache() throws Exception {
+        final PropertyUtilsBean pub = new PropertyUtilsBean();
+        pub.addBeanIntrospector(new SuppressPropertiesBeanIntrospector(Arrays.asList("stringProperty")));
+
+        // Warm the descriptor cache with the suppression in effect.
+        assertNull(pub.getPropertyDescriptor(bean, "stringProperty"), "Suppressed property should have no descriptor");
+
+        pub.resetBeanIntrospectors();
+
+        assertNotNull(pub.getPropertyDescriptor(bean, "stringProperty"), "Property should be re-evaluated and visible after the reset");
+        assertEquals(bean.getStringProperty(), pub.getProperty(bean, "stringProperty"), "Property should be readable after the reset");
+    }
+
+    /**
+     * Changing the introspector set must also invalidate the mapped descriptor cache. The suppression guard in {@code getPropertyDescriptor} already hides a
+     * suppressed mapped property, so this checks the cached {@link MappedPropertyDescriptor} itself is dropped and re-created rather than served stale.
+     */
+    @Test
+    void testIntrospectorChangeInvalidatesMappedDescriptorCache() throws Exception {
+        final PropertyUtilsBean pub = new PropertyUtilsBean();
+
+        // Warm the mapped descriptor cache for TestBean.
+        final PropertyDescriptor first = pub.getPropertyDescriptor(bean, "mappedProperty");
+        assertNotNull(first, "Mapped property should be visible before suppression");
+
+        final SuppressPropertiesBeanIntrospector suppressor = new SuppressPropertiesBeanIntrospector(Arrays.asList("mappedProperty"));
+        pub.addBeanIntrospector(suppressor);
+
+        assertNull(pub.getPropertyDescriptor(bean, "mappedProperty"), "Suppressed mapped property should have no descriptor");
+        assertThrows(NoSuchMethodException.class, () -> pub.getProperty(bean, "mappedProperty(First Key)"), "Suppressed mapped property must not be readable");
+
+        pub.removeBeanIntrospector(suppressor);
+
+        final PropertyDescriptor second = pub.getPropertyDescriptor(bean, "mappedProperty");
+        assertNotNull(second, "Mapped property should be visible again after the introspector is removed");
+        assertNotSame(first, second, "Mapped descriptor must be re-created, not served from the stale cache");
+        assertEquals("First Value", pub.getProperty(bean, "mappedProperty(First Key)"), "Mapped property should be readable again");
+    }
+
+    /**
+     * Each add and remove in a sequence of introspector changes must invalidate the caches, so the visible property set always reflects the currently
+     * registered introspectors.
+     */
+    @Test
+    void testSequentialIntrospectorChangesInvalidateCache() throws Exception {
+        final PropertyUtilsBean pub = new PropertyUtilsBean();
+        final SuppressPropertiesBeanIntrospector suppressString = new SuppressPropertiesBeanIntrospector(Arrays.asList("stringProperty"));
+        final SuppressPropertiesBeanIntrospector suppressInt = new SuppressPropertiesBeanIntrospector(Arrays.asList("intProperty"));
+
+        assertNotNull(pub.getPropertyDescriptor(bean, "stringProperty"), "stringProperty should be visible initially");
+        assertNotNull(pub.getPropertyDescriptor(bean, "intProperty"), "intProperty should be visible initially");
+
+        pub.addBeanIntrospector(suppressString);
+        assertNull(pub.getPropertyDescriptor(bean, "stringProperty"), "stringProperty should be suppressed after the first add");
+        assertNotNull(pub.getPropertyDescriptor(bean, "intProperty"), "intProperty should be unaffected by the first add");
+
+        pub.addBeanIntrospector(suppressInt);
+        assertNull(pub.getPropertyDescriptor(bean, "stringProperty"), "stringProperty should stay suppressed after the second add");
+        assertNull(pub.getPropertyDescriptor(bean, "intProperty"), "intProperty should be suppressed after the second add");
+
+        pub.removeBeanIntrospector(suppressString);
+        assertNotNull(pub.getPropertyDescriptor(bean, "stringProperty"), "stringProperty should be visible again after its introspector is removed");
+        assertNull(pub.getPropertyDescriptor(bean, "intProperty"), "intProperty should stay suppressed after the unrelated remove");
+
+        pub.removeBeanIntrospector(suppressInt);
+        assertNotNull(pub.getPropertyDescriptor(bean, "stringProperty"), "stringProperty should stay visible after the last remove");
+        assertNotNull(pub.getPropertyDescriptor(bean, "intProperty"), "intProperty should be visible again after its introspector is removed");
     }
 
     /**
