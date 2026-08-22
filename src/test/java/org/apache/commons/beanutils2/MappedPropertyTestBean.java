@@ -29,6 +29,14 @@ public class MappedPropertyTestBean {
     private final Map<Object, Object> map = new HashMap<>();
     private final Map<Object, Object> myMap = new HashMap<>();
 
+    public static String getStaticMapped(final String key) {
+        return "static-" + key;
+    }
+
+    public static void setStaticMapped(final String key, final String value) {
+        // empty
+    }
+
     public Long getDifferentTypes(final String key) {
         return Long.valueOf(((Number) map.get(key)).longValue());
     }
