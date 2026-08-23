@@ -57,7 +57,7 @@ import org.apache.commons.logging.LogFactory;
  * <p>
  * This class is more tolerant with regards to the return type of a set method. It basically iterates over all methods of a class and filters them for a
  * configurable prefix (the default prefix is {@code set}). It then generates corresponding {@code PropertyDescriptor} objects for the methods found which use
- * these methods as write methods. Static methods are ignored, as they are by default introspection.
+ * these methods as write methods. Static methods are ignored, as they are by default ignored in introspection.
  * </p>
  * <p>
  * An instance of this class is intended to collaborate with a {@link DefaultBeanIntrospector} object. So best results are achieved by adding this instance as
