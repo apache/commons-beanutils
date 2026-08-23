@@ -57,7 +57,8 @@
       <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Floor pre-epoch Timestamp seconds in DateTimeConverter.convertToType (#433).</action>
       <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Record element type of first element in LazyDynaList.transform (#434).</action>
       <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Clear descriptor caches when bean introspectors change (#435).</action>
-      <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Reject out-of-range sql date/time fields in DateTimeConverter.toDate (#436).</action>
+      <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Reject out-of-range SQL date/time fields in DateTimeConverter.toDate (#436).</action>
+      <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Skip static methods in FluentPropertyBeanIntrospector and mapped lookup (#437).</action>
       <!-- ADD -->
       <action type="add" dev="ggregory" due-to="Gary Gregory">Use varargs for org.apache.commons.beanutils2.MethodUtils.getAccessibleMethod(Class, String, Class...), and remove last argument variants using Class[] and Class.</action>
       <action type="add" dev="ggregory" due-to="SethFalco, Melloware, Gary Gregory">Add Instant converter and improve enum converter #49.</action>
