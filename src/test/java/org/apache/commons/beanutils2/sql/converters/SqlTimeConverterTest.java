@@ -17,10 +17,14 @@
 
 package org.apache.commons.beanutils2.sql.converters;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.sql.Time;
 import java.util.Calendar;
 import java.util.Locale;
 
+import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.converters.AbstractDateConverterTest;
 import org.junit.jupiter.api.Test;
 
@@ -77,6 +81,35 @@ class SqlTimeConverterTest extends AbstractDateConverterTest<Time> {
 
         // Invalid String --> java.sql.Time Conversion
         invalidConversion(converter, "15:36");
+
+        // Out-of-range fields must be rejected, not silently rolled over (25:70:90 -> 02:11:30)
+        invalidConversion(converter, "25:70:90");
+        invalidConversion(converter, "-1:-1:-1");
+    }
+
+    @Test
+    void testDefaultStringToTypeConvertInvalidTimeHourMinuteSecond() {
+        final SqlTimeConverter converter = makeConverter();
+        converter.setUseLocaleFormat(false);
+        invalidConversion(converter, "24:00:00");
+        invalidConversion(converter, "12:60:00");
+        invalidConversion(converter, "12:00:60");
+    }
+
+    @Test
+    void testDefaultStringToTypeConvertStrictValidationMessage() {
+        final SqlTimeConverter converter = makeConverter();
+        converter.setUseLocaleFormat(false);
+        final ConversionException ex = assertThrows(ConversionException.class, () -> converter.convert(getExpectedType(), "25:70:90"));
+        assertTrue(ex.getMessage().contains("validation is strict"));
+    }
+
+    @Test
+    void testDefaultStringToTypeConvertValidBoundaryTimes() {
+        final SqlTimeConverter converter = makeConverter();
+        converter.setUseLocaleFormat(false);
+        validConversion(converter, toType("00:00:00", "HH:mm:ss", null), "00:00:00");
+        validConversion(converter, toType("23:59:59", "HH:mm:ss", null), "23:59:59");
     }
 
     /**
@@ -127,5 +160,4 @@ class SqlTimeConverterTest extends AbstractDateConverterTest<Time> {
     protected Time toType(final Calendar value) {
         return new Time(getTimeInMillis(value));
     }
-
 }

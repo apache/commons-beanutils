@@ -62,14 +62,16 @@ class DateConverterTest extends AbstractDateConverterTest<Date> {
     }
 
     /**
-     * Convert from a Calendar to the appropriate Date type
-     *
-     * @param value The Calendar value to convert
-     * @return The converted value
+     * For {@code getTime()} in {@code [Long.MIN_VALUE, Long.MIN_VALUE + 807]} the whole-second term
+     * {@code Math.floorDiv(getTime(), 1000) * 1000} wraps around {@link Long#MIN_VALUE}, but adding the non-negative
+     * {@code getNanos() / 1_000_000} wraps it back: the two terms reconstruct {@code getTime()} exactly in
+     * two's-complement arithmetic, so no overflow guard is needed.
      */
-    @Override
-    protected Date toType(final Calendar value) {
-        return value.getTime();
+    @Test
+    void testConvertExtremePreEpochSqlTimestamp() {
+        assertEquals(Long.MIN_VALUE, makeConverter().convert(getExpectedType(), new Timestamp(Long.MIN_VALUE)).getTime());
+        // last value whose whole-second term still wraps
+        assertEquals(Long.MIN_VALUE + 807, makeConverter().convert(getExpectedType(), new Timestamp(Long.MIN_VALUE + 807)).getTime());
     }
 
     /**
@@ -85,15 +87,13 @@ class DateConverterTest extends AbstractDateConverterTest<Date> {
     }
 
     /**
-     * For {@code getTime()} in {@code [Long.MIN_VALUE, Long.MIN_VALUE + 807]} the whole-second term
-     * {@code Math.floorDiv(getTime(), 1000) * 1000} wraps around {@link Long#MIN_VALUE}, but adding the non-negative
-     * {@code getNanos() / 1_000_000} wraps it back: the two terms reconstruct {@code getTime()} exactly in
-     * two's-complement arithmetic, so no overflow guard is needed.
+     * Convert from a Calendar to the appropriate Date type
+     *
+     * @param value The Calendar value to convert
+     * @return The converted value
      */
-    @Test
-    void testConvertExtremePreEpochSqlTimestamp() {
-        assertEquals(Long.MIN_VALUE, makeConverter().convert(getExpectedType(), new Timestamp(Long.MIN_VALUE)).getTime());
-        // last value whose whole-second term still wraps
-        assertEquals(Long.MIN_VALUE + 807, makeConverter().convert(getExpectedType(), new Timestamp(Long.MIN_VALUE + 807)).getTime());
+    @Override
+    protected Date toType(final Calendar value) {
+        return value.getTime();
     }
 }

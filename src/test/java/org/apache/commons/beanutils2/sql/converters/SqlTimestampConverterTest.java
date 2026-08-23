@@ -88,6 +88,55 @@ class SqlTimestampConverterTest extends AbstractDateConverterTest<Timestamp> {
         invalidConversion(converter, "2006/09/21 15:36:01.0");
         invalidConversion(converter, "2006-10-22");
         invalidConversion(converter, "15:36:01");
+
+        // Out-of-range fields must be rejected, not silently rolled over (2006-02-31 25:70:90 -> 2006-03-04 02:11:30)
+        invalidConversion(converter, "2006-02-31 15:36:01.0");
+        invalidConversion(converter, "2006-10-23 25:70:90.0");
+    }
+
+    @Test
+    void testDefaultStringToTypeConvertInvalidTimestampOutOfRangeDate() {
+        final SqlTimestampConverter converter = makeConverter();
+        converter.setUseLocaleFormat(false);
+        invalidConversion(converter, "2006-02-31 15:36:01");
+        invalidConversion(converter, "2006-13-01 00:00:00");
+    }
+
+    @Test
+    void testDefaultStringToTypeConvertInvalidTimestampOutOfRangeTime() {
+        final SqlTimestampConverter converter = makeConverter();
+        converter.setUseLocaleFormat(false);
+        invalidConversion(converter, "2006-10-23 25:00:00");
+        invalidConversion(converter, "2006-10-23 12:60:00");
+    }
+
+    /**
+     * Test default String to {@code java.sql.Timestamp} conversion with fractional seconds.
+     * <p>
+     * The strict {@link DateTimeConverter#SQL_TIMESTAMP_FORMAT} accepts an optional fractional second part. The helper
+     * {@link AbstractDateConverterTest#toType(String,String,Locale)} builds the expected value via {@link SimpleDateFormat}, which only supports millisecond
+     * precision {@code S} = 1-3 digits. Therefore, the test uses a 3-digit fraction {@code .123} for the {@code toType} comparison and additionally verifies
+     * that {@code Timestamp.valueOf} correctly handles the full 9-digit nanosecond fraction that the strict formatter accepts. This avoids the
+     * {@code ParseException} that occurs with {@code SSSSSSSSS} in {@code SimpleDateFormat}.
+     * </p>
+     */
+    @Test
+    void testDefaultStringToTypeConvertValidTimestampWithFraction() {
+        final SqlTimestampConverter converter = makeConverter();
+        converter.setUseLocaleFormat(false);
+        // 3-digit fraction – SimpleDateFormat can create the expected value
+        final String testString1 = "2006-10-23 15:36:01.123";
+        final Object expected1 = toType(testString1, "yyyy-MM-dd HH:mm:ss.SSS", null);
+        validConversion(converter, expected1, testString1);
+        // No fraction – also valid
+        final String testString2 = "2006-10-23 15:36:01";
+        final Object expected2 = toType(testString2, "yyyy-MM-dd HH:mm:ss", null);
+        validConversion(converter, expected2, testString2);
+        // Full nanosecond fraction – expected built directly with valueOf
+        // valueOf handles up to 9 digits, toType cannot, so build expected manually
+        final String testString3 = "2006-10-23 15:36:01.123456789";
+        final java.sql.Timestamp expected3 = java.sql.Timestamp.valueOf("2006-10-23 15:36:01.123456789");
+        validConversion(converter, expected3, testString3);
     }
 
     /**
@@ -142,5 +191,4 @@ class SqlTimestampConverterTest extends AbstractDateConverterTest<Timestamp> {
     protected Timestamp toType(final Calendar value) {
         return new Timestamp(getTimeInMillis(value));
     }
-
 }

@@ -22,10 +22,16 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
+import java.time.format.SignStyle;
+import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAccessor;
 import java.util.Calendar;
 import java.util.Date;
@@ -49,7 +55,6 @@ import org.apache.commons.beanutils2.ConversionException;
  * <li>{@link java.sql.Time}</li>
  * <li>{@link java.sql.Timestamp}</li>
  * </ul>
- *
  * <h2>String Conversions (to and from)</h2> This class provides a number of ways in which date/time conversions to/from Strings can be achieved:
  * <ul>
  * <li>Using the SHORT date format for the default Locale, configure using:
@@ -76,14 +81,80 @@ import org.apache.commons.beanutils2.ConversionException;
  * <li>If none of the above are configured the {@code toDate(String)} method is used to convert from String to Date and the Dates's {@code toString()} method
  * used to convert from Date to String.</li>
  * </ul>
- *
+ * <p>
+ * For {@link java.sql.Date}, {@link java.sql.Time} and {@link java.sql.Timestamp} the default String conversion, that is when {@code useLocaleFormat} is
+ * {@code false} and no patterns are configured, requires the JDBC escape format and validation is strict: out-of-range fields are rejected with a
+ * {@link ConversionException} instead of being rolled over.
+ * </p>
+ * <p>
+ * <strong>Note:</strong> This strict JDBC validation applies only to the default String conversion path. When the converter is configured with patterns via
+ * {@link #setPattern(String)}/{@link #setPatterns(String[])} or with {@link #setUseLocaleFormat(boolean)} = {@code true}, conversion is performed through
+ * {@link java.text.DateFormat}/{@link java.util.Calendar} and the strict JDBC validation is bypassed.
+ * </p>
  * <p>
  * The <strong>Time Zone</strong> to use with the date format can be specified using the {@link #setTimeZone(TimeZone)} method.
+ * </p>
  *
  * @param <D> The default value type.
  * @since 1.8.0
  */
 public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
+
+    /**
+     * Strict DateTimeFormatter for the JDBC {@code java.sql.Date} escape format, rejecting out-of-range fields that {@code valueOf} would roll over.
+     * <p>
+     * Values follow this STRICT format:
+     * <pre>
+     * YEAR 4-10 + '-' + MONTH + '-' + DAY
+     * </pre>
+     */
+    // @formatter:off
+    private static final DateTimeFormatter SQL_DATE_FORMAT = new DateTimeFormatterBuilder()
+            .appendValue(ChronoField.YEAR, 4, 10, SignStyle.EXCEEDS_PAD).appendLiteral('-')
+            .appendValue(ChronoField.MONTH_OF_YEAR).appendLiteral('-')
+            .appendValue(ChronoField.DAY_OF_MONTH)
+            .toFormatter()
+            .withResolverStyle(ResolverStyle.STRICT);
+    // @formatter:on
+
+    /**
+     * Strict DateTimeFormatter for the JDBC {@code java.sql.Time} escape format, rejecting out-of-range fields that {@code valueOf} would roll over.
+     * <p>
+     * Values follow this STRICT format:
+     * <pre>
+     * HOUR_OF_DAY ':' MINUTE ':' SECOND
+     * </pre>
+     */
+    // @formatter:off
+    private static final DateTimeFormatter SQL_TIME_FORMAT = new DateTimeFormatterBuilder()
+            .appendValue(ChronoField.HOUR_OF_DAY).appendLiteral(':')
+            .appendValue(ChronoField.MINUTE_OF_HOUR).appendLiteral(':')
+            .appendValue(ChronoField.SECOND_OF_MINUTE)
+            .toFormatter()
+            .withResolverStyle(ResolverStyle.STRICT);
+    // @formatter:on
+
+    /**
+     * Strict DateTimeFormatter for the JDBC {@code java.sql.Timestamp} escape format, rejecting out-of-range fields that {@code valueOf} would roll over.
+     * <p>
+     * Values follow this STRICT format:
+     * <pre>
+     * YEAR '-' MONTH '-' DAY ' ' HOUR ':' MINUTE ':' SECOND [fraction]
+     * </pre>
+     */
+    // @formatter:off
+    private static final DateTimeFormatter SQL_TIMESTAMP_FORMAT = new DateTimeFormatterBuilder()
+            .appendValue(ChronoField.YEAR, 4, 10, SignStyle.EXCEEDS_PAD).appendLiteral('-')
+            .appendValue(ChronoField.MONTH_OF_YEAR).appendLiteral('-')
+            .appendValue(ChronoField.DAY_OF_MONTH).appendLiteral(' ')
+            .appendValue(ChronoField.HOUR_OF_DAY).appendLiteral(':')
+            .appendValue(ChronoField.MINUTE_OF_HOUR).appendLiteral(':')
+            .appendValue(ChronoField.SECOND_OF_MINUTE)
+            .optionalStart()
+                .appendFraction(ChronoField.NANO_OF_SECOND, 0, 9, true)
+            .optionalEnd().toFormatter()
+            .withResolverStyle(ResolverStyle.STRICT);
+    // @formatter:on
 
     private String[] patterns;
     private String displayPatterns;
@@ -569,9 +640,10 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
     }
 
     /**
-     * Default String to Date conversion.
+     * Default String to date/time conversion.
      * <p>
-     * This method handles conversion from a String to the following types:
+     * This method handles conversion from a {@code String} to the following types:
+     * </p>
      * <ul>
      * <li>{@link java.sql.Date}</li>
      * <li>{@link java.sql.Time}</li>
@@ -579,36 +651,50 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
      * <li>{@link java.time.Instant}</li>
      * </ul>
      * <p>
-     * <strong>N.B.</strong> No default String conversion mechanism is provided for {@link java.util.Date} and {@link java.util.Calendar} type.
+     * For the {@code java.sql} types the String must be in the JDBC escape format and validation is strict: out-of-range fields, for example {@code 2006-02-31}
+     * or {@code 25:70:90} are rejected with a {@link ConversionException} instead of being rolled over.
+     * </p>
+     * <p>
+     * <strong>Note:</strong> This strict JDBC validation applies only to the default String conversion path when no patterns are configured and
+     * {@code useLocaleFormat} is {@code false}. When the converter is configured with patterns or {@link #setUseLocaleFormat(boolean)} = {@code true},
+     * conversion is performed through {@link java.text.DateFormat}/{@link java.util.Calendar} and the strict JDBC validation is bypassed.
+     * </p>
+     * <p>
+     * No default String conversion mechanism is provided for {@link java.util.Date} and {@link java.util.Calendar}.
+     * </p>
      *
-     * @param <T>   The target type
-     * @param type  The date type to convert to
-     * @param value The String value to convert.
-     * @return The converted Number value.
+     * @param <T>   the target type
+     * @param type  the date/time type to convert to
+     * @param value the String value to convert
+     * @return the converted date/time value
+     * @throws ConversionException if the String cannot be converted to the target type
      */
     private <T> T toDate(final Class<T> type, final String value) {
         // java.sql.Date
         if (type.equals(java.sql.Date.class)) {
             try {
-                return type.cast(java.sql.Date.valueOf(value));
-            } catch (final IllegalArgumentException e) {
-                throw new ConversionException("String must be in JDBC format [yyyy-MM-dd] to create a java.sql.Date");
+                return type.cast(java.sql.Date.valueOf(LocalDate.parse(value, SQL_DATE_FORMAT)));
+            } catch (final IllegalArgumentException | DateTimeParseException e) {
+                throw new ConversionException(
+                        "String must be in JDBC format [yyyy-MM-dd] to create a java.sql.Date; validation is strict, out-of-range fields are rejected");
             }
         }
         // java.sql.Time
         if (type.equals(java.sql.Time.class)) {
             try {
-                return type.cast(java.sql.Time.valueOf(value));
-            } catch (final IllegalArgumentException e) {
-                throw new ConversionException("String must be in JDBC format [HH:mm:ss] to create a java.sql.Time");
+                return type.cast(java.sql.Time.valueOf(LocalTime.parse(value, SQL_TIME_FORMAT)));
+            } catch (final IllegalArgumentException | DateTimeParseException e) {
+                throw new ConversionException(
+                        "String must be in JDBC format [HH:mm:ss] to create a java.sql.Time; validation is strict, out-of-range fields are rejected");
             }
         }
         // java.sql.Timestamp
         if (type.equals(java.sql.Timestamp.class)) {
             try {
-                return type.cast(java.sql.Timestamp.valueOf(value));
-            } catch (final IllegalArgumentException e) {
-                throw new ConversionException("String must be in JDBC format [yyyy-MM-dd HH:mm:ss.fffffffff] to create a java.sql.Timestamp");
+                return type.cast(java.sql.Timestamp.valueOf(LocalDateTime.parse(value, SQL_TIMESTAMP_FORMAT)));
+            } catch (final IllegalArgumentException | DateTimeParseException e) {
+                throw new ConversionException("String must be in JDBC format [yyyy-MM-dd HH:mm:ss.fffffffff] to create a java.sql.Timestamp; "
+                        + "validation is strict, out-of-range fields are rejected");
             }
         }
         // java.time.Instant

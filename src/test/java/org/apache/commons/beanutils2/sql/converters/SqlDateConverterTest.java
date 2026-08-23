@@ -18,10 +18,13 @@
 package org.apache.commons.beanutils2.sql.converters;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.sql.Date;
 import java.util.Calendar;
 
+import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.converters.AbstractDateConverterTest;
 import org.apache.commons.beanutils2.converters.DateTimeConverter;
 import org.junit.jupiter.api.Test;
@@ -62,6 +65,7 @@ class SqlDateConverterTest extends AbstractDateConverterTest<Date> {
         return new SqlDateConverter(defaultValue);
     }
 
+
     /**
      * Test default String to java.sql.Date conversion
      */
@@ -80,6 +84,43 @@ class SqlDateConverterTest extends AbstractDateConverterTest<Date> {
 
         // Invalid String --> java.sql.Date Conversion
         invalidConversion(converter, "01/01/2006");
+
+        // Out-of-range fields must be rejected, not silently rolled over (2006-02-31 -> 2006-03-03)
+        invalidConversion(converter, "2006-02-31");
+        invalidConversion(converter, "2006-13-01");
+    }
+
+    @Test
+    void testDefaultStringToTypeConvertInvalidNonLeapYearFeb29() {
+        final SqlDateConverter converter = makeConverter();
+        converter.setUseLocaleFormat(false);
+        invalidConversion(converter, "2005-02-29");
+        invalidConversion(converter, "1900-02-29");
+    }
+
+    @Test
+    void testDefaultStringToTypeConvertStrictValidationMessage() {
+        final SqlDateConverter converter = makeConverter();
+        converter.setUseLocaleFormat(false);
+        final ConversionException ex = assertThrows(ConversionException.class, () -> converter.convert(getExpectedType(), "2006-02-31"));
+        assertTrue(ex.getMessage().contains("validation is strict"), "Message must mention strict validation");
+    }
+
+    @Test
+    void testDefaultStringToTypeConvertValidBoundaryDates() {
+        final SqlDateConverter converter = makeConverter();
+        converter.setUseLocaleFormat(false);
+        validConversion(converter, toType("0001-01-01", "yyyy-MM-dd", null), "0001-01-01");
+        validConversion(converter, toType("9999-12-31", "yyyy-MM-dd", null), "9999-12-31");
+    }
+
+    @Test
+    void testDefaultStringToTypeConvertValidLeapYear() {
+        final SqlDateConverter converter = makeConverter();
+        converter.setUseLocaleFormat(false);
+        final String testString = "2004-02-29";
+        final Object expected = toType(testString, "yyyy-MM-dd", null);
+        validConversion(converter, expected, testString);
     }
 
     /**
