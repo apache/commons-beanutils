@@ -16,6 +16,7 @@
  */
 package org.apache.commons.beanutils2;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -42,6 +43,23 @@ class FluentPropertyBeanIntrospectorTest {
 
         public void setURI(final URI theURI) {
             mURI = theURI;
+        }
+    }
+
+    public static final class StaticSetterBean {
+        private static String staticValue;
+
+        public static void setStaticOnly(final String value) {
+            staticValue = value;
+        }
+
+        public static StaticSetterBean setStaticProperty(final String value) {
+            staticValue = value;
+            return new StaticSetterBean();
+        }
+
+        public String getStaticProperty() {
+            return staticValue;
         }
     }
 
@@ -118,5 +136,20 @@ class FluentPropertyBeanIntrospectorTest {
         assertNotNull(aDescriptor.getWriteMethod(), "No write method for uri");
 
         assertNull(props.get("uRI"), "Should not find mis-capitalized property");
+    }
+
+    /**
+     * Tests that static methods are not treated as write methods.
+     */
+    @Test
+    void testIntrospectionStaticMethods() throws Exception {
+        final PropertyUtilsBean pu = new PropertyUtilsBean();
+        pu.addBeanIntrospector(new FluentPropertyBeanIntrospector());
+        final Map<String, PropertyDescriptor> props = createDescriptorMap(pu.getPropertyDescriptors(StaticSetterBean.class));
+        assertNull(props.get("staticOnly"), "Property created from static method");
+        final PropertyDescriptor pd = fetchDescriptor(props, "staticProperty");
+        assertNotNull(pd.getReadMethod(), "No read method for staticProperty");
+        assertNull(pd.getWriteMethod(), "Static method used as write method");
+        assertFalse(pu.isWriteable(new StaticSetterBean(), "staticProperty"), "staticProperty is writeable");
     }
 }

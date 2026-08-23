@@ -20,6 +20,7 @@ import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.Objects;
 
 import org.apache.commons.logging.Log;
@@ -56,7 +57,7 @@ import org.apache.commons.logging.LogFactory;
  * <p>
  * This class is more tolerant with regards to the return type of a set method. It basically iterates over all methods of a class and filters them for a
  * configurable prefix (the default prefix is {@code set}). It then generates corresponding {@code PropertyDescriptor} objects for the methods found which use
- * these methods as write methods.
+ * these methods as write methods. Static methods are ignored, as they are by default ignored in introspection.
  * </p>
  * <p>
  * An instance of this class is intended to collaborate with a {@link DefaultBeanIntrospector} object. So best results are achieved by adding this instance as
@@ -128,6 +129,10 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
     @Override
     public void introspect(final IntrospectionContext icontext) throws IntrospectionException {
         for (final Method m : icontext.getTargetClass().getMethods()) {
+            // Static methods are not property accessors; default introspection skips them as well.
+            if (Modifier.isStatic(m.getModifiers())) {
+                continue;
+            }
             if (m.getName().startsWith(getWriteMethodPrefix())) {
                 final String propertyName = propertyName(m);
                 final PropertyDescriptor pd = icontext.getPropertyDescriptor(propertyName);

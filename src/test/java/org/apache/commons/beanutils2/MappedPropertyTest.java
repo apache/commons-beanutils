@@ -226,6 +226,16 @@ class MappedPropertyTest {
     }
 
     /**
+     * Test static mapped accessors are ignored
+     */
+    @Test
+    void testStaticMapped() {
+        final String property = "staticMapped";
+        final Class<?> clazz = MappedPropertyTestBean.class;
+        assertThrows(IntrospectionException.class, () -> new MappedPropertyDescriptor(property, clazz));
+    }
+
+    /**
      * Test 'protected' method in parent
      */
     @Test

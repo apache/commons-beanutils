@@ -181,7 +181,8 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         }
 
         final Method method = MethodUtils.getMatchingAccessibleMethod(clazz, methodName, parameterTypes);
-        if (method != null) {
+        // skip static methods, as internalGetMethod does.
+        if (method != null && !Modifier.isStatic(method.getModifiers())) {
             return method;
         }
 
