@@ -112,6 +112,18 @@ class MappedPropertyTest {
     }
 
     /**
+     * Test instance getter is used but static setter is ignored
+     */
+    @Test
+    void testInstanceGetterStaticSetter() throws Exception {
+        final String property = "instanceGetterStaticSetter";
+        final Class<?> clazz = MappedPropertyTestBean.class;
+        final MappedPropertyDescriptor desc = new MappedPropertyDescriptor(property, clazz);
+        assertNotNull(desc.getMappedReadMethod(), "Instance getter should be found");
+        assertNull(desc.getMappedWriteMethod(), "Static setter should be ignored");
+    }
+
+    /**
      * Test Interface with mapped property
      */
     @Test
@@ -226,16 +238,6 @@ class MappedPropertyTest {
     }
 
     /**
-     * Test static mapped accessors are ignored
-     */
-    @Test
-    void testStaticMapped() {
-        final String property = "staticMapped";
-        final Class<?> clazz = MappedPropertyTestBean.class;
-        assertThrows(IntrospectionException.class, () -> new MappedPropertyDescriptor(property, clazz));
-    }
-
-    /**
      * Test 'protected' method in parent
      */
     @Test
@@ -255,5 +257,27 @@ class MappedPropertyTest {
         final MappedPropertyDescriptor desc = new MappedPropertyDescriptor(property, clazz);
         assertNotNull(desc.getMappedReadMethod(), "Getter is missing");
         assertNotNull(desc.getMappedWriteMethod(), "Setter is missing");
+    }
+
+    /**
+     * Test static getter is ignored but instance setter is used
+     */
+    @Test
+    void testStaticGetterInstanceSetter() throws Exception {
+        final String property = "staticGetterInstanceSetter";
+        final Class<?> clazz = MappedPropertyTestBean.class;
+        final MappedPropertyDescriptor desc = new MappedPropertyDescriptor(property, clazz);
+        assertNull(desc.getMappedReadMethod(), "Static getter should be ignored");
+        assertNotNull(desc.getMappedWriteMethod(), "Instance setter should be found");
+    }
+
+    /**
+     * Test static mapped accessors are ignored
+     */
+    @Test
+    void testStaticMapped() {
+        final String property = "staticMapped";
+        final Class<?> clazz = MappedPropertyTestBean.class;
+        assertThrows(IntrospectionException.class, () -> new MappedPropertyDescriptor(property, clazz));
     }
 }

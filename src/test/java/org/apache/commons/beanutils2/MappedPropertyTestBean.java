@@ -26,19 +26,31 @@ import java.util.Map;
 
 public class MappedPropertyTestBean {
 
-    private final Map<Object, Object> map = new HashMap<>();
-    private final Map<Object, Object> myMap = new HashMap<>();
-
+    public static String getStaticGetterInstanceSetter(final String key) {
+        return null;
+    }
     public static String getStaticMapped(final String key) {
         return "static-" + key;
+    }
+
+    public static void setInstanceGetterStaticSetter(final String key, final String value) {
+        // static setter should be ignored
     }
 
     public static void setStaticMapped(final String key, final String value) {
         // empty
     }
 
+    private final Map<Object, Object> map = new HashMap<>();
+
+    private final Map<Object, Object> myMap = new HashMap<>();
+
     public Long getDifferentTypes(final String key) {
         return Long.valueOf(((Number) map.get(key)).longValue());
+    }
+
+    public String getInstanceGetterStaticSetter(final String key) {
+        return (String) map.get(key);
     }
 
     public String getInvalidGetter(final String key, final String other) {
@@ -101,6 +113,10 @@ public class MappedPropertyTestBean {
     }
 
     protected void setProtectedMapped(final String key, final String value) {
+        map.put(key, value);
+    }
+
+    public void setStaticGetterInstanceSetter(final String key, final String value) {
         map.put(key, value);
     }
 

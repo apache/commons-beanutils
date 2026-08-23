@@ -46,6 +46,23 @@ class FluentPropertyBeanIntrospectorTest {
         }
     }
 
+    public static final class MixedSetterBean {
+        public static void setMixed(final Integer v) {
+            // static setter should be ignored
+        }
+
+        private String value;
+
+        public String getMixed() {
+            return value;
+        }
+
+        public MixedSetterBean setMixed(final String v) {
+            this.value = v;
+            return this;
+        }
+    }
+
     public static final class StaticSetterBean {
         private static String staticValue;
 
@@ -136,6 +153,21 @@ class FluentPropertyBeanIntrospectorTest {
         assertNotNull(aDescriptor.getWriteMethod(), "No write method for uri");
 
         assertNull(props.get("uRI"), "Should not find mis-capitalized property");
+    }
+
+    /**
+     * Tests that an instance setter is used when a static setter with the same name exists.
+     */
+    @Test
+    void testIntrospectionMixedStaticInstanceSetter() throws Exception {
+        final PropertyUtilsBean pu = new PropertyUtilsBean();
+        pu.addBeanIntrospector(new FluentPropertyBeanIntrospector());
+        final Map<String, PropertyDescriptor> props = createDescriptorMap(pu.getPropertyDescriptors(MixedSetterBean.class));
+        final PropertyDescriptor pd = fetchDescriptor(props, "mixed");
+        assertNotNull(pd.getReadMethod(), "No read method for mixed");
+        assertNotNull(pd.getWriteMethod(), "Instance setter should be found");
+        assertFalse(java.lang.reflect.Modifier.isStatic(pd.getWriteMethod().getModifiers()), "Write method should not be static");
+        assertTrue(pu.isWriteable(new MixedSetterBean(), "mixed"), "mixed should be writeable");
     }
 
     /**
