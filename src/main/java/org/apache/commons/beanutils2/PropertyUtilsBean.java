@@ -140,6 +140,15 @@ public class PropertyUtilsBean {
     }
 
     /**
+     * Discards the memoized introspection results after the registered {@link BeanIntrospector} set has changed. Unlike {@link #clearDescriptors()} this leaves
+     * the JVM-global {@link Introspector} cache untouched.
+     */
+    private void clearDescriptorCaches() {
+        descriptorsCache.clear();
+        mappedDescriptorsCache.clear();
+    }
+
+    /**
      * Clear any cached property descriptors information for all classes loaded by any class loaders. This is useful in cases where class loaders are thrown
      * away to implement class reloading.
      */
@@ -147,15 +156,6 @@ public class PropertyUtilsBean {
         descriptorsCache.clear();
         mappedDescriptorsCache.clear();
         Introspector.flushCaches();
-    }
-
-    /**
-     * Discards the memoized introspection results after the registered {@link BeanIntrospector} set has changed. Unlike {@link #clearDescriptors()} this leaves
-     * the JVM-global {@link Introspector} cache untouched.
-     */
-    private void clearDescriptorCaches() {
-        descriptorsCache.clear();
-        mappedDescriptorsCache.clear();
     }
 
     /**
