@@ -19,6 +19,7 @@ package org.apache.commons.beanutils2.converters;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import org.apache.commons.beanutils2.Converter;
@@ -60,6 +61,15 @@ class BigIntegerConverterTest extends AbstractNumberConverterTest<BigInteger> {
     @AfterEach
     public void tearDown() throws Exception {
         converter = null;
+    }
+
+    @Test
+    void testLargeFloatingPointMagnitude() {
+        // A Float or Double beyond long range must keep its magnitude instead of saturating to Long.MAX_VALUE.
+        final Double bigDouble = Double.valueOf(1.0e30);
+        assertEquals(new BigDecimal(bigDouble.toString()).toBigInteger(), converter.convert(BigInteger.class, bigDouble));
+        final Float bigFloat = Float.valueOf(1.0e20f);
+        assertEquals(new BigDecimal(bigFloat.toString()).toBigInteger(), converter.convert(BigInteger.class, bigFloat));
     }
 
     @Test
