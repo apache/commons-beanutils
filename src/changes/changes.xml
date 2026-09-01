@@ -59,6 +59,7 @@
       <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Clear descriptor caches when bean introspectors change (#435).</action>
       <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Reject out-of-range SQL date/time fields in DateTimeConverter.toDate (#436).</action>
       <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Skip static methods in FluentPropertyBeanIntrospector and mapped lookup (#437).</action>
+      <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">NumberConverter.toNumber(Class, Number): Preserve float and double magnitude when converting to BigInteger (#438).</action>
       <!-- ADD -->
       <action type="add" dev="ggregory" due-to="Gary Gregory">Use varargs for org.apache.commons.beanutils2.MethodUtils.getAccessibleMethod(Class, String, Class...), and remove last argument variants using Class[] and Class.</action>
       <action type="add" dev="ggregory" due-to="SethFalco, Melloware, Gary Gregory">Add Instant converter and improve enum converter #49.</action>
