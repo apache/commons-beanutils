@@ -493,6 +493,9 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
             if (value instanceof BigDecimal) {
                 return targetType.cast(((BigDecimal) value).toBigInteger());
             }
+            if (value instanceof Float || value instanceof Double) {
+                return targetType.cast(new BigDecimal(value.toString()).toBigInteger());
+            }
             return targetType.cast(BigInteger.valueOf(value.longValue()));
         }
 
