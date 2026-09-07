@@ -20,6 +20,7 @@ package org.apache.commons.beanutils2.converters;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.math.BigInteger;
 import java.text.DecimalFormat;
 
 import org.apache.commons.beanutils2.ConversionException;
@@ -207,6 +208,21 @@ class LongLocaleConverterTest extends AbstractLocaleConverterTest<Long> {
         assertEquals(Long.valueOf(Long.MIN_VALUE), converter.convert(fmt.format(Long.MIN_VALUE)), "Long.MIN_VALUE");
         assertThrows(ConversionException.class, () -> converter.convert("99999999999999999999"));
         assertThrows(ConversionException.class, () -> converter.convert("-99999999999999999999"));
+    }
+
+    /**
+     * Values just past the long range must not wrap or round into range before the range check sees them: a parsed String one past {@link Long#MAX_VALUE}
+     * comes back from {@link DecimalFormat} as the {@link Double} 2^63, which a double-based comparison cannot distinguish from {@link Long#MAX_VALUE}, and
+     * {@code longValue()} of a {@link BigInteger} keeps only the low-order 64 bits, so 2^63 becomes {@link Long#MIN_VALUE}.
+     */
+    @Test
+    void testOutOfRangeBoundaryRejected() {
+        converter = LongLocaleConverter.builder().setLocale(defaultLocale).get();
+        assertThrows(ConversionException.class, () -> converter.convert("9223372036854775808"), "One more than maximum, expected ConversionException");
+        final BigInteger maxPlusOne = BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.ONE);
+        assertThrows(ConversionException.class, () -> converter.convert(maxPlusOne), "2^63, expected ConversionException");
+        assertThrows(ConversionException.class, () -> converter.convert(BigInteger.valueOf(Long.MIN_VALUE).subtract(BigInteger.ONE)),
+                "One less than minimum, expected ConversionException");
     }
 
     /**

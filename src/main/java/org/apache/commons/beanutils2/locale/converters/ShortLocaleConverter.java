@@ -81,8 +81,8 @@ public class ShortLocaleConverter extends DecimalLocaleConverter<Short> {
             return (Short) result;
         }
         final Number parsed = (Number) result;
-        if (parsed.longValue() != parsed.shortValue()) {
-            throw new ConversionException("Supplied number is not of type Short: " + parsed.longValue());
+        if (parsed.longValue() != parsed.shortValue() || !inRange(parsed, Short.MIN_VALUE, Short.MAX_VALUE)) {
+            throw new ConversionException("Supplied number is not of type Short: " + parsed);
         }
         // now returns property Short
         return Short.valueOf(checkInteger(parsed).shortValue());

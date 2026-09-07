@@ -20,6 +20,9 @@ package org.apache.commons.beanutils2.converters;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
 import org.junit.jupiter.api.AfterEach;
@@ -81,6 +84,20 @@ class ByteConverterTest extends AbstractNumberConverterTest<Byte> {
         assertThrows(ConversionException.class, () -> converter.convert(clazz, minMinusOne), "Less than minimum, expected ConversionException");
         // Too Large
         assertThrows(ConversionException.class, () -> converter.convert(clazz, maxPlusOne), "More than maximum, expected ConversionException");
+    }
+
+    /**
+     * A {@link BigInteger} or {@link BigDecimal} beyond long range wraps to its low-order 64 bits in {@code longValue()}, so it can slip through a long-based
+     * bounds check and convert to an unrelated in-range value (2^64 + 5 converted to 5); it must be rejected.
+     */
+    @Test
+    void testWrappedAmount() {
+        final Converter<Byte> converter = makeConverter();
+        final Class<Byte> clazz = Byte.class;
+        final BigInteger wrapped = BigInteger.ONE.shiftLeft(64).add(BigInteger.valueOf(5));
+        assertThrows(ConversionException.class, () -> converter.convert(clazz, wrapped), "2^64 + 5, expected ConversionException");
+        assertThrows(ConversionException.class, () -> converter.convert(clazz, new BigDecimal(wrapped)), "2^64 + 5, expected ConversionException");
+        assertThrows(ConversionException.class, () -> converter.convert(clazz, wrapped.negate()), "-(2^64 + 5), expected ConversionException");
     }
 
     @Test
