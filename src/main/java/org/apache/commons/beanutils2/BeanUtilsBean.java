@@ -21,6 +21,7 @@ import java.beans.IndexedPropertyDescriptor;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -91,7 +92,17 @@ public class BeanUtilsBean {
     /**
      * Logging for this instance
      */
-    private static final Log LOG = LogFactory.getLog(BeanUtilsBean.class);
+    private static Log LOG = LogFactory.getLog(BeanUtilsBean.class);
+
+    /**
+     * Reset this bean's log as another log implementation
+     * <strong>Only use for log test</strong>
+     *
+     * @param log log for this BeanUtilsBean
+     */
+    protected static void setLOG(Log log) {
+        BeanUtilsBean.LOG = log;
+    }
 
     /**
      * Determines the type of a {@code DynaProperty}. Here a special treatment is needed for mapped properties.
@@ -333,30 +344,8 @@ public class BeanUtilsBean {
     public void copyProperty(final Object bean, String name, Object value) throws IllegalAccessException, InvocationTargetException {
         // Trace logging (if enabled)
         if (LOG.isTraceEnabled()) {
-            final StringBuilder sb = new StringBuilder("  copyProperty(");
-            sb.append(bean);
-            sb.append(", ");
-            sb.append(name);
-            sb.append(", ");
-            if (value == null) {
-                sb.append("<NULL>");
-            } else if (value instanceof String) {
-                sb.append((String) value);
-            } else if (value instanceof String[]) {
-                final String[] values = (String[]) value;
-                sb.append('[');
-                for (int i = 0; i < values.length; i++) {
-                    if (i > 0) {
-                        sb.append(',');
-                    }
-                    sb.append(values[i]);
-                }
-                sb.append(']');
-            } else {
-                sb.append(value.toString());
-            }
-            sb.append(')');
-            LOG.trace(sb.toString());
+            final String logStart = "  copyProperty(";
+            LOG.trace(traceLogRecord(bean, name, value, logStart).toString());
         }
 
         // Resolve any nested expression to get the actual target bean
@@ -757,30 +746,8 @@ public class BeanUtilsBean {
     public void setProperty(final Object bean, String name, final Object value) throws IllegalAccessException, InvocationTargetException {
         // Trace logging (if enabled)
         if (LOG.isTraceEnabled()) {
-            final StringBuilder sb = new StringBuilder("  setProperty(");
-            sb.append(bean);
-            sb.append(", ");
-            sb.append(name);
-            sb.append(", ");
-            if (value == null) {
-                sb.append("<NULL>");
-            } else if (value instanceof String) {
-                sb.append((String) value);
-            } else if (value instanceof String[]) {
-                final String[] values = (String[]) value;
-                sb.append('[');
-                for (int i = 0; i < values.length; i++) {
-                    if (i > 0) {
-                        sb.append(',');
-                    }
-                    sb.append(values[i]);
-                }
-                sb.append(']');
-            } else {
-                sb.append(value.toString());
-            }
-            sb.append(')');
-            LOG.trace(sb.toString());
+            final String logStart = "  setProperty(";
+            LOG.trace(traceLogRecord(bean, name, value, logStart).toString());
         }
 
         // Resolve any nested expression to get the actual target bean
@@ -906,5 +873,61 @@ public class BeanUtilsBean {
         } catch (final NoSuchMethodException e) {
             throw new InvocationTargetException(e, "Cannot set " + propName);
         }
+    }
+
+    /**
+     * <p>Build the stringBuilder by using set/copy bean property for log, only
+     * run when log level is <b>trace</b>. Sequentially fill stringBuilder by
+     * {@code bean.toString}, property name and property value.</p>
+     *
+     * <p><strong>When the bean's toString method is override, hide the detail
+     * of value.</strong></p>
+     *
+     * @param bean Bean on which setting is to be performed
+     * @param name Property name (can be nested/indexed/mapped/combo)
+     * @param value Value to be set
+     * @param logStart the start of log
+     * @return the value should log as trace
+     */
+    protected static StringBuilder traceLogRecord(Object bean, String name, Object value, String logStart) {
+        StringBuilder sb = new StringBuilder(logStart);
+        sb.append(bean);
+        sb.append(", ");
+        sb.append(name);
+        sb.append(", ");
+        // If bean's toString method has override, do not directly log value
+        boolean hasToStringOverride = false;
+        try {
+            Method toString = bean.getClass().getDeclaredMethod("toString");
+            if (toString.getDeclaringClass()!= Object.class){
+                hasToStringOverride = true;
+            }
+        } catch (NoSuchMethodException e) {
+            // If NoSuchMethodException, the bean doesn't override toString, continue
+        }
+        if (hasToStringOverride){
+            // Only mention the value has been set, do not expose detail
+            return sb.append("has been set)");
+        }
+
+        // normal scene, haven't override toString
+        if (value == null) {
+            return sb.append("<NULL>)");
+        }
+        if (value instanceof String){
+            return sb.append((String) value).append(')');
+        }
+        if (value instanceof String[]){
+            final String[] values = (String[]) value;
+            sb.append('[');
+            for (int i = 0; i < values.length; i++) {
+                if (i > 0) {
+                    sb.append(',');
+                }
+                sb.append(values[i]);
+            }
+            return sb.append("])");
+        }
+        return sb.append(value.toString()).append(')');
     }
 }
