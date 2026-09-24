@@ -318,6 +318,59 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
     }
 
     /**
+     * Converts a {@code Number} to a {@code long}, validating that its whole part is within the specified range.
+     * <p>
+     * The range test must not be performed on a narrowed copy of the value: {@code longValue()} of a {@link BigInteger} or {@link BigDecimal} keeps only the
+     * low-order 64 bits and a {@code double} cannot represent every {@code long}, so an out-of-range value can wrap or round into range before a {@code long}
+     * or {@code double} based bounds check sees it. These types are therefore compared as {@link BigDecimal}.
+     *
+     * @param sourceType The type being converted from
+     * @param targetType The Number type to convert to
+     * @param value      The Number to convert.
+     * @param min        The smallest value of the target type
+     * @param max        The largest value of the target type
+     * @return The value as a {@code long}, with any fractional part discarded.
+     * @throws ConversionException if the value is outside the specified range.
+     */
+    private long toLong(final Class<?> sourceType, final Class<?> targetType, final Number value, final long min, final long max) {
+        BigDecimal decimalValue = null;
+        if (value instanceof BigDecimal) {
+            decimalValue = (BigDecimal) value;
+        } else if (value instanceof BigInteger) {
+            decimalValue = new BigDecimal((BigInteger) value);
+        } else if (value instanceof Float || value instanceof Double) {
+            final double doubleValue = value.doubleValue();
+            if (doubleValue == Double.POSITIVE_INFINITY) {
+                throw ConversionException.format("%s value '%s' is too large for %s", toString(sourceType), value, toString(targetType));
+            }
+            if (doubleValue == Double.NEGATIVE_INFINITY) {
+                throw ConversionException.format("%s value '%s' is too small %s", toString(sourceType), value, toString(targetType));
+            }
+            if (!Double.isNaN(doubleValue)) {
+                decimalValue = new BigDecimal(doubleValue);
+            }
+        }
+        if (decimalValue != null) {
+            // Values whose whole part truncates into range stay accepted, so compare against min - 1 and max + 1.
+            if (decimalValue.compareTo(BigDecimal.valueOf(max).add(BigDecimal.ONE)) >= 0) {
+                throw ConversionException.format("%s value '%s' is too large for %s", toString(sourceType), value, toString(targetType));
+            }
+            if (decimalValue.compareTo(BigDecimal.valueOf(min).subtract(BigDecimal.ONE)) <= 0) {
+                throw ConversionException.format("%s value '%s' is too small %s", toString(sourceType), value, toString(targetType));
+            }
+            return decimalValue.longValue();
+        }
+        final long longValue = value.longValue();
+        if (longValue > max) {
+            throw ConversionException.format("%s value '%s' is too large for %s", toString(sourceType), value, toString(targetType));
+        }
+        if (longValue < min) {
+            throw ConversionException.format("%s value '%s' is too small %s", toString(sourceType), value, toString(targetType));
+        }
+        return longValue;
+    }
+
+    /**
      * Default String to Number conversion.
      * <p>
      * This method handles conversion from a String to the following types:
@@ -413,49 +466,22 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
 
         // Byte
         if (targetType.equals(Byte.class)) {
-            final long longValue = value.longValue();
-            if (longValue > Byte.MAX_VALUE) {
-                throw ConversionException.format("%s value '%s' is too large for %s", toString(sourceType), value, toString(targetType));
-            }
-            if (longValue < Byte.MIN_VALUE) {
-                throw ConversionException.format("%s value '%s' is too small %s", toString(sourceType), value, toString(targetType));
-            }
-            return targetType.cast(Byte.valueOf(value.byteValue()));
+            return targetType.cast(Byte.valueOf((byte) toLong(sourceType, targetType, value, Byte.MIN_VALUE, Byte.MAX_VALUE)));
         }
 
         // Short
         if (targetType.equals(Short.class)) {
-            final long longValue = value.longValue();
-            if (longValue > Short.MAX_VALUE) {
-                throw ConversionException.format("%s value '%s' is too large for %s", toString(sourceType), value, toString(targetType));
-            }
-            if (longValue < Short.MIN_VALUE) {
-                throw ConversionException.format("%s value '%s' is too small %s", toString(sourceType), value, toString(targetType));
-            }
-            return targetType.cast(Short.valueOf(value.shortValue()));
+            return targetType.cast(Short.valueOf((short) toLong(sourceType, targetType, value, Short.MIN_VALUE, Short.MAX_VALUE)));
         }
 
         // Integer
         if (targetType.equals(Integer.class)) {
-            final long longValue = value.longValue();
-            if (longValue > Integer.MAX_VALUE) {
-                throw ConversionException.format("%s value '%s' is too large for %s", toString(sourceType), value, toString(targetType));
-            }
-            if (longValue < Integer.MIN_VALUE) {
-                throw ConversionException.format("%s value '%s' is too small %s", toString(sourceType), value, toString(targetType));
-            }
-            return targetType.cast(Integer.valueOf(value.intValue()));
+            return targetType.cast(Integer.valueOf((int) toLong(sourceType, targetType, value, Integer.MIN_VALUE, Integer.MAX_VALUE)));
         }
 
         // Long
         if (targetType.equals(Long.class)) {
-            if (value.doubleValue() > Long.MAX_VALUE) {
-                throw ConversionException.format("%s value '%s' is too large for %s", toString(sourceType), value, toString(targetType));
-            }
-            if (value.doubleValue() < Long.MIN_VALUE) {
-                throw ConversionException.format("%s value '%s' is too small %s", toString(sourceType), value, toString(targetType));
-            }
-            return targetType.cast(Long.valueOf(value.longValue()));
+            return targetType.cast(Long.valueOf(toLong(sourceType, targetType, value, Long.MIN_VALUE, Long.MAX_VALUE)));
         }
 
         // Float
