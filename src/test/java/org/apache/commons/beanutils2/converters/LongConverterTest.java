@@ -20,6 +20,7 @@ package org.apache.commons.beanutils2.converters;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Locale;
 
@@ -91,6 +92,37 @@ class LongConverterTest extends AbstractNumberConverterTest<Long> {
         final LongConverter converter = makeConverter();
         converter.setLocale(Locale.US);
         assertThrows(ConversionException.class, () -> converter.convert(Long.class, "99999999999999999999"), "More than maximum, expected ConversionException");
+    }
+
+    /**
+     * A locale-parsed String one past {@link Long#MAX_VALUE} comes back from {@link java.text.DecimalFormat} as the {@link Double} 2^63, which a double-based
+     * bounds check cannot distinguish from {@link Long#MAX_VALUE}; it must be rejected rather than clamped.
+     */
+    @Test
+    void testLocaleStringOutOfRangeBoundary() {
+        final LongConverter converter = makeConverter();
+        converter.setLocale(Locale.US);
+        assertThrows(ConversionException.class, () -> converter.convert(Long.class, "9223372036854775808"), "One more than maximum, expected ConversionException");
+    }
+
+    /**
+     * Values just past the long range must not wrap or round into range before the bounds check sees them: {@code longValue()} of a {@link BigInteger} keeps
+     * only the low-order 64 bits (so 2^63 becomes {@link Long#MIN_VALUE}) and {@code doubleValue()} of 2^63 equals the double representation of
+     * {@link Long#MAX_VALUE}.
+     */
+    @Test
+    void testOutOfRangeBoundary() {
+        final Converter<Long> converter = makeConverter();
+        final Class<?> clazz = Long.class;
+        final BigInteger maxPlusOne = BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.ONE);
+        final BigInteger minMinusOne = BigInteger.valueOf(Long.MIN_VALUE).subtract(BigInteger.ONE);
+        assertThrows(ConversionException.class, () -> converter.convert(clazz, maxPlusOne), "One more than maximum, expected ConversionException");
+        assertThrows(ConversionException.class, () -> converter.convert(clazz, minMinusOne), "One less than minimum, expected ConversionException");
+        assertThrows(ConversionException.class, () -> converter.convert(clazz, new BigDecimal(maxPlusOne)), "One more than maximum, expected ConversionException");
+        assertThrows(ConversionException.class, () -> converter.convert(clazz, Double.valueOf(9.223372036854775808E18)), "2^63, expected ConversionException");
+        // Boundaries still convert
+        assertEquals(Long.valueOf(Long.MAX_VALUE), converter.convert(clazz, BigInteger.valueOf(Long.MAX_VALUE)), "Maximum");
+        assertEquals(Long.valueOf(Long.MIN_VALUE), converter.convert(clazz, BigInteger.valueOf(Long.MIN_VALUE)), "Minimum");
     }
 
     @Test
