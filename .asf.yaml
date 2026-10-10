@@ -16,6 +16,8 @@
 github:
   description: "Apache Commons Beanutils"
   homepage: https://commons.apache.org/beanutils/
+  autolink_jira:
+    - BEANUTILS
   
   pull_requests:
     # allow auto-merge
