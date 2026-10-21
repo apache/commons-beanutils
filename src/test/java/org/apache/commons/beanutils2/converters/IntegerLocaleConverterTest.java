@@ -18,7 +18,11 @@
 package org.apache.commons.beanutils2.converters;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.math.BigInteger;
+
+import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.locale.converters.IntegerLocaleConverter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -199,6 +203,17 @@ class IntegerLocaleConverterTest extends AbstractLocaleConverterTest<Integer> {
     void testNonIntegerRejected() {
         converter = IntegerLocaleConverter.builder().setDefault(defaultValue).setLocale(defaultLocale).get();
         convertValueNoPattern(converter, "non-integer", "5.5", defaultValue);
+    }
+
+    /**
+     * A {@link BigInteger} beyond long range wraps to its low-order 64 bits in {@code longValue()}, so it can slip through a long-based range check and
+     * convert to an unrelated in-range value (2^64 + 5 converted to 5); it must be rejected.
+     */
+    @Test
+    void testWrappedOutOfRangeRejected() {
+        converter = IntegerLocaleConverter.builder().setLocale(defaultLocale).get();
+        final BigInteger wrapped = BigInteger.ONE.shiftLeft(64).add(BigInteger.valueOf(5));
+        assertThrows(ConversionException.class, () -> converter.convert(wrapped), "2^64 + 5, expected ConversionException");
     }
 
     /**
