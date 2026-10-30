@@ -35,9 +35,13 @@ import java.util.Map;
  * Alternatively, an implementatin may choose to ignore this property.
  * All keys for maps must be of type String so no meta data is needed for map keys.</p>
  *
+ * <p>Since 1.11.1, serialization writes default fields before custom class metadata.
+ * Deserialization also accepts the historical format, which wrote these values in
+ * the opposite order. The new format is not intended for readers from earlier releases.</p>
+ *
  */
 
-public class DynaProperty implements Serializable {
+public class DynaProperty extends DynaPropertySerialization implements Serializable {
 
     private static final long serialVersionUID = 1L;
     /*
@@ -262,12 +266,16 @@ public class DynaProperty implements Serializable {
      * @throws ClassNotFoundException Class of a serialized object cannot be found.
      */
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
+        if (!DynaPropertySerialization.isLegacyStream(this)) {
+            in.defaultReadObject();
+        }
         this.type = readAnyClass(in);
         if (isMapped() || isIndexed()) {
             this.contentType = readAnyClass(in);
         }
-        // read other values
-        in.defaultReadObject();
+        if (DynaPropertySerialization.isLegacyStream(this)) {
+            in.defaultReadObject();
+        }
     }
 
     /**
@@ -330,14 +338,14 @@ public class DynaProperty implements Serializable {
      * workaround.
      *
      * @param out Where to write.
+     * @serialData Default fields, followed by the property type and, for indexed or mapped properties, the content type.
      * @throws IOException Thrown if I/O errors occur while writing to the underlying stream.
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
         writeAnyClass(this.type,out);
         if (isMapped() || isIndexed()) {
             writeAnyClass(this.contentType,out);
         }
-        // write out other values
-        out.defaultWriteObject();
     }
 }
