@@ -53,6 +53,7 @@ class Jira492Test {
         assertEquals("item0", described.get("someList"));
     }
 
+    @Test
     public void getArrayProperty() throws Exception {
         final String[] arr = beanUtils.getArrayProperty(bean, "someList");
         assertEquals(2, arr.length);

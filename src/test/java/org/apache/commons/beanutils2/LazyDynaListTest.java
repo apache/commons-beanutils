@@ -268,7 +268,8 @@ class LazyDynaListTest {
     /**
      * Test Collection
      */
-    void testCollection(final LazyDynaList list, final Class<?> testClass, final DynaClass testDynaClass, final Object wrongBean) {
+    @Test
+    void testCollection() {
 
         // Create Collection & Array of Maps
         final int size = 5;
