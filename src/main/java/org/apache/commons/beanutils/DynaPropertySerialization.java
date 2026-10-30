@@ -38,8 +38,8 @@ class DynaPropertySerialization implements Serializable {
 
     private transient boolean legacyStream;
 
-    final boolean isLegacyStream() {
-        return legacyStream;
+    static boolean isLegacyStream(final DynaPropertySerialization property) {
+        return property.legacyStream;
     }
 
     private void readObjectNoData() {

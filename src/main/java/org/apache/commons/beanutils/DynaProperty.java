@@ -266,14 +266,14 @@ public class DynaProperty extends DynaPropertySerialization implements Serializa
      * @throws ClassNotFoundException Class of a serialized object cannot be found.
      */
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
-        if (!isLegacyStream()) {
+        if (!DynaPropertySerialization.isLegacyStream(this)) {
             in.defaultReadObject();
         }
         this.type = readAnyClass(in);
         if (isMapped() || isIndexed()) {
             this.contentType = readAnyClass(in);
         }
-        if (isLegacyStream()) {
+        if (DynaPropertySerialization.isLegacyStream(this)) {
             in.defaultReadObject();
         }
     }
