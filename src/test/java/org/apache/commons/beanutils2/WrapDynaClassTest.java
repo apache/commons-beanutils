@@ -18,10 +18,13 @@
 package org.apache.commons.beanutils2;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
+import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.IdentityHashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutorService;
@@ -29,11 +32,17 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.collections4.map.ConcurrentReferenceHashMap;
+import org.apache.commons.collections4.map.ConcurrentReferenceHashMap.ReferenceType;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.Isolated;
 
 /**
  * Tests {@link WrapDynaClass}.
  */
+@Isolated("Temporarily replaces the shared WrapDynaClass cache")
 class WrapDynaClassTest {
 
     /**
@@ -52,10 +61,34 @@ class WrapDynaClassTest {
         }
     }
 
+    private ContextClassLoaderLocal<Map<Object, WrapDynaClass>> classLoaderCache;
+    private Map<Object, WrapDynaClass> originalCache;
+
+    @BeforeEach
+    @SuppressWarnings("unchecked")
+    void installStrongKeyCache() throws ReflectiveOperationException {
+        final Field field = WrapDynaClass.class.getDeclaredField("CLASSLOADER_CACHE");
+        field.setAccessible(true);
+        classLoaderCache = (ContextClassLoaderLocal<Map<Object, WrapDynaClass>>) field.get(null);
+        originalCache = classLoaderCache.get();
+        assertInstanceOf(ConcurrentReferenceHashMap.class, originalCache, "Production cache must use the concurrent map tested here");
+        // Keep the production map implementation, but prevent GC from evicting the temporary CacheKey objects while testing instance identity.
+        classLoaderCache.set(ConcurrentReferenceHashMap.<Object, WrapDynaClass>builder().setKeyReferenceType(ReferenceType.STRONG).get());
+    }
+
+    @AfterEach
+    void restoreCache() {
+        if (originalCache != null) {
+            classLoaderCache.set(originalCache);
+        }
+    }
+
     /**
-     * The cache key is one bean class, so {@code createDynaClass} must hand back a single instance no matter how many threads race to populate the
-     * per-classloader cache. With a plain {@code WeakHashMap} the non-atomic {@code computeIfAbsent} let concurrent callers build and return distinct
-     * instances for one key; this drives that race and fails if more than one instance escapes.
+     * Tests that concurrent callers receive the same instance when populating an empty cache.
+     *
+     * <p>
+     * Strong keys isolate atomic initialization from garbage collection of the production cache's weak keys. Each round starts with an empty cache.
+     * </p>
      */
     @Test
     void testConcurrentCreateDynaClassReturnsSameInstance() throws Exception {
@@ -90,13 +123,13 @@ class WrapDynaClassTest {
     }
 
     /**
-     * The single-threaded cache contract: repeated calls for one bean class return the same instance until the cache is cleared.
+     * Tests that repeated calls return the same cached instance when keys cannot be reclaimed.
      */
     @Test
     void testCreateDynaClassIsCached() {
         WrapDynaClass.clear();
         final WrapDynaClass first = WrapDynaClass.createDynaClass(ConcurrentBean.class);
+        System.gc();
         assertSame(first, WrapDynaClass.createDynaClass(ConcurrentBean.class));
-        WrapDynaClass.clear();
     }
 }
