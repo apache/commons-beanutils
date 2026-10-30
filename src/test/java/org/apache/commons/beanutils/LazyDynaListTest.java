@@ -16,6 +16,8 @@
  */
 package org.apache.commons.beanutils;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -304,7 +306,7 @@ public class LazyDynaListTest extends TestCase {
     /**
      * Test Collection
      */
-    public void testCollection(final LazyDynaList list, final Class<?> testClass, final DynaClass testDynaClass, final Object wrongBean) {
+    public void testCollection() {
 
         final int size = 5;
         final List<Object> testList = new ArrayList<>(size);
@@ -405,6 +407,132 @@ public class LazyDynaListTest extends TestCase {
     public void testNullType() {
         final LazyDynaList lazyList = new LazyDynaList();
         lazyList.add(new HashMap<>());
+    }
+
+    /**
+     * Test that the element type is set from the first element populated on an untyped List: a later
+     * element of a different type is rejected, and toArray() returns an array of the element type.
+     */
+    public void testFirstElementSetsElementType() {
+        final LazyDynaList lazyList = new LazyDynaList();
+        lazyList.add(new HashMap<>());
+        assertThrows(IllegalArgumentException.class, () -> lazyList.add("a POJO String"),
+                "Element of a different type must be rejected once the type is set");
+
+        final TreeMap<String, Object> first = new TreeMap<>();
+        first.put("key0", "val0");
+        final TreeMap<String, Object> second = new TreeMap<>();
+        second.put("key1", "val1");
+        final TreeMap<?, ?>[] source = {first, second};
+        final LazyDynaList mapList = new LazyDynaList(source);
+        final TreeMap<?, ?>[] array = (TreeMap[]) mapList.toArray();
+        assertEquals(2, array.length);
+        assertEquals("val0", array[0].get("key0"));
+        assertEquals("val1", array[1].get("key1"));
+    }
+
+    /**
+     * Test that a POJO first element on an untyped List takes the WrapDynaBean path: toArray()
+     * returns an array of the POJO class and toDynaBeanArray() returns a WrapDynaBean[].
+     */
+    public void testUntypedListPojoFirstElement() {
+        final LazyDynaList lazyList = new LazyDynaList();
+        final TestBean bean = new TestBean();
+        lazyList.add(bean);
+
+        final Object[] array = lazyList.toArray();
+        assertEquals("Not TestBean[]", TestBean.class, array.getClass().getComponentType());
+        assertSame("Wrong element", bean, array[0]);
+
+        final DynaBean[] dynaArray = lazyList.toDynaBeanArray();
+        assertEquals("Not WrapDynaBean[]", WrapDynaBean.class, dynaArray.getClass().getComponentType());
+        assertSame("Wrong wrapped instance", bean, ((WrapDynaBean) dynaArray[0]).getInstance());
+    }
+
+    /**
+     * Test that a DynaBean first element on an untyped List sets both the element type and the
+     * DynaBean type to the same DynaBean subclass.
+     */
+    public void testUntypedListDynaBeanFirstElement() throws Exception {
+        final LazyDynaList lazyList = new LazyDynaList();
+        final DynaBean bean = basicDynaClass.newInstance();
+        lazyList.add(bean);
+
+        // elementType: toArray() returns an array of the DynaBean subclass
+        final Object[] array = lazyList.toArray();
+        assertEquals("Not BasicDynaBean[]", BasicDynaBean.class, array.getClass().getComponentType());
+        assertSame("Wrong element", bean, array[0]);
+
+        // elementDynaBeanType: toDynaBeanArray() returns the same subclass
+        final DynaBean[] dynaArray = lazyList.toDynaBeanArray();
+        assertEquals("Not BasicDynaBean[]", BasicDynaBean.class, dynaArray.getClass().getComponentType());
+        assertSame("Wrong element", bean, dynaArray[0]);
+    }
+
+    /**
+     * Test addAll(Collection) and addAll(int, Collection) on an untyped List: the type is set from
+     * the first element of the Collection and mismatched types are then rejected.
+     */
+    public void testUntypedListAddAll() {
+        final List<Object> collection = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            final TreeMap<String, Object> map = new TreeMap<>();
+            map.put("prop" + i, "val" + i);
+            collection.add(map);
+        }
+
+        // addAll(Collection)
+        final LazyDynaList lazyList = new LazyDynaList();
+        lazyList.addAll(collection);
+        assertEquals("1. check size", 2, lazyList.size());
+        TreeMap<?, ?>[] mapArray = (TreeMap[]) lazyList.toArray();
+        assertEquals("2. Map error", "val0", mapArray[0].get("prop0"));
+        assertEquals("3. Map error", "val1", mapArray[1].get("prop1"));
+        assertThrows(IllegalArgumentException.class, () -> lazyList.add(new TestBean()), "4. wrong type accepted");
+
+        // addAll(int, Collection) - grows the List to the insert position first
+        final LazyDynaList indexedList = new LazyDynaList();
+        indexedList.addAll(2, collection);
+        assertEquals("5. check size", 4, indexedList.size());
+        mapArray = (TreeMap[]) indexedList.toArray();
+        assertEquals("6. check size", 4, mapArray.length);
+        assertEquals("7. Map error", "val0", mapArray[2].get("prop0"));
+        assertEquals("8. Map error", "val1", mapArray[3].get("prop1"));
+        assertThrows(IllegalArgumentException.class, () -> indexedList.add(new TestBean()), "9. wrong type accepted");
+    }
+
+    /**
+     * Test that get(index) grows an untyped List with the element type fixed by the first
+     * population.
+     */
+    public void testUntypedListGrowAfterFirstElement() {
+        final LazyDynaList lazyList = new LazyDynaList();
+        final TreeMap<String, Object> map = new TreeMap<>();
+        map.put("prop", "val");
+        lazyList.add(map);
+
+        final Object grown = lazyList.get(2);
+        assertNotNull("DynaBean Not Created", grown);
+        assertEquals("Not LazyDynaMap", LazyDynaMap.class, grown.getClass());
+        assertEquals("Wrong Map", TreeMap.class, ((LazyDynaMap) grown).getMap().getClass());
+        assertEquals("check size", 3, lazyList.size());
+
+        final TreeMap<?, ?>[] mapArray = (TreeMap[]) lazyList.toArray();
+        assertEquals("check array size", 3, mapArray.length);
+        assertEquals("Map error", "val", mapArray[0].get("prop"));
+    }
+
+    /**
+     * Test toDynaBeanArray() type correctness for the untyped Map case.
+     */
+    public void testUntypedListToDynaBeanArray() {
+        final LazyDynaList lazyList = new LazyDynaList();
+        lazyList.add(new HashMap<>());
+
+        final DynaBean[] dynaArray = lazyList.toDynaBeanArray();
+        assertEquals("Not LazyDynaMap[]", LazyDynaMap.class, dynaArray.getClass().getComponentType());
+        assertEquals("check size", 1, dynaArray.length);
+        assertEquals("Wrong Map", HashMap.class, ((LazyDynaMap) dynaArray[0]).getMap().getClass());
     }
 
     /**
