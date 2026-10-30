@@ -440,7 +440,7 @@ public final class PropertyUtils {
      * @param bean Bean to be examined (may be a {@link DynaBean}
      * @param name Property name to be evaluated
      * @return {@code true} if the property is readable, otherwise {@code false}
-     * @throws IllegalArgumentException if {@code bean} or {@code name</code> is <code>null}
+     * @throws IllegalArgumentException if {@code bean} or {@code name} is {@code null}
      * @see PropertyUtilsBean#isReadable
      * @since 1.6
      */
@@ -460,7 +460,7 @@ public final class PropertyUtils {
      * @param bean Bean to be examined (may be a {@link DynaBean}
      * @param name Property name to be evaluated
      * @return {@code true} if the property is writable, otherwise {@code false}
-     * @throws IllegalArgumentException if {@code bean} or {@code name</code> is <code>null}
+     * @throws IllegalArgumentException if {@code bean} or {@code name} is {@code null}
      * @see PropertyUtilsBean#isWriteable
      * @since 1.6
      */
