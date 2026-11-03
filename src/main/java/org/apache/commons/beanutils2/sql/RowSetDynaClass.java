@@ -99,9 +99,6 @@ public class RowSetDynaClass extends AbstractJdbcDynaClass {
      * be lower cased or not, depending on the specified {@code lowerCase} value.
      * </p>
      *
-     * If {@code limit</code> is not less than 0, max <code>limit} number of rows will be copied into the resultset.
-     *
-     *
      * @param resultSet The result set to be wrapped
      * @param lowerCase Should property names be lower cased?
      * @throws NullPointerException if {@code resultSet} is {@code null}
@@ -192,7 +189,7 @@ public class RowSetDynaClass extends AbstractJdbcDynaClass {
      * lower cased.
      * </p>
      *
-     * If {@code limit</code> is not less than 0, max <code>limit} number of rows will be copied into the list.
+     * If {@code limit} is not less than 0, max {@code limit} number of rows will be copied into the list.
      *
      * @param resultSet The result set to be wrapped
      * @param limit     The maximum for the size of the result.
