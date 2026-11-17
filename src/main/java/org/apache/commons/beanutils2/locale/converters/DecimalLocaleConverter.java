@@ -17,6 +17,8 @@
 
 package org.apache.commons.beanutils2.locale.converters;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -102,6 +104,36 @@ public class DecimalLocaleConverter<T extends Number> extends BaseLocaleConverte
             throw new ConversionException("Supplied number is not an integer: " + number);
         }
         return number;
+    }
+
+    /**
+     * Tests whether the whole part of the given number is within the specified range.
+     * <p>
+     * The test must not be performed on a narrowed copy of the value: {@code longValue()} of a {@link BigInteger} or {@link BigDecimal} keeps only the
+     * low-order 64 bits and a {@code double} cannot represent every {@code long}, so an out-of-range value can wrap or round into range before a narrowed
+     * bounds check sees it. These types are therefore compared as {@link BigDecimal}; other types compare their {@code longValue()}.
+     *
+     * @param number The number to test.
+     * @param min    The smallest value of the target type.
+     * @param max    The largest value of the target type.
+     * @return {@code true} if the whole part of the number is within the range.
+     */
+    boolean inRange(final Number number, final long min, final long max) {
+        BigDecimal decimalValue = null;
+        if (number instanceof BigDecimal) {
+            decimalValue = (BigDecimal) number;
+        } else if (number instanceof BigInteger) {
+            decimalValue = new BigDecimal((BigInteger) number);
+        } else if ((number instanceof Float || number instanceof Double) && Double.isFinite(number.doubleValue())) {
+            decimalValue = new BigDecimal(number.doubleValue());
+        }
+        if (decimalValue != null) {
+            // Values whose whole part truncates into range stay accepted, so compare against min - 1 and max + 1.
+            return decimalValue.compareTo(BigDecimal.valueOf(max).add(BigDecimal.ONE)) < 0
+                    && decimalValue.compareTo(BigDecimal.valueOf(min).subtract(BigDecimal.ONE)) > 0;
+        }
+        final long longValue = number.longValue();
+        return longValue <= max && longValue >= min;
     }
 
     /**

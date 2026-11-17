@@ -71,8 +71,8 @@ public class ByteLocaleConverter extends DecimalLocaleConverter<Byte> {
     @Override
     protected Byte parse(final Object value, final String pattern) throws ParseException {
         final Number parsed = super.parse(value, pattern);
-        if (parsed.longValue() != parsed.byteValue()) {
-            throw new ConversionException("Supplied number is not of type Byte: " + parsed.longValue());
+        if (parsed.longValue() != parsed.byteValue() || !inRange(parsed, Byte.MIN_VALUE, Byte.MAX_VALUE)) {
+            throw new ConversionException("Supplied number is not of type Byte: " + parsed);
         }
         // now returns property Byte
         return Byte.valueOf(checkInteger(parsed).byteValue());
