@@ -372,6 +372,22 @@ class PropertyUtilsTest {
     }
 
     /**
+     * A property removed by a {@link SuppressPropertiesBeanIntrospector} must stay hidden when an introspector registered after it detects the property
+     * again. {@link FluentPropertyBeanIntrospector} picks up the plain {@code setStringProperty} method and used to add a write-only descriptor back.
+     */
+    @Test
+    void testCustomIntrospectionSuppressedPropertyNotRestoredByLaterIntrospector() throws Exception {
+        final PropertyUtilsBean pub = new PropertyUtilsBean();
+        pub.addBeanIntrospector(new SuppressPropertiesBeanIntrospector(Arrays.asList("stringProperty")));
+        pub.addBeanIntrospector(new FluentPropertyBeanIntrospector());
+
+        assertNull(pub.getPropertyDescriptor(bean, "stringProperty"), "Suppressed property should have no descriptor");
+        assertFalse(pub.isWriteable(bean, "stringProperty"), "Suppressed property must not be writable");
+        assertThrows(NoSuchMethodException.class, () -> pub.setProperty(bean, "stringProperty", "changed"), "Suppressed property must not be writable");
+        assertEquals("This is a string", bean.getStringProperty(), "Suppressed property must be unchanged");
+    }
+
+    /**
      * Test the describe() method.
      */
     @Test

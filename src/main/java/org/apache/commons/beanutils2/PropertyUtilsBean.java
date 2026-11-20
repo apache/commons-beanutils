@@ -301,6 +301,13 @@ public class PropertyUtilsBean {
                 LOG.error("Exception during introspection", iex);
             }
         }
+        // Apply suppression again after all introspectors ran, so an introspector registered after a SuppressPropertiesBeanIntrospector cannot add a
+        // suppressed property back.
+        for (final BeanIntrospector bi : introspectors) {
+            if (bi instanceof SuppressPropertiesBeanIntrospector) {
+                ((SuppressPropertiesBeanIntrospector) bi).getSuppressedProperties().forEach(ictx::removePropertyDescriptor);
+            }
+        }
 
         return new BeanIntrospectionData(ictx.getPropertyDescriptors());
     }
