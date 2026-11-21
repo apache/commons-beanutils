@@ -161,6 +161,13 @@ public class LazyDynaBean implements DynaBean {
     static final LazyDynaBean[] EMPTY_ARRAY = {};
 
     /**
+     * The default maximum number of elements a single indexed access may add to an indexed property.
+     *
+     * @since 2.0.0
+     */
+    public static final int DEFAULT_AUTO_GROW_LIMIT = 256;
+
+    /**
      * The {@code MutableDynaClass} "base class" that this DynaBean is associated with.
      */
     protected Map<String, Object> values;
@@ -172,6 +179,11 @@ public class LazyDynaBean implements DynaBean {
      * The {@code MutableDynaClass} "base class" that this DynaBean is associated with.
      */
     protected MutableDynaClass dynaClass;
+
+    /**
+     * The maximum number of elements a single indexed access may add to an indexed property.
+     */
+    private int autoGrowLimit = DEFAULT_AUTO_GROW_LIMIT;
 
     /**
      * Constructs a new {@code LazyDynaBean</code> with a <code>LazyDynaClass} instance.
@@ -567,6 +579,31 @@ public class LazyDynaBean implements DynaBean {
     }
 
     /**
+     * Throws an {@link IndexOutOfBoundsException} if growing an indexed property from {@code size} elements to hold {@code index} would add more than
+     * {@link #getAutoGrowLimit()} elements.
+     *
+     * @param name  The name of the property
+     * @param index The requested index
+     * @param size  The current size of the property
+     */
+    private void checkAutoGrowLimit(final String name, final int index, final int size) {
+        if (index >= size && index - size >= autoGrowLimit) {
+            throw new IndexOutOfBoundsException("Index " + index + " for '" + name + "' exceeds the auto-grow limit of " + autoGrowLimit
+                    + " new elements (current size " + size + ")");
+        }
+    }
+
+    /**
+     * Gets the maximum number of elements a single indexed access may add to an indexed property.
+     *
+     * @return The auto-grow limit.
+     * @since 2.0.0
+     */
+    public int getAutoGrowLimit() {
+        return autoGrowLimit;
+    }
+
+    /**
      * Gets the {@code DynaClass} instance that describes the set of properties available for this DynaBean.
      *
      * @return The associated DynaClass
@@ -602,6 +639,7 @@ public class LazyDynaBean implements DynaBean {
      * @param indexedProperty The current property value
      * @param index           The indexed value to grow the property to (i.e. one less than the required size)
      * @return The new property value (grown to the appropriate size)
+     * @throws IndexOutOfBoundsException if growing the property would add more than {@link #getAutoGrowLimit()} elements
      */
     protected Object growIndexedProperty(final String name, Object indexedProperty, final int index) {
         // Grow a List to the appropriate size
@@ -611,6 +649,7 @@ public class LazyDynaBean implements DynaBean {
             final
             // Indexed properties are stored as List<Object>
             List<Object> list = (List<Object>) indexedProperty;
+            checkAutoGrowLimit(name, index, list.size());
             while (index >= list.size()) {
                 final Class<?> contentType = getDynaClass().getDynaProperty(name).getContentType();
                 Object value = null;
@@ -626,6 +665,7 @@ public class LazyDynaBean implements DynaBean {
         if (indexedProperty.getClass().isArray()) {
 
             final int length = Array.getLength(indexedProperty);
+            checkAutoGrowLimit(name, index, length);
             if (index >= length) {
                 final Class<?> componentType = indexedProperty.getClass().getComponentType();
                 final Object newArray = Array.newInstance(componentType, index + 1);
@@ -829,6 +869,22 @@ public class LazyDynaBean implements DynaBean {
         // Set the value in the Map
         // mapped properties are stored in a Map<String, Object>
         ((Map<String, Object>) mappedProperty).put(key, value);
+    }
+
+    /**
+     * Sets the maximum number of elements a single indexed access may add to an indexed property. An index further than this past the current end of the
+     * property is rejected with an {@link IndexOutOfBoundsException} instead of growing the property, since indexes often come from property expressions
+     * such as {@code items[12345]} built from untrusted input. Defaults to {@link #DEFAULT_AUTO_GROW_LIMIT}.
+     *
+     * @param autoGrowLimit The auto-grow limit, must not be negative.
+     * @throws IllegalArgumentException if {@code autoGrowLimit} is negative
+     * @since 2.0.0
+     */
+    public void setAutoGrowLimit(final int autoGrowLimit) {
+        if (autoGrowLimit < 0) {
+            throw new IllegalArgumentException("autoGrowLimit must not be negative: " + autoGrowLimit);
+        }
+        this.autoGrowLimit = autoGrowLimit;
     }
 
     /**
