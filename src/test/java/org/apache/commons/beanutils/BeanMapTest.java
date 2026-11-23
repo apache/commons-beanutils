@@ -17,13 +17,16 @@
 package org.apache.commons.beanutils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.time.DayOfWeek;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -177,7 +180,7 @@ public class BeanMapTest extends AbstractMapTest<BeanMap, Object, Object>  {
     @Override
     public Object[] getNewSampleValues() {
         final Object[] values = { Integer.valueOf(223), Long.valueOf(23341928234L), Double.valueOf(23423.34), Float.valueOf(213332.12f),
-                Short.valueOf((short) 234), Byte.valueOf((byte) 20), Character.valueOf('b'), Integer.valueOf(232), "SomeNewStringValue", new Object(), null, };
+                Short.valueOf((short) 234), Byte.valueOf((byte) 20), Character.valueOf('b'), Integer.valueOf(232), "SomeNewStringValue", new Object(), };
         return values;
     }
 
@@ -189,12 +192,12 @@ public class BeanMapTest extends AbstractMapTest<BeanMap, Object, Object>  {
     // To:
     // "some\2Value",
     //
-    // Then, I manually added the "class" key, which is a property that exists for
-    // all beans (and all objects for that matter.
+    // The "class" pseudo-property is intentionally absent: it is suppressed so the bean's
+    // ClassLoader is not reachable through the map.
     @Override
     public String[] getSampleKeys() {
         final String[] keys = { "someIntValue", "someLongValue", "someDoubleValue", "someFloatValue", "someShortValue", "someByteValue", "someCharValue",
-                "someIntegerValue", "someStringValue", "someObjectValue", "class", };
+                "someIntegerValue", "someStringValue", "someObjectValue", };
         return keys;
     }
 
@@ -202,8 +205,7 @@ public class BeanMapTest extends AbstractMapTest<BeanMap, Object, Object>  {
     @Override
     public Object[] getSampleValues() {
         final Object[] values = { Integer.valueOf(1234), Long.valueOf(1298341928234L), Double.valueOf(123423.34), Float.valueOf(1213332.12f),
-                Short.valueOf((short) 134), Byte.valueOf((byte) 10), Character.valueOf('a'), Integer.valueOf(1432), "SomeStringValue", objectInFullMap,
-                BeanWithProperties.class, };
+                Short.valueOf((short) 134), Byte.valueOf((byte) 10), Character.valueOf('a'), Integer.valueOf(1432), "SomeStringValue", objectInFullMap, };
         return values;
     }
 
@@ -291,6 +293,23 @@ public class BeanMapTest extends AbstractMapTest<BeanMap, Object, Object>  {
         map2.put("someIntValue", Integer.valueOf(0));
         map1.putAllWriteable(map2);
         assertEquals(map1.get("someIntValue"), Integer.valueOf(0));
+    }
+
+    /**
+     * The {@code class} and (for enums) {@code declaringClass} pseudo-properties expose the bean's {@link ClassLoader} and must not be reachable through the map,
+     * matching the suppression {@link PropertyUtilsBean} applies by default.
+     */
+    @Test
+    void testClassPropertyNotExposed() {
+        final BeanMap map = new BeanMap(new BeanWithProperties());
+        assertFalse(map.containsKey("class"), "class must not be exposed as a property");
+        assertNull(map.get("class"));
+        assertNull(map.getReadMethod("class"));
+
+        final BeanMap enumMap = new BeanMap(DayOfWeek.MONDAY);
+        assertFalse(enumMap.containsKey("class"), "class must not be exposed as a property");
+        assertFalse(enumMap.containsKey("declaringClass"), "declaringClass must not be exposed as a property");
+        assertNull(enumMap.get("declaringClass"));
     }
 
     /**
