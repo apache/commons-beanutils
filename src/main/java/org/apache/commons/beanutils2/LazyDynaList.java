@@ -184,6 +184,11 @@ public class LazyDynaList extends ArrayList<Object> {
     private Class<?> elementDynaBeanType;
 
     /**
+     * The maximum number of elements a single access may add when growing the List.
+     */
+    private int autoGrowLimit = LazyDynaBean.DEFAULT_AUTO_GROW_LIMIT;
+
+    /**
      * Constructs a new instance.
      */
     public LazyDynaList() {
@@ -311,6 +316,7 @@ public class LazyDynaList extends ArrayList<Object> {
             return false;
         }
 
+        checkAutoGrowLimit(index);
         ensureCapacity(Math.max(index, size()) + collection.size());
 
         // Call "transform" with first element, before
@@ -365,6 +371,29 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
     /**
+     * Throws an {@link IndexOutOfBoundsException} if growing the List to {@code requiredSize} would add more than {@link #getAutoGrowLimit()} elements.
+     *
+     * @param requiredSize The required size of the List.
+     */
+    private void checkAutoGrowLimit(final int requiredSize) {
+        final int size = size();
+        if (requiredSize > size && requiredSize - size > autoGrowLimit) {
+            throw new IndexOutOfBoundsException("Growing the List from " + size + " to " + requiredSize + " elements exceeds the auto-grow limit of "
+                    + autoGrowLimit + " new elements");
+        }
+    }
+
+    /**
+     * Gets the maximum number of elements a single access may add when growing the List.
+     *
+     * @return The auto-grow limit.
+     * @since 2.0.0
+     */
+    public int getAutoGrowLimit() {
+        return autoGrowLimit;
+    }
+
+    /**
      * Gets the DynaClass.
      */
     private DynaClass getDynaClass() {
@@ -377,11 +406,13 @@ public class LazyDynaList extends ArrayList<Object> {
      * </p>
      *
      * @param requiredSize The required size of the List.
+     * @throws IndexOutOfBoundsException if growing the List would add more than {@link #getAutoGrowLimit()} elements
      */
     private void growList(final int requiredSize) {
         if (requiredSize < size()) {
             return;
         }
+        checkAutoGrowLimit(requiredSize);
 
         ensureCapacity(requiredSize + 1);
 
@@ -412,6 +443,22 @@ public class LazyDynaList extends ArrayList<Object> {
         growList(index + 1);
 
         return super.set(index, dynaBean);
+    }
+
+    /**
+     * Sets the maximum number of elements a single access may add when growing the List. An index further than this past the end of the List is rejected with
+     * an {@link IndexOutOfBoundsException} instead of growing the List, since indexes often come from property expressions such as {@code items[12345]}
+     * built from untrusted input. Defaults to {@link LazyDynaBean#DEFAULT_AUTO_GROW_LIMIT}.
+     *
+     * @param autoGrowLimit The auto-grow limit, must not be negative.
+     * @throws IllegalArgumentException if {@code autoGrowLimit} is negative
+     * @since 2.0.0
+     */
+    public void setAutoGrowLimit(final int autoGrowLimit) {
+        if (autoGrowLimit < 0) {
+            throw new IllegalArgumentException("autoGrowLimit must not be negative: " + autoGrowLimit);
+        }
+        this.autoGrowLimit = autoGrowLimit;
     }
 
     /**

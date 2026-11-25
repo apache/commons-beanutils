@@ -24,8 +24,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.TreeMap;
 
 import org.junit.jupiter.api.AfterEach;
@@ -68,6 +70,35 @@ class LazyDynaBeanTest {
     @AfterEach
     public void tearDown() {
         bean = null;
+    }
+
+    /**
+     * Test that an index far past the end of an indexed property is rejected instead of growing the property to that size.
+     */
+    @Test
+    void testIndexedAutoGrowLimit() throws Exception {
+        final int limit = LazyDynaBean.DEFAULT_AUTO_GROW_LIMIT;
+        assertEquals(limit, bean.getAutoGrowLimit());
+        // Growing by exactly the limit is allowed, and so is appending one element at a time past it
+        bean.set(testProperty, limit - 1, testString1);
+        bean.set(testProperty, limit, testString2);
+        assertEquals(limit + 1, ((List<?>) bean.get(testProperty)).size());
+        // A single access may not add more than the limit
+        assertThrows(IndexOutOfBoundsException.class, () -> bean.set(testPropertyA, limit, testString1));
+        assertThrows(IndexOutOfBoundsException.class, () -> bean.get(testPropertyA, 100_000));
+        assertEquals(0, ((List<?>) bean.get(testPropertyA)).size());
+        // Arrays are bounded the same way
+        dynaClass.add(testPropertyB, String[].class);
+        assertThrows(IndexOutOfBoundsException.class, () -> bean.set(testPropertyB, Integer.MAX_VALUE, testString1));
+        assertEquals(0, ((String[]) bean.get(testPropertyB)).length);
+        // An index taken from a property expression is bounded too
+        final LazyDynaBean populated = new LazyDynaBean();
+        assertThrows(IndexOutOfBoundsException.class, () -> BeanUtils.populate(populated, Collections.singletonMap("items[100000]", testString1)));
+        // The limit can be raised
+        bean.setAutoGrowLimit(100_001);
+        bean.set(testPropertyA, 100_000, testString1);
+        assertEquals(100_001, ((List<?>) bean.get(testPropertyA)).size());
+        assertThrows(IllegalArgumentException.class, () -> bean.setAutoGrowLimit(-1));
     }
 
     /**

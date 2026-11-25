@@ -29,6 +29,7 @@ import java.io.NotSerializableException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -336,6 +337,30 @@ class LazyDynaListTest {
         bean.set("prop1", "val");
         // test
         dynaBeanTest(list, LazyDynaBean.class, bean.getDynaClass(), new BenchBean());
+    }
+
+    /**
+     * Test that an index far past the end of the List is rejected instead of growing the List to that size.
+     */
+    @Test
+    void testAutoGrowLimit() {
+        final int limit = LazyDynaBean.DEFAULT_AUTO_GROW_LIMIT;
+        final LazyDynaList list = new LazyDynaList(TreeMap.class);
+        assertEquals(limit, list.getAutoGrowLimit());
+        // Growing by exactly the limit is allowed
+        assertNotNull(list.get(limit - 1));
+        assertEquals(limit, list.size());
+        // A single access may not add more than the limit
+        assertThrows(IndexOutOfBoundsException.class, () -> list.get(2 * limit));
+        assertThrows(IndexOutOfBoundsException.class, () -> list.set(100_000, new TreeMap<>()));
+        assertThrows(IndexOutOfBoundsException.class, () -> list.add(100_000, new TreeMap<>()));
+        assertThrows(IndexOutOfBoundsException.class, () -> list.addAll(100_000, Collections.singletonList(new TreeMap<>())));
+        assertEquals(limit, list.size());
+        // The limit can be raised
+        list.setAutoGrowLimit(100_000);
+        assertNotNull(list.get(100_000));
+        assertEquals(100_001, list.size());
+        assertThrows(IllegalArgumentException.class, () -> list.setAutoGrowLimit(-1));
     }
 
     /**
