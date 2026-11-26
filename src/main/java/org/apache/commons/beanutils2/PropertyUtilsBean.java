@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.commons.beanutils2.expression.DefaultResolver;
 import org.apache.commons.beanutils2.expression.Resolver;
@@ -119,6 +120,12 @@ public class PropertyUtilsBean {
     /** The list with BeanIntrospector objects. */
     private final List<BeanIntrospector> introspectors;
 
+    /**
+     * Counts how often the registered {@link BeanIntrospector} set has changed. {@link #getIntrospectionData(Class)} compares this value before and after it
+     * introspects a class, so that introspection results computed against an outdated introspector set are never left in the cache.
+     */
+    private final AtomicLong introspectorsVersion = new AtomicLong();
+
     /** Base constructor */
     public PropertyUtilsBean() {
         descriptorsCache = BeanUtils.createCache();
@@ -144,6 +151,7 @@ public class PropertyUtilsBean {
      * the JVM-global {@link Introspector} cache untouched.
      */
     private void clearDescriptorCaches() {
+        introspectorsVersion.incrementAndGet();
         descriptorsCache.clear();
         mappedDescriptorsCache.clear();
     }
@@ -153,8 +161,7 @@ public class PropertyUtilsBean {
      * away to implement class reloading.
      */
     public void clearDescriptors() {
-        descriptorsCache.clear();
-        mappedDescriptorsCache.clear();
+        clearDescriptorCaches();
         Introspector.flushCaches();
     }
 
@@ -437,8 +444,14 @@ public class PropertyUtilsBean {
         // Look up any cached information for this bean class
         BeanIntrospectionData data = descriptorsCache.get(beanClass);
         if (data == null) {
+            final long version = introspectorsVersion.get();
             data = fetchIntrospectionData(beanClass);
             descriptorsCache.put(beanClass, data);
+            if (version != introspectorsVersion.get()) {
+                // The introspector set changed while we were introspecting, so this result may predate it and the cache
+                // flush that came with the change cannot have removed it. Drop it again and let the next caller refetch.
+                descriptorsCache.remove(beanClass, data);
+            }
         }
         return data;
     }
