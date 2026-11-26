@@ -38,6 +38,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.commons.beanutils2.priv.PrivateBeanFactory;
 import org.apache.commons.beanutils2.priv.PrivateDirect;
@@ -197,6 +200,43 @@ class PropertyUtilsTest {
         beanPublicSubclass = null;
 
         PropertyUtils.resetBeanIntrospectors();
+    }
+
+    /**
+     * Registering a {@link SuppressPropertiesBeanIntrospector} while another thread is introspecting the same class must still take effect. The per-class
+     * descriptor cache was filled with an unsynchronized get/compute/put sequence, so introspection data computed before the registration could be stored
+     * after the registration had already flushed the caches, leaving the suppressed property readable and writable from then on.
+     */
+    @Test
+    void testAddBeanIntrospectorDuringIntrospectionInvalidatesCache() throws Exception {
+        final PropertyUtilsBean pub = new PropertyUtilsBean();
+        final CountDownLatch introspecting = new CountDownLatch(1);
+        final CountDownLatch registered = new CountDownLatch(1);
+        final AtomicBoolean pending = new AtomicBoolean(true);
+        pub.addBeanIntrospector(icontext -> {
+            if (icontext.getTargetClass() == TestBean.class && pending.compareAndSet(true, false)) {
+                introspecting.countDown();
+                try {
+                    registered.await(30, TimeUnit.SECONDS);
+                } catch (final InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        });
+
+        final Thread reader = new Thread(() -> pub.getPropertyDescriptors(TestBean.class));
+        reader.start();
+        try {
+            assertTrue(introspecting.await(30, TimeUnit.SECONDS), "Introspection did not start");
+            pub.addBeanIntrospector(new SuppressPropertiesBeanIntrospector(Arrays.asList("stringProperty")));
+        } finally {
+            registered.countDown();
+            reader.join(30_000);
+        }
+
+        assertNull(pub.getPropertyDescriptor(bean, "stringProperty"), "Suppressed property should have no descriptor");
+        assertThrows(NoSuchMethodException.class, () -> pub.getProperty(bean, "stringProperty"), "Suppressed property must not be readable");
+        assertThrows(NoSuchMethodException.class, () -> pub.setProperty(bean, "stringProperty", "changed"), "Suppressed property must not be writable");
     }
 
     /**
